@@ -1,0 +1,162 @@
+FileETag None
+# END Turn ETags Off
+Options +FollowSymlinks
+Options -Indexes
+DirectoryIndex index.php
+RewriteEngine on
+
+RewriteCond %{SERVER_PORT} 80 
+RewriteCond %{HTTP_HOST} !^www\.
+
+RewriteCond %{HTTP_HOST} ^https://thaimai.cloudonweb\.in [NC]
+
+RewriteRule ^(.*)$ http://localhost/Thaimai/api/$1 [R,L]
+
+# Eligible Couple api path
+
+RewriteRule ^ecregister ecuser/ECregister.php [L,QSA]
+
+RewriteRule ^editcouple ecuser/editEC.php [L,QSA]
+
+RewriteRule ^couplelist ecuser/EClist.php [L,QSA]
+
+RewriteRule ^allcouplelist ecuser/ECalllist.php [L,QSA]
+
+RewriteRule ^deletecouple ecuser/ECdelete.php [L,QSA]
+
+# hscmaster api path
+
+RewriteRule ^BlockId hscmaster/BlockIdlist.php [L,QSA]
+
+RewriteRule ^VillageIdBlockId hscmaster/BVillageIdlist.php [L,QSA]
+
+# hscmaster api path
+
+RewriteRule ^dBlockId hscmaster/DBlockIdlist.php [L,QSA]
+
+RewriteRule ^PhcId hscmaster/DBPhcIdlist.php [L,QSA]
+
+# Immunization api path
+
+RewriteRule ^addimmunization Immunization/AddImmunization.php [L,QSA]
+
+RewriteRule ^editimmunization Immunization/EditImmunization.php [L,QSA]
+
+
+RewriteRule ^imlist Immunization/ImList.php [L,QSA]
+
+RewriteRule ^imview Immunization/ImView.php [L,QSA]
+
+RewriteRule ^deleteim Immunization/ImDelete.php [L,QSA]
+
+# deliverydetails api path
+
+RewriteRule ^addDD deliverydetails/AddDelivery.php [L,QSA]
+
+RewriteRule ^editdd deliverydetails/EditDelivery.php [L,QSA]
+
+
+RewriteRule ^ddlist deliverydetails/ddList.php [L,QSA]
+
+RewriteRule ^ddview deliverydetails/ddView.php [L,QSA]
+
+RewriteRule ^deletedd deliverydetails/ddDelete.php [L,QSA]
+
+# Postnatal api  path
+
+RewriteRule ^addpostnatal postnatal/PvAdd.php [L,QSA]
+
+RewriteRule ^editpv postnatal/PvEdit.php [L,QSA]
+
+
+RewriteRule ^pvview postnatal/PvView.php [L,QSA]
+
+RewriteRule ^postnatallist postnatal/PvList.php [L,QSA]
+
+RewriteRule ^pvdelete postnatal/PvDelete.php [L,QSA]
+
+# Anregisteration api  path
+
+RewriteRule ^addan anregistration/AnAdd.php [L,QSA]
+
+RewriteRule ^editan anregistration/AnEdit.php [L,QSA]
+
+
+RewriteRule ^anview anregistration/ArView.php [L,QSA]
+
+RewriteRule ^anlist anregistration/ArList.php [L,QSA]
+
+RewriteRule ^andelete anregistration/ArDelete.php [L,QSA]
+
+
+# AnVisit api  path
+
+RewriteRule ^addvisitav anvisit/AddanVisit.php [L,QSA]
+
+RewriteRule ^editvisitav anvisit/EditanVisit.php [L,QSA]
+
+
+RewriteRule ^avviewvisit anvisit/AnView.php [L,QSA]
+
+RewriteRule ^avlistvisit anvisit/AnList.php [L,QSA]
+
+RewriteRule ^avdeletevisit anvisit/AnDelete.php [L,QSA]
+
+
+# Medical api  path
+
+RewriteRule ^addm medical/Addmedical.php [L,QSA]
+
+RewriteRule ^editm medical/Editmedical.php [L,QSA]
+
+
+RewriteRule ^mview medical/mView.php [L,QSA]
+
+RewriteRule ^mlist medical/mList.php [L,QSA]
+
+RewriteRule ^mdelete medical/mDelete.php [L,QSA]
+
+#Dropdown api Path
+
+RewriteRule ^selectdata enumdata/dropdownFields.php [L,QSA]
+
+#HighRiskMother api path
+
+RewriteRule ^hrlist highrisk/HRmother.php [L,QSA]
+
+RewriteRule ^hrview highrisk/hrView.php [L,QSA] 
+
+#Duelist api path
+
+
+RewriteRule ^sncubaby duelist/SncuDue.php [L,QSA]
+
+RewriteRule ^dcmonth duelist/DeliveryDue.php [L,QSA]
+ 
+RewriteRule ^imdue duelist/imduedatelist.php [L,QSA] 
+ 
+RewriteRule ^Babydue duelist/BabyImDue.php [L,QSA]
+
+RewriteRule ^Motherdue duelist/MotherImDue.php [L,QSA] 
+
+
+RewriteRule ^antenatalDue duelist/AnvisitDue.php [L,QSA]
+
+#admin or superadmin etc users login api path
+
+RewriteRule ^login users/login.php [L,QSA]
+
+RewriteRule ^edituser users/editusers.php [L,QSA]
+
+RewriteRule ^forgetpass users/forgetpassword.php [L,QSA]
+
+RewriteRule ^conformpass users/Conformpwd.php [L,QSA]
+
+
+
+
+RewriteCond %{THE_REQUEST} !^POST
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+
