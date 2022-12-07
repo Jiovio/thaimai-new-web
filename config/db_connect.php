@@ -8,6 +8,6 @@ $conn = mysqli_connect($host, $dbuser, $dbpwd, $dbname) or die("Thaimayudan Conn
 if ($conn->connect_error) { 
     echo "Thaimayudan Connection failed"; 
 }
-$siteurl = "https://thaimai.cloudonweb.in/";
+$siteurl = "https://thaimai.cloudonweb.in";
 
 ?>

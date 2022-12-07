@@ -57,7 +57,10 @@ if (!empty($data->motheraadhaarid)) {
    
     if ($mvalidchecknum == 0) {
         $inserid = $form->createanregistration();
-
+        
+        $query = "UPDATE ecregister SET picmeNo='".$data->picmeno."' WHERE motheraadhaarid='".$data->motheraadhaarid."' ORDER BY motheraadhaarid ASC";
+        $stmt = $db->prepare($query);
+        $stmt->execute(array());
         // set response code - 201 created
         http_response_code(200);
 

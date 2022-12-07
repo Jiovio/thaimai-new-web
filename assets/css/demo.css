@@ -190,3 +190,25 @@ div#response.display-block {
   color:red;
   font-family: emoji;
 }
+
+#picme-list {
+  float: left;
+  list-style: none;
+  margin-top: -3px;
+  padding: 0;
+  width: 190px;
+  position: absolute;
+}
+
+#picme-list li {
+  padding: 10px;
+  color: #696cff;
+  background: #f0f0f0;
+  border-bottom: #bbb9b9 1px solid;
+}
+
+#picme-list li:hover {
+  color: #696cff;
+  cursor: pointer;
+  background: azure;
+}

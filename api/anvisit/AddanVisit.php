@@ -1,6 +1,4 @@
 <?php
-ini_set("display_errors",'1');
-error_reporting(1);
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -159,9 +157,6 @@ if (!empty($data->picmeno)) {
    
     if ($mvalidchecknum == 0) {
         $inserid = $form->createantenatalvisit();
-        $query = "UPDATE ecregister SET picmeNo='".$data->picmeno."' WHERE motheraadhaarid='".$data->motheraadhaarid."' ORDER BY id ASC";
-        $stmt = $db->prepare($query);
-        $stmt->execute(array());
         // set response code - 201 created
         http_response_code(200);
         // tell the user

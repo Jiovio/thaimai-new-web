@@ -5,4 +5,5 @@
 session_unset();
 session_destroy();
 session_write_close();
-header("Location: $siteurl");
+    $url = "./index.php";
+    header("Location: $url");

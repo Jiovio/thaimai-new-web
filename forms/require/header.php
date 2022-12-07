@@ -10,7 +10,8 @@ if (isset($_SESSION["username"]) || isset($_SESSION["userid"]) || isset($_SESSIO
 } else {
     session_unset();
     session_write_close();
-    header("Location: $siteurl");
+    $url = "./index.php";
+    header("Location: $url");
 }
 include "../config/db_connect.php";
 ?>

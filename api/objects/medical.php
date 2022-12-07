@@ -39,11 +39,18 @@ class Medical {
             SET
             picmeno='" . $this->picmeno . "',lmpdate='" . $this->lmpdate . "',edddate='" . $this->edddate . "',
             reg12weeks='" . $this->reg12weeks . "',momBGtaken='" . $this->momBGtaken . "',momBGtype='" . $this->momBGtype . "',
-            pastillness='" . $this->pastillness . "',bleedtime='" . $this->bleedtime . "',clotTime='" . $this->clottime . "', momVdrlRpr='" . $this->momVdrlRpr . "',momVdrlRprResult='" . $this->momVdrlRprResult . "',
-            husVdrlRpr='" . $this->husVdrlRpr . "',husVdrlRprResult='" . $this->husVdrlRprResult . "',momhbsag='" . $this->momhbsag . "',
-            momhbresult='" . $this->momhbresult . "',hushbsag='" . $this->hushbsag . "', hushbresult='" . $this->hushbresult . "',momhivtest='" . $this->momhivtest . "', momhivtestresult='" . $this->momhivtestresult . "',
-            hushivtest='" . $this->hushivtest . "',hushivtestresult='" . $this->hushivtestresult . "',LastPregnancyComplication='" . $this->LastPregnancyComplication . "', LastPregnancyOutcome='" . $this->LastPregnancyOutcome . "',
-            placeDeliveryDistrict='" . $this->placeDeliveryDistrict . "',deliveryMode='" . $this->deliveryMode . "', hospitaltype='" . $this->hospitaltype . "',hospitalname='" . $this->hospitalname . "',createdBy='" . $this->usertype . "'";
+            pastillness='" . $this->pastillness . "',bleedtime='" . $this->bleedtime . "',clotTime='" . $this->clottime . "',
+             momVdrlRprResult='" . $this->momVdrlRprResult . "',
+            husVdrlRprResult='" . $this->husVdrlRprResult . "',
+            momhbresult='" . $this->momhbresult . "',
+            hushbresult='" . $this->hushbresult . "',
+             momhivtestresult='" . $this->momhivtestresult . "',
+            hushivtestresult='" . $this->hushivtestresult . "',
+            anyotherinvest='" . $this->anyotherinvest . "',
+             totpregnancy='" . $this->totpregnancy . "',
+            placeDeliveryDistrict='" . $this->placeDeliveryDistrict . "',
+             hospitaltype='" . $this->hospitaltype . "',
+             hospitalname='" . $this->hospitalname . "',createdBy='" . $this->usertype . "'";
             // prepare query
             $stmt = $this->conn->prepare($query);
     
@@ -72,11 +79,18 @@ class Medical {
             SET
             picmeno='" . $this->picmeno . "',lmpdate='" . $this->lmpdate . "',edddate='" . $this->edddate . "',
             reg12weeks='" . $this->reg12weeks . "',momBGtaken='" . $this->momBGtaken . "',momBGtype='" . $this->momBGtype . "',
-            pastillness='" . $this->pastillness . "',bleedtime='" . $this->bleedtime . "',clotTime='" . $this->clottime . "',momVdrlRpr='" . $this->momVdrlRpr . "',momVdrlRprResult='" . $this->momVdrlRprResult . "',
-            husVdrlRpr='" . $this->husVdrlRpr . "',husVdrlRprResult='" . $this->husVdrlRprResult . "',momhbsag='" . $this->momhbsag . "',
-            momhbresult='" . $this->momhbresult . "',hushbsag='" . $this->hushbsag . "', hushbresult='" . $this->hushbresult . "',momhivtest='" . $this->momhivtest . "', momhivtestresult='" . $this->momhivtestresult . "',
-            hushivtest='" . $this->hushivtest . "',hushivtestresult='" . $this->hushivtestresult . "',LastPregnancyComplication='" . $this->LastPregnancyComplication . "', LastPregnancyOutcome='" . $this->LastPregnancyOutcome . "',
-            placeDeliveryDistrict='" . $this->placeDeliveryDistrict . "',deliveryMode='" . $this->deliveryMode . "', hospitaltype='" . $this->hospitaltype . "',hospitalname='" . $this->hospitalname . "',updatedBy='" . $this->usertype . "', updatedat='" . $date . "' WHERE picmeno='" . $this->picmeno . "'";
+            pastillness='" . $this->pastillness . "',bleedtime='" . $this->bleedtime . "',clotTime='" . $this->clottime . "',
+            momVdrlRprResult='" . $this->momVdrlRprResult . "',
+            husVdrlRprResult='" . $this->husVdrlRprResult . "',
+            momhbresult='" . $this->momhbresult . "',
+             hushbresult='" . $this->hushbresult . "',
+              momhivtestresult='" . $this->momhivtestresult . "',
+            hushivtestresult='" . $this->hushivtestresult . "',
+            anyotherinvest='" . $this->anyotherinvest . "',
+             totpregnancy='" . $this->totpregnancy . "',
+            placeDeliveryDistrict='" . $this->placeDeliveryDistrict . "',
+            hospitaltype='" . $this->hospitaltype . "',
+            hospitalname='" . $this->hospitalname . "',updatedBy='" . $this->usertype . "', updatedat='" . $date . "' WHERE picmeno='" . $this->picmeno . "'";
             // prepare query
             $stmt = $this->conn->prepare($query);
     

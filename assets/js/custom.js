@@ -670,37 +670,6 @@ function fnClose() {
   window.location = $siteurl;
 }
 
-$(".picmeNo").select2({
-  tags: "true",
-  placeholder: "TYPE / SELECT PICME NO",
-  allowClear: true,
-  width: '100%',
-  createTag: function (params) {
-    var term = $.trim(params.term);
-
-    if (term === '') {
-      return null;
-    }
-    
-    // check whether the term matches an id
-    var search = $.grep(input, function( n, i ) {
-      return ( n.id === picmeNo || n.text === picmeNo); // check against id and text
-    });
-    
-    // if a match is found replace the term with the options' text
-    if (search.length) 
-    picmeNo = search[0].text;
-    else
-      return null; // didn't match id or text value so don't add it to selection
-    
-    return {
-     id: picmeNo,
-     text: picmeNo,
-     value: true // add additional parameters
-    }
-  }
-});
-
 function FirstAlphabet() {
   var selectBox = document.getElementById("SelectHsc");
   var selectedValue = selectBox.options[selectBox.selectedIndex].value.substring(0,3); 
@@ -725,3 +694,25 @@ function totPregnancyChange() {
   
   }, 2000); 
   }
+
+  $(document).ready(function() {
+    $("#picmeno").keyup(function() {
+        $.ajax({
+            type: "POST",
+            url: "readPicme.php",
+            data: 'keyword=' + $(this).val(),
+            beforeSend: function() {
+                $("#picmeno").css("background", "#FFF url(LoaderIcon.jpeg) no-repeat 165px");
+            },
+            success: function(data) {
+                $("#suggesstion-box").show();
+                $("#suggesstion-box").html(data);
+                $("#picmeno").css("background", "#FFF");
+            }
+        });
+    });
+});
+function selectPicme(val) {
+    $("#picmeno").val(val);
+    $("#suggesstion-box").hide();
+}

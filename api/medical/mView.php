@@ -19,7 +19,7 @@ $db = $database->getConnection();
 // initialize object
 $data = json_decode(file_get_contents("php://input"));
 
-$checkvaliduser = $db->prepare("SELECT * from medicalhistory mh JOIN ecregister ec on mh.picmeNo=ec.picmeno WHERE ec.BlockId='".$data->block."' AND ec.PhcId='".$data->phc."' AND ec.HscId='".$data->hsc."' AND picmeno='".$data->picmeno."' AND mh.status=1 ORDER BY ec.motheraadhaarname ASC");
+$checkvaliduser = $db->prepare("SELECT * from medicalhistory mh JOIN ecregister ec on mh.picmeNo=ec.picmeno WHERE ec.BlockId='".$data->block."' AND ec.PhcId='".$data->phc."' AND ec.HscId='".$data->hsc."' AND ec.picmeno='".$data->picmeno."' AND mh.status=1 ORDER BY ec.motheraadhaarname ASC");
 
 $checkvaliduser->execute();
 
@@ -42,22 +42,24 @@ $ddarray[] = array( "picmeno" =>$row['picmeno'],
 "pastillness" =>$row['pastillness'],
 "bleedtime" =>$row['bleedtime'],
 "clottime" =>$row['clotTime'],
-"momVdrlRpr" =>$row['momVdrlRpr'],
+//"momVdrlRpr" =>$row['momVdrlRpr'],
 "momVdrlRprResult" =>$row['momVdrlRprResult'],
-"husVdrlRpr" =>$row['husVdrlRpr'],
+//"husVdrlRpr" =>$row['husVdrlRpr'],
 "husVdrlRprResult" =>$row['husVdrlRprResult'],
-"momhbsag" =>$row['momhbsag'],
+//"momhbsag" =>$row['momhbsag'],
 "momhbresult" =>$row['momhbresult'],
-"hushbsag" =>$row['hushbsag'],
+//"hushbsag" =>$row['hushbsag'],
 "hushbresult" =>$row['hushbresult'],
-"momhivtest" =>$row['momhivtest'],
+//"momhivtest" =>$row['momhivtest'],
 "momhivtestresult" =>$row['momhivtestresult'],
-"hushivtest" =>$row['hushivtest'],
+//"hushivtest" =>$row['hushivtest'],
 "hushivtestresult" =>$row['hushivtestresult'],
-"LastPregnancyComplication" =>$row['LastPregnancyComplication'],
-"LastPregnancyOutcome" =>$row['LastPregnancyOutcome'],
+//"LastPregnancyComplication" =>$row['LastPregnancyComplication'],
+//"LastPregnancyOutcome" =>$row['LastPregnancyOutcome'],
+ "anyotherinvest" => $row["anyOtherInvest"],
+ "totpregnancy" => $row["totPregnancy"],
 "placeDeliveryDistrict" =>$row['placeDeliveryDistrict'],
-"deliveryMode" =>$row['deliveryMode'],
+//"deliveryMode" =>$row['deliveryMode'],
 "hospitaltype" =>$row['hospitaltype'],
 "hospitalname" =>$row['hospitalname']
 );
