@@ -3,7 +3,7 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-<?php  ini_set("display_errors",'1'); include ('require/header.php'); // Menu
+<?php include ('require/header.php'); // Menu
 	  if(($usertype == 0) || ($usertype == 1)) {
 	  include ('require/filter.php'); // Top Filter 
 }else if(($usertype == 2)) {
@@ -11,15 +11,6 @@
 }else if(($usertype == 3) || ($usertype == 4)) {
     include ('require/Pfilter.php');   
 }
-
-if (!empty($query)){ 
-  //$messagetype = "success";
-  $message = "Inserted Successfully";
-} else {
-  $messagetype = "error";
-  $message = "Check the Fields";
-}
-
 ?>
 <!-- Content wrapper -->
     <div class="content-wrapper">
@@ -34,18 +25,11 @@ if (!empty($query)){
            <a href="AddEc.php" type="button" class="btn btn-primary" style="float:right;">
                     <span class="bx bx-plus"></span>&nbsp; Add Eligible Couple
                 </a>
-                </h5>
-                
-                <form action="EcExport.php" method="post" style="margin: 0px 15px 15px;">               
-                <button type="submit" id="teenPregExp" name='teenPregExp' class="btn btn-primary"><span class="bx bx-download"></span>&nbsp; Teenage Preg Report</button>	
-                <button type="submit" id="export_data" name='export_data' class="btn btn-primary"><span class="bx bx-download"></span>&nbsp; Pregnant Report</button>
-              </form>
-              
-               
-                <div class="table-responsive text-nowrap">
-				<div class="container">
-        <div id="response" class="<?php if(!empty($messagetype) ) { echo $messagetype . " display-block"; } else { echo $messagetype . " display-none"; } ?>"><?php if(!empty($message)) { echo $message; } ?>
-       </div><br>
+                </h5>    
+  <div class="table-responsive text-nowrap">
+			<div class="container">
+      <div id="response" class="<?php if(!empty($messagetype) ) { echo $messagetype . " display-block"; } else { echo $messagetype . " display-none"; } ?>"><?php if(!empty($message)) { echo $message; } ?>
+      </div><br>
 				<table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
                     <thead>
                       <tr>

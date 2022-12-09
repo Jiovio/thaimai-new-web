@@ -149,6 +149,12 @@ include "../config/db_connect.php";
               </a>
             </li>
             <li class="menu-item">
+              <a href="Reports.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-id-card"></i>
+                <div data-i18n="Report">Report List</div>
+              </a>
+            </li>
+            <li class="menu-item">
               <a href="EligibleCouple.php" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-group"></i>
                 <div data-i18n="Eligible Couples List">Eligible Couples</div>

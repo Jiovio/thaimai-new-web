@@ -99,13 +99,12 @@
                     
                     <div class="card-body">
                       
-			<input type="hidden" name="picmeno" value="<?php echo $picmeno; ?>">
 				<div id="firstDiv">
 					<div class="row">
           <div class="col-4 mb-3">
-        <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
+        <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span><span id="errPicme"></span></label>
         <div class="frmSearch">
-        <input type="text" id="picmeno" name="picmeno" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
+        <input type="text" required id="picmeno" name="picmeno" oninput = "onlyNumbers(this.value)" onkeyup="checkPicme(); return false;" placeholder="PICME Number" class="form-control" />
         <div id="suggesstion-box"></div>
          </div>
                 </div>
@@ -338,14 +337,4 @@
               </div>
             </div>
             <!-- / Content -->
-            <script>
-              
-var options = document.getElementById("picmeno").value;
-for (var i = 0; i < options.length; i++) {
-  if (options[i].text == options) {
-    options[i].selected = true;
-    break;
-  }
-}
-            </script>
 <?php include ('require/footer.php'); ?>

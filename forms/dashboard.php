@@ -53,7 +53,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                      </a>
                     </div>
                     <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/Aregisterlist.php">
+                     <a href="<?php echo $siteurl; ?>/forms/AnRegisterlist.php">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">

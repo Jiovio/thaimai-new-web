@@ -716,3 +716,23 @@ function selectPicme(val) {
     $("#picmeno").val(val);
     $("#suggesstion-box").hide();
 }
+
+// function checkPicme()
+// {
+
+//     var picmeno = document.getElementById('picmeno');
+   
+    
+//     var message = document.getElementById('errPicme');
+
+//   //  var goodColor = "#0C6";
+//     var badColor = "#FF9B37";
+  
+//     if(picmeno.value.length!=12){
+       
+//         picmeno.style.backgroundColor = badColor;
+//         message.style.color = badColor;
+//         message.innerHTML = "required 12 digits"
+//         return false;
+//     }
+//   }

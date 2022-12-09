@@ -16,7 +16,8 @@
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-         <!-- Hoverable Table rows -->
+
+            <!-- Hoverable Table rows -->
               <div class="card">
                 <h5 class="card-header"><span class="text-muted fw-light">Antenatal Registration /</span> Antenatal Registration List
                 <a href="AnRegister.php" type="button" class="btn btn-primary" style="float:right;">
@@ -25,8 +26,6 @@
                 </h5>
                 <div class="table-responsive text-nowrap">
 				<div class="container">
-        <!-- <div id="response" class="<?php if(!empty($messagetype) ) { echo $messagetype . " display-block"; } else { echo $messagetype . " display-none"; } ?>"><?php if(!empty($message)) { echo $message; } ?> -->
-       <!-- </div><br> -->
 				<table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
                     <thead>
                       <tr>
