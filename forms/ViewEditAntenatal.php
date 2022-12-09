@@ -65,13 +65,13 @@ if (! empty($_POST['update'])) {
 $uquery = mysqli_query($conn, "UPDATE anregistration SET picmeRegDate='$picmeRegDate',residentType='$residentType', pregnancyTestResult='$ptest', methodofConception='$methodofConception', gravida='$gravida', para='$para',
 livingChildren='$child', abortion='$ab', childDeath='$cd', hrPregnancy='$hrPreg', obstetricCode='$obcode', motherHeight='$height', motherWeight='$weight', bpSys='$bp', bpDia='$dia',
 anRegDate='$rgdate', mrmbsEligible='$mrmbs',MotherAge='$MotherAge',HusbandAge='$HusbandAge', updatedat='$date',updatedBy='$userid' WHERE id=$id");
- if (!empty($uquery)) { if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-  header('Location: AnRegisterlist.php');
-  exit;
+ if (!empty($query)) {
+  echo "<script>alert('Update Successfully');</script>";
+  } 
+  // else { 
+  // echo "<script>alert('Check The Fields');</script>";
+  // }
  }
- } else { ?>
-<div class="alert alert-danger alert-dismissible"><h6><i class="icon fa fa-close"></i>Check the Fields User Unable to Update</h6></div>
-<?php } }
 if (isset($_GET['del'])) {
   $id = $_GET['del'];
   date_default_timezone_set('Asia/Kolkata');

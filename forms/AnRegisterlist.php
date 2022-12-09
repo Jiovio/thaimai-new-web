@@ -16,20 +16,7 @@
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-      <?php
-      //  if (!empty($query)){ 
-      //   $messagetype = "success";
-      //   $message = "Inserted Successfully";
-      // } else {
-      //   $messagetype = "error";
-      //   $message = "Check the Fields";
-      // }
-    
-        ?>
-        
-            <!-- <div class="alert alert-success alert-dismissible"><h6><i class="icon fa fa-check"></i><?php echo $success ?></h6></div> -->
-  
-            <!-- Hoverable Table rows -->
+         <!-- Hoverable Table rows -->
               <div class="card">
                 <h5 class="card-header"><span class="text-muted fw-light">Antenatal Registration /</span> Antenatal Registration List
                 <a href="AnRegister.php" type="button" class="btn btn-primary" style="float:right;">

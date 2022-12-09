@@ -28,8 +28,7 @@
                    </h5>
                    <div class="table-responsive text-nowrap">
            <div class="container">
-           <div id="response" class="<?php if(!empty($messagetype) ) { echo $messagetype . " display-block"; } else { echo $messagetype . " display-none"; } ?>"><?php if(!empty($_SESSION["message"])) { echo $_SESSION["message"]; } ?>
-           </div><br>
+             
            <table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
                        <thead>
                          <tr>
@@ -61,8 +60,10 @@
               } else if($bloName != "" && $phcName != "" && $hscName != ""){
                 $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'".$orderQry);
               }
+              
             } else if(isset($_POST['reset'])) {
               $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+              
             } else {
               $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
             }

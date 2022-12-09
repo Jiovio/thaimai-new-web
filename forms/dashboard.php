@@ -4,6 +4,7 @@
      <div class="layout-container">
 <?php 
 include ('require/header.php');  // Menu
+include ('preloader.php');
 include ('require/filter.php');  // Top Filter
 include ('require/Hfilter.php'); // Category Filter
 if(isset($_POST['filter'])) {

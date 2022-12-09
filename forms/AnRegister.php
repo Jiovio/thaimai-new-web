@@ -40,18 +40,14 @@ if (! empty($_POST["anuser"])) {
 
  $query = mysqli_query($conn,"INSERT INTO anregistration (motheraadhaarid, picmeno,picmeRegDate, residentType, pregnancyTestResult,methodofConception, gravida, para, livingChildren, abortion, childDeath, hrPregnancy, obstetricCode, motherHeight, motherWeight, bpSys, bpDia, anRegDate, mrmbsEligible,MotherAge,HusbandAge) 
  VALUES ('$motheraadhaarid','$picmeno','$picmeRegDate','$residentType','$ptest','$methodofConception','$gravida','$para','$child', '$ab', '$cd', '$hrPreg', '$obcode','$height','$weight','$bp','$dia','$date','$mrmbs','$MotherAge','$HusbandAge')");
-
- //if (!empty($query)) { 
-   ?> 
-  
-     <!-- <div class="btn btn-success btnSpace"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button><h4><i class="icon fa fa-check"></i>Inserted Successfully</h4></div> -->
-   <?php // header('location: AnRegisterlist.php');
- // } else { ?>
- <!-- <div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button><h6><i class="icon fa fa-close"></i>Check the Fields User Unable to insert</h6></div> -->
- <?php //}
   } }
+  if(!empty($_POST["anuser"])) {
+    $motheraadhaarid = $_POST["motheraadhaarid"];
+    $picmeno =$_POST["picmeno"]; 
+    $uquery = mysqli_query($conn,"UPDATE ecregister SET picmeNo='$picmeno' WHERE motheraadhaarid='$motheraadhaarid' ");
+  }
 $residentType=""; $ptest=""; $gravida=""; $para=""; $child=""; $ab=""; $cd=""; $hrPreg=""; $obcode=""; 
-$height=""; $weight=""; $bp=""; $dia=""; $date=""; $age=""; $mrmbs=""; $id = 0; $update = false;
+$height=""; $weight=""; $bp=""; $dia=""; $date=""; $age=""; $mrmbs=""; $pvalue=""; $id = 0; $update = false;
 ?>       
     <!-- Content wrapper -->
       <div class="content-wrapper">
@@ -63,11 +59,20 @@ $height=""; $weight=""; $bp=""; $dia=""; $date=""; $age=""; $mrmbs=""; $id = 0; 
                     <span class="bx bx-arrow-back"></span>&nbsp; Back
               </button></a>
             </h4>
+            <?php 
+            if (!empty($query)) {
+            echo "<script>alert('Inserted Successfully');</script>";
+            } 
+            // else { 
+            // echo "<script>alert('Check The Fields');</script>";
+            // } 
+            ?>
             <div class="row">
                     <div class="col-md-12">
                 <div class="card mb-4">
                 <hr class="my-0" />
                 <div class="card-body">
+        
                 <form onSubmit="return Arvalidate(this);" method="POST">
                   <div class="row">
                     <div class="col-4 mb-3">

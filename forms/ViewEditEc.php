@@ -45,13 +45,13 @@ if (! empty($_POST["update"])) {
  mothermobno='$mmobno', mobileofperson='$mobperson', motheredustatus='$mstatus', husfullname='$hfullname', husdob='$hdob', husageecreg='$hageecreg', husagemarriage='$hagemarriage',husmobno='$husmobno', husedustatus='$hedustatus', religion='$religion', caste='$caste', BlockId='$BlockId',PhcId='$PhcId',HscId= '$HscId', PanchayatId='$PanchayatId',VillageId='$VillageId', address='$address',pincode='$pincode', povertystatus='$povertystatus',migrantstatus='$migrantstatus', rationcardtype='$rctype',
  rationcardnum='$rcnum', updatedat='$date', updatedBy='$userid' WHERE id=$id");
 
-if (!empty($uquery)) { 
-   ?> 
-   <div class="alert alert-success alert-dismissible"><h6><i class="icon fa fa-check"></i>Updated Successfully</h6></div>
- <?php  header('location: EligibleCouple.php');
- } else { ?>
- <div class="alert alert-danger alert-dismissible"><h6><i class="icon fa fa-close"></i>Check the Fields User Unable to Update</h6></div>
- <?php  } }
+  if (!empty($uquery)) {
+  echo "<script>alert('Update Successfully');</script>";
+  } 
+  // else { 
+  // echo "<script>alert('Check The Fields');</script>";
+  // }
+ }
  if (isset($_GET['del'])) {
    $id = $_GET['del'];
    date_default_timezone_set('Asia/Kolkata');

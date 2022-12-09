@@ -88,13 +88,14 @@ if (! empty($_POST["update"])) {
     momhbresult='$momhbresult',Hushbresult='$hushbresult',momhivtestresult='$momhivtestresult',
     Hushivtestresult='$hushivtestresult',anyOtherInvest='$anyOtherInvest',totPregnancy='$totPregnancy',
     placeDeliveryDistrict='$placeDeliveryDistrict',hospitaltype='$hospitaltype',hospitalname='$hospitalname',
-    updatedat='$date',updatedBy='$userid' WHERE id=".$id);
-if (!empty($query)) { ?> 
-  <div class="alert alert-success alert-dismissible"><h6><i class="icon fa fa-check"></i>Updated Successfully</h6></div>
-<?php  header('location: MedicalHistory.php');
-} else { ?>
-<div class="alert alert-danger alert-dismissible"><h6><i class="icon fa fa-close"></i>Check the Fields User Unable to Update</h6></div>
-<?php } }
+    updatedat='$date',updatedBy='$userid' WHERE id=".$id); 
+if (!empty($query)) {
+echo "<script>alert('Update Successfully');</script>";
+} 
+// else { 
+// echo "<script>alert('Check The Fields');</script>";
+// }
+}
 
 if (isset($_GET['del'])) {
   $id = $_GET['del'];

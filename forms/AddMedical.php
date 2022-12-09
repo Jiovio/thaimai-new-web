@@ -48,25 +48,7 @@ if (! empty($_POST["addMedical"])) {
   VALUES ('$picmeno','$lmpdate','$edddate','$reg12weeks','$momBGtaken','$momBGtype','$pastillness','$bleedtime','$clottime','$momVdrlRprResult',
   '$husVdrlRprResult','$momhbresult','$hushbresult','$momhivtestresult',
   '$anyOtherInvest','$hushivtestresult','$totPregnancy','$placeDeliveryDistrict','$hospitaltype','$hospitalname','$userid')");
-if (!empty($query)){ 
-  //$messagetype = "success";
-  //$_SESSION["message"] = "Inserted Successfully";
-  // print($_SESSION["message"]);
-  // exit;
-  //header("Location:medicalhistory.php");
-  echo "<script>alert('Successfuly Saved'); window.location.href =  + $siteurl + '/medicalhistory.php';</script>";
-  ob_end_flush();
-  //exit(); 
-} else {
-  $messagetype = "error";
-  $message = "Check the Fields";
-}
-//if (!empty($query)) { ?> 
-<!-- <div class="alert alert-success alert-dismissible"><h6><i class="icon fa fa-check"></i>Inserted Successfully</h6></div> -->
-<?php  //header('location: MedicalHistory.php');
-//} else { ?>
-<!-- <div class="alert alert-danger alert-dismissible"><h6><i class="icon fa fa-close"></i>Check the Fields User Unable to insert</h6></div> -->
-<?php //} 
+ 
 } } ?>
 <!-- Content wrapper -->
       <div class="content-wrapper">
@@ -78,6 +60,14 @@ if (!empty($query)){
               <a href="MedicalHistory.php"><button type="submit" class="btn btn-primary" id="btnBack">
                     <span class="bx bx-arrow-back"></span>&nbsp; Back</button></a>
 			      </h4>
+            <?php 
+            if (!empty($query)) {
+            echo "<script>alert('Inserted Successfully');</script>";
+            } 
+            // else { 
+            // echo "<script>alert('Check The Fields');</script>";
+            // } 
+            ?>
             <form action=""  autocomplete="off" method="post">
               <!-- Basic Layout -->
               <div class="row">
@@ -95,7 +85,7 @@ if (!empty($query)){
                 <div class="col-6 mb-3">
         <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
         <div class="frmSearch">
-        <input type="text" id="picmeno" name="picmeno" placeholder="PICME Number" class="form-control" />
+        <input type="text" id="picmeno" name="picmeno" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
         <div id="suggesstion-box"></div>
     </div>
                 </div>

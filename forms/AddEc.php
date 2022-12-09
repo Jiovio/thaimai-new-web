@@ -35,14 +35,7 @@ if($mvid > 0) {
   '$magemarriage','$mmobno','$mobperson','$mstatus','$hfullname','$hdob','$hageecreg','$hagemarriage','$husmobno','$hedustatus',
   '$religion','$caste','$BlockId','$PhcId','$HscId','$PanchayatId','$VillageId','$address','$pincode','$povertystatus',
   '$migrantstatus','$rctype','$rcnum','$userid')");
-if (!empty($query)) { 
-    $successtype = "success";
-    $_SESSION["successmessage"] = "Inserted Successfully";
-    header("Location: EligibleCouple.php");
-} else { 
-    $errormessage = "error";
-    $errormessage = "Check the Fields User Unable to insert.";
-} } 
+} 
 }
 
 ?>
@@ -56,6 +49,14 @@ if (!empty($query)) {
                     <span class="bx bx-arrow-back"></span>&nbsp; Back
               </button></a>
             </h4>
+            <?php 
+            if (!empty($query)) {
+            echo "<script>alert('Inserted Successfully');</script>";
+            } 
+            // else { 
+            // echo "<script>alert('Check The Fields');</script>";
+            // } 
+            ?>
               <!-- Basic Layout -->
               <div class="row">
                 <div class="col-xl">

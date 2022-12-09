@@ -53,6 +53,12 @@
      divBox.style.display = 'none';
      }, 1000); 
    </script>
+   <script>
+     setTimeout(() => {
+     var divBox = document.getElementById('AlertMsg');
+     divBox.style.display = 'none';
+     }, 1000); 
+   </script>
 <!-- Select PICME Number -->
 <script src="../forms/datatables/ajax_googleapis_jquery_2.1.1.min.js"></script>
 

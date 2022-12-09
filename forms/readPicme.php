@@ -1,7 +1,7 @@
 <?php
 include "../config/db_connect.php";
 if (! empty($_POST["keyword"])) {
-    $sql = $conn->prepare("SELECT * FROM antenatalvisit WHERE picmeno LIKE  ? ORDER BY picmeno LIMIT 0,3");
+    $sql = $conn->prepare("SELECT * FROM ecregister WHERE picmeNo LIKE  ? ORDER BY picmeNo LIMIT 0,3");
     $search = "{$_POST['keyword']}%";
     $sql->bind_param("s", $search);
     $sql->execute();
@@ -12,8 +12,8 @@ if (! empty($_POST["keyword"])) {
 <?php
         foreach ($result as $country) {
             ?>
-   <li onClick="selectPicme('<?php echo $country["picmeno"]; ?>');">
-      <?php echo $country["picmeno"]; ?>
+   <li onClick="selectPicme('<?php echo $country["picmeNo"]; ?>');">
+      <?php echo $country["picmeNo"]; ?>
     </li>
 <?php
         }// end for

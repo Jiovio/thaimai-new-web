@@ -98,39 +98,17 @@
                 <hr class="my-0" />
                     
                     <div class="card-body">
-                      <?php
-                      if (! empty($registrationResponse["status"])) {
-                       
-                        if ($registrationResponse["status"] == "error") {
-                     ?>
-				             <div class="server-response errMsg"><?php echo $registrationResponse["message"]; ?></div>
-                    <?php
-                             } else if ($registrationResponse["status"] == "success") {
-                    ?>
-                    <div class="server-response success-msg"><?php echo $registrationResponse["message"]; ?></div>
-                    <?php
-        }
-    }
-    ?>
-	<div class="errMsg" id="errMsg"></div>
+                      
 			<input type="hidden" name="picmeno" value="<?php echo $picmeno; ?>">
 				<div id="firstDiv">
 					<div class="row">
           <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-fullname">PICME No. <span class="mand">* </span id="errPicmeno"><span></span></label>
-                          <select name="picmeno" id="picmeno"  oninput = "onlyNumbers(this.value)" value="" class="form-control picmeNo" required>
-                            <option value="">Choose...</option>
-                          <?php   
-                            $query = "SELECT picmeno FROM anregistration WHERE status=1";
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { 
-                                ?>
-                          <option value="<?php echo $listvalue['picmeno']; ?>"><?php echo $listvalue['picmeno']; ?></option>
-                          
-                          <?php  }  ?>
-                             </select>
-                          
-                        </div>
+        <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
+        <div class="frmSearch">
+        <input type="text" id="picmeno" name="picmeno" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
+        <div id="suggesstion-box"></div>
+         </div>
+                </div>
                       
 						            <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">Resident Type <span class="mand">* </span></label>
