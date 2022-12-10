@@ -70,6 +70,7 @@ $query = mysqli_query($conn, "UPDATE antenatalvisit SET calciumDate='$calciumDat
 if (!empty($_POST["btnFourth"])) { 
   $picmeno = $_POST["picmeno"]; 
    $methodofConception = $_POST["methodofConception"]; 
+   $AnyOtherSpecify = $_POST["AnyOtherSpecify"];
    $symptomsHighRisk = $_POST["symptomsHighRisk"];
    $referralDate = $_POST["referralDate"]; 
    $referralDistrict = $_POST["referralDistrict"]; 
@@ -80,9 +81,9 @@ if (!empty($_POST["btnFourth"])) {
    $placeAdministrator = $_POST["placeAdministrator"]; 
    $nooIVdoses = $_POST["noOfIVDoses"];
   
- $query = mysqli_query($conn, "UPDATE antenatalvisit SET methodofConception='$methodofConception',
+ $query = mysqli_query($conn, "UPDATE antenatalvisit SET methodofConception='$methodofConception',AnyOtherSpecify='$AnyOtherSpecify',
  PHCsymptomsHighRisk='$symptomsHighRisk',referralDate='$referralDate',referralDistrict='$referralDistrict',
- referralFacility='$referralFacility',referralPlace='$referralPlace',bloodTransfusion='$bloodTransfusion',bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',
+referralFacility='$referralFacility',referralPlace='$referralPlace',bloodTransfusion='$bloodTransfusion',bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',
    noOfIVDoses='$nooIVdoses' WHERE picmeno=".$picmeno);
    
 $motstatus = mysqli_query($conn, "UPDATE ecregister SET status=2 WHERE picmeNo=".$picmeno);
@@ -133,7 +134,7 @@ $motstatus = mysqli_query($conn, "UPDATE ecregister SET status=2 WHERE picmeNo="
                   <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-methodofConception">Method Of Contraception Councelling <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                            <select required name="methodofConception" id="methodofConception" class="form-select" >
+                            <select required name="methodofConception" id="methodofConception" onChange="MofConceptionChange()" class="form-select" >
                           <option value="">Choose...</option>
                         
                            <?php   
@@ -147,7 +148,36 @@ $motstatus = mysqli_query($conn, "UPDATE ecregister SET status=2 WHERE picmeNo="
                              </select> 
                           </div>
                         </div>
-						            <div class="col-4 mb-3">
+                        <div class="col-4 mb-3" id="Specify" style="display: none;">
+                          <label class="form-label" for="basic-icon-default-AnyOtherSpecify">Any Other Specify </label>
+                          <div class="input-group input-group-merge">
+                            <input
+                              type="text"
+                              name="AnyOtherSpecify"
+                              class="form-control"
+                              id="AnyOtherSpecify"
+                              placeholder="Any Other Specify"
+                              aria-label="Any Other Specify"
+                              aria-describedby="basic-icon-default-AnyOtherSpecify"
+                              
+                              />
+                          </div>
+                        </div>
+                        <div class="col-4 mb-3">
+                          <label class="form-label" for="basic-icon-default-highRisk">Symptoms High Risk <span class="mand">* </span></label>
+                          <div class="input-group input-group-merge">
+                          <select required name="highRisk" id="highRisk" onChange="SymHighRishChange()" class="form-select">
+                          <option value="">Choose...</option>
+                          <?php
+                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php } ?>
+                             </select>
+                          </div>
+                        </div>
+						            <div class="col-4 mb-3" id="symptom" style="display: none;">
                           <label class="form-label" for="basic-icon-default-symptomsHighRisk"> Symptoms High Risk During Visit <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             <select required name="methodofConception" id="methodofConception" class="form-select" >
@@ -165,10 +195,10 @@ $motstatus = mysqli_query($conn, "UPDATE ecregister SET status=2 WHERE picmeNo="
                           </div>
                         </div>
                         
-                        <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-referralFacility">Referral Facility <span class="mand">* </span></label>
+                        <div class="col-4 mb-3" id="refFacility" style="display: none;">
+                          <label class="form-label" for="basic-icon-default-referralFacility">Referral Facility </label>
                           <div class="input-group input-group-merge">
-                          <select required name="referralFacility" id="referralFacility" class="form-select" onchange="RefChange()">
+                          <select name="referralFacility" id="referralFacility" class="form-select" onchange="RefChange()">
                           <option value="">Choose...</option>
                           <?php
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -226,7 +256,7 @@ $motstatus = mysqli_query($conn, "UPDATE ecregister SET status=2 WHERE picmeNo="
                               />
                           </div>
                         </div> 
-						            <div class="col-4 mb-3">
+						            <div class="col-4 mb-3" id="bTrans" style="display: none;">
                           <label class="form-label" for="basic-icon-default-bloodTransfusion">Transfusion <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <select required name="bloodTransfusion" id="bloodTransfusion" class="form-select">
@@ -240,7 +270,7 @@ $motstatus = mysqli_query($conn, "UPDATE ecregister SET status=2 WHERE picmeNo="
                              </select>
                           </div>
                         </div>
-                        <div class="col-4 mb-3">
+                        <div class="col-4 mb-3" id="transDate" style="display: none;">
                           <label class="form-label" for="basic-icon-default-bloodTransfusionDate">Transfusion Date <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             <input
@@ -254,7 +284,7 @@ $motstatus = mysqli_query($conn, "UPDATE ecregister SET status=2 WHERE picmeNo="
                               required />
                           </div>
                         </div>
-						           <div class="col-4 mb-3">
+						           <div class="col-4 mb-3" id="placeAdmin" style="display: none;">
                           <label class="form-label" for="basic-icon-default-placeAdministered">Place Administered <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             <input
@@ -269,7 +299,7 @@ $motstatus = mysqli_query($conn, "UPDATE ecregister SET status=2 WHERE picmeNo="
                           </div>
                         </div>
 					
-				                <div class="col-4 mb-3">
+				                <div class="col-4 mb-3" id="ivDoses" style="display: none;">
                           <label class="form-label" for="basic-icon-default-noOfIVDoses">NO. of Units / IV Doses <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             <input

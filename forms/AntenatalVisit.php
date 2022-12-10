@@ -61,7 +61,7 @@
                     } else if(isset($_POST['reset'])) {
                       $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
                     } else {
-                      $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+                      $ExeQuery = mysqli_query($conn,"SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,ec.motheraadhaarname FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1  ORDER BY ec.motheraadhaarname ASC");
                     }
             } else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
                   $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQry);

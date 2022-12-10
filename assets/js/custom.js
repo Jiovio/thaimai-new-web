@@ -284,6 +284,8 @@ document.getElementById("NoFolicAcid").disabled = false;
  document.getElementById("usgResult").disabled = false;
  document.getElementById("usgRemarks").disabled = false;
  document.getElementById("methodofConception").disabled = false;
+ document.getElementById("AnyOtherSpecify").disabled = false;
+ document.getElementById("highRisk").disabled = false;
  document.getElementById("symptomsHighRisk").disabled = false;
  document.getElementById("referralDate").disabled = false;
  document.getElementById("referralDistrict").disabled = false;
@@ -717,22 +719,33 @@ function selectPicme(val) {
     $("#suggesstion-box").hide();
 }
 
-// function checkPicme()
-// {
 
-//     var picmeno = document.getElementById('picmeno');
-   
-    
-//     var message = document.getElementById('errPicme');
+function MofConceptionChange() {
+  var selectOption = document.getElementById("methodofConception");
+  var valueSelected = selectOption.options[selectOption.selectedIndex].value;
+  var anyOtherSpecify = document.getElementById("Specify");
+  if(valueSelected == '8') { anyOtherSpecify.style.display = "block"; }
+  else if(valueSelected == '1' || valueSelected == '2' || valueSelected == '3' || valueSelected == '4' 
+  || valueSelected == '5' || valueSelected == '6' || valueSelected == '7') {
+    anyOtherSpecify.style.display = "none";
+  }
+}
 
-//   //  var goodColor = "#0C6";
-//     var badColor = "#FF9B37";
+function SymHighRishChange() {
+  var selectBox = document.getElementById("highRisk"); 
+  var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+
+  var symptom = document.getElementById("symptom"); 
+  var refFacility = document.getElementById("refFacility");
+  var bTrans = document.getElementById("bTrans"); 
+  var transDate = document.getElementById("transDate");
+  var placeAdmin = document.getElementById("placeAdmin"); 
+  var ivDoses = document.getElementById("ivDoses");
   
-//     if(picmeno.value.length!=12){
-       
-//         picmeno.style.backgroundColor = badColor;
-//         message.style.color = badColor;
-//         message.innerHTML = "required 12 digits"
-//         return false;
-//     }
-//   }
+  if(selectedValue == "1") { symptom.style.display = "block"; } else if(selectedValue == "0") { symptom.style.display = "none"; } 
+  if(selectedValue == "1") { refFacility.style.display = "block"; } else if(selectedValue == "0") { refFacility.style.display = "none"; } 
+  if(selectedValue == "1") { bTrans.style.display = "block"; } else if(selectedValue == "0") { bTrans.style.display = "none"; } 
+  if(selectedValue == "1") { transDate.style.display = "block"; } else if(selectedValue == "0"){ transDate.style.display = "none"; } 
+  if(selectedValue == "1") { placeAdmin.style.display = "block"; } else if(selectedValue == "0"){ placeAdmin.style.display = "none"; } 
+  if(selectedValue == "1") { ivDoses.style.display = "block"; } else if(selectedValue == "0"){ ivDoses.style.display = "none"; } 
+}

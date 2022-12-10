@@ -15,14 +15,15 @@
 	position:absolute; z-index: 100;}
 /* Spinner Loading */
 .container-preloader .animation-preloader .spinner {
-  animation: spinner 1s infinite linear;
+  animation: spinner 1s infinite linear; 
+  text-align: center;
 	border-radius: 50%;  border: 10px solid rgba(0, 0, 0, 0.2);
   border-top-color: #3880ff; /* It is not in alphabetical order so that you do not overwrite it */
-  height: 9em;  margin: 0 auto 3.5em auto; width: 9em;
+  height: 4em;  margin: 0 auto 3.5em auto; width: 4em;
 }
 /* Loading text */
 .container-preloader .animation-preloader .txt-loading {
-  font: bold 5em 'Montserrat', sans-serif;
+  font: bold 2em 'Montserrat', sans-serif;
 	text-align: center;	user-select: none;
 }
 .container-preloader .animation-preloader .txt-loading .characters:before {
@@ -153,6 +154,16 @@ $(document).ready(function() {
 						<span preloader-text="A" class="characters">A</span>
 
 						<span preloader-text="I" class="characters">I</span>
+
+						<span preloader-text="Y" class="characters">Y</span>
+						
+						<span preloader-text="A" class="characters">A</span>
+						
+						<span preloader-text="D" class="characters">D</span>
+						
+						<span preloader-text="A" class="characters">A</span>
+						
+						<span preloader-text="N" class="characters">N</span>
 					</div>
 				</div>	
 				<div class="loader-section section-left"></div>

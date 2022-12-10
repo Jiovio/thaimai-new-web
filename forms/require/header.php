@@ -14,6 +14,7 @@ if (isset($_SESSION["username"]) || isset($_SESSION["userid"]) || isset($_SESSIO
     header("Location: $url");
 }
 include "../config/db_connect.php";
+include ('preloader.php');
 ?>
 
 <!DOCTYPE html>

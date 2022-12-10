@@ -28,8 +28,6 @@
                 </h5>    
   <div class="table-responsive text-nowrap">
 			<div class="container">
-      <div id="response" class="<?php if(!empty($messagetype) ) { echo $messagetype . " display-block"; } else { echo $messagetype . " display-none"; } ?>"><?php if(!empty($message)) { echo $message; } ?>
-      </div><br>
 				<table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
                     <thead>
                       <tr>
@@ -43,7 +41,7 @@
                       </tr>
                     </thead>
 <?php  
-  $listQry = "SELECT DISTINCT(motheraadhaarid),id,ecfrno,dateecreg,motheraadhaarname,husbandaadhaarid FROM ecregister WHERE status=1";
+  $listQry = "SELECT DISTINCT(motheraadhaarid),id,ecfrno,dateecreg,motheraadhaarname,husbandaadhaarid,status FROM ecregister WHERE status=1";
   $orderQry = " ORDER BY motheraadhaarname ASC";
 
  if(($usertype == 0) || ($usertype == 1)) {
@@ -62,9 +60,9 @@
                         $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."' AND PhcId='".$phcName."'".$orderQry);
                       }
                     } else if(isset($_POST['reset'])) {
-                      $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+                       $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
                     } else {
-                      $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+                      $ExeQuery = mysqli_query($conn,"SELECT DISTINCT(motheraadhaarid),id,ecfrno,dateecreg,motheraadhaarname,husbandaadhaarid,status FROM ecregister WHERE status=1  ORDER BY motheraadhaarname ASC");
                     }
             } else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
                   $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$BlockId."'".$orderQry);

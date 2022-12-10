@@ -25,7 +25,9 @@ if (isset($_GET['view'])) {
 
   $calciumDate = $An["calciumDate"];
   $sizeUterusinWeeks = $An["sizeUterusinWeeks"];
-  $methodofConception = $An["methodofConception"]; $symptomsHighRisk = $An["symptomsHighRisk"];
+  $methodofConception = $An["methodofConception"]; 
+  $AnyOtherSpecify = $An["AnyOtherSpecify"];
+  $symptomsHighRisk = $An["symptomsHighRisk"];
   $referralDate = $An["referralDate"]; $referralDistrict = $An["referralDistrict"];
   $referralFacility = $An["referralFacility"]; $referralPlace = $An["referralPlace"];
 //   $usgStatus = $An["usgTakenStatus"]; 
@@ -88,7 +90,8 @@ if (! empty($_POST["editVisit"])) {
 
   $calciumDate = $_POST["calciumDate"];
   $sizeUterusinWeeks = $_POST["sizeUterusinWeeks"];
-  $methodofConception = $_POST["methodofConception"]; $symptomsHighRisk = $_POST["symptomsHighRisk"];
+  $methodofConception = $_POST["methodofConception"]; $AnyOtherSpecify = $_POST["AnyOtherSpecify"];
+  $symptomsHighRisk = $_POST["symptomsHighRisk"];
   $referralDate = $_POST["referralDate"]; $referralDistrict = $_POST["referralDistrict"];
   $referralFacility = $_POST["referralFacility"]; $referralPlace = $_POST["referralPlace"];
   
@@ -136,7 +139,7 @@ if (! empty($_POST["editVisit"])) {
   TdDose='$TdDose',Td2Dose='$Td2Dose',Td1Date='$Td1Date',TdBoosterDate='$TdBoosterDate',covidvac='$Covidvac',Dose1Date='$Dose1Date',Dose2Date='$Dose2Date',
 preDate='$PreDate',NoFolicAcid='$NoFolicAcid',NoIFA='$NoIFA',
   DateofIFA='$dateofIFA',DateofAlbendazole='$dateofAlbendazole',noCalcium='$noCalcium',calciumDate='$calciumDate',
-  sizeUterusinWeeks='$sizeUterusinWeeks',methodofConception='$methodofConception',symptomsHighRisk='$symptomsHighRisk',referralDate='$referralDate',
+  sizeUterusinWeeks='$sizeUterusinWeeks',methodofConception='$methodofConception',AnyOtherSpecify='$AnyOtherSpecify',symptomsHighRisk='$symptomsHighRisk',referralDate='$referralDate',
   referralDistrict='$referralDistrict',referralFacility='$referralFacility',referralPlace='$referralPlace',usgreport='$filename',
   usgDoneDate='$usgDoneDate',usgScanEdd='$usgScanEdd',usgTrimester='$usgTrimester',usgFundalHeight='$usgFundalHeight',
   usgSizeUterusWeek='$usgSizeUterusWeek',usgFetusStatus='$usgFetusStatus',gestationSac='$gestationSac',liquor='$liquor',
@@ -1641,7 +1644,7 @@ if (isset($_GET['del'])) {
 						             <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-methodofConception">Method Of Contraception Councelling <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                            <select required name="methodofConception" id="methodofConception" class="form-select" disabled >
+                            <select required name="methodofConception" id="methodofConception" onChange="MofConceptionChange()" class="form-select" disabled >
                            <?php   
                             $query = "SELECT av.methodofConception,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.methodofConception WHERE type=29 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -1659,8 +1662,37 @@ if (isset($_GET['del'])) {
                                 </select>
                           </div>
                         </div>
-                        
-						            <div class="col-4 mb-3">
+                        <div class="col-4 mb-3">
+                          <label class="form-label" for="basic-icon-default-AnyOtherSpecify">Any Other Specify </label>
+                          <div class="input-group input-group-merge">
+                            <input
+                              type="text"
+                              name="AnyOtherSpecify"
+                              class="form-control"
+                              id="AnyOtherSpecify"
+                              placeholder="Any Other Specify"
+                              aria-label="Any Other Specify"
+                              aria-describedby="basic-icon-default-AnyOtherSpecify"
+                              value="<?php echo $AnyOtherSpecify ?>"
+                              disabled
+                              />
+                          </div>
+                        </div>
+                        <div class="col-4 mb-3">
+                          <label class="form-label" for="basic-icon-default-highRisk">Symptoms High Risk <span class="mand">* </span></label>
+                          <div class="input-group input-group-merge">
+                          <select required name="highRisk" id="highRisk" onChange="SymHighRishChange()" class="form-select">
+                          <option value="">Choose...</option>
+                          <?php
+                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php } ?>
+                             </select>
+                          </div>
+                        </div>
+						            <div class="col-4 mb-3" id="symptom">
                           <label class="form-label" for="basic-icon-default-symptomsHighRisk">Symptoms High Risk During Visit <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <select name="symptomsHighRisk" id="symptomsHighRisk" class="form-select" required disabled>
@@ -1693,7 +1725,7 @@ if (isset($_GET['del'])) {
                             <?php //} ?>
                           </div>
                         </div>
-                        <div class="col-4 mb-3">
+                        <div class="col-4 mb-3" id="refFacility">
                           <label class="form-label" for="basic-icon-default-referralFacility">Referral Facility <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <select required name="referralFacility" id="referralFacility" class="form-select" onchange="RefChange()" disabled>
@@ -1764,7 +1796,7 @@ if (isset($_GET['del'])) {
                               />
                           </div>
                         </div> 
-						      <div class="col-4 mb-3">
+						      <div class="col-4 mb-3" id="bTrans">
                           <label class="form-label" for="basic-icon-default-bloodTransfusion">Transfusion</label>
                           <div class="input-group input-group-merge">
                           <select name="bloodTransfusion" id="bloodTransfusion" class="form-select" disabled>
@@ -1785,7 +1817,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                         
-                        <div class="col-4 mb-3">
+                        <div class="col-4 mb-3" id="transDate" >
                           <label class="form-label" for="basic-icon-default-bloodTransfusionDate">Transfusion Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1802,7 +1834,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                       
-				           <div class="col-4 mb-3">
+				           <div class="col-4 mb-3" id="placeAdmin" >
                           <label class="form-label" for="basic-icon-default-placeAdministered">Place Administered</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1818,7 +1850,7 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                         </div>
-				                <div class="col-4 mb-3">
+				                <div class="col-4 mb-3" id="ivDoses">
                           <label class="form-label" for="basic-icon-default-noOfIVDoses">NO. of Units / IV Doses</label>
                           <div class="input-group input-group-merge">
                             <input
