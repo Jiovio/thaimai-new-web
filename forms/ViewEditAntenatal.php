@@ -349,7 +349,7 @@ if (isset($_GET['del'])) {
                     <div class="row"> 
                           <div class="mb-3 col-md-6">
                             <label class="form-label">OBSTETRIC CODE</label>
-                            <input type="text" class="form-control" id="obstetricCode" value="<?php echo $obcode; ?>" name="obstetricCode" placeholder="Code" disabled/>
+                            <input type="text" class="form-control" id="obstetricCode" value="<?php echo $obcode; ?>" name="obstetricCode" placeholder="Code" readonly />
                           </div>
                           
                           <div class="mb-3 col-md-6">

@@ -574,7 +574,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                 
-					             	<div class="col-4 mb-3"  id="Tddose1" style="display: none;">
+					   <div class="col-4 mb-3"  id="Tddose1">
                           <label class="form-label" for="basic-icon-default-TdDose">Td1 Dose</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -590,7 +590,7 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                         </div>
-                        <div class="col-4 mb-3" id="Tddate1"  style="display: none;" >
+                        <div class="col-4 mb-3" id="Tddate1">
                           <label class="form-label" for="basic-icon-default-Td1Date">Td1 Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -629,7 +629,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
 
-                        <div class="col-4 mb-3" id="Tddose2"  style="display: none;"  >
+                        <div class="col-4 mb-3" id="Tddose2">
                           <label class="form-label" for="basic-icon-default-TdDose">Td2 Dose</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -645,7 +645,7 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                         </div>
-                        <div class="col-4 mb-3"  id="Tddate2"  style="display: none;" >
+                        <div class="col-4 mb-3"  id="Tddate2">
                           <label class="form-label" for="basic-icon-default-Td1Date">Td2 Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -683,7 +683,7 @@ if (isset($_GET['del'])) {
                                 </select>
                           </div>
                         </div>
-                        <div class="col-4 mb-3" id="Bdose"  style="display: none;">
+                        <div class="col-4 mb-3" id="Bdose">
                           <label class="form-label" for="basic-icon-default-Td2Dose">Booster Dose </label>
                           <div class="input-group input-group-merge">
                             <input
@@ -694,11 +694,11 @@ if (isset($_GET['del'])) {
                               placeholder="Booster Dose"
                               aria-label="Booster Dose"
                               aria-describedby="basic-icon-default-TdDose"
-                              value="<?php echo $TdBdose; ?>"
+                              value="<?php echo $TdBdose; ?>" disabled
                               />
                           </div>
                         </div>
-						<div class="col-4 mb-3" id="TdB"  style="display: none;">
+						<div class="col-4 mb-3" id="TdB">
                           <label class="form-label" for="basic-icon-default-TdBoosterDate">Td Booster Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -929,7 +929,7 @@ if (isset($_GET['del'])) {
                           </div>
                           </div>
                           
-                        <div class="col-4 mb-3" id="takenStatus" style="display:none;">
+                        <div class="col-4 mb-3" id="takenStatus" >
                           <label class="form-label" for="basic-icon-default-usgDoneDate">USG Report</label>
                            <a href="<?php echo $siteurl."/usgDocument/".$usgreport; ?>" target="_blank"><button type="button" class="btn btn btn-primary">View USG Status</button></a>
                           <div class="input-group input-group-merge">
@@ -946,7 +946,7 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                         </div>
-						 <div class="col-4 mb-3" id="usgDoneDate" style="display:none;">
+						 <div class="col-4 mb-3" id="usgDoneDate" >
                           <label class="form-label" for="basic-icon-default-usgDoneDate">USG Done Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -963,7 +963,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                         
-						<div class="col-4 mb-3" id="usgScanEdd" style="display:none;">
+						<div class="col-4 mb-3" id="usgScanEdd" >
                           <label class="form-label" for="basic-icon-default-usgScanEdd">USG Scan Edd</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -980,7 +980,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                         <div class="row">
-					            <div class="col-4 mb-3" id="usgScanStatus" style="display:none;">
+					            <div class="col-4 mb-3" id="usgScanStatus" >
                           <label class="form-label" for="basic-icon-default-usgTrimester">USG Scan Status</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgScanStatus" id="ScanStatus" class="form-select" disabled>
@@ -1001,7 +1001,7 @@ if (isset($_GET['del'])) {
                                 </select>
                           </div>
                         </div>
-			        	<div class="col-4 mb-3" id="usgFundalHeight" style="display:none;">
+			        	<div class="col-4 mb-3" id="usgFundalHeight" >
                           <label class="form-label" for="basic-icon-default-usgFundalHeight">USG FUNDAL HEIGHT</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1018,7 +1018,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                         			
-						 <div class="col-4 mb-3" id="usgSizeUterusWeek" style="display:none;">
+						 <div class="col-4 mb-3" id="usgSizeUterusWeek" >
                           <label class="form-label" for="basic-icon-default-usgSizeUterusWeek">USG Size Uterus Week</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1035,7 +1035,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                         
-						           <div class="col-4 mb-3" id="usgFetusStatus" style="display:none;">
+						           <div class="col-4 mb-3" id="usgFetusStatus" >
                           <label class="form-label" for="basic-icon-default-phone">USG Fetus Status</label>
                           <div class="input-group input-group-merge">
                           <select name="usgFetusStatus" id="FetusStatus" class="form-select" disabled>
@@ -1056,7 +1056,7 @@ if (isset($_GET['del'])) {
                                 </select>
 						  </div>
 					    </div>
-			            <div class="col-4 mb-3" id="gestationSac" style="display:none;">
+			            <div class="col-4 mb-3" id="gestationSac" >
                           <label class="form-label" for="basic-icon-default-phone">Gestation Sac</label>
                           <div class="input-group input-group-merge">
                           <select name="gestationSac" id="gestation" class="form-select" onchange="gsacField()" disabled>
@@ -1078,7 +1078,7 @@ if (isset($_GET['del'])) {
 						             </div>
 					             </div>
                            
-						         <div class="col-4 mb-3 liquor" id="liquor" style="display:none;">
+						         <div class="col-4 mb-3 liquor" id="liquor" >
                           <label class="form-label" for="basic-icon-default-liquor">Liquor</label>
                           <div class="input-group input-group-merge">
                           <select name="liquor" id="liquorop" class="form-select" disabled>
@@ -1100,7 +1100,7 @@ if (isset($_GET['del'])) {
 						            </div>
 					            </div>
 
-					          	<div class="col-4 mb-3 FetalHeartRate" id="FetalHeartRate" style="display:none;">
+					          	<div class="col-4 mb-3 FetalHeartRate" id="FetalHeartRate" >
                           <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1117,7 +1117,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                         
-					            	<div class="col-4 mb-3 FetalPosition" id="FetalPosition" style="display:none;">
+					            	<div class="col-4 mb-3 FetalPosition" id="FetalPosition" >
                           <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation</label>
                           <div class="input-group input-group-merge">
                           <select name="usgFetalPosition" id="usgFetalPosition" class="form-select" disabled>
@@ -1140,7 +1140,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                         
-					            	<div class="col-4 mb-3 FetalMovement" id="FetalMovement" style="display:none;">
+					            	<div class="col-4 mb-3 FetalMovement" id="FetalMovement" >
                           <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement</label>
                           <div class="input-group input-group-merge">
                           <select name="usgFetalMovement" id="usgFetalMovement" class="form-select" disabled>
@@ -1163,7 +1163,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
 
-                        <div class="col-4 mb-3" id="liquor1" class="liquor1" style="display:none;">
+                        <div class="col-4 mb-3" id="liquor1" class="liquor1" >
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 1</label>
                           <div class="input-group input-group-merge">
                           <select  name="liquor1" id="liquor1value" class="form-select" disabled>
@@ -1186,7 +1186,7 @@ if (isset($_GET['del'])) {
 						            </div>
 					            </div>
                       
-					          	<div class="col-4 mb-3" id="usgFetalHeartRate1" class="usgFetalHeartRate1" style="display:none;">
+					          	<div class="col-4 mb-3" id="usgFetalHeartRate1" class="usgFetalHeartRate1" >
                           <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 1</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1203,7 +1203,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                        
-					            	<div class="col-4 mb-3" id="usgFetalPosition1" class="usgFetalPosition1" style="display:none;">
+					            	<div class="col-4 mb-3" id="usgFetalPosition1" class="usgFetalPosition1" >
                           <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 1</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFetalPosition1" id="usgFetalPosition1value" class="form-select" disabled>
@@ -1225,7 +1225,7 @@ if (isset($_GET['del'])) {
                                 </select>
                           </div>
                         </div> 
-					            	<div class="col-4 mb-3" id="usgFetalMovement1" class="usgFetalMovement1" style="display:none;">
+					            	<div class="col-4 mb-3" id="usgFetalMovement1" class="usgFetalMovement1" >
                           <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 1</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFetalMovement1" id="usgFetalMovement1value" class="form-select" disabled>
@@ -1248,7 +1248,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
 
-                        <div class="col-4 mb-3" id="liquor2" class="liquor2" style="display:none;">
+                        <div class="col-4 mb-3" id="liquor2" class="liquor2" >
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 2</label>
                           <div class="input-group input-group-merge">
                           <select  name="liquor2" id="liquor2value" class="form-select" disabled>
@@ -1271,7 +1271,7 @@ if (isset($_GET['del'])) {
 						            </div>
 					            </div>
                       
-					          	<div class="col-4 mb-3" id="usgFetalHeartRate2" class="usgFetalHeartRate2" style="display:none;">
+					          	<div class="col-4 mb-3" id="usgFetalHeartRate2" class="usgFetalHeartRate2" >
                           <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 2</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1288,7 +1288,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                        
-					            	<div class="col-4 mb-3" id="usgFetalPosition2" class="usgFetalPosition2" style="display:none;">
+					            	<div class="col-4 mb-3" id="usgFetalPosition2" class="usgFetalPosition2" >
                           <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 2</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFetalPosition2" id="usgFetalPosition2value" class="form-select"  disabled>
@@ -1310,7 +1310,7 @@ if (isset($_GET['del'])) {
                                 </select>
                           </div>
                         </div> 
-					            	<div class="col-4 mb-3" id="usgFetalMovement2" class="usgFetalMovement2" style="display:none;">
+					            	<div class="col-4 mb-3" id="usgFetalMovement2" class="usgFetalMovement2" >
                           <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 2</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFetalMovement2" id="usgFetalMovement2value" class="form-select" disabled>
@@ -1335,7 +1335,7 @@ if (isset($_GET['del'])) {
 
                         <!---- Triple Baby Field Start --->
 
-                        <div class="col-4 mb-3" id="lT1" class="lT" style="display:none;">
+                        <div class="col-4 mb-3" id="lT1" class="lT" >
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 1</label>
                           <div class="input-group input-group-merge">
                           <select  name="lT1" id="lT1value" class="form-select" disabled>
@@ -1358,7 +1358,7 @@ if (isset($_GET['del'])) {
 						            </div>
 					            </div>
                       
-					          	<div class="col-4 mb-3" id="usgFHRT1" style="display:none;">
+					          	<div class="col-4 mb-3" id="usgFHRT1" >
                           <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 1</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1375,7 +1375,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                        
-					            	<div class="col-4 mb-3" id="usgFPT1" class="usgFPT1" style="display:none;">
+					            	<div class="col-4 mb-3" id="usgFPT1" class="usgFPT1" >
                           <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 1</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFPT1" id="usgFPT1value" class="form-select" disabled>
@@ -1397,7 +1397,7 @@ if (isset($_GET['del'])) {
                                 </select>
                           </div>
                         </div> 
-					            	<div class="col-4 mb-3" id="usgFMT1" class="usgFMT1" style="display:none;">
+					            	<div class="col-4 mb-3" id="usgFMT1" class="usgFMT1" >
                           <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 1</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFMT1" id="usgFMT1value" class="form-select" disabled>
@@ -1420,7 +1420,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
 
-                        <div class="col-4 mb-3" id="lT2" class="lT2" style="display:none;">
+                        <div class="col-4 mb-3" id="lT2" class="lT2" >
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 2</label>
                           <div class="input-group input-group-merge">
                           <select  name="lT2" id="lT2value" class="form-select" disabled>
@@ -1443,7 +1443,7 @@ if (isset($_GET['del'])) {
 						            </div>
 					            </div>
                       
-					          	<div class="col-4 mb-3" id="usgFHRT2" class="usgFHRT2" style="display:none;">
+					          	<div class="col-4 mb-3" id="usgFHRT2" class="usgFHRT2" >
                           <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 2</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1460,7 +1460,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                        
-					            	<div class="col-4 mb-3" id="usgFPT2" class="usgFPT2" style="display:none;">
+					            	<div class="col-4 mb-3" id="usgFPT2" class="usgFPT2" >
                           <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 2</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFPT2" id="usgFPT2value" class="form-select" disabled>
@@ -1482,7 +1482,7 @@ if (isset($_GET['del'])) {
                                 </select>
                           </div>
                         </div> 
-					            	<div class="col-4 mb-3" id="usgFMT2" class="usgFMT2" style="display:none;">
+					            	<div class="col-4 mb-3" id="usgFMT2" class="usgFMT2" >
                           <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 2</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFMT2" id="usgFMT2value" class="form-select" disabled>
@@ -1505,7 +1505,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                         
-                        <div class="col-4 mb-3" id="lT3" class="lT3" style="display:none;">
+                        <div class="col-4 mb-3" id="lT3" class="lT3" >
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 3</label>
                           <div class="input-group input-group-merge">
                           <select  name="lT3" id="lT3value" class="form-select" disabled> 
@@ -1528,7 +1528,7 @@ if (isset($_GET['del'])) {
 						            </div>
 					            </div>
                       
-					          	<div class="col-4 mb-3" id="usgFHRT3" class="usgFHRT3" style="display:none;">
+					          	<div class="col-4 mb-3" id="usgFHRT3" class="usgFHRT3" >
                           <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 3</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1545,7 +1545,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                        
-					            	<div class="col-4 mb-3" id="usgFPT3" class="usgFPT3" style="display:none;">
+					            	<div class="col-4 mb-3" id="usgFPT3" class="usgFPT3" >
                           <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 3</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFPT3" id="usgFPT3value" class="form-select" disabled>
@@ -1567,7 +1567,7 @@ if (isset($_GET['del'])) {
                                 </select>
                           </div>
                         </div> 
-					            	<div class="col-4 mb-3" id="usgFMT3" class="usgFMT3" style="display:none;">
+					            	<div class="col-4 mb-3" id="usgFMT3" class="usgFMT3" >
                           <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 3</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFMT3" id="usgFMT3value" class="form-select" disabled>
@@ -1591,7 +1591,7 @@ if (isset($_GET['del'])) {
                         </div>
                        
 
-						           <div class="col-4 mb-3" id="placenta" style="display:none;">
+						           <div class="col-4 mb-3" id="placenta" >
                           <label class="form-label" for="basic-icon-default-phone">Placenta</label>
                           <div class="input-group input-group-merge">
                           <select name="placenta" id="pla" class="form-select" disabled>
@@ -1612,7 +1612,7 @@ if (isset($_GET['del'])) {
                                 </select>
 						           </div>
 					           </div>
-						             <div class="col-4 mb-3" id="usgResult" style="display:none;">
+						             <div class="col-4 mb-3" id="usgResult" >
                           <label class="form-label" for="basic-icon-default-usgResult">USG Result</label>
                           <div class="input-group input-group-merge">
                           <select name="usgResult" id="Result" class="form-select" disabled>
@@ -1634,14 +1634,14 @@ if (isset($_GET['del'])) {
 						             </div>
 					              </div>
                            
-						            <div class="col-4 mb-3" id="Remarks" style="display:none;">
+						            <div class="col-4 mb-3" id="Remarks" >
                           <label class="form-label" for="basic-icon-default-usgRemarks">USG Remarks</label>
                           <div class="input-group input-group-merge">
                             <input
                               type="text"
                               name="usgRemarks"
                               class="form-control"
-                              id="usgRemarks"
+                              id="Remarks"
                               placeholder="USG Remarks"
                               aria-label="USG Remarks"
                               aria-describedby="basic-icon-default-usgRemarks"
