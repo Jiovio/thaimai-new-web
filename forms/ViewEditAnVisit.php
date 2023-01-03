@@ -153,7 +153,7 @@ usgFHRT3='$usgFHRT3',usgFPT3='$usgFPT3',usgFMT3='$usgFMT3',placenta='$placenta',
   bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',noOfIVDoses='$nooIVdoses',
   updatedat='$date',updatedBy='$userid' WHERE id=".$id);
   if (!empty($query)) {
-            echo "<script>alert('Updated Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/AntenatalVisit.php');</script>";
+            echo "<script>alert('Updated Successfully');window.location.replace('https://thaimai.cloudonweb.in/forms/AntenatalVisit.php');</script>";
           }
           $highrisk = mysqli_query($conn, "UPDATE ecregister ec INNER JOIN antenatalvisit av ON ec.picmeNo=av.picmeno SET ec.status=6 WHERE av.symptomsHighRisk NOT IN('1','48') AND av.picmeNo=".$picmeno);
 }
@@ -164,7 +164,7 @@ if (isset($_GET['del'])) {
   $date = date('d-m-Y h:i:s');
   mysqli_query($conn, "UPDATE antenatalvisit SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
   $_SESSION['message'] = "User deleted!"; 
-    echo "<script>alert('Deleted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/AntenatalVisit.php');</script>";
+    echo "<script>alert('Deleted Successfully');window.location.replace('https://thaimai.cloudonweb.in/forms/AntenatalVisit.php');</script>";
 }
 ?>
           <!-- Content wrapper -->
@@ -1641,7 +1641,7 @@ if (isset($_GET['del'])) {
                               type="text"
                               name="usgRemarks"
                               class="form-control"
-                              id="Remarks"
+                              id="usgRemarks"
                               placeholder="USG Remarks"
                               aria-label="USG Remarks"
                               aria-describedby="basic-icon-default-usgRemarks"
