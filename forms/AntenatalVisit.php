@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -10,6 +11,8 @@
     include ('require/Bfilter.php');
 }else if(($usertype == 3) || ($usertype == 4)) {
     include ('require/Pfilter.php');  
+} else {
+    include ('require/Hfilter.php'); // Top Filter
 }
 ?>
           <!-- Content wrapper -->
@@ -39,7 +42,8 @@
                          </tr>
                        </thead>                        
 <?php
-  $listQry = "SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,ec.motheraadhaarname FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1";
+  $listQry = "SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,ec.motheraadhaarname,av.createdBy FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1";
+  $private = " AND av.createdBy='".$userid."'";
   $orderQry = " ORDER BY ec.motheraadhaarname ASC";
     
         if(($usertype == 0) || ($usertype == 1)) {
@@ -64,7 +68,9 @@
                     }
             } else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
                   $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQry);
-            } 
+            } else {
+                $ExeQuery = mysqli_query($conn,$listQry.$private.$orderQry);
+            }
               if($ExeQuery) {
                          $cnt=1;
                          while($row = mysqli_fetch_array($ExeQuery)) {

@@ -10,6 +10,8 @@
     include ('require/Bfilter.php');
 }else if(($usertype == 3) || ($usertype == 4)) {
     include ('require/Pfilter.php');  
+} else {
+    include ('require/Hfilter.php'); // Top Filter
 }
 ?>
 <!-- Content wrapper -->

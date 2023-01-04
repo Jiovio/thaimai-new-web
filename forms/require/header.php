@@ -168,7 +168,7 @@ include ('preloader.php');
               </a>
             </li>
             <?php } ?>
-            <?php if(($usertype != 5) || ($usertype != 6)) { ?>
+            <?php if($usertype != 5) { ?>
             <li class="menu-item">
               <a href="MedicalHistory.php" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-plus"></i>

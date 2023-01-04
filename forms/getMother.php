@@ -249,7 +249,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                       <div class="row">                            
                         <div class="mb-3 col-md-6">
                           <label class="form-label">OBSTETRIC CODE <span class="mand">* </span></label>
-                          <input type="text" class="form-control" id="obstetricCode" name="obstetricCode" placeholder="Code" />
+                          <input type="text" class="form-control" id="obstetricCode" name="obstetricCode" placeholder="Code" readonly />
                         </div>
 
                         <div class="mb-3 col-md-6">

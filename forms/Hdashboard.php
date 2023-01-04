@@ -28,21 +28,6 @@
                       </div>
                      </a>
                     </div>
-                    <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/MedicalHistory.php">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/cc-success.png" alt="Credit Card" class="rounded" />
-                            </div>
-                          </div>
-                          <span class="fw-semibold d-Block mb-1">Medical History</span>
-                          <h3 class="card-title mb-2"><?php // echo $MhTot; ?></h3>
-                        </div>
-                      </div>
-                     </a>
-                    </div>
 				  <div class="col-3 mb-4">
 				     <a href="<?php echo $siteurl; ?>/forms/highRiskMothers.php">
                       <div class="card">
@@ -50,7 +35,7 @@
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
                               <img
-                                src="../assets/img/icons/unicons/cc-success.png"
+                                src="../assets/img/icons/unicons/cc-warning.png"
                                 alt="chart success"
                                 class="rounded"
                               />
@@ -84,7 +69,7 @@
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/cc-warning.png" alt="Credit Card" class="rounded" />
+                              <img src="../assets/img/icons/unicons/cc-success.png" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
                           <span class="fw-semibold d-Block mb-1">Immunization Details</span>
@@ -108,6 +93,21 @@
               </div>
            </a>
           </div>
+          <div class="col-3 mb-4">
+                     <a href="<?php echo $siteurl; ?>/forms/MedicalHistory.php">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img src="../assets/img/icons/unicons/cc-success.png" alt="Credit Card" class="rounded" />
+                            </div>
+                          </div>
+                          <span class="fw-semibold d-Block mb-1">Pregnancy Status</span>
+                          <h3 class="card-title mb-2"><?php // echo $MhTot; ?></h3>
+                        </div>
+                      </div>
+                     </a>
+            </div>
         </div>
       </div>
     </div>
