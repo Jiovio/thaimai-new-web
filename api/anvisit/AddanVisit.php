@@ -24,11 +24,7 @@ if (!empty($data->picmeno)) {
     // set form property values
     
 
-    $mvaliduser1 = $db->prepare("SELECT * FROM antenatalvisit WHERE picmeno='".$data->picmeno."' ORDER BY id ASC");
-    $mvaliduser1->execute(array());
-    $mvalidchecknum = $mvaliduser1->rowCount();
-   
-    if ($mvalidchecknum > 0) {
+    
         //$inserid = $form->createantenatalvisit();
         $date = date('Y-m-d', strtotime($data->anvisitDate. ' + 30 days'));
         $addquery = "INSERT INTO antenatalvisit (`picmeno`, `residenttype`, `physicalpresent`, `placeofvisit`, `abortion`, 
@@ -54,20 +50,14 @@ if (!empty($data->picmeno)) {
         '$data->usgRemarks','$data->bloodTransfusion','$data->bloodTransfusionDate','$data->placeAdministrator','$data->noOfIVDoses','$data->usertype')";
         $addstmt = $db->prepare($addquery);
         $addstmt->execute(array());
-        $query = "UPDATE ecregister ec INNER JOIN antenatalvisit av ON ec.picmeNo=av.picmeno SET ec.status=6 WHERE av.symptomsHighRisk NOT IN('1','48') AND ec.picmeNo='".$data->picmeno."' ORDER BY ec.motheraadhaarid ASC";
+        $query = "UPDATE ecregister ec INNER JOIN antenatalvisit av ON ec.picmeNo=av.picmeno SET ec.status=6 WHERE av.symptomsHighRisk NOT IN('1','48') AND ec.picmeNo='".$data->picmeno."'";
         $stmt = $db->prepare($query);
         $stmt->execute(array());
         // set response code - 201 created
         http_response_code(200);
         // tell the user
         echo json_encode(array("success" => "true", /*"Anvisit_id" => $inserid,*/ "message" => "Antenatal Visit created."));
-    } else {
-       
-        http_response_code(400);
-        // tell the Antenatal Visit
-        echo json_encode(array("success" => "false", "error" => "true","message" => "PICME No already Entered."));
-        
-    }
+    
 }
 // tell the Antenatal Visit data is incomplete
 else {

@@ -21,12 +21,7 @@ $data = json_decode(file_get_contents("php://input"));
 // make sure data is not empty
 if (!empty($data->picmeno)) {
     // set form property values
-    
-    $mvaliduser1 = $db->prepare("SELECT * FROM antenatalvisit WHERE picmeno='".$data->picmeno."' ORDER BY id ASC");
-    $mvaliduser1->execute(array());
-    $mvalidchecknum = $mvaliduser1->rowCount();
-   
-    if ($mvalidchecknum > 0) {
+       
         // $inserid = $form->editantenatalvisit();
         $date = date('Y-m-d', strtotime($data->anvisitDate. ' + 30 days'));
         $uquery ="UPDATE antenatalvisit SET picmeno='$data->picmeno',residenttype='$data->residenttype',physicalpresent='$data->physicalpresent',placeofvisit='$data->placeofvisit',
@@ -49,20 +44,13 @@ if (!empty($data->picmeno)) {
         noOfIVDoses='$data->noOfIVDoses','updatedBy='$data->usertype' WHERE picmeno='$data->picmeno'";
         $ustmt = $db->prepare($uquery);
         $ustmt->execute(array());
-        $query = "UPDATE ecregister ec INNER JOIN antenatalvisit av ON ec.picmeNo=av.picmeno SET ec.status=6 WHERE av.symptomsHighRisk NOT IN('1','48') AND ec.picmeNo='".$data->picmeno."' ORDER BY ec.motheraadhaarid ASC";
+        $query = "UPDATE ecregister ec INNER JOIN antenatalvisit av ON ec.picmeNo=av.picmeno SET ec.status=6 WHERE av.symptomsHighRisk NOT IN('1','48') AND ec.picmeNo='".$data->picmeno."'";
         $stmt = $db->prepare($query);
         $stmt->execute(array());
         // set response code - 201 Updated
         http_response_code(200);
         // tell the user
         echo json_encode(array("success" => "true", "error" => "false", "message" => "Antenatal Visit Updated."));
-    } else {
-       
-        http_response_code(400);
-        // tell the Antenatal Visit
-        echo json_encode(array("success" => "false", "error" => "true","message" => "PICME No already Entered."));
-        
-    }
     
 }
 // tell the Antenatal Visit data is incomplete
