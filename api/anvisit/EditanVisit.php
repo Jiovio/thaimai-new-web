@@ -44,9 +44,7 @@ if (!empty($data->picmeno)) {
         usgFetusStatus='$data->usgFetusStatus',gestationSac='$data->gestationSac',liquor='$data->liquor',usgFetalHeartRate='$data->usgFetalHeartRate',
         usgFetalPosition='$data->usgFetalPosition',usgFetalMovement='$data->usgFetalMovement',liquor1='$data->liquor1',usgFetalHeartRate1='$data->usgFetalHeartRate1',
         usgFetalPosition1='$data->usgFetalPosition1',usgFetalMovement1='$data->usgFetalMovement1',liquor2='$data->liquor2',usgFetalHeartRate2='$data->usgFetalHeartRate2',
-        usgFetalPosition2='$data->usgFetalPosition2',usgFetalMovement2='$data->usgFetalMovement2',lT1='$data->lT1',usgFHRT1='$data->usgFHRT1',usgFPT1='$data->usgFPT1',
-        usgFMT1='$data->usgFMT1',lT2='$data->lT2',usgFHRT2='$data->usgFHRT2',usgFPT2='$data->usgFPT2',usgFMT2='$data->usgFMT2',lT3='$data->lT3',
-        usgFHRT3='$data->usgFHRT3',usgFPT3='$data->usgFPT3',usgFMT3='$data->usgFMT3',placenta='$data->placenta',usgResult='$data->usgResult',usgRemarks='$data->usgRemarks',
+        usgFetalPosition2='$data->usgFetalPosition2',usgFetalMovement2='$data->usgFetalMovement2',placenta='$data->placenta',usgResult='$data->usgResult',usgRemarks='$data->usgRemarks',
         bloodTransfusion='$data->bloodTransfusion',bloodTransfusionDate='$data->bloodTransfusionDate',placeAdministrator='$data->placeAdministrator,
         noOfIVDoses='$data->noOfIVDoses','updatedBy='$data->usertype' WHERE picmeno='$data->picmeno'";
         $ustmt = $db->prepare($uquery);

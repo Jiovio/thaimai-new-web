@@ -1,4 +1,6 @@
 <?php
+
+ini_set("display_errors",'1');
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -38,7 +40,6 @@ if (!empty($data->picmeno)) {
         `HighRisk`,`symptomsHighRisk`, `referralDate`, `referralDistrict`, `referralFacility`, `referralPlace`, `wusgTaken`, `usgDoneDate`, `usgScanEdd`,
         `usgScanStatus`, `usgSizeUterusWeek`, `usgFetusStatus`, `gestationSac`, `liquor`, `usgFetalHeartRate`, `usgFetalPosition`, `usgFetalMovement`,
         `liquor1`, `usgFetalHeartRate1`, `usgFetalPosition1`, `usgFetalMovement1`, `liquor2`, `usgFetalHeartRate2`, `usgFetalPosition2`, `usgFetalMovement2`,
-        `lT1`, `usgFHRT1`, `usgFPT1`, `usgFMT1`, `lT2`, `usgFHRT2`, `usgFPT2`, `usgFMT2`, `lT3`, `usgFHRT3`, `usgFPT3`, `usgFMT3`,
         `placenta`, `usgResult`, `usgRemarks`,`bloodTransfusion`, `bloodTransfusionDate`, `placeAdministrator`, `noOfIVDoses`,`createdBy`) 
         VALUES('$data->picmeno','$data->residenttype','$data->physicalpresent','$data->placeofvisit','$data->abortion',
         '$data->anvisitDate','$date','1','$data->ancPeriod','$data->pregnancyWeek','$data->motherWeight','$data->bpSys','$data->bpDia','$data->Hb',
@@ -50,8 +51,7 @@ if (!empty($data->picmeno)) {
         '$data->wusgTaken','$data->usgDoneDate','$data->usgScanEdd','$data->usgScanStatus','$data->usgSizeUterusWeek','$data->usgFetusStatus',
         '$data->gestationSac','$data->liquor','$data->usgFetalHeartRate','$data->usgFetalPosition','$data->usgFetalMovement',
         '$data->liquor1','$data->usgFetalHeartRate1','$data->usgFetalPosition1','$data->usgFetalMovement1','$data->liquor2','$data->usgFetalHeartRate2',
-        '$data->usgFetalPosition2','$data->usgFetalMovement2','$data->lT1','$data->usgFHRT1','$data->usgFPT1','$data->usgFMT1','$data->lT2','$data->usgFHRT2',
-        '$data->usgFPT2','$data->usgFMT2','$data->lT3','$data->usgFHRT3','$data->usgFPT3','$data->usgFMT3','$data->placenta','$data->usgResult',
+        '$data->usgFetalPosition2','$data->usgFetalMovement2','$data->placenta','$data->usgResult',
         '$data->usgRemarks','$data->bloodTransfusion','$data->bloodTransfusionDate','$data->placeAdministrator','$data->noOfIVDoses','$data->usertype')";
         $addstmt = $db->prepare($addquery);
         $addstmt->execute(array());
