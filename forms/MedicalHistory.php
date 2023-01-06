@@ -40,7 +40,8 @@
                          </tr>
                        </thead>
 <?php
-  $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarid,mh.id,mh.lmpdate,mh.edddate,mh.reg12weeks,ec.motheraadhaarname FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE mh.status=1";
+  $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarid,mh.id,mh.lmpdate,mh.edddate,mh.reg12weeks,ec.motheraadhaarname,mh.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE mh.status=1";
+  $private = " AND mh.createdBy='".$userid."'";
   $orderQry = " ORDER BY ec.motheraadhaarname ASC";
   
   if(($usertype == 0) || ($usertype == 1)) {
@@ -56,17 +57,17 @@
               } else if($bloName != "" && $phcName != "" && $hscName == ""){
                 $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'".$orderQry);
               } else if($bloName != "" && $phcName != "" && $hscName != ""){
-                $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'".$orderQry);
+                $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
               }
-              
             } else if(isset($_POST['reset'])) {
               $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
-              
             } else {
               $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
             }
     } else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
           $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQry);
+    } else {
+        $ExeQuery = mysqli_query($conn,$listQry.$private.$orderQry);
     } 
          if($ExeQuery) {
                          $cnt=1;

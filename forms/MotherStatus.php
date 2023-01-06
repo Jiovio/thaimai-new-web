@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -35,27 +36,35 @@
                          </tr>
                        </thead>
    
-    <?php  
+    <?php 
+    $listQry = "SELECT * FROM `ecregister` WHERE status NOT IN(0,1)";
+    $private = " AND createdBy='".$userid."'";
+    $orderQry = " ORDER BY motheraadhaarname ASC";
+    
     if(($usertype == 0) || ($usertype == 1)) {
-            if(isset($_POST['filter'])) {
-	            $bloName = $_POST['BlockId']; 
-	            $phcName = $_POST['PhcId'];
-                      
-                        if($bloName == "" && $phcName == "" ){
-                          $ExeQuery = mysqli_query($conn,"SELECT * FROM `ecregister` WHERE status NOT IN(0,1) ORDER BY status");
-                        } else if($bloName != "" && $phcName == "" ){
-                          $ExeQuery = mysqli_query($conn,"SELECT * FROM `ecregister` WHERE status NOT IN(0,1) AND BlockId='".$bloName."' AND status=1 ORDER BY motheraadhaarname ASC");
-                        } else if($bloName != "" && $phcName != "" ){
-                          $ExeQuery = mysqli_query($conn,"SELECT * FROM `ecregister` WHERE status NOT IN(0,1) AND BlockId='".$bloName."' AND PhcId='".$phcName."' AND status=1 ORDER BY motheraadhaarname ASC");
-                        }
-                      } else if(isset($_POST['reset'])) {
-                        $ExeQuery = mysqli_query($conn,"SELECT * FROM `ecregister` WHERE status NOT IN(0,1) AND status=1 ORDER BY motheraadhaarname ASC");
-                      } else {
-                        $ExeQuery = mysqli_query($conn,"SELECT * FROM `ecregister` WHERE status NOT IN(0,1) ORDER BY status");
-                      }
-    } else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
-    $ExeQuery = mysqli_query($conn,"SELECT * FROM `ecregister` WHERE status NOT IN(0,1) AND BlockId='".$BlockId."' AND status=1 ORDER BY motheraadhaarname ASC");
-            } 
+  if(isset($_POST['filter'])) {
+    $bloName = $_POST['BlockId']; 
+    $phcName = $_POST['PhcId'];
+    $hscName = $_POST['HscId'];        
+              if($bloName == "" && $phcName == "" && $hscName == ""){
+                $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+              } else if($bloName != "" && $phcName == "" && $hscName == ""){
+                $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."'".$orderQry);
+              } else if($bloName != "" && $phcName != "" && $hscName == ""){
+                $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."' AND PhcId='".$phcName."'".$orderQry);
+              } else if($bloName != "" && $phcName != "" && $hscName != ""){
+                $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."' AND PhcId='".$phcName."' AND HscId='".$hscName."'".$orderQry);
+              }
+            } else if(isset($_POST['reset'])) {
+              $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+            } else {
+              $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+            }
+} else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
+$ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$BlockId."'".$orderQry);
+  }  else {
+      $ExeQuery = mysqli_query($conn,$listQry.$private.$orderQry);
+  }
                   if($ExeQuery) {
                          $cnt=1;
                          while($row = mysqli_fetch_array($ExeQuery)) {

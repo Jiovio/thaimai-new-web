@@ -42,17 +42,17 @@
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/custom.js"></script>
 <script src="../assets/js/validate.js"></script>
+<script>
+     setTimeout(() => {
+     var divBox = document.getElementById('response');
+     divBox.style.display = 'none';
+     }, 5000); 
+   </script>
     <!-- Page JS -->
     <script src="../assets/js/dashboards-analytics.js"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script>
-     setTimeout(() => {
-     var divBox = document.getElementById('response');
-     divBox.style.display = 'none';
-     }, 1000); 
-   </script>
    <script>
      setTimeout(() => {
      var divBox = document.getElementById('AlertMsg');

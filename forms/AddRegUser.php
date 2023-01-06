@@ -10,7 +10,7 @@ if (! empty($_POST["adduser"])) {
     $member = new Member();
     $registrationResponse = $member->AddRegMember($userid);
     if (!empty($registrationResponse)) {
-        echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/UserManagement.php');</script>";
+        echo "<script>alert('Inserted Successfully');window.location.replace('http://localhost/thaimainew/forms/UserManagement.php');</script>";
       } 
 }
 

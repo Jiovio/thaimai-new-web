@@ -42,7 +42,7 @@
                          </tr>
                        </thead>                        
 <?php
-  $listQry = "SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,ec.motheraadhaarname,av.createdBy FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1";
+  $listQry = "SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,ec.motheraadhaarname,av.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1";
   $private = " AND av.createdBy='".$userid."'";
   $orderQry = " ORDER BY ec.motheraadhaarname ASC";
     
@@ -59,12 +59,12 @@
                       } else if($bloName != "" && $phcName != "" && $hscName == ""){
                         $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'".$orderQry);
                       } else if($bloName != "" && $phcName != "" && $hscName != ""){
-                        $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'".$orderQry);
+                        $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
                       }
                     } else if(isset($_POST['reset'])) {
                       $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
                     } else {
-                      $ExeQuery = mysqli_query($conn,"SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,ec.motheraadhaarname FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1  ORDER BY ec.motheraadhaarname ASC");
+                      $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
                     }
             } else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
                   $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQry);

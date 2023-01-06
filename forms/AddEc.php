@@ -35,7 +35,7 @@ if($mvid > 0) {
   '$religion','$caste','$BlockId','$PhcId','$HscId','$PanchayatId','$VillageId','$address','$pincode','$povertystatus',
   '$migrantstatus','$rctype','$rcnum','$userid')");
             if (!empty($query)) {
-              echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/EligibleCouple.php');</script>";
+              echo "<script>alert('Inserted Successfully');window.location.replace('http://localhost/thaimainew/forms/EligibleCouple.php');</script>";
             } 
 } }
 ?>
@@ -512,7 +512,6 @@ if($mvid > 0) {
           <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">Name of the Block <span class="mand">* </span><span id="errBlockValue"></span></label>
                           <div class="input-group input-group-merge">
-                      
                           <select onchange="BlockOn()" name="BlockId" id="BlockId" class="form-select">
                           <option value="">Choose...</option>
                            

@@ -261,18 +261,6 @@ document.getElementById("liquor2value").disabled = false;
 document.getElementById("usgFetalHeartRate2value").disabled = false;
 document.getElementById("usgFetalPosition2value").disabled = false;
 document.getElementById("usgFetalMovement2value").disabled = false;
-document.getElementById("lT1value").disabled = false;
-document.getElementById("usgFHRT1value").disabled = false;
-document.getElementById("usgFPT1value").disabled = false;
-document.getElementById("usgFMT1value").disabled = false;
-document.getElementById("lT2value").disabled = false;
-document.getElementById("usgFHRT2value").disabled = false;
-document.getElementById("usgFPT2value").disabled = false;
-document.getElementById("usgFMT2value").disabled = false;
-document.getElementById("lT3value").disabled = false;
-document.getElementById("usgFHRT3value").disabled = false;
-document.getElementById("usgFPT3value").disabled = false;
-document.getElementById("usgFMT3value").disabled = false;
 document.getElementById("pla").disabled = false;
 document.getElementById("Result").disabled = false;
 document.getElementById("usgRemarks").disabled = false;
@@ -387,6 +375,10 @@ var fs = document.getElementById("usgFetusStatus");
 var gs = document.getElementById("gestationSac"); 
 var pla = document.getElementById("placenta");
 var rem = document.getElementById("usgRemarks"); 
+var liq1 = document.getElementById("liquor1");
+var fhr1 = document.getElementById("usgFetalHeartRate1"); 
+var fp1 = document.getElementById("usgFetalPosition1");
+var fm1 = document.getElementById("usgFetalMovement1");
 
 if(selectedValue == "1") { ts.style.display = "block"; } else if(selectedValue == "0") { ts.style.display = "none"; } 
 if(selectedValue == "1") { res.style.display = "block"; } else if(selectedValue == "0") { res.style.display = "none"; } 
@@ -398,18 +390,17 @@ if(selectedValue == "1") { suw.style.display = "block"; } else if(selectedValue 
 if(selectedValue == "1") { fs.style.display = "block"; } else if(selectedValue == "0"){ fs.style.display = "none"; }  
 if(selectedValue == "1") { gs.style.display = "block"; } else if(selectedValue == "0"){ gs.style.display = "none"; } 
 if(selectedValue == "1") { pla.style.display = "block"; } else if(selectedValue == "0"){ pla.style.display = "none"; } 
-if(selectedValue == "1") { rem.style.display = "block"; } else if(selectedValue == "0"){ rem.style.display = "none"; }   
+if(selectedValue == "1") { rem.style.display = "block"; } else if(selectedValue == "0"){ rem.style.display = "none"; }  
+if(selectedValue == "1") { liq1.style.display = "block"; } else if(selectedValue == "0"){ liq1.style.display = "none"; }
+if(selectedValue == "1") { fhr1.style.display = "block"; } else if(selectedValue == "0"){ fhr1.style.display = "none"; }
+if(selectedValue == "1") { fp1.style.display = "block"; } else if(selectedValue == "0"){ fp1.style.display = "none"; }
+if(selectedValue == "1") { fm1.style.display = "block"; } else if(selectedValue == "0"){ fm1.style.display = "none"; }
+
 }
 
 function gsacField() {
 var selectBox = document.getElementById("gestation");
 var selectedValue1 = selectBox.options[selectBox.selectedIndex].value;
-
-var liq = document.getElementById("liquor");
-var fhr = document.getElementById("usgFetalHeartRate"); 
-var fp = document.getElementById("usgFetalPosition");
-var fm = document.getElementById("usgFetalMovement");
-
 var liq1 = document.getElementById("liquor1");
 var fhr1 = document.getElementById("usgFetalHeartRate1"); 
 var fp1 = document.getElementById("usgFetalPosition1");
@@ -418,46 +409,38 @@ var liq2 = document.getElementById("liquor2");
 var fhr2 = document.getElementById("usgFetalHeartRate2"); 
 var fp2 = document.getElementById("usgFetalPosition2");
 var fm2 = document.getElementById("usgFetalMovement2");
+var liq3 = document.getElementById("liquor3");
+var fhr3 = document.getElementById("usgFetalHeartRate3"); 
+var fp3 = document.getElementById("usgFetalPosition3");
+var fm3 = document.getElementById("usgFetalMovement3");
 
-var liqt1 = document.getElementById("lT1");
-var fhrt1 = document.getElementById("usgFHRT1"); 
-var fpt1 = document.getElementById("usgFPT1");
-var fmt1 = document.getElementById("usgFMT1");
-var liqt2 = document.getElementById("lT2");
-var fhrt2 = document.getElementById("usgFHRT2"); 
-var fpt2 = document.getElementById("usgFPT2");
-var fmt2 = document.getElementById("usgFMT2");
-var liqt3 = document.getElementById("lT3");
-var fhrt3 = document.getElementById("usgFHRT3"); 
-var fpt3 = document.getElementById("usgFPT3");
-var fmt3 = document.getElementById("usgFMT3");
+if(selectedValue1 == "1"){ liq2.style.display = "none"; } if(selectedValue1 == "1"){ liq3.style.display = "none"; }
+if(selectedValue1 == "1"){ fhr2.style.display = "none"; } if(selectedValue1 == "1"){ fhr3.style.display = "none"; }
+if(selectedValue1 == "1"){ fp2.style.display = "none"; }   if(selectedValue1 == "1"){ fp3.style.display = "none"; }
+if(selectedValue1 == "1"){ fm2.style.display = "none"; }   if(selectedValue1 == "1"){ fm3.style.display = "none"; }
 
-if(selectedValue1 == "1") { liq.style.display = "block"; } else if(selectedValue1 == "2"){ liq.style.display = "none"; } 
-if(selectedValue1 == "1") { fhr.style.display = "block"; } else if(selectedValue1 == "2"){ fhr.style.display = "none"; } 
-if(selectedValue1 == "1") { fp.style.display = "block"; } else if(selectedValue1 == "2"){ fp.style.display = "none"; } 
-if(selectedValue1 == "1") { fm.style.display = "block"; } else if(selectedValue1 == "2"){ fm.style.display = "none"; }
+if(selectedValue1 == "2") { liq1.style.display = "block"; } if(selectedValue1 == "2") { liq2.style.display = "block"; } 
+if(selectedValue1 == "2") { fhr1.style.display = "block"; } if(selectedValue1 == "2") { fhr2.style.display = "block"; } 
+if(selectedValue1 == "2") { fp1.style.display = "block"; }  if(selectedValue1 == "2") { fp2.style.display = "block"; } 
+if(selectedValue1 == "2") { fm1.style.display = "block"; }  if(selectedValue1 == "2") { fm2.style.display = "block"; }
 
-if(selectedValue1 == "2") { liq1.style.display = "block"; } else if(selectedValue1 == "3"){ liq1.style.display = "none"; } 
-if(selectedValue1 == "2") { fhr1.style.display = "block"; } else if(selectedValue1 == "3"){ fhr1.style.display = "none"; } 
-if(selectedValue1 == "2") { fp1.style.display = "block"; } else if(selectedValue1 == "3"){ fp1.style.display = "none"; } 
-if(selectedValue1 == "2") { fm1.style.display = "block"; } else if(selectedValue1 == "3"){ fm1.style.display = "none"; }
-if(selectedValue1 == "2") { liq2.style.display = "block"; } else if(selectedValue1 == "3"){ liq2.style.display = "none"; } 
-if(selectedValue1 == "2") { fhr2.style.display = "block"; } else if(selectedValue1 == "3"){ fhr2.style.display = "none"; } 
-if(selectedValue1 == "2") { fp2.style.display = "block"; } else if(selectedValue1 == "3"){ fp2.style.display = "none"; } 
-if(selectedValue1 == "2") { fm2.style.display = "block"; } else if(selectedValue1 == "3"){ fm2.style.display = "none"; }
+if(selectedValue1 == "2"){ liq3.style.display = "none"; }
+if(selectedValue1 == "2"){ fhr3.style.display = "none"; }
+if(selectedValue1 == "2"){ fp3.style.display = "none"; }
+if(selectedValue1 == "2"){ fm3.style.display = "none"; }
 
-if(selectedValue1 == "3") { liqt1.style.display = "block"; }  
-if(selectedValue1 == "3") { fhrt1.style.display = "block"; }  
-if(selectedValue1 == "3") { fpt1.style.display = "block"; }  
-if(selectedValue1 == "3") { fmt1.style.display = "block"; } 
-if(selectedValue1 == "3") { liqt2.style.display = "block"; }  
-if(selectedValue1 == "3") { fhrt2.style.display = "block"; }  
-if(selectedValue1 == "3") { fpt2.style.display = "block"; }  
-if(selectedValue1 == "3") { fmt2.style.display = "block"; } 
-if(selectedValue1 == "3") { liqt3.style.display = "block"; }  
-if(selectedValue1 == "3") { fhrt3.style.display = "block"; }  
-if(selectedValue1 == "3") { fpt3.style.display = "block"; }  
-if(selectedValue1 == "3") { fmt3.style.display = "block"; }
+if(selectedValue1 == "3") { liq1.style.display = "block"; }  
+if(selectedValue1 == "3") { fhr1.style.display = "block"; }  
+if(selectedValue1 == "3") { fp1.style.display = "block"; }  
+if(selectedValue1 == "3") { fm1.style.display = "block"; } 
+if(selectedValue1 == "3") { liq2.style.display = "block"; }  
+if(selectedValue1 == "3") { fhr2.style.display = "block"; }  
+if(selectedValue1 == "3") { fp2.style.display = "block"; }  
+if(selectedValue1 == "3") { fm2.style.display = "block"; } 
+if(selectedValue1 == "3") { liq3.style.display = "block"; }  
+if(selectedValue1 == "3") { fhr3.style.display = "block"; }  
+if(selectedValue1 == "3") { fp3.style.display = "block"; }  
+if(selectedValue1 == "3") { fm3.style.display = "block"; }
 }
 
 function SncuChange() {

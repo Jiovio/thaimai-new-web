@@ -29,24 +29,33 @@
                       </tr>
                     </thead>
 <?php  
-if(isset($_POST['filter'])) {
-	$bloName = $_POST['BlockId']; 
-	$phcName = $_POST['PhcId'];
-
-	if($bloName == "" && $phcName == "" ){
-		$ExeQuery = mysqli_query($conn,"SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.createdBy=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND av.status=1 ORDER BY ec.picmeNo ASC;");
-	}
-	else if($bloName != "" && $phcName != "" ){
-		$ExeQuery = mysqli_query($conn,"SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.createdBy=u.id  WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND av.status=1 AND ec.PhcId='".$phcName."' ORDER BY ec.picmeNo ASC;");
-	}
-}
-
-else if(isset($_POST['reset'])) {
-	$ExeQuery = mysqli_query($conn,"SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.createdBy=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND av.status=1 ORDER BY ec.picmeNo ASC;");
-}
-else {
-	$ExeQuery = mysqli_query($conn,"SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.createdBy=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND av.status=1 ORDER BY ec.picmeNo ASC;");
-}
+$listQry = "SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.createdBy=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND av.status=1";
+$private = " AND av.createdBy='".$userid."'";
+$orderQry = " ORDER BY ec.motheraadhaarname ASC";
+if(($usertype == 0) || ($usertype == 1)) {
+  if(isset($_POST['filter'])) {
+    $bloName = $_POST['BlockId']; 
+    $phcName = $_POST['PhcId'];
+    $hscName = $_POST['HscId'];        
+              if($bloName == "" && $phcName == "" && $hscName == ""){
+                $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+              } else if($bloName != "" && $phcName == "" && $hscName == ""){
+                $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."'".$orderQry);
+              } else if($bloName != "" && $phcName != "" && $hscName == ""){
+                $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'".$orderQry);
+              } else if($bloName != "" && $phcName != "" && $hscName != ""){
+                $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
+              }
+            } else if(isset($_POST['reset'])) {
+              $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+            } else {
+              $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+            }
+} else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
+$ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQry);
+  }  else {
+      $ExeQuery = mysqli_query($conn,$listQry.$private.$orderQry);
+  }
                    if($ExeQuery) {
                       $cnt=1;
                       while($row = mysqli_fetch_array($ExeQuery)) {

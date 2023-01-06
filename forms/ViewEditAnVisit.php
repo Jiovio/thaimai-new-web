@@ -40,30 +40,18 @@ $wusgTaken = $An["wusgTaken"];
   $usgSizeUterusWeek = $An["usgSizeUterusWeek"];
   $usgFetusStatus = $An["usgFetusStatus"];
   $gestationSac = $An["gestationSac"];
-  $liquor = $An["liquor"];
-  $usgFetalHeartRate = $An["usgFetalHeartRate"];
-  $usgFetalPosition = $An["usgFetalPosition"];
-  $usgFetalMovement = $An["usgFetalMovement"];
-  $liquor1 = $An["liquor1"]; 
-  $usgFetalHeartRate1 = $An["usgFetalHeartRate1"];
-  $usgFetalPosition1 = $An["usgFetalPosition1"]; 
-  $usgFetalMovement1 = $An["usgFetalMovement1"];
-  $liquor2 = $An["liquor2"]; 
-  $usgFetalHeartRate2 = $An["usgFetalHeartRate2"];
-  $usgFetalPosition2 = $An["usgFetalPosition2"]; 
-  $usgFetalMovement2 = $An["usgFetalMovement2"];
-  $lT1 = $An["lT1"]; 
-  $usgFHRT1 = $An["usgFHRT1"];
-  $usgFPT1 = $An["usgFPT1"]; 
-  $usgFMT1 = $An["usgFMT1"];
-  $lT2 = $An["lT2"]; 
-  $usgFHRT2 = $An["usgFHRT2"];
-  $usgFPT2 = $An["usgFPT2"]; 
-  $usgFMT2 = $An["usgFMT2"];
-  $lT3 = $An["lT3"]; 
-  $usgFHRT3 = $An["usgFHRT3"];
-  $usgFPT3 = $An["usgFPT3"]; 
-  $usgFMT3 = $An["usgFMT3"];
+  $liquor1 = $An["liquor"];
+  $usgFetalHeartRate1 = $An["usgFetalHeartRate"];
+  $usgFetalPosition1 = $An["usgFetalPosition"];
+  $usgFetalMovement1 = $An["usgFetalMovement"];
+  $liquor2 = $An["liquor1"]; 
+  $usgFetalHeartRate2 = $An["usgFetalHeartRate1"];
+  $usgFetalPosition2 = $An["usgFetalPosition1"]; 
+  $usgFetalMovement2 = $An["usgFetalMovement1"];
+  $liquor3 = $An["liquor2"]; 
+  $usgFetalHeartRate3 = $An["usgFetalHeartRate2"];
+  $usgFetalPosition3 = $An["usgFetalPosition2"]; 
+  $usgFetalMovement3 = $An["usgFetalMovement2"];
   $placenta = $An["placenta"];
   $usgResult = $An["usgResult"];
   $usgRemarks = $An["usgRemarks"];
@@ -104,27 +92,16 @@ if (! empty($_POST["editVisit"])) {
   $usgDoneDate = $_POST["usgDoneDate"];
   $usgScanEdd = $_POST["usgScanEdd"]; $usgScanStatus = $_POST["usgScanStatus"]; $usgFundalHeight = $_POST["usgFundalHeight"];
   $usgSizeUterusWeek = $_POST["usgSizeUterusWeek"]; $usgFetusStatus = $_POST["usgFetusStatus"];
-  $gestationSac = $_POST["gestationSac"]; $liquor = $_POST["liquor"]; $usgFetalHeartRate = $_POST["usgFetalHeartRate"];
-  $usgFetalPosition = $_POST["usgFetalPosition"]; $usgFetalMovement = $_POST["usgFetalMovement"]; $liquor1 = $_POST["liquor1"]; 
-  $usgFetalHeartRate1 = $_POST["usgFetalHeartRate1"];
-  $usgFetalPosition1 = $_POST["usgFetalPosition1"]; 
-  $usgFetalMovement1 = $_POST["usgFetalMovement1"];
-  $liquor2 = $_POST["liquor2"]; 
-  $usgFetalHeartRate2 = $_POST["usgFetalHeartRate2"];
-  $usgFetalPosition2 = $_POST["usgFetalPosition2"]; 
-  $usgFetalMovement2 = $_POST["usgFetalMovement2"];
-  $lT1 = $_POST["lT1"]; 
-  $usgFHRT1 = $_POST["usgFHRT1"];
-  $usgFPT1 = $_POST["usgFPT1"]; 
-  $usgFMT1 = $_POST["usgFMT1"];
-  $lT2 = $_POST["lT2"]; 
-  $usgFHRT2 = $_POST["usgFHRT2"];
-  $usgFPT2 = $_POST["usgFPT2"]; 
-  $usgFMT2 = $_POST["usgFMT2"];
-  $lT3 = $_POST["lT3"]; 
-  $usgFHRT3 = $_POST["usgFHRT3"];
-  $usgFPT3 = $_POST["usgFPT3"]; 
-  $usgFMT3 = $_POST["usgFMT3"]; $placenta = $_POST["placenta"];
+  $gestationSac = $_POST["gestationSac"]; $liquor1 = $_POST["liquor"]; $usgFetalHeartRate1 = $_POST["usgFetalHeartRate"];
+  $usgFetalPosition1 = $_POST["usgFetalPosition"]; $usgFetalMovement1 = $_POST["usgFetalMovement"]; $liquor2 = $_POST["liquor1"]; 
+  $usgFetalHeartRate2 = $_POST["usgFetalHeartRate1"];
+  $usgFetalPosition2 = $_POST["usgFetalPosition1"]; 
+  $usgFetalMovement2 = $_POST["usgFetalMovement1"];
+  $liquor3 = $_POST["liquor2"]; 
+  $usgFetalHeartRate3 = $_POST["usgFetalHeartRate2"];
+  $usgFetalPosition3 = $_POST["usgFetalPosition2"]; 
+  $usgFetalMovement3 = $_POST["usgFetalMovement2"];
+  $placenta = $_POST["placenta"];
   $usgResult = $_POST["usgResult"]; $usgRemarks = $_POST["usgRemarks"]; 
   $bloodTransfusion = $_POST["bloodTransfusion"]; $bloodTransfusionDate = $_POST["bloodTransfusionDate"];
   $placeAdministrator = $_POST["placeAdministrator"]; $nooIVdoses = $_POST["noOfIVDoses"];
@@ -142,18 +119,15 @@ preDate='$PreDate',NoFolicAcid='$NoFolicAcid',NoIFA='$NoIFA',
   sizeUterusinWeeks='$sizeUterusinWeeks',methodofConception='$methodofConception',AnyOtherSpecify='$AnyOtherSpecify',HighRisk='$HighRisk',symptomsHighRisk='$symptomsHighRisk',referralDate='$referralDate',
   referralDistrict='$referralDistrict',referralFacility='$referralFacility',referralPlace='$referralPlace',wusgTaken='$wusgTaken',usgreport='$filename',
   usgDoneDate='$usgDoneDate',usgScanEdd='$usgScanEdd',usgScanStatus='$usgScanStatus',usgFundalHeight='$usgFundalHeight',
-  usgSizeUterusWeek='$usgSizeUterusWeek',usgFetusStatus='$usgFetusStatus',gestationSac='$gestationSac',liquor='$liquor',
-  usgFetalHeartRate='$usgFetalHeartRate',usgFetalPosition='$usgFetalPosition',usgFetalMovement='$usgFetalMovement',liquor1='$liquor1',
-usgFetalHeartRate1='$usgFetalHeartRate1',usgFetalPosition1='$usgFetalPosition1',usgFetalMovement1='$usgFetalMovement',liquor2='$liquor2',
-usgFetalHeartRate2='$usgFetalHeartRate2',usgFetalPosition2='$usgFetalPosition2',usgFetalMovement2='$usgFetalMovement2',lT1='$lT1',
-usgFHRT1='$usgFHRT1',usgFPT1='$usgFPT1',usgFMT1='$usgFMT1',lT2='$lT2',
-usgFHRT2='$usgFHRT2',usgFPT2='$usgFPT2',usgFMT2='$usgFMT2',lT3='$lT3',
-usgFHRT3='$usgFHRT3',usgFPT3='$usgFPT3',usgFMT3='$usgFMT3',placenta='$placenta',
+  usgSizeUterusWeek='$usgSizeUterusWeek',usgFetusStatus='$usgFetusStatus',gestationSac='$gestationSac',liquor='$liquor1',
+  usgFetalHeartRate='$usgFetalHeartRate1',usgFetalPosition='$usgFetalPosition1',usgFetalMovement='$usgFetalMovement1',liquor1='$liquor2',
+usgFetalHeartRate1='$usgFetalHeartRate2',usgFetalPosition1='$usgFetalPosition2',usgFetalMovement1='$usgFetalMovemen2',liquor2='$liquor3',
+usgFetalHeartRate2='$usgFetalHeartRate3',usgFetalPosition2='$usgFetalPosition3',usgFetalMovement2='$usgFetalMovement3',placenta='$placenta',
   usgResult='$usgResult',usgRemarks='$usgRemarks',bloodTransfusion='$bloodTransfusion',
   bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',noOfIVDoses='$nooIVdoses',
   updatedat='$date',updatedBy='$userid' WHERE id=".$id);
   if (!empty($query)) {
-            echo "<script>alert('Updated Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/AntenatalVisit.php');</script>";
+            echo "<script>alert('Updated Successfully');window.location.replace('http://localhost/thaimainew/forms/AntenatalVisit.php');</script>";
           }
           $highrisk = mysqli_query($conn, "UPDATE ecregister ec INNER JOIN antenatalvisit av ON ec.picmeNo=av.picmeno SET ec.status=6 WHERE av.symptomsHighRisk NOT IN('1','48') AND av.picmeNo=".$picmeno);
 }
@@ -164,7 +138,7 @@ if (isset($_GET['del'])) {
   $date = date('d-m-Y h:i:s');
   mysqli_query($conn, "UPDATE antenatalvisit SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
   $_SESSION['message'] = "User deleted!"; 
-    echo "<script>alert('Deleted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/AntenatalVisit.php');</script>";
+    echo "<script>alert('Deleted Successfully');window.location.replace('http://localhost/thaimainew/forms/AntenatalVisit.php');</script>";
 }
 ?>
           <!-- Content wrapper -->
@@ -1078,98 +1052,12 @@ if (isset($_GET['del'])) {
 						             </div>
 					             </div>
                            
-						         <div class="col-4 mb-3 liquor" id="liquor" >
-                          <label class="form-label" for="basic-icon-default-liquor">Liquor</label>
+						         <div class="col-4 mb-3 liquor" id="liquor1" >
+                          <label class="form-label" for="basic-icon-default-liquor">Liquor 1</label>
                           <div class="input-group input-group-merge">
                           <select name="liquor" id="liquorop" class="form-select" disabled>
                           <?php
                             $query = "SELECT av.liquor,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.liquor WHERE type=28 AND av.id=".$id;
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$liquor) ?>
-                         <?php { echo $listvalue['enumvalue']; } ?>
-                         <?php 
-                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
-                                    $exequery = mysqli_query($conn, $dquery);
-                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
-                                    ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                               <?php } } ?>
-                                </select>
-						            </div>
-					            </div>
-
-					          	<div class="col-4 mb-3 FetalHeartRate" id="FetalHeartRate" >
-                          <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate</label>
-                          <div class="input-group input-group-merge">
-                            <input
-                              type="text"
-                              name="usgFetalHeartRate"
-                              class="form-control"
-                              id="usgFetalHeartRate"
-                              placeholder="USG FOETAL Heart Rate"
-                              aria-label="USG FOETAL Heart Rate"
-                              aria-describedby="basic-icon-default-usgFetalHeartRate"
-                              value="<?php echo $usgFetalHeartRate ?>"
-                              disabled
-                            />
-                          </div>
-                        </div>
-                        
-					            	<div class="col-4 mb-3 FetalPosition" id="FetalPosition" >
-                          <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation</label>
-                          <div class="input-group input-group-merge">
-                          <select name="usgFetalPosition" id="usgFetalPosition" class="form-select" disabled>
-
-                            <?php
-                            $query = "SELECT av.usgFetalPosition,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalPosition WHERE type=32 AND av.id=".$id;
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$usgFetalPosition) ?>
-                         <?php { echo $listvalue['enumvalue']; } ?>
-                         <?php 
-                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=12";
-                                    $exequery = mysqli_query($conn, $dquery);
-                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
-                                    ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                               <?php } } ?>
-                                </select>
-                          </div>
-                        </div>
-                        
-					            	<div class="col-4 mb-3 FetalMovement" id="FetalMovement" >
-                          <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement</label>
-                          <div class="input-group input-group-merge">
-                          <select name="usgFetalMovement" id="usgFetalMovement" class="form-select" disabled>
-
-                            <?php
-                          $query = "SELECT av.usgFetalMovement,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalMovement WHERE type=28 AND av.id=".$id;
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$usgFetalMovement) ?>
-                         <?php { echo $listvalue['enumvalue']; } ?>
-                         <?php 
-                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
-                                    $exequery = mysqli_query($conn, $dquery);
-                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
-                                    ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                               <?php } } ?>
-                                </select>
-                          </div>
-                        </div>
-
-                        <div class="col-4 mb-3" id="liquor1" class="liquor1" >
-                          <label class="form-label" for="basic-icon-default-liquor">Liquor 1</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="liquor1" id="liquor1value" class="form-select" disabled>
-                          <!-- <option value="">Choose...</option> -->
-                          <?php
-                            $query = "SELECT av.liquor1,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.liquor1 WHERE type=28 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['enumid']; ?>">
@@ -1185,36 +1073,36 @@ if (isset($_GET['del'])) {
                                 </select>
 						            </div>
 					            </div>
-                      
-					          	<div class="col-4 mb-3" id="usgFetalHeartRate1" class="usgFetalHeartRate1" >
+
+					          	<div class="col-4 mb-3 FetalHeartRate" id="usgFetalHeartRate1" >
                           <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 1</label>
                           <div class="input-group input-group-merge">
                             <input
                               type="text"
-                              name="usgFetalHeartRate1"
+                              name="usgFetalHeartRate"
                               class="form-control"
-                              id="usgFetalHeartRate1value"
+                              id="usgFetalHeartRate"
                               placeholder="USG FOETAL Heart Rate"
                               aria-label="USG FOETAL Heart Rate"
                               aria-describedby="basic-icon-default-usgFetalHeartRate"
                               value="<?php echo $usgFetalHeartRate1 ?>"
                               disabled
-                              />
+                            />
                           </div>
                         </div>
-                       
-					            	<div class="col-4 mb-3" id="usgFetalPosition1" class="usgFetalPosition1" >
+                        
+					            	<div class="col-4 mb-3 FetalPosition" id="usgFetalPosition1" >
                           <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 1</label>
                           <div class="input-group input-group-merge">
-                          <select  name="usgFetalPosition1" id="usgFetalPosition1value" class="form-select" disabled>
-                          <!-- <option value="">Choose...</option> -->
-                          <?php
-                            $query = "SELECT av.usgFetalPosition1,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalPosition1 WHERE type=32 AND av.id=".$id;
+                          <select name="usgFetalPosition" id="usgFetalPosition" class="form-select" disabled>
+
+                            <?php
+                            $query = "SELECT av.usgFetalPosition,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalPosition WHERE type=32 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['enumid']; ?>">
                           <?php if($listvalue['enumvalue']==$usgFetalPosition1) ?>
-                         <?php {echo $listvalue['enumvalue']; }  ?>
+                         <?php { echo $listvalue['enumvalue']; } ?>
                          <?php 
                                     $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=32";
                                     $exequery = mysqli_query($conn, $dquery);
@@ -1224,14 +1112,15 @@ if (isset($_GET['del'])) {
                                <?php } } ?>
                                 </select>
                           </div>
-                        </div> 
-					            	<div class="col-4 mb-3" id="usgFetalMovement1" class="usgFetalMovement1" >
+                        </div>
+                        
+					            	<div class="col-4 mb-3 FetalMovement" id="usgFetalMovement1" >
                           <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 1</label>
                           <div class="input-group input-group-merge">
-                          <select  name="usgFetalMovement1" id="usgFetalMovement1value" class="form-select" disabled>
-                          <!-- <option value="">Choose...</option> -->
-                          <?php
-                          $query = "SELECT av.usgFetalMovement1,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalMovement1 WHERE type=28 AND av.id=".$id;
+                          <select name="usgFetalMovement" id="usgFetalMovement" class="form-select" disabled>
+
+                            <?php
+                          $query = "SELECT av.usgFetalMovement,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalMovement WHERE type=28 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['enumid']; ?>">
@@ -1251,10 +1140,10 @@ if (isset($_GET['del'])) {
                         <div class="col-4 mb-3" id="liquor2" class="liquor2" >
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 2</label>
                           <div class="input-group input-group-merge">
-                          <select  name="liquor2" id="liquor2value" class="form-select" disabled>
+                          <select  name="liquor1" id="liquor1value" class="form-select" disabled>
                           <!-- <option value="">Choose...</option> -->
                           <?php
-                            $query = "SELECT av.liquor2,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.liquor2 WHERE type=28 AND av.id=".$id;
+                            $query = "SELECT av.liquor1,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.liquor1 WHERE type=28 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['enumid']; ?>">
@@ -1276,9 +1165,9 @@ if (isset($_GET['del'])) {
                           <div class="input-group input-group-merge">
                             <input
                               type="text"
-                              name="usgFetalHeartRate2"
+                              name="usgFetalHeartRate1"
                               class="form-control"
-                              id="usgFetalHeartRate2value"
+                              id="usgFetalHeartRate1value"
                               placeholder="USG FOETAL Heart Rate"
                               aria-label="USG FOETAL Heart Rate"
                               aria-describedby="basic-icon-default-usgFetalHeartRate"
@@ -1291,17 +1180,17 @@ if (isset($_GET['del'])) {
 					            	<div class="col-4 mb-3" id="usgFetalPosition2" class="usgFetalPosition2" >
                           <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 2</label>
                           <div class="input-group input-group-merge">
-                          <select  name="usgFetalPosition2" id="usgFetalPosition2value" class="form-select"  disabled>
+                          <select  name="usgFetalPosition1" id="usgFetalPosition1value" class="form-select" disabled>
                           <!-- <option value="">Choose...</option> -->
                           <?php
-                            $query = "SELECT av.usgFetalPosition2,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalPosition2 WHERE type=32 AND av.id=".$id;
+                            $query = "SELECT av.usgFetalPosition1,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalPosition1 WHERE type=32 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['enumid']; ?>">
                           <?php if($listvalue['enumvalue']==$usgFetalPosition2) ?>
-                         <?php { echo $listvalue['enumvalue']; } ?>
+                         <?php {echo $listvalue['enumvalue']; }  ?>
                          <?php 
-                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=20";
+                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=32";
                                     $exequery = mysqli_query($conn, $dquery);
                                     while($listvalue = mysqli_fetch_assoc($exequery)) { 
                                     ?>
@@ -1313,6 +1202,91 @@ if (isset($_GET['del'])) {
 					            	<div class="col-4 mb-3" id="usgFetalMovement2" class="usgFetalMovement2" >
                           <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 2</label>
                           <div class="input-group input-group-merge">
+                          <select  name="usgFetalMovement1" id="usgFetalMovement1value" class="form-select" disabled>
+                          <!-- <option value="">Choose...</option> -->
+                          <?php
+                          $query = "SELECT av.usgFetalMovement1,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalMovement1 WHERE type=28 AND av.id=".$id;
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>">
+                          <?php if($listvalue['enumvalue']==$usgFetalMovement2) ?>
+                         <?php { echo $listvalue['enumvalue']; } ?>
+                         <?php 
+                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
+                                    $exequery = mysqli_query($conn, $dquery);
+                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
+                                    ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                               <?php } } ?>
+                                </select>
+                          </div>
+                        </div>
+
+                        <div class="col-4 mb-3" id="liquor3" class="liquor3" >
+                          <label class="form-label" for="basic-icon-default-liquor">Liquor 3</label>
+                          <div class="input-group input-group-merge">
+                          <select  name="liquor2" id="liquor2value" class="form-select" disabled>
+                          <!-- <option value="">Choose...</option> -->
+                          <?php
+                            $query = "SELECT av.liquor2,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.liquor2 WHERE type=28 AND av.id=".$id;
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>">
+                          <?php if($listvalue['enumvalue']==$liquor3) ?>
+                         <?php { echo $listvalue['enumvalue']; } ?>
+                         <?php 
+                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
+                                    $exequery = mysqli_query($conn, $dquery);
+                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
+                                    ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                               <?php } } ?>
+                                </select>
+						            </div>
+					            </div>
+                      
+					          	<div class="col-4 mb-3" id="usgFetalHeartRate3" class="usgFetalHeartRate3" >
+                          <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 3</label>
+                          <div class="input-group input-group-merge">
+                            <input
+                              type="text"
+                              name="usgFetalHeartRate2"
+                              class="form-control"
+                              id="usgFetalHeartRate2value"
+                              placeholder="USG FOETAL Heart Rate"
+                              aria-label="USG FOETAL Heart Rate"
+                              aria-describedby="basic-icon-default-usgFetalHeartRate"
+                              value="<?php echo $usgFetalHeartRate3 ?>"
+                              disabled
+                              />
+                          </div>
+                        </div>
+                       
+					            	<div class="col-4 mb-3" id="usgFetalPosition3" class="usgFetalPosition3" >
+                          <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 3</label>
+                          <div class="input-group input-group-merge">
+                          <select  name="usgFetalPosition2" id="usgFetalPosition2value" class="form-select"  disabled>
+                          <!-- <option value="">Choose...</option> -->
+                          <?php
+                            $query = "SELECT av.usgFetalPosition2,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalPosition2 WHERE type=32 AND av.id=".$id;
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>">
+                          <?php if($listvalue['enumvalue']==$usgFetalPosition3) ?>
+                         <?php { echo $listvalue['enumvalue']; } ?>
+                         <?php 
+                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=20";
+                                    $exequery = mysqli_query($conn, $dquery);
+                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
+                                    ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                               <?php } } ?>
+                                </select>
+                          </div>
+                        </div> 
+					            	<div class="col-4 mb-3" id="usgFetalMovement3" class="usgFetalMovement3" >
+                          <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 3</label>
+                          <div class="input-group input-group-merge">
                           <select  name="usgFetalMovement2" id="usgFetalMovement2value" class="form-select" disabled>
                           <!-- <option value="">Choose...</option> -->
                           <?php
@@ -1320,7 +1294,7 @@ if (isset($_GET['del'])) {
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$usgFetalMovement2) ?>
+                          <?php if($listvalue['enumvalue']==$usgFetalMovement3) ?>
                          <?php { echo $listvalue['enumvalue']; } ?>
                          <option value="1">Normal</option><?php 
                                     $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
@@ -1331,265 +1305,7 @@ if (isset($_GET['del'])) {
                                <?php } } ?>
                                 </select>
                           </div>
-                        </div>
-
-                        <!---- Triple Baby Field Start --->
-
-                        <div class="col-4 mb-3" id="lT1" class="lT" >
-                          <label class="form-label" for="basic-icon-default-liquor">Liquor 1</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="lT1" id="lT1value" class="form-select" disabled>
-                          <!-- <option value="">Choose...</option> -->
-                          <?php
-                            $query = "SELECT av.lT1,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.lT1 WHERE type=28 AND av.id=".$id;
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$lT1) ?>
-                         <?php { echo $listvalue['enumvalue']; } ?>
-                         <?php 
-                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
-                                    $exequery = mysqli_query($conn, $dquery);
-                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
-                                    ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                               <?php } } ?>
-                                </select>
-						            </div>
-					            </div>
-                      
-					          	<div class="col-4 mb-3" id="usgFHRT1" >
-                          <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 1</label>
-                          <div class="input-group input-group-merge">
-                            <input
-                              type="text"
-                              name="usgFHRT1"
-                              class="form-control"
-                              id="usgFHRT1value"
-                              placeholder="USG FOETAL Heart Rate"
-                              aria-label="USG FOETAL Heart Rate"
-                              aria-describedby="basic-icon-default-usgFetalHeartRate"
-                              value="<?php echo $usgFHRT1 ?>"
-                              disabled
-                              />
-                          </div>
-                        </div>
-                       
-					            	<div class="col-4 mb-3" id="usgFPT1" class="usgFPT1" >
-                          <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 1</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="usgFPT1" id="usgFPT1value" class="form-select" disabled>
-                          <!-- <option value="">Choose...</option> -->
-                          <?php
-                            $query = "SELECT av.usgFPT1,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFPT1 WHERE type=32 AND av.id=".$id;
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$usgFPT1) ?>
-                         <?php { echo $listvalue['enumvalue']; } ?>
-                         <?php 
-                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=32";
-                                    $exequery = mysqli_query($conn, $dquery);
-                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
-                                    ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                               <?php } } ?>
-                                </select>
-                          </div>
-                        </div> 
-					            	<div class="col-4 mb-3" id="usgFMT1" class="usgFMT1" >
-                          <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 1</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="usgFMT1" id="usgFMT1value" class="form-select" disabled>
-                          <!-- <option value="">Choose...</option> -->
-                          <?php
-                          $query = "SELECT av.usgFMT1,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFMT1 WHERE type=28 AND av.id=".$id;
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$usgFMT1) ?>
-                         <?php { echo $listvalue['enumvalue']; } ?>
-                         <?php 
-                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
-                                    $exequery = mysqli_query($conn, $dquery);
-                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
-                                    ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                               <?php } } ?>
-                                </select>
-                          </div>
-                        </div>
-
-                        <div class="col-4 mb-3" id="lT2" class="lT2" >
-                          <label class="form-label" for="basic-icon-default-liquor">Liquor 2</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="lT2" id="lT2value" class="form-select" disabled>
-                          <!-- <option value="">Choose...</option> -->
-                          <?php
-                            $query = "SELECT av.lT2,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.lT2 WHERE type=28 AND av.id=".$id;
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$lT2) ?>
-                         <?php { echo $listvalue['enumvalue']; } ?>
-                         <?php 
-                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
-                                    $exequery = mysqli_query($conn, $dquery);
-                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
-                                    ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                               <?php } } ?>
-                                </select>
-						            </div>
-					            </div>
-                      
-					          	<div class="col-4 mb-3" id="usgFHRT2" class="usgFHRT2" >
-                          <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 2</label>
-                          <div class="input-group input-group-merge">
-                            <input
-                              type="text"
-                              name="usgFHRT2"
-                              class="form-control"
-                              id="usgFHRT2value"
-                              placeholder="USG FOETAL Heart Rate"
-                              aria-label="USG FOETAL Heart Rate"
-                              aria-describedby="basic-icon-default-usgFetalHeartRate"
-                              value="<?php echo $usgFHRT2 ?>"
-                              disabled
-                              />
-                          </div>
-                        </div>
-                       
-					            	<div class="col-4 mb-3" id="usgFPT2" class="usgFPT2" >
-                          <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 2</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="usgFPT2" id="usgFPT2value" class="form-select" disabled>
-                          <!-- <option value="">Choose...</option> -->
-                          <?php
-                            $query = "SELECT av.usgFPT2,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFPT2 WHERE type=32 AND av.id=".$id;
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$usgFPT2) ?>
-                         <?php { echo $listvalue['enumvalue']; } ?>
-                         <?php 
-                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=32";
-                                    $exequery = mysqli_query($conn, $dquery);
-                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
-                                    ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                               <?php } } ?>
-                                </select>
-                          </div>
-                        </div> 
-					            	<div class="col-4 mb-3" id="usgFMT2" class="usgFMT2" >
-                          <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 2</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="usgFMT2" id="usgFMT2value" class="form-select" disabled>
-                          <!-- <option value="">Choose...</option> -->
-                          <?php
-                          $query = "SELECT av.usgFMT2,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFMT2 WHERE type=28 AND av.id=".$id;
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$usgFMT2) ?>
-                         <?php { echo $listvalue['enumvalue']; } ?>
-                         <?php 
-                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
-                                    $exequery = mysqli_query($conn, $dquery);
-                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
-                                    ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                               <?php } } ?>
-                                </select>
-                          </div>
-                        </div>
-                        
-                        <div class="col-4 mb-3" id="lT3" class="lT3" >
-                          <label class="form-label" for="basic-icon-default-liquor">Liquor 3</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="lT3" id="lT3value" class="form-select" disabled> 
-                          <!-- <option value="">Choose...</option> -->
-                          <?php
-                            $query = "SELECT av.lT3,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.lT3 WHERE type=28 AND av.id=".$id;
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$lT3) ?>
-                         <?php { echo $listvalue['enumvalue']; } ?>
-                         <?php 
-                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
-                                    $exequery = mysqli_query($conn, $dquery);
-                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
-                                    ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                               <?php } } ?>
-                                </select>
-						            </div>
-					            </div>
-                      
-					          	<div class="col-4 mb-3" id="usgFHRT3" class="usgFHRT3" >
-                          <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 3</label>
-                          <div class="input-group input-group-merge">
-                            <input
-                              type="text"
-                              name="usgFHRT3"
-                              class="form-control"
-                              id="usgFHRT3value"
-                              placeholder="USG FOETAL Heart Rate"
-                              aria-label="USG FOETAL Heart Rate"
-                              aria-describedby="basic-icon-default-usgFetalHeartRate"
-                              value="<?php echo $usgFHRT3 ?>"
-                              disabled
-                              />
-                          </div>
-                        </div>
-                       
-					            	<div class="col-4 mb-3" id="usgFPT3" class="usgFPT3" >
-                          <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 3</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="usgFPT3" id="usgFPT3value" class="form-select" disabled>
-                          <!-- <option value="">Choose...</option> -->
-                          <?php
-                            $query = "SELECT av.usgFPT3,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFPT3 WHERE type=32 AND av.id=".$id;
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$usgFPT3) ?>
-                         <?php { echo $listvalue['enumvalue']; } ?>
-                         <?php 
-                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=32";
-                                    $exequery = mysqli_query($conn, $dquery);
-                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
-                                    ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                               <?php } } ?>
-                                </select>
-                          </div>
-                        </div> 
-					            	<div class="col-4 mb-3" id="usgFMT3" class="usgFMT3" >
-                          <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 3</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="usgFMT3" id="usgFMT3value" class="form-select" disabled>
-                          <!-- <option value="">Choose...</option> -->
-                          <?php
-                          $query = "SELECT av.usgFMT3,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFMT3 WHERE type=28 AND av.id=".$id;
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$usgFMT3) ?>
-                         <?php { echo $listvalue['enumvalue']; } ?>
-                         <?php 
-                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
-                                    $exequery = mysqli_query($conn, $dquery);
-                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
-                                    ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                               <?php } } ?>
-                                </select>
-                          </div>
-                        </div>
-                       
+                        </div>   
 
 						           <div class="col-4 mb-3" id="placenta" >
                           <label class="form-label" for="basic-icon-default-phone">Placenta</label>

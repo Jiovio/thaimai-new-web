@@ -232,8 +232,8 @@ if (!empty($_POST["btnSecond"])) {
 						             </div>
 					             </div>
                            
-						         <div class="col-4 mb-3" id="liquor" class="liquor" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-liquor">Liquor</label>
+						         <div class="col-4 mb-3" id="liquor1" class="liquor" style="display:none;">
+                          <label class="form-label" for="basic-icon-default-liquor">Liquor 1</label>
                           <div class="input-group input-group-merge">
                           <select  name="liquor" id="liquor" class="form-select">
                           <option value="">Choose...</option>
@@ -249,8 +249,8 @@ if (!empty($_POST["btnSecond"])) {
                       
               </div>
 					<div class="row">
-					          	<div class="col-4 mb-3" id="usgFetalHeartRate" class="usgFetalHeartRate" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate</label>
+					          	<div class="col-4 mb-3" id="usgFetalHeartRate1" class="usgFetalHeartRate" style="display:none;">
+                          <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 1</label>
                           <div class="input-group input-group-merge">
                             <input
                               type="text"
@@ -264,8 +264,8 @@ if (!empty($_POST["btnSecond"])) {
                           </div>
                         </div>
                        
-					            	<div class="col-4 mb-3" id="usgFetalPosition" class="usgFetalPosition" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation</label>
+					            	<div class="col-4 mb-3" id="usgFetalPosition1" class="usgFetalPosition" style="display:none;">
+                          <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 1</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFetalPosition" id="usgFetalPosition" class="form-select">
                           <option value="">Choose...</option>
@@ -278,8 +278,8 @@ if (!empty($_POST["btnSecond"])) {
                              </select>
                           </div>
                         </div> 
-					            	<div class="col-4 mb-3" id="usgFetalMovement" class="usgFetalMovement" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement</label>
+					            	<div class="col-4 mb-3" id="usgFetalMovement1" class="usgFetalMovement" style="display:none;">
+                          <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 1</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFetalMovement" id="usgFetalMovement" class="form-select">
                           <option value="">Choose...</option>
@@ -292,9 +292,10 @@ if (!empty($_POST["btnSecond"])) {
                              </select>
                           </div>
                         </div>
-
-                        <div class="col-4 mb-3" id="liquor1" class="liquor1" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-liquor">Liquor 1</label>
+                            </div>
+                            <div class="row">
+                        <div class="col-4 mb-3" id="liquor2" class="liquor2" style="display:none;">
+                          <label class="form-label" for="basic-icon-default-liquor">Liquor 2</label>
                           <div class="input-group input-group-merge">
                           <select  name="liquor1" id="liquor1" class="form-select">
                           <option value="">Choose...</option>
@@ -308,10 +309,8 @@ if (!empty($_POST["btnSecond"])) {
 						            </div>
 					            </div>
                       
-              </div>
-					<div class="row">
-					          	<div class="col-4 mb-3" id="usgFetalHeartRate1" class="usgFetalHeartRate1" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 1</label>
+					          	<div class="col-4 mb-3" id="usgFetalHeartRate2" class="usgFetalHeartRate2" style="display:none;">
+                          <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 2</label>
                           <div class="input-group input-group-merge">
                             <input
                               type="text"
@@ -325,22 +324,25 @@ if (!empty($_POST["btnSecond"])) {
                           </div>
                         </div>
                        
-					            	<div class="col-4 mb-3" id="usgFetalPosition1" class="usgFetalPosition1" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 1</label>
+					            	<div class="col-4 mb-3" id="usgFetalPosition2" class="usgFetalPosition2" style="display:none;">
+                          <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 2</label>
                           <div class="input-group input-group-merge">
-                          <input
-                              type="text"
-                              name="usgFetalPosition1"
-                              class="form-control"
-                              id="usgFetalPosition1"
-                              placeholder="USG FOETAL Heart Rate"
-                              aria-label="USG FOETAL Heart Rate"
-                              aria-describedby="basic-icon-default-usgFetalHeartRate"
-                               />
+                          <select  name="usgFetalPosition1" id="usgFetalPosition1" class="form-select">
+                          <option value="">Choose...</option>
+                          <?php
+                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=32";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php } ?>
+                             </select>
                           </div>
                         </div> 
-					            	<div class="col-4 mb-3" id="usgFetalMovement1" class="usgFetalMovement1" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 1</label>
+                        
+              </div>
+					<div class="row">
+					            	<div class="col-4 mb-3" id="usgFetalMovement2" class="usgFetalMovement1" style="display:none;">
+                          <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 2</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFetalMovement1" id="usgFetalMovement1" class="form-select">
                           <option value="">Choose...</option>
@@ -354,8 +356,8 @@ if (!empty($_POST["btnSecond"])) {
                           </div>
                         </div>
 
-                        <div class="col-4 mb-3" id="liquor2" class="liquor2" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-liquor">Liquor 2</label>
+                        <div class="col-4 mb-3" id="liquor3" class="liquor2" style="display:none;">
+                          <label class="form-label" for="basic-icon-default-liquor">Liquor 3</label>
                           <div class="input-group input-group-merge">
                           <select  name="liquor2" id="liquor2" class="form-select">
                           <option value="">Choose...</option>
@@ -369,10 +371,8 @@ if (!empty($_POST["btnSecond"])) {
 						            </div>
 					            </div>
                       
-              </div>
-					<div class="row">
-					          	<div class="col-4 mb-3" id="usgFetalHeartRate2" class="usgFetalHeartRate2" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 2</label>
+					          	<div class="col-4 mb-3" id="usgFetalHeartRate3" class="usgFetalHeartRate2" style="display:none;">
+                          <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 3</label>
                           <div class="input-group input-group-merge">
                             <input
                               type="text"
@@ -386,22 +386,24 @@ if (!empty($_POST["btnSecond"])) {
                           </div>
                         </div>
                        
-					            	<div class="col-4 mb-3" id="usgFetalPosition2" class="usgFetalPosition2" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 2</label>
+              </div>
+					<div class="row">                       
+					            	<div class="col-4 mb-3" id="usgFetalPosition3" class="usgFetalPosition2" style="display:none;">
+                          <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 3</label>
                           <div class="input-group input-group-merge">
-                          <input
-                              type="text"
-                              name="usgFetalPosition2"
-                              class="form-control"
-                              id="usgFetalPosition2"
-                              placeholder="USG FOETAL Heart Rate"
-                              aria-label="USG FOETAL Heart Rate"
-                              aria-describedby="basic-icon-default-usgFetalHeartRate"
-                               />
+                          <select  name="usgFetalPosition3" id="usgFetalPosition3" class="form-select">
+                          <option value="">Choose...</option>
+                          <?php
+                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=32";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php } ?>
+                             </select>
                           </div>
                         </div> 
-					            	<div class="col-4 mb-3" id="usgFetalMovement2" class="usgFetalMovement2" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 2</label>
+					            	<div class="col-4 mb-3" id="usgFetalMovement3" class="usgFetalMovement2" style="display:none;">
+                          <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 3</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFetalMovement2" id="usgFetalMovement2" class="form-select">
                           <option value="">Choose...</option>
@@ -414,191 +416,7 @@ if (!empty($_POST["btnSecond"])) {
                              </select>
                           </div>
                         </div>
-
-                        <!---- Triple Baby Field Start --->
-
-                        <div class="col-4 mb-3" id="lT1" class="lT" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-liquor">Liquor 1</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="lT1" id="lT1" class="form-select">
-                          <option value="">Choose...</option>
-                          <?php
-                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                          <?php } ?>
-                          </select>
-						            </div>
-					            </div>
-                      
-              </div>
-					<div class="row">
-					          	<div class="col-4 mb-3" id="usgFHRT1" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 1</label>
-                          <div class="input-group input-group-merge">
-                            <input
-                              type="text"
-                              name="usgFHRT1"
-                              class="form-control"
-                              id="usgFHRT1"
-                              placeholder="USG FOETAL Heart Rate"
-                              aria-label="USG FOETAL Heart Rate"
-                              aria-describedby="basic-icon-default-usgFetalHeartRate"
-                               />
-                          </div>
-                        </div>
-                       
-					            	<div class="col-4 mb-3" id="usgFPT1" class="usgFPT1" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 1</label>
-                          <div class="input-group input-group-merge">
-                          <input
-                              type="text"
-                              name="usgFPT1"
-                              class="form-control"
-                              id="usgFPT1"
-                              placeholder="USG FOETAL Heart Rate"
-                              aria-label="USG FOETAL Heart Rate"
-                              aria-describedby="basic-icon-default-usgFetalHeartRate"
-                               />
-                          </div>
-                        </div> 
-					            	<div class="col-4 mb-3" id="usgFMT1" class="usgFMT1" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 1</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="usgFMT1" id="usgFMT1" class="form-select">
-                          <option value="">Choose...</option>
-                          <?php
-                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                          <?php } ?>
-                             </select>
-                          </div>
-                        </div>
-
-                        <div class="col-4 mb-3" id="lT2" class="lT2" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-liquor">Liquor 2</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="lT2" id="lT2" class="form-select">
-                          <option value="">Choose...</option>
-                          <?php
-                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                          <?php } ?>
-                          </select>
-						            </div>
-					            </div>
-                      
-              </div>
-					<div class="row">
-					          	<div class="col-4 mb-3" id="usgFHRT2" class="usgFHRT2" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 2</label>
-                          <div class="input-group input-group-merge">
-                            <input
-                              type="text"
-                              name="usgFHRT2"
-                              class="form-control"
-                              id="usgFHRT2"
-                              placeholder="USG FOETAL Heart Rate"
-                              aria-label="USG FOETAL Heart Rate"
-                              aria-describedby="basic-icon-default-usgFetalHeartRate"
-                               />
-                          </div>
-                        </div>
-                       
-					            	<div class="col-4 mb-3" id="usgFPT2" class="usgFPT2" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 2</label>
-                          <div class="input-group input-group-merge">
-                          <input
-                              type="text"
-                              name="usgFPT2"
-                              class="form-control"
-                              id="usgFPT2"
-                              placeholder="USG FOETAL Heart Rate"
-                              aria-label="USG FOETAL Heart Rate"
-                              aria-describedby="basic-icon-default-usgFetalHeartRate"
-                               />
-                          </div>
-                        </div> 
-					            	<div class="col-4 mb-3" id="usgFMT2" class="usgFMT2" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 2</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="usgFMT2" id="usgFMT2" class="form-select">
-                          <option value="">Choose...</option>
-                          <?php
-                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                          <?php } ?>
-                             </select>
-                          </div>
-                        </div>
-                        
-                        <div class="col-4 mb-3" id="lT3" class="lT3" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-liquor">Liquor 3</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="lT3" id="lT3" class="form-select">
-                          <option value="">Choose...</option>
-                          <?php
-                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                          <?php } ?>
-                          </select>
-						            </div>
-					            </div>
-                      
-              </div>
-					<div class="row">
-					          	<div class="col-4 mb-3" id="usgFHRT3" class="usgFHRT3" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 3</label>
-                          <div class="input-group input-group-merge">
-                            <input
-                              type="text"
-                              name="usgFHRT3"
-                              class="form-control"
-                              id="usgFHRT3"
-                              placeholder="USG FOETAL Heart Rate"
-                              aria-label="USG FOETAL Heart Rate"
-                              aria-describedby="basic-icon-default-usgFetalHeartRate"
-                               />
-                          </div>
-                        </div>
-                       
-					            	<div class="col-4 mb-3" id="usgFPT3" class="usgFPT3" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 3</label>
-                          <div class="input-group input-group-merge">
-                          <input
-                              type="text"
-                              name="usgFPT3"
-                              class="form-control"
-                              id="usgFPT3"
-                              placeholder="USG FOETAL Heart Rate"
-                              aria-label="USG FOETAL Heart Rate"
-                              aria-describedby="basic-icon-default-usgFetalHeartRate"
-                               />
-                          </div>
-                        </div> 
-					            	<div class="col-4 mb-3" id="usgFMT3" class="usgFMT3" style="display:none;">
-                          <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 3</label>
-                          <div class="input-group input-group-merge">
-                          <select  name="usgFMT3" id="usgFMT3" class="form-select">
-                          <option value="">Choose...</option>
-                          <?php
-                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=28";
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                          <?php } ?>
-                             </select>
-                          </div>
-                        </div>
+                     
                         </div>
           <div class="row">
 						           <div class="col-4 mb-3" id="placenta" style="display:none;" >
@@ -615,6 +433,7 @@ if (!empty($_POST["btnSecond"])) {
                              </select>
 						           </div>
 					           </div>
+                     
 						             <div class="col-4 mb-3" id="usgResult" style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgResult">USG Result</label>
                           <div class="input-group input-group-merge">

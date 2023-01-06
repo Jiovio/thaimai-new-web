@@ -1,4 +1,5 @@
-<?php ob_start(); session_start();
+<?php 
+session_start();
 if (isset($_SESSION["username"]) || isset($_SESSION["userid"]) || isset($_SESSION["usertype"]) || isset($_SESSION["BlockId"]) || isset($_SESSION["PhcId"]) || isset($_SESSION["HscId"])) {
     $username = $_SESSION["username"];
     $userid = $_SESSION["userid"];
@@ -14,7 +15,7 @@ if (isset($_SESSION["username"]) || isset($_SESSION["userid"]) || isset($_SESSIO
     header("Location: $url");
 }
 include "../config/db_connect.php";
-include ('preloader.php');
+// include ('preloader.php');
 ?>
 
 <!DOCTYPE html>

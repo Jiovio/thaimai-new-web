@@ -39,32 +39,35 @@
                       </tr>
                     </thead>
 <?php
-  $listQry = "SELECT DISTINCT(an.motheraadhaarid),an.id,an.picmeno,ec.motheraadhaarname,an.residentType,an.pregnancyTestResult,an.gravida,an.para,an.hrPregnancy FROM anregistration an JOIN ecregister ec on ec.motheraadhaarid=an.motheraadhaarid WHERE an.status=1"; 
+  $listQry = "SELECT DISTINCT(an.motheraadhaarid),an.id,an.picmeno,ec.motheraadhaarname,an.residentType,an.pregnancyTestResult,an.gravida,an.para,an.hrPregnancy,an.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM anregistration an JOIN ecregister ec on ec.motheraadhaarid=an.motheraadhaarid WHERE an.status=1"; 
+  $private = " AND an.createdBy='".$userid."'";
   $orderQry = " ORDER BY ec.motheraadhaarname ASC";
     
-        if(($usertype == 0) || ($usertype == 1)) {
-            if(isset($_POST['filter'])) {
-              $bloName = $_POST['BlockId']; 
-              $phcName = $_POST['PhcId'];
-              $hscName = $_POST['HscId'];
-                    
-                      if($bloName == "" && $phcName == "" && $hscName == ""){
-                        $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
-                      } else if($bloName != "" && $phcName == "" && $hscName == ""){
-                        $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."'".$orderQry);
-                      } else if($bloName != "" && $phcName != "" && $hscName == ""){
-                        $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'".$orderQry);
-                      } else if($bloName != "" && $phcName != "" && $hscName != ""){
-                        $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'".$orderQry);
-                      }
-                    } else if(isset($_POST['reset'])) {
-                      $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
-                    } else {
-                      $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
-                    }
-            } else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
-                  $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQry);
-            } 
+  if(($usertype == 0) || ($usertype == 1)) {
+    if(isset($_POST['filter'])) {
+      $bloName = $_POST['BlockId']; 
+      $phcName = $_POST['PhcId'];
+      $hscName = $_POST['HscId'];
+            
+              if($bloName == "" && $phcName == "" && $hscName == ""){
+                $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+              } else if($bloName != "" && $phcName == "" && $hscName == ""){
+                $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."'".$orderQry);
+              } else if($bloName != "" && $phcName != "" && $hscName == ""){
+                $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'".$orderQry);
+              } else if($bloName != "" && $phcName != "" && $hscName != ""){
+                $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
+              }
+            } else if(isset($_POST['reset'])) {
+              $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+            } else {
+              $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+            }
+    } else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
+          $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQry);
+    } else {
+        $ExeQuery = mysqli_query($conn,$listQry.$private.$orderQry);
+    } 
              if($ExeQuery) {
                       $cnt=1;
                       while($row = mysqli_fetch_array($ExeQuery)) {

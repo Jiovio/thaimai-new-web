@@ -50,7 +50,7 @@ $id =0;
     $query = mysqli_query($conn,"UPDATE postnatalvisit SET calcium='$calcium',pncPeriod='$pncPeriod',vitaminA='$vitaminA',motherPnc='$motherPnc',ifaTabletStatus='$ifaTabletStatus',ppcMethod='$ppcMethod',motherDangerSign='$mDangerSign',
     bloodSugar='$bloodSugar',infantWeight='$weight',infantDangerSigns='$iDSigns',bpSys='$bpSys',bpDia='$bpDia',updatedat='$date',updatedBy='$userid' WHERE id=".$id);
     if (!empty($query)) {
-            echo "<script>alert('Updated Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/PostnatalVisit.php');</script>";
+            echo "<script>alert('Updated Successfully');window.location.replace('http://localhost/thaimainew/forms/PostnatalVisit.php');</script>";
           } }
 
 if (isset($_GET['del'])) {
@@ -59,7 +59,7 @@ if (isset($_GET['del'])) {
     $date = date('d-m-Y h:i:s');
     mysqli_query($conn, "UPDATE postnatalvisit SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
     $_SESSION['message'] = "User deleted!"; 
-    echo "<script>alert('Deleted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/PostnatalVisit.php');</script>";
+    echo "<script>alert('Deleted Successfully');window.location.replace('http://localhost/thaimainew/forms/PostnatalVisit.php');</script>";
   }
 ?>
 <!-- Content wrapper -->

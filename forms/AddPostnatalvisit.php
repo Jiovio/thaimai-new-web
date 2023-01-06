@@ -36,7 +36,7 @@ if (! empty($_POST["addpostnatal"])) {
   $query = mysqli_query($conn,"INSERT INTO postnatalvisit (picmeno, pncPeriod, motherPnc, ifaTabletStatus,calcium, ppcMethod,vitaminA, motherDangerSign, bloodSugar, infantWeight, infantDangerSigns,bpSys,bpDia,createdBy) 
   VALUES ('$picmeNo','$pncPeriod','$motherPnc','$ifaTabletStatus','$calcium','$ppcMethod','$vitaminA','$mDangerSign','$bloodSugar','$weight','$iDSigns','$bpSys','$bpDia','$userid')");
   if (!empty($query)) {
-     echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/PostnatalVisit.php');</script>";
+     echo "<script>alert('Inserted Successfully');window.location.replace('http://localhost/thaimainew/forms/PostnatalVisit.php');</script>";
    } 
   $motstatus = mysqli_query($conn, "UPDATE ecregister SET status=3 WHERE picmeNo='$picmeNo'");
   } } ?>

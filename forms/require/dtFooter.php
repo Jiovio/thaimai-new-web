@@ -40,7 +40,7 @@
      setTimeout(() => {
      var divBox = document.getElementById('response');
      divBox.style.display = 'none';
-     }, 2000); 
+     }, 5000); 
    </script>
   </body>
 </html>

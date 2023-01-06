@@ -28,24 +28,34 @@
 						<!--<th>View</th>-->
                       </tr>
                     </thead>
-<?php if(isset($_POST['filter'])) {
-	$bloName = $_POST['BlockId']; 
-	$phcName = $_POST['PhcId'];
-
-	if($bloName == "" && $phcName == "" ){
-		$ExeQuery = mysqli_query($conn,"SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.edddate,ec.mothermobno,ec.PhcId,u.name FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh.createdBy JOIN enumdata ed on ed.enumid=ec.PhcId WHERE YEAR(mh.edddate) = YEAR(CURRENT_DATE()) AND MONTH(mh.edddate) = MONTH(CURRENT_DATE()) AND mh.status=1 ORDER BY mh.picmeno ASC;");
-	}
-	else if($bloName != "" && $phcName != "" ){
-		$ExeQuery = mysqli_query($conn,"SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.edddate,ec.mothermobno,ec.PhcId,u.name FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh.createdBy JOIN enumdata ed on ed.enumid=ec.PhcId WHERE YEAR(mh.edddate) = YEAR(CURRENT_DATE()) AND MONTH(mh.edddate) = MONTH(CURRENT_DATE()) AND mh.status=1 AND ec.PhcId='".$phcName."' ORDER BY mh.picmeno ASC;");
-	}
-}
-
-else if(isset($_POST['reset'])) {
-	$ExeQuery = mysqli_query($conn,"SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.edddate,ec.mothermobno,ec.PhcId,u.name FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh.createdBy JOIN enumdata ed on ed.enumid=ec.PhcId WHERE YEAR(mh.edddate) = YEAR(CURRENT_DATE()) AND MONTH(mh.edddate) = MONTH(CURRENT_DATE()) AND mh.status=1 ORDER BY mh.picmeno ASC;");
-}
-else {
-	$ExeQuery = mysqli_query($conn,"SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.edddate,ec.mothermobno,ec.PhcId,u.name FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh.createdBy JOIN enumdata ed on ed.enumid=ec.PhcId WHERE YEAR(mh.edddate) = YEAR(CURRENT_DATE()) AND MONTH(mh.edddate) = MONTH(CURRENT_DATE()) AND mh.status=1 ORDER BY mh.picmeno ASC;");
-}
+<?php 
+$listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.edddate,ec.mothermobno,ec.PhcId,u.name,mh.createdBy,ec.BlockId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh. JOIN enumdata ed on ed.enumid=ec.PhcId WHERE YEAR(mh.edddate) = YEAR(CURRENT_DATE()) AND MONTH(mh.edddate) = MONTH(CURRENT_DATE()) AND mh.status=1";
+$private = " AND mh.createdBy='".$userid."'";
+$orderQry = " ORDER BY ec.motheraadhaarname ASC";
+if(($usertype == 0) || ($usertype == 1)) {
+  if(isset($_POST['filter'])) {
+    $bloName = $_POST['BlockId']; 
+    $phcName = $_POST['PhcId'];
+    $hscName = $_POST['HscId'];        
+              if($bloName == "" && $phcName == "" && $hscName == ""){
+                $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+              } else if($bloName != "" && $phcName == "" && $hscName == ""){
+                $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."'".$orderQry);
+              } else if($bloName != "" && $phcName != "" && $hscName == ""){
+                $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'".$orderQry);
+              } else if($bloName != "" && $phcName != "" && $hscName != ""){
+                $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
+              }
+            } else if(isset($_POST['reset'])) {
+              $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+            } else {
+              $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+            }
+} else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
+$ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQry);
+  }  else {
+      $ExeQuery = mysqli_query($conn,$listQry.$private.$orderQry);
+  }
                    if($ExeQuery) {
                       $cnt=1;
                       while($row = mysqli_fetch_array($ExeQuery)) {

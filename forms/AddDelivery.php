@@ -25,7 +25,7 @@ if (! empty($_POST["addDelivery"])) {
   '$skintoskinContact','$breastfeedInitiated','$admittedSncu','$sncudate','$sncuAreaName','$sncuOutcome','$dischargedate','$dischargetime','$bcgdate','$opvDdate','$hebBdate','$injuction','$userid')");
 
 if (!empty($query)) {
-            echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/DeliveryDetails.php');</script>";
+            echo "<script>alert('Inserted Successfully');window.location.replace('http://localhost/thaimainew/forms/DeliveryDetails.php');</script>";
           } }
 ?>
           <!-- Content wrapper -->

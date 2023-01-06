@@ -38,19 +38,6 @@ $liquor2 = $_POST["liquor2"];
 $usgFetalHeartRate2 = $_POST["usgFetalHeartRate2"];
 $usgFetalPosition2 = $_POST["usgFetalPosition2"]; 
 $usgFetalMovement2 = $_POST["usgFetalMovement2"];
-$lT1 = $_POST["lT1"]; 
-$usgFHRT1 = $_POST["usgFHRT1"];
-$usgFPT1 = $_POST["usgFPT1"]; 
-$usgFMT1 = $_POST["usgFMT1"];
-$lT2 = $_POST["lT2"]; 
-$usgFHRT2 = $_POST["usgFHRT2"];
-$usgFPT2 = $_POST["usgFPT2"]; 
-$usgFMT2 = $_POST["usgFMT2"];
-$lT3 = $_POST["lT3"]; 
-$usgFHRT3 = $_POST["usgFHRT3"];
-$usgFPT3 = $_POST["usgFPT3"]; 
-$usgFMT3 = $_POST["usgFMT3"];
-
 $placenta = $_POST["placenta"];
 $usgResult = $_POST["usgResult"];
 $usgRemarks = $_POST["usgRemarks"];
@@ -60,10 +47,7 @@ $query = mysqli_query($conn, "UPDATE antenatalvisit SET calciumDate='$calciumDat
  usgSizeUterusWeek='$usgSizeUterusWeek',usgFetusStatus='$usgFetusStatus',gestationSac='$gestationSac',liquor='$liquor',
  usgFetalHeartRate='$usgFetalHeartRate',usgFetalPosition='$usgFetalPosition',usgFetalMovement='$usgFetalMovement',liquor1='$liquor1',
  usgFetalHeartRate1='$usgFetalHeartRate1',usgFetalPosition1='$usgFetalPosition1',usgFetalMovement1='$usgFetalMovement1',liquor2='$liquor2',
- usgFetalHeartRate2='$usgFetalHeartRate2',usgFetalPosition2='$usgFetalPosition2',usgFetalMovement2='$usgFetalMovement2',lT1='$lT1',
- usgFHRT1='$usgFHRT1',usgFPT1='$usgFPT1',usgFMT1='$usgFMT1',lT2='$lT2',
- usgFHRT2='$usgFHRT2',usgFPT2='$usgFPT2',usgFMT2='$usgFMT2',lT3='$lT3',
- usgFHRT3='$usgFHRT3',usgFPT3='$usgFPT3',usgFMT3='$usgFMT3',
+ usgFetalHeartRate2='$usgFetalHeartRate2',usgFetalPosition2='$usgFetalPosition2',usgFetalMovement2='$usgFetalMovement2',
  placenta='$placenta',usgResult='$usgResult',usgRemarks='$usgRemarks' WHERE picmeno=".$picmeno);
 }
 
@@ -87,7 +71,7 @@ if (!empty($_POST["btnFourth"])) {
 referralFacility='$referralFacility',referralPlace='$referralPlace',bloodTransfusion='$bloodTransfusion',bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',
    noOfIVDoses='$nooIVdoses' WHERE picmeno=".$picmeno);
    if (!empty($query)) {
-            echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/AntenatalVisit.php');</script>";
+            echo "<script>alert('Inserted Successfully');window.location.replace('http://localhost/thaimainew/forms/AntenatalVisit.php');</script>";
           }
 $highrisk = mysqli_query($conn, "UPDATE ecregister ec INNER JOIN antenatalvisit av ON ec.picmeNo=av.picmeno SET ec.status=6 WHERE av.symptomsHighRisk NOT IN('1','48') AND ec.picmeNo=".$picmeno);
 } 

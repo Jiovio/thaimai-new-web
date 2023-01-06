@@ -105,7 +105,7 @@ $query = mysqli_query($conn, "UPDATE immunization SET doseNo='$doseNo', doseName
 doseProvidedDate='$doseProvidedDate',futureDoseNo='$FutureDoseNo',futureDoseDate='$FutureDoseDate', breastFeeding='$breastFeeding', 
 compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
 if (!empty($query)) {
-    echo "<script>alert('Updated Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/Immunization.php');</script>";
+    echo "<script>alert('Updated Successfully');window.location.replace('http://localhost/thaimainew/forms/Immunization.php');</script>";
   } }
 
 
@@ -139,7 +139,7 @@ if (!empty($query)) {
     $date = date('d-m-Y h:i:s');
     mysqli_query($conn, "UPDATE immunization SET status=0, deletedat='$date', deletedUserId='$userid' WHERE status=1 AND id=$id");
     $_SESSION['message'] = "User deleted!"; 
-      echo "<script>alert('Deleted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/Immunization.php');</script>";
+      echo "<script>alert('Deleted Successfully');window.location.replace('http://localhost/thaimainew/forms/Immunization.php');</script>";
   }
 ?>
 <!-- Content wrapper -->

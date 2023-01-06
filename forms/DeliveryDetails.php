@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -40,26 +41,37 @@
                       </tr>
                     </thead>
 
-    <?php if(($usertype == 0) || ($usertype == 1)) {
-            if(isset($_POST['filter'])) {
-	            $bloName = $_POST['BlockId']; 
-	            $phcName = $_POST['PhcId'];
-
-	if($bloName == "" && $phcName == "" ){
-		$ExeQuery = mysqli_query($conn,"SELECT DISTINCT(dd.picmeno),dd.id,ec.motheraadhaarname,dd.deliverydate,dd.deliverytime FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno WHERE dd.status=1 ORDER BY ec.motheraadhaarname ASC");
-	} else if($bloName != "" && $phcName == "" ){
-		$ExeQuery = mysqli_query($conn,"SELECT DISTINCT(dd.picmeno),dd.id,ec.motheraadhaarname,dd.deliverydate,dd.deliverytime FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno WHERE ec.BlockId='".$bloName."' AND dd.status=1 ORDER BY ec.motheraadhaarname ASC");
-	} else if($bloName != "" && $phcName != "" ){
-		$ExeQuery = mysqli_query($conn,"SELECT DISTINCT(dd.picmeno),dd.id,ec.motheraadhaarname,dd.deliverydate,dd.deliverytime FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND dd.status=1 ORDER BY ec.motheraadhaarname ASC");
-	}
-} else if(isset($_POST['reset'])) {
-	$ExeQuery = mysqli_query($conn,"SELECT DISTINCT(dd.picmeno),dd.id,ec.motheraadhaarname,dd.deliverydate,dd.deliverytime FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno WHERE dd.status=1 ORDER BY ec.motheraadhaarname ASC");
-} else {
-	$ExeQuery = mysqli_query($conn,"SELECT DISTINCT(dd.picmeno),dd.id,ec.motheraadhaarname,dd.deliverydate,dd.deliverytime FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno WHERE dd.status=1 ORDER BY ec.motheraadhaarname ASC");
-    }
-} else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
-    $ExeQuery = mysqli_query($conn,"SELECT DISTINCT(dd.picmeno),dd.id,ec.motheraadhaarname,dd.deliverydate,dd.deliverytime FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno WHERE ec.BlockId='".$BlockId."' AND dd.status=1 ORDER BY ec.motheraadhaarname ASC");
-            } 
+    <?php 
+    
+    $listQry = "SELECT DISTINCT(dd.picmeno),dd.id,ec.motheraadhaarname,dd.deliverydate,dd.deliverytime,ec.BlockId,ec.PhcId,ec.HscId FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno WHERE dd.status=1";
+    $private = " AND dd.createdBy='".$userid."'";
+    $orderQry = " ORDER BY ec.motheraadhaarname ASC";
+    
+    if(($usertype == 0) || ($usertype == 1)) {
+      if(isset($_POST['filter'])) {
+        $bloName = $_POST['BlockId']; 
+        $phcName = $_POST['PhcId'];
+        $hscName = $_POST['HscId'];
+              
+                if($bloName == "" && $phcName == "" && $hscName == ""){
+                  $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+                } else if($bloName != "" && $phcName == "" && $hscName == ""){
+                  $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."'".$orderQry);
+                } else if($bloName != "" && $phcName != "" && $hscName == ""){
+                  $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'".$orderQry);
+                } else if($bloName != "" && $phcName != "" && $hscName != ""){
+                  $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
+                }
+              } else if(isset($_POST['reset'])) {
+                $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+              } else {
+                $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+              }
+      } else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
+            $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQry);
+      } else {
+          $ExeQuery = mysqli_query($conn,$listQry.$private.$orderQry);
+      }
           if($ExeQuery) {
                       $cnt=1;
                       while($row = mysqli_fetch_array($ExeQuery)) {
