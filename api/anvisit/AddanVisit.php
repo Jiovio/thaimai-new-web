@@ -1,5 +1,4 @@
 <?php
-
 ini_set("display_errors",'1');
 // required headers
 header("Access-Control-Allow-Origin: *");
@@ -29,7 +28,7 @@ if (!empty($data->picmeno)) {
     $mvaliduser1->execute(array());
     $mvalidchecknum = $mvaliduser1->rowCount();
    
-    if ($mvalidchecknum == 0) {
+    if ($mvalidchecknum > 0) {
         //$inserid = $form->createantenatalvisit();
         $date = date('Y-m-d', strtotime($data->anvisitDate. ' + 30 days'));
         $addquery = "INSERT INTO antenatalvisit (`picmeno`, `residenttype`, `physicalpresent`, `placeofvisit`, `abortion`, 
