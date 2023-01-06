@@ -71,7 +71,7 @@ if (!empty($_POST["btnFourth"])) {
 referralFacility='$referralFacility',referralPlace='$referralPlace',bloodTransfusion='$bloodTransfusion',bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',
    noOfIVDoses='$nooIVdoses' WHERE picmeno=".$picmeno);
    if (!empty($query)) {
-            echo "<script>alert('Inserted Successfully');window.location.replace('http://localhost/thaimainew/forms/AntenatalVisit.php');</script>";
+            echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/AntenatalVisit.php');</script>";
           }
 $highrisk = mysqli_query($conn, "UPDATE ecregister ec INNER JOIN antenatalvisit av ON ec.picmeNo=av.picmeno SET ec.status=6 WHERE av.symptomsHighRisk NOT IN('1','48') AND ec.picmeNo=".$picmeno);
 } 

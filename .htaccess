@@ -9,7 +9,7 @@ Options -Indexes
 DirectoryIndex index.php
 RewriteEngine on
 RewriteCond %{SERVER_PORT} 80
-ErrorDocument 404 http://localhost/thaimainew/index.php
+ErrorDocument 404 http://admin.thaimaiyudan.org/index.php
 
 # RewriteRule ^thaimaiyudannew/(.*).htm thaimaiyudan/$1.php [L,QSA]
 

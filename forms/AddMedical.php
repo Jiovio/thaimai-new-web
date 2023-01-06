@@ -50,7 +50,7 @@ if (! empty($_POST["addMedical"])) {
   '$husVdrlRprResult','$momhbresult','$hushbresult','$momhivtestresult',
   '$anyOtherInvest','$hushivtestresult','$totPregnancy','$placeDeliveryDistrict','$hospitaltype','$hospitalname','$userid')");
             if (!empty($query)) {
-              echo "<script>alert('Inserted Successfully');window.location.replace('http://localhost/thaimainew/forms/MedicalHistory.php');</script>";
+              echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/MedicalHistory.php');</script>";
             } 
 } } ?>
 <!-- Content wrapper -->

@@ -44,7 +44,7 @@ if (! empty($_POST["update"])) {
  rationcardnum='$rcnum', updatedat='$date', updatedBy='$userid' WHERE id=$id");
 
   if (!empty($uquery)) {
-  echo "<script>alert('Updated Successfully');window.location.replace('http://localhost/thaimainew/forms/EligibleCouple.php');</script>";
+  echo "<script>alert('Updated Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/EligibleCouple.php');</script>";
   }
 }
  if (isset($_GET['del'])) {
@@ -52,7 +52,7 @@ if (! empty($_POST["update"])) {
    date_default_timezone_set('Asia/Kolkata');
    $date = date('d-m-Y h:i:s');
    mysqli_query($conn, "UPDATE ecregister SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND  id=$id");
-     echo "<script>alert('Deleted Successfully');window.location.replace('http://localhost/thaimainew/forms/EligibleCouple.php');</script>";
+     echo "<script>alert('Deleted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/EligibleCouple.php');</script>";
  }
 ?>
 <!-- Content wrapper -->

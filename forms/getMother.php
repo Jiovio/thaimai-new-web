@@ -54,7 +54,7 @@ $HusbandAge = $_POST["HusbandAge"];
 $query = mysqli_query($conn,"INSERT INTO anregistration (motheraadhaarid, picmeno,picmeRegDate, residentType, pregnancyTestResult,methodofConception, gravida, para, livingChildren, abortion, childDeath, hrPregnancy, obstetricCode, motherHeight, motherWeight, bpSys, bpDia, anRegDate, mrmbsEligible,MotherAge,HusbandAge,createdBy) 
 VALUES ('$motheraadhaarid','$picmeno','$picmeRegDate','$residentType','$ptest','$methodofConception','$gravida','$para','$child', '$ab', '$cd', '$hrPreg', '$obcode','$height','$weight','$bp','$dia','$date','$mrmbs','$MotherAge','$HusbandAge','$userid')");
           if (!empty($query)) {
-          echo "<script>alert('Inserted Successfully');window.location.replace('http://localhost/thaimainew/forms/AnRegisterlist.php');</script>";
+          echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/AnRegisterlist.php');</script>";
           } 
 $uquery = mysqli_query($conn,"UPDATE ecregister SET picmeNo='$picmeno',status=2 WHERE motheraadhaarid='$motheraadhaarid'");
 $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaarid='$motheraadhaarid' AND TIMESTAMPDIFF(YEAR, motherdob,CURDATE())<18");
