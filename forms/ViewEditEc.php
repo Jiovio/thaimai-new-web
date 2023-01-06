@@ -636,20 +636,19 @@ if (! empty($_POST["update"])) {
                                 <?php if($row_list['BlockId']== $BlockId){  }?>
                                 
                                 <?php echo $row_list['BlockName']; ?></option>
-                                <?php 
+                                <?php
+                                if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) { 
+                                $query = "SELECT DISTINCT(BlockId),BlockName FROM hscmaster WHERE BlockId='".$_SESSION["BlockId"]."' ORDER BY BlockId";
+                                } else {
                                 $query = "SELECT DISTINCT(BlockId),BlockName FROM hscmaster ORDER BY BlockId";
-                            $exequery = mysqli_query($conn, $query);
+
+                                }
+                                $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { 
                               ?>
-                          
                           <option value="<?php echo $listvalue['BlockId']; ?>"><?php echo $listvalue['BlockName']; ?></option>
-
-                            
-
-                                <?php }
-                                } ?>
-
-                                </select>
+                          <?php } } ?>
+                            </select>
                             <?php } ?>
 						</div>
 					  </div>
@@ -672,22 +671,21 @@ if (! empty($_POST["update"])) {
                                 <?php if($row_list['PhcId']== $PhcId){  }?>
                                 
                                 <?php echo $row_list['PhcName']; ?></option>
-                                <?php 
+                                <?php
+                                if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) { 
+                                $query = "SELECT DISTINCT(PhcId),PhcName FROM hscmaster WHERE PhcId='".$_SESSION["PhcId"]."' ORDER BY PhcId";
+                                } else {
                                 $query = "SELECT DISTINCT(PhcId),PhcName FROM hscmaster ORDER BY PhcId";
-                            $exequery = mysqli_query($conn, $query);
+                                }
+                                $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { 
                               ?>
-                          
-                          <option value="<?php echo $listvalue['PhcId']; ?>"><?php echo $listvalue['PhcName']; ?></option>
-
-                                <?php }
-                                } ?>
-
-                                </select>
+                            <option value="<?php echo $listvalue['PhcId']; ?>"><?php echo $listvalue['PhcName']; ?></option>
+                            <?php } } ?>
+                             </select>
                             <?php } ?>
-                          
-						</div>
-					  </div>
+                    </div>
+					          </div>
             <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">Name of the HSC <span class="mand">* </span><span id="errHscValue"></span></label>
                           <div class="input-group input-group-merge">
@@ -701,29 +699,27 @@ if (! empty($_POST["update"])) {
                                 while($row_list=mysqli_fetch_assoc($list)){
 
                                 ?>
-
-                                <option value="<?php echo $row_list['HscId']; ?>">
+                               <option value="<?php echo $row_list['HscId']; ?>">
 
                                 <?php if($row_list['HscId']== $HscId){  }?>
                                 
                                 <?php echo $row_list['HscName']; ?></option>
-                                <?php 
+                                <?php
+                                if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) { 
+                                $query = "SELECT DISTINCT(HscId),HscName FROM hscmaster WHERE HscId='".$_SESSION["HscId"]."' ORDER BY HscId";
+                                } else {
                                 $query = "SELECT DISTINCT(HscId),HscName FROM hscmaster ORDER BY HscId";
-                            $exequery = mysqli_query($conn, $query);
+                                }
+                                $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { 
                               ?>
-                          
-                          <option value="<?php echo $listvalue['HscId']; ?>"><?php echo $listvalue['HscName']; ?></option>
-
-                                <?php }
-                                } ?>
-
-                                </select>
+                            <option value="<?php echo $listvalue['HscId']; ?>"><?php echo $listvalue['HscName']; ?></option>
+                            <?php } } ?>
+                             </select>
                             <?php } ?>
-                          
-						</div>
-					  </div>
-            
+                            </div>
+                            </div>
+                            
             <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">Name of the Panchayat <span class="mand">* </span><span id="errPanchayat"></span></label>
                           <div class="input-group input-group-merge">

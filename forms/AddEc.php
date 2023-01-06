@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -514,14 +515,16 @@ if($mvid > 0) {
                           <div class="input-group input-group-merge">
                           <select onchange="BlockOn()" name="BlockId" id="BlockId" class="form-select">
                           <option value="">Choose...</option>
-                           
-                           <?php   
+                           <?php  
+                           if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) { 
+                            $query = "SELECT DISTINCT(BlockId),BlockName FROM hscmaster WHERE BlockId='".$_SESSION["BlockId"]."' ORDER BY BlockName";
+                            } else {
                             $query = "SELECT DISTINCT(BlockId),BlockName FROM hscmaster ORDER BY BlockName";
+                            }
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['BlockId']; ?>"><?php echo $listvalue['BlockName']; ?></option>
-                          
-                          <?php  } ?>
+                           <?php } ?>
                              </select>
 						</div>
 					  </div>
@@ -531,14 +534,16 @@ if($mvid > 0) {
                       
                           <select onchange="PhcOn()" name="PhcId" id="PhcId" class="form-select">
                           <option value="">Choose...</option>
-                           
                            <?php   
+                           if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
+                            $query = "SELECT DISTINCT(PhcId),PhcName FROM hscmaster WHERE PhcId='".$_SESSION["PhcId"]."' ORDER BY PhcName";
+                           } else {
                             $query = "SELECT DISTINCT(PhcId),PhcName FROM hscmaster ORDER BY PhcName";
+                            }
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['PhcId']; ?>"><?php echo $listvalue['PhcName']; ?></option>
-                          
-                          <?php  } ?>
+                            <option value="<?php echo $listvalue['PhcId']; ?>"><?php echo $listvalue['PhcName']; ?></option>
+                            <?php } ?>
                              </select>
 						</div>
 					  </div>
@@ -549,8 +554,12 @@ if($mvid > 0) {
                           <select name="HscId" id="HscId" class="form-select">
                           <option value="">Choose...</option>
                            
-                           <?php   
+                           <?php  
+                           if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) { 
+                            $query = "SELECT DISTINCT(HscId),HscName FROM hscmaster WHERE HscId='".$_SESSION["HscId"]."' ORDER BY HscId";
+                           } else {
                             $query = "SELECT DISTINCT(HscId),HscName FROM hscmaster ORDER BY HscId";
+                           }
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['HscId']; ?>"><?php echo $listvalue['HscName']; ?></option>
