@@ -59,7 +59,6 @@ if ($checknum >0) {
              "urineAlbuminPresent" =>$row['urineAlbuminPresent'],
             "fastingSugar" =>$row['fastingSugar'],
             "postPrandial" =>$row['postPrandial'],
-            "Rbs" =>$row['Rbs'],
             "gctStatus" =>$row['gctStatus'],
             "gctValue" =>$row['gctValue'],
             "Tsh" =>$row['Tsh'],
