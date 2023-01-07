@@ -453,7 +453,7 @@ $_SESSION['message'] = "User deleted!";
                           <?php if($listvalue['enumvalue']==$delayedCClamping){ echo "selected"; } ?>
                          <?php echo $listvalue['enumvalue']; ?>
                          <option value="1">Yes</option>
-                          <option value="2">No</option>
+                          <option value="0">No</option>
                                 </option>
                             <?php  } 
                                 ?>
@@ -473,7 +473,7 @@ $_SESSION['message'] = "User deleted!";
                         <?php if($listvalue['enumvalue']==$skintoskinContact){ echo "selected"; } ?>
                        <?php echo $listvalue['enumvalue']; ?>
                        <option value="1">Yes</option>
-                        <option value="2">No</option>
+                        <option value="0">No</option>
                               </option>
                           <?php  } 
                               ?>
@@ -491,7 +491,7 @@ $_SESSION['message'] = "User deleted!";
                         <?php if($listvalue['enumvalue']==$breastfeedInitiated){ echo "selected"; } ?>
                        <?php echo $listvalue['enumvalue']; ?>
                        <option value="1">Yes</option>
-                        <option value="2">No</option>
+                        <option value="0">No</option>
                               </option>
                           <?php  } 
                               ?>
@@ -510,7 +510,7 @@ $_SESSION['message'] = "User deleted!";
                         <?php if($listvalue['enumvalue']==$admittedSncu){ echo "selected"; } ?>
                        <?php echo $listvalue['enumvalue']; ?>
                        <option value="1">Yes</option>
-                        <option value="2">No</option>
+                        <option value="0">No</option>
                               </option>
                           <?php  } 
                               ?>
@@ -663,7 +663,7 @@ $_SESSION['message'] = "User deleted!";
                         <?php if($listvalue['enumvalue']==$injuction){ echo "selected"; } ?>
                        <?php echo $listvalue['enumvalue']; ?>
                        <option value="1">Yes</option>
-                        <option value="2">No</option>
+                        <option value="0">No</option>
                               </option>
                           <?php  } 
                               ?>

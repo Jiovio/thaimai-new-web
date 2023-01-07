@@ -16,7 +16,7 @@ if (isset($_GET['view'])) {
   $urineTestStatus = $An["urineTestStatus"]; $urineSugarPresent = $An["urineSugarPresent"];
   $urineAlbuminPresent = $An["urineAlbuminPresent"]; $bloodSugartest =$An["bloodSugartest"]; 
   $fastingSugar = $An["fastingSugar"]; $postPrandial = $An["postPrandial"]; 
-  $rbs = $An["Rbs"]; $gctStatus = $An["gctStatus"];  $gctValue = $An["gctValue"]; 
+  $gctStatus = $An["gctStatus"];  $gctValue = $An["gctValue"]; 
   $tsh = $An["Tsh"]; $Td1 = $An["Td1"]; $TdDose = $An["TdDose"]; $Td2 = $An["Td2"]; $Td2Dose = $An["Td2Dose"]; $Td1Date = $An["Td1Date"]; 
   $Tdb = $An["Tdb"]; $TdBdose = $An["TdBdose"]; $TdBoosterDate = $An["TdBoosterDate"]; $Covidvac = $An["Covidvac"]; 
   $Dose1Date = $An["Dose1Date"]; $Dose2Date = $An["Dose2Date"]; $PreDate = $An["PreDate"]; $NoFolicAcid = $An["NoFolicAcid"]; $NoIFA = $An["NoIFA"]; 
@@ -112,7 +112,7 @@ if (! empty($_POST["editVisit"])) {
   placeofvisit='$placeofvisit',abortion='$abortion',anvisitDate='$anvisitDate',avduedate='$avduedate',avTag='1',ancPeriod='$ancPeriod',pregnancyWeek='$pregnancyWeek',
   motherWeight='$motherWeight',bpSys='$bpSys',bpDia='$bpDia',Hb='$Hb',urineTestStatus='$urineTestStatus',
   urineSugarPresent='$urineSugarPresent',urineAlbuminPresent='$urineAlbuminPresent',bloodSugartest='$bloodSugartest',fastingSugar='$fastingSugar',
-  postPrandial='$postPrandial',rbs='$rbs',gctStatus='$gctStatus',gctValue='$gctValue',Tsh='$tsh',
+  postPrandial='$postPrandial',gctStatus='$gctStatus',gctValue='$gctValue',Tsh='$tsh',
   TdDose='$TdDose',Td2Dose='$Td2Dose',Td1Date='$Td1Date',TdBdose='$TdBdose',TdBoosterDate='$TdBoosterDate',covidvac='$Covidvac',Dose1Date='$Dose1Date',Dose2Date='$Dose2Date',
 preDate='$PreDate',NoFolicAcid='$NoFolicAcid',NoIFA='$NoIFA',
   DateofIFA='$dateofIFA',DateofAlbendazole='$dateofAlbendazole',noCalcium='$noCalcium',calciumDate='$calciumDate',
