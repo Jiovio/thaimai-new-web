@@ -244,7 +244,7 @@ if (! empty($_POST["update"])) {
                           </div>
                         </div>
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">MOTHER AGE AT Registration <span class="mand">* </span><span id="errMageecreg"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">MOTHER AGE AT EC Registration <span class="mand">* </span><span id="errMageecreg"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user-minus"></i
