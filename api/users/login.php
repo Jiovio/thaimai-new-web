@@ -48,12 +48,12 @@ $data = json_decode(file_get_contents("php://input"));
 
 // make sure data is not empty
 
-if (!empty($data->email) && !empty($data->password)) {
+if (!empty($data->username) && !empty($data->password)) {
     
     // check mobile number 
     
-    $checkvaliduser = $db->prepare("SELECT * FROM users WHERE email=? AND password=?");
-    $checkvaliduser->execute(array($data->email,$data->password));
+    $checkvaliduser = $db->prepare("SELECT * FROM users WHERE username=? AND password=?");
+    $checkvaliduser->execute(array($data->username,$data->password));
     $checknum = $checkvaliduser->rowCount();
     
     if (($checknum > 0)) {
