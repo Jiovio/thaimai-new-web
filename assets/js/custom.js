@@ -11,6 +11,7 @@ $(document).ready(function() {
 });
 
 function fnReset() {
+document.getElementById("BlockId").disabled = false;
 document.getElementById("BlockId").value = "";
 document.getElementById("PhcId").value = ""; 
 document.getElementById("HscId").value = "";

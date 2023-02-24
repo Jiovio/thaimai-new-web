@@ -10,7 +10,7 @@ RewriteCond %{HTTP_HOST} !^www\.
 
 RewriteCond %{HTTP_HOST} ^https://thaimai.cloudonweb\.in [NC]
 
-RewriteRule ^(.*)$ http://localhost/Thaimai/api/$1 [R,L]
+RewriteRule ^(.*)$ http://admin.thaimaiyudan.org/api/$1 [R,L]
 
 # Eligible Couple api path
 

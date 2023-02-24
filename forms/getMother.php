@@ -56,6 +56,11 @@ VALUES ('$motheraadhaarid','$picmeno','$picmeRegDate','$residentType','$ptest','
           if (!empty($query)) {
           echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/AnRegisterlist.php');</script>";
           } 
+if(($gravida > 2) || ($para > 2) || ($child > 2) || ($ab > 2) || ($cd > 2)) {
+  $hrqry = mysqli_query($conn,"INSERT INTO highriskmothers (picmeNo, motherName, highRiskFactor) 
+  VALUES ('$picmeno','$mothername','$obcode')"); 
+  $uqry= mysqli_query($conn,"UPDATE anregistration SET highRisk=1 WHERE motheraadhaarid='$motheraadhaarid'");
+}
 $uquery = mysqli_query($conn,"UPDATE ecregister SET picmeNo='$picmeno',status=2 WHERE motheraadhaarid='$motheraadhaarid'");
 $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaarid='$motheraadhaarid' AND TIMESTAMPDIFF(YEAR, motherdob,CURDATE())<18");
           }

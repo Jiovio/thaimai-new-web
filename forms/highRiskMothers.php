@@ -35,8 +35,7 @@
                          </tr>
                        </thead>
 <?php  
-$listQry = "SELECT DISTINCT(av.picmeno),ec.motheraadhaarname,ed.enumvalue,ec.BlockId,ec.PhcId,ec.HscId from antenatalvisit av JOIN ecregister ec on av.picmeNo=ec.picmeno join enumdata ed on ed.enumid=av.symptomsHighRisk WHERE av.symptomsHighRisk!=48 AND ed.type=51";
-$private = " AND av.createdBy='".$userid."'";
+$listQry = "SELECT hr.picmeNo,ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
 $orderQry = " ORDER BY ec.motheraadhaarname ASC";
     if(($usertype == 0) || ($usertype == 1)) {
       if(isset($_POST['filter'])) {
@@ -60,7 +59,7 @@ $orderQry = " ORDER BY ec.motheraadhaarname ASC";
   } else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
   $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQry);
       }  else {
-          $ExeQuery = mysqli_query($conn,$listQry.$private.$orderQry);
+          $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
       }
                        if($ExeQuery) {
                          $cnt=1;
@@ -68,9 +67,9 @@ $orderQry = " ORDER BY ec.motheraadhaarname ASC";
                        ?>
                                    <tr>
                                        <td><?php echo $cnt; ?></td>
-                                       <td><?php echo $row['picmeno']; ?></td>
+                                       <td><?php echo $row['picmeNo']; ?></td>
                                        <td><?php echo $row['motheraadhaarname']; ?></td>
-                                       <td><?php echo $row['enumvalue']; ?></td>
+                                       <td><?php echo $row['highRiskFactor']; ?></td>
 								   </tr>
                        <?php 
                            $cnt++;

@@ -3,7 +3,7 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-<?php include ('require/header.php'); // Menu & Top Search
+<?php ini_set("display_errors",'1'); include ('require/header.php'); // Menu & Top Search
 $pNo="";
 if (! empty($_POST["addMedical"])) {
     
@@ -19,25 +19,23 @@ if (! empty($_POST["addMedical"])) {
   $emessage = "Duplicate PICME No.";
   
    } else {
+       $mname = mysqli_query($conn,"SELECT picmeNo,motheraadhaarname FROM ecregister where picmeNo='".$_POST["picmeno"]."' ");
+  
+  while($MnameValue = mysqli_fetch_array($mname)) {
+    $mn = $MnameValue["motheraadhaarname"];
+  
+  }
   $picmeno = $_POST["picmeno"]; $lmpdate = $_POST["lmpdate"]; $edddate = $_POST["edddate"]; $reg12weeks = $_POST["reg12weeks"];
-  $momBGtaken = $_POST["momBGtaken"]; $momBGtype = $_POST["momBGtype"]; $pastillness = $_POST["pastillness"]; 
-  // $momVdrlRpr = $_POST["momVdrlRpr"];
-  $momVdrlRprResult = $_POST["momVdrlRprResult"]; $bleedtime = $_POST["bleedtime"]; $clottime = $_POST["clotTime"]; 
-  // $husVdrlRpr = $_POST["husVdrlRpr"]; 
+  $momBGtaken = $_POST["momBGtaken"]; $momBGtype = $_POST["momBGtype"]; 
+  $pastillness = $_POST["pastillness"]; 
+  $momVdrlRprResult = $_POST["momVdrlRprResult"]; 
+  $bleedtime = $_POST["bleedtime"]; $clottime = $_POST["clotTime"];
   $husVdrlRprResult = $_POST["husVdrlRprResult"];
-
-  //$momhbsag = $_POST["momhbsag"]; 
-  $momhbresult = $_POST["momhbresult"]; 
-  //$hushbsag = $_POST["hushbsag"]; 
+  $momhbresult = $_POST["momhbresult"];
   $hushbresult = $_POST["hushbresult"];
-  //$momhivtest = $_POST["momhivtest"]; 
-  $momhivtestresult = $_POST["momhivtestresult"]; 
-  //$hushivtest = $_POST["hushivtest"]; 
+  $momhivtestresult = $_POST["momhivtestresult"];
   $anyOtherInvest = $_POST["anyOtherInvest"]; 
   $hushivtestresult = $_POST["hushivtestresult"];
-  //$LastPregnancyComplication = $_POST["LastPregnancyComplication"]; 
- //$LastPregnancyOutcome = $_POST["LastPregnancyOutcome"]; 
- //$deliveryMode = $_POST["deliveryMode"];
  $totPregnancy = $_POST["totPregnancy"];
  $placeDeliveryDistrict = $_POST["placeDeliveryDistrict"];
   $hospitaltype = $_POST["hospitaltype"]; $hospitalname = $_POST["hospitalname"];
@@ -49,10 +47,16 @@ if (! empty($_POST["addMedical"])) {
   VALUES ('$picmeno','$lmpdate','$edddate','$reg12weeks','$momBGtaken','$momBGtype','$pastillness','$bleedtime','$clottime','$momVdrlRprResult',
   '$husVdrlRprResult','$momhbresult','$hushbresult','$momhivtestresult',
   '$anyOtherInvest','$hushivtestresult','$totPregnancy','$placeDeliveryDistrict','$hospitaltype','$hospitalname','$userid')");
+  if(($pastillness !=100) || ($momVdrlRprResult == 1) || ($momhbresult == 1) || ($hushbresult == 1) || ($momhivtestresult == 1) || ($hushivtestresult == 1)) {
+    
+  $hrqry = mysqli_query($conn,"INSERT INTO highriskmothers (picmeNo, motherName, highRiskFactor) 
+  VALUES ('$picmeno','$mn','$pastillness')"); 
+    $uqry= mysqli_query($conn,"UPDATE medicalhistory SET highRisk=1 WHERE picmeno='$picmeno'");
+  }
+
             if (!empty($query)) {
               echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/MedicalHistory.php');</script>";
-            } 
-} } ?>
+          }  }  }  ?>
 <!-- Content wrapper -->
       <div class="content-wrapper">
             <!-- Content -->
