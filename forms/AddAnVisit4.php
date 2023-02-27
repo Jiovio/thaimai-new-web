@@ -73,6 +73,16 @@ referralFacility='$referralFacility',referralPlace='$referralPlace',bloodTransfu
    if (!empty($query)) {
             echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/AntenatalVisit.php');</script>";
           }
+	if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
+      
+            $getMname = mysqli_query($conn,"SELECT motheraadhaarname FROM ecregister WHERE picmeNo='$picmeno'");
+            while($value = mysqli_fetch_array($getMname)) {
+                $mn = $value["motheraadhaarname"];
+            }
+            $hrqry = mysqli_query($conn,"INSERT INTO highriskmothers (picmeNo, motherName, highRiskFactor) 
+            VALUES ('$picmeno','$mn','$symptomsHighRisk')"); 
+            $uqry= mysqli_query($conn,"UPDATE antenatalvisit SET highRiskStatus=1 WHERE picmeno='$picmeno'");
+        }
 $highrisk = mysqli_query($conn, "UPDATE ecregister ec INNER JOIN antenatalvisit av ON ec.picmeNo=av.picmeno SET ec.status=6 WHERE av.symptomsHighRisk NOT IN('1','48') AND ec.picmeNo=".$picmeno);
 } 
 ?>
