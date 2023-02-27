@@ -69,6 +69,12 @@ anRegDate='$rgdate', mrmbsEligible='$mrmbs',MotherAge='$MotherAge',HusbandAge='$
   if (!empty($uquery)) {
     echo "<script>alert('Updated Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/AnRegisterlist.php');</script>";
   }
+  if(($gravida > 2) || ($para > 2) || ($child > 2) || ($ab > 2) || ($cd > 2)) {
+    $hrqry = mysqli_query($conn,"UPDATE highriskmothers SET picmeNo='$picmeno', motherName='$mothername', highRiskFactor='$obcode'"); 
+    $uqry= mysqli_query($conn,"UPDATE anregistration SET highRisk=1 WHERE motheraadhaarid='$motheraadhaarid'");
+  } else {
+      $uqry= mysqli_query($conn,"UPDATE highriskmothers SET status=0 WHERE picmeno='$picmeno'");
+  }
  }
 if (isset($_GET['del'])) {
   $id = $_GET['del'];
