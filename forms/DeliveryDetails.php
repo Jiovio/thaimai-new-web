@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">

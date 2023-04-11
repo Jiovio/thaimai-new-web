@@ -106,12 +106,13 @@ if (! empty($_POST["addMedical"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">EDD DATE <span class="mand">* </span></label>
                             <input
-                              type="date"
+                              type="text"
                               name="edddate"
                               id="edddate" required
                               class="form-control"
                               placeholder=""
                               aria-label=""
+                              readonly = true
                               aria-describedby="basic-icon-default-password2"
                             
                             />

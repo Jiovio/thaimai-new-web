@@ -315,6 +315,40 @@ $('#picmeno').on('keydown keyup change', function(){
   }
 });
 
+$('#lmpdate').on('blur change', function(){
+  var lmpdate = $(this).val();
+  if(lmpdate != ""){
+     lmpdateAr = lmpdate.split("-");
+     formattedLmpdateAr = lmpdateAr[0] + "/" +  lmpdateAr[1] + "/" + lmpdateAr[2];
+    var newDate = formatDate(addDays(new Date(formattedLmpdateAr), 280));
+   
+    $('#edddate').val(newDate)
+  }
+});
+
+function formatDate(date) {
+    day = date.getDate();
+    month = (date.getMonth() + 1)
+    if(day < 10){
+        day = '0'+day;
+        
+    }
+    
+    if(month < 10){
+        month = '0'+month;
+    }
+    
+    
+    return day + '-' + month + '-' + date.getFullYear();
+}
+
+// Correct
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(date.getDate() + days);
+    return result;
+}
+
 function CovidChange() {
 var selectBox = document.getElementById("Covidvac");
 var selectedValue = selectBox.options[selectBox.selectedIndex].value;

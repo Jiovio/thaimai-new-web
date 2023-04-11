@@ -14,6 +14,26 @@ if (isset($_SESSION["username"]) || isset($_SESSION["userid"]) || isset($_SESSIO
     $url = "./index.php";
     header("Location: $url");
 }
+if((isset($_GET['b']) && !empty($_GET['b'])) || (isset($_GET['p']) && !empty($_GET['p'])) || (isset($_GET['h']) && !empty($_GET['h']))) {
+    $_POST['BlockId'] =  $_POST['PhcId'] =  $_POST['HscId'] ="";
+     $_POST['filter'] =1;
+}
+
+if(isset($_GET['b']) && !empty($_GET['b'])){
+   
+    $_POST['BlockId'] = $_GET["b"];
+    
+}
+
+if(isset($_GET['p']) && !empty($_GET['p'])){
+    
+     $_POST['PhcId'] = $_GET["p"];
+}
+if(isset($_GET['h']) && !empty($_GET['h'])){
+   
+     $_POST['HscId'] = $_GET["h"];
+    
+}
 include "../config/db_connect.php";
  include ('preloader.php');
 ?>
