@@ -73,7 +73,7 @@ referralFacility='$referralFacility',referralPlace='$referralPlace',bloodTransfu
    if (!empty($query)) {
             echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/AntenatalVisit.php');</script>";
           }
-          if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
+	if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
       
             $getMname = mysqli_query($conn,"SELECT motheraadhaarname FROM ecregister WHERE picmeNo='$picmeno'");
             while($value = mysqli_fetch_array($getMname)) {
