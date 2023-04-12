@@ -326,6 +326,24 @@ $('#lmpdate').on('blur change', function(){
   }
 });
 
+$('#picmeno').on('blur change', function(){
+    var picmeno = $(this).val();
+    $.ajax({
+        url: "getGravida.php",
+        type: "POST",
+        data: {
+            picmeno: picmeno
+        },
+        cache: false,
+        success: function (result) {
+            $("#totPregnancy").val(result).change();
+           
+        }
+    });
+});
+
+
+
 function formatDate(date) {
     day = date.getDate();
     month = (date.getMonth() + 1)
@@ -339,7 +357,7 @@ function formatDate(date) {
     }
     
     
-    return day + '-' + month + '-' + date.getFullYear();
+    return day + '/' + month + '/' + date.getFullYear();
 }
 
 // Correct
