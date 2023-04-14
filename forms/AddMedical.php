@@ -55,7 +55,7 @@ if (! empty($_POST["addMedical"])) {
   }
 
             if (!empty($query)) {
-              echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/MedicalHistory.php');</script>";
+              echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}forms/MedicalHistory.php');</script>";
           }  }  }  ?>
 <!-- Content wrapper -->
       <div class="content-wrapper">

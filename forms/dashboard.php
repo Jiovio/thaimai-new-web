@@ -10,7 +10,7 @@ include ('require/header.php');  // Menu
 include ('require/filter.php');  // Top Filter 
 
 include ('require/Hfilter.php'); // Category Filter
-
+$bloName = $phcName = $hscName = "";
 if(isset($_POST['filter'])) {
   
   $bloName = isset($_POST['BlockId']) ? $_POST['BlockId'] : "";

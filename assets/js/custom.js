@@ -325,8 +325,8 @@ $('#lmpdate').on('blur change', function(){
     $('#edddate').val(newDate)
   }
 });
-
-$('#picmeno').on('blur change', function(){
+//for retrieve total no of pregnancy when enter picme number in medical history
+$('#picmeno').on('blur change', function () {
     var picmeno = $(this).val();
     $.ajax({
         url: "getGravida.php",
@@ -336,8 +336,20 @@ $('#picmeno').on('blur change', function(){
         },
         cache: false,
         success: function (result) {
-            $("#totPregnancy").val(result).change();
-           
+            if (result !== "") {
+                $("#totPregnancy").val(result).change();
+                $("#totPregnancy").attr("disabled", true);
+                if($('#pregnancyResult').length > 0 && $('#pregnancyResult').val() != ''){
+                    $('#pregnancyResult').val(result);
+                } else {
+                     $('<input>').attr({
+                    type: 'hidden',
+                    name: 'totPregnancy',
+                    value: result,
+                    id : 'pregnancyResult'
+                }).appendTo('#placeDelivery');
+                }
+            }
         }
     });
 });

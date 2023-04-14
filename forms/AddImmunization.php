@@ -107,7 +107,7 @@ if($doseNo == 1) {
 //   print_r($query.'hhhhhhhh');
 //   exit;
     if (!empty($query)) {
-            echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/Immunization.php');</script>";
+            echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}forms/Immunization.php');</script>";
     } } } ?>
           <!-- Content wrapper -->
           <div class="content-wrapper">

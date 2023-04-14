@@ -36,7 +36,7 @@ if($mvid > 0) {
   '$religion','$caste','$BlockId','$PhcId','$HscId','$PanchayatId','$VillageId','$address','$pincode','$povertystatus',
   '$migrantstatus','$rctype','$rcnum','$userid')");
             if (!empty($query)) {
-              echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/EligibleCouple.php');</script>";
+              echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}forms/EligibleCouple.php');</script>";
             } 
 } }
 ?>

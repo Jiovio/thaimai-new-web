@@ -46,7 +46,7 @@ breastfeedInitiated='$breastfeedInitiated',admittedSncu='$admittedSncu',sncudate
 sncuOutcome='$sncuOutcome',Dischargedate='$dischargedate',Dischargetime='$dischargetime',bcgdate='$bcgdate',
 opvDdate='$opvDdate',HebBdate='$hebBdate', injuction='$injuction',updatedat='$date',updatedBy='$userid' WHERE id=".$id);
 if (!empty($query)) {
-            echo "<script>alert('Updated Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/DeliveryDetails.php');</script>";
+            echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}forms/DeliveryDetails.php');</script>";
           } }
 
 if (isset($_GET['del'])) {
@@ -55,7 +55,7 @@ date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-Y h:i:s');
 mysqli_query($conn, "UPDATE deliverydetails SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
 $_SESSION['message'] = "User deleted!"; 
-  echo "<script>alert('Deleted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/DeliveryDetails.php');</script>";
+  echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}forms/DeliveryDetails.php');</script>";
 }
 ?>
  <!-- Content wrapper -->

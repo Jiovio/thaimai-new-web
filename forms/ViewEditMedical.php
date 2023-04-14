@@ -96,7 +96,7 @@ if (! empty($_POST["update"])) {
 
       }
 if (!empty($query)) {
-  echo "<script>alert('Updated Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/MedicalHistory.php');</script>";
+  echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}forms/MedicalHistory.php');</script>";
   } }
 
 if (isset($_GET['del'])) {
@@ -105,7 +105,7 @@ if (isset($_GET['del'])) {
   $date = date('d-m-Y h:i:s');
   mysqli_query($conn, "UPDATE medicalhistory SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
   $_SESSION['message'] = "User deleted!"; 
-  echo "<script>alert('Deleted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/MedicalHistory.php');</script>";
+  echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}forms/MedicalHistory.php');</script>";
 }
 ?>
           <!-- Content wrapper -->
