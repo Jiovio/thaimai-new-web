@@ -794,23 +794,40 @@ if(selectedValue == "1") { ivDoses.style.display = "block"; } else if(selectedVa
 function fnCalMotAge(){
   var MotDateinput = document.getElementById("motherdob").value;   
   // convert user input value into date object
-  var motbirthDate = new Date(MotDateinput);
+  //var motbirthDate = new Date(MotDateinput);
+  
+   var today = new Date();
+    var birthDate = new Date(MotDateinput);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+   
   
   // get difference from current date;
-  var mdiff=Date.now() - motbirthDate.getTime(); 
-  var  motAgeDate = new Date(mdiff); 
-  var motCalcAge=   Math.abs(motAgeDate.getUTCFullYear() - 1970);
-  document.getElementById("motherageecreg").value = motCalcAge;  
+//  var mdiff=Date.now() - motbirthDate.getTime(); 
+//  var  motAgeDate = new Date(mdiff); 
+//  var motCalcAge=   Math.abs(motAgeDate.getUTCFullYear() - 1970);
+  document.getElementById("motherageecreg").value = age;  
 }
 
 function fnCalHusAge(){
   var HusDateinput = document.getElementById("husdob").value;   
   // convert user input value into date object
-  var husbirthDate = new Date(HusDateinput);
+//  var husbirthDate = new Date(HusDateinput);
+  
+   var today = new Date();
+    var birthDate = new Date(HusDateinput);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
   
   // get difference from current date;
-  var hdiff=Date.now() - husbirthDate.getTime(); 
-  var  husAgeDate = new Date(hdiff); 
-  var husCalcAge=   Math.abs(husAgeDate.getUTCFullYear() - 1970);
-  document.getElementById("husageecreg").value = husCalcAge;  
+//  var hdiff=Date.now() - husbirthDate.getTime(); 
+//  var  husAgeDate = new Date(hdiff); 
+//  var husCalcAge=   Math.abs(husAgeDate.getUTCFullYear() - 1970);
+  document.getElementById("husageecreg").value = age;  
 }
