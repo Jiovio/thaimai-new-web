@@ -47,7 +47,8 @@ if (! empty($_POST["addMedical"])) {
   VALUES ('$picmeno','$lmpdate','$edddate','$reg12weeks','$momBGtaken','$momBGtype','$pastillness','$bleedtime','$clottime','$momVdrlRprResult',
   '$husVdrlRprResult','$momhbresult','$hushbresult','$momhivtestresult',
   '$anyOtherInvest','$hushivtestresult','$totPregnancy','$placeDeliveryDistrict','$hospitaltype','$hospitalname','$userid')");
-  if(($pastillness !=100) || ($momVdrlRprResult == 1) || ($momhbresult == 1) || ($hushbresult == 1) || ($momhivtestresult == 1) || ($hushivtestresult == 1)) {
+  if(($pastillness !=100) || ($momVdrlRprResult == 1) || ($momhbresult == 1) || ($momhbresult == 3) || ($hushbresult == 1) ||  ($hushbresult == 3) || 
+          ($momhivtestresult == 1) ||  ($momhivtestresult == 3) || ($hushivtestresult == 1)  || ($hushivtestresult == 3)) {
     
   $hrqry = mysqli_query($conn,"INSERT INTO highriskmothers (picmeNo, motherName, highRiskFactor) 
   VALUES ('$picmeno','$mn','$pastillness')"); 
