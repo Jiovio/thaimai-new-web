@@ -71,7 +71,7 @@ if (!empty($_POST["btnFourth"])) {
 referralFacility='$referralFacility',referralPlace='$referralPlace',bloodTransfusion='$bloodTransfusion',bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',
    noOfIVDoses='$nooIVdoses' WHERE picmeno=".$picmeno);
    if (!empty($query)) {
-            echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}forms/AntenatalVisit.php');</script>";
+            echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}/forms/AntenatalVisit.php');</script>";
           }
 	if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
       

@@ -67,7 +67,7 @@ $uquery = mysqli_query($conn, "UPDATE anregistration SET picmeRegDate='$picmeReg
 livingChildren='$child', abortion='$ab', childDeath='$cd', hrPregnancy='$hrPreg', obstetricCode='$obcode', motherHeight='$height', motherWeight='$weight', bpSys='$bp', bpDia='$dia',
 anRegDate='$rgdate', mrmbsEligible='$mrmbs',MotherAge='$MotherAge',HusbandAge='$HusbandAge', updatedat='$date',updatedBy='$userid' WHERE id=$id");
   if (!empty($uquery)) {
-    echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}forms/AnRegisterlist.php');</script>";
+    echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/AnRegisterlist.php');</script>";
   }
   if(($gravida > 2) || ($para > 2) || ($child > 2) || ($ab > 2) || ($cd > 2)) {
     $hrqry = mysqli_query($conn,"UPDATE highriskmothers SET picmeNo='$picmeno', motherName='$mothername', highRiskFactor='$obcode'"); 
@@ -81,7 +81,7 @@ if (isset($_GET['del'])) {
   date_default_timezone_set('Asia/Kolkata');
   $date = date('d-m-Y h:i:s');
   mysqli_query($conn, "UPDATE anregistration SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
-    echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}forms/AnRegisterlist.php');</script>";
+    echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/AnRegisterlist.php');</script>";
 }
 ?>        
 <!-- Content wrapper -->

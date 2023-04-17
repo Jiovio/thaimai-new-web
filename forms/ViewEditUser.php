@@ -66,7 +66,7 @@ if (isset($_POST['update'])) {
  
 $uquery = mysqli_query($conn, "UPDATE users SET name='$name',email='$email',username='$username',mobile='$phone',password='$pwd',encpassword='$password',usertype='$usertype',HosId='$HosId',BlockId='$BlockId',PhcId='$PhcId',HscId='$HscId',status='$status',updatedat='$date',updatedBy='$userid' WHERE id=$id");
 if (!empty($uquery)) {
-    echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}forms/UserManagement.php');</script>";
+    echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/UserManagement.php');</script>";
   }
 }
 if (isset($_GET['del'])) {
@@ -75,7 +75,7 @@ if (isset($_GET['del'])) {
   $date = date('d-m-Y h:i:s');
   mysqli_query($conn, "UPDATE users SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
   $_SESSION['message'] = "User deleted!"; 
-      echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}forms/UserManagement.php');</script>";
+      echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/UserManagement.php');</script>";
 }
 ?>
           <!-- Content wrapper -->

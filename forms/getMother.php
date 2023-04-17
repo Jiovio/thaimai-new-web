@@ -54,7 +54,7 @@ $HusbandAge = $_POST["HusbandAge"];
 $query = mysqli_query($conn,"INSERT INTO anregistration (motheraadhaarid, picmeno,picmeRegDate, residentType, pregnancyTestResult,methodofConception, gravida, para, livingChildren, abortion, childDeath, hrPregnancy, obstetricCode, motherHeight, motherWeight, bpSys, bpDia, anRegDate, mrmbsEligible,MotherAge,HusbandAge,createdBy) 
 VALUES ('$motheraadhaarid','$picmeno','$picmeRegDate','$residentType','$ptest','$methodofConception','$gravida','$para','$child', '$ab', '$cd', '$hrPreg', '$obcode','$height','$weight','$bp','$dia','$date','$mrmbs','$MotherAge','$HusbandAge','$userid')");
           if (!empty($query)) {
-          echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}forms/AnRegisterlist.php');</script>";
+          echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}/forms/AnRegisterlist.php');</script>";
           } 
 if(($gravida > 2) || ($para > 2) || ($child > 2) || ($ab > 2) || ($cd > 2)) {
   $hrqry = mysqli_query($conn,"INSERT INTO highriskmothers (picmeNo, motherName, highRiskFactor) 
