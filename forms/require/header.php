@@ -14,26 +14,6 @@ if (isset($_SESSION["username"]) || isset($_SESSION["userid"]) || isset($_SESSIO
     $url = "./index.php";
     header("Location: $url");
 }
-if((isset($_GET['b']) && !empty($_GET['b'])) || (isset($_GET['p']) && !empty($_GET['p'])) || (isset($_GET['h']) && !empty($_GET['h']))) {
-    $_POST['BlockId'] =  $_POST['PhcId'] =  $_POST['HscId'] ="";
-     $_POST['filter'] =1;
-}
-
-if(isset($_GET['b']) && !empty($_GET['b'])){
-   
-    $_POST['BlockId'] = $_GET["b"];
-    
-}
-
-if(isset($_GET['p']) && !empty($_GET['p'])){
-    
-     $_POST['PhcId'] = $_GET["p"];
-}
-if(isset($_GET['h']) && !empty($_GET['h'])){
-   
-     $_POST['HscId'] = $_GET["h"];
-    
-}
 include "../config/db_connect.php";
  include ('preloader.php');
 ?>
@@ -139,7 +119,7 @@ include "../config/db_connect.php";
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-calendar"></i>
-                <div data-i18n=">Current Month Due">Current Month Due</div>
+                <div data-i18n=">Due List">Due List</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
@@ -154,12 +134,17 @@ include "../config/db_connect.php";
                 </li>
                 <li class="menu-item">
                   <a href="BabyImDue.php" class="menu-link">
-                    <div data-i18n="Basic">Baby Immunization Due</div>
+                    <div data-i18n="Basic">Baby Immunization Due List</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="MotherImDue.php" class="menu-link">
-                    <div data-i18n="Basic">Mother Immunization Due</div>
+                    <div data-i18n="Basic">Mother Immunization Due List</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="EDDCompletedDue.php" class="menu-link">
+                    <div data-i18n="Basic">EDD Completed Mother's List</div>
                   </a>
                 </li>
               </ul>
