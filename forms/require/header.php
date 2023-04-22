@@ -122,16 +122,20 @@ include "../config/db_connect.php";
                 <div data-i18n=">Due List">Due List</div>
               </a>
               <ul class="menu-sub">
+			  <li class="menu-item">
+                  <a href="AntenatalDue.php" class="menu-link">
+                    <div data-i18n="Basic">Antenatal Due List</div>
+                  </a>
+                </li>
                 <li class="menu-item">
                   <a href="DeliveryDue.php" class="menu-link">
                     <div data-i18n="Basic">Delivery Due List</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="AntenatalDue.php" class="menu-link">
-                    <div data-i18n="Basic">Antenatal Due List</div>
+				<li class="menu-item">
+                  <a href="EDDCompletedDue.php" class="menu-link">
+                    <div data-i18n="Basic">EDD Crossed Mother's List</div>
                   </a>
-                </li>
                 <li class="menu-item">
                   <a href="BabyImDue.php" class="menu-link">
                     <div data-i18n="Basic">Baby Immunization Due List</div>
@@ -142,10 +146,6 @@ include "../config/db_connect.php";
                     <div data-i18n="Basic">Mother Immunization Due List</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="EDDCompletedDue.php" class="menu-link">
-                    <div data-i18n="Basic">EDD Completed Mother's List</div>
-                  </a>
                 </li>
               </ul>
             </li>
@@ -154,12 +154,99 @@ include "../config/db_connect.php";
                 <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div data-i18n="Eligible Couples List">Notified List</div>
               </a>
-            </li>
+            </li>			  
             <li class="menu-item">
-              <a href="Reports.php" class="menu-link">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-id-card"></i>
-                <div data-i18n="Report">Report List</div>
+                <div data-i18n=">Reports">Reports</div>
               </a>
+			  <ul class="menu-sub">
+			  <li class="menu-item">
+                  <a href="AntenatalDue.php" class="menu-link">
+                    <div data-i18n="Basic">Eligible Couples List</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="DeliveryDue.php" class="menu-link">
+                    <div data-i18n="Basic">Eligible Couples Teenage List</div>
+                  </a>
+                </li>
+				<li class="menu-item">
+                  <a href="EDDCompletedDue.php" class="menu-link">
+                    <div data-i18n="Basic">Antenatal Visit List</div>
+                  </a>
+                <li class="menu-item">
+                  <a href="BabyImDue.php" class="menu-link">
+                    <div data-i18n="Basic">ECs Following Temporary Methods</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="MotherImDue.php" class="menu-link">
+                    <div data-i18n="Basic">ECs following Permanent Methods </div>
+                  </a>
+                </li>
+                </li>
+				<li class="menu-item">
+                  <a href="AntenatalDue.php" class="menu-link">
+                    <div data-i18n="Basic">AN Mother Not Delivered List (3 Months EDD)</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="DeliveryDue.php" class="menu-link">
+                    <div data-i18n="Basic">AN Mother Delivered List</div>
+                  </a>
+                </li>
+				<li class="menu-item">
+                  <a href="EDDCompletedDue.php" class="menu-link">
+                    <div data-i18n="Basic">Antenatal Visit List</div>
+                  </a>
+                <li class="menu-item">
+                  <a href="BabyImDue.php" class="menu-link">
+                    <div data-i18n="Basic">HIGH RISK Report List</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="MotherImDue.php" class="menu-link">
+                    <div data-i18n="Basic">Teenage Pregnancy List</div>
+                  </a>
+                </li>
+				<li class="menu-item">
+                  <a href="BabyImDue.php" class="menu-link">
+                    <div data-i18n="Basic">HOB Pregnancy List</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="MotherImDue.php" class="menu-link">
+                    <div data-i18n="Basic">Infant Death List</div>
+                  </a>
+                </li>
+                </li>
+				<li class="menu-item">
+                  <a href="AntenatalDue.php" class="menu-link">
+                    <div data-i18n="Basic">ECs Not following Any Family welfare Methods</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="DeliveryDue.php" class="menu-link">
+                    <div data-i18n="Basic">GDM</div>
+                  </a>
+                </li>
+				<li class="menu-item">
+                  <a href="EDDCompletedDue.php" class="menu-link">
+                    <div data-i18n="Basic">Anemia</div>
+                  </a>
+                <li class="menu-item">
+                  <a href="BabyImDue.php" class="menu-link">
+                    <div data-i18n="Basic">PIH</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="MotherImDue.php" class="menu-link">
+                    <div data-i18n="Basic">Maternal Death list</div>
+                  </a>
+                </li>
+                </li>
+              </ul>
             </li>
             <li class="menu-item">
               <a href="EligibleCouple.php" class="menu-link">

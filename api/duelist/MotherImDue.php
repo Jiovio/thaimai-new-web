@@ -19,7 +19,7 @@ $db = $database->getConnection();
 // initialize object
 $data = json_decode(file_get_contents("php://input"));
 
-$checkvaliduser = $db->prepare("SELECT DISTINCT(im.picmeNo),ec.motheraadhaarname,im.FutureDoseDate,im.FutureDoseNo,im.NextDoseName1,ec.mothermobno,ec.PhcId,u.name FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeNo JOIN users u on u.id=im.createdUserId WHERE FutureDoseDate>=DATE_FORMAT(NOW() ,'%Y-%m-01') AND ec.BlockId='".$data->block."' AND ec.PhcId='".$data->phc."' AND ec.HscId='".$data->hsc."' AND im.status=1 ORDER BY ec.motheraadhaarname ASC");
+$checkvaliduser = $db->prepare("SELECT DISTINCT(im.picmeNo),ec.motheraadhaarname,im.FutureDoseDate,im.FutureDoseNo,im.NextDoseName1, ec.mothermobno,ec.PhcId,u.name FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeNo JOIN users u on u.id=im.createdUserId WHERE FutureDoseDate>=DATE_FORMAT(NOW() ,'%Y-%m-01') AND ec.BlockId='".$data->block."' AND ec.PhcId='".$data->phc."' AND ec.HscId='".$data->hsc."'  AND im.status=1 ORDER BY ec.motheraadhaarname ASC");
 
 $checkvaliduser->execute();
 
@@ -37,10 +37,9 @@ if ($checknum >0) {
         $PvArray[] = array("picmeNo" =>$row['picmeno'],
         "motheraadhaarname" =>$row['motheraadhaarname'],
         "FutureDoseDate" =>$row['FutureDoseDate'],
-        "NextDoseName2" =>$row['NextDoseName1'],
-        "NextDoseName3" =>$row['NextDoseName2'],
+        "NextDoseName1" =>$row['NextDoseName1'],
         "mothermobno" =>$row['mothermobno'],
-        // "PhcId" =>$row['PhcId'],
+        "PhcId" =>$row['PhcId'],
         "name" =>$row['name']
         
         );
@@ -50,7 +49,7 @@ if ($checknum >0) {
             http_response_code(200);
         
             echo json_encode(
-                    array("success" => "true", "error"=> "false",  "MotherImDue" => $PvArray , "message" => "Postnatal Visit Registered List")
+                    array("success" => "true", "error"=> "false",  "BabyImDue" => $PvArray , "message" => "Postnatal Visit Registered List")
             );
           
         } else {
@@ -58,7 +57,7 @@ if ($checknum >0) {
             http_response_code(404);
         
             echo json_encode(
-                    array("success" => "false", "error"=>"true", "message" => "MotherImmunization Due Data Not Found")
+                    array("success" => "false", "error"=>"true", "message" => "Baby Immunization Due Data Not Found")
             );
         }
         ?>

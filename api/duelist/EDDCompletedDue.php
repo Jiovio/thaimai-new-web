@@ -19,7 +19,7 @@ $data = json_decode(file_get_contents("php://input"));
 //$data->startdate =  date('d-m-Y h:i:s');
 
 $checkvaliduser = $db->prepare("SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno
-WHERE NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = mh.picmeno) AND 
+JOIN users u on u.id=mh.id WHERE NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = mh.picmeno) AND 
 mh.edddate < CURRENT_DATE() AND mh.status=1 ORDER By mh.edddate DESC");
 
 
@@ -40,7 +40,8 @@ if ($checknum >0) {
 		//"edddate" => date('d-m-Y',strtotime($row['edddate'])),
         "mothermobno" =>$row['mothermobno'],
         "PhcId" =>$row['PhcId'],
-        "createdBy" =>$row['createdBy']
+        "name" =>$row['name']
+
         );
          
         

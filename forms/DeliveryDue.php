@@ -12,7 +12,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card">
-                <h5 class="card-header"><span class="text-muted fw-light">Current Month Due /</span> Delivery Due List</h5>
+                <h5 class="card-header"><span class="text-muted fw-light">Delivery Due List</h5>
 				<div class="table-responsive text-nowrap">
 				<div class="container">
 				<table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
@@ -34,7 +34,7 @@
 //$private = " AND mh.createdBy='".$userid."'";
 //$orderQry = " ORDER BY ec.motheraadhaarname ASC";
 
- $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy, ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE 
+ $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy, u.name, ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh.id WHERE 
 NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = mh.picmeno) AND
 mh.edddate >= CURRENT_DATE() AND mh.status=1";
 $private = " AND mh.createdBy='".$userid."'";
@@ -77,6 +77,7 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                     <td><?php echo $row['mothermobno']; ?></td>
 									<td><?php echo $row['PhcId']; ?></td>
                                     <td><?php echo $row['name']; ?></td>
+								    <!--- <td><?php echo $row['createdBy']; ?> --->
 									<!--<td><a href="../forms/ViewEditMedical.php?view=<?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>-->
                                 </tr>
                     <?php 

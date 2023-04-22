@@ -12,7 +12,8 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card">
-                <h5 class="card-header"><span class="text-muted fw-light">Current Month Due /</span> Baby Immunization Due List</h5>
+                <!--- <h5 class="card-header"><span class="text-muted fw-light">Current Month Due /</span> Baby Immunization Due List</h5> --->
+				<h5 class="card-header"><span class="text-muted fw-light">Baby Immunization Due List</h5>
 				<div class="table-responsive text-nowrap">
 				<div class="container">
 				<table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
@@ -65,7 +66,8 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                     <td><?php echo $cnt; ?></td>
                                     <td><?php echo $row['picmeno']; ?></td>
 									<td><?php echo $row['motheraadhaarname']; ?></td>
-                                    <td><?php  $dd = date('d-m-Y',strtotime($row['FutureDoseDate'])); echo $dd; ?></td>
+                                    <!--- <td><?php  $dd = date('d-m-Y',strtotime($row['FutureDoseDate'])); echo $dd; ?></td> --->
+									<td><?php echo $row['FutureDoseDate']?></td>								
                                     <td><?php echo $row['FutureDoseNo']; ?></td>
                                     <td><?php echo $row['mothermobno']; ?></td>
 									<td><?php echo $row['PhcId']; ?></td>

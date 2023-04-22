@@ -19,7 +19,8 @@ $db = $database->getConnection();
 // initialize object
 $data = json_decode(file_get_contents("php://input"));
 
-$checkvaliduser = $db->prepare("SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarid,ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN users u on av.createdBy=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND ec.BlockId='".$data->block."' AND ec.PhcId='".$data->phc."' AND ec.HscId='".$data->hsc."' AND av.status=1 ORDER BY ec.picmeNo ASC;");
+//$checkvaliduser = $db->prepare("SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarid,ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN users u on av.createdBy=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND ec.BlockId='".$data->block."' AND ec.PhcId='".$data->phc."' AND ec.HscId='".$data->hsc."' AND av.status=1 ORDER BY ec.picmeNo ASC;");
+$checkvaliduser = $db->prepare("SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarid,ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN users u on av.id =u.id WHERE av.avdueDate >= CURRENT_DATE() AND NOT EXISTS (SELECT av.picmeno FROM antenatalvisit av WHERE av.picmeno = .picmeno) AND ec.BlockId='".$data->block."' AND ec.PhcId='".$data->phc."' AND ec.HscId='".$data->hsc."' AND av.status=1 ORDER BY ec.picmeNo ASC;");
 $checkvaliduser->execute();
 
 $checknum = $checkvaliduser->rowCount();
