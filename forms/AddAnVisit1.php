@@ -113,7 +113,7 @@
 					</div>
           <div class="row">
 						            <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-ancPeriod">Antenatal Period <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-ancPeriod">Antenatal Visit Count <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             <select class="1-15 form-control" id="ancPeriod" name="ancPeriod" required>
                           <option value="">Choose...</option>

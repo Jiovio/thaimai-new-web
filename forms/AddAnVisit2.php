@@ -118,9 +118,9 @@ if (!empty($_POST["btnFirst"])) {
                         </div>
                         
                         <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-TdBoosterDate">Td1 (Yes / No) <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-TdBoosterDate">Td1 (Yes / No) </label>
                           <div class="input-group input-group-merge">
-                          <select required name="Td1" id="Td1" class="form-select" onchange="Td1Change()">
+                          <select name="Td1" id="Td1" class="form-select" onchange="Td1Change()">
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -165,9 +165,9 @@ if (!empty($_POST["btnFirst"])) {
                         </div>
                         
                         <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-TdBoosterDate">Td2 (Yes / No) <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-TdBoosterDate">Td2 (Yes / No)</label>
                           <div class="input-group input-group-merge">
-                          <select required name="Td2" id="Td2" class="form-select" onchange="Td2Change()">
+                          <select name="Td2" id="Td2" class="form-select" onchange="Td2Change()">
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -211,9 +211,9 @@ if (!empty($_POST["btnFirst"])) {
                         </div>
                         
           <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-TdBoosterDate">Td Booster (Yes / No) <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-TdBoosterDate">Td Booster (Yes / No)</label>
                           <div class="input-group input-group-merge">
-                          <select required name="Tdb" id="Tdb" class="form-select" onchange="TdBChange()">
+                          <select name="Tdb" id="Tdb" class="form-select" onchange="TdBChange()">
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -320,9 +320,8 @@ if (!empty($_POST["btnFirst"])) {
 					<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-NoFolicAcid">Number of Folic Acid </label>
                           <div class="input-group input-group-merge">
-                          <select class="1-50 form-control" id="NoFolicAcid" name="NoFolicAcid">
-                          <option value="">Choose...</option>
-                          </select>
+                              <input type="number"  id="NoFolicAcid" name="NoFolicAcid" min="1" max="30" class="form-control" />
+                        
                           </div>
                     </div>
                     

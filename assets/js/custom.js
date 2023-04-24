@@ -354,6 +354,36 @@ $('#picmeno').on('blur change', function () {
     });
 });
 
+/**
+ * Anvisit - Step2 - number of IFA related process
+ * @param {type} date *
+ */
+$('#NoIFA').on('change', function(){
+    noIFAVAl = $(this).val();
+     $('#dateofIFA').attr("disabled", false).val("");
+     $('#dateofAlbendazole').attr("disabled", false).val("");
+    if(noIFAVAl !==""){
+        if(noIFAVAl <= 15){
+            $('#dateofIFA').attr("disabled", true)
+            $('#dateofAlbendazole').attr("disabled", false)
+        } else {
+            $('#dateofIFA').attr("disabled", false);
+            $('#dateofAlbendazole').attr("disabled", true);
+        }
+    } 
+});
+
+
+$('#lmpdate').on('blur change', function(){
+  var lmpdate = $(this).val();
+  if(lmpdate != ""){
+     lmpdateAr = lmpdate.split("-");
+     formattedLmpdateAr = lmpdateAr[0] + "/" +  lmpdateAr[1] + "/" + lmpdateAr[2];
+    var newDate = formatDate(addDays(new Date(formattedLmpdateAr), 280));
+   
+    $('#edddate').val(newDate)
+  }
+});
 
 
 function formatDate(date) {

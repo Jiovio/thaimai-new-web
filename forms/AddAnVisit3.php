@@ -26,8 +26,8 @@ if (!empty($_POST["btnSecond"])) {
   $PreDate = $_POST["PreDate"];
   $NoFolicAcid = $_POST["NoFolicAcid"];
   $NoIFA = $_POST["NoIFA"]; 
-  $dateofIFA = $_POST["dateofIFA"]; 
-  $dateofAlbendazole = $_POST["dateofAlbendazole"];
+  $dateofIFA = isset($_POST["dateofIFA"]) ? $_POST["dateofIFA"] : ""; 
+  $dateofAlbendazole = isset($_POST["dateofAlbendazole"]) ? $_POST["dateofAlbendazole"] : "" ;
   $noCalcium = $_POST["noCalcium"];
 
  $query = mysqli_query($conn, "UPDATE antenatalvisit SET fastingSugar='$fastingSugar',postPrandial='$postPrandial',
