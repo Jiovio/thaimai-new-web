@@ -4,6 +4,12 @@
       <div class="layout-container">
         <!-- Menu -->
 <?php include ('require/header.php'); // Menu & Top Search 
+$pregancyWeek1 = "";
+if(isset($_POST["pregnancyWeek"]) && !empty($_POST["pregnancyWeek"]))
+{
+    $pregancyWeek1 = intval(trim($_POST["pregnancyWeek"]));
+}
+
 if (!empty($_POST["btnFirst"])) {
 //   $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeno FROM antenatalvisit where picmeno='".$_POST["picmeno"]."' ");
 //   while($picvalue = mysqli_fetch_array($CheckDuplicatePno))
@@ -87,7 +93,7 @@ if (!empty($_POST["btnFirst"])) {
 						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-gctStatus">GCT Week Status <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                          <select name="gctStatus" id="gctStatus" class="form-select" onchange="usgChange()">
+                              <select name="gctStatus" id="gctStatus" class="form-select" onchange="usgChange()" required>
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=46";
@@ -102,7 +108,7 @@ if (!empty($_POST["btnFirst"])) {
                         <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-gctValue">GCT Value <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                          <select class="60-400 form-control" id="gctValue" name="gctValue">
+                              <select class="60-400 form-control" id="gctValue" name="gctValue" required>
                           <option value="">Choose...</option>
                           </select>
                           </div>
@@ -327,15 +333,15 @@ if (!empty($_POST["btnFirst"])) {
                     
 					<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-NoIFA">Number of IFA </label>
-                          <div class="input-group input-group-merge">
-                          <select class="1-50 form-control" id="NoIFA" name="NoIFA">
+                          <div class="input-group input-group-merge">        
+                              <select class="1-50 form-control" id="NoIFA" name="NoIFA" <?php if($pregancyWeek1 <= 15) { ?> disabled="disabled" <?php } ?>>
                           <option value="">Choose...</option>
                           </select>
                           </div>
                     </div>
                     
 						<div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-dateofIFA">Date Of IFA </label>
+                          <label class="form-label" for="basic-icon-default-dateofIFA" <?php if($pregancyWeek1 <= 15) { ?> disabled="disabled" <?php } ?>>Date Of IFA </label>
                           <div class="input-group input-group-merge">
                             <input
                               type="date"
@@ -350,7 +356,7 @@ if (!empty($_POST["btnFirst"])) {
                         </div>
                         
 					    <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-dateofAlbendazole">Date Of Albendazole </label>
+                          <label class="form-label" for="basic-icon-default-dateofAlbendazole" <?php if($pregancyWeek1 > 15) { ?> disabled="disabled" <?php } ?>>Date Of Albendazole </label>
                           <div class="input-group input-group-merge">
                             <input
                               type="date"

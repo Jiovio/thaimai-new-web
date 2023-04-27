@@ -352,6 +352,7 @@ $('#picmeno').on('blur change', function () {
             }
         }
     });
+    checkPicme(picmeno);
 });
 
 /**
@@ -374,6 +375,45 @@ $('#NoIFA').on('change', function(){
 });
 
 
+$('#HscId').on('change', function(){
+    hscId = $(this).val();
+    $.ajax({
+        url: "ajax/getPanchayat.php",
+        type: "POST",
+        data: {
+            hscId: hscId,
+            type:'hsc'
+        },
+        cache: false,
+        success: function (result) {
+            $("#PanchayatId").html(result);
+            $("#PanchayatId").prop('disabled', false);
+            $("#PanchayatId").focus();
+        }
+    });
+});
+
+$('#PanchayatId').on('change', function(){
+    panchayatId = $(this).val();
+    $.ajax({
+        url: "ajax/getPanchayat.php",
+        type: "POST",
+        data: {
+            panchayatId: panchayatId,
+            type : 'panchayat'
+        },
+        cache: false,
+        success: function (result) {
+            $("#VillageId").html(result);
+            $("#VillageId").prop('disabled', false);
+            $("#VillageId").focus();
+        }
+    });
+});
+
+
+
+
 $('#lmpdate').on('blur change', function(){
   var lmpdate = $(this).val();
   if(lmpdate != ""){
@@ -384,6 +424,34 @@ $('#lmpdate').on('blur change', function(){
     $('#edddate').val(newDate)
   }
 });
+
+function checkPicme(val)
+{    
+    $('#pregnancyWeek').val("");
+    $('#pregnancyWeek').attr("readOnly", false);
+     $.ajax({
+        url: "ajax/fetchPregnancyWeek.php",
+        type: "POST",
+        data: {
+            picmeno: val
+        },
+        cache: false,
+        success: function (result) {
+            if (result !== "") {      
+                resultAr = result.split("-#@#-")
+                if(resultAr[0] !==0){
+                    $("#ancPeriod").val(resultAr[0]).change();   
+                }
+                $('#pregnancyWeek').val("");
+                $('#pregnancyWeek').attr("readOnly", false);
+                if(resultAr[1] !=='0' && resultAr[1] !==""){
+                    $('#pregnancyWeek').val(resultAr[1]);
+                    $('#pregnancyWeek').attr("readOnly", true);
+                }
+            }
+        }
+    });
+}
 
 
 function formatDate(date) {
