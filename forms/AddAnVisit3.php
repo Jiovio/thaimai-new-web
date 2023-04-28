@@ -24,7 +24,7 @@ if (!empty($_POST["btnSecond"])) {
   $Dose1Date = $_POST["Dose1Date"];
   $Dose2Date = $_POST["Dose2Date"];
   $PreDate = $_POST["PreDate"];
-  $NoFolicAcid = $_POST["NoFolicAcid"];
+  $NoFolicAcid = isset($_POST["NoFolicAcid"]) ? $_POST["NoFolicAcid"] : "";
   $NoIFA = isset($_POST["NoIFA"]) ? $_POST["NoIFA"] : ""; 
   $dateofIFA = isset($_POST["dateofIFA"]) ? $_POST["dateofIFA"] : ""; 
   $dateofAlbendazole = isset($_POST["dateofAlbendazole"]) ? $_POST["dateofAlbendazole"] : "" ;

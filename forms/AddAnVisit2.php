@@ -106,9 +106,9 @@ if (!empty($_POST["btnFirst"])) {
                         </div>
                        
                         <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-gctValue">GCT Value <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-gctValue">GCT Value </label>
                           <div class="input-group input-group-merge">
-                              <select class="60-400 form-control" id="gctValue" name="gctValue" required>
+                              <select class="60-400 form-control" id="gctValue" name="gctValue">
                           <option value="">Choose...</option>
                           </select>
                           </div>
@@ -326,7 +326,7 @@ if (!empty($_POST["btnFirst"])) {
 					<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-NoFolicAcid">Number of Folic Acid </label>
                           <div class="input-group input-group-merge">
-                              <input type="number"  id="NoFolicAcid" name="NoFolicAcid" min="1" max="30" class="form-control" />
+                              <input type="number"  id="NoFolicAcid" name="NoFolicAcid" min="1" max="30" class="form-control" <?php if($pregancyWeek1 > 15) { ?> disabled="disabled" <?php } ?>/>
                         
                           </div>
                     </div>
@@ -356,7 +356,7 @@ if (!empty($_POST["btnFirst"])) {
                         </div>
                         
 					    <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-dateofAlbendazole" <?php if($pregancyWeek1 > 15) { ?> disabled="disabled" <?php } ?>>Date Of Albendazole </label>
+                          <label class="form-label" for="basic-icon-default-dateofAlbendazole" <?php if($pregancyWeek1 <= 15) { ?> disabled="disabled" <?php } ?>>Date Of Albendazole </label>
                           <div class="input-group input-group-merge">
                             <input
                               type="date"
