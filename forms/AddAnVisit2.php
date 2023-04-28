@@ -341,7 +341,7 @@ if (!empty($_POST["btnFirst"])) {
                     </div>
                     
 						<div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-dateofIFA" <?php if($pregancyWeek1 <= 15) { ?> disabled="disabled" <?php } ?>>Date Of IFA </label>
+                          <label class="form-label" for="basic-icon-default-dateofIFA">Date Of IFA </label>
                           <div class="input-group input-group-merge">
                             <input
                               type="date"
@@ -351,12 +351,13 @@ if (!empty($_POST["btnFirst"])) {
                               placeholder="Date Of IFA"
                               aria-label="Date Of IFA"
                               aria-describedby="basic-icon-default-dateofIFA"
+                              <?php if($pregancyWeek1 <= 15) { ?> disabled="disabled" <?php } ?>
                                />
                           </div>
                         </div>
                         
 					    <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-dateofAlbendazole" <?php if($pregancyWeek1 <= 15) { ?> disabled="disabled" <?php } ?>>Date Of Albendazole </label>
+                          <label class="form-label" for="basic-icon-default-dateofAlbendazole">Date Of Albendazole </label>
                           <div class="input-group input-group-merge">
                             <input
                               type="date"
@@ -366,7 +367,7 @@ if (!empty($_POST["btnFirst"])) {
                               placeholder="Date Of Albendazole"
                               aria-label="Date Of Albendazole"
                               aria-describedby="basic-icon-default-dateofAlbendazole"
-                              
+                              <?php if($pregancyWeek1 <= 15) { ?> disabled="disabled" <?php } ?>
                               />
                           </div>
                         </div>
