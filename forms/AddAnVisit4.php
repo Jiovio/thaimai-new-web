@@ -6,7 +6,7 @@
 <?php include ('require/header.php'); // Menu & Top Search
 if (!empty($_POST["btnThird"])) {
   $picmeno = $_POST["picmeno"];
-   $calciumDate =$_POST["calciumDate"]; 
+   $calciumDate = isset($_POST["calciumDate"]) ? $_POST["calciumDate"] : ""; 
    $sizeUterusinWeeks = $_POST["sizeUterusinWeeks"]; 
    
   $filename = $_FILES["usgreport"]["name"];
@@ -36,7 +36,7 @@ $usgFetalPosition1 = $_POST["usgFetalPosition1"];
 $usgFetalMovement1 = $_POST["usgFetalMovement1"];
 $liquor2 = $_POST["liquor2"]; 
 $usgFetalHeartRate2 = $_POST["usgFetalHeartRate2"];
-$usgFetalPosition2 = $_POST["usgFetalPosition2"]; 
+$usgFetalPosition2 = isset($_POST["usgFetalPosition2"]) ? $_POST["usgFetalPosition2"] : ""; 
 $usgFetalMovement2 = $_POST["usgFetalMovement2"];
 $placenta = $_POST["placenta"];
 $usgResult = $_POST["usgResult"];

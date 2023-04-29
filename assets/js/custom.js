@@ -326,7 +326,7 @@ $('#lmpdate').on('blur change', function(){
   }
 });
 //for retrieve total no of pregnancy when enter picme number in medical history
-$('#picmeno').on('blur change', function () {
+$('#picmeno').on('blur change click', function () {
     var picmeno = $(this).val();
     $.ajax({
         url: "getGravida.php",
@@ -490,7 +490,7 @@ var selectBox = document.getElementById("Td1");
 var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 var Tddose1 = document.getElementById("Tddose1"); 
 var Tddate1 = document.getElementById("Tddate1");
-if(selectedValue == "1") { Tddose1.style.display = "block"; } else if(selectedValue == "0") { Tddose1.style.display = "none"; }
+//if(selectedValue == "1") { Tddose1.style.display = "block"; } else if(selectedValue == "0") { Tddose1.style.display = "none"; }
 if(selectedValue == "1") { Tddate1.style.display = "block"; } else if(selectedValue == "0") { Tddate1.style.display = "none"; }
 }
 function Td2Change() {
@@ -498,7 +498,7 @@ var selectBox = document.getElementById("Td2");
 var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 var Tddose2 = document.getElementById("Tddose2"); 
 var Tddate2 = document.getElementById("Tddate2");
-if(selectedValue == "1") { Tddose2.style.display = "block"; } else if(selectedValue == "0") { Tddose2.style.display = "none"; }
+//if(selectedValue == "1") { Tddose2.style.display = "block"; } else if(selectedValue == "0") { Tddose2.style.display = "none"; }
 if(selectedValue == "1") { Tddate2.style.display = "block"; } else if(selectedValue == "0") { Tddate2.style.display = "none"; }
 }
 
@@ -508,7 +508,7 @@ var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 var Bdose = document.getElementById("Bdose");
 var TdB = document.getElementById("TdB"); 
 
-if(selectedValue == "1") { Bdose.style.display = "block"; } else if(selectedValue == "0") { Bdose.style.display = "none"; }
+//if(selectedValue == "1") { Bdose.style.display = "block"; } else if(selectedValue == "0") { Bdose.style.display = "none"; }
 if(selectedValue == "1") { TdB.style.display = "block"; } else if(selectedValue == "0") { TdB.style.display = "none"; }
 }
 function UrinetestChange() {
@@ -520,6 +520,17 @@ var ap = document.getElementById("urineAP");
 if(selectedValue == "1") { sp.style.display = "block"; } else if(selectedValue == "0") { sp.style.display = "none"; }
 if(selectedValue == "1") { ap.style.display = "block"; } else if(selectedValue == "0") { ap.style.display = "none"; }
 }
+
+function gctChange()
+{
+    var selectBox = document.getElementById("gctStatus"); 
+var selectedValue = selectBox.options[selectBox.selectedIndex].text;
+ $('#gctValue').attr('disabled', false);
+if(selectedValue == 'Not Done'){
+    $('#gctValue').attr('disabled', true);
+}
+}
+
 function usgChange() {
 var selectBox = document.getElementById("wusgTaken"); 
 var selectedValue = selectBox.options[selectBox.selectedIndex].value;

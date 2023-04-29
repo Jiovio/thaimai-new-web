@@ -4,12 +4,18 @@
       <div class="layout-container">
         <!-- Menu -->
 <?php ini_set('display_errors','1'); include ('require/header.php'); // Menu & Top Search
+$pregancyWeek1 = "";
+if(isset($_POST["pregnancyWeek1"]) && !empty($_POST["pregnancyWeek1"]))
+{
+    $pregancyWeek1 = intval(trim($_POST["pregnancyWeek1"]));
+}
+
 if (!empty($_POST["btnSecond"])) {
   $picmeno = $_POST["picmeno"];
   $fastingSugar = $_POST["fastingSugar"]; 
   $postPrandial = $_POST["postPrandial"]; 
   $gctStatus = $_POST["gctStatus"]; 
-  $gctValue = $_POST["gctValue"]; 
+  $gctValue = isset($_POST["gctValue"]) ? $_POST["gctValue"] : ""; 
   $tsh = $_POST["Tsh"];
   $Td1 = $_POST["Td1"];
   $TdDose = $_POST["TdDose"];
@@ -28,7 +34,7 @@ if (!empty($_POST["btnSecond"])) {
   $NoIFA = isset($_POST["NoIFA"]) ? $_POST["NoIFA"] : ""; 
   $dateofIFA = isset($_POST["dateofIFA"]) ? $_POST["dateofIFA"] : ""; 
   $dateofAlbendazole = isset($_POST["dateofAlbendazole"]) ? $_POST["dateofAlbendazole"] : "" ;
-  $noCalcium = $_POST["noCalcium"];
+  $noCalcium = isset($_POST["noCalcium"]) ? $_POST["noCalcium"] : "";
 
  $query = mysqli_query($conn, "UPDATE antenatalvisit SET fastingSugar='$fastingSugar',postPrandial='$postPrandial',
  gctStatus='$gctStatus',gctValue='$gctValue',Tsh='$tsh',Td1='$Td1',TdDose='$TdDose',Td1Date='$Td1Date',Td2='$Td1',Td2Dose='$Td2Dose',
@@ -72,8 +78,8 @@ if (!empty($_POST["btnSecond"])) {
                               id="calciumDate"
                               placeholder="Calcium Date"
                               aria-label="Calcium Date"
-                              aria-describedby="basic-icon-default-calciumDate"
-                              required
+                              aria-describedby="basic-icon-default-calciumDate"                              
+                              <?php if($pregancyWeek1 <= 15 && $pregancyWeek1!="") { ?> disabled="disabled" <?php } ?>
                             />
                           </div>
                         </div>
@@ -143,7 +149,7 @@ if (!empty($_POST["btnSecond"])) {
                           <label class="form-label" for="basic-icon-default-usgScanEdd">USG Scan Edd</label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="text"
+                              type="date"
                               name="usgScanEdd"
                               class="form-control"
                               id="ScanEdd"

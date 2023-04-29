@@ -93,7 +93,7 @@ if (!empty($_POST["btnFirst"])) {
 						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-gctStatus">GCT Week Status <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                              <select name="gctStatus" id="gctStatus" class="form-select" onchange="usgChange()" required>
+                              <select name="gctStatus" id="gctStatus" class="form-select" onchange="gctChange()" required>
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=46";
@@ -375,12 +375,13 @@ if (!empty($_POST["btnFirst"])) {
 						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-noCalcium">No. of Calcium </label>
                           <div class="input-group input-group-merge">
-                          <select class="1-50 form-control" id="noCalcium" name="noCalcium">
+                          <select class="1-50 form-control" id="noCalcium" name="noCalcium" <?php if($pregancyWeek1 <= 15) { ?> disabled="disabled" <?php } ?>>
                           <option value="">Choose...</option>
                           </select>
                           </div>
                         </div>
 					</div>
+                        <input type="hidden" name="pregnancyWeek1" value="<?php echo $pregancyWeek1; ?>" />
 <input class="btn btn-primary" type="submit" name="btnSecond" value="NEXT">
 			</form>
 			</div>
