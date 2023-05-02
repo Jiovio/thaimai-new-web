@@ -334,11 +334,18 @@ if (!empty($_POST["btnFirst"])) {
 					<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-NoIFA">Number of IFA </label>
                           <div class="input-group input-group-merge">        
-                              <select class="1-50 form-control" id="NoIFA" name="NoIFA" <?php if($pregancyWeek1 <= 15) { ?> disabled="disabled" <?php } ?>>
+                              <select class="form-control" id="NoIFA" name="NoIFA" <?php if($pregancyWeek1 <= 15) { ?> disabled="disabled" <?php } ?>>
                           <option value="">Choose...</option>
+                          <?php
+                          for ($j=1; $j < 61; $j++){
+                          ?>
+                          <option value ="<?php echo $j;?>"><?php echo $j;?></option>
+                          <?php
+                          } ?>
                           </select>
                           </div>
                     </div>
+                          ?>
                     
 						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-dateofIFA">Date Of IFA </label>
