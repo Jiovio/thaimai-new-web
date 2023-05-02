@@ -345,7 +345,7 @@ if (!empty($_POST["btnFirst"])) {
                           </select>
                           </div>
                     </div>
-                          ?>
+                          
                     
 						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-dateofIFA">Date Of IFA </label>
