@@ -414,7 +414,7 @@ $('#lmpdate').on('blur change', function(){
 function checkPicme(val)
 {    
     $('#pregnancyWeek').val("");
-    $('#pregnancyWeek').attr("readOnly", false);
+//    $('#pregnancyWeek').attr("readOnly", false);
      $.ajax({
         url: "ajax/fetchPregnancyWeek.php",
         type: "POST",
@@ -440,10 +440,10 @@ function checkPicme(val)
                 }
                 }
                 $('#pregnancyWeek').val("");
-                $('#pregnancyWeek').attr("readOnly", false);
+//                $('#pregnancyWeek').attr("readOnly", false);
                 if(resultAr[1] !=='0' && resultAr[1] !==""){
                     $('#pregnancyWeek').val(resultAr[1]);
-                    $('#pregnancyWeek').attr("readOnly", true);
+//                    $('#pregnancyWeek').attr("readOnly", true);
                 }
             }
         }

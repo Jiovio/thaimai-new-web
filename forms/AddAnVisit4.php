@@ -92,9 +92,9 @@ $highrisk = mysqli_query($conn, "UPDATE ecregister ec INNER JOIN antenatalvisit 
 
             <div class="container-xxl flex-grow-1 container-p-y">
               <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Antenatal Visit /</span> Add Antenatal Visit
-              <a href="AntenatalVisit.php"><button type="submit" class="btn btn-primary" id="btnBack">
+           <button type="submit" class="btn btn-primary" id="btnBack" onclick="history.back()">
 				<span class="bx bx-arrow-back"></span>&nbsp; Back
-              </button></a>
+              </button>
 			</h4>
       
 			<!-- Basic Layout -->
