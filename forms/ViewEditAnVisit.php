@@ -8,6 +8,9 @@ if (isset($_GET['view'])) {
   $id = $_GET['view'];
   $view = true;
   $record = mysqli_query($conn, "SELECT * FROM antenatalvisit WHERE id=$id");
+  $AnData = mysqli_fetch_array($record);
+  echo "SELECT * FROM antenatalvisit WHERE picmeno=". $AnData['picmeno']." order by id DESC";
+  $record = mysqli_query($conn, "SELECT * FROM antenatalvisit WHERE picmeno=". $AnData['picmeno']." order by id DESC");
   $An = mysqli_fetch_array($record);
   $picmeno = $An["picmeno"]; $residenttype = $An["residenttype"]; 
   $physicalpresent = $An["physicalpresent"]; $placeofvisit = $An["placeofvisit"]; $abortion = $An["abortion"]; 

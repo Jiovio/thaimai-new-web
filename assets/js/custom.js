@@ -328,6 +328,7 @@ $('#lmpdate').on('blur change', function(){
 //for retrieve total no of pregnancy when enter picme number in medical history
 $('#picmeno').on('blur change click', function () {
     var picmeno = $(this).val();
+    var anvisitDate = $('#anvisitDate').val();
     $.ajax({
         url: "getGravida.php",
         type: "POST",
@@ -352,7 +353,16 @@ $('#picmeno').on('blur change click', function () {
             }
         }
     });
-    checkPicme(picmeno);
+    checkPicme(picmeno, anvisitDate);
+});
+
+$('#anvisitDate').on('blur change click', function () {
+    anvisitDate = $(this).val();
+    var picmeno = $('#picmeno').val();
+    if (anvisitDate != "") {
+      
+        checkPicme(picmeno, anvisitDate);
+    }
 });
 
 /**
@@ -411,7 +421,13 @@ $('#lmpdate').on('blur change', function(){
   }
 });
 
-function checkPicme(val)
+/**
+ * 
+ * @param {type} val ->picme no
+ * @param {type} anvisitDate
+ * @returns {undefined}
+ */
+function checkPicme(val, anvisitDate)
 {    
     $('#pregnancyWeek').val("");
 //    $('#pregnancyWeek').attr("readOnly", false);
@@ -419,7 +435,7 @@ function checkPicme(val)
         url: "ajax/fetchPregnancyWeek.php",
         type: "POST",
         data: {
-            picmeno: val
+            picmeno: val, anvisitDate : anvisitDate
         },
         cache: false,
         success: function (result) {

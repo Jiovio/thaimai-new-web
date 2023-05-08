@@ -117,8 +117,10 @@ if (!empty($_POST["btnFirst"])) {
 						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-Tsh">TSH </label>
                           <div class="input-group input-group-merge">
-                          <select class="60-400 form-control" id="Tsh" name="Tsh">
+                          <select class="form-control" id="Tsh" name="Tsh">
                           <option value="">Choose...</option>
+                          <option value="yes">Yes</option>
+                           <option value="no">No</option>
                           </select>
                           </div>
                         </div>

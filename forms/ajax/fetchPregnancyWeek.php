@@ -2,22 +2,23 @@
 include "../../config/db_connect.php";
 $picmeNo = $_POST["picmeno"];
 
-$AvCntmq = mysqli_query($conn,"SELECT count(av.id) AS AvCnt FROM antenatalvisit as av WHERE av.picmeno = '$picmeNo'");
+$AvCntmq = mysqli_query($conn, "SELECT count(av.id) AS AvCnt FROM antenatalvisit as av WHERE av.picmeno = '$picmeNo'");
 $AvCnt = mysqli_fetch_array($AvCntmq);
-$ArTot = $AvCnt['AvCnt']+1;
-$selectLmpDate = mysqli_query($conn,"SELECT lmpdate FROM medicalhistory WHERE picmeno = '$picmeNo'");
+$ArTot = $AvCnt['AvCnt'] + 1;
+$selectLmpDate = mysqli_query($conn, "SELECT lmpdate FROM medicalhistory WHERE picmeno = '$picmeNo'");
 $lmpDateData = mysqli_fetch_array($selectLmpDate);
-if(!empty($selectLmpDate) && isset($lmpDateData['lmpdate'])){
+if (!empty($selectLmpDate) && isset($lmpDateData['lmpdate'])) {
 
-$lmpDate = $lmpDateData['lmpdate'];
+    $lmpDate = $lmpDateData['lmpdate'];
 } else {
     $lmpDate = date('d-m-Y');
 }
-
-
-$totalWeek = numWeeks($lmpDate, date('d-m-Y'));
-
-echo $ArTot.'-#@#-'.$totalWeek;
+$totalWeek = "";
+if (isset($_POST['anvisitDate']) && !empty($_POST['anvisitDate'])) {
+    $totalWeek = numWeeks($lmpDate, $_POST['anvisitDate']);
+}
+$ArTot = empty($ArTot) ? 1 : $ArTot;
+echo $ArTot . '-#@#-' . $totalWeek;
 
 /**
  * A custom function that calculates how many weeks occur
