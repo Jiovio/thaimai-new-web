@@ -5,16 +5,16 @@
         <!-- Menu -->
 <?php include ('require/header.php'); // Menu & Top Search
 if (! empty($_POST["addImmunization"])) {
-  $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeNo FROM immunization where picmeNo='".$_POST["picmeNo"]."' ");
-  
+  $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeNo FROM deliveryDetails where picmeNo='".$_POST["picmeNo"]."' ");
+  $pid = 0;
   while($Mvalue = mysqli_fetch_array($CheckDuplicatePno)) {
     $pid = $Mvalue["picmeNo"];
   
   } 
-  if($pid > 0) {
+  if($pid <= 0) {
    
   $type = "error";
-  $emessage = "Duplicate PICME No.";
+  $emessage = "PICME No doesn't exist";
   
    } else {
   $picmeno = $_POST["picmeNo"]; 
@@ -132,12 +132,12 @@ if($doseNo == 1) {
                     <div class="card-body">
                     <div id="response" class="<?php if(!empty($type)) { echo $type . " display-block"; } else { echo $type . " display-none"; } ?>"><?php if(!empty($emessage)) { echo $emessage; } ?></div>
                     <br>
-                      <form action="" method="post" autocomplete="off">
+                      <form action="" method="post" autocomplete="off" onSubmit = "return addImmuneValidate()">
 					<div class="row">
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
                           <div class="frmSearch">
-                          <input type="text" required id="picmeno" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
+                          <input type="text" required id="picmenoImmune" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
                           <div id="suggesstion-box"></div>
                       </div>
                       </div>
@@ -366,7 +366,7 @@ if($doseNo == 1) {
                         </div>
 					</div> -->
 					<div class="input-group">
-                        <input class="btn btn-primary" type="submit" name="addImmunization" value="Save">
+                                            <input class="btn btn-primary" type="submit" name="addImmunization" value="Save" onclick="return addImmuneValidate()">
                       </div>
                       </form>
                     </div>

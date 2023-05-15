@@ -54,7 +54,7 @@ if (!empty($query)) {
               <div class="col-6 mb-3">
                   <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
                   <div class="frmSearch">
-                  <input type="text" required id="picmeno" name="picmeno" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
+                  <input type="text" required id="picmenoNew" name="picmeno" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
                   <div id="suggesstion-box"></div>
                  </div>
                 </div>
@@ -544,7 +544,7 @@ if (!empty($query)) {
                           </div>
                         </div>
                         <div class="mt-2">
-                        <input class="btn btn-primary" type="submit" name="addDelivery" value="Save">
+                        <input class="btn btn-primary" type="submit" name="addDelivery" value="Save" onclick="return validateAddDelivery()">
                         </div>
                 </div>
                 

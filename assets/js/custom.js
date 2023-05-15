@@ -315,6 +315,95 @@ $('#picmeno').on('keydown keyup change', function(){
   }
 });
 
+$('#picmenoNew').on('keydown keyup change', function(){
+    var picmeno = $(this).val();
+    checkDuplicatePicmeNo(picmeno);
+   
+});
+
+$('#picmenoImmune').on('keydown keyup change', function(){
+    var picmeno = $('#picmenoImmune').val();
+    checkImmunedetails(picmeno);
+   
+});
+
+function addImmuneValidate(){
+    var picmeno = $('#picmenoImmune').val();
+ 
+    return checkImmunedetails(picmeno);
+}
+
+
+function checkImmunedetails(picmeno){
+      $.ajax({
+        url: "ajax/immunizationDetails.php",
+        async: false,
+        type: "POST",
+        data: {
+            picmeno: picmeno
+        },
+        cache: false,
+        success: function (response) {
+            result = JSON.parse(response);
+            $('#suggesstion-box').html("");
+             $('#doseName').attr('disabled', true);
+            if (result['result'] === 'fail') {
+               $('#suggesstion-box').html("<span style='color:red'>This Picme number didn't have delivery details. \n\
+Please proceed with delivery date from delivery details</span>");
+               return false;
+            } else {
+                
+                if(result['result']=='error'){
+                    $('#suggesstion-box').html("<span style='color:red'>"+result['message']+"</span>");
+                    $('#doseName').attr('disabled', true);
+                    return false;
+                }           
+                
+                 
+                if (result['result'] == 'success') {
+                    $('#suggesstion-box').html("<span style='color:red'>" + result['message'] + "</span>");
+                    $("#doseNo").val(result['doseNo']);
+                    $('#doseName').removeAttr('disabled');
+                    $("#doseDueDate").attr('value', result['doseDueDate']);
+                    
+                    //   $("#doseDueDate").attr('value', result['doseDueDate']).change();
+                    // $("#doseDueDate").val(result['doseDueDate']);
+
+                }
+            }
+        }
+    });
+}
+
+
+
+/**
+ * Add delivery picme no
+ * @returns {undefined}
+ */
+function validateAddDelivery(){
+    var picmeno = $('#picmenoNew').val();
+    checkDuplicatePicmeNo(picmeno);
+}
+
+function checkDuplicatePicmeNo(picmeno){
+     $.ajax({
+        url: "ajax/duplicatePicmeValidation.php",
+        type: "POST",
+        data: {
+            picmeno: picmeno
+        },
+        cache: false,
+        success: function (result) {
+            $('#suggesstion-box').html("")
+            if (result === '1') {
+               $('#suggesstion-box').html("<span style='color:red'>This picme already exists</span>");
+               return false;
+            }
+        }
+    });
+}
+
 $('#lmpdate').on('blur change', function(){
   var lmpdate = $(this).val();
   if(lmpdate != ""){
