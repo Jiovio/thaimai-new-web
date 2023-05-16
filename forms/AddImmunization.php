@@ -8,10 +8,11 @@ if (! empty($_POST["addImmunization"])) {
   $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeNo FROM deliveryDetails where picmeNo='".$_POST["picmeNo"]."' ");
   $pid = 0;
   while($Mvalue = mysqli_fetch_array($CheckDuplicatePno)) {
+      
     $pid = $Mvalue["picmeNo"];
   
   } 
-  if($pid <= 0) {
+  if(empty($pid)) {
    
   $type = "error";
   $emessage = "PICME No doesn't exist";
