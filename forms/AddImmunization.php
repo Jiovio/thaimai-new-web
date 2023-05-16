@@ -5,7 +5,7 @@
         <!-- Menu -->
 <?php include ('require/header.php'); // Menu & Top Search
 if (! empty($_POST["addImmunization"])) {
-  $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeNo FROM deliveryDetails where picmeNo='".$_POST["picmeNo"]."' ");
+  $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeNo FROM deliverydetails where picmeNo='".$_POST["picmeNo"]."' ");
   $pid = 0;
   while($Mvalue = mysqli_fetch_array($CheckDuplicatePno)) {
       
