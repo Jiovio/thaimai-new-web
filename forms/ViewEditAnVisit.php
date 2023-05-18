@@ -522,7 +522,7 @@ if (isset($_GET['del'])) {
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=46";
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                            <option value="<?php echo $listvalue['enumid']; ?>" <?php if($gctStatus==$listvalue['enumid']) { echo "Selected"; } ?> ><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
                           </div>

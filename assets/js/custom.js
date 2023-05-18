@@ -327,6 +327,12 @@ $('#picmenoImmune').on('keydown keyup change', function(){
    
 });
 
+$('#doseNo').change(function (){
+     var picmeno = $('#picmenoImmune').val();
+ 
+    return checkImmunedetails(picmeno);
+});
+
 function addImmuneValidate(){
     var picmeno = $('#picmenoImmune').val();
  
@@ -397,12 +403,64 @@ function checkDuplicatePicmeNo(picmeno){
         success: function (result) {
             $('#suggesstion-box').html("")
             if (result === '1') {
-               $('#suggesstion-box').html("<span style='color:red'>This picme already exists</span>");
+               $('#suggesstion-box').html("<span style='color:red'>Delivery details already exists</span>");
                return false;
             }
         }
     });
 }
+
+$('#pncPeriod').change(function (){
+     var picmeno = $('#picmenoPostNalVisit').val();
+     var pncperiod = $(this).val();     
+     $('#suggesstion-box').html("");
+     if(picmeno == ""){
+         $('#suggesstion-box').html("<span style='color:red'>Please enter picme no</span>");
+     } else {
+         checkPostnalVisitPeriod(picmeno, pncperiod);
+     }
+});
+
+$('#picmenoPostNalVisit').on('blur change click', function () {
+    var picmeno = $('#picmenoPostNalVisit').val();
+    $('#suggesstion-box').html("");
+    $('#pnc-period-box').html("");
+    var pncperiod = $('#pncPeriod').val();
+    if(pncperiod==""){
+        $('#pnc-period-box').html("<span style='color:red'>Please select PNC period for evaluation before Picme no</span>");
+       
+    } else {
+        checkPostnalVisitPeriod(picmeno, pncperiod);
+    }
+});
+
+function checkPostnalVisitPeriod(picmeno, pncperiod){
+      $.ajax({
+        url: "ajax/checkPostNalVisitPeriod.php",
+        async: false,
+        type: "POST",
+        data: {
+            picmeno: picmeno, pncPeriod:pncperiod
+        },
+        cache: false,
+        success: function (response) {
+             result = JSON.parse(response);
+             $('#pnc-period-box').html("");
+            if (result['result'] === 'fail') {
+               $('#pnc-period-box').html("<span style='color:red'>"+result['message']+"</span>");
+               $("#pncPeriod").val(result['selected']).change();
+               return false;
+            }
+            if(result['result']=='error'){
+                $('#pnc-period-box').html("<span style='color:red'>"+result['message']+"</span>");
+                $("#pncPeriod").val(result['selected']).change();
+                return false;
+            }
+            
+        }
+    });
+}
+
 
 $('#lmpdate').on('blur change', function(){
   var lmpdate = $(this).val();
@@ -928,17 +986,20 @@ $("#picmeno").keyup(function() {
       data: 'keyword=' + $(this).val(),
       beforeSend: function() {
           $("#picmeno").css("background", "#FFF url(LoaderIcon.jpeg) no-repeat 165px");
+          
       },
       success: function(data) {
           $("#suggesstion-box").show();
           $("#suggesstion-box").html(data);
           $("#picmeno").css("background", "#FFF");
+          
       }
   });
 });
 });
 function selectPicme(val) {
 $("#picmeno").val(val);
+
 $("#suggesstion-box").hide();
 }
 

@@ -70,6 +70,7 @@
             }  else {
                 $ExeQuery = mysqli_query($conn,$listQry.$private.$orderQry);
             }
+       
               if($ExeQuery) {
                          $cnt=1;
                          while($row = mysqli_fetch_array($ExeQuery)) {

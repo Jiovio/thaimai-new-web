@@ -7,7 +7,7 @@
 $pid = "";
 if (! empty($_POST["addpostnatal"])) { 
   
-  $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeNo FROM postnatalvisit where picmeNo='".$_POST["picmeNo"]."' ");
+  $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeNo FROM postnatalvisit where picmeNo='".$_POST["picmeNo"]."' AND pncPeriod='".$_POST["pncPeriod"]."'");
   
   while($Mvalue = mysqli_fetch_array($CheckDuplicatePno)) {
     $pid = $Mvalue["picmeNo"];
@@ -16,7 +16,7 @@ if (! empty($_POST["addpostnatal"])) {
   if($pid > 0) {
    
   $type = "error";
-  $emessage = "Duplicate PICME No.";
+  $emessage = "Selected ANC Period data is already entered for mentioned Picmeno";
   
    } else {
   $picmeNo =$_POST["picmeNo"]; 
@@ -63,7 +63,7 @@ if (! empty($_POST["addpostnatal"])) {
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
                           <div class="frmSearch">
-                          <input type="text" required id="picmeno" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
+                          <input type="text" required id="picmenoPostNalVisit" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
                           <div id="suggesstion-box"></div>
                       </div>
                       </div>
@@ -81,6 +81,7 @@ if (! empty($_POST["addpostnatal"])) {
                           <?php  } 
                               ?>
                              </select>
+                            <div id="pnc-period-box"></div>
                           </div>
                           </div>
                         <div class="row">
