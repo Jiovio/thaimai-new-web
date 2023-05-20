@@ -10,16 +10,18 @@ header("Access-Control-Max-Age: 3600");
 include_once '../config/database.php';
 
 
-
-
-
 $database = new Database();
 $db = $database->getConnection();
 
 // initialize object
 $data = json_decode(file_get_contents("php://input"));
+//date_default_timezone_set('Asia/Kolkata');
+//$data->startdate =  date('d-m-Y h:i:s');
 
-$checkvaliduser = $db->prepare("SELECT DISTINCT(im.picmeNo),ec.motheraadhaarname,im.FutureDoseDate,im.FutureDoseNo,im.NextDoseName1, ec.mothermobno,ec.PhcId,u.name FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeNo JOIN users u on u.id=im.createdUserId WHERE FutureDoseDate>=DATE_FORMAT(NOW() ,'%Y-%m-01') AND ec.BlockId='".$data->block."' AND ec.PhcId='".$data->phc."' AND ec.HscId='".$data->hsc."'  AND im.status=1 ORDER BY ec.motheraadhaarname ASC");
+$checkvaliduser = $db->prepare("SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno
+JOIN users u on u.id=mh.id WHERE NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = mh.picmeno) AND 
+mh.edddate < CURRENT_DATE() AND mh.status=1 ORDER By mh.edddate DESC");
+
 
 $checkvaliduser->execute();
 
@@ -28,28 +30,30 @@ $checknum = $checkvaliduser->rowCount();
 
 if ($checknum >0) {
      while ( $row = $checkvaliduser->fetch(PDO::FETCH_ASSOC)) 
-     {
-        
+     {    
 
      
       
-     
-        $PvArray[] = array("picmeNo" =>$row['picmeno'],
+        $Eddarray[] = array( "picmeno" =>$row['picmeno'],
         "motheraadhaarname" =>$row['motheraadhaarname'],
-        "FutureDoseDate" =>$row['FutureDoseDate'],
-        "NextDoseName1" =>$row['NextDoseName1'],
+        "edddate" =>$row['edddate'],
+		//"edddate" => date('d-m-Y',strtotime($row['edddate'])),
         "mothermobno" =>$row['mothermobno'],
         "PhcId" =>$row['PhcId'],
         "name" =>$row['name']
-        
+
         );
          
-            }   
+        
+            } 
+            
+            
             
             http_response_code(200);
         
+        
             echo json_encode(
-                    array("success" => "true", "error"=> "false",  "BabyImDue" => $PvArray , "message" => "Postnatal Visit Registered List")
+                    array("success" => "true", "error"=> "false",  "EDD Completed Mother's List" => $Eddarray , "message" => "High Risk Mother List")
             );
           
         } else {
@@ -57,8 +61,7 @@ if ($checknum >0) {
             http_response_code(404);
         
             echo json_encode(
-                    array("success" => "false", "error"=>"true", "message" => "Baby Immunization Due Data Not Found")
+                    array("success" => "false", "error"=>"true", "message" => "EDD Completed Mother's Data Not Found")
             );
         }
         ?>
-        

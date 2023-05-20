@@ -12,7 +12,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card">
-                <h5 class="card-header"><span class="text-muted fw-light">Current Month Due /</span> Antenatal Due List</h5>
+                <h5 class="card-header"><span class="text-muted fw-light">Antenatal Due List</h5>
 				<div class="table-responsive text-nowrap">
 				<div class="container">
 				<table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
@@ -29,9 +29,10 @@
                       </tr>
                     </thead>
 <?php  
-$listQry = "SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.createdBy=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND av.status=1";
+//$listQry = "SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.createdBy=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND av.status=1";
+$listQry = "SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.id=u.id WHERE av.avdueDate > CURRENT_DATE() AND av.status=1";
 $private = " AND av.createdBy='".$userid."'";
-$orderQry = " ORDER BY ec.motheraadhaarname ASC";
+$orderQry = " ORDER BY av.avdueDate ASC";
 if(($usertype == 0) || ($usertype == 1)) {
   if(isset($_POST['filter'])) {
     $bloName = $_POST['BlockId']; 
@@ -64,7 +65,8 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                     <td><?php echo $cnt; ?></td>
                                     <td><?php echo $row['picmeNo']; ?></td>
 									<td><?php echo $row['motheraadhaarname']; ?></td>
-                                    <td><?php  $dd = date('d-m-Y',strtotime($row['avdueDate'])); echo $dd; ?></td>
+                                    <!--- <td><?php  $dd = date('d-m-Y',strtotime($row['avdueDate'])); echo $dd; ?></td> --->
+									<td><?php echo $row['avdueDate']; ?></td>
                                     <td><?php echo $row['mothermobno']; ?></td>
 									<td><?php echo $row['PhcId']; ?></td>
                                     <td><?php echo $row['name']; ?></td>
