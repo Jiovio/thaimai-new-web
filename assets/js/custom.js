@@ -371,6 +371,7 @@ Please proceed with delivery date from delivery details</span>");
                     $("#doseNo").val(result['doseNo']);
                     $('#doseName').removeAttr('disabled');
                     $("#doseDueDate").attr('value', result['doseDueDate']);
+                    $("#doseDueDate").attr('readOnly', true);
                     
                     //   $("#doseDueDate").attr('value', result['doseDueDate']).change();
                     // $("#doseDueDate").val(result['doseDueDate']);
