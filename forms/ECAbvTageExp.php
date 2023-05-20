@@ -30,7 +30,7 @@ include "../config/db_connect.php";
 //if(strlen($search_text_input) > 0 )
 
     $listQry = "SELECT ec.picmeno, ec.id, hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName,ec.ecfrno, ec.HscId, ec.VillageId, ec.PanchayatId, ec.dateecreg, ec.motherageecreg, ec.motheraadhaarname, ec.BlockId,ec.PhcId, ec.mothermobno,ec.motheraadhaarid FROM ecregister ec INNER JOIN hscmaster hs on (ec.BlockId = hs.BlockId AND ec.PhcId = hs.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId) WHERE ec.status!= 0 
-                  AND ec.motherageecreg > 19";   		
+                  AND ec.motherageecreg > 19 AND NOT EXISTS (SELECT ar.picmeno FROM anregistration ar WHERE ar.picmeno = ec.picmeno)";    		
 				   
     $orderQry = " ORDER BY ec.dateecreg DESC";	
 		
@@ -53,18 +53,18 @@ include "../config/db_connect.php";
 	 $wild_srch = "";					     
 	 if(strlen($search_text_input) > 0 )
 	 {	 
-       $wild_srch = $sno.
-	   $rows['ecfrno']. 
-	   $rows['picmeno'].
-	   date('d-m-Y', strtotime($rows['dateecreg'])).
-	   $rows['motheraadhaarid'].
-	   $rows['motheraadhaarname'].
-	   $rows['mothermobno'].
-	   $rows['motherageecreg'].
-	   $rows['BlockName']. 
-       $rows['PhcName'].
-       $rows['HscName'].
-	   $rows['PanchayatName'].
+       $wild_srch =  $wild_cnt."||".
+	   $rows['ecfrno']."||".
+	   $rows['picmeno']."||".
+	   date('d-m-Y', strtotime($rows['dateecreg']))."||".
+	   $rows['motheraadhaarid']."||".
+	   $rows['motheraadhaarname']."||".
+	   $rows['mothermobno']."||".
+	   $rows['motherageecreg']."||".
+	   $rows['BlockName']."||".
+       $rows['PhcName']."||".
+       $rows['HscName']."||".
+	   $rows['PanchayatName']."||".
        $rows['VillageName'];
 	   //	     print_r($wild_srch); exit;
 		//print_r($rows['picmeno']); exit;
@@ -76,16 +76,16 @@ include "../config/db_connect.php";
 	//	print_r($rows['picmeno']); exit;
 	   }
 }
-	
+	 $wild_cnt++;
 	if($search_flag || strlen($search_text_input) == 0 )
 	{
 	  $developer_records[] = $rows;
 }}	
-	$filename = "AV_Report_".date('d-m-Y') . ".xls";			
+	$filename = "EC_Teenage_List_".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");
 	  $file = fopen('php://output','w');
-	  $header = array("Antenatal Visit Report as on ".date('d-m-Y'));
+	  $header = array("Eligible Couples Teenage List as on ".date('d-m-Y'));
 	  fputcsv($file,$header);	
 	  $show_coloumn = false;
 	  if(!empty($developer_records)) {
@@ -120,3 +120,4 @@ include "../config/db_connect.php";
 	  exit; 
 
 ?>
+

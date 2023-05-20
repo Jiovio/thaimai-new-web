@@ -222,7 +222,7 @@ include ('preloader.php');
                          </li>
                      
 					     <li class="menu-item; style=menu-list-type:None" >  
-                             <a href="MotherImDue.php" class="menu-link">
+                             <a href="" class="menu-link">
                                 <div data-i18n="Basic"><i>AN Mother Not Delivered List (3 Months EDD)</i></div>
                              </a>
                          </li>
@@ -271,28 +271,28 @@ include ('preloader.php');
 					<ul class="menu-sub"> <!---- Creating Sub Sub Menu Header ---->
 			             
 			             <li class="menu-item; style=menu-list-type:None" > 
-                             <a href="MotherImDue.php" class="menu-link">
+                             <a href="ECTMList.php" class="menu-link">
                                 <div data-i18n="Basic"><i>ECs Following Temporary Methods</i></div>
                              </a>
                          </li>
                      
 					 
 			             <li class="menu-item; style=menu-list-type:None" > 
-                             <a href="MotherImDue.php" class="menu-link">
+                             <a href="" class="menu-link">
                                 <div data-i18n="Basic"><i>ECs Following Permanent Methods</i></div>
                              </a>
                          </li>
                      
 					  
 			             <li class="menu-item; style=menu-list-type:None" >  
-                             <a href="MotherImDue.php" class="menu-link">
+                             <a href="ECAnyList.php" class="menu-link">
                                 <div data-i18n="Basic"><i>ECs Not Following Any Other Methods</i></div>
                              </a>
                          </li>
                      
 					  
 			             <li class="menu-item; style=menu-list-type:None" >  
-                             <a href="MotherImDue.php" class="menu-link">
+                             <a href="" class="menu-link">
                                 <div data-i18n="Basic"><i>ECs Not following Any Family Welfare Methods</i></div>
                              </a>
                          </li>
@@ -312,31 +312,31 @@ include ('preloader.php');
 					
 					<ul class="menu-sub"> <!---- Creating Sub Sub Menu Header ---->
 			             <li class="menu-item; style=menu-list-type:None" >  
-                             <a href="EligibleCouplesReport.php" class="menu-link">
+                             <a href="" class="menu-link">
                                  <div data-i18n="Basic"><i>High Risk List</i></div>
                              </a>
                          </li>
                     
 			             <li class="menu-item; style=menu-list-type:None" > 
-                              <a href="MotherImDue.php" class="menu-link">
+                              <a href="" class="menu-link">
                                  <div data-i18n="Basic"><i>HOB Pregnancy List</i></div>
                               </a>
                          </li>
                     
 			             <li class="menu-item; style=menu-list-type:None" >  
-                              <a href="MotherImDue.php" class="menu-link">
+                              <a href="" class="menu-link">
                                  <div data-i18n="Basic"><i>GDM</i></div>
                               </a>
                          </li>
                      
 			             <li class="menu-item; style=menu-list-type:None" >  
-                              <a href="MotherImDue.php" class="menu-link">
+                              <a href="" class="menu-link">
                                  <div data-i18n="Basic"><i>Anemia</i></div>
                               </a>
                          </li>
                      
 			             <li class="menu-item; style=menu-list-type:None" >  
-                              <a href="MotherImDue.php" class="menu-link">
+                              <a href="" class="menu-link">
                                  <div data-i18n="Basic"><i>PIH</i></div>
                               </a>
                          </li>

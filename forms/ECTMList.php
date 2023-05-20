@@ -20,18 +20,18 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card"><h5 class="card-header">
-                  <span class="text-muted fw-light">Reports / Delivery Details / </span> Delivered List
+                  <span class="text-muted fw-light">Reports / Postnatal Visit / </span> ECs Following Temporary Methods
                </h5>  
 			   
 <!------------------------------------------------------------------------------------- Page Details + search button + Table -------------------------------------------------------->		   
 			<div class="table-responsive text-nowrap">		 
 	 
 	        <div class="container"> 
-			<div class="table-responsive text-nowrap">	
-	       		
+	        <div class="table-responsive text-nowrap">
+		
 		   <table id="users-detail"  class="display nowrap" cellspacing="0" width="100%"> 
 			
-                        <thead>
+                       <thead>
                          <tr>
                <th>S.No</th>     
                <th>RCH ID</th>
@@ -41,35 +41,29 @@
                <th>HSC</th>
 			   <th>VP / TP / Mpty</th>
                <th>Village / Ward</th>
-			   <th>Resident/Visitor</th> 
                <th>Mother Name</th>
                <th>Age</th>
                <th>Husband Name</th>
 			   <th>Mobile No</th>
-			   <th>Address</th>
-               <th>Delivery Date</th>
-               <th>Delivery Hospital Type</th>
-               <th>Delivery Type</th>
-               <th>Outcome</th> 
-			   <th>Family Welfare Method</th> 
+               <th>Temporary Family Welfare Method</th>
                          </tr>
                        </thead>  
     <?php
-	
-//	$tst = "Hello  world ";
-//	print_r(trim($tst)); 
-	//print_r(strlen($tst)); exit;
-	
       // $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy,hs.BlockName,hs.PhcName,hs.HscName, ec.BlockId,ec.PhcId, hs.PanchayatName, hs.VillageName, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId) JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
       //              WHERE av.status=1";             
 
       //  $listQry = "SELECT hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId)";         
 		
-      $listQry = "SELECT dd.picmeno,ar.residentType, dd.deliverydate, dd.hospitaltype, dd.deliverytype,dd.deliveryOutcome, dd.id, ec.address, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.MotherAge, ec.motheraadhaarname,dd.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno
-             	  FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno JOIN anregistration ar on dd.picmeno = ar.picmeno
-                  WHERE dd.status!=0 AND NOT EXISTS (SELECT pv.picmeNo FROM postnatalvisit pv WHERE pv.picmeNo = dd.picmeno)";  		
-	  $private = " AND dd.createdBy='".$userid."'";
-      $orderQry = " ORDER BY dd.deliverydate DESC";
+      $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
+        WHERE pv.status!=0 AND (pv.ppcMethod = 2 OR pv.ppcMethod = 8)";
+	//  WHERE pv.status=1 AND pv.ppcMethod = 2"; 	
+	// WHERE pv.status=1 AND (pv.ppcMethod = trim(Condom) OR pv.ppcMethod = trim(Inj antara and Tab chaya)";   
+        
+				     		
+	  $private = " AND pv.createdBy='".$userid."'";
+      $orderQry = " ORDER BY ar.picmeRegDate DESC";
+	  
+	 // print_r()
 	  
       if(($usertype == 0) || ($usertype == 1)) {
          if(isset($_POST['filter'])) {
@@ -112,7 +106,7 @@
               if($ExeQuery) {
                 $cnt=1;
                 while($row = mysqli_fetch_array($ExeQuery)) {
-							//  print_r($row['Test']); exit;
+						//	  print_r($row['HscId']);
 						//	 if($row['HscId']== $Hsc_val)
 							// {print_r($rowh['BlockName']); exit;}
 				$HscQry = "SELECT * From hscmaster";				 
@@ -125,57 +119,14 @@
 						$row['VillageId']==$rowh['VillageId'] AND
 						$row['PanchayatId']==$rowh['PanchayatId'])
 						{
-							if($row['residentType'] == "1")
-							{
-							 $row['residentType'] = "RESIDENT";
-							}
-							
-							if($row['residentType'] == "2")	
-							{
-							 $row['residentType'] = "VISITOR";
-							}	
-							if($row['deliverytype'] == "1")
-							{
-							    $row['deliverytype'] = "Normal";
-							}	
-							if($row['deliverytype'] == "2")	
-							{
-							 $row['deliverytype'] = "Caesarian";
-							}	
-							if($row['deliverytype'] == "3")	
-							{
-							 $row['deliverytype'] = "Assisted";
-							}	
-							
-							if($row['deliveryOutcome'] == "1")	
-							{
-							$row['deliveryOutcome'] = "Live Birth";}
-							else								
-							    if($row['deliveryOutcome'] == "2")	
-							    {
-								$row['deliveryOutcome'] = "Still Birth"; }
-								 else
-							    	 if($row['deliveryOutcome'] == "3")	
-							         {
-									 $row['deliveryOutcome'] = "IUD"; }
-									   else
-										   if($row['deliveryOutcome'] == "4")	
-										   {
-                                           $row['deliveryOutcome'] = "Live Birth and Still Birth"; 											   
-						                   }	
-										   
-										//   1.None2.Condom3.Male sterilization4.IUCD-PP5.PP-PS6.Any traditional methods7.Any others specify
-										   
-										  
-						         	
-       $ppcMethod = "";
+							$ppcMethod = "";
 	   $ppcQry = "SELECT ppcMethod,picmeNo From postnatalvisit";		/*Fetching ppcMethod From postnatalvisit*/		 
 	   $ppcRes =  mysqli_query($conn,$ppcQry);
        if($ppcRes) {
          while($rowp = mysqli_fetch_array($ppcRes)) 
 		 {
 		//  if(($row['picmeno']==$rowp['picmeNo']) AND ($rowp['ppcMethod'] == "4" OR $rowp['ppcMethod'] == "5"))
-			 if($row['picmeno']==$rowp['picmeNo']) 
+			 if($row['picmeNo']==$rowp['picmeNo']) 
 			 {
 				 	if($rowp['ppcMethod'] == "1")	
 							{
@@ -213,67 +164,22 @@
 										   {
                                            $rowp['ppcMethod'] = "Inj antara and Tab chaya"; 	
                                            								   
-		 }	
-		                                   $ppcMethod = $rowp['ppcMethod'];		}}  
-										   
-										   	if($row['hospitaltype'] == "1")	
-							{
-							$row['hospitaltype'] = "HSC";}
-							else								
-							    if($row['hospitaltype'] == "2")	
-							    {
-								$row['hospitaltype'] = "PHC"; }
-								 else
-							    	 if($row['hospitaltype'] == "3")	
-							         {
-									 $row['hospitaltype'] = "UG PHC"; }
-									   else 
-										   if($row['hospitaltype'] == "4")	
-										   {
-                                           $row['hospitaltype'] = "GH"; 											   
-						                   }
-                                           else
-	                                       if($row['hospitaltype'] == "5")	
-										   {
-                                           $row['hospitaltype'] = "MCH"; 											   
-						                   }	
-                                           else
-											if($row['hospitaltype'] == "6")	
-										   {
-                                           $row['hospitaltype'] = "Private Hospital"; 											   
-						                   }	
-										   else
-										   if($row['hospitaltype'] == "7")	
-										   {
-                                           $row['hospitaltype'] = "PNH"; 											   
-						                   }	
-                                           if($row['hospitaltype'] == "8")	
-										   {
-                                           $row['hospitaltype'] = "Home"; 											   
-						                   }											   
-              //  $row['hospitaltype'] = $row['hospitaltype']; 		
-	
+		 }			
+		 $ppcMethod = $rowp['ppcMethod'];		}}
                        ?>
                         <tr>
                            <td><?php echo $cnt; ?></td>
-						   <td><?php echo $row['picmeno']; ?></td>
+						   <td><?php echo $row['picmeNo']; ?></td>
 					       <td><?php echo date('d-m-Y', strtotime($row['picmeRegDate'])); ?></td>
 				           <td><?php echo $rowh['BlockName']; ?></td>
                            <td><?php echo $rowh['PhcName']; ?></td>
                            <td><?php echo $rowh['HscName']; ?></td>
 			               <td><?php echo $rowh['PanchayatName']; ?></td>
                            <td><?php echo $rowh['VillageName']; ?></td>
-						   <td><?php echo $row['residentType']; ?></td>
                            <td><?php echo $row['motheraadhaarname']; ?></td>
 					       <td><?php echo $row['MotherAge']; ?></td>
 					       <td><?php echo $row['husbandaadhaarname']; ?></td>
 			               <td><?php echo $row['mothermobno']; ?></td>
-						   
-						   <td><?php echo $row['address']; ?></td>
-						   <td><?php echo date('d-m-Y', strtotime($row['deliverydate'])); ?></td>
-					       <td><?php echo $row['hospitaltype']; ?></td>									   
-					       <td><?php echo $row['deliverytype']; ?></td>
-                           <td><?php echo $row['deliveryOutcome']; ?></td> 
 					       <td><?php echo $ppcMethod; ?></td>
 					     </tr>
                          <?php 
@@ -281,8 +187,7 @@
 						}
 							
 						 }}
-                         } 
-						 }
+				} }
                        } ?>
 	   
 					</table>   <!-------------------- Insert Code Here -------------->
@@ -291,10 +196,6 @@
 <!--------------------------------------------------------------------------------------------- search button + Table Ends -------------------------------------------------------->	
 
 <!-------------------------------------------------------------- Start Download Code ------------------------------------------------------>		
-
-
-
-
 <!------------------------------------------------------------------ Preparing values for next page --------------------------------------------------------------------------------->
 <?php
     $hscName = "";
@@ -315,7 +216,7 @@
 ?>	
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------------------- Download button + Submitting values to next page ------------------------------------------------------------------>
-    <form action="DDListExp.php" method="post" id="filterform" style="width:100%";>	
+    <form action="ECTMListExp.php" method="post" id="filterform" style="width:100%";>	
 		  <div class="col-md-8" style="margin-top: 10px;">
    		
           <button type="submit" id="AVReport" name='AVReport' style = "margin-left : 450px; margin-bottom: 10px" class="btn lt btn-primary"><span class="bx bx-download"></span>&nbsp; Download</button>

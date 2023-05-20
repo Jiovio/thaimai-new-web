@@ -62,7 +62,7 @@
                   WHERE av.status=1 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno)";    		
 				     		
 	  $private = " AND av.createdBy='".$userid."'";
-      $orderQry = " ORDER BY av.picmeno ASC";
+      $orderQry = " ORDER BY ar.picmeRegDate DESC";
 	  
       if(($usertype == 0) || ($usertype == 1)) {
          if(isset($_POST['filter'])) {

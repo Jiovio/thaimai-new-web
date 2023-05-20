@@ -29,10 +29,9 @@ include "../config/db_connect.php";
 
 //if(strlen($search_text_input) > 0 )
 
-    $listQry ="SELECT dd.picmeno,ar.residentType, dd.deliverydate, dd.hospitaltype, dd.deliverytype,dd.deliveryOutcome, dd.id, ec.address, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.MotherAge, ec.motheraadhaarname,dd.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno
-             	  FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno JOIN anregistration ar on dd.picmeno = ar.picmeno
-                  WHERE dd.status!=0 AND NOT EXISTS (SELECT pv.picmeNo FROM postnatalvisit pv WHERE pv.picmeNo = dd.picmeno)";  		
-    $orderQry = " ORDER BY dd.deliverydate DESC";
+    $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
+        WHERE pv.status!=0 AND (pv.ppcMethod = 2 OR pv.ppcMethod = 8)";		
+    $orderQry = " ORDER BY ar.picmeRegDate DESC";
 		
     if($bloName == "" && $phcName == "" && $hscName == ""){
        $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
@@ -48,16 +47,7 @@ include "../config/db_connect.php";
 	$developer_records = array();
 	$sno=1;
 	while( $rows = mysqli_fetch_assoc($ExeQuery) ) {
-		$search_flag = false;   
-		
-	//	print_r($rows['address']); exit;
-    
-	//		 print_r($rows['BlockId']);
-	//		 print_r($rows['PhcId']);
-	//         print_r($rows['HscId']);
-			
-	//	 print_r($rows['PanchayatId']); 
-	// print_r($rows['VillageId']);exit;
+		$search_flag = false;
 	
              $rows['BlockName'] = "";
 			 $rows['PhcName'] = "";
@@ -85,88 +75,12 @@ include "../config/db_connect.php";
 				
 //print_r($rows['HscId']); exit;				
 }}}
-        if($rows['residentType'] == "1") /*Resident/Visitor*/
-							{
-							 $rows['residentType'] = "RESIDENT";
-							}
-							
-							if($rows['residentType'] == "2")	
-							{
-							 $rows['residentType'] = "VISITOR";
-							}	
-							
-							if($rows['deliverytype'] == "1") /*delivery Type*/
-							{
-							$rows['deliverytype'] = "Normal";
-							}	
-							if($rows['deliverytype'] == "2")	
-							{
-							 $rows['deliverytype'] = "Caesarian";
-							}	
-							if($rows['deliverytype'] == "3")	
-							{
-							 $rows['deliverytype'] = "Assisted";
-							}	
-							
-							if($rows['deliveryOutcome'] == "1")	/*delivery Outcome*/
-							{
-							$rows['deliveryOutcome'] = "Live Birth";}
-							else								
-							if($rows['deliveryOutcome'] == "2")	
-							{
-							$rows['deliveryOutcome'] = "Still Birth"; }
-							else
-							if($rows['deliveryOutcome'] == "3")	
-							{
-							$rows['deliveryOutcome'] = "IUD"; }
-							else
-							if($rows['deliveryOutcome'] == "4")	
-							{
-                            $rows['deliveryOutcome'] = "Live Birth and Still Birth"; 											   
-						    }	
-							
-							if($rows['hospitaltype'] == "1")	/*delivery Happened @*/
-							{
-							$rows['hospitaltype'] = "HSC";}
-							else								
-							if($rows['hospitaltype'] == "2")	
-							{
-							$rows['hospitaltype'] = "PHC"; }
-							else
-							if($rows['hospitaltype'] == "3")	
-							{
-							$rows['hospitaltype'] = "UG PHC"; }
-							else 
-							if($rows['hospitaltype'] == "4")	
-							{
-                            $rows['hospitaltype'] = "GH"; 											   
-						    }
-                            else
-	                        if($rows['hospitaltype'] == "5")	
-							{
-                            $rows['hospitaltype'] = "MCH"; 											   
-						    }	
-                            else
-							if($rows['hospitaltype'] == "6")	
-							{
-                            $rows['hospitaltype'] = "Private Hospital"; 											   
-						    }	
-							else
-							if($rows['hospitaltype'] == "7")	
-							{
-                            $rows['hospitaltype'] = "PNH"; 											   
-						    }	
-                            if($rows['hospitaltype'] == "8")	
-							{
-                            $rows['hospitaltype'] = "Home"; 			
-						    }
-
-	    $ppcQry = "SELECT ppcMethod,picmeNo From postnatalvisit";		/*Fetching ppcMethod From postnatalvisit*/		 
+        $ppcQry = "SELECT ppcMethod,picmeNo From postnatalvisit";		/*Fetching ppcMethod From postnatalvisit*/		 
 	    $ppcRes =  mysqli_query($conn,$ppcQry);
         if($ppcRes) {
          while($rowp = mysqli_fetch_array($ppcRes)) 
 		 {
-		if($rows['picmeno']==$rowp['picmeNo']) {
+		if($rows['picmeNo']==$rowp['picmeNo']) {
 			if($rowp['ppcMethod'] == "1")	
 							{
 							$rowp['ppcMethod'] = "None";}
@@ -222,12 +136,7 @@ include "../config/db_connect.php";
                            $rows['motheraadhaarname']. 
 					       $rows['MotherAge']. 
 					       $rows['husbandaadhaarname']. 
-			               $rows['mothermobno']. 						   
-						   trim($rows['address']). 
-						   date('d-m-Y', strtotime($rows['deliverydate'])). 
-					       $rows['hospitaltype']. 									   
-					       $rows['deliverytype']. 
-						   $rows['deliveryOutcome'].  
+			               $rows['mothermobno']. 
 					       $rows['ppcMethod']; 
 	   
 	   if(stripos($wild_srch,$search_text_input)!==false) /*STRIPOS - Case incensitive search */
@@ -255,18 +164,18 @@ print_r($wild_srch);
 	//		 print_r($rows['VillageName']); exit;
 }}	
  //print_r("$ppcMethod"); print_r($ppcMethod); exit;
-	$filename = "Delivered_List_".date('d-m-Y') . ".xls";			
+	$filename = "ECs_Following_Temporary_List_".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");
 	  $file = fopen('php://output','w');
-	  $header = array("Delivered List as on ".date('d-m-Y'));
+	  $header = array("ECs Following Temporary List as on ".date('d-m-Y'));
 	  fputcsv($file,$header);	
 	  $show_coloumn = false;
 	  if(!empty($developer_records)) {
 		foreach($developer_records as $record) {
 		 if(!$show_coloumn) {
 			 
-		$h = array("S.No", "RCH ID","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Resident/Visitor","Mother Name","Age","Husband Name","Mobile No", "Address","Delivery Date", "Delivery Hospital Type","Delivery Type","Outcome","Family Welfare Method");
+		$h = array("S.No", "RCH ID","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Mother Name","Age","Husband Name","Mobile No", "Temporary Family Welfare Method");
 			
 		$excelData = implode("\t", array_values($h)) . "\n";
 		$show_coloumn = true;	
@@ -274,23 +183,17 @@ print_r($wild_srch);
 		
 		$lineData = array(
 		$sno++,
-						    $record['picmeno'],
+						    $record['picmeNo'],
 					        date('d-m-Y', strtotime($record['picmeRegDate'])),
 				            $record['BlockName'],
                             $record['PhcName'],
                             $record['HscName'],
 	                        $record['PanchayatName'],
                             $record['VillageName'],
-						    $record['residentType'],
                             $record['motheraadhaarname'],
 					        $record['MotherAge'],
 					        $record['husbandaadhaarname'],
 			                $record['mothermobno'],
-						    $record['address'],
-						    date('d-m-Y', strtotime($record['deliverydate'])),
-					        $record['hospitaltype'],									   
-					        $record['deliverytype'],
-							$record['deliveryOutcome'],
 					        $record['ppcMethod']
 		  ); 
 			$excelData .= implode("\t", array_values($lineData)) . "\n";
