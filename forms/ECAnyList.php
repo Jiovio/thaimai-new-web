@@ -20,7 +20,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card"><h5 class="card-header">
-                  <span class="text-muted fw-light">Reports / Postnatal Visit / </span> ECs Not Following Family Welfare Methods List
+                  <span class="text-muted fw-light">Reports / Postnatal Visit / </span> ECs Following Any Other Family Welfare Methods List
                </h5>  
 			   
 <!------------------------------------------------------------------------------------- Page Details + search button + Table -------------------------------------------------------->		   
@@ -29,7 +29,7 @@
 	        <div class="container"> 
 	        <div class="table-responsive text-nowrap">
 		
-		   <table id="users-detail"  class="display nowrap" cellspacing="0" width="100%"> 
+		   		   <table id="users-detail"  class="display nowrap" cellspacing="0" width="100%"> 
 			
                        <thead>
                          <tr>
@@ -45,7 +45,9 @@
                <th>Age</th>
                <th>Husband Name</th>
 			   <th>Mobile No</th>
-               <th>Temporary Family Welfare Method</th>
+			   <th>Obstetric score</th>
+               <th>Living Children</th>
+               <th>Surgery Type</th>
                          </tr>
                        </thead>  
     <?php
@@ -54,8 +56,8 @@
 
       //  $listQry = "SELECT hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId)";         
 		
-      $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
-        WHERE pv.status!=0 AND (pv.ppcMethod = 1)";
+      $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ar.obstetricCode, ar.livingChildren, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
+        WHERE pv.status!=0 AND (pv.ppcMethod = 8 OR pv.ppcMethod = 9)";
 	//  WHERE pv.status=1 AND pv.ppcMethod = 2"; 	
 	// WHERE pv.status=1 AND (pv.ppcMethod = trim(Condom) OR pv.ppcMethod = trim(Inj antara and Tab chaya)";   
         
@@ -130,41 +132,46 @@
 			 {
 				 	if($rowp['ppcMethod'] == "1")	
 							{
-							$rowp['ppcMethod'] = "None";}
+							$rowp['ppcMethod'] = "Can't decide now";}
 							else								
 							    if($rowp['ppcMethod'] == "2")	
 							    {
-								$rowp['ppcMethod'] = "Condom"; }
+								$rowp['ppcMethod'] = "None"; }
 								 else
 							    	 if($rowp['ppcMethod'] == "3")	
 							         {
-									 $rowp['ppcMethod'] = "Male sterilization"; }
+									 $rowp['ppcMethod'] = "Condom"; }
 									   else 
 										   if($rowp['ppcMethod'] == "4")	
 										   {
-                                           $rowp['ppcMethod'] = "IUCD-PP"; 											   
+                                           $rowp['ppcMethod'] = "Male sterilization"; 											   
 						                   }
                                            else
 	                                       if($rowp['ppcMethod'] == "5")	
 										   {
-                                           $rowp['ppcMethod'] = "PP-PS"; 											   
+                                           $rowp['ppcMethod'] = "IUCD-PP"; 											   
 						                   }	
                                           else
 											if($rowp['ppcMethod'] == "6")	
 										   {
-                                           $rowp['ppcMethod'] = "Any traditional methods"; 											   
+                                           $rowp['ppcMethod'] = "PP-PS"; 											   
 						                   }	
 										   else
 										   if($rowp['ppcMethod'] == "7")	
 										   {
-                                           $rowp['ppcMethod'] = "Any others specify"; 	
+                                           $rowp['ppcMethod'] = "Inj antara and Tab chaya"; 	
                                            								   
 		 }		
 		 if($rowp['ppcMethod'] == "8")	
 										   {
-                                           $rowp['ppcMethod'] = "Inj antara and Tab chaya"; 	
+                                           $rowp['ppcMethod'] = "Any Other Specify"; 	
                                            								   
-		 }			
+		 }		
+if($rowp['ppcMethod'] == "9")	
+										   {
+                                           $rowp['ppcMethod'] = "Any Traditional Methods"; 	
+                                           								   
+		 }				 
 		 $ppcMethod = $rowp['ppcMethod'];		}}
                        ?>
                         <tr>
@@ -180,6 +187,8 @@
 					       <td><?php echo $row['MotherAge']; ?></td>
 					       <td><?php echo $row['husbandaadhaarname']; ?></td>
 			               <td><?php echo $row['mothermobno']; ?></td>
+						   <td><?php echo $row['obstetricCode']; ?></td>
+						   <td><?php echo $row['livingChildren']; ?></td>
 					       <td><?php echo $ppcMethod; ?></td>
 					     </tr>
                          <?php 
@@ -188,9 +197,12 @@
 							
 						 }}
 				} }
-                       } ?>
+                       } 
+					   
+					   ?>
 	   
 					</table>   <!-------------------- Insert Code Here -------------->
+					
 	
 </div>
 <!--------------------------------------------------------------------------------------------- search button + Table Ends -------------------------------------------------------->	

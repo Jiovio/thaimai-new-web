@@ -278,7 +278,7 @@ include ('preloader.php');
                      
 					 
 			             <li class="menu-item; style=menu-list-type:None" > 
-                             <a href="" class="menu-link">
+                             <a href="ECPrmntList.php" class="menu-link">
                                 <div data-i18n="Basic"><i>ECs Following Permanent Methods</i></div>
                              </a>
                          </li>
@@ -286,13 +286,13 @@ include ('preloader.php');
 					  
 			             <li class="menu-item; style=menu-list-type:None" >  
                              <a href="ECAnyList.php" class="menu-link">
-                                <div data-i18n="Basic"><i>ECs Not Following Any Other Methods</i></div>
+                                <div data-i18n="Basic"><i>ECs Following Any Other Methods</i></div>
                              </a>
                          </li>
                      
 					  
 			             <li class="menu-item; style=menu-list-type:None" >  
-                             <a href="" class="menu-link">
+                             <a href="ECNFWList.php" class="menu-link">
                                 <div data-i18n="Basic"><i>ECs Not following Any Family Welfare Methods</i></div>
                              </a>
                          </li>

@@ -20,7 +20,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card"><h5 class="card-header">
-                  <span class="text-muted fw-light">Reports / Postnatal Visit / </span> ECs Following Temporary Methods
+                  <span class="text-muted fw-light">Reports / Postnatal Visit / </span> ECs Following Permanent Methods
                </h5>  
 			   
 <!------------------------------------------------------------------------------------- Page Details + search button + Table -------------------------------------------------------->		   
@@ -45,7 +45,9 @@
                <th>Age</th>
                <th>Husband Name</th>
 			   <th>Mobile No</th>
-               <th>Temporary Family Welfare Method</th>
+			   <th>Obstetric score</th>
+               <th>Living Children</th>
+               <th>Surgery Type</th>
                          </tr>
                        </thead>  
     <?php
@@ -54,8 +56,8 @@
 
       //  $listQry = "SELECT hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId)";         
 		
-      $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
-        WHERE pv.status!=0 AND (pv.ppcMethod = 3 OR pv.ppcMethod = 7)";
+      $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ar.obstetricCode, ar.livingChildren, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
+        WHERE pv.status!=0 AND (pv.ppcMethod = 4 OR pv.ppcMethod = 6 OR pv.ppcMethod = 5)";
 	//  WHERE pv.status=1 AND pv.ppcMethod = 2"; 	
 	// WHERE pv.status=1 AND (pv.ppcMethod = trim(Condom) OR pv.ppcMethod = trim(Inj antara and Tab chaya)";   
         
@@ -169,7 +171,7 @@ if($rowp['ppcMethod'] == "9")
 										   {
                                            $rowp['ppcMethod'] = "Any Traditional Methods"; 	
                                            								   
-		 }				 			
+		 }				 
 		 $ppcMethod = $rowp['ppcMethod'];		}}
                        ?>
                         <tr>
@@ -185,6 +187,8 @@ if($rowp['ppcMethod'] == "9")
 					       <td><?php echo $row['MotherAge']; ?></td>
 					       <td><?php echo $row['husbandaadhaarname']; ?></td>
 			               <td><?php echo $row['mothermobno']; ?></td>
+						   <td><?php echo $row['obstetricCode']; ?></td>
+						   <td><?php echo $row['livingChildren']; ?></td>
 					       <td><?php echo $ppcMethod; ?></td>
 					     </tr>
                          <?php 
@@ -193,9 +197,12 @@ if($rowp['ppcMethod'] == "9")
 							
 						 }}
 				} }
-                       } ?>
+                       } 
+					   
+					   ?>
 	   
 					</table>   <!-------------------- Insert Code Here -------------->
+					
 	
 </div>
 <!--------------------------------------------------------------------------------------------- search button + Table Ends -------------------------------------------------------->	
@@ -221,7 +228,7 @@ if($rowp['ppcMethod'] == "9")
 ?>	
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------------------- Download button + Submitting values to next page ------------------------------------------------------------------>
-    <form action="ECTMListExp.php" method="post" id="filterform" style="width:100%";>	
+    <form action="ECPrmntListExp.php" method="post" id="filterform" style="width:100%";>	
 		  <div class="col-md-8" style="margin-top: 10px;">
    		
           <button type="submit" id="AVReport" name='AVReport' style = "margin-left : 450px; margin-bottom: 10px" class="btn lt btn-primary"><span class="bx bx-download"></span>&nbsp; Download</button>

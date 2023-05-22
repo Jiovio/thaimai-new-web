@@ -179,41 +179,46 @@
 			 {
 				 	if($rowp['ppcMethod'] == "1")	
 							{
-							$rowp['ppcMethod'] = "None";}
+							$rowp['ppcMethod'] = "Can't decide now";}
 							else								
 							    if($rowp['ppcMethod'] == "2")	
 							    {
-								$rowp['ppcMethod'] = "Condom"; }
+								$rowp['ppcMethod'] = "None"; }
 								 else
 							    	 if($rowp['ppcMethod'] == "3")	
 							         {
-									 $rowp['ppcMethod'] = "Male sterilization"; }
+									 $rowp['ppcMethod'] = "Condom"; }
 									   else 
 										   if($rowp['ppcMethod'] == "4")	
 										   {
-                                           $rowp['ppcMethod'] = "IUCD-PP"; 											   
+                                           $rowp['ppcMethod'] = "Male sterilization"; 											   
 						                   }
                                            else
 	                                       if($rowp['ppcMethod'] == "5")	
 										   {
-                                           $rowp['ppcMethod'] = "PP-PS"; 											   
+                                           $rowp['ppcMethod'] = "IUCD-PP"; 											   
 						                   }	
                                           else
 											if($rowp['ppcMethod'] == "6")	
 										   {
-                                           $rowp['ppcMethod'] = "Any traditional methods"; 											   
+                                           $rowp['ppcMethod'] = "PP-PS"; 											   
 						                   }	
 										   else
 										   if($rowp['ppcMethod'] == "7")	
 										   {
-                                           $rowp['ppcMethod'] = "Any others specify"; 	
+                                           $rowp['ppcMethod'] = "Inj antara and Tab chaya"; 	
                                            								   
 		 }		
 		 if($rowp['ppcMethod'] == "8")	
 										   {
-                                           $rowp['ppcMethod'] = "Inj antara and Tab chaya"; 	
+                                           $rowp['ppcMethod'] = "Any Other Specify"; 	
                                            								   
-		 }	
+		 }		
+if($rowp['ppcMethod'] == "9")	
+										   {
+                                           $rowp['ppcMethod'] = "Any Traditional Methods"; 	
+                                           								   
+		 }				 		
 		                                   $ppcMethod = $rowp['ppcMethod'];		}}  
 										   
 										   	if($row['hospitaltype'] == "1")	

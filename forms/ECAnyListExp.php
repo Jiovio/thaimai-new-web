@@ -29,8 +29,8 @@ include "../config/db_connect.php";
 
 //if(strlen($search_text_input) > 0 )
 
-    $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
-        WHERE pv.status!=0 AND (pv.ppcMethod = 1)";		
+    $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ar.obstetricCode, ar.livingChildren, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
+        WHERE pv.status!=0 AND (pv.ppcMethod = 8 OR pv.ppcMethod = 9)";	
     $orderQry = " ORDER BY ar.picmeRegDate DESC";
 		
     if($bloName == "" && $phcName == "" && $hscName == ""){
@@ -80,44 +80,51 @@ include "../config/db_connect.php";
         if($ppcRes) {
          while($rowp = mysqli_fetch_array($ppcRes)) 
 		 {
-		if($rows['picmeNo']==$rowp['picmeNo']) {
-			if($rowp['ppcMethod'] == "1")	
+		if($rows['picmeNo']==$rowp['picmeNo']) 
+			 {
+				 	if($rowp['ppcMethod'] == "1")	
 							{
-							$rowp['ppcMethod'] = "None";}
+							$rowp['ppcMethod'] = "Can't decide now";}
 							else								
 							    if($rowp['ppcMethod'] == "2")	
 							    {
-								$rowp['ppcMethod'] = "Condom"; }
+								$rowp['ppcMethod'] = "None"; }
 								 else
 							    	 if($rowp['ppcMethod'] == "3")	
 							         {
-									 $rowp['ppcMethod'] = "Male sterilization"; }
+									 $rowp['ppcMethod'] = "Condom"; }
 									   else 
 										   if($rowp['ppcMethod'] == "4")	
 										   {
-                                           $rowp['ppcMethod'] = "IUCD-PP"; 											   
+                                           $rowp['ppcMethod'] = "Male sterilization"; 											   
 						                   }
                                            else
 	                                       if($rowp['ppcMethod'] == "5")	
 										   {
-                                           $rowp['ppcMethod'] = "PP-PS"; 											   
+                                           $rowp['ppcMethod'] = "IUCD-PP"; 											   
 						                   }	
                                           else
 											if($rowp['ppcMethod'] == "6")	
 										   {
-                                           $rowp['ppcMethod'] = "Any traditional methods"; 											   
+                                           $rowp['ppcMethod'] = "PP-PS"; 											   
 						                   }	
 										   else
 										   if($rowp['ppcMethod'] == "7")	
 										   {
-                                           $rowp['ppcMethod'] = "Any others specify"; 	
-                                           								   
-		                                   }		
-										   if($rowp['ppcMethod'] == "8")	
-										   {
                                            $rowp['ppcMethod'] = "Inj antara and Tab chaya"; 	
                                            								   
-		 }	
+		                                    }		
+		 if($rowp['ppcMethod'] == "8")	
+										   {
+                                           $rowp['ppcMethod'] = "Any Other Specify"; 	
+                                           								   
+		 }		
+if($rowp['ppcMethod'] == "9")	
+										   {
+                                           $rowp['ppcMethod'] = "Any Traditional Methods"; 	
+                                           								   
+		 }				 		
+		 
 		$rows['ppcMethod'] = $rowp['ppcMethod'];}}}  
 	
 		$wild_srch = "";				     
@@ -137,6 +144,8 @@ include "../config/db_connect.php";
 					       $rows['MotherAge']. 
 					       $rows['husbandaadhaarname']. 
 			               $rows['mothermobno']. 
+						   $rows['obstetricCode'].
+						   $rows['livingChildren'].
 					       $rows['ppcMethod']; 
 	   
 	   if(stripos($wild_srch,$search_text_input)!==false) /*STRIPOS - Case incensitive search */
@@ -164,11 +173,11 @@ print_r($wild_srch);
 	//		 print_r($rows['VillageName']); exit;
 }}	
  //print_r("$ppcMethod"); print_r($ppcMethod); exit;
-	$filename = "ECs_Not_Following_FW_Methods_List".date('d-m-Y') . ".xls";			
+	$filename = "ECs_Following__Any_Other_FW_Method_List_".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");
 	  $file = fopen('php://output','w');
-	  $header = array("ECs Not Following Family Welfare Methods List as on ".date('d-m-Y'));
+	  $header = array("ECs Following Any Other FW Method List as on ".date('d-m-Y'));
 	  fputcsv($file,$header);	
 	  $show_coloumn = false;
 	  if(!empty($developer_records)) {
@@ -194,6 +203,8 @@ print_r($wild_srch);
 					        $record['MotherAge'],
 					        $record['husbandaadhaarname'],
 			                $record['mothermobno'],
+							$record['obstetricCode'],
+						    $record['livingChildren'],
 					        $record['ppcMethod']
 		  ); 
 			$excelData .= implode("\t", array_values($lineData)) . "\n";
