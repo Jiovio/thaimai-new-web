@@ -315,70 +315,6 @@ $('#picmeno').on('keydown keyup change', function(){
   }
 });
 
-$('#lmpdate').on('blur change', function(){
-  var lmpdate = $(this).val();
-  if(lmpdate != ""){
-     lmpdateAr = lmpdate.split("-");
-     formattedLmpdateAr = lmpdateAr[0] + "/" +  lmpdateAr[1] + "/" + lmpdateAr[2];
-    var newDate = formatDate(addDays(new Date(formattedLmpdateAr), 280));
-   
-    $('#edddate').val(newDate)
-  }
-});
-//for retrieve total no of pregnancy when enter picme number in medical history
-$('#picmeno').on('blur change', function () {
-    var picmeno = $(this).val();
-    $.ajax({
-        url: "getGravida.php",
-        type: "POST",
-        data: {
-            picmeno: picmeno
-        },
-        cache: false,
-        success: function (result) {
-            if (result !== "") {
-                $("#totPregnancy").val(result).change();
-                $("#totPregnancy").attr("disabled", true);
-                if($('#pregnancyResult').length > 0 && $('#pregnancyResult').val() != ''){
-                    $('#pregnancyResult').val(result);
-                } else {
-                     $('<input>').attr({
-                    type: 'hidden',
-                    name: 'totPregnancy',
-                    value: result,
-                    id : 'pregnancyResult'
-                }).appendTo('#placeDelivery');
-                }
-            }
-        }
-    });
-});
-
-
-
-function formatDate(date) {
-    day = date.getDate();
-    month = (date.getMonth() + 1)
-    if(day < 10){
-        day = '0'+day;
-        
-    }
-    
-    if(month < 10){
-        month = '0'+month;
-    }
-    
-    
-    return day + '/' + month + '/' + date.getFullYear();
-}
-
-// Correct
-function addDays(date, days) {
-    var result = new Date(date);
-    result.setDate(date.getDate() + days);
-    return result;
-}
-
 function CovidChange() {
 var selectBox = document.getElementById("Covidvac");
 var selectedValue = selectBox.options[selectBox.selectedIndex].value;
@@ -566,7 +502,20 @@ $("#doseName").focus();
 }
 });
 });  
+
+
+
 }); 
+
+var table = $('#users-detail').DataTable({
+}).on('search.dt', function() {
+  var input = $('.dataTables_filter input')[0];
+  $('#search_text_input').val(input.value);
+  console.log(input.value)
+})
+
+
+
 
 function RefChange() {
 var selectBox = document.getElementById("referralFacility");
@@ -794,40 +743,23 @@ if(selectedValue == "1") { ivDoses.style.display = "block"; } else if(selectedVa
 function fnCalMotAge(){
   var MotDateinput = document.getElementById("motherdob").value;   
   // convert user input value into date object
-  //var motbirthDate = new Date(MotDateinput);
-  
-   var today = new Date();
-    var birthDate = new Date(MotDateinput);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-   
+  var motbirthDate = new Date(MotDateinput);
   
   // get difference from current date;
-//  var mdiff=Date.now() - motbirthDate.getTime(); 
-//  var  motAgeDate = new Date(mdiff); 
-//  var motCalcAge=   Math.abs(motAgeDate.getUTCFullYear() - 1970);
-  document.getElementById("motherageecreg").value = age;  
+  var mdiff=Date.now() - motbirthDate.getTime(); 
+  var  motAgeDate = new Date(mdiff); 
+  var motCalcAge=   Math.abs(motAgeDate.getUTCFullYear() - 1970);
+  document.getElementById("motherageecreg").value = motCalcAge;  
 }
 
 function fnCalHusAge(){
   var HusDateinput = document.getElementById("husdob").value;   
   // convert user input value into date object
-//  var husbirthDate = new Date(HusDateinput);
-  
-   var today = new Date();
-    var birthDate = new Date(HusDateinput);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
+  var husbirthDate = new Date(HusDateinput);
   
   // get difference from current date;
-//  var hdiff=Date.now() - husbirthDate.getTime(); 
-//  var  husAgeDate = new Date(hdiff); 
-//  var husCalcAge=   Math.abs(husAgeDate.getUTCFullYear() - 1970);
-  document.getElementById("husageecreg").value = age;  
+  var hdiff=Date.now() - husbirthDate.getTime(); 
+  var  husAgeDate = new Date(hdiff); 
+  var husCalcAge=   Math.abs(husAgeDate.getUTCFullYear() - 1970);
+  document.getElementById("husageecreg").value = husCalcAge;  
 }
