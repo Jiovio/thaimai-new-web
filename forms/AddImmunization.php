@@ -199,7 +199,9 @@ if($doseNo == 1) {
                               aria-describedby="basic-icon-default-mobile"
                             required
                               />
+                            
                           </div>
+                          <div id="dose-provide-box"></div>
                         </div>
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">Breast Feeding</label>

@@ -10,7 +10,11 @@ if(empty($deliveryData) || $deliveryData==0){
     echo json_encode($result);
     return;
 }
-
+$doseProvidedDate = $_POST['doseProvidedDateVal'];
+$checkdoseProvidedDate =0;
+if(!empty($doseProvidedDate) && !is_null($doseProvidedDate)){
+    $checkdoseProvidedDate = $_POST['doseProvidedDateVal'];
+}
 $immuneSql = mysqli_query($conn, "SELECT * FROM immunization WHERE picmeno = '$picmeNo' order by id desc LIMIT 0,1");
 $immuneData = mysqli_fetch_array($immuneSql);
 
@@ -19,6 +23,7 @@ if (!empty($immuneData) &&  $immuneData !=0) {
  
      $today = date('Y-m-d');
      $dateDiff =  noOfDaysBetweenDates($deliveryData['deliverydate'], $today);
+     
     switch($immuneData['doseNo']){
         case 1:
            $ImmuneDate = date('Y-m-d', strtotime($deliveryData['deliverydate']. ' + 75 days'));
@@ -33,6 +38,12 @@ if (!empty($immuneData) &&  $immuneData !=0) {
                 $result['message']= "Second dose due date is ".$displayDate.". Please wait upto date of ".$displayDate;
                 $result['doseNo'] = 2;
                 $result['doseDueDate'] = $ImmuneDate;
+                if($checkdoseProvidedDate!=0 && (strtotime($ImmuneDate) > strtotime($checkdoseProvidedDate))){
+                     $result['message']= "You are taking this dose before due date ".$displayDate;                     
+                } else if($checkdoseProvidedDate!=0 && (strtotime($ImmuneDate) <= strtotime($checkdoseProvidedDate))){
+                     $result['result'] = "success";
+                     $result['message']="";
+                }
             } else {
                 $result['result'] = "success";
                 $result['message'] = "";
@@ -53,6 +64,12 @@ if (!empty($immuneData) &&  $immuneData !=0) {
                 $result['message']= "Third dose due date is ".$displayDate.". Please wait upto date of ".$displayDate;
                 $result['doseNo'] = 3;
                 $result['doseDueDate'] = $ImmuneDate;
+                if($checkdoseProvidedDate!=0 && (strtotime($ImmuneDate) > strtotime($checkdoseProvidedDate))){
+                     $result['message']= "You are taking this dose before due date ".$displayDate;                     
+                } else if($checkdoseProvidedDate!=0 && (strtotime($ImmuneDate) <= strtotime($checkdoseProvidedDate))){
+                     $result['result'] = "success";
+                     $result['message']="";
+                }
             } else {
                 $result['result'] = "success";
                 $result['message'] = "";
@@ -65,14 +82,20 @@ if (!empty($immuneData) &&  $immuneData !=0) {
              $displayDate = date('d/m/Y', strtotime($ImmuneDate));
             if($dateDiff > $doseDays[4]){
                 $result['result'] = "success";
-                $result['message'] = "Fourth dose due date is " . $ImmuneDate . ". It is already expired. Please take 4th dose immediately";
+                $result['message'] = "Fourth dose due date is " . $displayDate . ". It is already expired. Please take 4th dose immediately";
                 $result['doseNo'] = 4;
                 $result['doseDueDate'] = $ImmuneDate;
             } else if($dateDiff <  $doseDays[4]) {
                 $result['result'] = "error";
-                $result['message']= "Fourth dose due date is ".$ImmuneDate.". Please wait upto date of ".$ImmuneDate;
+                $result['message']= "Fourth dose due date is ".$displayDate.". Please wait upto date of ".$displayDate;
                 $result['doseNo'] = 4;
                 $result['doseDueDate'] = $ImmuneDate;
+                if($checkdoseProvidedDate!=0 && (strtotime($ImmuneDate) > strtotime($checkdoseProvidedDate))){
+                     $result['message']= "You are taking this dose before due date ".$displayDate;                     
+                } else if($checkdoseProvidedDate!=0 && (strtotime($ImmuneDate) <= strtotime($checkdoseProvidedDate))){
+                     $result['result'] = "success";
+                     $result['message']="";
+                }
             } else {
                 $result['result'] = "success";
                 $result['message'] = "";
@@ -93,6 +116,13 @@ if (!empty($immuneData) &&  $immuneData !=0) {
                 $result['message']= "Fifth dose due date is ".$displayDate.". Please wait upto date of ".$displayDate;
                 $result['doseNo'] = 5;
                 $result['doseDueDate'] = $ImmuneDate;
+
+                if($checkdoseProvidedDate!=0 && (strtotime($ImmuneDate) > strtotime($checkdoseProvidedDate))){
+                     $result['message']= "You are taking this dose before due date ".$displayDate;                     
+                } else if($checkdoseProvidedDate!=0 && (strtotime($ImmuneDate) <= strtotime($checkdoseProvidedDate))){
+                     $result['result'] = "success";
+                     $result['message']="";
+                }
             } else {
                 $result['result'] = "success";
                 $result['message'] = "";

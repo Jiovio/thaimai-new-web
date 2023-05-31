@@ -1,18 +1,28 @@
 <?php
 include "../../config/db_connect.php";
 $picmeNo = $_POST["picmeno"];
+$deliverySql = mysqli_query($conn, "SELECT * FROM deliverydetails WHERE picmeno = '$picmeNo' order by id desc LIMIT 0,1");
+$deliveryData = mysqli_fetch_array($deliverySql);
+$result = ['result' => '', 'message' => '', 'place' =>''];
+if(empty($deliveryData) || $deliveryData==0){
+    $result['result'] = "fail";
+    $result['message'] = "Invalid Picme no";
+    $result['place'] = 'picmeno';
+    echo json_encode($result);
+    return;
+}
 $CheckPNCPeriod = mysqli_query($conn,"SELECT picmeNo, pncPeriod  FROM postnatalvisit where picmeNo='".$_POST["picmeno"]."' order by id desc LIMIT 0,1");
 $CheckPNCPeriodData = mysqli_fetch_array($CheckPNCPeriod); 
-$result = ['result' => '', 'message' => ''];
+
 if (!empty($CheckPNCPeriodData) && isset($CheckPNCPeriodData['picmeNo']) &&  $CheckPNCPeriodData['picmeNo'] > 0) {
   $newPNCPeriod = $CheckPNCPeriodData["pncPeriod"] + 1;
   if($CheckPNCPeriodData['pncPeriod']==7){
       $result['result'] = "error";
-      $result['message'] = "Already entered for all PNC period details for this picme no";
+      $result['message'] = "Picme reached seven entries. No more entries allowed to this picme";
       $result['selected'] = "";
   } else if($_POST["pncPeriod"] != $CheckPNCPeriodData["pncPeriod"]){
        $result['result'] = "error";
-       $result['message'] = "Above selected period is missed to enter. Please fill for above period";
+       $result['message'] = "Selected PNC is already present. Please enter the details for applicable PNC.";
        $result['selected'] = $CheckPNCPeriodData["pncPeriod"]+1;
    } else {
        $result['result'] = "success";

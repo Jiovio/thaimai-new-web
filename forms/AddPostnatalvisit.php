@@ -180,14 +180,8 @@ if (! empty($_POST["addpostnatal"])) {
 
                           <div class="mb-3 col-md-6">
                           <label class="form-label">INFANT WEIGHT</label>
-                            <select name="infantWeight" id="infantWeight" class="form-select">
-                          <option value="">Choose...</option>
-                          <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=12";
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                          <?php  } ?>
-                             </select>
+                          <input class="form-control" type="number" step="0.001" name="infantWeight" id="infantWeight"/>
+                           
                             </div>
                         </div>
                         <div class="row">

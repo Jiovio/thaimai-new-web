@@ -333,6 +333,12 @@ $('#doseNo').change(function (){
     return checkImmunedetails(picmeno);
 });
 
+$('#doseProvidedDate').change(function(){
+     var picmeno = $('#picmenoImmune').val();
+     var doseProvidedDateVal = $(this).val();
+     checkImmunedetails(picmeno, 'date');
+});
+
 function addImmuneValidate(){
     var picmeno = $('#picmenoImmune').val();
  
@@ -340,18 +346,19 @@ function addImmuneValidate(){
 }
 
 
-function checkImmunedetails(picmeno){
+function checkImmunedetails(picmeno, place=''){
       $.ajax({
         url: "ajax/immunizationDetails.php",
         async: false,
         type: "POST",
         data: {
-            picmeno: picmeno
+            picmeno: picmeno, doseProvidedDateVal: $('#doseProvidedDate').val()
         },
         cache: false,
         success: function (response) {
             result = JSON.parse(response);
             $('#suggesstion-box').html("");
+            $('#dose-provide-box').html("");
              $('#doseName').attr('disabled', true);
             if (result['result'] === 'fail') {
                $('#suggesstion-box').html("<span style='color:red'>This Picme number didn't have delivery details. \n\
@@ -360,8 +367,15 @@ Please proceed with delivery date from delivery details</span>");
             } else {
                 
                 if(result['result']=='error'){
+                    if(place===''){
                     $('#suggesstion-box').html("<span style='color:red'>"+result['message']+"</span>");
-                    $('#doseName').attr('disabled', true);
+                   } else {
+                       $('#dose-provide-box').html("<span style='color:red'>"+result['message']+"</span>");
+                   }
+                    $('#doseName').attr('disabled', false);
+                    $("#doseNo").val(result['doseNo']);
+                    $("#doseDueDate").attr('value', result['doseDueDate']);
+                    $("#doseDueDate").attr('readOnly', true);
                     return false;
                 }           
                 
@@ -436,6 +450,7 @@ $('#picmenoPostNalVisit').on('blur change click', function () {
 });
 
 function checkPostnalVisitPeriod(picmeno, pncperiod){
+    $('#suggesstion-box').html("");
       $.ajax({
         url: "ajax/checkPostNalVisitPeriod.php",
         async: false,
@@ -448,8 +463,12 @@ function checkPostnalVisitPeriod(picmeno, pncperiod){
              result = JSON.parse(response);
              $('#pnc-period-box').html("");
             if (result['result'] === 'fail') {
-               $('#pnc-period-box').html("<span style='color:red'>"+result['message']+"</span>");
-               $("#pncPeriod").val(result['selected']).change();
+               if(result['place']==''){
+                $('#pnc-period-box').html("<span style='color:red'>"+result['message']+"</span>");
+                $("#pncPeriod").val(result['selected']).change();
+               } else {
+                    $('#suggesstion-box').html("<span style='color:red'>Please enter valid picme no</span>");
+               }
                return false;
             }
             if(result['result']=='error'){

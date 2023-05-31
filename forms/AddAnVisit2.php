@@ -328,7 +328,7 @@ if (!empty($_POST["btnFirst"])) {
 					<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-NoFolicAcid">Number of Folic Acid </label>
                           <div class="input-group input-group-merge">
-                              <input type="number"  id="NoFolicAcid" name="NoFolicAcid" min="1" max="30" class="form-control" <?php if($pregancyWeek1 > 15) { ?> disabled="disabled" <?php } ?>/>
+                              <input type="number"  id="NoFolicAcid" name="NoFolicAcid" min="1" max="30" class="form-control" <?php if($pregancyWeek1 > 12) { ?> disabled="disabled" <?php } ?>/>
                         
                           </div>
                     </div>
@@ -336,7 +336,7 @@ if (!empty($_POST["btnFirst"])) {
 					<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-NoIFA">Number of IFA </label>
                           <div class="input-group input-group-merge">        
-                              <select class="form-control" id="NoIFA" name="NoIFA" <?php if($pregancyWeek1 <= 15) { ?> disabled="disabled" <?php } ?>>
+                              <select class="form-control" id="NoIFA" name="NoIFA" <?php if($pregancyWeek1 <= 12) { ?> disabled="disabled" <?php } ?>>
                           <option value="">Choose...</option>
                           <?php
                           for ($j=1; $j < 61; $j++){
@@ -360,7 +360,7 @@ if (!empty($_POST["btnFirst"])) {
                               placeholder="Date Of IFA"
                               aria-label="Date Of IFA"
                               aria-describedby="basic-icon-default-dateofIFA"
-                              <?php if($pregancyWeek1 <= 15) { ?> disabled="disabled" <?php } ?>
+                              <?php if($pregancyWeek1 <= 12) { ?> disabled="disabled" <?php } ?>
                                />
                           </div>
                         </div>
@@ -376,7 +376,7 @@ if (!empty($_POST["btnFirst"])) {
                               placeholder="Date Of Albendazole"
                               aria-label="Date Of Albendazole"
                               aria-describedby="basic-icon-default-dateofAlbendazole"
-                              <?php if($pregancyWeek1 <= 15) { ?> disabled="disabled" <?php } ?>
+                              <?php if($pregancyWeek1 <= 12) { ?> disabled="disabled" <?php } ?>
                               />
                           </div>
                         </div>
@@ -384,8 +384,13 @@ if (!empty($_POST["btnFirst"])) {
 						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-noCalcium">No. of Calcium </label>
                           <div class="input-group input-group-merge">
-                          <select class="1-50 form-control" id="noCalcium" name="noCalcium" <?php if($pregancyWeek1 <= 15) { ?> disabled="disabled" <?php } ?>>
+                          <select class="form-control" id="noCalcium" name="noCalcium" <?php if($pregancyWeek1 <= 12) { ?> disabled="disabled" <?php } ?>>
                           <option value="">Choose...</option>
+                          <?php
+                           for($i=1; $i<=60; $i++){
+                               echo "<option value=".$i.">".$i."</option>";
+                           }
+                          ?>
                           </select>
                           </div>
                         </div>

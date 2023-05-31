@@ -48,7 +48,7 @@ if (!empty($_POST["btnSecond"])) {
       <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
               <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Antenatal Visit /</span> Add Antenatal Visit
-              <button type="submit" class="btn btn-primary" id="btnBack" onclick="history.back()">
+              <button type="buttonn" class="btn btn-primary" id="btnBack" onclick="javascript:history.go(-1);return false;">
 				<span class="bx bx-arrow-back"></span>&nbsp; Back
               </button>
 			</h4>
@@ -79,7 +79,7 @@ if (!empty($_POST["btnSecond"])) {
                               placeholder="Calcium Date"
                               aria-label="Calcium Date"
                               aria-describedby="basic-icon-default-calciumDate"                              
-                              <?php if($pregancyWeek1 <= 15 && $pregancyWeek1!="") { ?> disabled="disabled" <?php } ?>
+                              <?php if($pregancyWeek1 <= 12 && $pregancyWeek1!="") { ?> disabled="disabled" <?php } ?>
                             />
                           </div>
                         </div>
