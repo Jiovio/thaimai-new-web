@@ -9,7 +9,7 @@ if (isset($_GET['view'])) {
   $view = true;
   $record = mysqli_query($conn, "SELECT * FROM antenatalvisit WHERE id=$id");
   $AnData = mysqli_fetch_array($record);
-  echo "SELECT * FROM antenatalvisit WHERE picmeno=". $AnData['picmeno']." order by id DESC";
+ 
   $record = mysqli_query($conn, "SELECT * FROM antenatalvisit WHERE picmeno=". $AnData['picmeno']." order by id DESC");
   $An = mysqli_fetch_array($record);
   $picmeno = $An["picmeno"]; $residenttype = $An["residenttype"]; 
@@ -565,7 +565,7 @@ if (isset($_GET['del'])) {
                               </select>
                           </div>
                           </div>
-                          <div class="col-4 mb-3">
+                          <div class="col-4 mb-3"  style="display:none">
                           <label class="form-label" for="basic-icon-default-TdBoosterDate">Td1 (Yes / No) <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <select required name="Td1" id="Td1" class="form-select" onchange="Td1Change()" disabled>
@@ -588,7 +588,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                 
-					   <div class="col-4 mb-3"  id="Tddose1">
+					   <div class="col-4 mb-3"  id="Tddose1"  style="display:none">
                           <label class="form-label" for="basic-icon-default-TdDose">Td1 Dose</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -604,7 +604,7 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                         </div>
-                        <div class="col-4 mb-3" id="Tddate1">
+                        <div class="col-4 mb-3" id="Tddate1"  style="display:none">
                           <label class="form-label" for="basic-icon-default-Td1Date">Td1 Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -620,7 +620,7 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                         </div>
-                        <div class="col-4 mb-3">
+                        <div class="col-4 mb-3"  style="display:none">
                           <label class="form-label" for="basic-icon-default-TdBoosterDate">Td2 (Yes / No) <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <select required name="Td2" id="Td2" class="form-select" onchange="Td2Change()" disabled>
@@ -643,7 +643,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
 
-                        <div class="col-4 mb-3" id="Tddose2">
+                        <div class="col-4 mb-3" id="Tddose2" style="display:none">
                           <label class="form-label" for="basic-icon-default-TdDose">Td2 Dose</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -659,7 +659,7 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                         </div>
-                        <div class="col-4 mb-3"  id="Tddate2">
+                        <div class="col-4 mb-3"  id="Tddate2" style="display:none">
                           <label class="form-label" for="basic-icon-default-Td1Date">Td2 Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -675,7 +675,7 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                         </div>
-				<div class="col-4 mb-3">
+				<div class="col-4 mb-3" style="display:none">
                           <label class="form-label" for="basic-icon-default-TdBoosterDate">Td Booster (Yes / No) <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <select required name="Tdb" id="Tdb" class="form-select" onchange="TdBChange()" disabled>
@@ -712,7 +712,7 @@ if (isset($_GET['del'])) {
                               />
                           </div>
                         </div>
-						<div class="col-4 mb-3" id="TdB">
+						<div class="col-4 mb-3" id="TdB" style="display:none">
                           <label class="form-label" for="basic-icon-default-TdBoosterDate">Td Booster Date</label>
                           <div class="input-group input-group-merge">
                             <input
