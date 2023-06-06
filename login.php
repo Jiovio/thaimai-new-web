@@ -69,7 +69,7 @@ if (! empty($_POST["login-btn"])) {
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
-			  <img src="https://www.savemom.in/img/logo.png" class="w-px-50 rounded-circle">
+			  <img src="assets/img/Savemom-Logo.png" class="w-px-50 rounded-circle">
               </div>
               <!-- /Logo -->
               <h4 class="mb-2" style="padding-left:50px">Welcome to Savemom! 👋</h4>

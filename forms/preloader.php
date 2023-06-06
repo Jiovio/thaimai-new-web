@@ -141,29 +141,32 @@ $(document).ready(function() {
 				<div class="animation-preloader">
 					<div class="spinner"></div>
 					<div class="txt-loading">
-						<span preloader-text="T" class="characters">T</span>
+					
+					    <span preloader-text=" " class="characters"> </span>
 						
-						<span preloader-text="H" class="characters">H</span>
+						<span preloader-text=" " class="characters"> </span>
+						
+						<span preloader-text=" " class="characters"> </span>
+						
+						<span preloader-text="S" class="characters">S</span>
 						
 						<span preloader-text="A" class="characters">A</span>
 						
-						<span preloader-text="I" class="characters">I</span>
+						<span preloader-text="V" class="characters">V</span>
+						
+						<span preloader-text="E" class="characters">E</span>
 						
 						<span preloader-text="M" class="characters">M</span>
 
-						<span preloader-text="A" class="characters">A</span>
+						<span preloader-text="O" class="characters">O</span>
 
-						<span preloader-text="I" class="characters">I</span>
+						<span preloader-text="M" class="characters">M</span>
 
-						<span preloader-text="Y" class="characters">Y</span>
+					    <span preloader-text=" " class="characters"> </span>
 						
-						<span preloader-text="U" class="characters">U</span>
+						<span preloader-text=" " class="characters"> </span>
 						
-						<span preloader-text="D" class="characters">D</span>
-						
-						<span preloader-text="A" class="characters">A</span>
-						
-						<span preloader-text="N" class="characters">N</span>
+						<span preloader-text=" " class="characters"> </span> 
 					</div>
 				</div>	
 				<div class="loader-section section-left"></div>
