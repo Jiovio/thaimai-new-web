@@ -56,10 +56,10 @@
 
       //  $listQry = "SELECT hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId)";         
 		
+		
       $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ar.obstetricCode, ar.livingChildren, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
-        WHERE pv.status!=0 AND (pv.ppcMethod = 4 OR pv.ppcMethod = 6 OR pv.ppcMethod = 5)";
-	//  WHERE pv.status=1 AND pv.ppcMethod = 2"; 	
-	// WHERE pv.status=1 AND (pv.ppcMethod = trim(Condom) OR pv.ppcMethod = trim(Inj antara and Tab chaya)";   
+       WHERE  pv.status!=0 AND (pv.ppcMethod = 4 OR pv.ppcMethod = 6 OR pv.ppcMethod = 5) AND pv.pncPeriod = (SELECT max(pv1.pncPeriod) From postnatalvisit pv1 where pv1.picmeNo = pv.picmeNo)";
+	
         
 				     		
 	  $private = " AND pv.createdBy='".$userid."'";
@@ -173,6 +173,7 @@ if($rowp['ppcMethod'] == "9")
                                            								   
 		 }				 
 		 $ppcMethod = $rowp['ppcMethod'];		}}
+		
                        ?>
                         <tr>
                            <td><?php echo $cnt; ?></td>
@@ -193,6 +194,7 @@ if($rowp['ppcMethod'] == "9")
 					     </tr>
                          <?php 
                            $cnt++;
+			
 						}
 							
 						 }}

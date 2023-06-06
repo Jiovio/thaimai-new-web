@@ -70,6 +70,7 @@
                   WHERE dd.status!=0 AND NOT EXISTS (SELECT pv.picmeNo FROM postnatalvisit pv WHERE pv.picmeNo = dd.picmeno)";  		
 	  $private = " AND dd.createdBy='".$userid."'";
       $orderQry = " ORDER BY dd.deliverydate DESC";
+	 
 	  
       if(($usertype == 0) || ($usertype == 1)) {
          if(isset($_POST['filter'])) {

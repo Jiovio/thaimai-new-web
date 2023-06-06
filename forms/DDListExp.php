@@ -23,7 +23,7 @@ include "../config/db_connect.php";
 	if(isset($_POST['search_text_input']))
 	{
 	  $search_text_input = trim($_POST['search_text_input']);
-	  $wild_cnt = 0;     /*Serial No search */
+	  $wild_cnt = 1;     /*Serial No search */
 	} 	
 //	print_r($_POST['search_text_input']); exit;
 
@@ -84,7 +84,7 @@ include "../config/db_connect.php";
                			 	
 				
 //print_r($rows['HscId']); exit;				
-}}}
+//}}}
         if($rows['residentType'] == "1") /*Resident/Visitor*/
 							{
 							 $rows['residentType'] = "RESIDENT";
@@ -215,30 +215,30 @@ if($rowp['ppcMethod'] == "9")
 	    if(strlen($search_text_input) > 0 )
 	    {	 
        
-       $wild_srch = $wild_cnt. "*".  /* "*" - separates serails no */
-	   $rows['picmeno'].
-					       date('d-m-Y', strtotime($rows['picmeRegDate'])).
-				           $rows['BlockName'].
-                           $rows['PhcName'].
-                           $rows['HscName'].
-	                       $rows['PanchayatName'].
-                           $rows['VillageName'].
-						   $rows['residentType'].
-                           $rows['motheraadhaarname']. 
-					       $rows['MotherAge']. 
-					       $rows['husbandaadhaarname']. 
-			               $rows['mothermobno']. 						   
-						   trim($rows['address']). 
-						   date('d-m-Y', strtotime($rows['deliverydate'])). 
-					       $rows['hospitaltype']. 									   
-					       $rows['deliverytype']. 
-						   $rows['deliveryOutcome'].  
+       $wild_srch = $wild_cnt++. "||".  /* "*" - separates serails no */
+	   $rows['picmeno']."||".
+					       date('d-m-Y', strtotime($rows['picmeRegDate']))."||".
+				           $rows['BlockName']."||".
+                           $rows['PhcName']."||".
+                           $rows['HscName']."||".
+	                       $rows['PanchayatName']."||".
+                           $rows['VillageName']."||".
+						   $rows['residentType']."||".
+                           $rows['motheraadhaarname']."||". 
+					       $rows['MotherAge']."||". 
+					       $rows['husbandaadhaarname']."||". 
+			               $rows['mothermobno']."||". 						   
+						   $rows['address']."||". 
+						   date('d-m-Y', strtotime($rows['deliverydate']))."||". 
+					       $rows['hospitaltype']."||". 									   
+					       $rows['deliverytype']."||". 
+						   $rows['deliveryOutcome']."||".  
 					       $rows['ppcMethod']; 
 	   
 	   if(stripos($wild_srch,$search_text_input)!==false) /*STRIPOS - Case incensitive search */
 	   {
 		$search_flag = true;  
-print_r($wild_srch); 		
+//print_r($wild_srch); 		
 	//	print_r($ppcMethod); exit;
 	   }
 }
@@ -247,7 +247,7 @@ print_r($wild_srch);
 	//  if($wild_cnt == "181"){
 	//  print_r($wild_cnt);
 	 // print_r($rows['picmeno']); exit;}
-	   $wild_cnt++;
+	 //  $wild_cnt++;
 	
 	if($search_flag || strlen($search_text_input) == 0 )
 	{
@@ -259,6 +259,7 @@ print_r($wild_srch);
 	//		 print_r($rows['PanchayatName']);
 	//		 print_r($rows['VillageName']); exit;
 }}	
+}}}
  //print_r("$ppcMethod"); print_r($ppcMethod); exit;
 	$filename = "Delivered_List_".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");

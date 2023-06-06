@@ -23,7 +23,7 @@ include "../config/db_connect.php";
 	if(isset($_POST['search_text_input']))
 	{
 	  $search_text_input = trim($_POST['search_text_input']);
-	  $wild_cnt = 0;     /*Serial No search */
+	  $wild_cnt = 1;     /*Serial No search */
 	} 	
 
 //if(strlen($search_text_input) > 0 )
@@ -50,6 +50,12 @@ include "../config/db_connect.php";
 	   
   //  if(strlen($search_text_input) > 0 )
 //	{					  
+
+       $rows['BlockName'] = "";       
+                $rows['PhcName'] = ""; 
+                $rows['HscName'] = "";
+			    $rows['PanchayatName'] = ""; 
+                $rows['VillageName'] = "";
        $HscQry = "SELECT * From hscmaster";				 
 	   $HscRes =  mysqli_query($conn,$HscQry);
        if($HscRes) {
@@ -66,27 +72,145 @@ include "../config/db_connect.php";
                 $rows['PhcName'] = $rowh['PhcName']; 
                 $rows['HscName'] = $rowh['HscName'];
 			    $rows['PanchayatName'] = $rowh['PanchayatName']; 
-                $rows['VillageName'] = $rowh['VillageName']; 					  
-}}}
+                $rows['VillageName'] = $rowh['VillageName']; 
+
+ if($rows['symptomsHighRisk'] == "1")	
+							{
+							$rows['symptomsHighRisk'] = "Teenage Pregnancy";}
+							else								
+							    if($rows['symptomsHighRisk'] == "2")	
+							    {
+								$rows['symptomsHighRisk'] = "Elderly Primi"; }
+								 else
+							    	 if($rows['symptomsHighRisk'] == "3")	
+							         {
+									 $rows['symptomsHighRisk'] = "Elderly Multi "; }
+									   else 
+										   if($rows['symptomsHighRisk'] == "4")	
+										   {
+                                           $rows['symptomsHighRisk'] = "Short Primi"; 											   
+						                   }
+                                           else
+	                                       if($rows['symptomsHighRisk'] == "5")	
+										   {
+                                           $rows['symptomsHighRisk'] = "Severe Anaemia"; 											   
+						                   }	
+                                          else
+											if($rows['symptomsHighRisk'] == "6")	
+										   {
+                                           $rows['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia"; 											   
+						                   }	
+										   else
+										   if($rows['symptomsHighRisk'] == "7")	
+										   {
+                                           $rows['symptomsHighRisk'] = "Hydraminios"; 	
+                                           								   
+	                                    	 }		
+		                                   if($rows['symptomsHighRisk'] == "8")	
+										   {
+                                           $rows['symptomsHighRisk'] = "APH"; 	
+                                           								   
+	                                    	 }		
+                                           if($rows['symptomsHighRisk'] == "9")	
+										   {
+                                           $rows['symptomsHighRisk'] = "Multi Para"; 	
+                                           								   
+		                                     }				 
+											 
+											 if($rows['symptomsHighRisk'] == "10")	
+							{
+							$rows['symptomsHighRisk'] = "Multiple Pregnancy";}
+							else								
+							    if($rows['symptomsHighRisk'] == "11")	
+							    {
+								$rows['symptomsHighRisk'] = "Vesicular Mole"; }
+								 else
+							    	 if($rows['symptomsHighRisk'] == "12")	
+							         {
+									 $rows['symptomsHighRisk'] = "Rh incompatibility"; }
+									   else 
+										   if($rows['symptomsHighRisk'] == "13")	
+										   {
+                                           $rows['symptomsHighRisk'] = "Previous LSCS"; 											   
+						                   }
+                                           else
+	                                       if($rows['symptomsHighRisk'] == "14")	
+										   {
+                                           $rows['symptomsHighRisk'] = "Instrumental V.D"; 											   
+						                   }	
+                                          else
+											if($rows['symptomsHighRisk'] == "15")	
+										   {
+                                           $rows['symptomsHighRisk'] = "Weight below 40 kg"; 											   
+						                   }	
+										   else
+										   if($rows['symptomsHighRisk'] == "16")	
+										   {
+                                           $rows['symptomsHighRisk'] = "Heart Disease complicating pregnancy"; 	
+                                           								   
+	                                    	 }		
+		                                   if($rows['symptomsHighRisk'] == "17")	
+										   {
+                                           $rows['symptomsHighRisk'] = "Malaria"; 	
+                                           								   
+	                                    	 }		
+                                           if($rows['symptomsHighRisk'] == "18")	
+										   {
+                                           $rows['symptomsHighRisk'] = "Long period infertility"; 	
+                                           								   
+		                                     }			
+
+											if($rows['symptomsHighRisk'] == "19")	
+							{
+							$rows['symptomsHighRisk'] = "GDM";}
+							else								
+							    if($rows['symptomsHighRisk'] == "20")	
+							    {
+								$rows['symptomsHighRisk'] = "Previous bad obstetric history"; }
+								 else
+							    	 if($rows['symptomsHighRisk'] == "21")	
+							         {
+									 $rows['symptomsHighRisk'] = "Cancer"; }
+									   else 
+										   if($rows['symptomsHighRisk'] == "22")	
+										   {
+                                           $rows['symptomsHighRisk'] = "Intracranial Space occupying lesion"; 											   
+						                   }
+                                           else
+	                                       if($rows['symptomsHighRisk'] == "23")	
+										   {
+                                           $rows['symptomsHighRisk'] = "Pregnant due to contraceptive Failure"; 											   
+						                   }	
+                                          else
+											if($rows['symptomsHighRisk'] == "24")	
+										   {
+                                           $rows['symptomsHighRisk'] = "Ectopic Pregnancy"; 											   
+						                   }	
+										   else
+										   if($rows['symptomsHighRisk'] == "25")	
+										   {
+                                           $rows['symptomsHighRisk'] = "Malpresentation"; 	
+										   }				
+
 		  $wild_srch = "";   
 	 if(strlen($search_text_input) > 0 )
 	 {	 
-       $wild_srch =  $wild_cnt."*".  
+       $wild_srch =  $wild_cnt++."||".  
 	   $rows['picmeno'].
-	   date('d-m-Y', strtotime($rows['picmeRegDate'])).
-	   $rows['BlockName']. 
-       $rows['PhcName'].
-       $rows['HscName'].
-	   $rows['PanchayatName'].
-       $rows['VillageName'].
-       $rows['motheraadhaarname'].
-	   $rows['MotherAge'].
-	   $rows['husbandaadhaarname'].
-	   $rows['mothermobno'].
-	   $rows['obstetricCode'].								   
-	   date('d-m-Y', strtotime($rows['lmpdate'])).
-       date('d-m-Y', strtotime($rows['edddate'])).
-	   $rows['pregnancyWeek'].
+	   date('d-m-Y', strtotime($rows['picmeRegDate']))."||". 
+	   $rows['BlockName']."||".  
+       $rows['PhcName']."||". 
+       $rows['HscName']."||". 
+	   $rows['PanchayatName']."||". 
+       $rows['VillageName']."||". 
+       $rows['motheraadhaarname']."||". 
+	   $rows['MotherAge']."||". 
+	   $rows['husbandaadhaarname']."||". 
+	   $rows['mothermobno']."||". 
+	   $rows['obstetricCode']."||". 								   
+	   date('d-m-Y', strtotime($rows['lmpdate']))."||". 
+       date('d-m-Y', strtotime($rows['edddate']))."||". 
+	   $rows['pregnancyWeek']."||". 
 	   $rows['symptomsHighRisk'];					   
 	   
 	   if(stripos($wild_srch,$search_text_input)!==false) /*STRIPOS - Case incensitive search */
@@ -94,11 +218,12 @@ include "../config/db_connect.php";
 		$search_flag = true;   
 	   }
 }
-	 $wild_cnt++;
+	// $wild_cnt++;
 	if($search_flag || strlen($search_text_input) == 0 )
 	{
 	  $developer_records[] = $rows;
 }}	
+	}}}
 	$filename = "AV_Report_".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");
