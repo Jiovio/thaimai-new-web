@@ -20,18 +20,18 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card"><h5 class="card-header">
-                  <span class="text-muted fw-light">Reports / Antenatal Visit / </span> Antenatal Visit List
+                  <span class="text-muted fw-light">Reports / Delivery Details / </span> Infant Death List
                </h5>  
 			   
 <!------------------------------------------------------------------------------------- Page Details + search button + Table -------------------------------------------------------->		   
 			<div class="table-responsive text-nowrap">		 
 	 
 	        <div class="container"> 
-	        <div class="table-responsive text-nowrap">
-		
+			<div class="table-responsive text-nowrap">	
+	       		
 		   <table id="users-detail"  class="display nowrap" cellspacing="0" width="100%"> 
 			
-                       <thead>
+                        <thead>
                          <tr>
                <th>S.No</th>     
                <th>RCH ID</th>
@@ -40,29 +40,39 @@
                <th>PHC</th>
                <th>HSC</th>
 			   <th>VP / TP / Mpty</th>
-               <th>Village / Ward</th>
+               <th>Village / Ward</th> 
                <th>Mother Name</th>
                <th>Age</th>
                <th>Husband Name</th>
-			   <th>Mobile No.</th>
-               <th>Obstetric score</th>
-               <th>LMP</th>
-               <th>EDD</th>
-               <th>Gestational Age in Weeks</th>
-			   <th>High Risk Factor</th>
-                         </tr>
+			   <th>Mobile No</th>
+			   
+			   <th>Obstetric Score</th>
+			   <th>Infant RCH ID</th>
+			   <th>Infant Death Date</th>
+			   <th>Gender</th>
+			   <th>Infant Death Time</th>
+			   <th>Infant Age @ Death</th>
+			   <th>Infant Death District</th>
+			   <th>Infant Death Place</th>
+			   <th>Reason for Death</th>
+			          </tr>
                        </thead>  
     <?php
+	
+//	$tst = "Hello  world ";
+//	print_r(trim($tst)); 
+	//print_r(strlen($tst)); exit;
+	
       // $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy,hs.BlockName,hs.PhcName,hs.HscName, ec.BlockId,ec.PhcId, hs.PanchayatName, hs.VillageName, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId) JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
       //              WHERE av.status=1";             
 
       //  $listQry = "SELECT hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId)";         
 		
-      $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
-                  WHERE av.status=1 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno)";    		
-				     		
-	  $private = " AND av.createdBy='".$userid."'";
-      $orderQry = " ORDER BY ar.picmeRegDate DESC";
+      $listQry = "SELECT dd.picmeno,ar.residentType, ar.obstetricCode, dd.deliveryCompilcation, dd.infantId, dd.deliverydate,dd.childGender, dd.deliverytime, dd.deliverydistrict, dd.deliverydate, dd.hospitaltype, dd.deliverytype,dd.deliveryOutcome, dd.id, ec.address, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.MotherAge, ec.motheraadhaarname,dd.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno
+             	  FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno JOIN anregistration ar on dd.picmeno = ar.picmeno
+                  WHERE dd.status!=0 AND NOT EXISTS (SELECT pv.picmeNo FROM postnatalvisit pv WHERE pv.picmeNo = dd.picmeno) AND dd.deliveryCompilcation = 7";  		
+	  $private = " AND dd.createdBy='".$userid."'";
+      $orderQry = " ORDER BY dd.deliverydate DESC";
 	  
       if(($usertype == 0) || ($usertype == 1)) {
          if(isset($_POST['filter'])) {
@@ -105,7 +115,7 @@
               if($ExeQuery) {
                 $cnt=1;
                 while($row = mysqli_fetch_array($ExeQuery)) {
-						//	  print_r($row['HscId']);
+							//  print_r($row['Test']); exit;
 						//	 if($row['HscId']== $Hsc_val)
 							// {print_r($rowh['BlockName']); exit;}
 				$HscQry = "SELECT * From hscmaster";				 
@@ -118,126 +128,53 @@
 						$row['VillageId']==$rowh['VillageId'] AND
 						$row['PanchayatId']==$rowh['PanchayatId'])
 						{
-						 if($row['symptomsHighRisk'] == "1")	
+							if($row['hospitaltype'] == "1")	
 							{
-							$row['symptomsHighRisk'] = "Teenage Pregnancy";}
+							$row['hospitaltype'] = "HSC";}
 							else								
-							    if($row['symptomsHighRisk'] == "2")	
+							    if($row['hospitaltype'] == "2")	
 							    {
-								$row['symptomsHighRisk'] = "Elderly Primi"; }
+								$row['hospitaltype'] = "PHC"; }
 								 else
-							    	 if($row['symptomsHighRisk'] == "3")	
+							    	 if($row['hospitaltype'] == "3")	
 							         {
-									 $row['symptomsHighRisk'] = "Elderly Multi "; }
+									 $row['hospitaltype'] = "UG PHC"; }
 									   else 
-										   if($row['symptomsHighRisk'] == "4")	
+										   if($row['hospitaltype'] == "4")	
 										   {
-                                           $row['symptomsHighRisk'] = "Short Primi"; 											   
+                                           $row['hospitaltype'] = "GH"; 											   
 						                   }
                                            else
-	                                       if($row['symptomsHighRisk'] == "5")	
+	                                       if($row['hospitaltype'] == "5")	
 										   {
-                                           $row['symptomsHighRisk'] = "Severe Anaemia"; 											   
+                                           $row['hospitaltype'] = "MCH"; 											   
 						                   }	
-                                          else
-											if($row['symptomsHighRisk'] == "6")	
-										   {
-                                           $row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia"; 											   
-						                   }	
-										   else
-										   if($row['symptomsHighRisk'] == "7")	
-										   {
-                                           $row['symptomsHighRisk'] = "Hydraminios"; 	
-                                           								   
-	                                    	 }		
-		                                   if($row['symptomsHighRisk'] == "8")	
-										   {
-                                           $row['symptomsHighRisk'] = "APH"; 	
-                                           								   
-	                                    	 }		
-                                           if($row['symptomsHighRisk'] == "9")	
-										   {
-                                           $row['symptomsHighRisk'] = "Multi Para"; 	
-                                           								   
-		                                     }				 
-											 
-											 if($row['symptomsHighRisk'] == "10")	
-							{
-							$row['symptomsHighRisk'] = "Multiple Pregnancy";}
-							else								
-							    if($row['symptomsHighRisk'] == "11")	
-							    {
-								$row['symptomsHighRisk'] = "Vesicular Mole"; }
-								 else
-							    	 if($row['symptomsHighRisk'] == "12")	
-							         {
-									 $row['symptomsHighRisk'] = "Rh incompatibility"; }
-									   else 
-										   if($row['symptomsHighRisk'] == "13")	
-										   {
-                                           $row['symptomsHighRisk'] = "Previous LSCS"; 											   
-						                   }
                                            else
-	                                       if($row['symptomsHighRisk'] == "14")	
+											if($row['hospitaltype'] == "6")	
 										   {
-                                           $row['symptomsHighRisk'] = "Instrumental V.D"; 											   
-						                   }	
-                                          else
-											if($row['symptomsHighRisk'] == "15")	
-										   {
-                                           $row['symptomsHighRisk'] = "Weight below 40 kg"; 											   
+                                           $row['hospitaltype'] = "Private Hospital"; 											   
 						                   }	
 										   else
-										   if($row['symptomsHighRisk'] == "16")	
+										   if($row['hospitaltype'] == "7")	
 										   {
-                                           $row['symptomsHighRisk'] = "Heart Disease complicating pregnancy"; 	
-                                           								   
-	                                    	 }		
-		                                   if($row['symptomsHighRisk'] == "17")	
+                                           $row['hospitaltype'] = "PNH"; 											   
+						                   }	
+                                           if($row['hospitaltype'] == "8")	
 										   {
-                                           $row['symptomsHighRisk'] = "Malaria"; 	
-                                           								   
-	                                    	 }		
-                                           if($row['symptomsHighRisk'] == "18")	
-										   {
-                                           $row['symptomsHighRisk'] = "Long period infertility"; 	
-                                           								   
-		                                     }			
-
-											if($row['symptomsHighRisk'] == "19")	
+                                           $row['hospitaltype'] = "Home"; 											   
+						                   }											   
+              //  $row['hospitaltype'] = $row['hospitaltype']; 		
+			  
+			                if($row['childGender'] == "1")	/* Child Gender */
 							{
-							$row['symptomsHighRisk'] = "GDM";}
+							$row['childGender'] = "Male";}
 							else								
-							    if($row['symptomsHighRisk'] == "20")	
+							    if($row['childGender'] == "2")	
 							    {
-								$row['symptomsHighRisk'] = "Previous bad obstetric history"; }
-								 else
-							    	 if($row['symptomsHighRisk'] == "21")	
-							         {
-									 $row['symptomsHighRisk'] = "Cancer"; }
-									   else 
-										   if($row['symptomsHighRisk'] == "22")	
-										   {
-                                           $row['symptomsHighRisk'] = "Intracranial Space occupying lesion"; 											   
-						                   }
-                                           else
-	                                       if($row['symptomsHighRisk'] == "23")	
-										   {
-                                           $row['symptomsHighRisk'] = "Pregnant due to contraceptive Failure"; 											   
-						                   }	
-                                          else
-											if($row['symptomsHighRisk'] == "24")	
-										   {
-                                           $row['symptomsHighRisk'] = "Ectopic Pregnancy"; 											   
-						                   }	
-										   else
-										   if($row['symptomsHighRisk'] == "25")	
-										   {
-                                           $row['symptomsHighRisk'] = "Malpresentation"; 	
-										   }	
-							
-							
-							
+								$row['childGender'] = "Female"; }
+			  
+	                     $row['infage'] = "0";
+						 $row['Deathreason'] = "Delivery Complication";
                        ?>
                         <tr>
                            <td><?php echo $cnt; ?></td>
@@ -252,11 +189,17 @@
 					       <td><?php echo $row['MotherAge']; ?></td>
 					       <td><?php echo $row['husbandaadhaarname']; ?></td>
 			               <td><?php echo $row['mothermobno']; ?></td>
-					       <td><?php echo $row['obstetricCode']; ?></td>									   
-					       <td><?php echo date('d-m-Y', strtotime($row['lmpdate'])); ?></td>
-                           <td><?php echo date('d-m-Y', strtotime($row['edddate'])); ?></td> 
-					       <td><?php echo $row['pregnancyWeek']; ?></td>
-					       <td><?php echo $row['symptomsHighRisk']; ?></td>
+						   
+						   <td><?php echo $row['obstetricCode']; ?></td>
+                           <td><?php echo $row['infantId']; ?></td>
+						   <td><?php echo date('d-m-Y', strtotime($row['deliverydate'])); ?></td>
+						   <td><?php echo $row['childGender']; ?></td>
+						   <td><?php echo date('H:i:s',strtotime($row['deliverytime'])); ?></td>
+						   <td><?php echo $row['infage']; ?></td>
+						   <td><?php echo $row['deliverydistrict']; ?></td>
+					       <td><?php echo $row['hospitaltype']; ?></td>
+					       <td><?php echo $row['Deathreason']; ?></td>
+						   
 					     </tr>
                          <?php 
                            $cnt++;
@@ -264,6 +207,7 @@
 							
 						 }}
                          } 
+						// }
                        } ?>
 	   
 					</table>   <!-------------------- Insert Code Here -------------->
@@ -272,6 +216,10 @@
 <!--------------------------------------------------------------------------------------------- search button + Table Ends -------------------------------------------------------->	
 
 <!-------------------------------------------------------------- Start Download Code ------------------------------------------------------>		
+
+
+
+
 <!------------------------------------------------------------------ Preparing values for next page --------------------------------------------------------------------------------->
 <?php
     $hscName = "";
@@ -292,7 +240,7 @@
 ?>	
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------------------- Download button + Submitting values to next page ------------------------------------------------------------------>
-    <form action="AVEcExport.php" method="post" id="filterform" style="width:100%";>	
+    <form action="InfDthListExp.php" method="post" id="filterform" style="width:100%";>	
 		  <div class="col-md-8" style="margin-top: 10px;">
    		
           <button type="submit" id="AVReport" name='AVReport' style = "margin-left : 450px; margin-bottom: 10px" class="btn lt btn-primary"><span class="bx bx-download"></span>&nbsp; Download</button>

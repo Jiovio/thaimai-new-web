@@ -878,7 +878,20 @@ $("#doseName").focus();
 }
 });
 });  
+
+
+
 }); 
+
+var table = $('#users-detail').DataTable({
+}).on('search.dt', function() {
+  var input = $('.dataTables_filter input')[0];
+  $('#search_text_input').val(input.value);
+  console.log(input.value)
+})
+
+
+
 
 function RefChange() {
 var selectBox = document.getElementById("referralFacility");
@@ -1109,40 +1122,23 @@ if(selectedValue == "1") { ivDoses.style.display = "block"; } else if(selectedVa
 function fnCalMotAge(){
   var MotDateinput = document.getElementById("motherdob").value;   
   // convert user input value into date object
-  //var motbirthDate = new Date(MotDateinput);
-  
-   var today = new Date();
-    var birthDate = new Date(MotDateinput);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-   
+  var motbirthDate = new Date(MotDateinput);
   
   // get difference from current date;
-//  var mdiff=Date.now() - motbirthDate.getTime(); 
-//  var  motAgeDate = new Date(mdiff); 
-//  var motCalcAge=   Math.abs(motAgeDate.getUTCFullYear() - 1970);
-  document.getElementById("motherageecreg").value = age;  
+  var mdiff=Date.now() - motbirthDate.getTime(); 
+  var  motAgeDate = new Date(mdiff); 
+  var motCalcAge=   Math.abs(motAgeDate.getUTCFullYear() - 1970);
+  document.getElementById("motherageecreg").value = motCalcAge;  
 }
 
 function fnCalHusAge(){
   var HusDateinput = document.getElementById("husdob").value;   
   // convert user input value into date object
-//  var husbirthDate = new Date(HusDateinput);
-  
-   var today = new Date();
-    var birthDate = new Date(HusDateinput);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
+  var husbirthDate = new Date(HusDateinput);
   
   // get difference from current date;
-//  var hdiff=Date.now() - husbirthDate.getTime(); 
-//  var  husAgeDate = new Date(hdiff); 
-//  var husCalcAge=   Math.abs(husAgeDate.getUTCFullYear() - 1970);
-  document.getElementById("husageecreg").value = age;  
+  var hdiff=Date.now() - husbirthDate.getTime(); 
+  var  husAgeDate = new Date(hdiff); 
+  var husCalcAge=   Math.abs(husAgeDate.getUTCFullYear() - 1970);
+  document.getElementById("husageecreg").value = husCalcAge;  
 }

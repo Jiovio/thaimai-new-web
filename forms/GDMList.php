@@ -20,7 +20,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card"><h5 class="card-header">
-                  <span class="text-muted fw-light">Reports / Postnatal Visit / </span> ECs Following Any Other Family Welfare Methods List
+                  <span class="text-muted fw-light">Reports / Antenatal Visit / </span> GDM
                </h5>  
 			   
 <!------------------------------------------------------------------------------------- Page Details + search button + Table -------------------------------------------------------->		   
@@ -29,7 +29,7 @@
 	        <div class="container"> 
 	        <div class="table-responsive text-nowrap">
 		
-		   		   <table id="users-detail"  class="display nowrap" cellspacing="0" width="100%"> 
+		   <table id="users-detail"  class="display nowrap" cellspacing="0" width="100%"> 
 			
                        <thead>
                          <tr>
@@ -41,31 +41,41 @@
                <th>HSC</th>
 			   <th>VP / TP / Mpty</th>
                <th>Village / Ward</th>
+			   
+			   <th>Resident/Visitor</th>
+			   
                <th>Mother Name</th>
                <th>Age</th>
                <th>Husband Name</th>
-			   <th>Mobile No</th>
-			   <th>Obstetric score</th>
-               <th>Living Children</th>
-               <th>Surgery Type</th>
+			   <th>Mobile No.</th>
+               <th>Obstetric score</th>
+               <th>LMP</th>
+               <th>EDD</th>
+			   
+			   <th>Weight Gain</th>
+			   <th>GCT Weeks (12-16)</th>
+			   <th>GCT Weeks (24-28)</th>
+			   <th>GCT Weeks (32-34)</th>
+			   
+        <!--       <th>PPBS</th>  !Not present in form
+			   <th>Metformin Treatment</th>
+			   <th>Insulin Treatment</th> --!>
                          </tr>
                        </thead>  
     <?php
-      // $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy,hs.BlockName,hs.PhcName,hs.HscName, ec.BlockId,ec.PhcId, hs.PanchayatName, hs.VillageName, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId) JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
-      //              WHERE av.status=1";             
-
-      //  $listQry = "SELECT hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId)";         
+    
+		$pre_picmeno = "";
+		$pre_gct_st = "";
+		$pre_mot_wght = "";
+		$pre_GCTWeek1 = "";
+		$pre_GCTWeek2 = "";
+		$pre_GCTWeek3 = "";
 		
-      $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ar.obstetricCode, ar.livingChildren, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
-        WHERE pv.status!=0 AND (pv.ppcMethod = 8 OR pv.ppcMethod = 9) AND pv.pncPeriod = (SELECT max(pv1.pncPeriod) From postnatalvisit pv1 where pv1.picmeNo = pv.picmeNo)";
-	
-	// WHERE pv.status=1 AND (pv.ppcMethod = trim(Condom) OR pv.ppcMethod = trim(Inj antara and Tab chaya)";   
-        
+      $listQry = "SELECT av.picmeno, av.gctStatus, av.id, av.symptomsHighRisk, av.residenttype, av.motherWeight, av.gctValue, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
+                  WHERE av.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND av.gctStatus != 4 AND av.gctValue > 140";  		
 				     		
-	  $private = " AND pv.createdBy='".$userid."'";
+	  $private = " AND av.createdBy='".$userid."'";
       $orderQry = " ORDER BY ar.picmeRegDate DESC";
-	  
-	 // print_r()
 	  
       if(($usertype == 0) || ($usertype == 1)) {
          if(isset($_POST['filter'])) {
@@ -108,9 +118,7 @@
               if($ExeQuery) {
                 $cnt=1;
                 while($row = mysqli_fetch_array($ExeQuery)) {
-						//	  print_r($row['HscId']);
-						//	 if($row['HscId']== $Hsc_val)
-							// {print_r($rowh['BlockName']); exit;}
+					
 				$HscQry = "SELECT * From hscmaster";				 
 				$HscRes =  mysqli_query($conn,$HscQry);
                 if($HscRes) {
@@ -120,92 +128,108 @@
 					    $row['PhcId']==$rowh['PhcId'] AND
 						$row['VillageId']==$rowh['VillageId'] AND
 						$row['PanchayatId']==$rowh['PanchayatId'])
+												
 						{
-							$ppcMethod = "";
-	   $ppcQry = "SELECT ppcMethod,picmeNo From postnatalvisit";		/*Fetching ppcMethod From postnatalvisit*/		 
-	   $ppcRes =  mysqli_query($conn,$ppcQry);
-       if($ppcRes) {
-         while($rowp = mysqli_fetch_array($ppcRes)) 
-		 {
-		//  if(($row['picmeno']==$rowp['picmeNo']) AND ($rowp['ppcMethod'] == "4" OR $rowp['ppcMethod'] == "5"))
-			 if($row['picmeNo']==$rowp['picmeNo']) 
-			 {
-				 	if($rowp['ppcMethod'] == "1")	
+							if($row['residenttype'] == "1")
 							{
-							$rowp['ppcMethod'] = "Can't decide now";}
-							else								
-							    if($rowp['ppcMethod'] == "2")	
-							    {
-								$rowp['ppcMethod'] = "None"; }
-								 else
-							    	 if($rowp['ppcMethod'] == "3")	
-							         {
-									 $rowp['ppcMethod'] = "Condom"; }
-									   else 
-										   if($rowp['ppcMethod'] == "4")	
-										   {
-                                           $rowp['ppcMethod'] = "Male sterilization"; 											   
-						                   }
-                                           else
-	                                       if($rowp['ppcMethod'] == "5")	
-										   {
-                                           $rowp['ppcMethod'] = "IUCD-PP"; 											   
-						                   }	
-                                          else
-											if($rowp['ppcMethod'] == "6")	
-										   {
-                                           $rowp['ppcMethod'] = "PP-PS"; 											   
-						                   }	
-										   else
-										   if($rowp['ppcMethod'] == "7")	
-										   {
-                                           $rowp['ppcMethod'] = "Inj antara and Tab chaya"; 	
-                                           								   
-		 }		
-		 if($rowp['ppcMethod'] == "8")	
-										   {
-                                           $rowp['ppcMethod'] = "Any Other Specify"; 	
-                                           								   
-		 }		
-if($rowp['ppcMethod'] == "9")	
-										   {
-                                           $rowp['ppcMethod'] = "Any Traditional Methods"; 	
-                                           								   
-		 }				 
-		 $ppcMethod = $rowp['ppcMethod'];		}}
-		
-                       ?>
-                        <tr>
-                           <td><?php echo $cnt; ?></td>
-						   <td><?php echo $row['picmeNo']; ?></td>
-					       <td><?php echo date('d-m-Y', strtotime($row['picmeRegDate'])); ?></td>
-				           <td><?php echo $rowh['BlockName']; ?></td>
-                           <td><?php echo $rowh['PhcName']; ?></td>
-                           <td><?php echo $rowh['HscName']; ?></td>
-			               <td><?php echo $rowh['PanchayatName']; ?></td>
-                           <td><?php echo $rowh['VillageName']; ?></td>
-                           <td><?php echo $row['motheraadhaarname']; ?></td>
-					       <td><?php echo $row['MotherAge']; ?></td>
-					       <td><?php echo $row['husbandaadhaarname']; ?></td>
-			               <td><?php echo $row['mothermobno']; ?></td>
-						   <td><?php echo $row['obstetricCode']; ?></td>
-						   <td><?php echo $row['livingChildren']; ?></td>
-					       <td><?php echo $ppcMethod; ?></td>
-					     </tr>
-                         <?php 
-                           $cnt++;
-						  
-		 }
+							 $row['residenttype'] = "RESIDENT";
+							}
 							
-						 }}
-				} }
-                       } 
-					   
-					   ?>
+							if($row['residenttype'] == "2")	
+							{
+							 $row['residenttype'] = "VISITOR";
+							}	
+														
+			    if($pre_picmeno != $row['picmeno']) /*Avoid Picme Duplication */
+				{				
+							
+					if(strlen($pre_gct_st) > 0) /*For previous records checking */
+					{
+						?>
+						
+			         <td><?php echo $pre_mot_wght ; ?></td> 
+					 <td><?php echo $pre_GCTWeek1 ; ?></td>
+					 <td><?php echo $pre_GCTWeek2 ; ?></td>
+					 <td><?php echo $pre_GCTWeek3 ; ?></td>  
+					  
+					</tr>
+					<?php
+					}
+					
+                       ?>
+					      <tr>
+                          <td><?php echo $cnt; ?></td>  
+						   <td><?php echo $row['picmeno'] ;  ?></td> 
+					       <td><?php echo date('d-m-Y', strtotime($row['picmeRegDate' ]));  ?></td> 
+				           <td><?php echo $rowh['BlockName'] ;  ?></td> 
+                           <td><?php echo $rowh['PhcName'] ;  ?></td> 
+                           <td><?php echo $rowh['HscName'] ;  ?></td> 
+			               <td><?php echo $rowh['PanchayatName'] ; ?></td>  
+                           <td><?php echo $rowh['VillageName'] ;  ?></td> 
+						   <td><?php echo $row['residenttype'] ; ?></td>  
+                           <td><?php echo $row['motheraadhaarname'] ;  ?></td> 
+					       <td><?php echo $row['MotherAge'] ;  ?></td> 
+					       <td><?php echo $row['husbandaadhaarname'] ;  ?></td> 
+			               <td><?php echo $row['mothermobno'] ;  ?></td> 
+					       <td><?php echo $row['obstetricCode'] ;  	?></td> 								   
+					       <td><?php echo date('d-m-Y', strtotime($row['lmpdate'] ));  ?></td> 
+                           <td><?php echo date('d-m-Y', strtotime($row['edddate'] )); ?></td> 
+						   
+                         <?php 
+						 $pre_picmeno = $row['picmeno'];
+						 $pre_mot_wght = $row['motherWeight'];
+						 $pre_GCTWeek1 = "";
+						 $pre_GCTWeek2 = "";
+						 $pre_GCTWeek3 = "";
+						 if($row['gctStatus'] == "1")
+						{
+						 $pre_GCTWeek1 = $row['gctValue'];
+						}
+						else
+						if($row['gctStatus'] == "2") /* Here not used. But for extra check */
+						{
+						 $pre_GCTWeek2 = $row['gctValue'];
+						}
+						else
+						if($row['gctStatus'] == "3") /* Here not used. But for extra check */
+						{
+						 $pre_GCTWeek3 = $row['gctValue'];
+						}
+                         $cnt++;
+						} 
+	             else
+				 {  
+					 ?>	
+					  <?php
+							 $pre_gct_st = $row['gctStatus']; /* Getting Latest entry values */
+							 $pre_mot_wght = $row['motherWeight'];
+							 if($row['gctStatus'] == "1")
+								{
+							 $pre_GCTWeek1 = $row['gctValue'];
+							}
+							else
+						    if($row['gctStatus'] == "2")
+						    {
+							 $pre_GCTWeek2 = $row['gctValue'];
+							}
+							else
+							if($row['gctStatus'] == "3")
+						    {
+							 $pre_GCTWeek3 = $row['gctValue'];
+							}
+						
+					  } 
+									}}
+			  }}
+				
+                       } ?>
+					 <td><?php echo $pre_mot_wght ; ?></td> 
+					 <td><?php echo $pre_GCTWeek1 ; ?></td>
+					 <td><?php echo $pre_GCTWeek2 ; ?></td>
+					 <td><?php echo $pre_GCTWeek3 ; ?></td>  
 	   
 					</table>   <!-------------------- Insert Code Here -------------->
 					
-	
 </div>
 <!--------------------------------------------------------------------------------------------- search button + Table Ends -------------------------------------------------------->	
 
@@ -230,7 +254,7 @@ if($rowp['ppcMethod'] == "9")
 ?>	
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------------------- Download button + Submitting values to next page ------------------------------------------------------------------>
-    <form action="ECAnyListExp.php" method="post" id="filterform" style="width:100%";>	
+    <form action="GDMListExp.php" method="post" id="filterform" style="width:100%";>	
 		  <div class="col-md-8" style="margin-top: 10px;">
    		
           <button type="submit" id="AVReport" name='AVReport' style = "margin-left : 450px; margin-bottom: 10px" class="btn lt btn-primary"><span class="bx bx-download"></span>&nbsp; Download</button>

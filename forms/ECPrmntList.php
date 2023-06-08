@@ -20,7 +20,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card"><h5 class="card-header">
-                  <span class="text-muted fw-light">Reports / Antenatal Visit / </span> Antenatal Visit List
+                  <span class="text-muted fw-light">Reports / Postnatal Visit / </span> ECs Following Permanent Methods
                </h5>  
 			   
 <!------------------------------------------------------------------------------------- Page Details + search button + Table -------------------------------------------------------->		   
@@ -44,12 +44,10 @@
                <th>Mother Name</th>
                <th>Age</th>
                <th>Husband Name</th>
-			   <th>Mobile No.</th>
-               <th>Obstetric score</th>
-               <th>LMP</th>
-               <th>EDD</th>
-               <th>Gestational Age in Weeks</th>
-			   <th>High Risk Factor</th>
+			   <th>Mobile No</th>
+			   <th>Obstetric score</th>
+               <th>Living Children</th>
+               <th>Surgery Type</th>
                          </tr>
                        </thead>  
     <?php
@@ -58,11 +56,16 @@
 
       //  $listQry = "SELECT hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId)";         
 		
-      $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
-                  WHERE av.status=1 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno)";    		
+		
+      $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ar.obstetricCode, ar.livingChildren, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
+       WHERE  pv.status!=0 AND (pv.ppcMethod = 4 OR pv.ppcMethod = 6 OR pv.ppcMethod = 5) AND pv.pncPeriod = (SELECT max(pv1.pncPeriod) From postnatalvisit pv1 where pv1.picmeNo = pv.picmeNo)";
+	
+        
 				     		
-	  $private = " AND av.createdBy='".$userid."'";
+	  $private = " AND pv.createdBy='".$userid."'";
       $orderQry = " ORDER BY ar.picmeRegDate DESC";
+	  
+	 // print_r()
 	  
       if(($usertype == 0) || ($usertype == 1)) {
          if(isset($_POST['filter'])) {
@@ -118,130 +121,63 @@
 						$row['VillageId']==$rowh['VillageId'] AND
 						$row['PanchayatId']==$rowh['PanchayatId'])
 						{
-						 if($row['symptomsHighRisk'] == "1")	
+							$ppcMethod = "";
+	   $ppcQry = "SELECT ppcMethod,picmeNo From postnatalvisit";		/*Fetching ppcMethod From postnatalvisit*/		 
+	   $ppcRes =  mysqli_query($conn,$ppcQry);
+       if($ppcRes) {
+         while($rowp = mysqli_fetch_array($ppcRes)) 
+		 {
+		//  if(($row['picmeno']==$rowp['picmeNo']) AND ($rowp['ppcMethod'] == "4" OR $rowp['ppcMethod'] == "5"))
+			 if($row['picmeNo']==$rowp['picmeNo']) 
+			 {
+				 	if($rowp['ppcMethod'] == "1")	
 							{
-							$row['symptomsHighRisk'] = "Teenage Pregnancy";}
+							$rowp['ppcMethod'] = "Can't decide now";}
 							else								
-							    if($row['symptomsHighRisk'] == "2")	
+							    if($rowp['ppcMethod'] == "2")	
 							    {
-								$row['symptomsHighRisk'] = "Elderly Primi"; }
+								$rowp['ppcMethod'] = "None"; }
 								 else
-							    	 if($row['symptomsHighRisk'] == "3")	
+							    	 if($rowp['ppcMethod'] == "3")	
 							         {
-									 $row['symptomsHighRisk'] = "Elderly Multi "; }
+									 $rowp['ppcMethod'] = "Condom"; }
 									   else 
-										   if($row['symptomsHighRisk'] == "4")	
+										   if($rowp['ppcMethod'] == "4")	
 										   {
-                                           $row['symptomsHighRisk'] = "Short Primi"; 											   
+                                           $rowp['ppcMethod'] = "Male sterilization"; 											   
 						                   }
                                            else
-	                                       if($row['symptomsHighRisk'] == "5")	
+	                                       if($rowp['ppcMethod'] == "5")	
 										   {
-                                           $row['symptomsHighRisk'] = "Severe Anaemia"; 											   
+                                           $rowp['ppcMethod'] = "IUCD-PP"; 											   
 						                   }	
                                           else
-											if($row['symptomsHighRisk'] == "6")	
+											if($rowp['ppcMethod'] == "6")	
 										   {
-                                           $row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia"; 											   
+                                           $rowp['ppcMethod'] = "PP-PS"; 											   
 						                   }	
 										   else
-										   if($row['symptomsHighRisk'] == "7")	
+										   if($rowp['ppcMethod'] == "7")	
 										   {
-                                           $row['symptomsHighRisk'] = "Hydraminios"; 	
+                                           $rowp['ppcMethod'] = "Inj antara and Tab chaya"; 	
                                            								   
-	                                    	 }		
-		                                   if($row['symptomsHighRisk'] == "8")	
+		 }		
+		 if($rowp['ppcMethod'] == "8")	
 										   {
-                                           $row['symptomsHighRisk'] = "APH"; 	
+                                           $rowp['ppcMethod'] = "Any Other Specify"; 	
                                            								   
-	                                    	 }		
-                                           if($row['symptomsHighRisk'] == "9")	
+		 }		
+if($rowp['ppcMethod'] == "9")	
 										   {
-                                           $row['symptomsHighRisk'] = "Multi Para"; 	
+                                           $rowp['ppcMethod'] = "Any Traditional Methods"; 	
                                            								   
-		                                     }				 
-											 
-											 if($row['symptomsHighRisk'] == "10")	
-							{
-							$row['symptomsHighRisk'] = "Multiple Pregnancy";}
-							else								
-							    if($row['symptomsHighRisk'] == "11")	
-							    {
-								$row['symptomsHighRisk'] = "Vesicular Mole"; }
-								 else
-							    	 if($row['symptomsHighRisk'] == "12")	
-							         {
-									 $row['symptomsHighRisk'] = "Rh incompatibility"; }
-									   else 
-										   if($row['symptomsHighRisk'] == "13")	
-										   {
-                                           $row['symptomsHighRisk'] = "Previous LSCS"; 											   
-						                   }
-                                           else
-	                                       if($row['symptomsHighRisk'] == "14")	
-										   {
-                                           $row['symptomsHighRisk'] = "Instrumental V.D"; 											   
-						                   }	
-                                          else
-											if($row['symptomsHighRisk'] == "15")	
-										   {
-                                           $row['symptomsHighRisk'] = "Weight below 40 kg"; 											   
-						                   }	
-										   else
-										   if($row['symptomsHighRisk'] == "16")	
-										   {
-                                           $row['symptomsHighRisk'] = "Heart Disease complicating pregnancy"; 	
-                                           								   
-	                                    	 }		
-		                                   if($row['symptomsHighRisk'] == "17")	
-										   {
-                                           $row['symptomsHighRisk'] = "Malaria"; 	
-                                           								   
-	                                    	 }		
-                                           if($row['symptomsHighRisk'] == "18")	
-										   {
-                                           $row['symptomsHighRisk'] = "Long period infertility"; 	
-                                           								   
-		                                     }			
-
-											if($row['symptomsHighRisk'] == "19")	
-							{
-							$row['symptomsHighRisk'] = "GDM";}
-							else								
-							    if($row['symptomsHighRisk'] == "20")	
-							    {
-								$row['symptomsHighRisk'] = "Previous bad obstetric history"; }
-								 else
-							    	 if($row['symptomsHighRisk'] == "21")	
-							         {
-									 $row['symptomsHighRisk'] = "Cancer"; }
-									   else 
-										   if($row['symptomsHighRisk'] == "22")	
-										   {
-                                           $row['symptomsHighRisk'] = "Intracranial Space occupying lesion"; 											   
-						                   }
-                                           else
-	                                       if($row['symptomsHighRisk'] == "23")	
-										   {
-                                           $row['symptomsHighRisk'] = "Pregnant due to contraceptive Failure"; 											   
-						                   }	
-                                          else
-											if($row['symptomsHighRisk'] == "24")	
-										   {
-                                           $row['symptomsHighRisk'] = "Ectopic Pregnancy"; 											   
-						                   }	
-										   else
-										   if($row['symptomsHighRisk'] == "25")	
-										   {
-                                           $row['symptomsHighRisk'] = "Malpresentation"; 	
-										   }	
-							
-							
-							
+		 }				 
+		 $ppcMethod = $rowp['ppcMethod'];		}}
+		
                        ?>
                         <tr>
                            <td><?php echo $cnt; ?></td>
-						   <td><?php echo $row['picmeno']; ?></td>
+						   <td><?php echo $row['picmeNo']; ?></td>
 					       <td><?php echo date('d-m-Y', strtotime($row['picmeRegDate'])); ?></td>
 				           <td><?php echo $rowh['BlockName']; ?></td>
                            <td><?php echo $rowh['PhcName']; ?></td>
@@ -252,21 +188,23 @@
 					       <td><?php echo $row['MotherAge']; ?></td>
 					       <td><?php echo $row['husbandaadhaarname']; ?></td>
 			               <td><?php echo $row['mothermobno']; ?></td>
-					       <td><?php echo $row['obstetricCode']; ?></td>									   
-					       <td><?php echo date('d-m-Y', strtotime($row['lmpdate'])); ?></td>
-                           <td><?php echo date('d-m-Y', strtotime($row['edddate'])); ?></td> 
-					       <td><?php echo $row['pregnancyWeek']; ?></td>
-					       <td><?php echo $row['symptomsHighRisk']; ?></td>
+						   <td><?php echo $row['obstetricCode']; ?></td>
+						   <td><?php echo $row['livingChildren']; ?></td>
+					       <td><?php echo $ppcMethod; ?></td>
 					     </tr>
                          <?php 
                            $cnt++;
+			
 						}
 							
 						 }}
-                         } 
-                       } ?>
+				} }
+                       } 
+					   
+					   ?>
 	   
 					</table>   <!-------------------- Insert Code Here -------------->
+					
 	
 </div>
 <!--------------------------------------------------------------------------------------------- search button + Table Ends -------------------------------------------------------->	
@@ -292,7 +230,7 @@
 ?>	
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------------------- Download button + Submitting values to next page ------------------------------------------------------------------>
-    <form action="AVEcExport.php" method="post" id="filterform" style="width:100%";>	
+    <form action="ECPrmntListExp.php" method="post" id="filterform" style="width:100%";>	
 		  <div class="col-md-8" style="margin-top: 10px;">
    		
           <button type="submit" id="AVReport" name='AVReport' style = "margin-left : 450px; margin-bottom: 10px" class="btn lt btn-primary"><span class="bx bx-download"></span>&nbsp; Download</button>
