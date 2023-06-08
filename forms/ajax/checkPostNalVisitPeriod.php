@@ -14,16 +14,24 @@ if(empty($deliveryData) || $deliveryData==0){
 $CheckPNCPeriod = mysqli_query($conn,"SELECT picmeNo, pncPeriod  FROM postnatalvisit where picmeNo='".$_POST["picmeno"]."' order by id desc LIMIT 0,1");
 $CheckPNCPeriodData = mysqli_fetch_array($CheckPNCPeriod); 
 
+$query = "SELECT enumid,enumvalue FROM enumdata WHERE type=17";
+$exequery = mysqli_query($conn, $query);
+$periodAr= array();
+while ($listvalue = mysqli_fetch_assoc($exequery)) {
+    $periodAr[$listvalue['enumid']] = $listvalue['enumvalue'];
+}
+
 if (!empty($CheckPNCPeriodData) && isset($CheckPNCPeriodData['picmeNo']) &&  $CheckPNCPeriodData['picmeNo'] > 0) {
   $newPNCPeriod = $CheckPNCPeriodData["pncPeriod"] + 1;
   if($CheckPNCPeriodData['pncPeriod']==7){
       $result['result'] = "error";
       $result['message'] = "Picme reached seven entries. No more entries allowed to this picme";
       $result['selected'] = "";
-  } else if($_POST["pncPeriod"] != $CheckPNCPeriodData["pncPeriod"]){
+  } else if($_POST["pncPeriod"] != ($CheckPNCPeriodData["pncPeriod"]+1)){
        $result['result'] = "error";
-       $result['message'] = "Selected PNC is already present. Please enter the details for applicable PNC.";
        $result['selected'] = $CheckPNCPeriodData["pncPeriod"]+1;
+       $period = isset($periodAr[$result['selected']]) ? " : ".$periodAr[$result['selected']] : "";
+       $result['message'] = "Selected PNC is already present. Please enter the details for applicable PNC ".$period;
    } else {
        $result['result'] = "success";
        $result['selected'] = $CheckPNCPeriodData["pncPeriod"]+1;

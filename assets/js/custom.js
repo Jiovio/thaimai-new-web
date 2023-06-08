@@ -425,6 +425,27 @@ function checkDuplicatePicmeNo(picmeno){
     });
 }
 
+
+function checkGCTWeekStatusDuplicate(picmeno, selectedValue)
+{
+     $.ajax({
+        url: "ajax/ANVisitValidation.php",
+        type: "POST",
+        data: {
+            picmeno: picmeno, gctStatus:selectedValue
+        },
+        cache: false,
+        success: function (response) {
+            result = JSON.parse(response);
+            $('#gctWeekStatus_box').html("")
+            if (result['result'] === 'fail') {
+               $('#gctWeekStatus_box').html("<span style='color:red'>"+result['message']+"</span>");
+               return false;
+            }
+        }
+    });
+}
+
 $('#pncPeriod').change(function (){
      var picmeno = $('#picmenoPostNalVisit').val();
      var pncperiod = $(this).val();     
@@ -704,14 +725,16 @@ if(selectedValue == "1") { sp.style.display = "block"; } else if(selectedValue =
 if(selectedValue == "1") { ap.style.display = "block"; } else if(selectedValue == "0") { ap.style.display = "none"; }
 }
 
-function gctChange()
+function gctChange(picmeno)
 {
-    var selectBox = document.getElementById("gctStatus"); 
-var selectedValue = selectBox.options[selectBox.selectedIndex].text;
- $('#gctValue').attr('disabled', false);
-if(selectedValue == 'Not Done'){
-    $('#gctValue').attr('disabled', true);
-}
+    var selectBox = document.getElementById("gctStatus");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].text;
+    var selectedIndex = selectBox.options[selectBox.selectedIndex].value;
+    $('#gctValue').attr('disabled', false);
+    if (selectedValue == 'Not Done') {
+        $('#gctValue').attr('disabled', true);
+    }
+    checkGCTWeekStatusDuplicate(picmeno, selectedIndex)
 }
 
 function usgChange() {
