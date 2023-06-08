@@ -565,7 +565,7 @@ if (isset($_GET['del'])) {
                               </select>
                           </div>
                           </div>
-                          <div class="col-4 mb-3"  style="display:none">
+                          <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-TdBoosterDate">Td1 (Yes / No) <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <select required name="Td1" id="Td1" class="form-select" onchange="Td1Change()" disabled>
@@ -620,7 +620,7 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                         </div>
-                        <div class="col-4 mb-3"  style="display:none">
+                        <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-TdBoosterDate">Td2 (Yes / No) <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <select required name="Td2" id="Td2" class="form-select" onchange="Td2Change()" disabled>
@@ -675,7 +675,7 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                         </div>
-				<div class="col-4 mb-3" style="display:none">
+				<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-TdBoosterDate">Td Booster (Yes / No) <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <select required name="Tdb" id="Tdb" class="form-select" onchange="TdBChange()" disabled>

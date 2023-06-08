@@ -29,7 +29,7 @@ if (!empty($immuneData) &&  $immuneData !=0) {
            $ImmuneDate = date('Y-m-d', strtotime($deliveryData['deliverydate']. ' + 75 days'));
            $displayDate = date('d/m/Y', strtotime($ImmuneDate));
             if($dateDiff > $doseDays[2]){
-                $result['result'] = "success";
+                $result['result'] = "success.";
                 $result['message'] = "Second dose due date is " . $displayDate . ". It is already expired. Please take 2nd dose immediately";
                 $result['doseNo'] = 2;
                 $result['doseDueDate'] = $ImmuneDate;
@@ -46,7 +46,7 @@ if (!empty($immuneData) &&  $immuneData !=0) {
                 }
             } else {
                 $result['result'] = "success";
-                $result['message'] = "";
+                $result['message'] = ".";
                 $result['doseNo'] = 2;
                 $result['doseDueDate'] = $ImmuneDate;
             }
@@ -56,7 +56,7 @@ if (!empty($immuneData) &&  $immuneData !=0) {
              $displayDate = date('d/m/Y', strtotime($ImmuneDate));
             if($dateDiff > $doseDays[3]){
                 $result['result'] = "success";
-                $result['message'] = "Third dose due date is " . $displayDate . ". It is already expired. Please take 3rd dose immediately";
+                $result['message'] = "Third dose due date is " . $displayDate . ". It is already expired. Please take 3rd dose immediately.";
                 $result['doseNo'] = 3;
                 $result['doseDueDate'] = $ImmuneDate;
             } else if($dateDiff <  $doseDays[3]) {
@@ -82,7 +82,7 @@ if (!empty($immuneData) &&  $immuneData !=0) {
              $displayDate = date('d/m/Y', strtotime($ImmuneDate));
             if($dateDiff > $doseDays[4]){
                 $result['result'] = "success";
-                $result['message'] = "Fourth dose due date is " . $displayDate . ". It is already expired. Please take 4th dose immediately";
+                $result['message'] = "Fourth dose due date is " . $displayDate . ". It is already expired. Please take 4th dose immediately.";
                 $result['doseNo'] = 4;
                 $result['doseDueDate'] = $ImmuneDate;
             } else if($dateDiff <  $doseDays[4]) {
@@ -108,7 +108,7 @@ if (!empty($immuneData) &&  $immuneData !=0) {
              $displayDate = date('d/m/Y', strtotime($ImmuneDate));
               if($dateDiff > $doseDays[5]){
                 $result['result'] = "success";
-                $result['message'] = "Fifth dose due date is " . $displayDate . ". It is already expired. Please take 5th dose immediately";
+                $result['message'] = "Fifth dose due date is " . $displayDate . ". It is already expired. Please take 5th dose immediately.";
                 $result['doseNo'] = 5;
                 $result['doseDueDate'] = $ImmuneDate;
             } else if($dateDiff <  $doseDays[5]) {
@@ -140,7 +140,7 @@ if (!empty($immuneData) &&  $immuneData !=0) {
        $displayDate = date('d/m/Y', strtotime($firstDoseDate));
    if($dateDiff > 45){
        $result['result'] = "success";
-       $result['message']= "First dose due date is ".$displayDate.". It is already expired. Please take first dose immediately";
+       $result['message']= "First dose due date is ".$displayDate.". It is already expired. Please take first dose immediately.";
        $result['doseNo'] = 1;
        $result['doseDueDate'] = $firstDoseDate;
 //       $msg = "success#@#First dose due date is ".$firstDoseDate.". It is already expired. Please take first dose immediately.";

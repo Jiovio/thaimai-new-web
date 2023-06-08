@@ -30,7 +30,7 @@ include "../config/db_connect.php";
 //if(strlen($search_text_input) > 0 )
 
     $listQry = "SELECT ec.picmeno, ec.id, hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName,ec.ecfrno, ec.HscId, ec.VillageId, ec.PanchayatId, ec.dateecreg, ec.motherageecreg, ec.motheraadhaarname, ec.BlockId,ec.PhcId, ec.mothermobno,ec.motheraadhaarid FROM ecregister ec INNER JOIN hscmaster hs on (ec.BlockId = hs.BlockId AND ec.PhcId = hs.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId) WHERE ec.status!= 0 
-                  AND ec.motherageecreg < 20 AND NOT EXISTS (SELECT ar.picmeno FROM anregistration ar WHERE ar.picmeno = ec.picmeno)";    		
+                  AND ec.motherageecreg > 19 AND NOT EXISTS (SELECT ar.picmeno FROM anregistration ar WHERE ar.picmeno = ec.picmeno)";    		
 				   
     $orderQry = " ORDER BY ec.dateecreg DESC";	
 		
@@ -53,15 +53,15 @@ include "../config/db_connect.php";
 	 $wild_srch = "";					     
 	 if(strlen($search_text_input) > 0 )
 	 {	 
-       $wild_srch = $wild_cnt++."||".
-	   $rows['ecfrno']."||". 
+       $wild_srch =  $wild_cnt."||".
+	   $rows['ecfrno']."||".
 	   $rows['picmeno']."||".
 	   date('d-m-Y', strtotime($rows['dateecreg']))."||".
 	   $rows['motheraadhaarid']."||".
 	   $rows['motheraadhaarname']."||".
 	   $rows['mothermobno']."||".
 	   $rows['motherageecreg']."||".
-	   $rows['BlockName']."||". 
+	   $rows['BlockName']."||".
        $rows['PhcName']."||".
        $rows['HscName']."||".
 	   $rows['PanchayatName']."||".
@@ -76,7 +76,7 @@ include "../config/db_connect.php";
 	//	print_r($rows['picmeno']); exit;
 	   }
 }
-
+	 $wild_cnt++;
 	if($search_flag || strlen($search_text_input) == 0 )
 	{
 	  $developer_records[] = $rows;
@@ -120,3 +120,4 @@ include "../config/db_connect.php";
 	  exit; 
 
 ?>
+

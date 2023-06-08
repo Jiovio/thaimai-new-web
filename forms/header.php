@@ -72,8 +72,8 @@ include ('preloader.php');
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-			<img src="../assets/img/Savemom-Logo.png" class="w-px-40 h-auto rounded-circle" />
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">Savemom</span>
+			<img src="../assets/img/Thaimaiyudan-logo.png" class="w-px-40 h-auto rounded-circle" />
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">Thaimaiyudan</span>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-Block d-xl-none">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -222,8 +222,8 @@ include ('preloader.php');
                          </li>
                      
 					     <li class="menu-item; style=menu-list-type:None" >  
-                             <a href="" class="menu-link">
-                                <div data-i18n="Basic"><i>AN Mother Not Delivered List (3 Months EDD)</i></div>
+                             <a href="ANDue3List.php" class="menu-link">
+                                <div data-i18n="Basic"><i>Delivery Due List (3 Months EDD)</i></div>
                              </a>
                          </li>
                        </ul>                  			 
@@ -246,8 +246,8 @@ include ('preloader.php');
                      
 					
 			             <li class="menu-item; style=menu-list-type:None" >  
-                              <a href="" class="menu-link">
-                                 <div data-i18n="Basic"><i>Infant Death List (FUTURE) </i></div>
+                              <a href="InfDthList.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>Infant Death List</i></div>
                               </a>
                          </li>
                     
@@ -312,31 +312,31 @@ include ('preloader.php');
 					
 					<ul class="menu-sub"> <!---- Creating Sub Sub Menu Header ---->
 			             <li class="menu-item; style=menu-list-type:None" >  
-                             <a href="" class="menu-link">
-                                 <div data-i18n="Basic"><i>High Risk List</i></div>
+                             <a href="HRList.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>High Risk</i></div>
                              </a>
                          </li>
                     
 			             <li class="menu-item; style=menu-list-type:None" > 
-                              <a href="" class="menu-link">
-                                 <div data-i18n="Basic"><i>HOB Pregnancy List</i></div>
+                              <a href="HOBList.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>HOB</i></div>
                               </a>
                          </li>
                     
 			             <li class="menu-item; style=menu-list-type:None" >  
-                              <a href="" class="menu-link">
+                              <a href="GDMList.php" class="menu-link">
                                  <div data-i18n="Basic"><i>GDM</i></div>
                               </a>
                          </li>
                      
 			             <li class="menu-item; style=menu-list-type:None" >  
-                              <a href="" class="menu-link">
+                              <a href="AnemiaList.php" class="menu-link">
                                  <div data-i18n="Basic"><i>Anemia</i></div>
                               </a>
                          </li>
                      
 			             <li class="menu-item; style=menu-list-type:None" >  
-                              <a href="" class="menu-link">
+                              <a href="PIHList.php" class="menu-link">
                                  <div data-i18n="Basic"><i>PIH</i></div>
                               </a>
                          </li>

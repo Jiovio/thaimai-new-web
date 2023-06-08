@@ -9,7 +9,7 @@ if(isset($_POST["pregnancyWeek"]) && !empty($_POST["pregnancyWeek"]))
 {
     $pregancyWeek1 = intval(trim($_POST["pregnancyWeek"]));
 }
-
+$picmeno ="0";
 if (!empty($_POST["btnFirst"])) {
 //   $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeno FROM antenatalvisit where picmeno='".$_POST["picmeno"]."' ");
 //   while($picvalue = mysqli_fetch_array($CheckDuplicatePno))
@@ -93,7 +93,7 @@ if (!empty($_POST["btnFirst"])) {
 						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-gctStatus">GCT Week Status <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                              <select name="gctStatus" id="gctStatus" class="form-select" onchange="gctChange()" required>
+                              <select name="gctStatus" id="gctStatus" class="form-select" onchange="gctChange(<?php echo $picmeno;  ?>)" required>
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=46";
@@ -103,6 +103,7 @@ if (!empty($_POST["btnFirst"])) {
                           <?php } ?>
                              </select>
                           </div>
+                          <div id="gctWeekStatus_box"></div>
                         </div>
                        
                         <div class="col-4 mb-3">

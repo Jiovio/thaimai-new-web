@@ -53,7 +53,7 @@ include "../config/db_connect.php";
 	 $wild_srch = "";					     
 	 if(strlen($search_text_input) > 0 )
 	 {	 
-       $wild_srch =  $wild_cnt."||".
+       $wild_srch =  $wild_cnt++."||".
 	   $rows['ecfrno']."||".
 	   $rows['picmeno']."||".
 	   date('d-m-Y', strtotime($rows['dateecreg']))."||".
@@ -76,16 +76,16 @@ include "../config/db_connect.php";
 	//	print_r($rows['picmeno']); exit;
 	   }
 }
-	 $wild_cnt++;
+	// $wild_cnt++;
 	if($search_flag || strlen($search_text_input) == 0 )
 	{
 	  $developer_records[] = $rows;
 }}	
-	$filename = "EC_Teenage_List_".date('d-m-Y') . ".xls";			
+	$filename = "EC_Above_Teenage_List_".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");
 	  $file = fopen('php://output','w');
-	  $header = array("Eligible Couples Teenage List as on ".date('d-m-Y'));
+	  $header = array("EC Above Teenage List as on ".date('d-m-Y'));
 	  fputcsv($file,$header);	
 	  $show_coloumn = false;
 	  if(!empty($developer_records)) {

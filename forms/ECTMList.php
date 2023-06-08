@@ -55,7 +55,8 @@
       //  $listQry = "SELECT hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId)";         
 		
       $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
-        WHERE pv.status!=0 AND (pv.ppcMethod = 2 OR pv.ppcMethod = 8)";
+        WHERE pv.status!=0 AND (pv.ppcMethod = 3 OR pv.ppcMethod = 7) AND pv.pncPeriod = (SELECT max(pv1.pncPeriod) From postnatalvisit pv1 where pv1.picmeNo = pv.picmeNo)";
+	
 	//  WHERE pv.status=1 AND pv.ppcMethod = 2"; 	
 	// WHERE pv.status=1 AND (pv.ppcMethod = trim(Condom) OR pv.ppcMethod = trim(Inj antara and Tab chaya)";   
         
@@ -130,41 +131,46 @@
 			 {
 				 	if($rowp['ppcMethod'] == "1")	
 							{
-							$rowp['ppcMethod'] = "None";}
+							$rowp['ppcMethod'] = "Can't decide now";}
 							else								
 							    if($rowp['ppcMethod'] == "2")	
 							    {
-								$rowp['ppcMethod'] = "Condom"; }
+								$rowp['ppcMethod'] = "None"; }
 								 else
 							    	 if($rowp['ppcMethod'] == "3")	
 							         {
-									 $rowp['ppcMethod'] = "Male sterilization"; }
+									 $rowp['ppcMethod'] = "Condom"; }
 									   else 
 										   if($rowp['ppcMethod'] == "4")	
 										   {
-                                           $rowp['ppcMethod'] = "IUCD-PP"; 											   
+                                           $rowp['ppcMethod'] = "Male sterilization"; 											   
 						                   }
                                            else
 	                                       if($rowp['ppcMethod'] == "5")	
 										   {
-                                           $rowp['ppcMethod'] = "PP-PS"; 											   
+                                           $rowp['ppcMethod'] = "IUCD-PP"; 											   
 						                   }	
                                           else
 											if($rowp['ppcMethod'] == "6")	
 										   {
-                                           $rowp['ppcMethod'] = "Any traditional methods"; 											   
+                                           $rowp['ppcMethod'] = "PP-PS"; 											   
 						                   }	
 										   else
 										   if($rowp['ppcMethod'] == "7")	
 										   {
-                                           $rowp['ppcMethod'] = "Any others specify"; 	
+                                           $rowp['ppcMethod'] = "Inj antara and Tab chaya"; 	
                                            								   
 		 }		
 		 if($rowp['ppcMethod'] == "8")	
 										   {
-                                           $rowp['ppcMethod'] = "Inj antara and Tab chaya"; 	
+                                           $rowp['ppcMethod'] = "Any Other Specify"; 	
                                            								   
-		 }			
+		 }		
+if($rowp['ppcMethod'] == "9")	
+										   {
+                                           $rowp['ppcMethod'] = "Any Traditional Methods"; 	
+                                           								   
+		 }				 			
 		 $ppcMethod = $rowp['ppcMethod'];		}}
                        ?>
                         <tr>

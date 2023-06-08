@@ -23,16 +23,14 @@ include "../config/db_connect.php";
 	if(isset($_POST['search_text_input']))
 	{
 	  $search_text_input = trim($_POST['search_text_input']);
-	  $wild_cnt = 0;     /*Serial No search */
+	  $wild_cnt = 1;     /*Serial No search */
 	} 	
-//	print_r($_POST['search_text_input']); exit;
 
-//if(strlen($search_text_input) > 0 )
-	
-        $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ar.obstetricCode, ar.livingChildren, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
-        WHERE pv.status!=0 AND (pv.ppcMethod = 8 OR pv.ppcMethod = 9) AND pv.pncPeriod = (SELECT max(pv1.pncPeriod) From postnatalvisit pv1 where pv1.picmeNo = pv.picmeNo)";
-		
-    $orderQry = " ORDER BY ar.picmeRegDate DESC";
+
+    $listQry = "SELECT dd.picmeno,ar.residentType, ar.obstetricCode, dd.deliveryCompilcation, dd.infantId, dd.deliverydate,dd.childGender, dd.deliverytime, dd.deliverydistrict, dd.deliverydate, dd.hospitaltype, dd.deliverytype,dd.deliveryOutcome, dd.id, ec.address, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.MotherAge, ec.motheraadhaarname,dd.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno
+             	  FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno JOIN anregistration ar on dd.picmeno = ar.picmeno
+                  WHERE dd.status!=0 AND NOT EXISTS (SELECT pv.picmeNo FROM postnatalvisit pv WHERE pv.picmeNo = dd.picmeno) AND dd.deliveryCompilcation = 7";   		
+    $orderQry = " ORDER BY dd.deliverydate DESC";
 		
     if($bloName == "" && $phcName == "" && $hscName == ""){
        $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
@@ -43,12 +41,11 @@ include "../config/db_connect.php";
        } else if($bloName != "" && $phcName != "" && $hscName != ""){
        $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
        } 
-	
 			 
 	$developer_records = array();
 	$sno=1;
 	while( $rows = mysqli_fetch_assoc($ExeQuery) ) {
-		$search_flag = false;
+		$search_flag = false;   	
 	
              $rows['BlockName'] = "";
 			 $rows['PhcName'] = "";
@@ -75,65 +72,60 @@ include "../config/db_connect.php";
                			 	
 				
 //print_r($rows['HscId']); exit;				
-}}}
-        $ppcQry = "SELECT ppcMethod,picmeNo From postnatalvisit";		/*Fetching ppcMethod From postnatalvisit*/		 
-	    $ppcRes =  mysqli_query($conn,$ppcQry);
-        if($ppcRes) {
-         while($rowp = mysqli_fetch_array($ppcRes)) 
-		 {
-		if($rows['picmeNo']==$rowp['picmeNo']) 
-			 {
-				 	if($rowp['ppcMethod'] == "1")	
+//}}}
+							if($rows['hospitaltype'] == "1")	/*delivery Happened @*/
 							{
-							$rowp['ppcMethod'] = "Can't decide now";}
+							$rows['hospitaltype'] = "HSC";}
 							else								
-							    if($rowp['ppcMethod'] == "2")	
+							if($rows['hospitaltype'] == "2")	
+							{
+							$rows['hospitaltype'] = "PHC"; }
+							else
+							if($rows['hospitaltype'] == "3")	
+							{
+							$rows['hospitaltype'] = "UG PHC"; }
+							else 
+							if($rows['hospitaltype'] == "4")	
+							{
+                            $rows['hospitaltype'] = "GH"; 											   
+						    }
+                            else
+	                        if($rows['hospitaltype'] == "5")	
+							{
+                            $rows['hospitaltype'] = "MCH"; 											   
+						    }	
+                            else
+							if($rows['hospitaltype'] == "6")	
+							{
+                            $rows['hospitaltype'] = "Private Hospital"; 											   
+						    }	
+							else
+							if($rows['hospitaltype'] == "7")	
+							{
+                            $rows['hospitaltype'] = "PNH"; 											   
+						    }	
+                            if($rows['hospitaltype'] == "8")	
+							{
+                            $rows['hospitaltype'] = "Home"; 			
+						    }
+							
+							if($rows['childGender'] == "1")	/* Child Gender */
+							{
+							$rows['childGender'] = "Male";}
+							else								
+							    if($rows['childGender'] == "2")	
 							    {
-								$rowp['ppcMethod'] = "None"; }
-								 else
-							    	 if($rowp['ppcMethod'] == "3")	
-							         {
-									 $rowp['ppcMethod'] = "Condom"; }
-									   else 
-										   if($rowp['ppcMethod'] == "4")	
-										   {
-                                           $rowp['ppcMethod'] = "Male sterilization"; 											   
-						                   }
-                                           else
-	                                       if($rowp['ppcMethod'] == "5")	
-										   {
-                                           $rowp['ppcMethod'] = "IUCD-PP"; 											   
-						                   }	
-                                          else
-											if($rowp['ppcMethod'] == "6")	
-										   {
-                                           $rowp['ppcMethod'] = "PP-PS"; 											   
-						                   }	
-										   else
-										   if($rowp['ppcMethod'] == "7")	
-										   {
-                                           $rowp['ppcMethod'] = "Inj antara and Tab chaya"; 	
-                                           								   
-		                                    }		
-		 if($rowp['ppcMethod'] == "8")	
-										   {
-                                           $rowp['ppcMethod'] = "Any Other Specify"; 	
-                                           								   
-		 }		
-if($rowp['ppcMethod'] == "9")	
-										   {
-                                           $rowp['ppcMethod'] = "Any Traditional Methods"; 	
-                                           								   
-		 }				 		
-		 
-		$rows['ppcMethod'] = $rowp['ppcMethod'];}}}  
-	
+								$rows['childGender'] = "Female"; }
+			  
+	                        $rows['infage'] = "0";
+						    $rows['Deathreason'] = "Delivery Complication";
+							
 		$wild_srch = "";				     
 	    if(strlen($search_text_input) > 0 )
 	    {	 
        
-       $wild_srch = $wild_cnt. "||".  /* "*" - separates serails no */
-	   $rows['picmeNo']."||".
+       $wild_srch = $wild_cnt++."||".                        /* "*" - separates serails no */
+	   $rows['picmeno']."||".
 					       date('d-m-Y', strtotime($rows['picmeRegDate']))."||".
 				           $rows['BlockName']."||".
                            $rows['PhcName']."||".
@@ -142,45 +134,47 @@ if($rowp['ppcMethod'] == "9")
                            $rows['VillageName']."||".
                            $rows['motheraadhaarname']."||". 
 					       $rows['MotherAge']."||". 
-					       $rows['husbandaadhaarname']."||".
+					       $rows['husbandaadhaarname']."||". 
 			               $rows['mothermobno']."||". 
-						   $rows['obstetricCode']."||".
-						   $rows['livingChildren']."||".
-					       $rows['ppcMethod']; 
+                           $row['obstetricCode']."||".
+                           $row['infantId']."||".
+						   date('d-m-Y', strtotime($row['deliverydate']))."||".
+						   $row['childGender']."||".
+						   date('H:i:s',strtotime($row['deliverytime']))."||".
+						   $row['infage']."||".
+						   $row['deliverydistrict']."||".
+					       $row['hospitaltype']."||".
+					       $row['Deathreason']."||"; 
 	   
 	   if(stripos($wild_srch,$search_text_input)!==false) /*STRIPOS - Case incensitive search */
 	   {
 		$search_flag = true;  
-print_r($wild_srch); 		
-	//	print_r($ppcMethod); exit;
 	   }
 }
     
-	 
-	//  if($wild_cnt == "181"){
-	//  print_r($wild_cnt);
-	 // print_r($rows['picmeno']); exit;}
-	   $wild_cnt++;
 	
+	   
+   //  $wild_cnt++;
 	if($search_flag || strlen($search_text_input) == 0 )
 	{
-	
-	      $developer_records[] = $rows;	
 		
+	  $developer_records[] = $rows;	
+	
 }}	
- //print_r("$ppcMethod"); print_r($ppcMethod); exit;
-	$filename = "ECs_Following__Any_Other_FW_Method_List_".date('d-m-Y') . ".xls";			
+}}}
+ 
+	$filename = "Infant_Death_List_".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");
 	  $file = fopen('php://output','w');
-	  $header = array("ECs Following Any Other FW Method List as on ".date('d-m-Y'));
+	  $header = array("Infant Death List as on ".date('d-m-Y'));
 	  fputcsv($file,$header);	
 	  $show_coloumn = false;
 	  if(!empty($developer_records)) {
 		foreach($developer_records as $record) {
 		 if(!$show_coloumn) {
 			 
-		$h = array("S.No", "RCH ID","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Mother Name","Age","Husband Name","Mobile No", "Temporary Family Welfare Method");
+		$h = array("S.No", "RCH ID","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Mother Name","Age","Husband Name","Mobile No", "Obstetric Score","Infant RCH ID","Infant Death Date","Gender","Infant Death Time","Infant Age @ Death","Infant Death District","Infant Death Place","Reason for Death");
 			
 		$excelData = implode("\t", array_values($h)) . "\n";
 		$show_coloumn = true;	
@@ -188,7 +182,7 @@ print_r($wild_srch);
 		
 		$lineData = array(
 		$sno++,
-						    $record['picmeNo'],
+						    $record['picmeno'],
 					        date('d-m-Y', strtotime($record['picmeRegDate'])),
 				            $record['BlockName'],
                             $record['PhcName'],
@@ -199,9 +193,15 @@ print_r($wild_srch);
 					        $record['MotherAge'],
 					        $record['husbandaadhaarname'],
 			                $record['mothermobno'],
-							$record['obstetricCode'],
-						    $record['livingChildren'],
-					        $record['ppcMethod']
+						   $record['obstetricCode'],
+                           $record['infantId'],
+						   date('d-m-Y', strtotime($record['deliverydate'])),
+						   $record['childGender'],
+						   date('H:i:s',strtotime($record['deliverytime'])),
+						   $record['infage'],
+						   $record['deliverydistrict'],
+					       $record['hospitaltype'],
+					       $record['Deathreason'] 
 		  ); 
 			$excelData .= implode("\t", array_values($lineData)) . "\n";
 	   }
