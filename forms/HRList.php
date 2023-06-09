@@ -60,11 +60,11 @@
 
     
 	
-    $listQry = "SELECT ar.gravida,ar.para,ar.livingChildren,ar.abortion,ar.childDeath,ar.bpSys,ar.bpDia,ar.motherWeight,ar.updatedat, ar.createdat,ar.picmeno,ar.residentType, ec.motherdob, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno
+    $listQry = "SELECT ar.gravida,ar.para,ar.livingChildren,ar.abortion,ar.childDeath,ar.bpSys,ar.bpDia,ar.motherWeight,ar.updatedat, ar.createdat,ar.picmeno,ar.residentType, ec.motherdob, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno
 	            WHERE ar.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ar.picmeno)";
 									 
 	  $private = " AND ar.createdBy='".$userid."'";
-      $orderQry = " ORDER BY ar.picmeRegDate DESC";
+      $orderQry = " ORDER BY ar.anRegDate DESC";
 	  
       if(($usertype == 0) || ($usertype == 1)) {
          if(isset($_POST['filter'])) {
@@ -119,7 +119,7 @@
 							{
 							$row['refdat'] = $row['updatedat'];	
 							} */
-						 $row['refdat'] = $row['picmeRegDate'];
+						 $row['refdat'] = $row['anRegDate'];
 							
 				$ar_picme = "";
 				$ar_picme = $row['picmeno'];
@@ -482,7 +482,7 @@
                         <tr>
                            <td><?php echo $cnt; ?></td>
 						   <td><?php echo $row['picmeno']; ?></td>
-					       <td><?php echo date('d-m-Y', strtotime($row['picmeRegDate'])); ?></td>
+					       <td><?php echo date('d-m-Y', strtotime($row['anRegDate'])); ?></td>
 				           <td><?php echo $rowh['BlockName']; ?></td>
                            <td><?php echo $rowh['PhcName']; ?></td>
                            <td><?php echo $rowh['HscName']; ?></td>

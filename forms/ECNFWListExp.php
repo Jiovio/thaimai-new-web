@@ -29,10 +29,10 @@ include "../config/db_connect.php";
 
 //if(strlen($search_text_input) > 0 )
 
-    $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
+    $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.anRegDate, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
         WHERE pv.status!=0 AND (pv.ppcMethod = 2 OR pv.ppcMethod = 1) AND pv.pncPeriod = (SELECT max(pv1.pncPeriod) From postnatalvisit pv1 where pv1.picmeNo = pv.picmeNo)";
 		
-    $orderQry = " ORDER BY ar.picmeRegDate DESC";
+    $orderQry = " ORDER BY ar.anRegDate DESC";
 		
     if($bloName == "" && $phcName == "" && $hscName == ""){
        $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
@@ -134,7 +134,7 @@ if($rowp['ppcMethod'] == "9")
        
        $wild_srch = $wild_cnt++."||".  /* "*" - separates serails no */
 	   $rows['picmeNo']."||".
-					       date('d-m-Y', strtotime($rows['picmeRegDate']))."||".
+					       date('d-m-Y', strtotime($rows['anRegDate']))."||".
 				           $rows['BlockName']."||".
                            $rows['PhcName']."||".
                            $rows['HscName']."||".
@@ -192,7 +192,7 @@ if($rowp['ppcMethod'] == "9")
 		$lineData = array(
 		$sno++,
 						    $record['picmeNo'],
-					        date('d-m-Y', strtotime($record['picmeRegDate'])),
+					        date('d-m-Y', strtotime($record['anRegDate'])),
 				            $record['BlockName'],
                             $record['PhcName'],
                             $record['HscName'],

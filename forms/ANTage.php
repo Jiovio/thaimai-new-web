@@ -59,15 +59,15 @@
 //	print_r(trim($tst)); 
 	//print_r(strlen($tst)); exit;
 	
-      // $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy,hs.BlockName,hs.PhcName,hs.HscName, ec.BlockId,ec.PhcId, hs.PanchayatName, hs.VillageName, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId) JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
+      // $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy,hs.BlockName,hs.PhcName,hs.HscName, ec.BlockId,ec.PhcId, hs.PanchayatName, hs.VillageName, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId) JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
       //              WHERE av.status=1";             
 
       //  $listQry = "SELECT hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId)";         
 		
-      $listQry = "SELECT ar.picmeno,ar.residentType, ar.picmeRegDate, ec.motherdob, mh.reg12weeks, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno JOIN medicalhistory mh on mh.picmeno = ar.picmeno
+      $listQry = "SELECT ar.picmeno,ar.residentType, ar.anRegDate, ec.motherdob, mh.reg12weeks, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno JOIN medicalhistory mh on mh.picmeno = ar.picmeno
                   WHERE ar.status!=0 AND ar.MotherAge < 20 AND NOT EXISTS (SELECT av.picmeno FROM antenatalvisit av WHERE av.picmeno = ar.picmeno)";  		
 	  $private = " AND ar.createdBy='".$userid."'";
-      $orderQry = " ORDER BY ar.picmeRegDate DESC";
+      $orderQry = " ORDER BY ar.anRegDate DESC";
 	  
       if(($usertype == 0) || ($usertype == 1)) {
          if(isset($_POST['filter'])) {
@@ -134,17 +134,17 @@
 							}	
 							if($row['reg12weeks'] == "1")
 							{
-							    $row['reg12weeks'] = "No";
+							    $row['reg12weeks'] = "Yes";
 							}	
 							if($row['reg12weeks'] == "0")	
 							{
-							 $row['reg12weeks'] = "Yes";
+							 $row['reg12weeks'] = "No";
 							}		
                        ?>
                         <tr>
                            <td><?php echo $cnt; ?></td>
 						   <td><?php echo $row['picmeno']; ?></td>
-					       <td><?php echo date('d-m-Y', strtotime($row['picmeRegDate'])); ?></td>
+					       <td><?php echo date('d-m-Y', strtotime($row['anRegDate'])); ?></td>
 				           <td><?php echo $rowh['BlockName']; ?></td>
                            <td><?php echo $rowh['PhcName']; ?></td>
                            <td><?php echo $rowh['HscName']; ?></td>

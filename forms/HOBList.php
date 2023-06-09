@@ -54,10 +54,10 @@
                          </tr>
                        </thead>  
     <?php
-      $listQry = "SELECT ar.picmeno,ar.residentType, ar.picmeRegDate, ec.motherdob, ar.livingChildren, mh.reg12weeks, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno JOIN medicalhistory mh on mh.picmeno = ar.picmeno
+      $listQry = "SELECT ar.picmeno,ar.residentType, ar.anRegDate, ec.motherdob, ar.livingChildren, mh.reg12weeks, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno JOIN medicalhistory mh on mh.picmeno = ar.picmeno
                   WHERE ar.status!=0 AND (ar.gravida > 2 OR ar.livingChildren > 2 OR ar.abortion > 2 OR ar.childDeath > 2 OR ar.para > 2) AND NOT EXISTS (SELECT av.picmeno FROM antenatalvisit av WHERE av.picmeno = ar.picmeno)";  		
 	  $private = " AND ar.createdBy='".$userid."'";
-      $orderQry = " ORDER BY ar.picmeRegDate DESC"; 
+      $orderQry = " ORDER BY ar.anRegDate DESC"; 
 	  
       if(($usertype == 0) || ($usertype == 1)) {
          if(isset($_POST['filter'])) {
@@ -135,7 +135,7 @@
                         <tr>
                            <td><?php echo $cnt; ?></td>
 						   <td><?php echo $row['picmeno']; ?></td>
-					       <td><?php echo date('d-m-Y', strtotime($row['picmeRegDate'])); ?></td>
+					       <td><?php echo date('d-m-Y', strtotime($row['anRegDate'])); ?></td>
 				           <td><?php echo $rowh['BlockName']; ?></td>
                            <td><?php echo $rowh['PhcName']; ?></td>
                            <td><?php echo $rowh['HscName']; ?></td>
