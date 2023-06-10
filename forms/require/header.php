@@ -123,7 +123,7 @@ include ('preloader.php');
               </a>
               <ul class="menu-sub">
 			  				<li class="menu-item">
-                  <a href="DeliveryDue.php" class="menu-link">
+                  <a href="AntenatalDue.php" class="menu-link">
                     <div data-i18n="Basic">Antenatal Due List</div>
                   </a>
                 </li>
@@ -142,9 +142,10 @@ include ('preloader.php');
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="MotherImDue.php" class="menu-link">
-                    <div data-i18n="Basic">Mother Immunization Due List</div>
-                  </a>
+               <!--   <a href="MotherImDue.php" class="menu-link"> !-->
+			   <a class="menu-link">
+                    <div data-i18n="Basic">Mother Immunization Due List (Future)</div>
+                 </a>
                 </li>
                 </li>
               </ul>
@@ -253,7 +254,8 @@ include ('preloader.php');
                     
 					 
 			             <li class="menu-item; style=menu-list-type:None" > 
-                              <a href="" class="menu-link">
+                         <!---     <a href="" class="menu-link">  --->
+						      <a class="menu-link">
                                  <div data-i18n="Basic"><i>Maternal Death List (FUTURE) </i></div>
                               </a>
                          </li>
