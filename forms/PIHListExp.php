@@ -28,11 +28,11 @@ include "../config/db_connect.php";
 
 //if(strlen($search_text_input) > 0 )
 
-    $listQry = "SELECT av.picmeno,av.id, av.motherWeight, av.bpSys, av.bpDia, av.pregnancyWeek,av.urineAlbuminPresent,av.noCalcium, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
+    $listQry = "SELECT av.picmeno,av.id, av.motherWeight, av.bpSys, av.bpDia, av.pregnancyWeek,av.urineAlbuminPresent,av.noCalcium, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
                   WHERE av.status!=0 AND av.symptomsHighRisk = 6 AND av.pregnancyWeek >13 AND av.pregnancyWeek < 28 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND av.ancPeriod = (SELECT max(av1.ancPeriod) From antenatalvisit av1 where av1.picmeno = av.picmeno)";
 	 		
 				    
-    $orderQry = " ORDER BY ar.picmeRegDate DESC";  	
+    $orderQry = " ORDER BY ar.anRegDate DESC";  	
 		
     if($bloName == "" && $phcName == "" && $hscName == ""){
        $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
@@ -92,7 +92,7 @@ if($rows['residenttype'] == "1")
 	 {	 
        $wild_srch =  $wild_cnt++."||".  
 	   $rows['picmeno'].
-	   date('d-m-Y', strtotime($rows['picmeRegDate']))."||". 
+	   date('d-m-Y', strtotime($rows['anRegDate']))."||". 
 	   $rows['BlockName']."||".  
        $rows['PhcName']."||". 
        $rows['HscName']."||". 
@@ -144,7 +144,7 @@ if($rows['residenttype'] == "1")
 		$lineData = array(
 		$sno++, 
 		$record['picmeno'], 
-		date('d-m-Y', strtotime($record['picmeRegDate'])), 
+		date('d-m-Y', strtotime($record['anRegDate'])), 
 		$record['BlockName'], 
 		$record['PhcName'], 
 		$record['HscName'], 

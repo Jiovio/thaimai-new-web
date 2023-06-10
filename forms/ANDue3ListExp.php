@@ -28,10 +28,10 @@ include "../config/db_connect.php";
 
 //if(strlen($search_text_input) > 0 )
 
-    $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, av.residenttype, av.motherWeight, av.Hb, av.bpSys, av.bpDia, av.HighRisk, ec.address, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
+    $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, av.residenttype, av.motherWeight, av.Hb, av.bpSys, av.bpDia, av.HighRisk, ec.address, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
                   WHERE av.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND (TIMESTAMPDIFF(MONTH, CURRENT_DATE(), mh.edddate) <= 3)";   		
 				   
-    $orderQry = " ORDER BY ar.picmeRegDate DESC";  	
+    $orderQry = " ORDER BY ar.anRegDate DESC";  	
 		
     if($bloName == "" && $phcName == "" && $hscName == ""){
        $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
@@ -92,7 +92,7 @@ include "../config/db_connect.php";
 	 {	 
        $wild_srch =  $wild_cnt++."||".  
 	   $rows['picmeno']."||".  
-	   date('d-m-Y', strtotime($rows['picmeRegDate']))."||".  
+	   date('d-m-Y', strtotime($rows['anRegDate']))."||".  
 	   $rows['BlockName']."||".   
        $rows['PhcName']."||".  
        $rows['HscName']."||".  
@@ -141,7 +141,7 @@ include "../config/db_connect.php";
 		$lineData = array(
 		$sno++, 
 		$record['picmeno'], 
-		date('d-m-Y', strtotime($record['picmeRegDate'])), 
+		date('d-m-Y', strtotime($record['anRegDate'])), 
 		$record['BlockName'], 
 		$record['PhcName'], 
 		$record['HscName'], 

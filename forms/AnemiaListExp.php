@@ -30,10 +30,10 @@ include "../config/db_connect.php";
 	$pre_av_picme = "";
     $prev_picmeno = ""; 
 
-    $listQry = "SELECT ar.gravida,ar.para,ar.livingChildren,ar.abortion,ar.childDeath,ar.bpSys,ar.bpDia,ar.motherWeight,ar.residenttype, ar.updatedat, ar.createdat,ar.picmeno,ar.residentType, ec.motherdob, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno JOIN medicalhistory mh on mh.picmeno = ar.picmeno
+    $listQry = "SELECT ar.gravida,ar.para,ar.livingChildren,ar.abortion,ar.childDeath,ar.bpSys,ar.bpDia,ar.motherWeight,ar.residenttype, ar.updatedat, ar.createdat,ar.picmeno,ar.residentType, ec.motherdob, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno JOIN medicalhistory mh on mh.picmeno = ar.picmeno
 	            WHERE ar.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ar.picmeno)";
 				
-    $orderQry = " ORDER BY ar.picmeRegDate DESC";  	
+    $orderQry = " ORDER BY ar.anRegDate DESC";  	
 		
     if($bloName == "" && $phcName == "" && $hscName == ""){
        $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
@@ -265,7 +265,7 @@ include "../config/db_connect.php";
 					 { 
 			         //	 print_r("Diff".$prev_picmeno); 
 				        $row_pre['picmeno'] = $prev_picmeno;
-					    $row_pre['picmeRegDate'] = $prev_picmeRegDate;  
+					    $row_pre['anRegDate'] = $prev_anRegDate;  
 				        $row_pre['BlockName'] = $prev_BlockName; 
                         $row_pre['PhcName'] = $prev_PhcName;  
                         $row_pre['HscName'] = $prev_HscName;
@@ -304,7 +304,7 @@ include "../config/db_connect.php";
 	                    {	 
                             $wild_srch =  $wild_cnt++."||".  
 	   						$row_pre['picmeno']."||".
-					        $row_pre['picmeRegDate']."||".
+					        $row_pre['anRegDate']."||".
 				            $row_pre['BlockName']."||".  
                             $row_pre['PhcName']."||".  
                             $row_pre['HscName']."||".
@@ -359,7 +359,7 @@ include "../config/db_connect.php";
 							 } /* Search Flag True */
 							 
 	                         
-					        $prev_picmeRegDate =  "";
+					        $prev_anRegDate =  "";
 				            $prev_BlockName =  "";
                             $prev_PhcName =  "";  
                             $prev_HscName =  ""; 
@@ -397,7 +397,7 @@ include "../config/db_connect.php";
 						   
 						   $pre_picme = $row['picmeno'];
 						   $prev_picmeno = $row['picmeno'];  
-					        $prev_picmeRegDate = date('d-m-Y', strtotime($row['picmeRegDate']));  
+					        $prev_anRegDate = date('d-m-Y', strtotime($row['anRegDate']));  
 				            $prev_BlockName = $rowh['BlockName'];  
                             $prev_PhcName = $rowh['PhcName'];  
                             $prev_HscName = $rowh['HscName'];  
@@ -445,7 +445,7 @@ include "../config/db_connect.php";
 							$pre_picme = $row['picmeno'];
 							 
 						    $prev_picmeno = $row['picmeno'];  
-					        $prev_picmeRegDate = date('d-m-Y', strtotime($row['picmeRegDate']));  
+					        $prev_anRegDate = date('d-m-Y', strtotime($row['anRegDate']));  
 				            $prev_BlockName = $rowh['BlockName'];  
                             $prev_PhcName = $rowh['PhcName'];  
                             $prev_HscName = $rowh['HscName'];  
@@ -523,7 +523,7 @@ include "../config/db_connect.php";
 					 { 
 			         //	 print_r("Diff".$prev_picmeno); 
 				        $row_pre['picmeno'] = $prev_picmeno;
-					    $row_pre['picmeRegDate'] = $prev_picmeRegDate;  
+					    $row_pre['anRegDate'] = $prev_anRegDate;  
 				        $row_pre['BlockName'] = $prev_BlockName; 
                         $row_pre['PhcName'] = $prev_PhcName;  
                         $row_pre['HscName'] = $prev_HscName;
@@ -562,7 +562,7 @@ include "../config/db_connect.php";
 	                    {	 
                             $wild_srch =  $wild_cnt++."||".  
 	   						$row_pre['picmeno']."||".
-					        $row_pre['picmeRegDate']."||".
+					        $row_pre['anRegDate']."||".
 				            $row_pre['BlockName']."||".  
                             $row_pre['PhcName']."||".  
                             $row_pre['HscName']."||".
@@ -635,7 +635,7 @@ include "../config/db_connect.php";
 		$lineData = array(
 		$sno++, 
 		$record['picmeno'], 
-		date('d-m-Y', strtotime($record['picmeRegDate'])), 
+		date('d-m-Y', strtotime($record['anRegDate'])), 
 		$record['BlockName'], 
 		$record['PhcName'], 
 		$record['HscName'], 

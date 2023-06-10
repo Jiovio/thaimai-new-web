@@ -60,9 +60,9 @@
 	  $private = " AND ec.createdBy='".$userid."'";
       $orderQry = " ORDER BY ec.dateecreg DESC";
 	  
-      if(($usertype == 0) || ($usertype == 1)) {
-         if(isset($_POST['filter'])) {
-	        $hscName = "";
+    if(($usertype == 0) || ($usertype == 1)) {
+      if(isset($_POST['filter'])) {
+	$hscName = "";
 	$bloName = "";
 	$phcName = "";
    if(isset($_POST['HscId']))
@@ -149,7 +149,7 @@
 	?>	
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------------------- Download button + Submitting values to next page ------------------------------------------------------------------>
-    <form action="EcAbvTageExp.php" method="post" id="filterform" style="width:100%";>	
+    <form action="ECAbvTageExp.php" method="post" id="filterform" style="width:100%";>	
 		  <div class="col-md-8" style="margin-top: 10px;">
    		
           <button type="submit" id="AVReport" name='AVReport' style = "margin-left : 450px; margin-bottom: 10px" class="btn lt btn-primary"><span class="bx bx-download"></span>&nbsp; Download</button>

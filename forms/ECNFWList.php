@@ -51,13 +51,13 @@
     <?php
       
 		
-      $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.picmeRegDate, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
+      $listQry = "SELECT pv.picmeNo,pv.id, pv.ppcMethod, ec.HscId, ar.anRegDate, ec.VillageId, ec.PanchayatId, ar.MotherAge, ec.motheraadhaarname,pv.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM postnatalvisit pv JOIN ecregister ec on ec.picmeNo=pv.picmeNo JOIN anregistration ar on ar.picmeno=pv.picmeNo
         WHERE pv.status!=0 AND (pv.ppcMethod = 2 OR pv.ppcMethod = 1) AND pv.pncPeriod = (SELECT max(pv1.pncPeriod) From postnatalvisit pv1 where pv1.picmeNo = pv.picmeNo)";
 	
 	
 				     		
 	  $private = " AND pv.createdBy='".$userid."'";
-      $orderQry = " ORDER BY ar.picmeRegDate DESC";
+      $orderQry = " ORDER BY ar.anRegDate DESC";
 	  
 	 // print_r()
 	  
@@ -172,7 +172,7 @@ if($rowp['ppcMethod'] == "9")
                         <tr>
                            <td><?php echo $cnt; ?></td>
 						   <td><?php echo $row['picmeNo']; ?></td>
-					       <td><?php echo date('d-m-Y', strtotime($row['picmeRegDate'])); ?></td>
+					       <td><?php echo date('d-m-Y', strtotime($row['anRegDate'])); ?></td>
 				           <td><?php echo $rowh['BlockName']; ?></td>
                            <td><?php echo $rowh['PhcName']; ?></td>
                            <td><?php echo $rowh['HscName']; ?></td>
