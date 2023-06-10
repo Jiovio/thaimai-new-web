@@ -29,10 +29,10 @@ include "../config/db_connect.php";
 
 //if(strlen($search_text_input) > 0 )
 
-    $listQry = "SELECT ar.picmeRegDate,ar.gravida,ar.para,ar.livingChildren,ar.abortion,ar.childDeath,ar.bpSys,ar.bpDia,ar.motherWeight,ar.updatedat, ar.createdat,ar.picmeno,ar.residentType, ec.motherdob, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno
+    $listQry = "SELECT ar.anRegDate,ar.gravida,ar.para,ar.livingChildren,ar.abortion,ar.childDeath,ar.bpSys,ar.bpDia,ar.motherWeight,ar.updatedat, ar.createdat,ar.picmeno,ar.residentType, ec.motherdob, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno
 	            WHERE ar.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ar.picmeno)"; 		
 				   
-    $orderQry = " ORDER BY ar.picmeRegDate DESC";	
+    $orderQry = " ORDER BY ar.anRegDate DESC";	
 		
     if($bloName == "" && $phcName == "" && $hscName == ""){
        $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
@@ -49,14 +49,14 @@ include "../config/db_connect.php";
 	while( $row = mysqli_fetch_assoc($ExeQuery) ) {
 		$High_Risk_Ind = "N";
 				$row['refdat'] = "";
-				$row['refdat'] = $row['picmeRegDate'];
+				$row['refdat'] = $row['anRegDate'];
 							
 				$ar_picme = "";
 				$ar_picme = $row['picmeno'];
 				
 				$row['lmpdate'] = "";
 							$row['edddate'] = "";
-							$row['hospitaltype'] = "";
+							$row['hospitalType'] = "";
 							$row['hospitalname'] = "";
 							
 							if($row['residentType'] == "1")
@@ -107,47 +107,47 @@ include "../config/db_connect.php";
 					  
 					$row['lmpdate'] = $row_mh['lmpdate'];
 							$row['edddate'] = $row_mh['edddate'];
-							$row['hospitaltype'] = $row_mh['hospitaltype'];
+							$row['hospitalType'] = $row_mh['hospitaltype'];
 							$row['hospitalname'] = $row_mh['hospitalname'] ;
 							
 							$lmp_fmt = date('d-m-Y', strtotime($row['lmpdate']));
 							$edd_fmt = date('d-m-Y', strtotime($row['edddate']));
 					
 					
-							if($row['hospitaltype'] == "1")	
+							if($row['hospitalType'] == "1")	
 							{
-							$row['hospitaltype'] = "HSC";}
+							$row['hospitalType'] = "HSC";}
 							else								
-							    if($row['hospitaltype'] == "2")	
+							    if($row['hospitalType'] == "2")	
 							    {
-								$row['hospitaltype'] = "PHC"; }
+								$row['hospitalType'] = "PHC"; }
 								 else
-							    	 if($row['hospitaltype'] == "3")	
+							    	 if($row['hospitalType'] == "3")	
 							         {
-									 $row['hospitaltype'] = "UG PHC"; }
+									 $row['hospitalType'] = "UG PHC"; }
 									   else 
-										   if($row['hospitaltype'] == "4")	
+										   if($row['hospitalType'] == "4")	
 										   {
-                                           $row['hospitaltype'] = "GH"; 											   
+                                           $row['hospitalType'] = "GH"; 											   
 						                   }
                                            else
-	                                       if($row['hospitaltype'] == "5")	
+	                                       if($row['hospitalType'] == "5")	
 										   {
-                                           $row['hospitaltype'] = "MCH"; 											   
+                                           $row['hospitalType'] = "MCH"; 											   
 						                   }	
                                            else
-											if($row['hospitaltype'] == "6")	
+											if($row['hospitalType'] == "6")	
 										   {
-                                           $row['hospitaltype'] = "Private Hospital"; 											   
+                                           $row['hospitalType'] = "Private Hospital"; 											   
 						                   }	
 										   else
-										   if($row['hospitaltype'] == "7")	
+										   if($row['hospitalType'] == "7")	
 										   {
-                                           $row['hospitaltype'] = "PNH"; 											   
+                                           $row['hospitalType'] = "PNH"; 											   
 						                   }	
-                                           if($row['hospitaltype'] == "8")	
+                                           if($row['hospitalType'] == "8")	
 										   {
-                                           $row['hospitaltype'] = "Home"; 											   
+                                           $row['hospitalType'] = "Home"; 											   
 						                   }		
 																				   
 							 if($row_mh['momVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "1" OR $row_mh['momhbresult'] == "1" OR $row_mh['hushbresult'] == "1" OR $row_mh['momhivtestresult'] == "1" OR $row_mh['hushivtestresult'] == "1") 
@@ -187,42 +187,42 @@ include "../config/db_connect.php";
 							$row['symptomsHighRisk'] = $row_av['symptomsHighRisk'];
 							  $row['refdat'] = $row_av['referralDate'];
 							 $row['hospitalname'] = $row_av['referralPlace'];
-							 $row['hospitaltype'] = $row_av['hospitaltype'];
+							 $row['hospitalType'] = $row_av['hospitalType'];
 							 
-							 if($row['hospitaltype'] == "1")	
+							 if($row['hospitalType'] == "1")	
 							{
-							$row['hospitaltype'] = "HSC";}
+							$row['hospitalType'] = "HSC";}
 							else								
-							    if($row['hospitaltype'] == "2")	
+							    if($row['hospitalType'] == "2")	
 							    {
-								$row['hospitaltype'] = "PHC"; }
+								$row['hospitalType'] = "PHC"; }
 								 else
-							    	 if($row['hospitaltype'] == "3")	
+							    	 if($row['hospitalType'] == "3")	
 							         {
-									 $row['hospitaltype'] = "UG PHC"; }
+									 $row['hospitalType'] = "UG PHC"; }
 									   else 
-										   if($row['hospitaltype'] == "4")	
+										   if($row['hospitalType'] == "4")	
 										   {
-                                           $row['hospitaltype'] = "GH"; 											   
+                                           $row['hospitalType'] = "GH"; 											   
 						                   }
                                            else
-	                                       if($row['hospitaltype'] == "5")	
+	                                       if($row['hospitalType'] == "5")	
 										   {
-                                           $row['hospitaltype'] = "MCH"; 											   
+                                           $row['hospitalType'] = "MCH"; 											   
 						                   }	
                                            else
-											if($row['hospitaltype'] == "6")	
+											if($row['hospitalType'] == "6")	
 										   {
-                                           $row['hospitaltype'] = "Private Hospital"; 											   
+                                           $row['hospitalType'] = "Private Hospital"; 											   
 						                   }	
 										   else
-										   if($row['hospitaltype'] == "7")	
+										   if($row['hospitalType'] == "7")	
 										   {
-                                           $row['hospitaltype'] = "PNH"; 											   
+                                           $row['hospitalType'] = "PNH"; 											   
 						                   }	
-                                           if($row['hospitaltype'] == "8")	
+                                           if($row['hospitalType'] == "8")	
 										   {
-                                           $row['hospitaltype'] = "Home"; 											   
+                                           $row['hospitalType'] = "Home"; 											   
 						                   }		
 							 
 							 if($row['symptomsHighRisk'] == "1")	
@@ -398,7 +398,7 @@ include "../config/db_connect.php";
        
        $wild_srch = $wild_cnt++."||".   
 	   $row['picmeno']."||".
-	   date('d-m-Y', strtotime($row['picmeRegDate']))."||".
+	   date('d-m-Y', strtotime($row['anRegDate']))."||".
 	   $rowh['BlockName']."||".
        $rowh['PhcName']."||".
        $rowh['HscName']."||".
@@ -414,7 +414,7 @@ include "../config/db_connect.php";
        date('d-m-Y', strtotime($row['eddfmt']))."||".
 	   $row['pregnancyWeek']."||".
 	   $row['symptomsHighRisk']."||".	   
-	   $row['hospitaltype']."||".
+	   $row['hospitalType']."||".
 	   date('d-m-Y', strtotime($row['refdat']))."||".
 	   $row['hospitalname'];
 	   
@@ -449,7 +449,7 @@ include "../config/db_connect.php";
 		$lineData = array(
 		$sno++, 
 		$record['picmeno'],
-	   date('d-m-Y', strtotime($record['picmeRegDate'])),
+	   date('d-m-Y', strtotime($record['anRegDate'])),
 	   $record['BlockName'],
        $record['PhcName'],
        $record['HscName'],
@@ -465,7 +465,7 @@ include "../config/db_connect.php";
        $record['eddfmt'],
 	   $record['pregnancyWeek'],
 	   $record['symptomsHighRisk'],
-	   $record['hospitaltype'],
+	   $record['hospitalType'],
 	   date('d-m-Y', strtotime($record['refdat'])),
 	   $record['hospitalname']
 		  ); 

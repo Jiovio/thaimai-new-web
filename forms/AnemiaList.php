@@ -80,17 +80,17 @@
 	$pre_av_picme = "";
     $prev_picmeno = "";  
 	  
-      $listQry = "SELECT ar.gravida,ar.para,ar.livingChildren,ar.abortion,ar.childDeath,ar.bpSys,ar.bpDia,ar.motherWeight,ar.residenttype, ar.updatedat, ar.createdat,ar.picmeno,ar.residentType, ec.motherdob, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno JOIN medicalhistory mh on mh.picmeno = ar.picmeno
+      $listQry = "SELECT ar.gravida,ar.para,ar.livingChildren,ar.abortion,ar.childDeath,ar.bpSys,ar.bpDia,ar.motherWeight,ar.residenttype, ar.updatedat, ar.createdat,ar.picmeno,ar.residentType, ec.motherdob, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno JOIN medicalhistory mh on mh.picmeno = ar.picmeno
 	            WHERE ar.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ar.picmeno)";  
 
-      // $listQry = "SELECT av.Hb, av.fastingSugar, av.bloodTransfusion, av.noOfIVDoses, av.picmeno,av.id, av.motherWeight, av.bpSys, av.bpDia, av.pregnancyWeek,av.urineAlbuminPresent,av.noCalcium, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
+      // $listQry = "SELECT av.Hb, av.fastingSugar, av.bloodTransfusion, av.noOfIVDoses, av.picmeno,av.id, av.motherWeight, av.bpSys, av.bpDia, av.pregnancyWeek,av.urineAlbuminPresent,av.noCalcium, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
      //            WHERE av.status!=0 NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno)";  
 
 
   //   mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno	 
 				   		
 	  $private = " AND av.createdBy='".$userid."'";
-      $orderQry = " ORDER BY ar.picmeRegDate DESC";
+      $orderQry = " ORDER BY ar.anRegDate DESC";
 	  
       if(($usertype == 0) || ($usertype == 1)) {
          if(isset($_POST['filter'])) {
@@ -327,7 +327,7 @@
                         <tr>
                            <td><?php echo $cnt; ?></td>
 						   <td><?php echo $prev_picmeno; ?></td>
-					       <td><?php echo $prev_picmeRegDate; ?></td>
+					       <td><?php echo $prev_anRegDate; ?></td>
 				           <td><?php echo $prev_BlockName; ?></td>
                            <td><?php echo $prev_PhcName; ?></td>
                            <td><?php echo $prev_HscName; ?></td>
@@ -369,7 +369,7 @@
 						    }
 						   $pre_picme = "";
 						   $prev_picmeno =  ""; 
-					        $prev_picmeRegDate =  "";
+					        $prev_anRegDate =  "";
 				            $prev_BlockName =  "";
                             $prev_PhcName =  "";  
                             $prev_HscName =  ""; 
@@ -407,7 +407,7 @@
 						   
 						   $pre_picme = $row['picmeno'];
 						   $prev_picmeno = $row['picmeno'];  
-					        $prev_picmeRegDate = date('d-m-Y', strtotime($row['picmeRegDate']));  
+					        $prev_anRegDate = date('d-m-Y', strtotime($row['anRegDate']));  
 				            $prev_BlockName = $rowh['BlockName'];  
                             $prev_PhcName = $rowh['PhcName'];  
                             $prev_HscName = $rowh['HscName'];  
@@ -449,7 +449,7 @@
 							$pre_picme = $row['picmeno'];
 							 
 						    $prev_picmeno = $row['picmeno'];  
-					        $prev_picmeRegDate = date('d-m-Y', strtotime($row['picmeRegDate']));  
+					        $prev_anRegDate = date('d-m-Y', strtotime($row['anRegDate']));  
 				            $prev_BlockName = $rowh['BlockName'];  
                             $prev_PhcName = $rowh['PhcName'];  
                             $prev_HscName = $rowh['HscName'];  
@@ -533,7 +533,7 @@ if(strlen($prev_picmeno) > 0)
 					   <tr>
                            <td><?php echo $cnt; ?></td>
 						   <td><?php echo $prev_picmeno; ?></td>
-					       <td><?php echo $prev_picmeRegDate; ?></td>
+					       <td><?php echo $prev_anRegDate; ?></td>
 				           <td><?php echo $prev_BlockName; ?></td>
                            <td><?php echo $prev_PhcName; ?></td>
                            <td><?php echo $prev_HscName; ?></td>

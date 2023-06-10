@@ -20,7 +20,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card"><h5 class="card-header">
-                  <span class="text-muted fw-light">Reports / High Risk / </span> PIH
+                  <span class="text-muted fw-light">Reports / Antenatal Visit / </span> Delivery Due List (3 Months EDD)
                </h5>  
 			   
 <!------------------------------------------------------------------------------------- Page Details + search button + Table -------------------------------------------------------->		   
@@ -41,36 +41,32 @@
                <th>HSC</th>
 			   <th>VP / TP / Mpty</th>
                <th>Village / Ward</th>
-			   
-			   <th>Resident/Visitor</th>
-			   
+			   <th>Resident/Visitor</th> 
                <th>Mother Name</th>
                <th>Age</th>
                <th>Husband Name</th>
 			   <th>Mobile No.</th>
-               <th>Obstetric score</th>
-               <th>LMP</th>
-               <th>EDD</th>
-			   
-			   <th>Weight Gain</th>
-			   
+			   <th>Gestational Age in Weeks</th>
+			   <th>Address</th>
+               <th>Weight Gain</th>
+               <th>HB</th>
                <th>BP Systolic</th>
-			   <th>BP Diastolic</th>
-			   <th>Mid-Trimester Fall</th>
-			   <th>Urine Albumin Present (Yes/No)?</th>
-			   <th>No of Calcium Tablet</th>
-			   <th>Treatment</th>
-			       
-			   
-			   
-                         </tr>
-                       </thead>  
+               <th>BP Diastolic</th>
+			   <th>High Risk (Yes/No)?</th>
+               </tr>
+               </thead>  
     <?php
-     
-      $listQry = "SELECT av.picmeno,av.id, av.motherWeight, av.bpSys, av.bpDia, av.pregnancyWeek,av.urineAlbuminPresent,av.noCalcium, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
-                  WHERE av.status!=0 AND av.symptomsHighRisk = 6 AND av.pregnancyWeek >13 AND av.pregnancyWeek < 28 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND av.ancPeriod = (SELECT max(av1.ancPeriod) From antenatalvisit av1 where av1.picmeno = av.picmeno)";
-	
-					
+      // $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy,hs.BlockName,hs.PhcName,hs.HscName, ec.BlockId,ec.PhcId, hs.PanchayatName, hs.VillageName, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId) JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
+      //              WHERE av.status=1";             
+
+      //  $listQry = "SELECT hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId)";         
+		
+	  
+      $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, av.residenttype, av.motherWeight, av.Hb, av.bpSys, av.bpDia, av.HighRisk, ec.address, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
+                  WHERE av.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND (TIMESTAMPDIFF(MONTH, CURRENT_DATE(), mh.edddate) <= 3)";  
+				 
+				// (mh.edddate = DATE_ADD(CURRENT_DATE(), INTERVAL 3 MONTH))";  
+				     		
 	  $private = " AND av.createdBy='".$userid."'";
       $orderQry = " ORDER BY ar.anRegDate DESC";
 	  
@@ -118,9 +114,6 @@
 						//	  print_r($row['HscId']);
 						//	 if($row['HscId']== $Hsc_val)
 							// {print_r($rowh['BlockName']); exit;}
-						
-						$row['treatment'] = "Taken";
-						
 				$HscQry = "SELECT * From hscmaster";				 
 				$HscRes =  mysqli_query($conn,$HscQry);
                 if($HscRes) {
@@ -140,14 +133,16 @@
 							{
 							 $row['residenttype'] = "VISITOR";
 							}	
-							if($row['urineAlbuminPresent'] == "1")
+							
+							if($row['HighRisk'] == "1")
 							{
-							    $row['urineAlbuminPresent'] = "Yes";
+							 $row['HighRisk'] = "Yes";
+							}
+							
+							if($row['HighRisk'] == "0")	
+							{
+							 $row['HighRisk'] = "No";
 							}	
-							if($row['urineAlbuminPresent'] == "0")	
-							{
-							 $row['urineAlbuminPresent'] = "No";
-							}		
                        ?>
                         <tr>
                            <td><?php echo $cnt; ?></td>
@@ -158,25 +153,18 @@
                            <td><?php echo $rowh['HscName']; ?></td>
 			               <td><?php echo $rowh['PanchayatName']; ?></td>
                            <td><?php echo $rowh['VillageName']; ?></td>
-						   
 						   <td><?php echo $row['residenttype']; ?></td>
-						   
                            <td><?php echo $row['motheraadhaarname']; ?></td>
 					       <td><?php echo $row['MotherAge']; ?></td>
 					       <td><?php echo $row['husbandaadhaarname']; ?></td>
 			               <td><?php echo $row['mothermobno']; ?></td>
-					       <td><?php echo $row['obstetricCode']; ?></td>									   
-					       <td><?php echo date('d-m-Y', strtotime($row['lmpdate'])); ?></td>
-                           <td><?php echo date('d-m-Y', strtotime($row['edddate'])); ?></td> 
-						   
-						   <td><?php echo $row['motherWeight']; ?></td>	
-						   <td><?php echo $row['bpSys']; ?></td>	
-						   <td><?php echo $row['bpDia']; ?></td>	
 						   <td><?php echo $row['pregnancyWeek']; ?></td>
-						   <td><?php echo $row['urineAlbuminPresent']; ?></td>	
-						   <td><?php echo $row['noCalcium']; ?></td>
-					       
-					       <td><?php echo $row['treatment']; ?></td>
+						   <td><?php echo $row['address']; ?></td>	
+						   <td><?php echo $row['motherWeight']; ?></td>
+					       <td><?php echo $row['Hb']; ?></td>
+						   <td><?php echo $row['bpSys']; ?></td>
+					       <td><?php echo $row['bpDia']; ?></td>					     
+					       <td><?php echo $row['HighRisk']; ?></td>
 					     </tr>
                          <?php 
                            $cnt++;
@@ -212,7 +200,7 @@
 ?>	
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------------------- Download button + Submitting values to next page ------------------------------------------------------------------>
-    <form action="PIHListExp.php" method="post" id="filterform" style="width:100%";>	
+    <form action="ANDue3ListExp.php" method="post" id="filterform" style="width:100%";>	
 		  <div class="col-md-8" style="margin-top: 10px;">
    		
           <button type="submit" id="AVReport" name='AVReport' style = "margin-left : 450px; margin-bottom: 10px" class="btn lt btn-primary"><span class="bx bx-download"></span>&nbsp; Download</button>

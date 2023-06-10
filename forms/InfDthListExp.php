@@ -27,7 +27,7 @@ include "../config/db_connect.php";
 	} 	
 
 
-    $listQry = "SELECT dd.picmeno,ar.residentType, ar.obstetricCode, dd.deliveryCompilcation, dd.infantId, dd.deliverydate,dd.childGender, dd.deliverytime, dd.deliverydistrict, dd.deliverydate, dd.hospitaltype, dd.deliverytype,dd.deliveryOutcome, dd.id, ec.address, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.MotherAge, ec.motheraadhaarname,dd.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno
+    $listQry = "SELECT dd.picmeno,ar.residentType, ar.obstetricCode, dd.deliveryCompilcation, dd.infantId, dd.deliverydate,dd.childGender, dd.deliverytime, dd.deliverydistrict, dd.deliverydate, dd.hospitaltype, dd.deliverytype,dd.deliveryOutcome, dd.id, ec.address, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.MotherAge, ec.motheraadhaarname,dd.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno
              	  FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno JOIN anregistration ar on dd.picmeno = ar.picmeno
                   WHERE dd.status!=0 AND NOT EXISTS (SELECT pv.picmeNo FROM postnatalvisit pv WHERE pv.picmeNo = dd.picmeno) AND dd.deliveryCompilcation = 7";   		
     $orderQry = " ORDER BY dd.deliverydate DESC";
@@ -126,7 +126,7 @@ include "../config/db_connect.php";
        
        $wild_srch = $wild_cnt++."||".                        /* "*" - separates serails no */
 	   $rows['picmeno']."||".
-					       date('d-m-Y', strtotime($rows['picmeRegDate']))."||".
+					       date('d-m-Y', strtotime($rows['anRegDate']))."||".
 				           $rows['BlockName']."||".
                            $rows['PhcName']."||".
                            $rows['HscName']."||".
@@ -183,7 +183,7 @@ include "../config/db_connect.php";
 		$lineData = array(
 		$sno++,
 						    $record['picmeno'],
-					        date('d-m-Y', strtotime($record['picmeRegDate'])),
+					        date('d-m-Y', strtotime($record['anRegDate'])),
 				            $record['BlockName'],
                             $record['PhcName'],
                             $record['HscName'],
