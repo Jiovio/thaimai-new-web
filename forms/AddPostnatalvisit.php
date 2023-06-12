@@ -7,7 +7,7 @@
 $pid = "";
 if (! empty($_POST["addpostnatal"])) { 
   
-  $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeNo FROM postnatalvisit where picmeNo='".$_POST["picmeNo"]."' ");
+  $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeNo FROM postnatalvisit where picmeNo='".$_POST["picmeNo"]."' AND pncPeriod='".$_POST["pncPeriod"]."'");
   
   while($Mvalue = mysqli_fetch_array($CheckDuplicatePno)) {
     $pid = $Mvalue["picmeNo"];
@@ -16,7 +16,7 @@ if (! empty($_POST["addpostnatal"])) {
   if($pid > 0) {
    
   $type = "error";
-  $emessage = "Duplicate PICME No.";
+  $emessage = "Selected ANC Period data is already entered for mentioned Picmeno";
   
    } else {
   $picmeNo =$_POST["picmeNo"]; 
@@ -36,7 +36,7 @@ if (! empty($_POST["addpostnatal"])) {
   $query = mysqli_query($conn,"INSERT INTO postnatalvisit (picmeno, pncPeriod, motherPnc, ifaTabletStatus,calcium, ppcMethod,vitaminA, motherDangerSign, bloodSugar, infantWeight, infantDangerSigns,bpSys,bpDia,createdBy) 
   VALUES ('$picmeNo','$pncPeriod','$motherPnc','$ifaTabletStatus','$calcium','$ppcMethod','$vitaminA','$mDangerSign','$bloodSugar','$weight','$iDSigns','$bpSys','$bpDia','$userid')");
   if (!empty($query)) {
-     echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}forms/PostnatalVisit.php');</script>";
+     echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}/forms/PostnatalVisit.php');</script>";
    } 
   $motstatus = mysqli_query($conn, "UPDATE ecregister SET status=3 WHERE picmeNo='$picmeNo'");
   } } ?>
@@ -63,7 +63,7 @@ if (! empty($_POST["addpostnatal"])) {
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
                           <div class="frmSearch">
-                          <input type="text" required id="picmeno" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
+                          <input type="text" required id="picmenoPostNalVisit" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
                           <div id="suggesstion-box"></div>
                       </div>
                       </div>
@@ -81,6 +81,7 @@ if (! empty($_POST["addpostnatal"])) {
                           <?php  } 
                               ?>
                              </select>
+                            <div id="pnc-period-box"></div>
                           </div>
                           </div>
                         <div class="row">
@@ -171,7 +172,7 @@ if (! empty($_POST["addpostnatal"])) {
                               class="form-control"
                               id="bloodSugar"
                               name="bloodSugar"
-                              placeholder="BLOOD SUGER"
+                              placeholder="BLOOD SUGAR"
                             
                             />
                           </div>
@@ -179,14 +180,8 @@ if (! empty($_POST["addpostnatal"])) {
 
                           <div class="mb-3 col-md-6">
                           <label class="form-label">INFANT WEIGHT</label>
-                            <select name="infantWeight" id="infantWeight" class="form-select">
-                          <option value="">Choose...</option>
-                          <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=12";
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                          <?php  } ?>
-                             </select>
+                          <input class="form-control" type="number" step="0.001" name="infantWeight" id="infantWeight"/>
+                           
                             </div>
                         </div>
                         <div class="row">

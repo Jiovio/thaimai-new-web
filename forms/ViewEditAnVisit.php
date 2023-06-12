@@ -8,6 +8,9 @@ if (isset($_GET['view'])) {
   $id = $_GET['view'];
   $view = true;
   $record = mysqli_query($conn, "SELECT * FROM antenatalvisit WHERE id=$id");
+  $AnData = mysqli_fetch_array($record);
+ 
+  $record = mysqli_query($conn, "SELECT * FROM antenatalvisit WHERE picmeno=". $AnData['picmeno']." order by id DESC");
   $An = mysqli_fetch_array($record);
   $picmeno = $An["picmeno"]; $residenttype = $An["residenttype"]; 
   $physicalpresent = $An["physicalpresent"]; $placeofvisit = $An["placeofvisit"]; $abortion = $An["abortion"]; 
@@ -127,7 +130,7 @@ usgFetalHeartRate2='$usgFetalHeartRate3',usgFetalPosition2='$usgFetalPosition3',
   bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',noOfIVDoses='$nooIVdoses',
   updatedat='$date',updatedBy='$userid' WHERE id=".$id);
   if (!empty($query)) {
-            echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}forms/AntenatalVisit.php');</script>";
+            echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/AntenatalVisit.php');</script>";
           }
           $highrisk = mysqli_query($conn, "UPDATE ecregister ec INNER JOIN antenatalvisit av ON ec.picmeNo=av.picmeno SET ec.status=6 WHERE av.symptomsHighRisk NOT IN('1','48') AND av.picmeNo=".$picmeno);
 }
@@ -149,7 +152,7 @@ if (isset($_GET['del'])) {
   $date = date('d-m-Y h:i:s');
   mysqli_query($conn, "UPDATE antenatalvisit SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
   $_SESSION['message'] = "User deleted!"; 
-    echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}forms/AntenatalVisit.php');</script>";
+    echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/AntenatalVisit.php');</script>";
 }
 ?>
           <!-- Content wrapper -->
@@ -519,7 +522,7 @@ if (isset($_GET['del'])) {
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=46";
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                            <option value="<?php echo $listvalue['enumid']; ?>" <?php if($gctStatus==$listvalue['enumid']) { echo "Selected"; } ?> ><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
                           </div>
@@ -585,7 +588,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                 
-					   <div class="col-4 mb-3"  id="Tddose1">
+					   <div class="col-4 mb-3"  id="Tddose1"  style="display:none">
                           <label class="form-label" for="basic-icon-default-TdDose">Td1 Dose</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -601,7 +604,7 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                         </div>
-                        <div class="col-4 mb-3" id="Tddate1">
+                        <div class="col-4 mb-3" id="Tddate1"  style="display:none">
                           <label class="form-label" for="basic-icon-default-Td1Date">Td1 Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -640,7 +643,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
 
-                        <div class="col-4 mb-3" id="Tddose2">
+                        <div class="col-4 mb-3" id="Tddose2" style="display:none">
                           <label class="form-label" for="basic-icon-default-TdDose">Td2 Dose</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -656,7 +659,7 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                         </div>
-                        <div class="col-4 mb-3"  id="Tddate2">
+                        <div class="col-4 mb-3"  id="Tddate2" style="display:none">
                           <label class="form-label" for="basic-icon-default-Td1Date">Td2 Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -694,22 +697,8 @@ if (isset($_GET['del'])) {
                                 </select>
                           </div>
                         </div>
-                        <div class="col-4 mb-3" id="Bdose">
-                          <label class="form-label" for="basic-icon-default-Td2Dose">Booster Dose </label>
-                          <div class="input-group input-group-merge">
-                            <input
-                              type="text"
-                              name="TdBdose"
-                              class="form-control"
-                              id="TdBdose"
-                              placeholder="Booster Dose"
-                              aria-label="Booster Dose"
-                              aria-describedby="basic-icon-default-TdDose"
-                              value="<?php echo $TdBdose; ?>" disabled
-                              />
-                          </div>
-                        </div>
-						<div class="col-4 mb-3" id="TdB">
+                        
+						<div class="col-4 mb-3" id="TdB" style="display:none">
                           <label class="form-label" for="basic-icon-default-TdBoosterDate">Td Booster Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -999,7 +988,7 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                         </div>
-                        <div class="row">
+                     <!---   <div class="row"> --->
 					            <div class="col-4 mb-3" id="usgScanStatus" >
                           <label class="form-label" for="basic-icon-default-usgTrimester">USG Scan Status</label>
                           <div class="input-group input-group-merge">
