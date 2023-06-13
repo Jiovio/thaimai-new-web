@@ -57,7 +57,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                 <div class="col-12 col-md-12 col-lg-12 order-3 order-md-2">
                   <div class="row">
                   <div class="col-3 mb-4">
-                    <a onclick="return false" href="<?php echo $siteurl; ?>/forms/EligibleCouple.php?b=<?php echo $bloName; ?>&p=<?php echo $phcName;  ?>&h=<?php echo $hscName;  ?>">
+                  
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -71,7 +71,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                       </div>
                     </div>
                     <div class="col-3 mb-4">
-                     <a onclick="return false" href="<?php echo $siteurl; ?>/forms/AnRegisterlist.php?b=<?php echo $bloName;  ?>&p=<?php echo $phcName  ?>&h=<?php echo $hscName; ?>">
+                 
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -86,7 +86,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                    
                     </div>
                     <div class="col-3 mb-4">
-                     <a onclick="return false" href="<?php echo $siteurl; ?>/forms/AntenatalVisit.php?b=<?php echo $bloName;  ?>&p=<?php echo $phcName  ?>&h=<?php echo $hscName; ?>">
+                  
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
