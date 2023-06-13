@@ -697,21 +697,7 @@ if (isset($_GET['del'])) {
                                 </select>
                           </div>
                         </div>
-                        <div class="col-4 mb-3" id="Bdose">
-                          <label class="form-label" for="basic-icon-default-Td2Dose">Booster Dose </label>
-                          <div class="input-group input-group-merge">
-                            <input
-                              type="text"
-                              name="TdBdose"
-                              class="form-control"
-                              id="TdBdose"
-                              placeholder="Booster Dose"
-                              aria-label="Booster Dose"
-                              aria-describedby="basic-icon-default-TdDose"
-                              value="<?php echo $TdBdose; ?>" disabled
-                              />
-                          </div>
-                        </div>
+                        
 						<div class="col-4 mb-3" id="TdB" style="display:none">
                           <label class="form-label" for="basic-icon-default-TdBoosterDate">Td Booster Date</label>
                           <div class="input-group input-group-merge">
@@ -1002,7 +988,7 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                         </div>
-                        <div class="row">
+                     <!---   <div class="row"> --->
 					            <div class="col-4 mb-3" id="usgScanStatus" >
                           <label class="form-label" for="basic-icon-default-usgTrimester">USG Scan Status</label>
                           <div class="input-group input-group-merge">
