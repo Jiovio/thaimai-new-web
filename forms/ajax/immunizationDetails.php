@@ -130,6 +130,10 @@ if (!empty($immuneData) &&  $immuneData !=0) {
                 $result['doseDueDate'] = $ImmuneDate;
             }
            break;
+        case 5:
+             $result['result'] = "error";
+             $result['message']= "Already 5 doses taken. No more doses applicable for this picme. Please choose new picme";
+             break;
        
     }
    echo json_encode($result);

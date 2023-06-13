@@ -426,8 +426,9 @@ function checkDuplicatePicmeNo(picmeno){
 }
 
 
-function checkGCTWeekStatusDuplicate(picmeno, selectedValue)
+function checkGCTWeekStatusDuplicate(picmeno, selectedValue, selectedText)
 {
+    if(selectedText!="Not Done"){
      $.ajax({
         url: "ajax/ANVisitValidation.php",
         type: "POST",
@@ -444,6 +445,7 @@ function checkGCTWeekStatusDuplicate(picmeno, selectedValue)
             }
         }
     });
+    }
 }
 
 $('#pncPeriod').change(function (){
@@ -734,7 +736,7 @@ function gctChange(picmeno)
     if (selectedValue == 'Not Done') {
         $('#gctValue').attr('disabled', true);
     }
-    checkGCTWeekStatusDuplicate(picmeno, selectedIndex)
+    checkGCTWeekStatusDuplicate(picmeno, selectedIndex, selectedValue)
 }
 
 function usgChange() {
