@@ -30,9 +30,9 @@
                     </thead>
 <?php  
 //$listQry = "SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.createdBy=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND av.status=1";
-$listQry = "SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.id=u.id WHERE av.avdueDate > CURRENT_DATE() AND av.status=1";
+$listQry = "SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.id=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND av.status=1";
 $private = " AND av.createdBy='".$userid."'";
-$orderQry = " ORDER BY av.avdueDate ASC";
+$orderQry = " ORDER BY av.avdueDate DESC";
 if(($usertype == 0) || ($usertype == 1)) {
   if(isset($_POST['filter'])) {
     $bloName = $_POST['BlockId']; 
@@ -65,12 +65,11 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                     <td><?php echo $cnt; ?></td>
                                     <td><?php echo $row['picmeNo']; ?></td>
 									<td><?php echo $row['motheraadhaarname']; ?></td>
-                                    <!--- <td><?php  $dd = date('d-m-Y',strtotime($row['avdueDate'])); echo $dd; ?></td> --->
-									<td><?php echo $row['avdueDate']; ?></td>
+                                    <td><?php echo date('Y-m-d',strtotime($row['avdueDate']));?></td> 
                                     <td><?php echo $row['mothermobno']; ?></td>
 									<td><?php echo $row['PhcId']; ?></td>
                                     <td><?php echo $row['name']; ?></td>
-									<!--<td><a href="../forms/ViewEditMedical.php?view=<?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>-->
+									<!--<td><a href="../forms/ViewEditMedical.php?view=<//?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>-->
                                 </tr>
                     <?php 
                         $cnt++;

@@ -124,7 +124,7 @@ include ('preloader.php');
               <ul class="menu-sub">
 			  				<li class="menu-item">
                   <a href="AntenatalDue.php" class="menu-link">
-                    <div data-i18n="Basic">Antenatal Due List</div>
+                    <div data-i18n="Basic">Current Month Antenatal Due List</div>
                   </a>
                 </li>
                 <li class="menu-item">
