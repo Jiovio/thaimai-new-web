@@ -172,7 +172,7 @@ if (! empty($_POST["addpostnatal"])) {
                               class="form-control"
                               id="bloodSugar"
                               name="bloodSugar"
-                              placeholder="BLOOD SUGAR"
+                              placeholder="BLOOD SUGER"
                             
                             />
                           </div>

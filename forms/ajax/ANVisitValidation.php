@@ -7,16 +7,9 @@ $antVisitData = mysqli_fetch_array($deliverySql);
 $result = ['result' => '', 'message' => '', 'place' =>''];
 if(empty($antVisitData) || $antVisitData==0){
     $result['result'] = "success";    
-} 
-else 
-if($gctStatus == "4")	
-{
-    $result['result'] = "success";  
-}
-else 
-{
+} else {
     $result['result'] = "fail";
-    $result['message'] = "This GCT week status is already present.";
+    $result['message'] = "This GCT week status is already updated for mentioning Picme no";
 }
 
 echo json_encode($result);
