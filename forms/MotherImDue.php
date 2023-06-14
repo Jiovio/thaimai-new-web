@@ -66,12 +66,11 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                     <td><?php echo $row['picmeno']; ?></td>
 									<td><?php echo $row['motheraadhaarname']; ?></td>
 									<td><?php echo $row['NextDoseName1']; ?></td>
-                                    <!--- <td><?php  $dd = date('d-m-Y',strtotime($row['FutureDoseDate'])); echo $dd; ?></td> --->
-									<td><?php echo $row['FutureDoseDate']; ?></td>
+                                    <td><?php  $dd = date('Y-m-d',strtotime($row['FutureDoseDate'])); echo $dd; ?></td> 
                                     <td><?php echo $row['mothermobno']; ?></td>
 									<td><?php echo $row['PhcId']; ?></td>
                                     <td><?php echo $row['name']; ?></td>
-									<!--<td><a href="../forms/ViewEditMedical.php?view=<?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>-->
+									<!--<td><a href="../forms/ViewEditMedical.php?view=<//?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>-->
                                 </tr>
                     <?php 
                         $cnt++;

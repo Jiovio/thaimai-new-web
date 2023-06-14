@@ -33,7 +33,7 @@
 <?php
  $listQry = "SELECT DISTINCT(im.picmeno),ec.motheraadhaarname,im.FutureDoseDate,im.FutureDoseNo,ec.mothermobno,ec.PhcId,u.name,ec.BlockId,ec.HscId FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeno JOIN users u on u.id=im.createdUserId WHERE FutureDoseDate>=DATE_FORMAT(NOW() ,'%Y-%m-01') AND im.status=1";
  $private = " AND im.createdUserId='".$userid."'";
- $orderQry = " ORDER BY ec.motheraadhaarname ASC";
+ $orderQry = " ORDER BY ec.motheraadhaarname DESC";
   if(($usertype == 0) || ($usertype == 1)) {
   if(isset($_POST['filter'])) {
     $bloName = $_POST['BlockId']; 
@@ -66,13 +66,12 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                     <td><?php echo $cnt; ?></td>
                                     <td><?php echo $row['picmeno']; ?></td>
 									<td><?php echo $row['motheraadhaarname']; ?></td>
-                                    <!--- <td><?php  $dd = date('d-m-Y',strtotime($row['FutureDoseDate'])); echo $dd; ?></td> --->
-									<td><?php echo $row['FutureDoseDate']?></td>								
+                                    <td><?php  $dd = date('d-m-Y',strtotime($row['FutureDoseDate'])); echo $dd; ?></td> 
                                     <td><?php echo $row['FutureDoseNo']; ?></td>
                                     <td><?php echo $row['mothermobno']; ?></td>
 									<td><?php echo $row['PhcId']; ?></td>
                                     <td><?php echo $row['name']; ?></td>
-									<!--<td><a href="../forms/ViewEditMedical.php?view=<?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>-->
+									<!--<td><a href="../forms/ViewEditMedical.php?view=<//?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>-->
                                 </tr>
                     <?php 
                         $cnt++;
