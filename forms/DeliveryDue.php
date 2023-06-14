@@ -36,7 +36,7 @@
 
  $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy, u.name, ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh.id WHERE 
 NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = mh.picmeno) AND
-mh.edddate >= CURRENT_DATE() AND mh.status=1";
+mh.edddate > CURRENT_DATE() AND mh.status=1";
 $private = " AND mh.createdBy='".$userid."'";
 $orderQry = " ORDER BY mh.edddate DESC";
 
@@ -72,14 +72,11 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                     <td><?php echo $cnt; ?></td>
                                     <td><?php echo $row['picmeno']; ?></td>
 									<td><?php echo $row['motheraadhaarname']; ?></td>
-                                    <!--- <td><?php  $dd = date('d-m-Y',strtotime($row['edddate'])); echo $dd; ?></td> --->
-									<td><?php echo $row['edddate']; ?></td>
+                                    <td><?php  $dd = date('Y-m-d',strtotime($row['edddate'])); echo $dd; ?>
                                     <td><?php echo $row['mothermobno']; ?></td>
 									<td><?php echo $row['PhcId']; ?></td>
                                     <td><?php echo $row['name']; ?></td>
-								    <!--- <td><?php echo $row['createdBy']; ?> --->
-									<!--<td><a href="../forms/ViewEditMedical.php?view=<?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>-->
-                                </tr>
+								    </tr>
                     <?php 
                         $cnt++;
                       } 
