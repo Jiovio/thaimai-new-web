@@ -35,7 +35,7 @@
                          </tr>
                        </thead>
 <?php  
-$listQry = "SELECT hr.picmeNo,ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
+$listQry = "SELECT DISTINCT(hr.picmeNo),ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
 $orderQry = " ORDER BY ec.motheraadhaarname ASC";
     if(($usertype == 0) || ($usertype == 1)) {
       if(isset($_POST['filter'])) {
