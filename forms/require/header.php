@@ -142,8 +142,9 @@ include ('preloader.php');
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="MotherImDue.php" class="menu-link">
-                    <div data-i18n="Basic">Mother Immunization Due List</div>
+			   <a class="menu-link">
+                    <div data-i18n="Basic">Mother Immunization Due List (Future)</div>
+                 
                   </a>
                 </li>
                 </li>
@@ -246,14 +247,15 @@ include ('preloader.php');
                      
 					
 			             <li class="menu-item; style=menu-list-type:None" >  
-                              <a href="" class="menu-link">
-                                 <div data-i18n="Basic"><i>Infant Death List (FUTURE) </i></div>
+                              <a href="InfDthList.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>Infant Death List</i></div>
                               </a>
                          </li>
                     
 					 
 			             <li class="menu-item; style=menu-list-type:None" > 
-                              <a href="" class="menu-link">
+                              <!---     <a href="" class="menu-link">  --->
+						      <a class="menu-link">
                                  <div data-i18n="Basic"><i>Maternal Death List (FUTURE) </i></div>
                               </a>
                          </li>
@@ -312,31 +314,33 @@ include ('preloader.php');
 					
 					<ul class="menu-sub"> <!---- Creating Sub Sub Menu Header ---->
 			             <li class="menu-item; style=menu-list-type:None" >  
-                             <a href="" class="menu-link">
-                                 <div data-i18n="Basic"><i>High Risk List</i></div>
+                             <a href="HRList.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>High Risk</i></div>
                              </a>
                          </li>
                     
 			             <li class="menu-item; style=menu-list-type:None" > 
-                              <a href="" class="menu-link">
-                                 <div data-i18n="Basic"><i>HOB Pregnancy List</i></div>
+                              <a href="HOBList.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>HOB</i></div>
                               </a>
                          </li>
                     
 			             <li class="menu-item; style=menu-list-type:None" >  
-                              <a href="" class="menu-link">
+                              <a href="GDMList.php" class="menu-link">
+                                
                                  <div data-i18n="Basic"><i>GDM</i></div>
                               </a>
                          </li>
                      
 			             <li class="menu-item; style=menu-list-type:None" >  
-                              <a href="" class="menu-link">
+                              <a href="AnemiaList.php" class="menu-link">
+                                
                                  <div data-i18n="Basic"><i>Anemia</i></div>
                               </a>
                          </li>
                      
 			             <li class="menu-item; style=menu-list-type:None" >  
-                              <a href="" class="menu-link">
+                              <a href="PIHList.php" class="menu-link">
                                  <div data-i18n="Basic"><i>PIH</i></div>
                               </a>
                          </li>
