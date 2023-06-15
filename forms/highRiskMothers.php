@@ -70,7 +70,7 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
 							 $ExeQuery_ec = mysqli_query($conn,$listQry_ec);
 							 while($row_e = mysqli_fetch_array($ExeQuery_ec))
 							 {
-								 if($row_e['picmeno']==$row['picmeNo'])
+								 if($pre_picme!=$row['picmeNo'])
 								 { 
 							 
                        ?>
@@ -82,6 +82,7 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
 								   </tr>
                        <?php 
                            $cnt++;
+						   $pre_picme = $row['picmeNo'];
                          } 
 						 }} /* New */
                        } ?>
