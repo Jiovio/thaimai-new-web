@@ -35,8 +35,8 @@
                          </tr>
                        </thead>
 <?php  
-$listQry = "SELECT DISTINCT(hr.picmeNo),ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
-//$listQry = "SELECT DISTINCT(hr.picmeNo),hr.highRiskFactor from highriskmothers hr WHERE hr.status=1";
+//$listQry = "SELECT DISTINCT(hr.picmeNo),ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
+$listQry = "SELECT DISTINCT(hr.picmeNo),hr.highRiskFactor from highriskmothers hr WHERE hr.status=1";
 $orderQry = " ORDER BY ec.motheraadhaarname ASC";
     if(($usertype == 0) || ($usertype == 1)) {
       if(isset($_POST['filter'])) {
@@ -66,18 +66,18 @@ $orderQry = " ORDER BY ec.motheraadhaarname ASC";
                          $cnt=1;
                          while($row = mysqli_fetch_array($ExeQuery)) {
 							 
-						/*	 $listQry_ec = "SELECT ec.motheraadhaarname, ec.picmeno from ecregister ec";
+							 $listQry_ec = "SELECT ec.motheraadhaarname, ec.picmeno from ecregister ec";
 							 $ExeQuery_ec = mysqli_query($conn,$listQry_ec);
 							 while($row_e = mysqli_fetch_array($ExeQuery_ec))
 							 {
 								 if($row_e['picmeno']==$row['picmeNo'])
-								 { */
+								 { 
 							 
                        ?>
                                    <tr>
                                        <td><?php echo $cnt; ?></td>
                                        <td><?php echo $row['picmeNo']; ?></td>
-                                       <td><?php echo $row['motheraadhaarname']; ?></td>
+                                       <td><?php echo $row_e['motheraadhaarname']; ?></td>
                                        <td><?php echo $row['highRiskFactor']; ?></td>
 								   </tr>
                        <?php 
