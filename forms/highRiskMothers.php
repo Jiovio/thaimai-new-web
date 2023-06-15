@@ -37,7 +37,7 @@
 <?php  
 //$listQry = "SELECT DISTINCT(hr.picmeNo),ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
 $listQry = "SELECT DISTINCT(hr.picmeNo),hr.highRiskFactor from highriskmothers hr WHERE hr.status=1";
-$orderQry = " ORDER BY ec.motheraadhaarname ASC";
+$orderQry = " ORDER BY hr.picmeNo ASC";
     if(($usertype == 0) || ($usertype == 1)) {
       if(isset($_POST['filter'])) {
         $bloName = $_POST['BlockId']; 
@@ -83,7 +83,7 @@ $orderQry = " ORDER BY ec.motheraadhaarname ASC";
                        <?php 
                            $cnt++;
                          } 
-					//	 }} /* New */
+						 }} /* New */
                        } ?>
                      </table></div>
                    </div>
