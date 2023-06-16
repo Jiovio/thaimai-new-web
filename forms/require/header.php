@@ -80,7 +80,7 @@ include ('preloader.php');
                          <?php
                   if (strstr($_SERVER['SERVER_NAME'], 'mom')) {
                       ?>
-                       <img src="../assets/img/Savemom-logo.png" class="w-px-40 h-auto rounded-circle" />
+                       <img src="../assets/img/Savemom-Logo.png" class="w-px-40 h-auto rounded-circle" />
                   <?php } else { ?>
                     <img src="../assets/img/Thaimaiyudan-logo.png" class="w-px-40 h-auto rounded-circle" />
                   <?php } ?>
