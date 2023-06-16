@@ -32,13 +32,8 @@ include ('preloader.php');
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-      <?php
-      if (strstr($_SERVER['SERVER_NAME'], 'mom')) {
-          ?>
-        <title>Savemom</title>
-    <?php } else { ?>
-        <title>Thaimaiyudan</title>
-    <?php } ?>
+
+    <title>Savemom</title>
 
     <meta name="description" content="" />
 
@@ -77,23 +72,8 @@ include ('preloader.php');
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-                         <?php
-                  if (strstr($_SERVER['SERVER_NAME'], 'mom')) {
-                      ?>
-                       <img src="../assets/img/Savemom-Logo.png" class="w-px-40 h-auto rounded-circle" />
-                  <?php } else { ?>
-                    <img src="../assets/img/Thaimaiyudan-logo.png" class="w-px-40 h-auto rounded-circle" />
-                  <?php } ?>
-			
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">   
-                  <?php
-                  if (strstr($_SERVER['SERVER_NAME'], 'mom')) {
-                      ?>
-                      Savemom
-                  <?php } else { ?>
-                      Thaimaiyudan
-                  <?php } ?>
-            </span>
+			<img src="../assets/img/Savemom-logo.png" class="w-px-40 h-auto rounded-circle" />
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">Savemom</span>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-Block d-xl-none">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -162,10 +142,10 @@ include ('preloader.php');
                   </a>
                 </li>
                 <li class="menu-item">
+               <!--   <a href="MotherImDue.php" class="menu-link"> !-->
 			   <a class="menu-link">
                     <div data-i18n="Basic">Mother Immunization Due List (Future)</div>
-                 
-                  </a>
+                 </a>
                 </li>
                 </li>
               </ul>
@@ -243,7 +223,7 @@ include ('preloader.php');
                          </li>
                      
 					     <li class="menu-item; style=menu-list-type:None" >  
-                             <a href="DDue3List.php" class="menu-link">
+                             <a href="ANDue3List.php" class="menu-link">
                                 <div data-i18n="Basic"><i>Delivery Due List (3 Months EDD)</i></div>
                              </a>
                          </li>
@@ -274,7 +254,7 @@ include ('preloader.php');
                     
 					 
 			             <li class="menu-item; style=menu-list-type:None" > 
-                              <!---     <a href="" class="menu-link">  --->
+                         <!---     <a href="" class="menu-link">  --->
 						      <a class="menu-link">
                                  <div data-i18n="Basic"><i>Maternal Death List (FUTURE) </i></div>
                               </a>
@@ -347,14 +327,12 @@ include ('preloader.php');
                     
 			             <li class="menu-item; style=menu-list-type:None" >  
                               <a href="GDMList.php" class="menu-link">
-                                
                                  <div data-i18n="Basic"><i>GDM</i></div>
                               </a>
                          </li>
                      
 			             <li class="menu-item; style=menu-list-type:None" >  
                               <a href="AnemiaList.php" class="menu-link">
-                                
                                  <div data-i18n="Basic"><i>Anemia</i></div>
                               </a>
                          </li>
