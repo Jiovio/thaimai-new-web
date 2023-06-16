@@ -70,8 +70,8 @@ if (!empty($_POST["btnFirst"])) {
 
 			<div id="secondDiv">
 			
-                           <form action="AddAnVisit3.php" method="post">
-			<input type="hidden" name="picmeno" value="<?php echo $picmeno ?>">
+                           <form action="AddAnVisit3.php" method="post" onsubmit="return validateGctChange()">
+			<input type="hidden" name="picmeno" value="<?php echo $picmeno ?>" id="picmepage2">
 					<div class="row">
 						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-fastingSugar">Fasting Sugar </label>

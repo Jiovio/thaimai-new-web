@@ -342,11 +342,12 @@ $('#doseProvidedDate').change(function(){
 function addImmuneValidate(){
     var picmeno = $('#picmenoImmune').val();
  
-    return checkImmunedetails(picmeno);
+    return checkImmunedetails(picmeno,"");
 }
 
 
 function checkImmunedetails(picmeno, place=''){
+      returnParam = true
       $.ajax({
         url: "ajax/immunizationDetails.php",
         async: false,
@@ -356,6 +357,7 @@ function checkImmunedetails(picmeno, place=''){
         },
         cache: false,
         success: function (response) {
+          
             result = JSON.parse(response);
             $('#suggesstion-box').html("");
             $('#dose-provide-box').html("");
@@ -363,7 +365,7 @@ function checkImmunedetails(picmeno, place=''){
             if (result['result'] === 'fail') {
                $('#suggesstion-box').html("<span style='color:red'>This Picme number didn't have delivery details. \n\
 Please proceed with delivery date from delivery details</span>");
-               return false;
+               returnParam= false;
             } else {
                 
                 if(result['result']=='error'){
@@ -376,7 +378,7 @@ Please proceed with delivery date from delivery details</span>");
                     $("#doseNo").val(result['doseNo']);
                     $("#doseDueDate").attr('value', result['doseDueDate']);
                     $("#doseDueDate").attr('readOnly', true);
-                    return false;
+                     returnParam =  false;
                 }           
                 
                  
@@ -386,7 +388,7 @@ Please proceed with delivery date from delivery details</span>");
                     $('#doseName').removeAttr('disabled');
                     $("#doseDueDate").attr('value', result['doseDueDate']);
                     $("#doseDueDate").attr('readOnly', true);
-                    
+                     returnParam = true;
                     //   $("#doseDueDate").attr('value', result['doseDueDate']).change();
                     // $("#doseDueDate").val(result['doseDueDate']);
 
@@ -394,6 +396,8 @@ Please proceed with delivery date from delivery details</span>");
             }
         }
     });
+    console.log(returnParam)
+    return returnParam;
 }
 
 
@@ -428,24 +432,27 @@ function checkDuplicatePicmeNo(picmeno){
 
 function checkGCTWeekStatusDuplicate(picmeno, selectedValue, selectedText)
 {
-    if(selectedText!="Not Done"){
-     $.ajax({
-        url: "ajax/ANVisitValidation.php",
-        type: "POST",
-        data: {
-            picmeno: picmeno, gctStatus:selectedValue
-        },
-        cache: false,
-        success: function (response) {
-            result = JSON.parse(response);
-            $('#gctWeekStatus_box').html("")
-            if (result['result'] === 'fail') {
-               $('#gctWeekStatus_box').html("<span style='color:red'>"+result['message']+"</span>");
-               return false;
+    resultParam = true;
+    if (selectedText != "Not Done") {
+        $.ajax({
+            url: "ajax/ANVisitValidation.php",
+            type: "POST",
+            async:false,
+            data: {
+                picmeno: picmeno, gctStatus: selectedValue
+            },
+            cache: false,
+            success: function (response) {
+                result = JSON.parse(response);
+                $('#gctWeekStatus_box').html("")
+                if (result['result'] === 'fail') {
+                    $('#gctWeekStatus_box').html("<span style='color:red'>" + result['message'] + "</span>");
+                    resultParam = false;
+                }
             }
-        }
-    });
+        });
     }
+    return resultParam;
 }
 
 $('#pncPeriod').change(function (){
@@ -473,6 +480,7 @@ $('#picmenoPostNalVisit').on('blur change click', function () {
 });
 
 function checkPostnalVisitPeriod(picmeno, pncperiod){
+    resultParam = true;
     $('#suggesstion-box').html("");
       $.ajax({
         url: "ajax/checkPostNalVisitPeriod.php",
@@ -492,16 +500,23 @@ function checkPostnalVisitPeriod(picmeno, pncperiod){
                } else {
                     $('#suggesstion-box').html("<span style='color:red'>Please enter valid picme no</span>");
                }
-               return false;
+               resultParam =  false;
             }
             if(result['result']=='error'){
                 $('#pnc-period-box').html("<span style='color:red'>"+result['message']+"</span>");
                 $("#pncPeriod").val(result['selected']).change();
-                return false;
+                resultParam =  false;
             }
             
         }
     });
+    return resultParam;
+}
+
+function validatePostnalVisit(){
+    var picmeno = $('#picmenoPostNalVisit').val();
+    var pncperiod = $('#pncPeriod').val();
+    return checkPostnalVisitPeriod(picmeno, pncperiod);
 }
 
 
@@ -646,8 +661,10 @@ function checkPicme(val, anvisitDate)
                 }
                 }
                 $('#pregnancyWeek').val("");
+                  $("#ancPeriod").val(resultAr[0]).change();   
 //                $('#pregnancyWeek').attr("readOnly", false);
                 if(resultAr[1] !=='0' && resultAr[1] !==""){
+                    console.log(resultAr[1])
                     $('#pregnancyWeek').val(resultAr[1]);
 //                    $('#pregnancyWeek').attr("readOnly", true);
                 }
@@ -736,7 +753,13 @@ function gctChange(picmeno)
     if (selectedValue == 'Not Done') {
         $('#gctValue').attr('disabled', true);
     }
-    checkGCTWeekStatusDuplicate(picmeno, selectedIndex, selectedValue)
+    return checkGCTWeekStatusDuplicate(picmeno, selectedIndex, selectedValue)
+}
+
+function validateGctChange(){
+    
+    var picmeNum = $('#picmepage2').val();
+    return gctChange(picmeNum);
 }
 
 function usgChange() {
