@@ -65,14 +65,17 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                        if($ExeQuery) {
                          $cnt=1;
                          while($row = mysqli_fetch_array($ExeQuery)) {
+							$pre_picme = "";
 							 
 							 $listQry_ec = "SELECT ec.motheraadhaarname, ec.picmeno from ecregister ec";
 							 $ExeQuery_ec = mysqli_query($conn,$listQry_ec);
 							 while($row_e = mysqli_fetch_array($ExeQuery_ec))
 							 {
 								 if($pre_picme!=$row['picmeNo'])
+									 
 								 { 
-							 
+							 if ($row['picmeNo'] == $row_e['picmeno'])
+							 {
                        ?>
                                    <tr>
                                        <td><?php echo $cnt; ?></td>
@@ -84,7 +87,7 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                            $cnt++;
 						   $pre_picme = $row['picmeNo'];
                          } 
-						 }} /* New */
+						 }}} /* New */
                        } ?>
                      </table></div>
                    </div>
