@@ -32,8 +32,13 @@ include ('preloader.php');
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-
-    <title>Savemom</title>
+      <?php
+      if (strstr($_SERVER['SERVER_NAME'], 'mom')) {
+          ?>
+        <title>Savemom</title>
+    <?php } else { ?>
+        <title>Thaimaiyudan</title>
+    <?php } ?>
 
     <meta name="description" content="" />
 
@@ -72,8 +77,23 @@ include ('preloader.php');
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-			<img src="../assets/img/Thaimaiyudan-logo.png" class="w-px-40 h-auto rounded-circle" />
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">Thaimaiyudan</span>
+                         <?php
+                  if (strstr($_SERVER['SERVER_NAME'], 'mom')) {
+                      ?>
+                       <img src="../assets/img/Savemom-logo.png" class="w-px-40 h-auto rounded-circle" />
+                  <?php } else { ?>
+                    <img src="../assets/img/Thaimaiyudan-logo.png" class="w-px-40 h-auto rounded-circle" />
+                  <?php } ?>
+			
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">   
+                  <?php
+                  if (strstr($_SERVER['SERVER_NAME'], 'mom')) {
+                      ?>
+                      Savemom
+                  <?php } else { ?>
+                      Thaimaiyudan
+                  <?php } ?>
+            </span>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-Block d-xl-none">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
