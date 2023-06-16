@@ -133,7 +133,7 @@ if($doseNo == 1) {
                     <div class="card-body">
                     <div id="response" class="<?php if(!empty($type)) { echo $type . " display-block"; } else { echo $type . " display-none"; } ?>"><?php if(!empty($emessage)) { echo $emessage; } ?></div>
                     <br>
-                      <form action="" method="post" autocomplete="off" onSubmit = "return addImmuneValidate()">
+                      <form action="" method="post" autocomplete="off" onSubmit="return addImmuneValidate()">
 					<div class="row">
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
@@ -369,7 +369,7 @@ if($doseNo == 1) {
                         </div>
 					</div> -->
 					<div class="input-group">
-                                            <input class="btn btn-primary" type="submit" name="addImmunization" value="Save" onclick="return addImmuneValidate()">
+                                            <input class="btn btn-primary" type="submit" name="addImmunization" value="Save">
                       </div>
                       </form>
                     </div>
