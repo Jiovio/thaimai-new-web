@@ -84,7 +84,6 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                            $cnt++;
 						   $pre_picme = $row['picmeNo'];
                          } 
-						 }} /* New */
                        } ?>
                      </table></div>
                    </div>

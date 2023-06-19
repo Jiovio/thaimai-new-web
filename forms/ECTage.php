@@ -52,7 +52,7 @@
 					   
     <?php
       $listQry = "SELECT ec.picmeno, ec.id, hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName,ec.ecfrno, ec.HscId, ec.VillageId, ec.PanchayatId, ec.dateecreg, ec.motherageecreg, ec.motheraadhaarname, ec.BlockId,ec.PhcId, ec.mothermobno,ec.motheraadhaarid FROM ecregister ec INNER JOIN hscmaster hs on (ec.BlockId = hs.BlockId AND ec.PhcId = hs.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId) WHERE ec.status!= 0 
-                  AND ec.motherageecreg < 20 AND NOT EXISTS (SELECT ar.picmeno FROM anregistration ar WHERE ar.picmeno = ec.picmeno)";  
+                  AND ec.motherageecreg < 18 AND NOT EXISTS (SELECT ar.picmeno FROM anregistration ar WHERE ar.picmeno = ec.picmeno)";  
 	 
 	//  $listQry = "SELECT DISTINCT(motheraadhaarid),id,picmeno, ecfrno, HscId, VillageId, PanchayatId, dateecreg, motherageecreg, motheraadhaarname, BlockId, PhcId, mothermobno FROM ecregister WHERE status!=0" AND 
     //              motherageecreg > 19";  
@@ -149,7 +149,7 @@
 	?>	
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------------------- Download button + Submitting values to next page ------------------------------------------------------------------>
-    <form action="ECTageExp.php" method="post" id="filterform" style="width:100%";>	
+    <form action="EcTageExp.php" method="post" id="filterform" style="width:100%";>	
 		  <div class="col-md-8" style="margin-top: 10px;">
    		
           <button type="submit" id="AVReport" name='AVReport' style = "margin-left : 450px; margin-bottom: 10px" class="btn lt btn-primary"><span class="bx bx-download"></span>&nbsp; Download</button>
@@ -166,7 +166,7 @@
 	  	
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
  
-<!-- / Navbar -->
+        <!-- / Navbar -->
 <?php include ('require/dtFooter.php'); ?>		
 		 
 		
