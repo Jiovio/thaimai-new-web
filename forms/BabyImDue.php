@@ -13,7 +13,7 @@
 			<!-- Hoverable Table rows -->
               <div class="card">
                 <!--- <h5 class="card-header"><span class="text-muted fw-light">Current Month Due /</span> Baby Immunization Due List</h5> --->
-				<h5 class="card-header"><span class="text-muted fw-light">Baby Immunization Due List</h5>
+				<h5 class="card-header"><span class="text-muted fw-light"> Due List /</span> Baby Immunization Due List</h5>
 				<div class="table-responsive text-nowrap">
 				<div class="container">
 				<table id="users-detail" class="display nowrap" cellspacing="0" width="100%">

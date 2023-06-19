@@ -29,10 +29,10 @@ include "../config/db_connect.php";
 
 //if(strlen($search_text_input) > 0 )
 
-    $listQry = "SELECT ar.picmeno,ar.residentType, ar.anRegDate, ec.motherdob, mh.reg12weeks, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno JOIN medicalhistory mh on mh.picmeno = ar.picmeno
-                  WHERE ar.status!=0 AND ar.MotherAge < 20 AND NOT EXISTS (SELECT av.picmeno FROM antenatalvisit av WHERE av.picmeno = ar.picmeno)";  		
+    $listQry = "SELECT ar.picmeno,ar.residentType, ar.picmeRegDate, ec.motherdob, mh.reg12weeks, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno JOIN medicalhistory mh on mh.picmeno = ar.picmeno
+                  WHERE ar.status!=0 AND ar.MotherAge < 18 AND NOT EXISTS (SELECT av.picmeno FROM antenatalvisit av WHERE av.picmeno = ar.picmeno)";  		
 				   
-    $orderQry = " ORDER BY ar.anRegDate DESC";	
+    $orderQry = " ORDER BY ar.picmeRegDate DESC";	
 		
     if($bloName == "" && $phcName == "" && $hscName == ""){
        $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
@@ -97,7 +97,7 @@ $rows['BlockName'] = "";
        
        $wild_srch = $wild_cnt++."||".   
 	   $rows['picmeno']."||".
-	   date('d-m-Y', strtotime($rows['anRegDate']))."||".
+	   date('d-m-Y', strtotime($rows['picmeRegDate']))."||".
 	   $rows['BlockName']."||".
        $rows['PhcName']."||".
        $rows['HscName']."||".
@@ -146,7 +146,7 @@ $rows['BlockName'] = "";
 		$lineData = array(
 		$sno++, 
 		$record['picmeno'],
-	   date('d-m-Y', strtotime($record['anRegDate'])),
+	   date('d-m-Y', strtotime($record['picmeRegDate'])),
 	   $record['BlockName'],
        $record['PhcName'],
        $record['HscName'],

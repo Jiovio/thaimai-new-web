@@ -36,7 +36,7 @@
                       </tr>
                     </thead>
 <?php 
-  $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy,ec.BlockId,u.name, ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh.id WHERE 
+  $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy,ec.BlockId,u.name, ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh.createdBy WHERE 
 NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = mh.picmeno) AND
 mh.edddate < CURRENT_DATE() AND mh.status!=0";
 $private = " AND mh.createdBy='".$userid."'";

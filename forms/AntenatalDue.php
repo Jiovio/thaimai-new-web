@@ -12,7 +12,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card">
-                <h5 class="card-header"><span class="text-muted fw-light">Antenatal Due List</h5>
+                <h5 class="card-header"><span class="text-muted fw-light"> Due List /</span> Current Month Antenatal Due List</h5>
 				<div class="table-responsive text-nowrap">
 				<div class="container">
 				<table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
@@ -30,7 +30,7 @@
                     </thead>
 <?php  
 //$listQry = "SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.createdBy=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND av.status=1";
-$listQry = "SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.id=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND av.status=1";
+$listQry = "SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.createdBy =u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND av.status=1";
 $private = " AND av.createdBy='".$userid."'";
 $orderQry = " ORDER BY av.avdueDate DESC";
 if(($usertype == 0) || ($usertype == 1)) {

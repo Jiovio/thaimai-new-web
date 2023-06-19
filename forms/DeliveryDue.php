@@ -12,7 +12,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card">
-                <h5 class="card-header"><span class="text-muted fw-light">Delivery Due List</h5>
+                <h5 class="card-header"><span class="text-muted fw-light"> Due List /</span> Delivery Due List</h5>
 				<div class="table-responsive text-nowrap">
 				<div class="container">
 				<table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
@@ -34,7 +34,7 @@
 //$private = " AND mh.createdBy='".$userid."'";
 //$orderQry = " ORDER BY ec.motheraadhaarname ASC";
 
- $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy, u.name, ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh.id WHERE 
+ $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy, u.name, ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh.createdBy WHERE 
 NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = mh.picmeno) AND
 mh.edddate > CURRENT_DATE() AND mh.status=1";
 $private = " AND mh.createdBy='".$userid."'";
