@@ -72,7 +72,7 @@ include ('preloader.php');
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-			<img src="../assets/img/Savemom-logo.png" class="w-px-40 h-auto rounded-circle" />
+			<img src="../assets/img/Savemom-Logo.png" class="w-px-40 h-auto rounded-circle" />
               <span class="app-brand-text demo menu-text fw-bolder ms-2">Savemom</span>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-Block d-xl-none">
