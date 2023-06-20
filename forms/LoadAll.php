@@ -11,7 +11,7 @@ $AvCnt = mysqli_fetch_array($AvCntmq);
 $MhCntmq = mysqli_query($conn,"SELECT count(mh.id) AS MhCnt FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE mh.status=1");
 $MhCnt = mysqli_fetch_array($MhCntmq);
 
-$HrCntmq = mysqli_query($conn,"SELECT COUNT(hr.id) AS HrCnt FROM highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1");
+$HrCntmq = mysqli_query($conn,"SELECT count(DISTINCT(hr.picmeNo)) as HrCnt from highriskmothers hr WHERE hr.status=1;");
 $HrCnt = mysqli_fetch_array($HrCntmq);
 
 $DdCntmq = mysqli_query($conn,"SELECT COUNT(dd.id) AS DdCnt FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno WHERE dd.status=1");
