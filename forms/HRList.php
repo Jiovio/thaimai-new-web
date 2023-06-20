@@ -167,6 +167,7 @@
 							
 							$lmp_fmt = "";
 							$edd_fmt = "";
+							$mh_hspl_ty = "";
 							$ar_mh_fnd = "N";
 						//	$row_mh = "";
 							$row_mh['momVdrlRprResult'] = " ";
@@ -186,8 +187,10 @@
 							$row['hospitalType'] = $row_mh['hospitaltype'];
 							$row['hospitalname'] = $row_mh['hospitalname'] ;
 							
+							
 							$lmp_fmt = date('d-m-Y', strtotime($row['lmpdate']));
 							$edd_fmt = date('d-m-Y', strtotime($row['edddate']));
+							
 					
 					
 							if($row['hospitalType'] == "1")	
@@ -224,7 +227,9 @@
                                            if($row['hospitalType'] == "8")	
 										   {
                                            $row['hospitalType'] = "Home"; 											   
-						                   }		
+						                   }	
+										   
+										   $mh_hspl_ty = $row['hospitalType'];
 										/*  if($row_mh['picmeno']=="133010154265"){
 									
 									
@@ -687,7 +692,7 @@ else
                            <td><?php echo $edd_fmt; ?></td> 
 					      <td><?php echo $row['pregnancyWeek']; ?></td>
 						   <td><?php echo $row['symptomsHighRisk']; ?></td> 
-						   <td><?php echo $row['hospitalType']; ?></td>
+						   <td><?php echo $mh_hspl_ty; ?></td>
 						   <td><?php echo date('d-m-Y', strtotime($row['refdat'])); ?></td>
 						   <td><?php echo $row['hospitalname']; ?></td>
 					     </tr> 

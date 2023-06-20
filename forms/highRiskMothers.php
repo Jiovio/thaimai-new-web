@@ -79,6 +79,7 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
 							 $ExeQuery_ec = mysqli_query($conn,$listQry_ec);
 							 while($row_e = mysqli_fetch_array($ExeQuery_ec))
 							 {
+								 
 								 if($pre_picme!=$row['picmeNo'])
 									 
 								 { 
@@ -91,9 +92,14 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                                        <td><?php echo $row_e['motheraadhaarname']; ?></td>
                                        <?php
                                        $highRiskFactor="";
-                                        if(isset($periodAr[$row['highRiskFactor']])){
+                                        if(isset($periodAr[$row['highRiskFactor']]))
+										{
                                             $highRiskFactor = $periodAr[$row['highRiskFactor']];
                                         } 
+										else
+										{
+                                            $highRiskFactor = "Others";
+                                        } 	
                                        ?>
                                        <td><?php echo $highRiskFactor; ?></td>
 								   </tr>
