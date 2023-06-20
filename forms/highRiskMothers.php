@@ -36,6 +36,12 @@
                        </thead>
 <?php  
 $pre_picme = "";
+$query = "SELECT enumid,enumvalue FROM enumdata WHERE type > 0";
+$exequery = mysqli_query($conn, $query);
+$periodAr= array();
+while ($listvalue = mysqli_fetch_assoc($exequery)) {
+    $periodAr[$listvalue['enumid']] = $listvalue['enumvalue'];
+}
 //$listQry = "SELECT DISTINCT(hr.picmeNo),ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
 $listQry = "SELECT DISTINCT(hr.picmeNo),hr.highRiskFactor from highriskmothers hr WHERE hr.status=1";
 $orderQry = " ORDER BY hr.picmeNo ASC";
@@ -83,7 +89,13 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                                        <td><?php echo $cnt; ?></td>
                                        <td><?php echo $row['picmeNo']; ?></td>
                                        <td><?php echo $row_e['motheraadhaarname']; ?></td>
-                                       <td><?php echo $row['highRiskFactor']; ?></td>
+                                       <?php
+                                       $highRiskFactor="";
+                                        if(isset($periodAr[$row['highRiskFactor']])){
+                                            $highRiskFactor = $periodAr[$row['highRiskFactor']];
+                                        } 
+                                       ?>
+                                       <td><?php echo $highRiskFactor; ?></td>
 								   </tr>
                        <?php 
                            $cnt++;
