@@ -29,7 +29,7 @@
                       </tr>
                     </thead>
 <?php  
-$listQry = "SELECT DISTINCT(av.picmeno),ec.motheraadhaarname,av.avdueDate,ec.mothermobno, ec.picmeNo, ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.createdBy=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND av.status!=0
+$listQry = "SELECT DISTINCT(av.picmeno),ec.motheraadhaarname,av.avdueDate,ec.mothermobno, av.anvisitDate, ec.picmeNo, ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.createdBy=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND av.status!=0
 ";
 $private = " AND av.createdBy='".$userid."'";
 $orderQry = " ORDER BY ec.motheraadhaarname ASC";
