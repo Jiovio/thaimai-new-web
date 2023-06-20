@@ -43,7 +43,7 @@ while ($listvalue = mysqli_fetch_assoc($exequery)) {
     $periodAr[$listvalue['enumid']] = $listvalue['enumvalue'];
 }
 //$listQry = "SELECT DISTINCT(hr.picmeNo),ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
-$listQry = "SELECT DISTINCT(hr.picmeNo),hr.highRiskFactor from highriskmothers hr WHERE hr.status=1 AND hr.highRiskFactor != NULL";
+$listQry = "SELECT hr.picmeNo,hr.highRiskFactor from highriskmothers hr WHERE hr.status=1";
 $orderQry = " ORDER BY hr.picmeNo ASC";
 
     if(($usertype == 0) || ($usertype == 1)) {

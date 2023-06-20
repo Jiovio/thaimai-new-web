@@ -240,7 +240,7 @@
                           if($row_mh['hushivtestresult'] == "1") 
 							{
 							
-							$row['symptomsHighRisk'] = "HIV affected father";	
+							$row['symptomsHighRisk'] = "HIV affected husband";	
 							}
 														 else		
 														 if($row_mh['momVdrlRprResult'] == "1") 
@@ -266,7 +266,7 @@
 							 if($row_mh['hushbresult'] == "1") 
 							{
 							
-							$row['symptomsHighRisk'] = "Hepatitis B surface antigen for father";	
+							$row['symptomsHighRisk'] = "Hepatitis B surface antigen for husband";	
 							}
 														 else
 							if($row_mh['totPregnancy'] > "2") 
@@ -292,7 +292,7 @@ else
 							else
 								 if($row_mh['hushivtestresult'] == "3") 
 							{
-							$row['symptomsHighRisk'] = "HIV test not done for father";	
+							$row['symptomsHighRisk'] = "HIV test not done for husband";	
 							}	
 						
 											  
@@ -317,19 +317,38 @@ else
 				  if($ExeQuery_av) { 
 				  while($row_av = mysqli_fetch_array($ExeQuery_av)) {
 					  $row['pregnancyWeek'] = $row_av['pregnancyWeek'];
+							
+							if(strlen($row_av['symptomsHighRisk']) > 0)
+							{
 							$row['symptomsHighRisk'] = $row_av['symptomsHighRisk'];
-							 if(isset($row_av['referralDate']))
+							}
+							else
+							{
+							$row['symptomsHighRisk'] = "Others";
+							}	
+							 if(strlen($row_av['referralDate']) > 0)
 							 {
 							 $row['refdat'] = $row_av['referralDate'];
+							 
 							 }
-							 if(isset($row_av['referralPlace']))
+							 
+							 if(strlen($row_av['referralPlace']) > 0)
 							 {
 							 $row['hospitalname'] = $row_av['referralPlace'];
 							 }
-							 if(isset($row_av['hospitalType']))
+							 else
+								 {
+							 $row['hospitalname'] = $row_mh['hospitalname'] ;
+							 }
+							 if(strlen($row_av['hospitalType']) > 0)
 							 {
 							 $row['hospitalType'] = $row_av['hospitalType'];
 							 }
+							 else
+								 {
+							 $row['hospitalType'] = $row_mh['hospitaltype'];
+							 }
+								 
 							 
 							 if($row['hospitalType'] == "1")	
 							{
@@ -366,7 +385,8 @@ else
 										   {
                                            $row['hospitalType'] = "Home"; 											   
 						                   }		
-							 
+							 if(isset($row['symptomsHighRisk']))
+							 {
 							 if($row['symptomsHighRisk'] == "1")	
 							{
 							$row['symptomsHighRisk'] = "Teenage Pregnancy";}
@@ -599,6 +619,7 @@ else
 										   {
                                            $row['symptomsHighRisk'] = "None"; 	
 										   }
+							 }
 										   
 										   
 										   
