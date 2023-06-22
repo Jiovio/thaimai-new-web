@@ -673,29 +673,35 @@ else
 										    if($High_Risk_Ind == "Y")
 											{
                        ?>
-                        <tr>
-                           <td><?php echo $cnt; ?></td>
-						   <td><?php echo $row['picmeno']; ?></td>
-					       <td><?php echo date('d-m-Y', strtotime($row['anRegDate'])); ?></td>
-				           <td><?php echo $rowh['BlockName']; ?></td>
-                           <td><?php echo $rowh['PhcName']; ?></td>
-                           <td><?php echo $rowh['HscName']; ?></td>
-			               <td><?php echo $rowh['PanchayatName']; ?></td>
-                           <td><?php echo $rowh['VillageName']; ?></td>
-						   <td><?php echo $row['residentType']; ?></td>
-                           <td><?php echo $row['motheraadhaarname']; ?></td>
-					       <td><?php echo $row['MotherAge']; ?></td>
-					       <td><?php echo $row['husbandaadhaarname']; ?></td>
-			               <td><?php echo $row['mothermobno']; ?></td>
-					       <td><?php echo $row['obstetricCode']; ?></td>									   
-					       <td><?php echo $lmp_fmt; ?></td>
-                           <td><?php echo $edd_fmt; ?></td> 
-					      <td><?php echo $row['pregnancyWeek']; ?></td>
-						   <td><?php echo $row['symptomsHighRisk']; ?></td> 
-						   <td><?php echo $mh_hspl_ty; ?></td>
-						   <td><?php echo date('d-m-Y', strtotime($row['refdat'])); ?></td>
-						   <td><?php echo $row['hospitalname']; ?></td>
-					     </tr> 
+                       <tr>
+                                                   <td><?php echo $cnt; ?></td>
+                                                   <td><?php echo $row['picmeno']; ?></td>
+                                                   <td><?php echo date('d-m-Y', strtotime($row['anRegDate'])); ?></td>
+                                                   <td><?php echo $rowh['BlockName']; ?></td>
+                                                   <td><?php echo $rowh['PhcName']; ?></td>
+                                                   <td><?php echo $rowh['HscName']; ?></td>
+                                                   <td><?php echo $rowh['PanchayatName']; ?></td>
+                                                   <td><?php echo $rowh['VillageName']; ?></td>
+                                                   <td><?php echo $row['residentType']; ?></td>
+                                                   <td><?php echo $row['motheraadhaarname']; ?></td>
+                                                   <td><?php echo $row['MotherAge']; ?></td>
+                                                   <td><?php echo $row['husbandaadhaarname']; ?></td>
+                                                   <td><?php echo $row['mothermobno']; ?></td>
+                                                   <td><?php echo $row['obstetricCode']; ?></td>									   
+                                                   <td><?php echo $lmp_fmt; ?></td>
+                                                   <td><?php echo $edd_fmt; ?></td> 
+                                                   <td><?php
+                                                   $pregnancyWeek = $row['pregnancyWeek'];
+                                                   if(empty($pregnancyWeek)){
+                                                       $pregnancyWeek = numWeeks($lmp_fmt, $edd_fmt);
+                                                   }
+                                                   
+                                                   echo $pregnancyWeek; ?></td>
+                                                   <td><?php echo $row['symptomsHighRisk']; ?></td> 
+                                                   <td><?php echo $mh_hspl_ty; ?></td>
+                                                   <td><?php echo date('d-m-Y', strtotime($row['refdat'])); ?></td>
+                                                   <td><?php echo $row['hospitalname']; ?></td>
+                                               </tr> 
                          <?php 
                            $cnt++;
 						
@@ -755,6 +761,20 @@ else
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
  
         <!-- / Navbar -->
-<?php include ('require/dtFooter.php'); ?>		
+<?php
+function numWeeks($dateOne, $dateTwo){
+    //Create a DateTime object for the first date.
+    $firstDate = new DateTime($dateOne);
+    //Create a DateTime object for the second date.
+    $secondDate = new DateTime($dateTwo);
+    //Get the difference between the two dates in days.
+    $differenceInDays = $firstDate->diff($secondDate)->days;
+    //Divide the days by 7
+    $differenceInWeeks = $differenceInDays / 7;
+    //Round down with floor and return the difference in weeks.
+    return floor($differenceInWeeks);
+}
+
+include ('require/dtFooter.php'); ?>		
 		 
 		
