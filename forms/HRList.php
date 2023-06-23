@@ -167,6 +167,7 @@
 							
 							$lmp_fmt = "";
 							$edd_fmt = "";
+							$mh_hspl_ty = "";
 							$ar_mh_fnd = "N";
 						//	$row_mh = "";
 							$row_mh['momVdrlRprResult'] = " ";
@@ -186,8 +187,10 @@
 							$row['hospitalType'] = $row_mh['hospitaltype'];
 							$row['hospitalname'] = $row_mh['hospitalname'] ;
 							
+							
 							$lmp_fmt = date('d-m-Y', strtotime($row['lmpdate']));
 							$edd_fmt = date('d-m-Y', strtotime($row['edddate']));
+							
 					
 					
 							if($row['hospitalType'] == "1")	
@@ -224,26 +227,51 @@
                                            if($row['hospitalType'] == "8")	
 										   {
                                            $row['hospitalType'] = "Home"; 											   
-						                   }		
+						                   }	
+										   
+										   $mh_hspl_ty = $row['hospitalType'];
 										/*  if($row_mh['picmeno']=="133010154265"){
 									
 									
 						print_r($row_mh['momVdrlRprResult']); print_r("After"); } */
-										   
-							 if($row_mh['momVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "1" OR $row_mh['momhbresult'] == "1" OR $row_mh['hushbresult'] == "1" OR $row_mh['momhivtestresult'] == "1" OR $row_mh['hushivtestresult'] == "1") 
+						
+						
+								if($row_mh['momhivtestresult'] == "1") 
 							{
-							/*	if($row_mh['picmeno']=="133010154265"){
-									
-							/*		print_r($row_mh['momhbresult']);
-									print_r($row_mh['hushbresult']);
-									print_r($row_mh['momhivtestresult']);
-									print_r($row_mh['hushivtestresult']);
-									print_r($row_mh['husVdrlRprResult']); 
-									
-									print_r($row_mh['momVdrlRprResult']); 
-									
-									exit;} */
-							$row['symptomsHighRisk'] = "Dangerous test result";	
+							
+							$row['symptomsHighRisk'] = "HIV affected mother";	
+							}
+														 else	
+                          if($row_mh['hushivtestresult'] == "1") 
+							{
+							
+							$row['symptomsHighRisk'] = "HIV affected husband";	
+							}
+														 else		
+														 if($row_mh['momVdrlRprResult'] == "1") 
+							{
+							
+							$row['symptomsHighRisk'] = "Mom's VDRL Positive";	
+							}
+							else		
+														 if($row_mh['husVdrlRprResult'] == "1") 
+							{
+							
+							$row['symptomsHighRisk'] = "Husband's VDRL Positive";	
+							}
+														 else
+															
+							 if($row_mh['momhbresult'] == "1") 
+							{
+							
+							$row['symptomsHighRisk'] = "Hepatitis B surface antigen for mother";	
+							}
+							else
+															
+							 if($row_mh['hushbresult'] == "1") 
+							{
+							
+							$row['symptomsHighRisk'] = "Hepatitis B surface antigen for husband";	
 							}
 														 else
 							if($row_mh['totPregnancy'] > "2") 
@@ -251,10 +279,27 @@
 							$row['symptomsHighRisk'] = "Multiple Pregnancy";	
 							}
 							else
-								 if($row_mh['momhbresult'] == "3" OR $row_mh['hushbresult'] == "3" OR $row_mh['momhivtestresult'] == "3" OR $row_mh['hushivtestresult'] == "3") 
+								
+								 if($row_mh['momhbresult'] == "3") 
 							{
-							$row['symptomsHighRisk'] = "Necessary test not done yet";	
-							}	   
+							$row['symptomsHighRisk'] = "HBsAG test not done for mother";	
+							}	
+else
+								 if($row_mh['hushbresult'] == "3") 
+							{
+							$row['symptomsHighRisk'] = "HBsAG test not done for husband";	
+							}
+else
+								 if($row_mh['momhivtestresult'] == "3") 
+							{
+							$row['symptomsHighRisk'] = "HIV test not done for mother";	
+							}	
+							else
+								 if($row_mh['hushivtestresult'] == "3") 
+							{
+							$row['symptomsHighRisk'] = "HIV test not done for husband";	
+							}	
+						
 											  
 					  
 					  if($row_mh['momVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "3" OR $row_mh['hushbresult'] == "1" OR $row_mh['hushbresult'] == "3" OR
@@ -262,8 +307,7 @@
 				{
 					
 					$High_Risk_Ind = "Y";
-				/*	 if($row['picmeno']=="133010407072"){
-						print_r($High_Risk_Ind);print_r("mh");}*/
+				
 				}
 							
 				  }}		
@@ -278,10 +322,38 @@
 				  if($ExeQuery_av) { 
 				  while($row_av = mysqli_fetch_array($ExeQuery_av)) {
 					  $row['pregnancyWeek'] = $row_av['pregnancyWeek'];
+							
+							if(strlen($row_av['symptomsHighRisk']) > 0)
+							{
 							$row['symptomsHighRisk'] = $row_av['symptomsHighRisk'];
+							}
+							else
+							{
+							$row['symptomsHighRisk'] = "Others";
+							}	
+							 if(strlen($row_av['referralDate']) > 0)
+							 {
 							 $row['refdat'] = $row_av['referralDate'];
+							 
+							 }
+							 
+							 if(strlen($row_av['referralPlace']) > 0)
+							 {
 							 $row['hospitalname'] = $row_av['referralPlace'];
+							 }
+							 else
+								 {
+							 $row['hospitalname'] = $row_mh['hospitalname'] ;
+							 }
+							 if(strlen($row_av['hospitalType']) > 0)
+							 {
 							 $row['hospitalType'] = $row_av['hospitalType'];
+							 }
+							 else
+								 {
+							 $row['hospitalType'] = $row_mh['hospitaltype'];
+							 }
+								 
 							 
 							 if($row['hospitalType'] == "1")	
 							{
@@ -318,7 +390,8 @@
 										   {
                                            $row['hospitalType'] = "Home"; 											   
 						                   }		
-							 
+							 if(isset($row['symptomsHighRisk']))
+							 {
 							 if($row['symptomsHighRisk'] == "1")	
 							{
 							$row['symptomsHighRisk'] = "Teenage Pregnancy";}
@@ -436,6 +509,127 @@
 										   {
                                            $row['symptomsHighRisk'] = "Malpresentation"; 	
 										   }
+										   else
+										   if($row['symptomsHighRisk'] == "26")	
+										   {
+                                           $row['symptomsHighRisk'] = "Congenital malformation"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "27")	/**/
+										   {
+                                           $row['symptomsHighRisk'] = "Differently abled mother"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "28")	
+										   {
+                                           $row['symptomsHighRisk'] = "Cephalo Pelvic Disproportion"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "29")	
+										   {
+                                           $row['symptomsHighRisk'] = "HIV affected mother"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "30")	
+										   {
+                                           $row['symptomsHighRisk'] = "Intra Uterine Death"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "31")	
+										   {
+                                           $row['symptomsHighRisk'] = "Post dated Pregnancy"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "32")	
+										   {
+                                           $row['symptomsHighRisk'] = "IUGR"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "33")	
+										   {
+                                           $row['symptomsHighRisk'] = "Epilepsy"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "34")	
+										   {
+                                           $row['symptomsHighRisk'] = "Foul Smelling discharge"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "35")	
+										   {
+                                           $row['symptomsHighRisk'] = "Diabetes Mellitus"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "36")	
+										   {
+                                           $row['symptomsHighRisk'] = "Chronic Hypertension"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "37")	
+										   {
+                                           $row['symptomsHighRisk'] = "Renal Disease"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "38")	
+										   {
+                                           $row['symptomsHighRisk'] = "Maternal Tetanus"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "39")	
+										   {
+                                           $row['symptomsHighRisk'] = "High Fever"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "40")	
+										   {
+                                           $row['symptomsHighRisk'] = "Still Birth"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "41")	
+										   {
+                                           $row['symptomsHighRisk'] = "Obstructed Labour"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "42")	
+										   {
+                                           $row['symptomsHighRisk'] = "Transfusion Reaction"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "43")	
+										   {
+                                           $row['symptomsHighRisk'] = "Maternal Tuberculosis"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "44")	
+										   {
+                                           $row['symptomsHighRisk'] = "Maternal Hep. B positive"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "45")	
+										   {
+                                           $row['symptomsHighRisk'] = "Bronchial Asthma"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "46")	
+										   {
+                                           $row['symptomsHighRisk'] = "VDRL Positive"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "47")	
+										   {
+                                           $row['symptomsHighRisk'] = "COthers"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "48")	
+										   {
+                                           $row['symptomsHighRisk'] = "None"; 	
+										   }
+							 }
+										   
+										   
+										   
+										   
+										   
 					  
 					  
 					  if($row_av['Hb'] < "10" OR $row_av['urineSugarPresent'] == "1" OR $row_av['urineAlbuminPresent']  == "1" OR $row_av['gctValue']  >= "190" OR $row_av['Tsh'] > "4.87" OR $row_av['bpSys']  >= "140" OR $row_av['bpDia']  >= "90" OR $row_av['motherWeight'] <= "40") 
@@ -479,29 +673,35 @@
 										    if($High_Risk_Ind == "Y")
 											{
                        ?>
-                        <tr>
-                           <td><?php echo $cnt; ?></td>
-						   <td><?php echo $row['picmeno']; ?></td>
-					       <td><?php echo date('d-m-Y', strtotime($row['anRegDate'])); ?></td>
-				           <td><?php echo $rowh['BlockName']; ?></td>
-                           <td><?php echo $rowh['PhcName']; ?></td>
-                           <td><?php echo $rowh['HscName']; ?></td>
-			               <td><?php echo $rowh['PanchayatName']; ?></td>
-                           <td><?php echo $rowh['VillageName']; ?></td>
-						   <td><?php echo $row['residentType']; ?></td>
-                           <td><?php echo $row['motheraadhaarname']; ?></td>
-					       <td><?php echo $row['MotherAge']; ?></td>
-					       <td><?php echo $row['husbandaadhaarname']; ?></td>
-			               <td><?php echo $row['mothermobno']; ?></td>
-					       <td><?php echo $row['obstetricCode']; ?></td>									   
-					       <td><?php echo $lmp_fmt; ?></td>
-                           <td><?php echo $edd_fmt; ?></td> 
-					      <td><?php echo $row['pregnancyWeek']; ?></td>
-						   <td><?php echo $row['symptomsHighRisk']; ?></td> 
-						   <td><?php echo $row['hospitalType']; ?></td>
-						   <td><?php echo date('d-m-Y', strtotime($row['refdat'])); ?></td>
-						   <td><?php echo $row['hospitalname']; ?></td>
-					     </tr> 
+                       <tr>
+                                                   <td><?php echo $cnt; ?></td>
+                                                   <td><?php echo $row['picmeno']; ?></td>
+                                                   <td><?php echo date('d-m-Y', strtotime($row['anRegDate'])); ?></td>
+                                                   <td><?php echo $rowh['BlockName']; ?></td>
+                                                   <td><?php echo $rowh['PhcName']; ?></td>
+                                                   <td><?php echo $rowh['HscName']; ?></td>
+                                                   <td><?php echo $rowh['PanchayatName']; ?></td>
+                                                   <td><?php echo $rowh['VillageName']; ?></td>
+                                                   <td><?php echo $row['residentType']; ?></td>
+                                                   <td><?php echo $row['motheraadhaarname']; ?></td>
+                                                   <td><?php echo $row['MotherAge']; ?></td>
+                                                   <td><?php echo $row['husbandaadhaarname']; ?></td>
+                                                   <td><?php echo $row['mothermobno']; ?></td>
+                                                   <td><?php echo $row['obstetricCode']; ?></td>									   
+                                                   <td><?php echo $lmp_fmt; ?></td>
+                                                   <td><?php echo $edd_fmt; ?></td> 
+                                                   <td><?php
+                                                   $pregnancyWeek = $row['pregnancyWeek'];
+                                                   if(empty($pregnancyWeek)){
+                                                       $pregnancyWeek = numWeeks($lmp_fmt, $edd_fmt);
+                                                   }
+                                                   
+                                                   echo $pregnancyWeek; ?></td>
+                                                   <td><?php echo $row['symptomsHighRisk']; ?></td> 
+                                                   <td><?php echo $mh_hspl_ty; ?></td>
+                                                   <td><?php echo date('d-m-Y', strtotime($row['refdat'])); ?></td>
+                                                   <td><?php echo $row['hospitalname']; ?></td>
+                                               </tr> 
                          <?php 
                            $cnt++;
 						
@@ -561,6 +761,20 @@
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
  
         <!-- / Navbar -->
-<?php include ('require/dtFooter.php'); ?>		
+<?php
+function numWeeks($dateOne, $dateTwo){
+    //Create a DateTime object for the first date.
+    $firstDate = new DateTime($dateOne);
+    //Create a DateTime object for the second date.
+    $secondDate = new DateTime($dateTwo);
+    //Get the difference between the two dates in days.
+    $differenceInDays = $firstDate->diff($secondDate)->days;
+    //Divide the days by 7
+    $differenceInWeeks = $differenceInDays / 7;
+    //Round down with floor and return the difference in weeks.
+    return floor($differenceInWeeks);
+}
+
+include ('require/dtFooter.php'); ?>		
 		 
 		

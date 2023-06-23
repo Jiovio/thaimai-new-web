@@ -391,7 +391,13 @@ include "../config/db_connect.php";
 		$row['lmpfmt'] = $lmp_fmt;
 		$row['eddfmt'] = $edd_fmt;
 		
-			
+		
+        $pregnancyWeek = $row['pregnancyWeek'];
+        if(empty($pregnancyWeek)){
+           $pregnancyWeek = numWeeks($lmp_fmt, $edd_fmt);
+		   $row['pregnancyWeek'] = $pregnancyWeek;
+        }
+        			
 		$wild_srch = "";				     
 	 if(strlen($search_text_input) > 0 )
 	 {	 
@@ -476,4 +482,18 @@ include "../config/db_connect.php";
 	//  header('Location: ' . $_SERVER['HTTP_REFERER']);
 	  exit; 
 
+?>
+<?php
+function numWeeks($dateOne, $dateTwo){
+    //Create a DateTime object for the first date.
+    $firstDate = new DateTime($dateOne);
+    //Create a DateTime object for the second date.
+    $secondDate = new DateTime($dateTwo);
+    //Get the difference between the two dates in days.
+    $differenceInDays = $firstDate->diff($secondDate)->days;
+    //Divide the days by 7
+    $differenceInWeeks = $differenceInDays / 7;
+    //Round down with floor and return the difference in weeks.
+    return floor($differenceInWeeks);
+}
 ?>
