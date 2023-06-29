@@ -95,13 +95,250 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                                         if(isset($periodAr[$row['highRiskFactor']]))
 										{
                                             $highRiskFactor = $periodAr[$row['highRiskFactor']];
+											if(isset($row['highRiskFactor']))
+							 {
+							 if($row['highRiskFactor'] == "1")	
+							{
+							$row['highRiskFactor'] = "Teenage Pregnancy";}
+							else								
+							    if($row['highRiskFactor'] == "2")	
+							    {
+								$row['highRiskFactor'] = "Elderly Primi"; }
+								 else
+							    	 if($row['highRiskFactor'] == "3")	
+							         {
+									 $row['highRiskFactor'] = "Elderly Multi "; }
+									   else 
+										   if($row['highRiskFactor'] == "4")	
+										   {
+                                           $row['highRiskFactor'] = "Short Primi"; 											   
+						                   }
+                                           else
+	                                       if($row['highRiskFactor'] == "5")	
+										   {
+                                           $row['highRiskFactor'] = "Severe Anaemia"; 											   
+						                   }	
+                                          else
+											if($row['highRiskFactor'] == "6")	
+										   {
+                                           $row['highRiskFactor'] = "PIH/Pre Eclampsia/Eclampsia"; 											   
+						                   }	
+										   else
+										   if($row['highRiskFactor'] == "7")	
+										   {
+                                           $row['highRiskFactor'] = "Hydraminios"; 	
+                                           								   
+	                                    	 }		
+		                                   if($row['highRiskFactor'] == "8")	
+										   {
+                                           $row['highRiskFactor'] = "APH"; 	
+                                           								   
+	                                    	 }		
+                                           if($row['highRiskFactor'] == "9")	
+										   {
+                                           $row['highRiskFactor'] = "Multi Para"; 	
+                                           								   
+		                                     }				 
+											 
+											 if($row['highRiskFactor'] == "10")	
+							{
+							$row['highRiskFactor'] = "Multiple Pregnancy";}
+							else								
+							    if($row['highRiskFactor'] == "11")	
+							    {
+								$row['highRiskFactor'] = "Vesicular Mole"; }
+								 else
+							    	 if($row['highRiskFactor'] == "12")	
+							         {
+									 $row['highRiskFactor'] = "Rh incompatibility"; }
+									   else 
+										   if($row['highRiskFactor'] == "13")	
+										   {
+                                           $row['highRiskFactor'] = "Previous LSCS"; 											   
+						                   }
+                                           else
+	                                       if($row['highRiskFactor'] == "14")	
+										   {
+                                           $row['highRiskFactor'] = "Instrumental V.D"; 											   
+						                   }	
+                                          else
+											if($row['highRiskFactor'] == "15")	
+										   {
+                                           $row['highRiskFactor'] = "Weight below 40 kg"; 											   
+						                   }	
+										   else
+										   if($row['highRiskFactor'] == "16")	
+										   {
+                                           $row['highRiskFactor'] = "Heart Disease complicating pregnancy"; 	
+                                           								   
+	                                    	 }		
+		                                   if($row['highRiskFactor'] == "17")	
+										   {
+                                           $row['highRiskFactor'] = "Malaria"; 	
+                                           								   
+	                                    	 }		
+                                           if($row['highRiskFactor'] == "18")	
+										   {
+                                           $row['highRiskFactor'] = "Long period infertility"; 	
+                                           								   
+		                                     }			
+
+											if($row['highRiskFactor'] == "19")	
+							{
+							$row['highRiskFactor'] = "GDM";}
+							else								
+							    if($row['highRiskFactor'] == "20")	
+							    {
+								$row['highRiskFactor'] = "Previous bad obstetric history"; }
+								 else
+							    	 if($row['highRiskFactor'] == "21")	
+							         {
+									 $row['highRiskFactor'] = "Cancer"; }
+									   else 
+										   if($row['highRiskFactor'] == "22")	
+										   {
+                                           $row['highRiskFactor'] = "Intracranial Space occupying lesion"; 											   
+						                   }
+                                           else
+	                                       if($row['highRiskFactor'] == "23")	
+										   {
+                                           $row['highRiskFactor'] = "Pregnant due to contraceptive Failure"; 											   
+						                   }	
+                                          else
+											if($row['highRiskFactor'] == "24")	
+										   {
+                                           $row['highRiskFactor'] = "Ectopic Pregnancy"; 											   
+						                   }	
+										   else
+										   if($row['highRiskFactor'] == "25")	
+										   {
+                                           $row['highRiskFactor'] = "Malpresentation"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "26")	
+										   {
+                                           $row['highRiskFactor'] = "Congenital malformation"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "27")	/**/
+										   {
+                                           $row['highRiskFactor'] = "Differently abled mother"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "28")	
+										   {
+                                           $row['highRiskFactor'] = "Cephalo Pelvic Disproportion"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "29")	
+										   {
+                                           $row['highRiskFactor'] = "HIV affected mother"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "30")	
+										   {
+                                           $row['highRiskFactor'] = "Intra Uterine Death"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "31")	
+										   {
+                                           $row['highRiskFactor'] = "Post dated Pregnancy"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "32")	
+										   {
+                                           $row['highRiskFactor'] = "IUGR"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "33")	
+										   {
+                                           $row['highRiskFactor'] = "Epilepsy"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "34")	
+										   {
+                                           $row['highRiskFactor'] = "Foul Smelling discharge"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "35")	
+										   {
+                                           $row['highRiskFactor'] = "Diabetes Mellitus"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "36")	
+										   {
+                                           $row['highRiskFactor'] = "Chronic Hypertension"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "37")	
+										   {
+                                           $row['highRiskFactor'] = "Renal Disease"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "38")	
+										   {
+                                           $row['highRiskFactor'] = "Maternal Tetanus"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "39")	
+										   {
+                                           $row['highRiskFactor'] = "High Fever"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "40")	
+										   {
+                                           $row['highRiskFactor'] = "Still Birth"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "41")	
+										   {
+                                           $row['highRiskFactor'] = "Obstructed Labour"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "42")	
+										   {
+                                           $row['highRiskFactor'] = "Transfusion Reaction"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "43")	
+										   {
+                                           $row['highRiskFactor'] = "Maternal Tuberculosis"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "44")	
+										   {
+                                           $row['highRiskFactor'] = "Maternal Hep. B positive"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "45")	
+										   {
+                                           $row['highRiskFactor'] = "Bronchial Asthma"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "46")	
+										   {
+                                           $row['highRiskFactor'] = "VDRL Positive"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "47")	
+										   {
+                                           $row['highRiskFactor'] = "COthers"; 	
+										   }
+										   else
+										   if($row['highRiskFactor'] == "48")	
+										   {
+                                           $row['highRiskFactor'] = "None"; 	
+										   }
+							 }
+										   
                                         } 
 										else
 										{
                                             $highRiskFactor = "Others";
                                         } 	
                                        ?>
-                                       <td><?php echo $highRiskFactor; ?></td>
+                                    <!---   <td><//?php echo $highRiskFactor; ?></td> --->
+									   <td><?php echo $row['highRiskFactor']; ?></td>
 								   </tr>
                        <?php 
                            $cnt++;
