@@ -594,6 +594,30 @@ $('#HscId').on('change', function(){
     });
 });
 
+
+
+$('.anregisterPicmenoCls').on('blur change', function(){
+    picmeno =  $(this).val();
+     $.ajax({
+        url: "ajax/AnVisitData.php",
+        type: "POST",
+        async: false,
+        data: {
+            picmeno: picmeno         
+        },
+        cache: false,
+        success: function (response) {
+            result = JSON.parse(response);
+            alert(result['highRisk']);
+            if(result['result']=='success'){
+                 $("#hrPregnancy").val(result['highRisk']).change();
+                  $("#obstetricCode").val(result['obcode']).change();
+            } 
+            
+        }
+    });
+});
+
 $('#PanchayatId').on('change', function(){
     panchayatId = $(this).val();
     $.ajax({

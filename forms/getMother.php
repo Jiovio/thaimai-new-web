@@ -17,7 +17,7 @@ include ('require/header.php'); // Menu & Top Search
 $pvalue =""; 
 $residentType=""; $ptest=""; $gravida=""; $para=""; $child=""; $ab=""; $cd=""; $hrPreg=""; $obcode=""; 
 $height=""; $weight=""; $bp=""; $dia=""; $date=""; $age=""; $mrmbs=""; $pvalue=""; $id = 0; $update = false;
-
+$picmeno ="";
 if (! empty($_POST["anuser"])) {
 $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeno FROM anregistration where picmeno='".$_POST["picmeno"]."' ");
 while($picvalue = mysqli_fetch_array($CheckDuplicatePno))
@@ -41,6 +41,7 @@ $child = $_POST["livingChildren"];
 $ab = $_POST["abortion"]; 
 $cd = $_POST["childDeath"];
 $hrPreg = $_POST["hrPregnancy"];
+echo "hr-".$hrPreg; exit;
 $obcode = $_POST["obstetricCode"]; 
 $height = $_POST["motherHeight"];
 $weight = $_POST["motherWeight"]; 
@@ -56,7 +57,9 @@ VALUES ('$motheraadhaarid','$picmeno','$picmeRegDate','$residentType','$ptest','
           if (!empty($query)) {
           echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}/forms/AnRegisterlist.php');</script>";
           } 
+          $HighRisk =0;
 if(($gravida > 2) || ($para > 2) || ($child > 2) || ($ab > 2) || ($cd > 2)) {
+  $HighRisk = 1;
   $hrqry = mysqli_query($conn,"INSERT INTO highriskmothers (picmeNo, motherName, highRiskFactor) 
   VALUES ('$picmeno','$mothername','$obcode')"); 
   $uqry= mysqli_query($conn,"UPDATE anregistration SET highRisk=1 WHERE motheraadhaarid='$motheraadhaarid'");
@@ -113,11 +116,12 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                           oninput = "onlyNumbers(this.value)"
                             type="number"
                             name="picmeno"
-                            class="form-control"
+                            class="form-control anregisterPicmenoCls"
                             id="picmeno" min="100000000000" max="999999999999" required
                             placeholder="PICME No."
                             aria-label="PICME No."
                             aria-describedby="basic-icon-default-fullname2"
+                            value ="<?php echo $picmeno; ?>"
                           />
                         </div>
                       </div>
