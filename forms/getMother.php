@@ -41,7 +41,7 @@ $child = $_POST["livingChildren"];
 $ab = $_POST["abortion"]; 
 $cd = $_POST["childDeath"];
 $hrPreg = $_POST["hrPregnancy"];
-echo "hr-".$hrPreg; exit;
+//echo "hr-".$hrPreg; exit;
 $obcode = $_POST["obstetricCode"]; 
 $height = $_POST["motherHeight"];
 $weight = $_POST["motherWeight"]; 

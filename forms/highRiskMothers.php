@@ -323,7 +323,7 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
 										   else
 										   if($row['highRiskFactor'] == "47")	
 										   {
-                                           $row['highRiskFactor'] = "COthers"; 	
+                                           $row['highRiskFactor'] = "Others"; 	
 										   }
 										   else
 										   if($row['highRiskFactor'] == "48")	
@@ -335,7 +335,7 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                                         } 
 										else
 										{
-                                            $highRiskFactor = "Others";
+                                            $row['highRiskFactor'] = "Others";
                                         } 	
                                        ?>
                                     <!---   <td><//?php echo $highRiskFactor; ?></td> --->
