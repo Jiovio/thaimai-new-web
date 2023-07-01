@@ -95,6 +95,7 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                                         if(isset($periodAr[$row['highRiskFactor']]))
 										{
                                             $highRiskFactor = $periodAr[$row['highRiskFactor']];
+											$row['highRiskFactor'] = $highRiskFactor;
 											if(isset($row['highRiskFactor']))
 							 {
 							 if($row['highRiskFactor'] == "1")	
