@@ -29,8 +29,8 @@ include "../config/db_connect.php";
 
 //if(strlen($search_text_input) > 0 )
 
-    $listQry = "SELECT ar.anRegDate,ar.gravida,ar.para,ar.livingChildren,ar.abortion,ar.childDeath,ar.bpSys,ar.bpDia,ar.motherWeight,ar.updatedat, ar.createdat,ar.picmeno,ar.residentType, ec.motherdob, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno
-	            WHERE ar.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ar.picmeno)"; 		
+    $listQry = "SELECT ar.hrPregnancy,ar.gravida,ar.para,ar.livingChildren,ar.abortion,ar.childDeath,ar.bpSys,ar.bpDia,ar.motherWeight,ar.updatedat, ar.createdat,ar.picmeno,ar.residentType, ec.motherdob, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno
+	             WHERE ar.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ar.picmeno)";		
 				   
     $orderQry = " ORDER BY ar.anRegDate DESC";	
 		
@@ -50,6 +50,7 @@ include "../config/db_connect.php";
 		$High_Risk_Ind = "N";
 				$row['refdat'] = "";
 				$row['refdat'] = $row['anRegDate'];
+				$row['symptomsHighRisk'] = "";
 							
 				$ar_picme = "";
 				$ar_picme = $row['picmeno'];
@@ -93,9 +94,17 @@ include "../config/db_connect.php";
 							{
 							$row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia";	
 							} 
+							else
+								if($row['MotherAge'] < "18") 
+							{
+							$row['symptomsHighRisk'] = "Teenage Pregnancy";	
+							} 
 							
 							$lmp_fmt = "";
 							$edd_fmt = "";
+							$mh_hspl_ty = "";
+							$ar_mh_fnd = "N";
+							$row_mh['momVdrlRprResult'] = " ";
 											
 				$listQry_mh = "SELECT * FROM medicalhistory mh 
 	              WHERE mh.status!=0 AND mh.picmeno = $ar_picme";
@@ -148,11 +157,46 @@ include "../config/db_connect.php";
                                            if($row['hospitalType'] == "8")	
 										   {
                                            $row['hospitalType'] = "Home"; 											   
-						                   }		
+						                   }	
+
+                             $mh_hspl_ty = $row['hospitalType'];										   
 																				   
-							 if($row_mh['momVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "1" OR $row_mh['momhbresult'] == "1" OR $row_mh['hushbresult'] == "1" OR $row_mh['momhivtestresult'] == "1" OR $row_mh['hushivtestresult'] == "1") 
+							if($row_mh['momhivtestresult'] == "1") 
 							{
-							$row['symptomsHighRisk'] = "Dangerous test result";	
+							
+							$row['symptomsHighRisk'] = "HIV affected mother";	
+							}
+														 else	
+                          if($row_mh['hushivtestresult'] == "1") 
+							{
+							
+							$row['symptomsHighRisk'] = "HIV affected husband";	
+							}
+														 else		
+														 if($row_mh['momVdrlRprResult'] == "1") 
+							{
+							
+							$row['symptomsHighRisk'] = "Mom's VDRL Positive";	
+							}
+							else		
+														 if($row_mh['husVdrlRprResult'] == "1") 
+							{
+							
+							$row['symptomsHighRisk'] = "Husband's VDRL Positive";	
+							}
+														 else
+															
+							 if($row_mh['momhbresult'] == "1") 
+							{
+							
+							$row['symptomsHighRisk'] = "Hepatitis B surface antigen for mother";	
+							}
+							else
+															
+							 if($row_mh['hushbresult'] == "1") 
+							{
+							
+							$row['symptomsHighRisk'] = "Hepatitis B surface antigen for husband";	
 							}
 														 else
 							if($row_mh['totPregnancy'] > "2") 
@@ -160,14 +204,90 @@ include "../config/db_connect.php";
 							$row['symptomsHighRisk'] = "Multiple Pregnancy";	
 							}
 							else
-								 if($row_mh['momhbresult'] == "3" OR $row_mh['hushbresult'] == "3" OR $row_mh['momhivtestresult'] == "3" OR $row_mh['hushivtestresult'] == "3") 
+								
+								 if($row_mh['momhbresult'] == "3") 
 							{
-							$row['symptomsHighRisk'] = "Necessary test not done yet";	
-							}	   
-											  
+							$row['symptomsHighRisk'] = "HBsAG test not done for mother";	
+							}	
+else
+								 if($row_mh['hushbresult'] == "3") 
+							{
+							$row['symptomsHighRisk'] = "HBsAG test not done for husband";	
+							}
+else
+								 if($row_mh['momhivtestresult'] == "3") 
+							{
+							$row['symptomsHighRisk'] = "HIV test not done for mother";	
+							}	
+							else
+								 if($row_mh['hushivtestresult'] == "3") 
+							{
+							$row['symptomsHighRisk'] = "HIV test not done for husband";	
+							}
+
+                            if($row_mh['pastillness'] == "101")
+                            {
+                             $row['symptomsHighRisk'] = "TB";
+                            }
+                            else	
+                            if($row_mh['pastillness'] == "102")
+                            {
+                             $row['symptomsHighRisk'] = "Diabetes";
+                            }		
+                             else	
+                            if($row_mh['pastillness'] == "103")
+                            {
+                             $row['symptomsHighRisk'] = "Hypertension";
+                            }	
+                            else	
+                            if($row_mh['pastillness'] == "104")
+                            {
+                             $row['symptomsHighRisk'] = "Heart Disease";
+                            }	
+                            else	
+                            if($row_mh['pastillness'] == "105")
+                            {
+                             $row['symptomsHighRisk'] = "Epilepsy";
+                            }	
+                            else	
+                            if($row_mh['pastillness'] == "106")
+                            {
+                             $row['symptomsHighRisk'] = "RTI / STI";
+                            }
+                            else	
+                            if($row_mh['pastillness'] == "107")
+                            {
+                             $row['symptomsHighRisk'] = "HIV Positive";
+                            }		
+                            else	
+                            if($row_mh['pastillness'] == "108")
+                            {
+                             $row['symptomsHighRisk'] = "Asthma";
+                            }									
+						    else	
+                            if($row_mh['pastillness'] == "109")
+                            {
+                             $row['symptomsHighRisk'] = "Hep B";
+                            }	
+							else	
+                            if($row_mh['pastillness'] == "110")
+                            {
+                             $row['symptomsHighRisk'] = "Any Other Specify";
+                            }
+                            else	
+                            if($row_mh['pastillness'] == "111")
+                            {
+                             $row['symptomsHighRisk'] = "Gestational Diabete";
+                            }	
+                            else	
+                            if($row_mh['pastillness'] == "112")
+                            {
+                             $row['symptomsHighRisk'] = "Hypothyroidism";
+                            }								
+											  										  
 					  
-					  if($row_mh['momVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "3" OR $row_mh['hushbresult'] == "1" OR $row_mh['hushbresult'] == "3" OR
-				$row_mh['momhivtestresult'] == "1" OR $row_mh['momhivtestresult'] == "3" OR $row_mh['hushivtestresult'] == "1" OR $row_mh['hushivtestresult'] == "3" OR $row_mh['totPregnancy'] > "2")
+					 if($row_mh['momVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "3" OR $row_mh['hushbresult'] == "1" OR $row_mh['hushbresult'] == "3" OR
+				$row_mh['momhivtestresult'] == "1" OR $row_mh['momhivtestresult'] == "3" OR $row_mh['hushivtestresult'] == "1" OR $row_mh['hushivtestresult'] == "3" OR $row_mh['totPregnancy'] > "2" OR $row_mh['pastillness'] != "100")
 				{
 					
 					$High_Risk_Ind = "Y";
@@ -184,10 +304,37 @@ include "../config/db_connect.php";
 				  if($ExeQuery_av) { 
 				  while($row_av = mysqli_fetch_array($ExeQuery_av)) {
 					  $row['pregnancyWeek'] = $row_av['pregnancyWeek'];
+					  if(strlen($row_av['symptomsHighRisk']) > 0)
+							{
 							$row['symptomsHighRisk'] = $row_av['symptomsHighRisk'];
-							  $row['refdat'] = $row_av['referralDate'];
+							}
+							else
+							{
+							$row['symptomsHighRisk'] = "Others";
+							}	
+							
+							if(strlen($row_av['referralDate']) > 0)
+							 {
+							 $row['refdat'] = $row_av['referralDate'];
+							 
+							 }
+							 
+							if(strlen($row_av['referralPlace']) > 0)
+							 {
 							 $row['hospitalname'] = $row_av['referralPlace'];
+							 }
+							 else
+								 {
+							 $row['hospitalname'] = $row_mh['hospitalname'] ;
+							 }
+							 if(strlen($row_av['hospitalType']) > 0)
+							 {
 							 $row['hospitalType'] = $row_av['hospitalType'];
+							 }
+							 else
+								 {
+							 $row['hospitalType'] = $row_mh['hospitaltype'];
+							 }
 							 
 							 if($row['hospitalType'] == "1")	
 							{
@@ -225,6 +372,8 @@ include "../config/db_connect.php";
                                            $row['hospitalType'] = "Home"; 											   
 						                   }		
 							 
+							 if(isset($row['symptomsHighRisk']))
+							 {
 							 if($row['symptomsHighRisk'] == "1")	
 							{
 							$row['symptomsHighRisk'] = "Teenage Pregnancy";}
@@ -342,9 +491,125 @@ include "../config/db_connect.php";
 										   {
                                            $row['symptomsHighRisk'] = "Malpresentation"; 	
 										   }
+										   else
+										   if($row['symptomsHighRisk'] == "26")	
+										   {
+                                           $row['symptomsHighRisk'] = "Congenital malformation"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "27")	/**/
+										   {
+                                           $row['symptomsHighRisk'] = "Differently abled mother"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "28")	
+										   {
+                                           $row['symptomsHighRisk'] = "Cephalo Pelvic Disproportion"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "29")	
+										   {
+                                           $row['symptomsHighRisk'] = "HIV affected mother"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "30")	
+										   {
+                                           $row['symptomsHighRisk'] = "Intra Uterine Death"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "31")	
+										   {
+                                           $row['symptomsHighRisk'] = "Post dated Pregnancy"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "32")	
+										   {
+                                           $row['symptomsHighRisk'] = "IUGR"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "33")	
+										   {
+                                           $row['symptomsHighRisk'] = "Epilepsy"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "34")	
+										   {
+                                           $row['symptomsHighRisk'] = "Foul Smelling discharge"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "35")	
+										   {
+                                           $row['symptomsHighRisk'] = "Diabetes Mellitus"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "36")	
+										   {
+                                           $row['symptomsHighRisk'] = "Chronic Hypertension"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "37")	
+										   {
+                                           $row['symptomsHighRisk'] = "Renal Disease"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "38")	
+										   {
+                                           $row['symptomsHighRisk'] = "Maternal Tetanus"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "39")	
+										   {
+                                           $row['symptomsHighRisk'] = "High Fever"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "40")	
+										   {
+                                           $row['symptomsHighRisk'] = "Still Birth"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "41")	
+										   {
+                                           $row['symptomsHighRisk'] = "Obstructed Labour"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "42")	
+										   {
+                                           $row['symptomsHighRisk'] = "Transfusion Reaction"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "43")	
+										   {
+                                           $row['symptomsHighRisk'] = "Maternal Tuberculosis"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "44")	
+										   {
+                                           $row['symptomsHighRisk'] = "Maternal Hep. B positive"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "45")	
+										   {
+                                           $row['symptomsHighRisk'] = "Bronchial Asthma"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "46")	
+										   {
+                                           $row['symptomsHighRisk'] = "VDRL Positive"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "47")	
+										   {
+                                           $row['symptomsHighRisk'] = "COthers"; 	
+										   }
+										   else
+										   if($row['symptomsHighRisk'] == "48")	
+										   {
+                                           $row['symptomsHighRisk'] = "None"; 	
+										   }
+							 }
 					  
 					  
-					  if($row_av['Hb'] < "10" OR $row_av['urineSugarPresent'] == "1" OR $row_av['urineAlbuminPresent']  == "1" OR $row_av['gctValue']  >= "190" OR $row_av['Tsh'] > "4.87" OR $row_av['bpSys']  >= "140" OR $row_av['bpDia']  >= "90" OR $row_av['motherWeight'] <= "40") 
+					  if($row_av['HighRisk'] == "1" OR $row_av['Hb'] < "10" OR $row_av['urineSugarPresent'] == "1" OR $row_av['urineAlbuminPresent']  == "1" OR $row_av['gctValue']  >= "190" OR $row_av['Tsh'] > "4.87" OR $row_av['bpSys']  >= "140" OR $row_av['bpDia']  >= "90" OR $row_av['motherWeight'] <= "40") 
 					  {
 					
 				            $High_Risk_Ind = "Y";
@@ -376,7 +641,7 @@ include "../config/db_connect.php";
 							
 										   if($High_Risk_Ind == "N")
 										   {
-											   if($row['gravida'] > "2" OR $row['para'] > "2" OR $row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2" OR $row['bpSys'] >= "140" OR $row['bpDia'] >= "90" OR $row['motherWeight'] <= "40")
+											   if($row['gravida'] > "2" OR $row['para'] > "2" OR $row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2" OR $row['bpSys'] >= "140" OR $row['bpDia'] >= "90" OR $row['motherWeight'] <= "40" OR $row['MotherAge'] < "18" OR $row['hrPregnancy'] == "1")
         		
 											   {
 												$High_Risk_Ind = "Y"; 

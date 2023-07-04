@@ -58,10 +58,8 @@
                        </thead>  
     <?php
 
-    
-	
-    $listQry = "SELECT ar.gravida,ar.para,ar.livingChildren,ar.abortion,ar.childDeath,ar.bpSys,ar.bpDia,ar.motherWeight,ar.updatedat, ar.createdat,ar.picmeno,ar.residentType, ec.motherdob, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno
-	            WHERE ar.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ar.picmeno)";
+        $listQry = "SELECT ar.hrPregnancy,ar.gravida,ar.para,ar.livingChildren,ar.abortion,ar.childDeath,ar.bpSys,ar.bpDia,ar.motherWeight,ar.updatedat, ar.createdat,ar.picmeno,ar.residentType, ec.motherdob, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno
+	             WHERE ar.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ar.picmeno)";
 									 
 	  $private = " AND ar.createdBy='".$userid."'";
       $orderQry = " ORDER BY ar.anRegDate DESC";
@@ -109,6 +107,7 @@
                 while($row = mysqli_fetch_array($ExeQuery)) {
 					$High_Risk_Ind = "N";
 					        $row['refdat'] = "";
+							$row['symptomsHighRisk'] = "";
 					   /*     if($row['updatedat'] == "NULL")
 							{
 							 if($row['createdat'] != "NULL")	
@@ -164,6 +163,12 @@
 							{
 							$row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia";	
 							} 
+							else
+								if($row['MotherAge'] < "18") 
+							{
+							$row['symptomsHighRisk'] = "Teenage Pregnancy";	
+							} 
+							
 							
 							$lmp_fmt = "";
 							$edd_fmt = "";
@@ -298,12 +303,71 @@ else
 								 if($row_mh['hushivtestresult'] == "3") 
 							{
 							$row['symptomsHighRisk'] = "HIV test not done for husband";	
-							}	
-						
+							}
+
+                            if($row_mh['pastillness'] == "101")
+                            {
+                             $row['symptomsHighRisk'] = "TB";
+                            }
+                            else	
+                            if($row_mh['pastillness'] == "102")
+                            {
+                             $row['symptomsHighRisk'] = "Diabetes";
+                            }		
+                             else	
+                            if($row_mh['pastillness'] == "103")
+                            {
+                             $row['symptomsHighRisk'] = "Hypertension";
+                            }	
+                            else	
+                            if($row_mh['pastillness'] == "104")
+                            {
+                             $row['symptomsHighRisk'] = "Heart Disease";
+                            }	
+                            else	
+                            if($row_mh['pastillness'] == "105")
+                            {
+                             $row['symptomsHighRisk'] = "Epilepsy";
+                            }	
+                            else	
+                            if($row_mh['pastillness'] == "106")
+                            {
+                             $row['symptomsHighRisk'] = "RTI / STI";
+                            }
+                            else	
+                            if($row_mh['pastillness'] == "107")
+                            {
+                             $row['symptomsHighRisk'] = "HIV Positive";
+                            }		
+                            else	
+                            if($row_mh['pastillness'] == "108")
+                            {
+                             $row['symptomsHighRisk'] = "Asthma";
+                            }									
+						    else	
+                            if($row_mh['pastillness'] == "109")
+                            {
+                             $row['symptomsHighRisk'] = "Hep B";
+                            }	
+							else	
+                            if($row_mh['pastillness'] == "110")
+                            {
+                             $row['symptomsHighRisk'] = "Any Other Specify";
+                            }
+                            else	
+                            if($row_mh['pastillness'] == "111")
+                            {
+                             $row['symptomsHighRisk'] = "Gestational Diabete";
+                            }	
+                            else	
+                            if($row_mh['pastillness'] == "112")
+                            {
+                             $row['symptomsHighRisk'] = "Hypothyroidism";
+                            }								
 											  
 					  
 					  if($row_mh['momVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "3" OR $row_mh['hushbresult'] == "1" OR $row_mh['hushbresult'] == "3" OR
-				$row_mh['momhivtestresult'] == "1" OR $row_mh['momhivtestresult'] == "3" OR $row_mh['hushivtestresult'] == "1" OR $row_mh['hushivtestresult'] == "3" OR $row_mh['totPregnancy'] > "2")
+				$row_mh['momhivtestresult'] == "1" OR $row_mh['momhivtestresult'] == "3" OR $row_mh['hushivtestresult'] == "1" OR $row_mh['hushivtestresult'] == "3" OR $row_mh['totPregnancy'] > "2" OR $row_mh['pastillness'] != "100")
 				{
 					
 					$High_Risk_Ind = "Y";
@@ -625,14 +689,9 @@ else
                                            $row['symptomsHighRisk'] = "None"; 	
 										   }
 							 }
-										   
-										   
-										   
-										   
-										   
+							
 					  
-					  
-					  if($row_av['Hb'] < "10" OR $row_av['urineSugarPresent'] == "1" OR $row_av['urineAlbuminPresent']  == "1" OR $row_av['gctValue']  >= "190" OR $row_av['Tsh'] > "4.87" OR $row_av['bpSys']  >= "140" OR $row_av['bpDia']  >= "90" OR $row_av['motherWeight'] <= "40") 
+					  if($row_av['HighRisk'] == "1" OR $row_av['Hb'] < "10" OR $row_av['urineSugarPresent'] == "1" OR $row_av['urineAlbuminPresent']  == "1" OR $row_av['gctValue']  >= "190" OR $row_av['Tsh'] > "4.87" OR $row_av['bpSys']  >= "140" OR $row_av['bpDia']  >= "90" OR $row_av['motherWeight'] <= "40") 
 					  {
 					
 				            $High_Risk_Ind = "Y";
@@ -662,7 +721,7 @@ else
 									   
 										   if($High_Risk_Ind == "N")
 										   {
-											   if($row['gravida'] > "2" OR $row['para'] > "2" OR $row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2" OR $row['bpSys'] >= "140" OR $row['bpDia'] >= "90" OR $row['motherWeight'] <= "40")
+											   if($row['gravida'] > "2" OR $row['para'] > "2" OR $row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2" OR $row['bpSys'] >= "140" OR $row['bpDia'] >= "90" OR $row['motherWeight'] <= "40" OR $row['MotherAge'] < "18" OR $row['hrPregnancy'] == "1")
         		
 											   {
 												$High_Risk_Ind = "Y";   
