@@ -608,7 +608,7 @@ $('.anregisterPicmenoCls').on('blur change', function(){
         cache: false,
         success: function (response) {
             result = JSON.parse(response);
-            alert(result['highRisk']);
+           
             if(result['result']=='success'){
                  $("#hrPregnancy").val(result['highRisk']).change();
                   $("#obstetricCode").val(result['obcode']).change();
