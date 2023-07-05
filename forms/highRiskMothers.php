@@ -95,6 +95,7 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                                         if(isset($periodAr[$row['highRiskFactor']]))
 										{
                                             $highRiskFactor = $periodAr[$row['highRiskFactor']];
+											$row['highRiskFactor'] = $highRiskFactor;
 											if(isset($row['highRiskFactor']))
 							 {
 							 if($row['highRiskFactor'] == "1")	
@@ -322,7 +323,7 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
 										   else
 										   if($row['highRiskFactor'] == "47")	
 										   {
-                                           $row['highRiskFactor'] = "COthers"; 	
+                                           $row['highRiskFactor'] = "Others"; 	
 										   }
 										   else
 										   if($row['highRiskFactor'] == "48")	
@@ -334,7 +335,7 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                                         } 
 										else
 										{
-                                            $highRiskFactor = "Others";
+                                            $row['highRiskFactor'] = "Others";
                                         } 	
                                        ?>
                                     <!---   <td><//?php echo $highRiskFactor; ?></td> --->
