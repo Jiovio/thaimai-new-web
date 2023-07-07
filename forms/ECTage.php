@@ -149,7 +149,7 @@
 	?>	
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------------------- Download button + Submitting values to next page ------------------------------------------------------------------>
-    <form action="EcTageExp.php" method="post" id="filterform" style="width:100%";>	
+    <form action="ECTageExp.php" method="post" id="filterform" style="width:100%";>	
 		  <div class="col-md-8" style="margin-top: 10px;">
    		
           <button type="submit" id="AVReport" name='AVReport' style = "margin-left : 450px; margin-bottom: 10px" class="btn lt btn-primary"><span class="bx bx-download"></span>&nbsp; Download</button>
