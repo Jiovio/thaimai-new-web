@@ -22,7 +22,12 @@
 
                 <!-- Hoverable Table rows -->
                  <div class="card">
-                   <h5 class="card-header">High Risk Mothers List</h5>
+                   <h5 class="card-header">High Risk Mothers List
+				   
+				   <a href="Refhr.php" type="button" class="btn btn-primary" style="float:right;">
+                    <span class="bx bx-refresh"></span> Refresh </a>				   			   
+				   </h5>
+				   
                    <div class="table-responsive text-nowrap">
            <div class="container">
            <table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
@@ -90,8 +95,10 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                                        <td><?php echo $cnt; ?></td>
                                        <td><?php echo $row['picmeNo']; ?></td>
                                        <td><?php echo $row_e['motheraadhaarname']; ?></td>
-                                       <?php
-                                       $highRiskFactor="";
+									   <td><?php echo $row['highRiskFactor']; ?></td>
+                                       <?php 
+									   
+                                  /*     $highRiskFactor="";
                                         if(isset($periodAr[$row['highRiskFactor']]))
 										{
                                             $highRiskFactor = $periodAr[$row['highRiskFactor']];
@@ -221,7 +228,7 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                                            $row['highRiskFactor'] = "Congenital malformation"; 	
 										   }
 										   else
-										   if($row['highRiskFactor'] == "27")	/**/
+										   if($row['highRiskFactor'] == "27")	
 										   {
                                            $row['highRiskFactor'] = "Differently abled mother"; 	
 										   }
@@ -339,8 +346,9 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                                         } 	
                                        ?>
                                     <!---   <td><//?php echo $highRiskFactor; ?></td> --->
-									   <td><?php echo $row['highRiskFactor']; ?></td>
-								   </tr>
+									   <td><?php echo $row['highRiskFactor']; ?></td> 
+								   </tr> */
+								   ?> 
                        <?php 
                            $cnt++;
 						   $pre_picme = $row['picmeNo'];

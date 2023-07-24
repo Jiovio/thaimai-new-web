@@ -37,8 +37,9 @@
                        </thead>
    
     <?php 
-    $listQry = "SELECT * FROM `ecregister` WHERE status NOT IN(0,1)";
-    $private = " AND createdBy='".$userid."'";
+  //  $listQry = "SELECT * FROM `ecregister` WHERE status NOT IN(0,1) AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ec.picmeNo)";
+    $listQry = "SELECT * FROM `ecregister` ec WHERE status NOT IN(0,1) AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ec.picmeNo)";
+	$private = " AND createdBy='".$userid."'";
     $orderQry = " ORDER BY motheraadhaarname ASC";
     
     if(($usertype == 0) || ($usertype == 1)) {
