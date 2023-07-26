@@ -1,13 +1,13 @@
 <?php
 $host = "localhost";
-$dbuser = "thaimaicloudonwe_dev-user";
-$dbpwd = "=t1VE89[*7w_";
-$dbname = "thaimaicloudonwe_dev";
+$dbuser = "root";
+$dbpwd = "";
+$dbname = "thaimai_cloud";
 $conn = mysqli_connect($host, $dbuser, $dbpwd, $dbname) or die("Thaimayudan Connection failed: " . mysqli_connect_error());
 if ($conn->connect_error) { 
     echo "Thaimayudan Connection failed"; 
 }
 
-$siteurl = "https://thaimai.cloudonweb.in";
+$siteurl = "http://localhost/thaimai-new-web-main";
 
 ?>
