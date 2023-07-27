@@ -52,8 +52,6 @@ while ($listvalue = mysqli_fetch_assoc($exequery)) {
 $listQry = "SELECT hr.picmeNo,hr.highRiskFactor from highriskmothers hr WHERE hr.status=1";
 $orderQry = " ORDER BY hr.picmeNo ASC";
 
-echo $siteurl; exit;
-
     if(($usertype == 0) || ($usertype == 1)) {
       if(isset($_POST['filter'])) {
         $bloName = $_POST['BlockId']; 
