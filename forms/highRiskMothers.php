@@ -24,6 +24,7 @@
                  <div class="card">
                    <h5 class="card-header">High Risk Mothers List
 				   
+				  				   
 				   <a href="Refhr.php" type="button" class="btn btn-primary" style="float:right;">
                     <span class="bx bx-refresh"></span> Refresh </a>				   			   
 				   </h5>
@@ -50,6 +51,8 @@ while ($listvalue = mysqli_fetch_assoc($exequery)) {
 //$listQry = "SELECT DISTINCT(hr.picmeNo),ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
 $listQry = "SELECT hr.picmeNo,hr.highRiskFactor from highriskmothers hr WHERE hr.status=1";
 $orderQry = " ORDER BY hr.picmeNo ASC";
+
+echo $siteurl; exit;
 
     if(($usertype == 0) || ($usertype == 1)) {
       if(isset($_POST['filter'])) {
