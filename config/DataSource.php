@@ -16,10 +16,11 @@ namespace Phppot;
  */
 class DataSource
 {
+
     // PHP 7.1.0 visibility modifiers are allowed for class constants.
     // when using above 7.1.0, declare the below constants as private
     // for better encapsulation
-    const HOST = 'localhost';   
+    const HOST = 'localhost';
 
     const USERNAME = 'root';
 
