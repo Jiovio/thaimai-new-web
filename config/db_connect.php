@@ -8,6 +8,6 @@ if ($conn->connect_error) {
     echo "Thaimayudan Connection failed"; 
 }
 
-$siteurl = "http://demo.savemom.in";
+$siteurl = "http://demo.savemom.in";   
 
 ?>
