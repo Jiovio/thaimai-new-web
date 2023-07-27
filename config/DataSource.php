@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) Phppot   
+ * Copyright (C) Phppot
  *
  * Distributed under 'The MIT License (MIT)'
  * In essense, you can do commercial use, modify, distribute and private use.
