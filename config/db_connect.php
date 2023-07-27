@@ -9,5 +9,4 @@ if ($conn->connect_error) {
 }
   
 $siteurl = "https://demo.savemom.in";   
-
 ?>
