@@ -22,11 +22,11 @@ class DataSource
     // for better encapsulation
     const HOST = 'localhost';
 
-    const USERNAME = 'adminthaimai_user';
+    const USERNAME = 'root';
 
-    const PASSWORD = 'ELxKb+Tp2GHn';
+    const PASSWORD = 'Savemom@123';
 
-    const DATABASENAME = 'adminthaimai_admin';
+    const DATABASENAME = 'demo_savemom';
 
     private $conn;
 
