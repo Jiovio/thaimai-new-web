@@ -570,6 +570,39 @@ $('#anvisitDate').on('blur change click', function () {
     }
 });
 
+
+$('.highPregnancyCls').on('blur change', function (){
+    var tagId = $(this).attr('id');
+    if(tagId === 'gravida' || tagId === 'para' || tagId === 'childDeath' ||tagId === 'abortion' || tagId === 'livingChildren'){
+       var checkVal =  $('#'+tagId).val();
+       if(checkVal > 2){
+             $("#hrPregnancy").val(1).change();
+       }
+    } 
+    
+   
+    if(tagId == 'motherWeight '){
+       var checkVal =  $('#'+tagId).val();
+       if(checkVal <= 40){
+             $("#hrPregnancy").val(1).change();
+       }
+    }
+    
+    if(tagId == 'bpSys'){
+         var checkVal =  $('#'+tagId).val();
+       if(checkVal >= 140){
+             $("#hrPregnancy").val(1).change();
+       }
+    }
+    
+    if(tagId == 'childDeath'){
+          var checkVal =  $('#'+tagId).val();
+       if(bpDia  >= 90){
+             $("#hrPregnancy").val(1).change();
+       }
+    }
+});
+
 /**
  * Anvisit - Step2 - number of IFA related process
  * @param {type} date *
