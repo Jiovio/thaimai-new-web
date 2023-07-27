@@ -297,15 +297,15 @@ $highrisk = mysqli_query($conn, "UPDATE ecregister ec INNER JOIN antenatalvisit 
                         </div>
 					
 				                <div class="col-4 mb-3" id="ivDoses" style="display: none;">
-                          <label class="form-label" for="basic-icon-default-noOfIVDoses">NO. of Units / IV Doses <!--<span class="mand">* </span>--></label>
+                          <label class="form-label" for="basic-icon-default-noOfIVDoses">No. of Units / IV Doses <!--<span class="mand">* </span>--></label>
                           <div class="input-group input-group-merge">
                             <input
                               type="text"
                               name="noOfIVDoses"
                               class="form-control"
                               id="noOfIVDoses"
-                              placeholder="NO. of IV Doses"
-                              aria-label="NO. of IV Doses"
+                              placeholder="No. of Units / IV Doses"
+                              aria-label="No. of Units / IV Doses"
                               aria-describedby="basic-icon-default-noOfIVDoses"
                                />
                           </div>

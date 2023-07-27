@@ -127,7 +127,7 @@ if (! empty($_POST["addpostnatal"])) {
                           </div>
 
                           <div class="mb-3 col-md-6">
-                          <label class="form-label">Family Welfare Method Accepted</label>
+                          <label class="form-label">Family Welfare Method Accepted <span class="mand">* </span></label>
                             <select name="ppcMethod" id="ppcMethod" class="form-select">
                           <option value="">Choose...</option>
                           <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=29";
@@ -172,7 +172,7 @@ if (! empty($_POST["addpostnatal"])) {
                               class="form-control"
                               id="bloodSugar"
                               name="bloodSugar"
-                              placeholder="BLOOD SUGER"
+                              placeholder="BLOOD SUGAR"
                             
                             />
                           </div>

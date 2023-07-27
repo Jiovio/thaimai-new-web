@@ -120,7 +120,7 @@ if (isset($_GET['del'])) {
                         </div>
                         
                         <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">MOTHER NAME AS PER AADHAAR</label>
+                          <label class="form-label" for="basic-icon-default-phone">MOTHER'S NAME AS PER AADHAAR</label>
                           <div class="input-group input-group-merge">
                             <?php $query = mysqli_query($conn,"SELECT an.motheraadhaarid, ec.motheraadhaarname FROM anregistration an join ecregister ec on ec.motheraadhaarid=an.motheraadhaarid WHERE an.motheraadhaarid=".$motheraadhaarid); 
                             while ($mid = mysqli_fetch_assoc($query)) {
@@ -182,7 +182,7 @@ if (isset($_GET['del'])) {
                           </div>
                         <div class="row">
                           <div class="mb-3 col-md-6">
-                            <label class="form-label">RESIDENT TYPE</label>
+                            <label class="form-label">RESIDENT TYPE <span class="mand">* </span></label>
                             <?php if($update == true || $view == true) { ?>
                           <select name="residentType" id="residentType" class="form-select" value="<?php echo $residentType; ?>" disabled>
                           <?php $list=mysqli_query($conn, "SELECT an.residentType,e.enumid,e.enumvalue from anregistration an join enumdata e ON e.enumid=an.residentType WHERE type=10 AND an.id=".$id);
@@ -354,12 +354,12 @@ if (isset($_GET['del'])) {
                             </div>
                     <div class="row"> 
                           <div class="mb-3 col-md-6">
-                            <label class="form-label">OBSTETRIC CODE</label>
+                            <label class="form-label">OBSTETRIC CODE<span class="mand"> * </span></label>
                             <input type="text" class="form-control" id="obstetricCode" value="<?php echo $obcode; ?>" name="obstetricCode" placeholder="Code" readonly />
                           </div>
                           
                           <div class="mb-3 col-md-6">
-                          <label class="form-label">HR Pregnancy</label>
+                          <label class="form-label">HR Pregnancy<span class="mand"> * </span></label>
                           <?php if($update == true || $view == true) { ?>
                             <select name="hrPregnancy" id="hrPregnancy" class="form-select" disabled>
                             
@@ -388,7 +388,7 @@ if (isset($_GET['del'])) {
                             </div>
                         <div class="row">
                           <div class="mb-3 col-md-6">
-                            <label class="form-label">MOTHER HEIGHT <span class="mand">* </span></label>
+                            <label class="form-label">MOTHER'S HEIGHT <span class="mand">* </span></label>
                             <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-female"></i></span>
                             <input class="form-control" type="text" id="motherHeight" value="<?php echo $height; ?>" name="motherHeight" placeholder="Height" disabled required/>
@@ -396,7 +396,7 @@ if (isset($_GET['del'])) {
                           </div>
                             
                           <div class="mb-3 col-md-6">
-                            <label for="zipCode" class="form-label">MOTHER WEIGHT <span class="mand">* </span></label>
+                            <label for="zipCode" class="form-label">MOTHER'S WEIGHT <span class="mand">* </span></label>
                             <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-female"></i></span>
                             <input
@@ -404,7 +404,7 @@ if (isset($_GET['del'])) {
                               class="form-control"
                               id="motherWeight"
                               name="motherWeight" required
-                              placeholder="Mother Weight"
+                              placeholder="Mother's Weight"
                               value="<?php echo $weight; ?>"
                               disabled
                             />
@@ -457,7 +457,7 @@ if (isset($_GET['del'])) {
                         </div>
                         <div class="row">
                           <div class="mb-3 col-md-6">
-                            <label for="zipCode" class="form-label">ANTENATAL REGISTER DATE</label>
+                            <label for="zipCode" class="form-label">ANTENATAL REGISTER DATE <span class="mand">* </span></label>
                             <input
                               type="date"
                               class="form-control"
@@ -515,7 +515,7 @@ if (isset($_GET['del'])) {
                           </div>
                           
                           <div class="mb-3 col-md-6">
-                            <label class="form-label">Husband Age at Conception <span class="mand">* </span></label>
+                            <label class="form-label">Husband's Age at Conception <span class="mand">* </span></label>
                             <div class="input-group input-group-merge">
                             <input
                               type="number"
@@ -523,7 +523,7 @@ if (isset($_GET['del'])) {
                               class="form-control"
                               id="HusbandAge"
                               name="HusbandAge"
-                              placeholder="Husband Age"
+                              placeholder="Husband's Age"
                               value="<?php echo $HusbandAge; ?>"
                               disabled
                               required

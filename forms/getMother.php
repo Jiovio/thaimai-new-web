@@ -94,7 +94,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         </div>
                       </div>
                       <div class="mb-3 col-md-4">
-                        <label class="form-label" for="basic-icon-default-mothername">MOTHER NAME AS PER AADHAAR <span class="mand">* </span> </span id="errPicmeno"><span></label>
+                        <label class="form-label" for="basic-icon-default-mothername">MOTHER'S NAME AS PER AADHAAR <span class="mand">* </span> </span id="errPicmeno"><span></label>
                         <div class="input-group input-group-merge">
                             <input type="text" value="<?php echo $mothername; ?>" class="form-control" disabled /> 
                       </div>
@@ -277,14 +277,14 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         </div>
                       <div class="row">
                         <div class="mb-3 col-md-6">
-                          <label class="form-label">MOTHER HEIGHT <span class="mand">* </span></label>
+                          <label class="form-label">MOTHER'S HEIGHT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <input class="form-control" type="number" id="motherHeight" required name="motherHeight" placeholder="Height" />
                         </div>
                         </div>
                         
                         <div class="mb-3 col-md-6">
-                          <label for="zipCode" class="form-label">MOTHER WEIGHT <span class="mand">* </span></label>
+                          <label for="zipCode" class="form-label">MOTHER'S WEIGHT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <input
                             type="number"
@@ -361,7 +361,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         </div>
                         </div>
                         <div class="mb-3 col-md-6">
-                          <label class="form-label">Husband Age at Conception <span class="mand">* </span></label>
+                          <label class="form-label">Husband's Age at Conception <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <input
                             type="number"
@@ -369,7 +369,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             class="form-control"
                             id="HusbandAge"
                             name="HusbandAge"
-                            placeholder="Husband Age"
+                            placeholder="Husband's Age"
                             required
                           />
                         </div>

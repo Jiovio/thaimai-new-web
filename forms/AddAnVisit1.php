@@ -4,7 +4,7 @@
       <div class="layout-container">
         <!-- Menu -->
 <?php include ('require/header.php'); // Menu & Top Search ?>
-          <!-- Content wrapper -->
+          <!-- Content wrapper --> 
           <div class="content-wrapper">
             <!-- Content -->
       <div class="container-xxl flex-grow-1 container-p-y">

@@ -339,7 +339,7 @@ $_SESSION['message'] = "User deleted!";
                   </div>
 
                   <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-password">NO. OF LIVE BIRTH</label>
+                          <label class="form-label" for="basic-icon-default-password">NO. OF LIVE BIRTH <span class="mand">* </span></label>
                             <input
                               type="text"
                               name="noOfLiveBirth"
@@ -619,7 +619,7 @@ $_SESSION['message'] = "User deleted!";
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-password">OPV-0 DATE</label>
+                          <label class="form-label" for="basic-icon-default-password">OPV-0 DATE <span class="mand">* </span></label>
                            <input
                               type="date"
                               name="opvDdate"

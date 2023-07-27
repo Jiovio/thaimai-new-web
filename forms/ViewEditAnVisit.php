@@ -303,7 +303,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
 						            <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-ancPeriod">Antenatal Period <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-ancPeriod">Antenatal Visit Count <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             <select class="40-150 form-control" id="ancPeriod" name="ancPeriod" placeholder="Antenatal Period" required disabled>
                             <?php
@@ -697,21 +697,7 @@ if (isset($_GET['del'])) {
                                 </select>
                           </div>
                         </div>
-                        <div class="col-4 mb-3" id="Bdose">
-                          <label class="form-label" for="basic-icon-default-Td2Dose">Booster Dose </label>
-                          <div class="input-group input-group-merge">
-                            <input
-                              type="text"
-                              name="TdBdose"
-                              class="form-control"
-                              id="TdBdose"
-                              placeholder="Booster Dose"
-                              aria-label="Booster Dose"
-                              aria-describedby="basic-icon-default-TdDose"
-                              value="<?php echo $TdBdose; ?>" disabled
-                              />
-                          </div>
-                        </div>
+                      						
 						<div class="col-4 mb-3" id="TdB" style="display:none">
                           <label class="form-label" for="basic-icon-default-TdBoosterDate">Td Booster Date</label>
                           <div class="input-group input-group-merge">
@@ -1633,15 +1619,15 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
 				                <div class="col-4 mb-3" id="ivDoses">
-                          <label class="form-label" for="basic-icon-default-noOfIVDoses">NO. of Units / IV Doses</label>
+                          <label class="form-label" for="basic-icon-default-noOfIVDoses">No. of Units / IV Doses</label>
                           <div class="input-group input-group-merge">
                             <input
                               type="text"
                               name="noOfIVDoses"
                               class="form-control"
                               id="noOfIVDoses"
-                              placeholder="NO. of IV Doses"
-                              aria-label="NO. of IV Doses"
+                              placeholder="No. of Units / IV Doses"
+                              aria-label="No. of Units / IV Doses"
                               aria-describedby="basic-icon-default-noOfIVDoses"
                               value="<?php echo $nooIVdoses ?>"
                               disabled

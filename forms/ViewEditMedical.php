@@ -636,20 +636,6 @@ if (isset($_GET['del'])) {
                           </div> -->
                        
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">Any Other Investigation With Result </label>
-                            <input
-                              type="text"
-                              name="anyOtherInvest"
-                              id="anyOtherInvest"
-                              class="form-control"
-                              placeholder="Any Other Investigation"
-                              aria-label="Any Other Investigation"
-                              aria-describedby="basic-icon-default-email2"
-                              value="<?php  echo $anyOtherInvest ?>"
-                              disabled
-                            />
-                          </div>
-                        <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">HUSBAND HIV TEST RESULT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             <?php if($view == true) { ?>
@@ -673,6 +659,21 @@ if (isset($_GET['del'])) {
                                 <?php } ?>
                       </div>
                         </div>
+						
+						<div class="col-6 mb-3">
+                          <label class="form-label" for="basic-icon-default-email">Any Other Investigation With Result </label>
+                            <input
+                              type="text"
+                              name="anyOtherInvest"
+                              id="anyOtherInvest"
+                              class="form-control"
+                              placeholder="Any Other Investigation"
+                              aria-label="Any Other Investigation"
+                              aria-describedby="basic-icon-default-email2"
+                              value="<?php  echo $anyOtherInvest ?>"
+                              disabled
+                            />
+                          </div>
 
                         </div>
                         <div class="row">
@@ -777,14 +778,14 @@ if (isset($_GET['del'])) {
                       </div>
                         </div>
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">PLACE OF DELIVERY DISTRICT </label>
+                          <label class="form-label" for="basic-icon-default-email">PREVIOUS DELIVERY DISTRICT </label>
                             <input
                               type="text"
                               name="placeDeliveryDistrict"
                               id="placeDeliveryDistrict"
                               class="form-control"
-                              placeholder="PLACE OF DELIVERY DISTRICT"
-                              aria-label="PLACE OF DELIVERY DISTRICT"
+                              placeholder="PREVIOUS DELIVERY DISTRICT"
+                              aria-label="PREVIOUS DELIVERY DISTRICT"
                               aria-describedby="basic-icon-default-email2"
                               value="<?php echo $placeDeliveryDistrict ?>"
                               disabled
