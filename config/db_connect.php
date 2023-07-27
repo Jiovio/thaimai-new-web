@@ -1,5 +1,5 @@
 <?php
-$host = "localhost";
+$host = "localhost";   
 $dbuser = "root";
 $dbpwd = "Savemom@123";
 $dbname = "demo_upload";
