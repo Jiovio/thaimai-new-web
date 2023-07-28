@@ -26,7 +26,7 @@
 				   
 				  				   
 				   <a href="Refhr.php" type="button" class="btn btn-primary" style="float:right;">
-                    <span class="bx bx-refresh"> </span> Refresh </a>				   			   
+                    <span class="bx bx-refresh"></span> Refresh </a>				   			   
 				   </h5>
 				   
                    <div class="table-responsive text-nowrap">

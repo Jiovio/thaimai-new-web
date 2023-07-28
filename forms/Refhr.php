@@ -3,7 +3,7 @@
   error_reporting(E_ALL);
   include "../config/db_connect.php";
 
-    /* ------------------------------------------------------- AN Reg --------------------------------------------------------------------*/
+   /* ------------------------------------------------------- AN Reg --------------------------------------------------------------------*/
 
     $listQry_anreg_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) SELECT DISTINCT(picmeno),status from anregistration WHERE (anregistration.gravida > 2 OR anregistration.livingChildren > 2 OR anregistration.abortion > 2 OR anregistration.childDeath > 2 OR anregistration.para > 2 OR anregistration.motherWeight <= 40 OR anregistration.bpSys >= 140 OR anregistration.bpDia >= 90 OR anregistration.MotherAge < 18) 
 AND NOT EXISTS (SELECT antenatalvisit.picmeno FROM antenatalvisit WHERE antenatalvisit.picmeno = anregistration.picmeno)
