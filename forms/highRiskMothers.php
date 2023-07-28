@@ -25,7 +25,7 @@
                    <h5 class="card-header">High Risk Mothers List
 				   
 				  				   
-				   <a href="Refhr.php" type="button" class="btn btn-primary" style="float:right;">
+				   <a href="HRRefresh.php" type="button" class="btn btn-primary" style="float:right;">
                     <span class="bx bx-refresh"></span> Refresh </a>				   			   
 				   </h5>
 				   
