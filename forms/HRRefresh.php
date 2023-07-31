@@ -110,8 +110,8 @@ anregistration.childDeath > 2)");
 	/* ------------------------------------------------------- Refresh Message -----------------------------------------------------------*/
      
 	 
-	 echo "<script>alert('Refreshed Successfully!!!');window.location.replace('{$siteurl}/forms/highRiskMothers.php');</script>";
-          
-	exit; 
+	 echo "<script>alert('Refreshed Successfully!!!');</script>";
+         //. "window.location.replace('{$siteurl}/forms/highRiskMothers.php');</script>";
+         header("Location: {$siteurl}/forms/highRiskMothers.php");
+	//exit; 
 
-?>
