@@ -46,14 +46,15 @@ include "../config/db_connect.php";
 	          		                  		  
 	$developer_records = array();
 	$sno=1;
-	while( $rows = mysqli_fetch_assoc($ExeQuery) ) {
-		$search_flag = false;  
-
-$rows['BlockName'] = "";
+	$rows['BlockName'] = "";
 			 $rows['PhcName'] = "";
 			 $rows['HscName'] = "";
 			 $rows['PanchayatName'] = "";
-			 $rows['VillageName'] = "";	 		
+			 $rows['VillageName'] = "";	 	
+	while( $rows = mysqli_fetch_assoc($ExeQuery) ) {
+		$search_flag = false;  
+
+	
 			  
        $HscQry = "SELECT * From hscmaster";				 
 	   $HscRes =  mysqli_query($conn,$HscQry);
