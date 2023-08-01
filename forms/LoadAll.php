@@ -24,7 +24,7 @@ $PvCntmq = mysqli_query($conn,"SELECT count(p.id) AS PvCnt FROM postnatalvisit p
 $PvCnt = mysqli_fetch_array($PvCntmq);
     
 $UsCntmq = mysqli_query($conn,"SELECT COUNT(id) AS UsCnt FROM users WHERE email !='test@thaimaiyudan.org' AND status='1' AND usertype NOT IN (0,1)");
-$UsCnt = mysqli_fetch_array($UsCntmq);
+$UsCnt = mysqli_fetch_array($UsCntmq); 
 
 
 /* Restricted Delivery Detials Record in pregnancy status count - by Nithya*/     
