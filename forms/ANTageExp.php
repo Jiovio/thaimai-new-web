@@ -46,11 +46,11 @@ include "../config/db_connect.php";
 	          		                  		  
 	$developer_records = array();
 	$sno=1;
-	$rows['BlockName'] = "";
+/*	$rows['BlockName'] = "";
 			 $rows['PhcName'] = "";
 			 $rows['HscName'] = "";
 			 $rows['PanchayatName'] = "";
-			 $rows['VillageName'] = "";	 	
+			 $rows['VillageName'] = "";	 	*/
 	while( $rows = mysqli_fetch_assoc($ExeQuery) ) {
 		$search_flag = false;  
 
