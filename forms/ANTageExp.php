@@ -72,7 +72,7 @@ include "../config/db_connect.php";
                 $rows['HscName'] = $rowh['HscName'];
 			    $rows['PanchayatName'] = $rowh['PanchayatName']; 
                 $rows['VillageName'] = $rowh['VillageName']; 					  
-}}}
+}}
 		
 		 if($rows['residentType'] == "1")
 							{
@@ -167,7 +167,7 @@ include "../config/db_connect.php";
 			$excelData .= implode("\t", array_values($lineData)) . "\n";
 	   }
 		echo $excelData;
-	  }
+	}}
 	//  header('Location: ' . $_SERVER['HTTP_REFERER']);
 	  exit; 
 
