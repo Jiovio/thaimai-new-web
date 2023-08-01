@@ -76,7 +76,7 @@ $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$BlockId."'".$orderQry)
                                        <td><?php echo $row['picmeNo']; ?></td>
                                        <td><?php $mstatus=$row['status'];
                                        if($mstatus==2){ echo "Antenatal"; }
-                                       else if($mstatus==3){ echo "Postnatal"; }
+                                     //  else if($mstatus==3){ echo "Postnatal"; }
                                        else if($mstatus==5){ echo "Teenage Pregnancy"; } 
                                        else if($mstatus==6){ echo "High Risk Pregnancy"; } ?></td>
 								</tr>
