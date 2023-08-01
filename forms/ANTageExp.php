@@ -31,7 +31,7 @@ include "../config/db_connect.php";
 
     $listQry = "SELECT ar.picmeno,ar.residentType, ar.picmeRegDate, ec.motherdob, mh.reg12weeks, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno JOIN medicalhistory mh on mh.picmeno = ar.picmeno
                   WHERE ar.status!=0 AND ar.MotherAge < 18 AND NOT EXISTS (SELECT av.picmeno FROM antenatalvisit av WHERE av.picmeno = ar.picmeno)";  		
-				   
+	
     $orderQry = " ORDER BY ar.picmeRegDate DESC";	
 		
     if($bloName == "" && $phcName == "" && $hscName == ""){
@@ -44,13 +44,14 @@ include "../config/db_connect.php";
        $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
        } 
 	          		                  		  
-	$developer_records = array();
-	$sno=1;
-/*	$rows['BlockName'] = "";
+		$rows['BlockName'] = "";
 			 $rows['PhcName'] = "";
 			 $rows['HscName'] = "";
 			 $rows['PanchayatName'] = "";
-			 $rows['VillageName'] = "";	 	*/
+			 $rows['VillageName'] = "";	 	
+	$developer_records = array();
+	$sno=1;
+
 	while( $rows = mysqli_fetch_assoc($ExeQuery) ) {
 		$search_flag = false;  
 
@@ -72,7 +73,7 @@ include "../config/db_connect.php";
                 $rows['HscName'] = $rowh['HscName'];
 			    $rows['PanchayatName'] = $rowh['PanchayatName']; 
                 $rows['VillageName'] = $rowh['VillageName']; 					  
-}}
+//}}
 		
 		 if($rows['residentType'] == "1")
 							{
@@ -128,6 +129,7 @@ include "../config/db_connect.php";
 	{
 	  $developer_records[] = $rows;
 }}	
+}}}
 	$filename = "Teenage_Pregnancy_List_".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");
@@ -165,9 +167,10 @@ include "../config/db_connect.php";
 	   $record['reg12weeks']
 		  ); 
 			$excelData .= implode("\t", array_values($lineData)) . "\n";
-	  }}
+	  }
 		echo $excelData;
 	}
+	
 	//  header('Location: ' . $_SERVER['HTTP_REFERER']);
 	  exit; 
 
