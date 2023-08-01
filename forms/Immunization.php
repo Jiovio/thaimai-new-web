@@ -44,7 +44,8 @@
 <?php 
   $listQry = "SELECT DISTINCT(im.picmeNo),im.id,im.doseNo,im.doseDueDate,im.doseProvidedDate,im.breastFeeding,ec.motheraadhaarname,im.createdUserId,ec.BlockId,ec.PhcId,ec.HscId FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeNo WHERE im.status=1";
   $private = " AND im.createdUserId='".$userid."'";
-  $orderQry = " ORDER BY ec.motheraadhaarname ASC";
+ // $orderQry = " ORDER BY ec.motheraadhaarname ASC";
+ $orderQry = " ORDER BY im.doseNo ASC";
 
     if(($usertype == 0) || ($usertype == 1)) {
             if(isset($_POST['filter'])) {
