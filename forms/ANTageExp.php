@@ -165,9 +165,9 @@ include "../config/db_connect.php";
 	   $record['reg12weeks']
 		  ); 
 			$excelData .= implode("\t", array_values($lineData)) . "\n";
-	   }
+	  }}
 		echo $excelData;
-	}}
+	}
 	//  header('Location: ' . $_SERVER['HTTP_REFERER']);
 	  exit; 
 
