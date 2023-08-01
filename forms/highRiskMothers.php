@@ -49,7 +49,8 @@ while ($listvalue = mysqli_fetch_assoc($exequery)) {
     $periodAr[$listvalue['enumid']] = $listvalue['enumvalue'];
 }
 //$listQry = "SELECT DISTINCT(hr.picmeNo),ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
-$listQry = "SELECT hr.picmeNo,hr.highRiskFactor from highriskmothers hr WHERE hr.status=1";
+//$listQry = "SELECT hr.picmeNo,hr.highRiskFactor from highriskmothers hr WHERE hr.status!=0";
+ $listQry = "SELECT * from highriskmothers hr WHERE hr.status!=0";
 $orderQry = " ORDER BY hr.picmeNo ASC";
 
     if(($usertype == 0) || ($usertype == 1)) {
@@ -81,7 +82,7 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                          while($row = mysqli_fetch_array($ExeQuery)) {
 							
 							 
-							 $listQry_ec = "SELECT ec.motheraadhaarname, ec.picmeno from ecregister ec";
+					/*		 $listQry_ec = "SELECT ec.motheraadhaarname, ec.picmeno from ecregister ec";
 							 $ExeQuery_ec = mysqli_query($conn,$listQry_ec);
 							 while($row_e = mysqli_fetch_array($ExeQuery_ec))
 							 {
@@ -90,12 +91,12 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
 									 
 								 { 
 							 if ($row['picmeNo'] == $row_e['picmeno'])
-							 {
+							 { */
                        ?>
                                    <tr>
                                        <td><?php echo $cnt; ?></td>
                                        <td><?php echo $row['picmeNo']; ?></td>
-                                       <td><?php echo $row_e['motheraadhaarname']; ?></td>
+                                       <td><?php echo $row['motherName']; ?></td>
 									   <td><?php echo $row['highRiskFactor']; ?></td>
                                        <?php 
 									   
@@ -354,7 +355,8 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                            $cnt++;
 						   $pre_picme = $row['picmeNo'];
                          } 
-						 }}} /* New */
+					/*	 } */
+					/*	 }} /* New */
                        } ?>
                      </table></div>
                    </div>
