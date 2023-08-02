@@ -38,7 +38,7 @@
                <th>PICME No.</th>
                <th>Mother Name</th>
                <th>High Risk Factor</th>
-                         </tr>
+                         </tr>  
                        </thead>
 <?php  
 $pre_picme = "";
@@ -50,7 +50,7 @@ while ($listvalue = mysqli_fetch_assoc($exequery)) {
 }
 //$listQry = "SELECT DISTINCT(hr.picmeNo),ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
 //$listQry = "SELECT hr.picmeNo,hr.highRiskFactor from highriskmothers hr WHERE hr.status!=0";
- $listQry = "SELECT * from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeNo WHERE hr.status!=0";
+ $listQry = "SELECT DISTINCT(hr.picmeNo), hr.highRiskFactor, hr.status, hr.motherName  from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeNo WHERE hr.status!=0";
 $orderQry = " ORDER BY hr.picmeNo ASC";
 
     if(($usertype == 0) || ($usertype == 1)) {
