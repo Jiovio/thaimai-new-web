@@ -10,9 +10,10 @@ $(document).ready(function() {
   });
 //grouping tables based on column
     const dataListTable = {
-        '0': {'id': 'antenetal-visit-detail', 'group_column': 2, 'desc': 0},
-        '1': {'id': 'immunization-detail', 'group_column': 2, 'desc': 3},
-        '2': {'id': 'highRisk-mother-detail', 'group_column': 1, 'desc': 0}
+        '0': {'id': 'antenetal-visit-detail', 'group_column': 2},
+        '1': {'id': 'immunization-detail', 'group_column': 2},
+        '2': {'id': 'highRisk-mother-detail', 'group_column': 1},
+        '3': {'id': 'postnalVisit-detail', 'group_column': 2}
     };
     for (var keys in dataListTable) {
         var groupColumn = dataListTable[keys]['group_column'];
@@ -20,7 +21,7 @@ $(document).ready(function() {
         var ascRecords = dataListTable[keys]['desc'];
         var table1 = $('#' + tableID).DataTable({
             columnDefs: [{visible: false, targets: groupColumn, orderData: [0, ascRecords]}],
-            order: [[0, 'desc']],
+            order: [[0, 'asc']],
             displayLength: 25,
 
             drawCallback: function (settings) {
