@@ -31,7 +31,7 @@
 				   
                    <div class="table-responsive text-nowrap">
            <div class="container">
-           <table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
+           <table id="highRisk-mother-detail" class="display nowrap" cellspacing="0" width="100%">
                        <thead>
                          <tr>
                <th>S.No</th>            

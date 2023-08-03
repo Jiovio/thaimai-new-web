@@ -7,6 +7,89 @@ $(document).ready(function() {
     } else {
       $("#name").prop('disabled', true);		// if enabled, disable
     }
+  });
+
+  const dataListTable = { 
+      '0': {'id' : 'antenetal-visit-detail', 'group_column':2, 'desc' :0},
+      '1': {'id' : 'immunization-detail', 'group_column':2, 'desc' :3},
+      '2': {'id' : 'highRisk-mother-detail', 'group_column':1, 'desc' :0} 
+  };
+  for (var keys in dataListTable) { 
+   var groupColumn = dataListTable[keys]['group_column'];
+   var tableID =  dataListTable[keys]['id'];
+   var ascRecords = dataListTable[keys]['desc'];
+var table1 = $('#'+tableID).DataTable({
+    columnDefs: [{ visible: false, targets: groupColumn,    orderData: [0, ascRecords] }],
+    order: [[0, 'desc']],
+    displayLength: 25,
+    
+    drawCallback: function (settings) {
+        var api = this.api();
+        var rows = api.rows({ page: 'current' }).nodes();
+        var last = null;
+ 
+        api.column(groupColumn, { page: 'current' })
+            .data()
+            .each(function (group, i) {
+                if (last !== group) {
+                    $(rows)
+                        .eq(i)
+                        .before(
+                            '<tr class="group"><td colspan="5" style="font-weight:bold">' +
+                                group +
+                                '</td></tr>'
+                        );
+ 
+                    last = group;
+                }
+            });
+    }
+});
+  }
+   
+   new DataTable('#antenetal-visit-detail', {
+    orderFixed: [3, 'asc'],
+    rowGroup: {
+        dataSrc: 2
+    }
+});
+   
+   var groupColumn = 3;
+var table1 = $('#antenetal-visit-detail').DataTable({
+    columnDefs: [{ visible: false, targets: groupColumn }],
+    order: [[groupColumn, 'asc']],
+    displayLength: 25,
+    drawCallback: function (settings) {
+        var api = this.api();
+        var rows = api.rows({ page: 'current' }).nodes();
+        var last = null;
+ 
+        api.column(groupColumn, { page: 'current' })
+            .data()
+            .each(function (group, i) {
+                if (last !== group) {
+                    $(rows)
+                        .eq(i)
+                        .before(
+                            '<tr class="group"><td colspan="5">' +
+                                group +
+                                '</td></tr>'
+                        );
+ 
+                    last = group;
+                }
+            });
+    }
+});
+   
+   
+  $('#edit').click(function() {
+    var disabled = $("#name").prop('disabled');
+    if (disabled) {
+      $("#name").prop('disabled', false);		// if disabled, enable
+    } else {
+      $("#name").prop('disabled', true);		// if enabled, disable
+    }
   })
 });
 
@@ -573,34 +656,56 @@ $('#anvisitDate').on('blur change click', function () {
 
 $('.highPregnancyCls').on('blur change', function (){
     var tagId = $(this).attr('id');
-    if(tagId === 'gravida' || tagId === 'para' || tagId === 'childDeath' ||tagId === 'abortion' || tagId === 'livingChildren'){
-       var checkVal =  $('#'+tagId).val();
-       if(checkVal > 2){
-             $("#hrPregnancy").val(1).change();
-       }
-    } 
+    var gravidaVal = $('#gravida').val();
+    var para = $('#para').val();
+    var childDeath = $('#childDeath').val()
     
-   
-    if(tagId == 'motherWeight '){
-       var checkVal =  $('#'+tagId).val();
-       if(checkVal <= 40){
-             $("#hrPregnancy").val(1).change();
-       }
+    if($('#gravida').val() > 2 || $('#para').val() > 2 ||  $('#childDeath').val() >2 ||
+           $('#abortion').val() > 2 || $('#livingChildren').val() > 2 || $('#motherWeight').val() <= 2 ||
+           $('#bpSys').val() >= 140 ||  $('#bpSys').val() >=90
+            ){
+       $("#hrPregnancy").val(1).change();
+    } else {
+       $("#hrPregnancy").val(0).change();
     }
     
-    if(tagId == 'bpSys'){
-         var checkVal =  $('#'+tagId).val();
-       if(checkVal >= 140){
-             $("#hrPregnancy").val(1).change();
-       }
-    }
+//    var negative = true;
+//    if(tagId === 'gravida' || tagId === 'para' || tagId === 'childDeath' || tagId === 'abortion' || tagId === 'livingChildren'){
+//       var checkVal =  $('#'+tagId).val();
+//       if(checkVal > 2){
+//             $("#hrPregnancy").val(1).change();
+//       } else {
+//            $("#hrPregnancy").val(0).change();
+//       }
+//    } 
     
-    if(tagId == 'childDeath'){
-          var checkVal =  $('#'+tagId).val();
-       if(bpDia  >= 90){
-             $("#hrPregnancy").val(1).change();
-       }
-    }
+//   
+//    if(tagId == 'motherWeight '){
+//       var checkVal =  $('#'+tagId).val();
+//       if(checkVal <= 40){
+//             $("#hrPregnancy").val(1).change();
+//       } else {
+//            $("#hrPregnancy").val(0).change();
+//       }
+//    }
+//    
+//    if(tagId == 'bpSys'){
+//         var checkVal =  $('#'+tagId).val();
+//       if(checkVal >= 140){
+//             $("#hrPregnancy").val(1).change();
+//       } else {
+//            $("#hrPregnancy").val(0).change();
+//       }
+//    } 
+//    
+//    if(tagId == 'childDeath'){
+//          var checkVal =  $('#'+tagId).val();
+//       if(bpDia  >= 90){
+//             $("#hrPregnancy").val(1).change();
+//       } else {
+//            $("#hrPregnancy").val(0).change();
+//       }
+//    }
 });
 
 /**
