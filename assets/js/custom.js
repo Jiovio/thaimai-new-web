@@ -22,7 +22,7 @@ $(document).ready(function() {
         var table1 = $('#' + tableID).DataTable({
             columnDefs: [{visible: false, targets: groupColumn, orderData: [0, ascRecords]}],
             order: [[0, 'asc']],
-            displayLength: 25,
+            displayLength: 10,
 
             drawCallback: function (settings) {
                 var api = this.api();
