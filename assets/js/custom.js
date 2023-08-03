@@ -8,44 +8,44 @@ $(document).ready(function() {
       $("#name").prop('disabled', true);		// if enabled, disable
     }
   });
+//grouping tables based on column
+    const dataListTable = {
+        '0': {'id': 'antenetal-visit-detail', 'group_column': 2, 'desc': 0},
+        '1': {'id': 'immunization-detail', 'group_column': 2, 'desc': 3},
+        '2': {'id': 'highRisk-mother-detail', 'group_column': 1, 'desc': 0}
+    };
+    for (var keys in dataListTable) {
+        var groupColumn = dataListTable[keys]['group_column'];
+        var tableID = dataListTable[keys]['id'];
+        var ascRecords = dataListTable[keys]['desc'];
+        var table1 = $('#' + tableID).DataTable({
+            columnDefs: [{visible: false, targets: groupColumn, orderData: [0, ascRecords]}],
+            order: [[0, 'desc']],
+            displayLength: 25,
 
-  const dataListTable = { 
-      '0': {'id' : 'antenetal-visit-detail', 'group_column':2, 'desc' :0},
-      '1': {'id' : 'immunization-detail', 'group_column':2, 'desc' :3},
-      '2': {'id' : 'highRisk-mother-detail', 'group_column':1, 'desc' :0} 
-  };
-  for (var keys in dataListTable) { 
-   var groupColumn = dataListTable[keys]['group_column'];
-   var tableID =  dataListTable[keys]['id'];
-   var ascRecords = dataListTable[keys]['desc'];
-var table1 = $('#'+tableID).DataTable({
-    columnDefs: [{ visible: false, targets: groupColumn,    orderData: [0, ascRecords] }],
-    order: [[0, 'desc']],
-    displayLength: 25,
-    
-    drawCallback: function (settings) {
-        var api = this.api();
-        var rows = api.rows({ page: 'current' }).nodes();
-        var last = null;
- 
-        api.column(groupColumn, { page: 'current' })
-            .data()
-            .each(function (group, i) {
-                if (last !== group) {
-                    $(rows)
-                        .eq(i)
-                        .before(
-                            '<tr class="group"><td colspan="5" style="font-weight:bold">' +
-                                group +
-                                '</td></tr>'
-                        );
- 
-                    last = group;
-                }
-            });
+            drawCallback: function (settings) {
+                var api = this.api();
+                var rows = api.rows({page: 'current'}).nodes();
+                var last = null;
+
+                api.column(groupColumn, {page: 'current'})
+                        .data()
+                        .each(function (group, i) {
+                            if (last !== group) {
+                                $(rows)
+                                        .eq(i)
+                                        .before(
+                                                '<tr class="group"><td colspan="5" style="font-weight:bold">' +
+                                                group +
+                                                '</td></tr>'
+                                                );
+
+                                last = group;
+                            }
+                        });
+            }
+        });
     }
-});
-  }
    
    new DataTable('#antenetal-visit-detail', {
     orderFixed: [3, 'asc'],
