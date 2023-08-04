@@ -35,6 +35,7 @@
                <th>S.No</th> 
                <th>Mother Name</th>
                <th>PICME Number</th>
+			   <th>PNC Period</th>
                <th>IFA Tablet</th>
                <th>Mother Danger Sign</th>
                <th>Blood Sugar</th>
@@ -43,9 +44,9 @@
                        </thead>
    
     <?php 
-    $listQry = "SELECT DISTINCT(p.picmeNo),p.id,p.ifaTabletStatus,p.motherDangerSign,p.bloodSugar,ec.motheraadhaarname,ec.BlockId,ec.PhcId,ec.HscId FROM postnatalvisit p JOIN ecregister ec on ec.picmeNo=p.picmeno WHERE p.status=1";
+    $listQry = "SELECT DISTINCT(p.picmeNo),p.id,p.ifaTabletStatus,p.motherDangerSign,p.bloodSugar,p.pncPeriod, ec.motheraadhaarname,ec.BlockId,ec.PhcId,ec.HscId FROM postnatalvisit p JOIN ecregister ec on ec.picmeNo=p.picmeno WHERE p.status=1";
     $private = " AND p.createdBy='".$userid."'";
-    $orderQry = " ORDER BY ec.motheraadhaarname ASC";
+    $orderQry = " ORDER BY p.picmeNo + p.pncPeriod ASC";
     if(($usertype == 0) || ($usertype == 1)) {
       if(isset($_POST['filter'])) {
         $bloName = $_POST['BlockId']; 
@@ -78,6 +79,7 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                        <td><?php echo $cnt; ?></td>
                                        <td><?php echo $row['motheraadhaarname']; ?></td>
                                        <td><?php echo $row['picmeNo']; ?></td>
+									   <td><?php echo $row['pncPeriod']; ?></td>
                                        <td><?php $ts = $row['ifaTabletStatus'];
                                        if($ts==1){ echo "Yes"; } elseif($ts==2){ echo "No"; }
                                        ?></td>
