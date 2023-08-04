@@ -35,6 +35,7 @@
                <th>S.No</th>     
                <th>Mother Name</th>
                <th>PICME No.</th>
+			   <th>Antenatal Visit Count</th>
                <th>Resident Type</th>
                <th>Visit Date</th>
                <th>Pregnancy Week</th>
@@ -42,9 +43,9 @@
                          </tr>
                        </thead>                        
 <?php
-  $listQry = "SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,ec.motheraadhaarname,av.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1";
+  $listQry = "SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,av.ancPeriod,ec.motheraadhaarname,av.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1";
   $private = " AND av.createdBy='".$userid."'";
-  $orderQry = " ORDER BY ec.motheraadhaarname ASC";
+  $orderQry = " ORDER BY av.picmeno + av.ancPeriod ASC";
     
         if(($usertype == 0) || ($usertype == 1)) {
             if(isset($_POST['filter'])) {
@@ -79,6 +80,7 @@
                                        <td><?php echo $cnt; ?></td>
                                        <td><?php echo $row['motheraadhaarname']; ?></td>
                                        <td><?php echo $row['picmeno']; ?></td>
+									   <td><?php echo $row['ancPeriod']; ?></td>
                                        <td><?php $rt = $row['residenttype'];
                                     if($rt == 1) { echo "RESIDENT";}elseif($rt == 2){ echo "VISITOR"; }
                                     ?></td>
