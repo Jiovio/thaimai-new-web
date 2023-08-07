@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $('#users-detail').dataTable();
+  $('#highRisk-mother-detail').dataTable();
   
   $('#edit').click(function() {
     var disabled = $("#name").prop('disabled');
@@ -12,7 +13,7 @@ $(document).ready(function() {
 //grouping tables based on column
     const dataListTable = {
         '0': {'id': 'antenetal-visit-detail', 'group_column': 2},
-        '1': {'id': 'immunization-detail', 'group_column': 2},   
+        '1': {'id': 'immunization-detail', 'group_column': 2},       
         '2': {'id': 'postnalVisit-detail', 'group_column': 2}
     };
     for (var keys in dataListTable) {
