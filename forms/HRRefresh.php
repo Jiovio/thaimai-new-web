@@ -132,9 +132,12 @@ NOT EXISTS (SELECT highriskmothers.picmeNo FROM highriskmothers WHERE highriskmo
 	 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)");
 	
     /* ------------------------------------------------------- HR to Low Risk -----------------------------------------------------------*/	
-	 $listQry_upd_ec_11 = mysqli_query($conn, "UPDATE `ecregister` SET ecregister.status = '2'  WHERE ecregister.status = '6' AND 
-	 NOT EXISTS (SELECT highriskmothers.picmeNo FROM highriskmothers WHERE highriskmothers.picmeNo = ecregister.picmeNo)
-	 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)"); 
+	 $listQry_upd_ec_11 = mysqli_query($conn, "UPDATE `ecregister` JOIN "
+                 . "antenatalvisit av ON ecregister.picmeNo = av.picmeno SET ecregister.status = '2' "
+                 . "WHERE ecregister.status = '6' AND NOT EXISTS (SELECT highriskmothers.picmeNo "
+                 . "FROM highriskmothers WHERE highriskmothers.picmeNo = ecregister.picmeNo) "
+                 . "AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 "
+                 . "where av1.picmeno = av.picmeno);"); 
 	 
 /*	 $listQry_AV_del_upd_ec_12 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN antenatalvisit ON highriskmothers.picmeNo = antenatalvisit.picmeno SET highriskmothers.status = 'D' WHERE (antenatalvisit.HighRisk = 0 AND antenatalvisit.Hb >= 10 AND antenatalvisit.urineSugarPresent = 0 AND antenatalvisit.urineAlbuminPresent = 0 AND antenatalvisit.gctValue < 190 AND antenatalvisit.Tsh <= 4.87 AND antenatalvisit.bpSys < 140 AND antenatalvisit.bpDia < 90 OR antenatalvisit.motherWeight > 40) AND
 antenatalvisit.anvisitDate = (SELECT max(av1.anvisitDate) From antenatalvisit av1 where av1.picmeno = antenatalvisit.picmeno)"); 
