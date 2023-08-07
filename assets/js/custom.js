@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $('#users-detail').dataTable();
+  
   $('#edit').click(function() {
     var disabled = $("#name").prop('disabled');
     if (disabled) {
@@ -11,9 +12,8 @@ $(document).ready(function() {
 //grouping tables based on column
     const dataListTable = {
         '0': {'id': 'antenetal-visit-detail', 'group_column': 2},
-        '1': {'id': 'immunization-detail', 'group_column': 2},
-        '2': {'id': 'highRisk-mother-detail', 'group_column': 1},
-        '3': {'id': 'postnalVisit-detail', 'group_column': 2}
+        '1': {'id': 'immunization-detail', 'group_column': 2},   
+        '2': {'id': 'postnalVisit-detail', 'group_column': 2}
     };
     for (var keys in dataListTable) {
         var groupColumn = dataListTable[keys]['group_column'];
