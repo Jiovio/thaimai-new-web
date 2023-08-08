@@ -21,12 +21,18 @@
                         <th>S.No</th>            
                         <th>PICME Number</th>
 						<th>Mother's Aadhaar Name</th>
-                        <th>Last AN Visit Date</th>
+						<th>AV Due Date</th>
+                        <th>AN Visit Date</th>
 						<th>Mother's Mobile No.</th>
 					</tr>
                     </thead>
 <?php 
-$listQry = "SELECT av.picmeno,ec.motheraadhaarname,av.anvisitDate,ec.mothermobno,ec.BlockId,ec.PhcId,av.createdBy,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec ON av.picmeno=ec.picmeNo WHERE DATEDIFF(CURDATE(),anvisitDate)>30 AND av.status=1";
+$listQry = "SELECT av.picmeno,ec.motheraadhaarname,av.anvisitDate,av.avdueDate, ec.mothermobno,ec.BlockId,ec.PhcId,av.createdBy,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec ON av.picmeno=ec.picmeNo WHERE 
+date_format(str_to_date(av.anvisitDate, '%m/%d/%Y'), '%Y-%m-%d') >
+         date_format(str_to_date(av.avdueDate, '%m/%d/%Y'), '%Y-%m-%d')
+AND date_format(str_to_date(av.anvisitDate, '%m/%d/%Y'), '%Y-%m-%d') = CURRENT_DATE()
+ AND av.status=1";
+//DATEDIFF(CURDATE(),anvisitDate)>30 AND av.status=1";
 $private = " AND av.createdBy='".$userid."'";
 $orderQry = " ORDER BY ec.motheraadhaarname ASC";
 if(($usertype == 0) || ($usertype == 1)) {
@@ -61,7 +67,8 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                     <td><?php echo $cnt; ?></td>
                                     <td><?php echo $row['picmeno']; ?></td>
 									<td><?php echo $row['motheraadhaarname']; ?></td>
-									    <td><?php echo $row['anvisitDate']; ?></td>
+									<td><?php echo $row['avdueDate']; ?></td>
+									<td><?php echo $row['anvisitDate']; ?></td>
                                     <td><?php echo $row['mothermobno']; ?></td>
 								</tr>
                     <?php 

@@ -35,8 +35,8 @@
 //$orderQry = " ORDER BY ec.motheraadhaarname ASC";
 
  $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy, u.name, ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh.createdBy WHERE 
-NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = mh.picmeno) AND
-mh.edddate > CURRENT_DATE() AND mh.status=1";
+ NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = mh.picmeno) AND 
+ date_format(str_to_date(mh.edddate, '%m/%d/%Y'), '%Y-%m-%d') > CURRENT_DATE() AND mh.status=1";
 $private = " AND mh.createdBy='".$userid."'";
 $orderQry = " ORDER BY mh.edddate DESC";
 
