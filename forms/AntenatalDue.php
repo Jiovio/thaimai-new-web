@@ -76,7 +76,7 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
 									<!--<td><a href="../forms/ViewEditMedical.php?view=<?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>-->
                                 </tr>
                     <?php 
-                        $cnt++;
+                        $cnt++; 
                       } 
                     } ?>
                     </table></div>

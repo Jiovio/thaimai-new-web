@@ -38,7 +38,7 @@
  NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = mh.picmeno) AND 
  date_format(str_to_date(mh.edddate, '%m/%d/%Y'), '%Y-%m-%d') > CURRENT_DATE() AND mh.status=1";
 $private = " AND mh.createdBy='".$userid."'";
-$orderQry = " ORDER BY mh.edddate DESC";
+$orderQry = " ORDER BY mh.edddate DESC"; 
 
 if(($usertype == 0) || ($usertype == 1)) {
   if(isset($_POST['filter'])) {
