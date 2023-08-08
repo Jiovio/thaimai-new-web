@@ -9,10 +9,15 @@ $(document).ready(function() {
     }
   });
 //grouping tables based on column
-    const dataListTable = {
+  /*  const dataListTable = {
         '0': {'id': 'antenetal-visit-detail', 'group_column': 2},
         '1': {'id': 'immunization-detail', 'group_column': 2},
-      //  '2': {'id': 'highRisk-mother-detail', 'group_column': 1}, /Unique picme - so no need to group
+       '2': {'id': 'highRisk-mother-detail', 'group_column': 1}, /Unique picme - so no need to group
+        '3': {'id': 'postnalVisit-detail', 'group_column': 2}
+    }; */
+	const dataListTable = {
+        '0': {'id': 'antenetal-visit-detail', 'group_column': 2},
+        '1': {'id': 'immunization-detail', 'group_column': 2},
         '3': {'id': 'postnalVisit-detail', 'group_column': 2}
     };
     for (var keys in dataListTable) {
