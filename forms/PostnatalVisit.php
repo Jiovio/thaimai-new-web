@@ -81,7 +81,7 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                        <td><?php echo $row['picmeNo']; ?></td>
 									   <td><?php echo $row['pncPeriod']; ?></td>
                                        <td><?php $ts = $row['ifaTabletStatus'];
-                                       if($ts==1){ echo "Yes"; } elseif($ts==2){ echo "No"; }
+                                       if($ts==1){ echo "Yes"; } elseif($ts==0){ echo "No"; }
                                        ?></td>
                                <td><?php $ut = $row['motherDangerSign'];
                                 if($ut==1){ echo "PPH"; } elseif($ut==2){ echo "Fever"; } elseif($ut==3){ echo "Sepsis"; }
