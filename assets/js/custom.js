@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $('#users-detail').dataTable();
+  $('#highRisk-mother-detail').dataTable();
   $('#edit').click(function() {
     var disabled = $("#name").prop('disabled');
     if (disabled) {
