@@ -8,7 +8,6 @@ include "../config/db_connect.php";
 	$bloName = "";
 	$phcName = "";
 	$search_text_input = "";
-	
    if(isset($_POST['HscId']))
 	{
 	  $hscName = $_POST['HscId'];
@@ -24,28 +23,18 @@ include "../config/db_connect.php";
 	if(isset($_POST['search_text_input']))
 	{
 	  $search_text_input = trim($_POST['search_text_input']);
-	  $wild_cnt = 0;     /*Serial No search */
-	}
+	  $wild_cnt = 1;     /*Serial No search */
+	} 	
+//	print_r($_POST['search_text_input']); exit;
 
-    $pre_picmeno = "";
-		$pre_gct_st = "";
-		$pre_motherWeight  = "";
-		$pre_GCTWeek1 = "";
-		$pre_GCTWeek2 = "";
-		$pre_GCTWeek3 = "";
-		 $rows['GCTWeek1'] = "";
-	     $rows['GCTWeek2'] = "";
-	     $rows['GCTWeek3'] = "";	
-         $fpre_GCTWeek1 = "";
-         $fpre_GCTWeek2 = "";	
-         $fpre_GCTWeek3 = "";		
-		 	
+//if(strlen($search_text_input) > 0 )
 
-   $listQry = "SELECT av.picmeno, av.gctStatus, av.id, av.symptomsHighRisk, av.residenttype, av.motherWeight, av.gctValue, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
-                  WHERE av.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND av.gctStatus != 4 AND av.gctValue > 140";  		
-				   
-    $orderQry = " ORDER BY ar.anRegDate DESC";
-	
+    $listQry = "SELECT av.picmeno, av.gctStatus, av.id, av.symptomsHighRisk, av.residenttype, av.motherWeight, av.gctValue, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
+                  WHERE av.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) 
+				  AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)
+				  AND av.gctStatus != 4 AND av.gctValue > 140";  		
+				   	
+    $orderQry = " ORDER BY av.picmeno DESC";
 		
     if($bloName == "" && $phcName == "" && $hscName == ""){
        $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
@@ -56,40 +45,86 @@ include "../config/db_connect.php";
        } else if($bloName != "" && $phcName != "" && $hscName != ""){
        $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
        } 
-	
-			 
-	$developer_records = array();
-	$sno=1;
-	
-	while( $rows = mysqli_fetch_assoc($ExeQuery) ) {
-		$search_flag = false;  
-		
-             
-             $rows['BlockName'] = "";
+	          		                  		  
+		$rows['BlockName'] = "";
 			 $rows['PhcName'] = "";
 			 $rows['HscName'] = "";
 			 $rows['PanchayatName'] = "";
-			 $rows['VillageName'] = "";	
-            	 
-        
+			 $rows['VillageName'] = "";	 	
+	$developer_records = array();
+	$sno=1;
+
+	while( $rows = mysqli_fetch_assoc($ExeQuery) ) {
+		$search_flag = false;  
+$gdm_picme = "";
+					$gdm_picme = $rows['picmeno'];
+					$rows['gctweek1'] = "";
+					$rows['gctweek2'] = "";
+					$rows['gctweek3'] = "";
+					$listQry_GCT_Week1 = "SELECT av.gctStatus, av.gctValue, av.motherWeight FROM antenatalvisit av WHERE av.picmeno = $gdm_picme and av.gctStatus = 1";
+					                  //    av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)))"; 
+					$ExeQuery_Week1 = mysqli_query($conn, $listQry_GCT_Week1); 
+					if($ExeQuery_Week1) {
+						while($wk1 = mysqli_fetch_array($ExeQuery_Week1))
+						{
+						//	print_r("I am here First"); 
+							
+							$rows['gctweek1'] = $wk1['gctValue'];  
+							
+							$rows['motherWeight'] = $wk1['motherWeight'];
+						//	print_r($wk1['gctweek1']); 
+	                    }}
+						
+					$listQry_GCT_Week2 = "SELECT av.gctStatus, av.gctValue, av.motherWeight FROM antenatalvisit av WHERE av.picmeno = $gdm_picme and av.gctStatus = 2";
+					                  //    av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)))"; 
+					$ExeQuery_Week2 = mysqli_query($conn, $listQry_GCT_Week2); 
+					if($ExeQuery_Week2) {
+						while($wk2 = mysqli_fetch_array($ExeQuery_Week2))
+						{
+						//	print_r("I am here Second"); 
+							
+							$rows['gctweek2'] = $wk2['gctValue'];
+							
+							$rows['motherWeight'] = $wk2['motherWeight'];
+						//	print_r($wk2['gctweek2']); 
+	                    }}
+						
+						$listQry_GCT_Week3 = "SELECT av.gctStatus, av.gctValue, av.motherWeight FROM antenatalvisit av WHERE av.picmeno = $gdm_picme and av.gctStatus = 3";
+					                  //    av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)))"; 
+					$ExeQuery_Week3 = mysqli_query($conn, $listQry_GCT_Week3); 
+					if($ExeQuery_Week3) {
+						while($wk3 = mysqli_fetch_array($ExeQuery_Week3))
+						{
+						//	print_r("I am here Third"); 
+							
+							$rows['gctweek3'] = $wk3['gctValue'];
+							
+							$rows['motherWeight'] = $wk3['motherWeight'];
+						//	print_r($wk3['gctweek3']); exit;
+	                    }}
+						
+                  $rows['treatment'] = "Taken";
+	
+			  
        $HscQry = "SELECT * From hscmaster";				 
 	   $HscRes =  mysqli_query($conn,$HscQry);
        if($HscRes) {
          while($rowh = mysqli_fetch_array($HscRes)) 
-		 {			 
+		 {
 		  if($rows['HscId']==$rowh['HscId'] AND
 			 $rows['BlockId']==$rowh['BlockId'] AND
 			 $rows['PhcId']==$rowh['PhcId'] AND
 			 $rows['VillageId']==$rowh['VillageId'] AND
 			 $rows['PanchayatId']==$rowh['PanchayatId'])
 			 {
-                $rows['BlockName'] = $rowh['BlockName']; 
+                $rows['BlockName'] = $rowh['BlockName'];       
                 $rows['PhcName'] = $rowh['PhcName']; 
                 $rows['HscName'] = $rowh['HscName'];
 			    $rows['PanchayatName'] = $rowh['PanchayatName']; 
-                $rows['VillageName'] = $rowh['VillageName']; 
-	  // }}}
-        if($rows['residenttype'] == "1") /*Resident/Visitor*/
+                $rows['VillageName'] = $rowh['VillageName']; 					  
+//}}
+		
+		if($rows['residenttype'] == "1") /*Resident/Visitor*/
 							{
 							 $rows['residenttype'] = "RESIDENT";
 							}
@@ -98,297 +133,91 @@ include "../config/db_connect.php";
 							{
 							 $rows['residenttype'] = "VISITOR";
 							}	
-						
-	/*	$wild_srch = "";				     
-	    if(strlen($search_text_input) > 0 )
-	    {	 
-       
-       $wild_srch = $wild_cnt. "||".  /* "*" - separates serails no */
-	 /*  $rows['picmeno']."||".
-					       date('d-m-Y', strtotime($rows['anRegDate']))."||".
-				           $rows['BlockName']."||".
-                           $rows['PhcName']."||".
-                           $rows['HscName']."||".
-	                       $rows['PanchayatName']."||".
-                           $rows['VillageName']."||".
-						   $rows['residentType']."||".
-                           $rows['motheraadhaarname']."||". 
-					       $rows['MotherAge']."||". 
-					       $rows['husbandaadhaarname']."||". 
-			               $rows['mothermobno']."||". 						   
-						   $rows['address']."||". 
-						   date('d-m-Y', strtotime($rows['deliverydate']))."||". 
-					       $rows['hospitaltype']."||". 									   
-					       $rows['deliverytype']."||". 
-						   $rows['deliveryOutcome']."||".  
-					       $rows['ppcMethod']; */
-	   
-	/*   if(stripos($wild_srch,$search_text_input)!==false) /*STRIPOS - Case incensitive search */
-	 //  {
-	//	$search_flag = true;  
-//print_r($wild_srch); 		
-	//	print_r($ppcMethod); exit;
-	//   }
-//}
-    
-	 
-	//  if($wild_cnt == "181"){
-	//  print_r($wild_cnt);
-	 // print_r($rows['picmeno']); exit;}
-	 //  $wild_cnt++;
-	
-	//if($search_flag || strlen($search_text_input) == 0 )
-//	{
-	//	print_r($rows['VillageName']); exit;		
-	                    if($rows['gctStatus'] == "1")
-						{
 							
-						 $pre_GCTWeek1 = $rows['gctValue'];
-					     $rows['GCTWeek1'] = $rows['gctValue'];
-						 
-						}
-						else
-						if($rows['gctStatus'] == "2") /* Here not used. But for extra check */
-						{
-						 $pre_GCTWeek2 = $rows['gctValue'];
-					     $rows['GCTWeek2'] = $rows['gctValue'];
-						}
-						else
-						if($rows['gctStatus'] == "3") /* Here not used. But for extra check */
-						{
-						 $pre_GCTWeek3 = $rows['gctValue'];
-						 $rows['GCTWeek3'] = $rows['gctValue'];
-						}
 						
-						$pre_rows = $rows;    /*For next record */		
-						
-						if($pre_picmeno != $rows['picmeno'])
-						{
-							if(strlen($pre_picmeno)>0)
-							{
-					  $pre_rows['picmeno'] = $fpre_picmeno;  
-					  $pre_rows['anRegDate' ] = date('d-m-Y', strtotime($fpre_anRegDate));  
-				      $pre_rows['BlockName'] = $fpre_BlockName;  
-                      $pre_rows['PhcName'] = $fpre_PhcName;  
-                      $pre_rows['HscName'] = $fpre_HscName;  
-			          $pre_rows['PanchayatName'] = $fpre_PanchayatName;  
-                      $pre_rows['VillageName']  = $fpre_VillageName;  
-					  $pre_rows['residenttype'] = $fpre_residenttype;  
-                      $pre_rows['motheraadhaarname'] = $fpre_motheraadhaarname ;  
-					  $pre_rows['MotherAge'] = $fpre_MotherAge;  
-					  $pre_rows['husbandaadhaarname'] = $fpre_husbandaadhaarname;  
-			          $pre_rows['mothermobno'] = $fpre_mothermobno;  
-					  $pre_rows['obstetricCode'] = $fpre_obstetricCode ;  								   
-					  $pre_rows['lmpdate'] = date('d-m-Y', strtotime($fpre_lmpdate));  
-                      $pre_rows['edddate'] = date('d-m-Y', strtotime($fpre_edddate )); 
-					  $pre_rows['GCTWeek1'] = $fpre_GCTWeek1;
-					  $pre_rows['motherWeight'] = $fpre_motherWeight ;
-					  $pre_rows['GCTWeek2'] = $fpre_GCTWeek2;
-					  $pre_rows['GCTWeek3'] = $fpre_GCTWeek3;
-					  
-					  $wild_srch = "";   
+		$wild_srch = "";				     
 	 if(strlen($search_text_input) > 0 )
 	 {	 
-       $wild_srch =  $wild_cnt."||".  
-	   $fpre_picmeno."||".  
-       $fpre_anRegDate."||".   
-	   $fpre_BlockName."||". 
-       $fpre_PhcName."||".  
-       $fpre_HscName."||". 
-	   $fpre_PanchayatName."||".   
-       $fpre_VillageName."||".   
-	   $fpre_residenttype."||".   
-       $fpre_motheraadhaarname."||". 
-	   $fpre_MotherAge."||".  
-	   $fpre_husbandaadhaarname."||". 
-	   $fpre_mothermobno."||".  
-	   $fpre_obstetricCode."||".   								   
-	   $fpre_lmpdate."||".   
-       $fpre_edddate."||".  
-       $fpre_motherWeight ."||".
-       $fpre_GCTWeek1."||". 
-	   $fpre_GCTWeek2."||".
-	   $fpre_GCTWeek3;
+       
+       $wild_srch = $wild_cnt++."||".   
+	   $rows['picmeno']."||".
+	   date('d-m-Y', strtotime($rows['anRegDate']))."||".
+	   $rows['BlockName']."||".
+       $rows['PhcName']."||".
+       $rows['HscName']."||".
+	   $rows['PanchayatName']."||".
+       $rows['VillageName']."||".
+	   $rows['residenttype']."||".
+       $rows['motheraadhaarname']."||".
+	   $rows['MotherAge']."||".
+	   $rows['husbandaadhaarname']."||".
+	   $rows['mothermobno']."||".
+	   $rows['obstetricCode']."||".								   
+	   date('d-m-Y', strtotime($rows['lmpdate']))."||".
+       date('d-m-Y', strtotime($rows['edddate']))."||".
+	   $rows['motherWeight']."||".
+       $rows['gctweek1']."||".
+       $rows['gctweek2']."||".
+       $rows['gctweek3'];  
 	   
 	   if(stripos($wild_srch,$search_text_input)!==false) /*STRIPOS - Case incensitive search */
 	   {
 		$search_flag = true;   
+		
+	//	print_r($rows['picmeno']); exit;
 	   }
 }
-	 
-	 $wild_cnt++;
-	 
-	 if($search_flag || strlen($search_text_input) == 0 )
+//	$wild_cnt++;
+	
+	if($search_flag || strlen($search_text_input) == 0 )
 	{
-	  $developer_records[] = $pre_rows;	
-}}
+	  $developer_records[] = $rows;
+}}	
 }}}
-						
-						
-					  $fpre_picmeno = $rows['picmeno'] ;  
-					  $fpre_anRegDate = date('d-m-Y', strtotime($rows['anRegDate' ]));  
-				      $fpre_BlockName = $rows['BlockName'] ;  
-                      $fpre_PhcName = $rows['PhcName'] ;  
-                      $fpre_HscName = $rows['HscName'] ;  
-			          $fpre_PanchayatName =  $rows['PanchayatName'] ;  
-                      $fpre_VillageName = $rows['VillageName'] ;  
-					  $fpre_residenttype =  $rows['residenttype'] ;  
-                      $fpre_motheraadhaarname = $rows['motheraadhaarname'] ;  
-					  $fpre_MotherAge =    $rows['MotherAge'] ;  
-					  $fpre_husbandaadhaarname  =   $rows['husbandaadhaarname'] ;  
-			          $fpre_mothermobno = $rows['mothermobno'] ;  
-					  $fpre_obstetricCode =  $rows['obstetricCode'] ;  								   
-					  $fpre_lmpdate = date('d-m-Y', strtotime($rows['lmpdate'] ));  
-                      $fpre_edddate = date('d-m-Y', strtotime($rows['edddate'] )); 
-					  $fpre_GCTWeek1 = $rows['GCTWeek1'];
-					//  print_r($fpre_GCTWeek1);
-					  $fpre_motherWeight = $rows['motherWeight'];
-					  
-					  
-					  
-					//	}
-											  
-						
-	                       $pre_picmeno = $rows['picmeno'];
-						}
-						else
-						{
-						if($rows['gctStatus'] == "2") /* Here not used. But for extra check */
-						{
-					//	 $pre_GCTWeek2 = $rows['gctValue'];
-					      $rows['GCTWeek2'] = $rows['gctValue'];
-						  $fpre_GCTWeek2 = $rows['GCTWeek2'];
-						  $fpre_motherWeight = $rows['motherWeight'];
-				      //   $developer_records[] = $rows;
-						}
-						else
-						if($rows['gctStatus'] == "3") /* Here not used. But for extra check */
-					{
-					//	 $pre_GCTWeek3 = $rows['gctValue'];
-					     $rows['GCTWeek3'] = $rows['gctValue'];
-						 $fpre_GCTWeek3 = $rows['GCTWeek3'];
-						 $fpre_motherWeight = $rows['motherWeight'];
-					//	 $developer_records[] = $rows;
-						 						//  $rows['GCTWeek3'] = $rows['gctValue'];
-						}	
-						}
-						
-	//   print_r($rows['BlockName']);
-	//		 print_r($rows['PhcName']);
-	//		 print_r($rows['HscName']);
-	//		 print_r($rows['PanchayatName']);
-	//		 print_r($rows['VillageName']); exit;
-//}
-	}	
- //print_r("$ppcMethod"); print_r($ppcMethod); exit;
-	$filename = "GDM_Report_".date('d-m-Y') . ".xls";			
+	$filename = "GDM_List_".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");
 	  $file = fopen('php://output','w');
-	  $header = array("GDM Report as on ".date('d-m-Y'));
+	  $header = array("GDM List as on ".date('d-m-Y'));
 	  fputcsv($file,$header);	
 	  $show_coloumn = false;
-	  
-	                  $pre_rows['picmeno'] = $fpre_picmeno;  
-					  $pre_rows['anRegDate' ] = date('d-m-Y', strtotime($fpre_anRegDate));  
-				      $pre_rows['BlockName'] = $fpre_BlockName;  
-                      $pre_rows['PhcName'] = $fpre_PhcName;  
-                      $pre_rows['HscName'] = $fpre_HscName;  
-			          $pre_rows['PanchayatName'] = $fpre_PanchayatName;  
-                      $pre_rows['VillageName']  = $fpre_VillageName;  
-					  $pre_rows['residenttype'] = $fpre_residenttype;  
-                      $pre_rows['motheraadhaarname'] = $fpre_motheraadhaarname ;  
-					  $pre_rows['MotherAge'] = $fpre_MotherAge;  
-					  $pre_rows['husbandaadhaarname'] = $fpre_husbandaadhaarname;  
-			          $pre_rows['mothermobno'] = $fpre_mothermobno;  
-					  $pre_rows['obstetricCode'] = $fpre_obstetricCode ;  								   
-					  $pre_rows['lmpdate'] = date('d-m-Y', strtotime($fpre_lmpdate));  
-                      $pre_rows['edddate'] = date('d-m-Y', strtotime($fpre_edddate )); 
-					  $pre_rows['GCTWeek1'] = $fpre_GCTWeek1;
-					  $pre_rows['motherWeight'] = $fpre_motherWeight ;
-					  $pre_rows['GCTWeek2'] = $fpre_GCTWeek2;
-					  $pre_rows['GCTWeek3'] = $fpre_GCTWeek3;
-					  
-					  $wild_srch = "";   
-	 if(strlen($search_text_input) > 0 )
-	 {	 
-       $wild_srch =  $wild_cnt."||".  
-	   $fpre_picmeno."||".  
-       $fpre_anRegDate."||".   
-	   $fpre_BlockName."||". 
-       $fpre_PhcName."||".  
-       $fpre_HscName."||". 
-	   $fpre_PanchayatName."||".   
-       $fpre_VillageName."||".   
-	   $fpre_residenttype."||".   
-       $fpre_motheraadhaarname."||". 
-	   $fpre_MotherAge."||".  
-	   $fpre_husbandaadhaarname."||". 
-	   $fpre_mothermobno."||".  
-	   $fpre_obstetricCode."||".   								   
-	   $fpre_lmpdate."||".   
-       $fpre_edddate."||".  
-       $fpre_motherWeight ."||".
-       $fpre_GCTWeek1."||". 
-	   $fpre_GCTWeek2."||".
-	   $fpre_GCTWeek3;
-	   
-	   if(stripos($wild_srch,$search_text_input)!==false) /*STRIPOS - Case incensitive search */
-	   {
-		$search_flag = true;   
-	   }
-}
-	 
-	 $wild_cnt++;
-	 
-	 if($search_flag || strlen($search_text_input) == 0 )
-	{
-	  $developer_records[] = $pre_rows;	
-}
-								
-							  
 	  if(!empty($developer_records)) {
 		foreach($developer_records as $record) {
 		 if(!$show_coloumn) {
 			 
-		$h = array("S.No","RCH ID","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Resident/Visitor","Mother Name","Age","Husband Name", "Mobile No", "Obstetric score","LMP","EDD","Weight Gain","GCT Weeks (12-16)","GCT Weeks (24-28)","GCT Weeks (32-34)");
+		$h = array("S.No", "RCH ID","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Resident/Visitor","Mother Name","Age","Husband Name", "Mobile No", "Obstetric score","LMP","EDD","Weight Gain","GCT Weeks (12-16)","GCT Weeks (24-28)","GCT Weeks (32-34)");
 			
 		$excelData = implode("\t", array_values($h)) . "\n";
-		$show_coloumn = true;	
-	/*	$record['GCTWeek1'] = $pre_GCTWeek1;
-	  $record['GCTWeek2'] = $pre_GCTWeek2;
-	  $record['GCTWeek3'] = $pre_GCTWeek3; */
+		$show_coloumn = true;
 		}
-		
 		$lineData = array(
-		$sno++,
-						    $record['picmeno'],
-					        date('d-m-Y', strtotime($record['anRegDate'])),
-				            $record['BlockName'],
-                            $record['PhcName'],
-                            $record['HscName'],
-	                        $record['PanchayatName'],
-                            $record['VillageName'],
-						    $record['residenttype'],
-                            $record['motheraadhaarname'],
-					        $record['MotherAge'],
-					        $record['husbandaadhaarname'],
-			                $record['mothermobno'],
-							$record['obstetricCode'], 	 								   
-					       date('d-m-Y', strtotime($record['lmpdate'] )),  
-                           date('d-m-Y', strtotime($record['edddate'] )), 
-						 $record['motherWeight'],
-		                 $record['GCTWeek1'],
-		                 $record['GCTWeek2'],
-		                 $record['GCTWeek3'] 
-						   
+		$sno++, 
+		$record['picmeno'],
+	   date('d-m-Y', strtotime($record['anRegDate'])),
+	   $record['BlockName'],
+       $record['PhcName'],
+       $record['HscName'],
+	   $record['PanchayatName'],
+       $record['VillageName'],
+	   $record['residenttype'],
+       $record['motheraadhaarname'],
+	   $record['MotherAge'],
+	   $record['husbandaadhaarname'],
+	   $record['mothermobno'],
+	   $record['obstetricCode'],								   
+	   date('d-m-Y', strtotime($record['lmpdate'])),
+       date('d-m-Y', strtotime($record['edddate'])),
+	   $record['motherWeight'],
+	   $record['gctweek1'],
+	   $record['gctweek2'],
+	   $record['gctweek3']
 		  ); 
 			$excelData .= implode("\t", array_values($lineData)) . "\n";
-	   }
-	   
-		echo $excelData;
 	  }
+		echo $excelData;
+	}
+	
 	//  header('Location: ' . $_SERVER['HTTP_REFERER']);
 	  exit; 
 
-
+?>

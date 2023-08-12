@@ -31,7 +31,7 @@
 		
 		   <table id="users-detail"  class="display nowrap" cellspacing="0" width="100%"> 
 			
-                       <thead>
+                      <thead>
                          <tr>
                <th>S.No</th>     
                <th>RCH ID</th>
@@ -64,18 +64,16 @@
                        </thead>  
     <?php
     
-		$pre_picmeno = "";
-		$pre_gct_st = "";
-		$pre_mot_wght = "";
-		$pre_GCTWeek1 = "";
-		$pre_GCTWeek2 = "";
-		$pre_GCTWeek3 = "";
-		
-      $listQry = "SELECT av.picmeno, av.gctStatus, av.id, av.symptomsHighRisk, av.residenttype, av.motherWeight, av.gctValue, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
-                  WHERE av.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND av.gctStatus != 4 AND av.gctValue > 140";  		
-				     		
+      $listQry = "SELECT av.picmeno, av.gctStatus, av.ancPeriod, av.id, av.symptomsHighRisk, av.residenttype, av.motherWeight, av.gctValue, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
+                  WHERE av.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND av.gctStatus != 4 
+				  AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)
+				  AND av.gctValue > 140";  		
+				  
+				  //  AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)
+				   	
 	  $private = " AND av.createdBy='".$userid."'";
-      $orderQry = " ORDER BY ar.anRegDate DESC";
+	  
+      $orderQry = " ORDER BY av.picmeno DESC";
 	  
       if(($usertype == 0) || ($usertype == 1)) {
          if(isset($_POST['filter'])) {
@@ -114,11 +112,62 @@
                        }  else {
                        $ExeQuery = mysqli_query($conn,$listQry.$private.$orderQry);
                         } 
+				
+	if($ExeQuery) {
+		
+						 
+              $cnt=1;
+                while($row = mysqli_fetch_array($ExeQuery))	
+				{
+					$gdm_picme = "";
+					$gdm_picme = $row['picmeno'];
+					$row['gctweek1'] = "";
+					$row['gctweek2'] = "";
+					$row['gctweek3'] = "";
+					$listQry_GCT_Week1 = "SELECT av.gctStatus, av.gctValue, av.motherWeight FROM antenatalvisit av WHERE av.picmeno = $gdm_picme and av.gctStatus = 1";
+					                  //    av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)))"; 
+					$ExeQuery_Week1 = mysqli_query($conn, $listQry_GCT_Week1); 
+					if($ExeQuery_Week1) {
+						while($wk1 = mysqli_fetch_array($ExeQuery_Week1))
+						{
+						//	print_r("I am here First"); 
+							
+							$row['gctweek1'] = $wk1['gctValue'];  
+							
+							$row['motherWeight'] = $wk1['motherWeight'];
+						//	print_r($wk1['gctweek1']); 
+	                    }}
 						
-              if($ExeQuery) {
-                $cnt=1;
-                while($row = mysqli_fetch_array($ExeQuery)) {
-					
+					$listQry_GCT_Week2 = "SELECT av.gctStatus, av.gctValue, av.motherWeight FROM antenatalvisit av WHERE av.picmeno = $gdm_picme and av.gctStatus = 2";
+					                  //    av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)))"; 
+					$ExeQuery_Week2 = mysqli_query($conn, $listQry_GCT_Week2); 
+					if($ExeQuery_Week2) {
+						while($wk2 = mysqli_fetch_array($ExeQuery_Week2))
+						{
+						//	print_r("I am here Second"); 
+							
+							$row['gctweek2'] = $wk2['gctValue'];
+							
+							$row['motherWeight'] = $wk2['motherWeight'];
+						//	print_r($wk2['gctweek2']); 
+	                    }}
+						
+						$listQry_GCT_Week3 = "SELECT av.gctStatus, av.gctValue, av.motherWeight FROM antenatalvisit av WHERE av.picmeno = $gdm_picme and av.gctStatus = 3";
+					                  //    av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)))"; 
+					$ExeQuery_Week3 = mysqli_query($conn, $listQry_GCT_Week3); 
+					if($ExeQuery_Week3) {
+						while($wk3 = mysqli_fetch_array($ExeQuery_Week3))
+						{
+						//	print_r("I am here Third"); 
+							
+							$row['gctweek3'] = $wk3['gctValue'];
+							
+							$row['motherWeight'] = $wk3['motherWeight'];
+						//	print_r($wk3['gctweek3']); exit;
+	                    }}
+						
+                  $row['treatment'] = "Taken";
+						
 				$HscQry = "SELECT * From hscmaster";				 
 				$HscRes =  mysqli_query($conn,$HscQry);
                 if($HscRes) {
@@ -128,7 +177,6 @@
 					    $row['PhcId']==$rowh['PhcId'] AND
 						$row['VillageId']==$rowh['VillageId'] AND
 						$row['PanchayatId']==$rowh['PanchayatId'])
-												
 						{
 							if($row['residenttype'] == "1")
 							{
@@ -139,25 +187,10 @@
 							{
 							 $row['residenttype'] = "VISITOR";
 							}	
-														
-			    if($pre_picmeno != $row['picmeno']) /*Avoid Picme Duplication */
-				{				
 							
-					if(strlen($pre_gct_st) > 0) /*For previous records checking */
-					{
-						?>
-						
-			         <td><?php echo $pre_mot_wght ; ?></td> 
-					 <td><?php echo $pre_GCTWeek1 ; ?></td>
-					 <td><?php echo $pre_GCTWeek2 ; ?></td>
-					 <td><?php echo $pre_GCTWeek3 ; ?></td>  
-					  
-					</tr>
-					<?php
-					}
-					
+                            						
                        ?>
-					      <tr>
+                        <tr>
                           <td><?php echo $cnt; ?></td>  
 						   <td><?php echo $row['picmeno'] ;  ?></td> 
 					       <td><?php echo date('d-m-Y', strtotime($row['anRegDate' ]));  ?></td> 
@@ -174,62 +207,21 @@
 					       <td><?php echo $row['obstetricCode'] ;  	?></td> 								   
 					       <td><?php echo date('d-m-Y', strtotime($row['lmpdate'] ));  ?></td> 
                            <td><?php echo date('d-m-Y', strtotime($row['edddate'] )); ?></td> 
-						   
+						   <td><?php echo $row['motherWeight']; ?></td> 
+				           <td><?php echo $row['gctweek1'] ; ?></td>
+				           <td><?php echo $row['gctweek2'] ; ?></td>
+					       <td><?php echo $row['gctweek3'] ; ?></td> 
+                         </tr>
                          <?php 
-						 $pre_picmeno = $row['picmeno'];
-						 $pre_mot_wght = $row['motherWeight'];
-						 $pre_GCTWeek1 = "";
-						 $pre_GCTWeek2 = "";
-						 $pre_GCTWeek3 = "";
-						 if($row['gctStatus'] == "1")
-						{
-						 $pre_GCTWeek1 = $row['gctValue'];
+                           $cnt++;
 						}
-						else
-						if($row['gctStatus'] == "2") /* Here not used. But for extra check */
-						{
-						 $pre_GCTWeek2 = $row['gctValue'];
-						}
-						else
-						if($row['gctStatus'] == "3") /* Here not used. But for extra check */
-						{
-						 $pre_GCTWeek3 = $row['gctValue'];
-						}
-                         $cnt++;
-						} 
-	             else
-				 {  
-					 ?>	
-					  <?php
-							 $pre_gct_st = $row['gctStatus']; /* Getting Latest entry values */
-							 $pre_mot_wght = $row['motherWeight'];
-							 if($row['gctStatus'] == "1")
-								{
-							 $pre_GCTWeek1 = $row['gctValue'];
-							}
-							else
-						    if($row['gctStatus'] == "2")
-						    {
-							 $pre_GCTWeek2 = $row['gctValue'];
-							}
-							else
-							if($row['gctStatus'] == "3")
-						    {
-							 $pre_GCTWeek3 = $row['gctValue'];
-							}
-						
-					  } 
-									}}
-			  }}
-				
+							
+						 }}
+                         } 
                        } ?>
-					 <td><?php echo $pre_mot_wght ; ?></td> 
-					 <td><?php echo $pre_GCTWeek1 ; ?></td>
-					 <td><?php echo $pre_GCTWeek2 ; ?></td>
-					 <td><?php echo $pre_GCTWeek3 ; ?></td>  
 	   
 					</table>   <!-------------------- Insert Code Here -------------->
-					
+	
 </div>
 <!--------------------------------------------------------------------------------------------- search button + Table Ends -------------------------------------------------------->	
 
