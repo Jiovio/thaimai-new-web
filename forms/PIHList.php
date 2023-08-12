@@ -68,9 +68,8 @@
     <?php
      
       $listQry = "SELECT av.picmeno,av.id, av.motherWeight, av.bpSys, av.bpDia, av.pregnancyWeek,av.urineAlbuminPresent,av.noCalcium, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
-                  WHERE av.status!=0 AND av.symptomsHighRisk = 6 AND av.pregnancyWeek >13 AND av.pregnancyWeek < 28 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND av.ancPeriod = (SELECT max(av1.ancPeriod) From antenatalvisit av1 where av1.picmeno = av.picmeno)";
+                  WHERE av.status!=0 AND av.symptomsHighRisk = 6 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)";
 	
-					
 	  $private = " AND av.createdBy='".$userid."'";
       $orderQry = " ORDER BY ar.anRegDate DESC";
 	  
@@ -148,6 +147,19 @@
 							{
 							 $row['urineAlbuminPresent'] = "No";
 							}		
+							if($row['urineAlbuminPresent'] == "0")	
+							
+                            $Week_13_28 = "";						
+							$Week_13_28 = $row['pregnancyWeek'];
+								
+					if($Week_13_28 > 13 AND $Week_13_28 < 28)
+					{
+			        	$row['pregnancyWeek'] = $row['pregnancyWeek'];
+					}
+					else
+					{
+			        	$row['pregnancyWeek'] = "";
+					}	
                        ?>
                         <tr>
                            <td><?php echo $cnt; ?></td>

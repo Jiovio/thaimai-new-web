@@ -366,8 +366,20 @@ else
                             }								
 											  
 					  
-					  if($row_mh['momVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "1" OR $row_mh['husVdrlRprResult'] == "3" OR $row_mh['hushbresult'] == "1" OR $row_mh['hushbresult'] == "3" OR
-				$row_mh['momhivtestresult'] == "1" OR $row_mh['momhivtestresult'] == "3" OR $row_mh['hushivtestresult'] == "1" OR $row_mh['hushivtestresult'] == "3" OR $row_mh['totPregnancy'] > "2" OR $row_mh['pastillness'] != "100")
+					  if($row_mh['momVdrlRprResult'] == "1" OR 
+					     $row_mh['momVdrlRprResult'] == "3" OR 
+						 $row_mh['husVdrlRprResult'] == "1" OR 
+						 $row_mh['husVdrlRprResult'] == "3" OR 
+						 $row_mh['hushbresult'] == "1" OR 
+						 $row_mh['hushbresult'] == "3" OR
+						 $row_mh['momhbresult'] == "1" OR 
+						 $row_mh['momhbresult'] == "3" OR
+				         $row_mh['momhivtestresult'] == "1" OR 
+						 $row_mh['momhivtestresult'] == "3" OR 
+						 $row_mh['hushivtestresult'] == "1" OR 
+						 $row_mh['hushivtestresult'] == "3" OR 
+						 $row_mh['totPregnancy'] > "2" OR 
+						 $row_mh['pastillness'] != "100")
 				{
 					
 					$High_Risk_Ind = "Y";
@@ -379,9 +391,9 @@ else
 								
 				$row['pregnancyWeek'] = "";
 				//$row_av = "";
-				
+				$AR_High_Risk_Ind = "Not";
 				$listQry_av = "SELECT * FROM antenatalvisit av 
-	              WHERE av.status!=0 AND av.picmeno = $ar_picme AND av.anvisitDate = (SELECT max(av1.anvisitDate) From antenatalvisit av1 where av1.picmeno = av.picmeno)";
+	              WHERE av.status!=0 AND av.picmeno = $ar_picme AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)";
 				  $ExeQuery_av = mysqli_query($conn,$listQry_av);
 				  if($ExeQuery_av) { 
 				  while($row_av = mysqli_fetch_array($ExeQuery_av)) {
@@ -406,6 +418,7 @@ else
 							 $row['hospitalname'] = $row_av['referralPlace'];
 							 }
 							 else
+								 if(isset($row_mh['hospitalname']) > 0)
 								 {
 							 $row['hospitalname'] = $row_mh['hospitalname'] ;
 							 }
@@ -414,6 +427,7 @@ else
 							 $row['hospitalType'] = $row_av['hospitalType'];
 							 }
 							 else
+								 if(isset($row_mh['hospitaltype']) > 0)
 								 {
 							 $row['hospitalType'] = $row_mh['hospitaltype'];
 							 }
@@ -679,22 +693,23 @@ else
                                            $row['symptomsHighRisk'] = "VDRL Positive"; 	
 										   }
 										   else
-										   if($row['symptomsHighRisk'] == "47")	
+										/*   if($row['symptomsHighRisk'] == "47")	
 										   {
                                            $row['symptomsHighRisk'] = "COthers"; 	
 										   }
-										   else
+										   else */
 										   if($row['symptomsHighRisk'] == "48")	
 										   {
                                            $row['symptomsHighRisk'] = "None"; 	
 										   }
 							 }
 							
-					  
-					  if($row_av['HighRisk'] == "1" OR $row_av['Hb'] < "10" OR $row_av['urineSugarPresent'] == "1" OR $row_av['urineAlbuminPresent']  == "1" OR $row_av['gctValue']  >= "190" OR $row_av['Tsh'] > "4.87" OR $row_av['bpSys']  >= "140" OR $row_av['bpDia']  >= "90" OR $row_av['motherWeight'] <= "40") 
+					  $AR_High_Risk_Ind = "N";
+					  if($row_av['HighRisk'] == "1" OR $row_av['Hb'] < "10" OR $row_av['urineSugarPresent'] == "1" OR $row_av['urineAlbuminPresent']  == "1" OR $row_av['gctValue']  >= "190" OR $row_av['bpSys']  >= "140" OR $row_av['bpDia']  >= "90" OR $row_av['motherWeight'] <= "40") 
 					  {
 					
 				            $High_Risk_Ind = "Y";
+							$AR_High_Risk_Ind = "N";
 							 
 							
 				  }}	}	
@@ -718,7 +733,8 @@ else
 										 /*  if($row['picmeno']=="133010407072"){
 						print_r($High_Risk_Ind);print_r("After");}*/
 									   
-									   
+									   if($AR_High_Risk_Ind == "Not")
+									   {
 										   if($High_Risk_Ind == "N")
 										   {
 											   if($row['gravida'] > "2" OR $row['para'] > "2" OR $row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2" OR $row['bpSys'] >= "140" OR $row['bpDia'] >= "90" OR $row['motherWeight'] <= "40" OR $row['MotherAge'] < "18" OR $row['hrPregnancy'] == "1")
@@ -729,6 +745,7 @@ else
 						print_r($High_Risk_Ind);exit;}*/
 											   }
 										   }
+									   }
 										    if($High_Risk_Ind == "Y")
 											{
                        ?>
@@ -836,4 +853,3 @@ function numWeeks($dateOne, $dateTwo){
 
 include ('require/dtFooter.php'); ?>		
 		 
-		
