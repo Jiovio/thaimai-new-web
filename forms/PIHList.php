@@ -154,12 +154,20 @@
 								
 					if($Week_13_28 > 13 AND $Week_13_28 < 28)
 					{
-			        	$row['pregnancyWeek'] = $row['pregnancyWeek'];
+			        	$pgncyWk = $row['pregnancyWeek']. " Weeks";
 					}
 					else
 					{
-			        	$row['pregnancyWeek'] = "";
+			        	$pgncyWk = "Not falls b/w 14 Weeks to 27 Weeks";
 					}	
+					if(isset($row['noCalcium']))
+					{
+						$no_cal = $row['noCalcium'];
+					}
+					else
+					{
+						$no_cal = "0";
+					}
                        ?>
                         <tr>
                            <td><?php echo $cnt; ?></td>
@@ -184,9 +192,9 @@
 						   <td><?php echo $row['motherWeight']; ?></td>	
 						   <td><?php echo $row['bpSys']; ?></td>	
 						   <td><?php echo $row['bpDia']; ?></td>	
-						   <td><?php echo $row['pregnancyWeek']; ?></td>
+						   <td><?php echo $pgncyWk; ?></td>
 						   <td><?php echo $row['urineAlbuminPresent']; ?></td>	
-						   <td><?php echo $row['noCalcium']; ?></td>
+						   <td><?php echo $no_cal ; ?></td>
 					       
 					       <td><?php echo $row['treatment']; ?></td>
 					     </tr>

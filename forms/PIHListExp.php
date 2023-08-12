@@ -87,18 +87,32 @@ if($rows['residenttype'] == "1")
 							{
 							 $rows['urineAlbuminPresent'] = "No";
 							}		
-							
-							$Week_13_28 = "";						
-							$Week_13_28 = $rows['pregnancyWeek'];
+				$Week_13_28 = $rows['pregnancyWeek'];
 								
 					if($Week_13_28 > 13 AND $Week_13_28 < 28)
 					{
-			        	$rows['pregnancyWeek'] = $rows['pregnancyWeek'];
+			        	$pgncyWk = $rows['pregnancyWeek']. " Weeks";
 					}
 					else
 					{
-			        	$rows['pregnancyWeek'] = "";
+			        	$pgncyWk = "Not falls b/w 14 Weeks to 27 Weeks";
 					}	
+					
+					$rows['pregnancyWeek'] = "";
+					$rows['pregnancyWeek'] = $pgncyWk; 
+					
+					if(isset($rows['noCalcium']))
+					{
+						$no_cal = $rows['noCalcium'];
+					}
+					else
+					{
+						$no_cal = "0";
+					}		
+					
+					$rows['noCalcium'] = "";
+					$rows['noCalcium'] = $no_cal;
+					
 					
 		  $wild_srch = "";   
 	 if(strlen($search_text_input) > 0 )
@@ -133,6 +147,10 @@ if($rows['residenttype'] == "1")
 	   }
 }
 	// $wild_cnt++;
+	
+	 $Week_13_28 = "";						
+							
+					
 	if($search_flag || strlen($search_text_input) == 0 )
 	{
 	  $developer_records[] = $rows;
