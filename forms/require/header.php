@@ -288,7 +288,7 @@ include ('preloader.php');
 					  
 			             <li class="menu-item; style=menu-list-type:None" >  
                              <a href="ECAnyList.php" class="menu-link">
-                                <div data-i18n="Basic"><i>ECs Following Any Other Methods</i></div>
+                                <div data-i18n="Basic"><i>ECs Following Any Other Methods (Future) </i></div>
                              </a>
                          </li>
                      
