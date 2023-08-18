@@ -205,6 +205,14 @@ include ('preloader.php');
                              </a>
                          </li>
                      </ul>
+					 
+					 <ul class="menu-sub"> <!---- Creating Sub Sub Menu Header ---->
+			             <li class="menu-item; style=menu-list-type:None" >  
+                             <a href="PANTage.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>Potential Teenage Pregnancy List</i></div>
+                             </a>
+                         </li>
+                     </ul>
                  </li>
 			</ul>
 			
