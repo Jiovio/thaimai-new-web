@@ -29,8 +29,8 @@ include "../config/db_connect.php";
 
 //if(strlen($search_text_input) > 0 )
 
-    $listQry = "SELECT ar.picmeno,ar.residentType, ar.picmeRegDate, ec.motherdob, mh.reg12weeks, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno JOIN medicalhistory mh on mh.picmeno = ar.picmeno
-                  WHERE ar.status!=0 AND ar.MotherAge < 18 AND ar.motherWeight < 40 AND NOT EXISTS (SELECT av.picmeno FROM antenatalvisit av WHERE av.picmeno = ar.picmeno)";  		
+    $listQry = "SELECT ar.picmeno,ar.residentType, ar.picmeRegDate, ar.motherWeight, ec.motherdob, mh.reg12weeks, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.picmeRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno JOIN medicalhistory mh on mh.picmeno = ar.picmeno
+                  WHERE ar.status!=0 AND CAST(ar.MotherAge AS SIGNED) < 18 AND CAST(ar.motherWeight AS SIGNED) < 40 AND NOT EXISTS (SELECT av.picmeno FROM antenatalvisit av WHERE av.picmeno = ar.picmeno)";  		
 	
     $orderQry = " ORDER BY ar.picmeRegDate DESC";	
 		
@@ -130,11 +130,11 @@ include "../config/db_connect.php";
 	  $developer_records[] = $rows;
 }}	
 }}}
-	$filename = "Teenage_Pregnancy_List_".date('d-m-Y') . ".xls";			
+	$filename = "Potential_Teenage_Pregnancy_List_".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");
 	  $file = fopen('php://output','w');
-	  $header = array("Teenage Pregnancy List as on ".date('d-m-Y'));
+	  $header = array("Potential Teenage Pregnancy List as on ".date('d-m-Y'));
 	  fputcsv($file,$header);	
 	  $show_coloumn = false;
 	  if(!empty($developer_records)) {
