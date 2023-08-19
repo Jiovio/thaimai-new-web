@@ -1,19 +1,13 @@
-<?php session_start(); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-<?php include ('require/header.php'); // Menu
-	  if(($usertype == 0) || ($usertype == 1)) {
-	  include ('require/filter.php'); // Top Filter 
-}else if(($usertype == 2)) {
-    include ('require/Bfilter.php');
-}else if(($usertype == 3) || ($usertype == 4)) {
-    include ('require/Pfilter.php');  
-} else {
-    include ('require/Hfilter.php'); // Top Filter
-}
+<?php include ('require/header.php'); // Menu & Top Search
+if (isset($_GET['History'])) {
+  $AV_picmeno = $_GET['History'];
+$History = true;}
+  
 ?>
           <!-- Content wrapper -->
           <div class="content-wrapper">
@@ -22,11 +16,8 @@
              
                 <!-- Hoverable Table rows -->
                  <div class="card">
-                   <h5 class="card-header"><span class="text-muted fw-light">Antenatal Visit /</span> Antenatal Visit List
-                   <a href="AddAnVisit1.php" id="add" type="button" class="btn btn-primary" style="float:right;">
-						<span class="bx bx-plus"></span>&nbsp; Add Antenatal Visit
-					</a>
-                   </h5>
+                   <h5 class="card-header"><span class="text-muted fw-light">Antenatal Visit /</span> Antenatal Visit Detail List
+                  </h5>
                    <div class="table-responsive text-nowrap">
            <div class="container">
            <table id="antenetal-visit-detail" class="display nowrap" cellspacing="0" width="100%">
@@ -39,14 +30,19 @@
                <th>Resident Type</th>
                <th>Visit Date</th>
                <th>Pregnancy Week</th>
-               <th>History</th>
+               <th>View</th>
                          </tr>
                        </thead>                        
 <?php
-  $listQry = "SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,av.ancPeriod,ec.motheraadhaarname,av.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE 
-              av.status=1 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)";
+
+  $listQry = "SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,av.ancPeriod,ec.motheraadhaarname,av.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno 
+              WHERE av.status=1 AND av.picmeno = $AV_picmeno";
+			  
   $private = " AND av.createdBy='".$userid."'";
+  
   $orderQry = " ORDER BY av.picmeno + av.ancPeriod ASC";
+  
+ // print_r($AV_picmeno); //exit;
     
         if(($usertype == 0) || ($usertype == 1)) {
             if(isset($_POST['filter'])) {
@@ -87,7 +83,7 @@
                                     ?></td>
                                        <td><?php echo date('d-m-Y', strtotime($row['anvisitDate'])); ?></td>
 									                     <td><?php echo $row['pregnancyWeek']; ?></td>
-                                       <td ><a id="History" name="History" href="../forms/AntenatalVisitDtl.php?History=<?php echo $row['picmeno']; ?>" ><i  class="bx bx-show me-1"></i>History</a></td>
+                                       <td ><a id="view" name="view" href="../forms/ViewEditAnVisit.php?view=<?php echo $row['id']; ?>" ><i  class="bx bx-show me-1"></i>View</a></td>
 
                         </tr>
                        <?php 
