@@ -203,7 +203,7 @@ include "../config/db_connect.php";
 							{
 							$row['symptomsHighRisk'] = "Multiple Pregnancy";	
 							}
-							else
+						/*	else
 								
 								 if($row_mh['momhbresult'] == "3") 
 							{
@@ -223,7 +223,7 @@ else
 								 if($row_mh['hushivtestresult'] == "3") 
 							{
 							$row['symptomsHighRisk'] = "HIV test not done for husband";	
-							}
+							} */
 
                             if($row_mh['pastillness'] == "101")
                             {
@@ -287,17 +287,17 @@ else
 											  										  
 					  
 					 if($row_mh['momVdrlRprResult'] == "1" OR 
-					     $row_mh['momVdrlRprResult'] == "3" OR 
+					 //    $row_mh['momVdrlRprResult'] == "3" OR 
 						 $row_mh['husVdrlRprResult'] == "1" OR 
-						 $row_mh['husVdrlRprResult'] == "3" OR 
+					 //	 $row_mh['husVdrlRprResult'] == "3" OR 
 						 $row_mh['hushbresult'] == "1" OR 
-						 $row_mh['hushbresult'] == "3" OR
+					//	 $row_mh['hushbresult'] == "3" OR
 						 $row_mh['momhbresult'] == "1" OR 
-						 $row_mh['momhbresult'] == "3" OR
+					//	 $row_mh['momhbresult'] == "3" OR
 				         $row_mh['momhivtestresult'] == "1" OR 
-						 $row_mh['momhivtestresult'] == "3" OR 
+					//	 $row_mh['momhivtestresult'] == "3" OR 
 						 $row_mh['hushivtestresult'] == "1" OR 
-						 $row_mh['hushivtestresult'] == "3" OR 
+					//	 $row_mh['hushivtestresult'] == "3" OR 
 						 $row_mh['totPregnancy'] > "2" OR 
 						 $row_mh['pastillness'] != "100")
 				{
