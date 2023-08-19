@@ -1,6 +1,9 @@
 $(document).ready(function() {
   $('#users-detail').dataTable();
   $('#highRisk-mother-detail').dataTable();
+  $('#antenetal-visit-detail').dataTable();
+  $('#immunization-detail').dataTable();
+  $('#postnalVisit-detail').dataTable();
   $('#edit').click(function() {
     var disabled = $("#name").prop('disabled');
     if (disabled) {
@@ -16,50 +19,50 @@ $(document).ready(function() {
        '2': {'id': 'highRisk-mother-detail', 'group_column': 1}, /Unique picme - so no need to group
         '3': {'id': 'postnalVisit-detail', 'group_column': 2}
     }; */
-	const dataListTable = {
-        '0': {'id': 'antenetal-visit-detail', 'group_column': 2},
-        '1': {'id': 'immunization-detail', 'group_column': 2},
-        '3': {'id': 'postnalVisit-detail', 'group_column': 2}
-    };
-    for (var keys in dataListTable) {
-        var groupColumn = dataListTable[keys]['group_column'];
-        var tableID = dataListTable[keys]['id'];
-        var ascRecords = dataListTable[keys]['desc'];
-        var table1 = $('#' + tableID).DataTable({
-            columnDefs: [{visible: false, targets: groupColumn, orderData: [0, ascRecords]}],
-            order: [[0, 'asc']],
-            displayLength: 10,
-
-            drawCallback: function (settings) {
-                var api = this.api();
-                var rows = api.rows({page: 'current'}).nodes();
-                var last = null;
-
-                api.column(groupColumn, {page: 'current'})
-                        .data()
-                        .each(function (group, i) {
-                            if (last !== group) {
-                                $(rows)
-                                        .eq(i)
-                                        .before(
-                                                '<tr class="group"><td colspan="5" style="font-weight:bold">' +
-                                                group +
-                                                '</td></tr>'
-                                                );
-
-                                last = group;
-                            }
-                        });
-            }
-        });
-    }
-   
-   new DataTable('#antenetal-visit-detail', {
-    orderFixed: [3, 'asc'],
-    rowGroup: {
-        dataSrc: 2
-    }
-});
+//	const dataListTable = {
+//        '0': {'id': 'antenetal-visit-detail', 'group_column': 2},
+//        '1': {'id': 'immunization-detail', 'group_column': 2},
+//        '3': {'id': 'postnalVisit-detail', 'group_column': 2}
+//    };
+//    for (var keys in dataListTable) {
+//        var groupColumn = dataListTable[keys]['group_column'];
+//        var tableID = dataListTable[keys]['id'];
+//        var ascRecords = dataListTable[keys]['desc'];
+//        var table1 = $('#' + tableID).DataTable({
+//            columnDefs: [{visible: false, targets: groupColumn, orderData: [0, ascRecords]}],
+//            order: [[0, 'asc']],
+//            displayLength: 10,
+//
+//            drawCallback: function (settings) {
+//                var api = this.api();
+//                var rows = api.rows({page: 'current'}).nodes();
+//                var last = null;
+//
+//                api.column(groupColumn, {page: 'current'})
+//                        .data()
+//                        .each(function (group, i) {
+//                            if (last !== group) {
+//                                $(rows)
+//                                        .eq(i)
+//                                        .before(
+//                                                '<tr class="group"><td colspan="5" style="font-weight:bold">' +
+//                                                group +
+//                                                '</td></tr>'
+//                                                );
+//
+//                                last = group;
+//                            }
+//                        });
+//            }
+//        });
+//    }
+//   
+//   new DataTable('#antenetal-visit-detail', {
+//    orderFixed: [3, 'asc'],
+//    rowGroup: {
+//        dataSrc: 2
+//    }
+//});
    
    var groupColumn = 3;
 var table1 = $('#antenetal-visit-detail').DataTable({
