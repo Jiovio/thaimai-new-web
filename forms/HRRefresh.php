@@ -15,7 +15,7 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 
     $listQry_anreg_upd_1 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN ecregister ON highriskmothers.picmeNo = ecregister.picmeNo SET highriskmothers.motherName = ecregister.motheraadhaarname");
 
-    $listQry_anreg_upd_2 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno SET highriskmothers.highRiskFactor = 'Multiple Pregnancy' WHERE (anregistration.gravida > 2 OR anregistration.livingChildren > 2 OR anregistration.abortion > 2 OR
+    $listQry_anreg_upd_2 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno SET highriskmothers.highRiskFactor = 'Multi Para' WHERE (anregistration.gravida > 2 OR anregistration.livingChildren > 2 OR anregistration.abortion > 2 OR
 anregistration.childDeath > 2)");
 
     $listQry_anreg_upd_3 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno SET highriskmothers.highRiskFactor = 'Multi Para' WHERE (anregistration.para > 2)");
@@ -57,15 +57,15 @@ anregistration.childDeath > 2)");
 	 
 	 $listQry_MH_upd_7 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN medicalhistory ON highriskmothers.picmeNo = medicalhistory.picmeno SET highriskmothers.highRiskFactor = 'Hepatitis B surface antigen for husband' WHERE (medicalhistory.hushbresult = 1)");
 	 
-	 $listQry_MH_upd_8 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN medicalhistory ON highriskmothers.picmeNo = medicalhistory.picmeno SET highriskmothers.highRiskFactor = 'Multiple Pregnancy' WHERE (medicalhistory.totPregnancy > 2)");
+	 $listQry_MH_upd_8 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN medicalhistory ON highriskmothers.picmeNo = medicalhistory.picmeno SET highriskmothers.highRiskFactor = 'Multi Para' WHERE (medicalhistory.totPregnancy > 2)");
 	 
-	 $listQry_MH_upd_9 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN medicalhistory ON highriskmothers.picmeNo = medicalhistory.picmeno SET highriskmothers.highRiskFactor = 'HBsAG test not done for mother' WHERE (medicalhistory.momhbresult = 3)");
+	 /*$listQry_MH_upd_9 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN medicalhistory ON highriskmothers.picmeNo = medicalhistory.picmeno SET highriskmothers.highRiskFactor = 'HBsAG test not done for mother' WHERE (medicalhistory.momhbresult = 3)");
 	 
 	 $listQry_MH_upd_10 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN medicalhistory ON highriskmothers.picmeNo = medicalhistory.picmeno SET highriskmothers.highRiskFactor = 'HBsAG test not done for husband' WHERE (medicalhistory.hushbresult = 3)");
 	 
 	 $listQry_MH_upd_11 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN medicalhistory ON highriskmothers.picmeNo = medicalhistory.picmeno SET highriskmothers.highRiskFactor = 'HIV test not done for mother' WHERE (medicalhistory.momhivtestresult = 3)"); 
 	 
-	 $listQry_MH_upd_12 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN medicalhistory ON highriskmothers.picmeNo = medicalhistory.picmeno SET highriskmothers.highRiskFactor = 'HIV test not done for husband' WHERE (medicalhistory.hushivtestresult = 3)");
+	 $listQry_MH_upd_12 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN medicalhistory ON highriskmothers.picmeNo = medicalhistory.picmeno SET highriskmothers.highRiskFactor = 'HIV test not done for husband' WHERE (medicalhistory.hushivtestresult = 3)");*/
 	  
 	 $listQry_MH_upd_13 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN medicalhistory ON highriskmothers.picmeNo = medicalhistory.picmeno SET highriskmothers.highRiskFactor = 'TB' WHERE (medicalhistory.pastillness = 101)"); 
 	 
