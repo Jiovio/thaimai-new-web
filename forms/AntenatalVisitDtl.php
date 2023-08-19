@@ -16,7 +16,7 @@ $History = true;}
              
                 <!-- Hoverable Table rows -->
                  <div class="card">
-                   <h5 class="card-header"><span class="text-muted fw-light">Antenatal Visit /</span> Antenatal Visit Detail List
+                   <h5 class="card-header"><span class="text-muted fw-light">Antenatal Visit /</span> Antenatal Visit Header List /</span> Antenatal Visit Detail List
                   </h5>
                    <div class="table-responsive text-nowrap">
            <div class="container">
