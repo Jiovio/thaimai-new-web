@@ -6,6 +6,10 @@
 <?php include ('require/header.php'); // Menu & Top Search
 if (isset($_GET['History'])) {
   $AV_picmeno = $_GET['History'];
+  $record = mysqli_query($conn, "SELECT * FROM ecregister ec WHERE ec.picmeNo=$AV_picmeno");
+  $his = mysqli_fetch_array($record);
+  $his_mot_name = $his['motheraadhaarname'];
+  
 $History = true;}
   
 ?>
@@ -17,19 +21,19 @@ $History = true;}
                 <!-- Hoverable Table rows -->
                  <div class="card">
                    <h5 class="card-header"><span class="text-muted fw-light">Antenatal Visit /</span> Antenatal Visit Header List /</span> Antenatal Visit Detail List
-                  </h5>
+		           <h5 class="card-header"><span class="text-muted fw-light"> PICME : </span> <?php echo $_GET['History']; ?> 
+				  <h5 class="card-header"> <span class="text-muted fw-light"> Mother Name : </span> <?php echo $his_mot_name; ?>
+				  </h5>
                    <div class="table-responsive text-nowrap">
            <div class="container">
            <table id="antenetal-visit-detail" class="display nowrap" cellspacing="0" width="100%">
                        <thead>
                          <tr>
                <th>S.No</th>     
-               <th>Mother Name</th>
-               <th>PICME No.</th>
 			   <th>Antenatal Visit Count</th>
-               <th>Resident Type</th>
                <th>Visit Date</th>
                <th>Pregnancy Week</th>
+               <th>Resident Type</th>
                <th>View</th>
                          </tr>
                        </thead>                        
@@ -75,14 +79,13 @@ $History = true;}
                        ?>
                                    <tr>
                                        <td><?php echo $cnt; ?></td>
-                                       <td><?php echo $row['motheraadhaarname']; ?></td>
-                                       <td><?php echo $row['picmeno']; ?></td>
 									   <td><?php echo $row['ancPeriod']; ?></td>
+                                       <td><?php echo date('d-m-Y', strtotime($row['anvisitDate'])); ?></td>
+									                     <td><?php echo $row['pregnancyWeek']; ?></td>
+														 
                                        <td><?php $rt = $row['residenttype'];
                                     if($rt == 1) { echo "RESIDENT";}elseif($rt == 2){ echo "VISITOR"; }
                                     ?></td>
-                                       <td><?php echo date('d-m-Y', strtotime($row['anvisitDate'])); ?></td>
-									                     <td><?php echo $row['pregnancyWeek']; ?></td>
                                        <td ><a id="view" name="view" href="../forms/ViewEditAnVisit.php?view=<?php echo $row['id']; ?>" ><i  class="bx bx-show me-1"></i>View</a></td>
 
                         </tr>
