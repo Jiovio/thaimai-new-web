@@ -1,9 +1,13 @@
 <?php
- error_reporting(E_ALL);
-
-  include "../config/db_connect.php";
+// error_reporting(E_ALL);
+include ('require/Refheader.php');
+//include ('preloader.php');
+ // include "../config/db_connect.php";
+ // include ('preloader.php');
   
   //$listQry_anreg_ins = mysqli_query($conn,"DELETE highriskmothers");
+  
+  
   
   $listQry_trunc = mysqli_query($conn,"TRUNCATE highriskmothers");
 

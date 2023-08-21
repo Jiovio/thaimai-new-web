@@ -64,7 +64,7 @@ $(document).ready(function() {
 //    }
 //});
    
-   var groupColumn = 3;
+/*   var groupColumn = 3;
 var table1 = $('#antenetal-visit-detail').DataTable({
     columnDefs: [{ visible: false, targets: groupColumn }],
     order: [[groupColumn, 'asc']],
@@ -90,7 +90,7 @@ var table1 = $('#antenetal-visit-detail').DataTable({
                 }
             });
     }
-});
+}); */
    
    
   $('#edit').click(function() {
