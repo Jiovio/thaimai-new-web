@@ -38,7 +38,7 @@ include ('preloader.php');
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.png" height="100" />
+    <link rel="icon" type="image/x-icon" href="{$siteurl}/assets/img/favicon/favicon.png" height="100" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
