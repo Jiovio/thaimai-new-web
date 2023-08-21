@@ -75,7 +75,7 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                     ?>
                                    <tr>
                                        <td><?php echo $row['pncPeriod']; ?></td>
-									   <td><?php echo $row['motherPnc']; ?></td>
+									   <td><?php $pnc = date('d-m-Y', strtotime($row['motherPnc'])); echo $pnc; ?></td>
                                        <td><?php $ts = $row['ifaTabletStatus'];
                                        if($ts==1){ echo "Yes"; } elseif($ts==0){ echo "No"; }
                                        ?></td>

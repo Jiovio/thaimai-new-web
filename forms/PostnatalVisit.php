@@ -80,8 +80,9 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                        <td><?php echo $cnt; ?></td>
                                        <td><?php echo $row['picmeNo']; ?></td>
 									   <td><?php echo $row['motheraadhaarname']; ?></td>
-                                       <td><?php echo $row['pncPeriod']; ?></td>
-									   <td><?php echo $row['motherPnc']; ?></td>
+									   <td><?php echo $row['pncPeriod']; ?></td>
+									   <td><?php $pnc = date('d-m-Y', strtotime($row['motherPnc'])); echo $pnc; ?></td>
+									   
                                        <td><?php $ts = $row['ifaTabletStatus'];
                                        if($ts==1){ echo "Yes"; } elseif($ts==0){ echo "No"; }
                                        ?></td>
