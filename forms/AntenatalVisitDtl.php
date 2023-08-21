@@ -29,17 +29,18 @@ $History = true;}
            <table id="antenetal-visit-detail" class="display nowrap" cellspacing="0" width="100%">
                        <thead>
                          <tr>
-               <th>S.No</th>     
+             
 			   <th>Antenatal Visit Count</th>
-               <th>Visit Date</th>
                <th>Pregnancy Week</th>
+			   <th>Due Date</th>
+               <th>Visit Date</th>
                <th>Resident Type</th>
                <th>View</th>
                          </tr>
                        </thead>                        
 <?php
 
-  $listQry = "SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,av.ancPeriod,ec.motheraadhaarname,av.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno 
+  $listQry = "SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,av.ancPeriod,av.avdueDate, ec.motheraadhaarname,av.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno 
               WHERE av.status=1 AND av.picmeno = $AV_picmeno";
 			  
   $private = " AND av.createdBy='".$userid."'";
@@ -78,11 +79,10 @@ $History = true;}
                          while($row = mysqli_fetch_array($ExeQuery)) {
                        ?>
                                    <tr>
-                                       <td><?php echo $cnt; ?></td>
 									   <td><?php echo $row['ancPeriod']; ?></td>
-                                       <td><?php echo date('d-m-Y', strtotime($row['anvisitDate'])); ?></td>
-									                     <td><?php echo $row['pregnancyWeek']; ?></td>
-														 
+									   <td><?php echo $row['pregnancyWeek']; ?></td>
+                                       <td><?php echo date('d-m-Y', strtotime($row['avdueDate'])); ?></td>
+									   <td><?php echo date('d-m-Y', strtotime($row['anvisitDate'])); ?></td>
                                        <td><?php $rt = $row['residenttype'];
                                     if($rt == 1) { echo "RESIDENT";}elseif($rt == 2){ echo "VISITOR"; }
                                     ?></td>

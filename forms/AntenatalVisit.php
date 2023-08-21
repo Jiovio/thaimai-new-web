@@ -22,7 +22,7 @@
              
                 <!-- Hoverable Table rows -->
                  <div class="card">
-                   <h5 class="card-header"><span class="text-muted fw-light">Antenatal Visit /</span> Antenatal Visit List
+                   <h5 class="card-header"><span class="text-muted fw-light">Antenatal Visit /</span> Antenatal Visit Header List
                    <a href="AddAnVisit1.php" id="add" type="button" class="btn btn-primary" style="float:right;">
 						<span class="bx bx-plus"></span>&nbsp; Add Antenatal Visit
 					</a>
@@ -32,18 +32,19 @@
            <table id="antenetal-visit-detail" class="display nowrap" cellspacing="0" width="100%">
                        <thead>
                          <tr>
-               <th>S.No</th>     
+               <th>S.No</th>
+               <th>PICME No.</th>			   
                <th>Mother Name</th>
-               <th>PICME No.</th>
 			   <th>Antenatal Visit Count</th>
-               <th>Resident Type</th>
-               <th>Visit Date</th>
                <th>Pregnancy Week</th>
+			   <th>Due Date</th>
+			   <th>Visit Date</th>
+               <th>Resident Type</th>
                <th>History</th>
                          </tr>
                        </thead>                        
 <?php
-  $listQry = "SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,av.ancPeriod,ec.motheraadhaarname,av.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE 
+  $listQry = "SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.avdueDate, av.pregnancyWeek,av.ancPeriod,ec.motheraadhaarname,av.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE 
               av.status=1 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)";
   $private = " AND av.createdBy='".$userid."'";
   $orderQry = " ORDER BY av.picmeno + av.ancPeriod ASC";
@@ -79,14 +80,17 @@
                        ?>
                                    <tr>
                                        <td><?php echo $cnt; ?></td>
-                                       <td><?php echo $row['motheraadhaarname']; ?></td>
+									   
                                        <td><?php echo $row['picmeno']; ?></td>
+                                       <td><?php echo $row['motheraadhaarname']; ?></td>
 									   <td><?php echo $row['ancPeriod']; ?></td>
+									   <td><?php echo $row['pregnancyWeek']; ?></td>
+                                       <td><?php echo date('d-m-Y', strtotime($row['avdueDate'])); ?></td>
+									   <td><?php echo date('d-m-Y', strtotime($row['anvisitDate'])); ?></td>
                                        <td><?php $rt = $row['residenttype'];
                                     if($rt == 1) { echo "RESIDENT";}elseif($rt == 2){ echo "VISITOR"; }
                                     ?></td>
-                                       <td><?php echo date('d-m-Y', strtotime($row['anvisitDate'])); ?></td>
-									                     <td><?php echo $row['pregnancyWeek']; ?></td>
+                                                       
                                        <td ><a id="History" name="History" href="../forms/AntenatalVisitDtl.php?History=<?php echo $row['picmeno']; ?>" ><i  class="bx bx-show me-1"></i>History</a></td>
 
                         </tr>

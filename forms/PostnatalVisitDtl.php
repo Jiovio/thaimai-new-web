@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -22,8 +21,9 @@ $History = true;}
                 <!-- Hoverable Table rows -->
                  <div class="card">
                    <h5 class="card-header"><span class="text-muted fw-light">Postnatal Visit /</span> Postnatal Visit Header List /</span> Postnatal Visit Detail List
-                   <a href="AddPostnatalvisit.php" id="add" type="button" class="btn btn-primary" style="float:right;">
-                       <span class="bx bx-plus"></span>&nbsp; Add Postnatal Visit
+                   <h5 class="card-header"><span class="text-muted fw-light"> PICME : </span> <?php echo $_GET['History']; ?> 
+				   <h5 class="card-header"><span class="text-muted fw-light"> Mother Name : </span> <?php echo $his_mot_name; ?>
+                   
                    </a>
                    </h5>
                    <div class="table-responsive text-nowrap">
@@ -31,10 +31,7 @@ $History = true;}
            <table id="postnalVisit-detail" class="display nowrap" cellspacing="0" width="100%">
                        <thead>
                          <tr>
-               <th>S.No</th>
-               <th>PICME No.</th>
-			   <th>Mother Name</th>
-			   <th>PNC Period</th>
+               <th>PNC Period</th>
                <th>Mother PNC</th>
                <th>IFA Tablet</th>
                <th>Mother Danger Sign</th>
@@ -45,7 +42,7 @@ $History = true;}
    
     <?php 
     $listQry = "SELECT DISTINCT(p.picmeNo),p.id,p.ifaTabletStatus,p.motherDangerSign,p.bloodSugar,p.pncPeriod,p.motherPnc, ec.motheraadhaarname,ec.BlockId,ec.PhcId,ec.HscId FROM postnatalvisit p JOIN ecregister ec on ec.picmeNo=p.picmeno 
-	            WHERE p.status=1 AND p.pncPeriod = (SELECT max(CAST(p1.pncPeriod AS SIGNED)) From postnatalvisit p1 where p1.picmeNo = p.picmeNo)";
+	            WHERE p.status=1 AND p.picmeNo = $pv_picmeno";
     $private = " AND p.createdBy='".$userid."'";
     $orderQry = " ORDER BY p.picmeNo + p.pncPeriod ASC";
     if(($usertype == 0) || ($usertype == 1)) {
@@ -77,9 +74,6 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                          while($row = mysqli_fetch_array($ExeQuery)) {
                     ?>
                                    <tr>
-                                       <td><?php echo $cnt; ?></td>
-                                       <td><?php echo $row['picmeNo']; ?></td>
-									   <td><?php echo $row['motheraadhaarname']; ?></td>
                                        <td><?php echo $row['pncPeriod']; ?></td>
 									   <td><?php echo $row['motherPnc']; ?></td>
                                        <td><?php $ts = $row['ifaTabletStatus'];
@@ -92,7 +86,7 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                 elseif($ut==8){ echo "None"; } elseif($ut==9){ echo "Any other specify"; } ?></td>
     
                                <td><?php echo $row['bloodSugar']; ?></td>
-                              <td ><a id="History" name="History" href="../forms/PostnatalVisitDtl.php?History=<?php echo $row['picmeNo']; ?>" ><i  class="bx bx-show me-1"></i>History</a></td>
+                              <td ><a id="view" name="view" href="../forms/ViewEditPostnatal.php?view=<?php echo $row['id']; ?>" ><i  class="bx bx-show me-1"></i>View</a></td>
 
 								</tr>
                        <?php 

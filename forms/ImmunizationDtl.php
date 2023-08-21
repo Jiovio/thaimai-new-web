@@ -1,19 +1,17 @@
-<?php session_start(); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-<?php include ('require/header.php'); // Menu
-	  if(($usertype == 0) || ($usertype == 1)) {
-	  include ('require/filter.php'); // Top Filter 
-}else if(($usertype == 2)) {
-    include ('require/Bfilter.php');
-}else if(($usertype == 3) || ($usertype == 4)) {
-    include ('require/Pfilter.php');  
-} else {
-    include ('require/Hfilter.php'); // Top Filter
-}
+<?php include ('require/header.php'); // Menu & Top Search
+if (isset($_GET['History'])) {
+  $IM_picmeno = $_GET['History'];
+  $record = mysqli_query($conn, "SELECT * FROM ecregister ec WHERE ec.picmeNo=$IM_picmeno");
+  $his = mysqli_fetch_array($record);
+  $his_mot_name = $his['motheraadhaarname'];
+    
+$History = true;}
+  
 ?>
 <!-- Content wrapper -->
     <div class="content-wrapper">
@@ -22,30 +20,26 @@
 
            <!-- Hoverable Table rows -->
                  <div class="card">
-                   <h5 class="card-header"><span class="text-muted fw-light">Immunization /</span> Immunization Header List
-                   <a href="AddImmunization.php" id="add" type="button" class="btn btn-primary" style="float:right;">
-                       <span class="bx bx-plus"></span>&nbsp; Add Immunization
-                   </a>
+                   <h5 class="card-header"><span class="text-muted fw-light">Immunization /</span> Immunization Header List /</span> Immunization Detail List
+                   <h5 class="card-header"><span class="text-muted fw-light"> PICME : </span> <?php echo $_GET['History']; ?> 
+				   <h5 class="card-header"><span class="text-muted fw-light"> Mother Name : </span> <?php echo $his_mot_name; ?>
                    </h5>
                    <div class="table-responsive text-nowrap">
            <div class="container">
            <table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
                        <thead>
                          <tr>
-               <th>S.No</th>
-               <th>PICME No.</th>
-               <th>Mother Name</th>
-               <th>Dose No.</th>
+               <th>Dose No </th>
 			   <th>Dose Name </th> 
                <th>Dose Due Date</th>
                <th>Dose Provided Date</th>
 			   <th>Future Dose Date</th>
-               <th>History</th>
+               <th>View</th>
                          </tr>
                        </thead>
 <?php 
-  $listQry = "SELECT DISTINCT(im.picmeNo),im.id,im.doseNo,im.doseDueDate,im.FutureDoseDate, im.doseName, im.doseProvidedDate,im.breastFeeding,ec.motheraadhaarname,im.createdUserId,ec.BlockId,ec.PhcId,ec.HscId FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeNo 
-              WHERE im.status=1 AND im.doseNo = (SELECT max(CAST(im1.doseNo AS SIGNED)) From immunization im1 where im1.picmeNo = im.picmeNo)";
+  $listQry = "SELECT DISTINCT(im.picmeNo),im.id,im.doseNo,im.doseDueDate,im.doseName, im.FutureDoseDate, im.doseProvidedDate,im.breastFeeding,ec.motheraadhaarname,im.createdUserId,ec.BlockId,ec.PhcId,ec.HscId FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeNo 
+              WHERE im.status=1 AND im.picmeNo = $IM_picmeno";
   $private = " AND im.createdUserId='".$userid."'";
   $orderQry = " ORDER BY im.picmeNo + im.doseNo ASC";
 
@@ -78,17 +72,14 @@
                          while($row = mysqli_fetch_array($ExeQuery)) {
                        ?>
                                    <tr>
-                                       <td><?php echo $cnt; ?></td>
-                                       <td><?php echo $row['picmeNo']; ?></td>
-									   <td><?php echo $row['motheraadhaarname']; ?></td>
-                                       <td><?php $dn = $row['doseNo'];
+									   <td><?php $dn = $row['doseNo'];
                                     if($dn == 1) { echo "Dose 1 (Day 45)";}elseif($dn == 2){ echo "Dose 2 (Day 75)"; }
                                     elseif($dn == 3){ echo "Dose 3 (Day 105)"; } 
                                     elseif($dn == 4){ echo "Dose 4 (Day 270)"; } 
                                     elseif($dn == 5){ echo "Dose 5 (Day 480)"; }
                                        ?></td>
-									   
-									   <?php  
+                                      
+                                 <?php  
 								 $wild_srch = "";
 								 $wild = $row['doseName'];
 								 $wild_srch = str_replace(' ', '', $wild);
@@ -122,13 +113,11 @@
 								 } }
 							//	 print_r($dose_name); exit;?>
                                        <td><?php echo $dose_name; ?></td>
-                                       
-                                       
 									   <td><?php $dpd = date('d-m-Y', strtotime($row['doseDueDate'])); echo $dpd; ?></td>
                                        <td><?php $dosepd = date('d-m-Y', strtotime($row['doseProvidedDate'])); echo $dosepd; ?></td>
-                                       <td><?php $futpd = date('d-m-Y', strtotime($row['FutureDoseDate'])); echo $futpd; ?></td>
-						   <td ><a id="History" name="History" href="../forms/ImmunizationDtl.php?History=<?php echo $row['picmeNo']; ?>" ><i  class="bx bx-show me-1"></i>History</a></td>
-		                     </tr>
+									   <td><?php $futpd = date('d-m-Y', strtotime($row['FutureDoseDate'])); echo $futpd; ?></td>
+                             <td ><a id="view" name="view" href="../forms/ViewEditImmunization.php?view=<?php echo $row['id']; ?>" ><i  class="bx bx-show me-1"></i>View</a></td>
+				    </tr>
                        <?php 
                            $cnt++;
                          } 
