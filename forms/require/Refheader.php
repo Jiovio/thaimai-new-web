@@ -1,5 +1,5 @@
 <?php 
-session_start();
+/*session_start();
 if (isset($_SESSION["username"]) || isset($_SESSION["userid"]) || isset($_SESSION["usertype"]) || isset($_SESSION["BlockId"]) || isset($_SESSION["PhcId"]) || isset($_SESSION["HscId"])) {
     $username = $_SESSION["username"];
     $userid = $_SESSION["userid"];
@@ -13,7 +13,7 @@ if (isset($_SESSION["username"]) || isset($_SESSION["userid"]) || isset($_SESSIO
     session_write_close();
     $url = "./index.php";
     header("Location: $url");
-}
+} */
 include "../config/db_connect.php";
 include ('Refpreloader.php');
 ?>
