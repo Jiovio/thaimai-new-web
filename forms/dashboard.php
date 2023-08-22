@@ -1,3 +1,7 @@
+<?php 
+
+include ('require/header.php');  // Menu
+?>
 <body>
      
   <!-- Layout wrapper -->
