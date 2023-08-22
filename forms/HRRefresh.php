@@ -1,6 +1,8 @@
+
 <?php
-// error_reporting(E_ALL);
-include ('require/Refheader.php');
+
+ //error_reporting(E_ALL);
+include ('require/header.php');
 //include ('preloader.php');
  // include "../config/db_connect.php";
  // include ('preloader.php');
