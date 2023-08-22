@@ -15,7 +15,7 @@ if (isset($_SESSION["username"]) || isset($_SESSION["userid"]) || isset($_SESSIO
     header("Location: $url");
 }
 include "../config/db_connect.php";
-
+include ('preloader.php');
 ?>
 
 <!DOCTYPE html>
@@ -33,12 +33,12 @@ include "../config/db_connect.php";
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-    <title>Savemom</title>
+    <title>Savemom</title> 
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="<?php echo $siteurl; ?>/assets/img/favicon/favicon.png" height="100" />
+    <link rel="icon" type="image/x-icon" href="https://demo.savemom.in/assets/img/favicon/favicon.png" height="100" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -431,6 +431,8 @@ include "../config/db_connect.php";
                 <div data-i18n="Postnatal Visit">Pregnancy Status</div>
               </a>
             </li>
+			
+			
 			    <?php if(($usertype == 0) || ($usertype == 1) || ($usertype == 2)) { ?>
             <li class="menu-item">
               <a href="UserManagement.php" class="menu-link">
