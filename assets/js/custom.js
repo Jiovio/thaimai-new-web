@@ -57,12 +57,12 @@ $(document).ready(function() {
 //        });
 //    }
 //   
-//   new DataTable('#antenetal-visit-detail', {
-//    orderFixed: [3, 'asc'],
-//    rowGroup: {
-//        dataSrc: 2
-//    }
-//});
+   new DataTable('#antenetal-visit-detail', {
+    orderFixed: [3, 'asc'],
+    rowGroup: {
+        dataSrc: 2
+    }
+});
    
 /*   var groupColumn = 3;
 var table1 = $('#antenetal-visit-detail').DataTable({
