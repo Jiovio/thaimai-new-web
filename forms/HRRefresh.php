@@ -1,7 +1,7 @@
 
 <?php
 
-echo "<script>alert('Refreshed Successfullyyyyyyyyy!!!');</script>";
+echo "<script>alert('Start to find high risk mother!');</script>";
                     
  //error_reporting(E_ALL);
 include ('require/Refheader.php');
