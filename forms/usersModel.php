@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <?php
 // DB table to use
 $table = 'users';

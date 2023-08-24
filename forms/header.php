@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <?php 
 session_start();
 if (isset($_SESSION["username"]) || isset($_SESSION["userid"]) || isset($_SESSION["usertype"]) || isset($_SESSION["BlockId"]) || isset($_SESSION["PhcId"]) || isset($_SESSION["HscId"])) {

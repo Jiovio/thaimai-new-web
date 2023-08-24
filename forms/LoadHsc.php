@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <?php
 $ErCntmq = mysqli_query($conn,"SELECT COUNT(id) AS ErCnt FROM ecregister WHERE BlockId='".$bloName."' AND PhcId='".$phcName."' AND HscId='".$hscName."' AND status!=0");
 $ErCnt = mysqli_fetch_array($ErCntmq);

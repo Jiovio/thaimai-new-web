@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <?php include ('require/header.php'); 
  // Menu & Top Search
     $record = mysqli_query($conn, "SELECT * FROM users WHERE id='".$userid."'");

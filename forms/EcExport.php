@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <?php
 //ini_set("display_errors",'1');
 include '../config/db_connect.php';
