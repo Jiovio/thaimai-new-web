@@ -1,6 +1,8 @@
 
 <?php
 
+echo "<script>alert('Refreshed Successfullyyyyyyyyy!!!');</script>";
+                    
  //error_reporting(E_ALL);
 include ('require/Refheader.php');
 //include ('preloader.php');
