@@ -14,10 +14,17 @@ $id = 0; $update = false; $view = false;
    $id = $_GET['view']; $view = true;
    $record = mysqli_query($conn, "SELECT * FROM ecregister WHERE id=$id");
    $n = mysqli_fetch_array($record);
-   $ecfrno = $n["ecfrno"]; $dateecreg = $n["dateecreg"]; $maadhaarid = $n["motheraadhaarid"]; $maadhaarname = $n["motheraadhaarname"];
-   $mfullname = $n["motherfullname"]; $mdob = $n["motherdob"]; $mageecreg = $n["motherageecreg"]; $magemarriage = $n["motheragemarriage"];
+   $ecfrno = $n["ecfrno"];
+
+   $dateecreg = $n["dateecreg"]; 
+   $maadhaarid = $n["motheraadhaarid"]; $maadhaarname = $n["motheraadhaarname"];
+   $mfullname = $n["motherfullname"]; 
+   $mdob = $n["motherdob"]; 
+   $mageecreg = $n["motherageecreg"]; $magemarriage = $n["motheragemarriage"];
    $mmobno = $n["mothermobno"];$mobperson = $n["mobileofperson"]; $mstatus = $n["motheredustatus"]; $haadhaarid = $n["husbandaadhaarid"]; 
-   $haadhaarname = $n["husbandaadhaarname"]; $hfullname = $n["husfullname"]; $hdob = $n["husdob"]; $hageecreg = $n["husageecreg"]; 
+   $haadhaarname = $n["husbandaadhaarname"]; $hfullname = $n["husfullname"]; 
+   $hdob = $n["husdob"]; 
+   $hageecreg = $n["husageecreg"]; 
    $hagemarriage = $n["husagemarriage"]; $husmobno = $n["husmobno"]; $hedustatus = $n["husedustatus"]; $religion = $n["religion"]; 
    $caste = $n["caste"]; $BlockId = $n["BlockId"]; $PhcId = $n["PhcId"]; $HscId= $n["HscId"]; $PanchayatId= $n["PanchayatId"]; 
    $VillageId= $n["VillageId"]; $address = $n["address"]; $pincode = $n["pincode"]; $povertystatus = $n["povertystatus"]; 
@@ -129,19 +136,22 @@ if (! empty($_POST["update"])) {
                           <label class="form-label" for="basic-icon-default-email">DATE OF EC REG <span class="mand">* </span> <span id="errEcReg"></span></label>
                           <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+							
+							
                             <input
-                              type="date"
+                              type="text"
                               name="dateecreg"
                               id="dateecreg"
                               class="form-control"
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-                              disabled value="<?php echo $dateecreg; ?>"
+							   disabled value="<?php echo date("m/d/Y", strtotime($dateecreg)); ?>"
                               
                             />
                           </div>
                         </div>
+						
                         </div>
                         <div class="row">
                         <div class="col-6 mb-3">
@@ -209,14 +219,14 @@ if (! empty($_POST["update"])) {
                           <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-calendar"></i></span>
                             <input
-                              type="date"
+                              type="text"
                               name="motherdob"
                               id="motherdob"
                               class="form-control"
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-                              disabled value="<?php echo $mdob; ?>"
+                              disabled value="<?php echo date("m/d/Y", strtotime($mdob)); ?>"
                               
                             />
                           </div>
@@ -429,14 +439,15 @@ if (! empty($_POST["update"])) {
                           <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-calendar"></i></span>
                             <input
-                              type="date"
+                              type="text"
                               name="husdob"
                               id="husdob"
                               class="form-control"
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-                              disabled value="<?php echo $hdob; ?>"
+                              disabled value="<?php echo date("m/d/Y", strtotime($hdob)); ?>"
+							  
                               
                             />
                           </div>
