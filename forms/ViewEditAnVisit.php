@@ -198,6 +198,8 @@ if (isset($_GET['del'])) {
                               </label>
                           </div>
                         </div>
+						
+						
 						            <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">Resident Type  <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
@@ -290,14 +292,14 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-anvisitDate">Antenatal Visit Date <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="date"
+                              type="text"
                               name="anvisitDate"
                               class="form-control"
                               id="anvisitDate"
                               placeholder="Antenatal Visit Date"
                               aria-label="Antenatal Visit Date"
                               aria-describedby="basic-icon-default-anvisitDate"
-                              value="<?php echo $anvisitDate ?>"
+                              value="<?php echo date("m/d/Y", strtotime($anvisitDate)); ?>"  
                               disabled
                               required
                             />
@@ -608,15 +610,25 @@ if (isset($_GET['del'])) {
                         <div class="col-4 mb-3" id="Tddate1"  style="display:none">
                           <label class="form-label" for="basic-icon-default-Td1Date">Td1 Date</label>
                           <div class="input-group input-group-merge">
-                            <input
-                              type="date"
+                           
+						   <input
+                              type="text"
                               name="Td1Date"
                               class="form-control"
                               id="Td1Date"
                               placeholder="Td1 Date"
                               aria-label="Td1 Date"
                               aria-describedby="basic-icon-default-Td1Date"
-                              value="<?php echo $Td1Date ?>"
+                              
+							  value="<?php 
+							  if(isset($Td1Date))
+							  {
+								  echo date("m/d/Y", strtotime($Td1Date)); 
+							  }
+							  else
+							  {
+								echo $Td1Date;
+							  }; ?>"   
                               disabled
                             />
                           </div>
@@ -664,14 +676,23 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-Td1Date">Td2 Date</label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="date"
+                              type="text"
                               name="Td2Date"
                               class="form-control"
                               id="Td2Date"
                               placeholder="Td1 Date"
                               aria-label="Td1 Date"
                               aria-describedby="basic-icon-default-Td1Date"
-                              value="<?php echo $Td2Date ?>"
+                              
+                              value="<?php 
+							  if(isset($Td2Date))
+							  {
+								  echo date("m/d/Y", strtotime($Td2Date)); 
+							  }
+							  else
+							  {
+								echo $Td2Date;
+							  }; ?>"   							  
                               disabled
                             />
                           </div>
@@ -703,15 +724,25 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-TdBoosterDate">Td Booster Date</label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="date"
+                              type="text"
                               name="TdBoosterDate"
                               class="form-control"
                               id="TdBoosterDate"
                               placeholder="Td Booster Date"
                               aria-label="Td Booster Date"
                               aria-describedby="basic-icon-default-TdBoosterDate"
-                              value="<?php echo $TdBoosterDate ?>"
-                              disabled
+                               
+							  value="<?php 
+							  if(isset($TdBoosterDate))
+							  {
+								  echo date("m/d/Y", strtotime($TdBoosterDate)); 
+							  }
+							  else
+							  {
+								echo $TdBoosterDate;
+							  }; ?>"   		
+							  
+							  disabled
                             />
                           </div>
                         </div>
@@ -740,14 +771,23 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-Dose1Date">Dose1 Date </label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="date"
+                              type="text"
                               name="Dose1Date"
                               class="form-control"
                               id="Dose1Date"
                               placeholder="Dose1 Date"
                               aria-label="Dose1 Date"
                               aria-describedby="basic-icon-default-Dose1Date"
-                              value="<?php echo $Dose1Date ?>"
+                              
+							  value="<?php 
+							  if(isset($Dose1Date))
+							  {
+								  echo date("m/d/Y", strtotime($Dose1Date)); 
+							  }
+							  else
+							  {
+								echo $Dose1Date;
+							  }; ?>"   		
                               disabled
                               />
                           </div>
@@ -756,14 +796,23 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-Dose2Date">Dose2 date </label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="date"
+                              type="text"
                               name="Dose2Date"
                               class="form-control"
                               id="Dose2Date"
                               placeholder="Dose2 Date"
                               aria-label="Dose2 Date"
                               aria-describedby="basic-icon-default-Dose2Date"
-                              value="<?php echo $Dose2Date ?>"
+                              
+							  value="<?php 
+							  if(isset($Dose2Date))
+							  {
+								  echo date("m/d/Y", strtotime($Dose2Date)); 
+							  }
+							  else
+							  {
+								echo $Dose2Date;
+							  }; ?>"   	
                               disabled
                               />
                           </div>
@@ -772,14 +821,23 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-PreDate">Precaution Dose Date </label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="date"
+                              type="text"
                               name="PreDate"
                               class="form-control"
                               id="PreDate"
                               placeholder="Td1 Date"
                               aria-label="Td1 Date"
                               aria-describedby="basic-icon-default-PreDate"
-                              value="<?php echo $PreDate ?>"
+                                
+                              value="<?php 
+							  if(isset($PreDate))
+							  {
+								  echo date("m/d/Y", strtotime($PreDate)); 
+							  }
+							  else
+							  {
+								echo $PreDate;
+							  }; ?>"   							  
                               disabled
                               />
                           </div>
@@ -826,15 +884,24 @@ if (isset($_GET['del'])) {
 						              <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-dateofIFA">Date Of IFA</label>
                           <div class="input-group input-group-merge">
+						  
                             <input
-                              type="date"
+                              type="text"
                               name="dateofIFA"
                               class="form-control"
                               id="dateofIFA"
                               placeholder="Date Of IFA"
                               aria-label="Date Of IFA"
                               aria-describedby="basic-icon-default-dateofIFA"
-                              value="<?php echo $dateofIFA ?>"
+                              value="<?php 
+							  if(isset($dateofIFA))
+							  {
+								  echo date("m/d/Y", strtotime($dateofIFA)); 
+							  }
+							  else
+							  {
+								echo $dateofIFA;
+							  }; ?>"   
                               disabled
                             />
                           </div>
@@ -844,14 +911,22 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-dateofAlbendazole">Date Of Albendazole</label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="date"
+                              type="text"
                               name="dateofAlbendazole"
                               class="form-control"
                               id="dateofAlbendazole"
                               placeholder="Date Of Albendazole"
                               aria-label="Date Of Albendazole"
                               aria-describedby="basic-icon-default-dateofAlbendazole"
-                              value="<?php echo $dateofAlbendazole ?>"
+                              value="<?php 
+							  if(isset($dateofAlbendazole))
+							  {
+								  echo date("m/d/Y", strtotime($dateofAlbendazole)); 
+							  }
+							  else
+							  {
+								echo $dateofAlbendazole;
+							  }; ?>"   
                               disabled
                             />
                           </div>
@@ -879,14 +954,23 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-calciumDate">Calcium Date</label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="date"
+                              type="text"
                               name="calciumDate"
                               class="form-control"
                               id="calciumDate"
                               placeholder="Calcium Date"
                               aria-label="Calcium Date"
                               aria-describedby="basic-icon-default-calciumDate"
-                              value="<?php echo $calciumDate ?>"
+                              
+                              value="<?php 
+							  if(isset($calciumDate))
+							  {
+								  echo date("m/d/Y", strtotime($calciumDate)); 
+							  }
+							  else
+							  {
+								echo $calciumDate;
+							  }; ?>"   							  
                               disabled
                             />
                           </div>
@@ -960,14 +1044,23 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-usgDoneDate">USG Done Date</label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="date"
+                              type="text"
                               name="usgDoneDate"
                               class="form-control"
                               id="usgDDate"
                               placeholder="USG Done Date"
                               aria-label="USG Done Date"
                               aria-describedby="basic-icon-default-usgDoneDate"
-                              value="<?php echo $usgDoneDate ?>"
+                              
+							  value="<?php 
+							  if(isset($usgDoneDate))
+							  {
+								  echo date("m/d/Y", strtotime($usgDoneDate)); 
+							  }
+							  else
+							  {
+								echo $usgDoneDate;
+							  }; ?>"   
                               disabled
                             />
                           </div>
@@ -1553,14 +1646,23 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-referralDate">Referral Date </label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="date"
+                              type="text"
                               name="referralDate"
                               class="form-control"
                               id="referralDate"
                               placeholder="Referral Date"
                               aria-label="Referral Date"
                               aria-describedby="basic-icon-default-referralDate"
-                              value="<?php echo $referralDate ?>"
+                              
+							  value="<?php 
+							  if(isset($referralDate))
+							  {
+								  echo date("m/d/Y", strtotime($referralDate)); 
+							  }
+							  else
+							  {
+								echo $referralDate;
+							  }; ?>"   
                               disabled
                               />
                           </div>
@@ -1590,14 +1692,23 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-bloodTransfusionDate">Transfusion Date</label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="date"
+                              type="text"
                               name="bloodTransfusionDate"
                               class="form-control"
                               id="bloodTransfusionDate"
                               placeholder="USG REPORT URL"
                               aria-label="USG REPORT URL"
                               aria-describedby="basic-icon-default-bloodTransfusionDate"
-                              value="<?php echo $bloodTransfusionDate ?>"
+							   value="<?php 
+							  if(isset($PreDate))
+							  {
+								  echo date("m/d/Y", strtotime($bloodTransfusionDate)); 
+							  }
+							  else
+							  {
+								echo $bloodTransfusionDate;
+							  }; ?>"   			
+                             
                               disabled
                             />
                           </div>

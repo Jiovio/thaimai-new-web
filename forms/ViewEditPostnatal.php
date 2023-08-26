@@ -136,12 +136,12 @@ if (isset($_GET['del'])) {
                             <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-calendar"></i></span>
                             <input
-                              type="date"
+                              type="text"
                               class="form-control"
                               id="motherPnc"
                               name="motherPnc"
                               placeholder=""
-                             value="<?php echo $motherPnc; ?>"
+                             value="<?php echo date("m/d/Y", strtotime($motherPnc)); ?>"   
                              disabled
                             />
                           </div>

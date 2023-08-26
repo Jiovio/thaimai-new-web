@@ -176,12 +176,12 @@ if (isset($_GET['del'])) {
                         <div class="mb-3 col-md-6">
                             <label for="zipCode" class="form-label">PICME REGISTER DATE <span class="mand">* </span></label>
                             <input
-                              type="date"
+                              type="text"
                               class="form-control"
                               id="picmeRegDate"
                               name="picmeRegDate"
                               placeholder="PICME REGISTER DATE"
-                              value="<?php echo $picmeRegDate; ?>"
+                              value="<?php echo date("m/d/Y", strtotime($picmeRegDate)); ?>"
                               disabled
                               required
                             />
@@ -466,12 +466,14 @@ if (isset($_GET['del'])) {
                           <div class="mb-3 col-md-6">
                             <label for="zipCode" class="form-label">ANTENATAL REGISTER DATE <span class="mand">* </span></label>
                             <input
-                              type="date"
+                              type="text"
                               class="form-control"
                               id="anRegDate"
                               name="anRegDate" required
                               placeholder="ANTENATAL REGISTER DATE"
                               value="<?php echo $rgdate; ?>"
+							  "<?php echo date("m/d/Y", strtotime($rgdate)); ?>"
+							  
                               disabled
                             />
                           </div>

@@ -183,15 +183,14 @@ if (isset($_GET['del'])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-email">LMP DATE <span class="mand">* </span></label>
                             <input
-                              type="date"
+                              type="text"
                               name="lmpdate"
                               id="lmpdate" required
                               class="form-control"
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-                              value="<?php echo $lmpdate ?>"
-                              disabled
+                              value="<?php echo date("m/d/Y", strtotime($lmpdate)); ?>"  
                             />
                           
                         </div>
@@ -202,14 +201,14 @@ if (isset($_GET['del'])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">EDD DATE <span class="mand">* </span></label>
                             <input
-                              type="date"
+                              type="text"
                               name="edddate"
                               id="edddate" required
                               class="form-control"
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-password2"
-                              value="<?php echo $edddate ?>"
+                              value="<?php echo date("m/d/Y", strtotime($edddate)); ?>" 
                               disabled
                             />
                           

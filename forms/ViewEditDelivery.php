@@ -120,14 +120,14 @@ $_SESSION['message'] = "User deleted!";
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-email">DELIVERY DATE <span class="mand">* </span></label>
                             <input
-                              type="date"
+                              type="text"
                               name="deliverydate"
                               id="deliverydate"
                               class="form-control"
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-                              value="<?php echo $deliverydate ?>"
+                              value="<?php echo date("m/d/Y", strtotime($deliverydate)); ?>"  
                               disabled
                               required
                             />
@@ -571,14 +571,14 @@ $_SESSION['message'] = "User deleted!";
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">DISCHARGE DATE <span class="mand">* </span></label>
                             <input
-                              type="date"
+                              type="text"
                               name="dischargedate"
                               id="dischargedate"
                               class="form-control"
                               placeholder="DISCHARGE DATE"
                               aria-label="DISCHARGE DATE"
                               aria-describedby="basic-icon-default-password2"
-                              value="<?php echo $dischargedate ?>"
+                              value="<?php echo date("m/d/Y", strtotime($dischargedate)); ?>"     
                               disabled
                               required
                             />
@@ -606,14 +606,23 @@ $_SESSION['message'] = "User deleted!";
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">BCG DATE</label>
                             <input
-                              type="date"
+                              type="text"
                               name="bcgdate"
                               id="bcgdate"
                               class="form-control"
                               placeholder="BCG DATE"
                               aria-label="BCG DATE"
                               aria-describedby="basic-icon-default-password2"
-                              value="<?php echo $bcgdate ?>"
+                              
+							  value="<?php 
+							  if(isset($bcgdate))
+							  {
+								  echo date("m/d/Y", strtotime($bcgdate)); 
+							  }
+							  else
+							  {
+								echo $bcgdate;
+							  }; ?>"  
                               disabled
                             />
                           
@@ -622,14 +631,14 @@ $_SESSION['message'] = "User deleted!";
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">OPV-0 DATE <span class="mand">* </span></label>
                            <input
-                              type="date"
+                              type="text"
                               name="opvDdate"
                               id="opvDdate"
                               class="form-control"
                               placeholder="OPV-D DATE"
                               aria-label="OPV-D DATE"
                               aria-describedby="basic-icon-default-password2"
-                              value="<?php echo $opvDdate ?>"
+                              value="<?php echo date("m/d/Y", strtotime($opvDdate)); ?>"   
                               disabled
                             />
                          
@@ -641,14 +650,23 @@ $_SESSION['message'] = "User deleted!";
                           <label class="form-label" for="basic-icon-default-password">HEP-B DATE</label>
                           
                             <input
-                              type="date"
+                              type="text"
                               name="hebBdate"
                               id="hebBdate"
                               class="form-control"
                               placeholder="HEB-B DATE"
                               aria-label="HEB-B DATE"
                               aria-describedby="basic-icon-default-password2"
-                              value="<?php echo $hebBdate ?>"
+                               
+							   value="<?php 
+							  if(isset($hebBdate))
+							  {
+								  echo date("m/d/Y", strtotime($hebBdate)); 
+							  }
+							  else
+							  {
+								echo $hebBdate;
+							  }; ?>"   
                               disabled
                             />  
                         </div>

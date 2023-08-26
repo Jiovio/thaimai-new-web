@@ -257,14 +257,14 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-password">Dose Due Date <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="date"
+                              type="text"
                               name="doseDueDate"
                               id="doseDueDate"
                               class="form-control"
                               placeholder="Dose Due Date"
                               aria-label="Dose Due Date"
                               aria-describedby="basic-icon-default-conpassword" 
-                              value="<?php echo $doseDueDate;  ?>"
+                              value="<?php echo date("m/d/Y", strtotime($doseDueDate)); ?>" 
                               disabled
                               required
                               />
@@ -276,14 +276,14 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">Dose Provided Date <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="date"
+                              type="text"
                               name="doseProvidedDate"
                               id="doseProvidedDate"
                               class="form-control phone-mask"
                               placeholder="Dose Provided Date"
                               aria-label="Dose Provided Date"
                               aria-describedby="basic-icon-default-mobile"
-                              value="<?php echo $doseProvidedDate;  ?>"
+                              value="<?php echo date("m/d/Y", strtotime($doseProvidedDate)); ?>" 
                               disabled
                               required
                               />
