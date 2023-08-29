@@ -45,8 +45,11 @@
                          </tr>
                        </thead>
 <?php 
-  $listQry = "SELECT DISTINCT(im.picmeNo),im.id,im.doseNo,im.doseDueDate,im.FutureDoseDate, im.doseName, im.doseProvidedDate,im.breastFeeding,ec.motheraadhaarname,im.createdUserId,ec.BlockId,ec.PhcId,ec.HscId FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeNo 
-              WHERE im.status=1 AND im.doseNo = (SELECT max(CAST(im1.doseNo AS SIGNED)) From immunization im1 where im1.picmeNo = im.picmeNo)";
+  $listQry = "";
+  $private = "";
+  $orderQry = "";
+  $listQry = "SELECT im.picmeNo,im.id,im.doseNo,im.doseDueDate,im.FutureDoseDate, im.doseName, im.doseProvidedDate,im.breastFeeding,ec.motheraadhaarname,im.createdUserId,ec.BlockId,ec.PhcId,ec.HscId FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeNo 
+              WHERE im.doseNo = (SELECT max(CAST(im1.doseNo AS SIGNED)) From immunization im1 where im1.picmeNo = im.picmeNo)";
   $private = " AND im.createdUserId='".$userid."'";
   $orderQry = " ORDER BY im.picmeNo + im.doseNo ASC";
 
@@ -76,6 +79,7 @@
             }
               if($ExeQuery) {
                          $cnt=1;
+						 $row = "";
                          while($row = mysqli_fetch_array($ExeQuery)) {
                        ?>
                                    <tr>
@@ -89,10 +93,11 @@
                                     elseif($dn == 5){ echo "Dose 5 (Day 480)"; }
                                        ?></td>
 									   
-									   <?php  
+									  <?php  
 								 $wild_srch = "";
 								 $wild = $row['doseName'];
 								 $wild_srch = str_replace(' ', '', $wild);
+								// print_r($wild_srch); exit;
 								 $search_text_input = "";
 								 $search_text_input = ",";
 								 $dose_name = "";
@@ -100,7 +105,17 @@
 								 $cur_pos = 0;
 								 $search_pos = 2;
 	                             $sub_cnt = substr_count($wild_srch,$search_text_input);
-								 while($sub_cnt >= 0)
+								 
+								 if($sub_cnt == 0)
+								 {
+								  $search_val = $wild_srch; 
+                                  $rec_enum = mysqli_query($conn, "SELECT * FROM enumdata ed WHERE ed.enumid = $search_val AND ed.type = 43");
+                                  $vac_nm = mysqli_fetch_array($rec_enum);
+ 								  $dose_name = $vac_nm['enumvalue'];
+								 }
+								else
+								{	
+								while($sub_cnt >= 0)
 								 {
 								  if(stripos($wild_srch,$search_text_input)!==false) /*STRIPOS - Case incensitive search */
 	                              {
@@ -121,7 +136,8 @@
 		                           $sub_cnt--;
 								   
 								 } }
-							//	 print_r($dose_name); exit;?>
+								}
+								 ?>
                                        <td><?php echo $dose_name; ?></td>
                                        
                                        

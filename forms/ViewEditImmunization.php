@@ -15,6 +15,10 @@ $picmeNo = ""; $doseNo = ""; $doseName = ""; $doseDueDate = ""; $doseProvidedDat
 		$view = true;
 		$record = mysqli_query($conn, "SELECT * FROM immunization WHERE id=$id");
 			$n = mysqli_fetch_array($record);
+			$Del_rec_id = "";
+            $Del_rec_id = $id;
+			
+			
 
             $picmeNo = $n["picmeNo"]; 
             $doseNo = $n["doseNo"]; 
@@ -37,12 +41,17 @@ $picmeNo = ""; $doseNo = ""; $doseName = ""; $doseDueDate = ""; $doseProvidedDat
 if (! empty($_POST["update"])) {
 
     $id = $_POST['id'];
-  $doseNo = $_POST["doseNo"]; 
-  $doseName = implode(",",$_POST["doseName"]); 
-  $doseDueDate = $_POST["doseDueDate"];
+  //$doseNo = $_POST["doseNo"]; 
+  //$doseName = implode(",",$_POST["doseName"]); 
+  
+  $doseName = implode(",",$_POST["doseName"]);
+ // print_r($chk_dose_name); exit;
+ // print_r($doseName); exit;
+  
+//$doseDueDate = $_POST["doseDueDate"];
   $doseProvidedDate = $_POST["doseProvidedDate"]; 
-  $query = mysqli_query($conn,"SELECT dd.deliverydate FROM immunization im JOIN deliverydetails dd ON dd.picmeno=im.picmeNo WHERE im.picmeNo='$picmeNo'");
-  while ($fdate = mysqli_fetch_array($query)){
+ // $query = mysqli_query($conn,"SELECT dd.deliverydate FROM immunization im JOIN deliverydetails dd ON dd.picmeno=im.picmeNo WHERE im.picmeNo='$picmeNo'");
+ /* while ($fdate = mysqli_fetch_array($query)){
    $futdate = $fdate['deliverydate'];
   }
   if($doseNo == 1) {
@@ -53,7 +62,7 @@ if (! empty($_POST["update"])) {
     $FutureDoseDate = date('Y-m-d', strtotime($futdate. '+ 269 days' ));
   } if($doseNo == 4) {
     $FutureDoseDate = date('Y-m-d', strtotime($futdate. '+ 479 days' ));
-  }
+  } 
 
 if($doseNo == 1) {
   $FutureDoseNo = $doseNo + 1;
@@ -63,7 +72,7 @@ if($doseNo == 1) {
   $FutureDoseNo = $doseNo + 1;
   } else if($doseNo == 4) {
   $FutureDoseNo = $doseNo + 1;
-  }
+  } */
   
   $breastFeeding = $_POST["breastFeeding"]; 
   $compliFoodStart = $_POST["compliFoodStart"];
@@ -101,12 +110,28 @@ if($doseNo == 1) {
   // }
     date_default_timezone_set('Asia/Kolkata');
     $date = date('d-m-Y h:i:s');
+	
+	$wild_com = $doseName;
+	$wild_srch_com = str_replace(',', '', $wild_com);
+	
+	//print_r($doseName); exit;
 
-$query = mysqli_query($conn, "UPDATE immunization SET doseNo='$doseNo', doseName='$doseName', doseDueDate='$doseDueDate',
-doseProvidedDate='$doseProvidedDate',futureDoseNo='$FutureDoseNo',futureDoseDate='$FutureDoseDate', breastFeeding='$breastFeeding', 
+    $dose_chg_val = is_numeric($wild_srch_com);
+	
+	if($dose_chg_val == 1)
+	{
+	 $query = mysqli_query($conn, "UPDATE immunization SET doseName = '$doseName',
+doseProvidedDate='$doseProvidedDate', breastFeeding='$breastFeeding', 
 compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
-if (!empty($query)) {
-    echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/Immunization.php');</script>";
+	}
+	else
+	{
+	 $query = mysqli_query($conn, "UPDATE immunization SET 
+doseProvidedDate='$doseProvidedDate', breastFeeding='$breastFeeding', 
+compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
+	}	
+if (!empty($query)) {echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/ImmunizationDtl.php?History=$picmeNo');</script>";
+
   } }
 
 
@@ -138,29 +163,63 @@ if (!empty($query)) {
     $id = $_GET['del'];
     date_default_timezone_set('Asia/Kolkata');
     $date = date('d-m-Y h:i:s');
-    mysqli_query($conn, "UPDATE immunization SET status=0, deletedat='$date', deletedUserId='$userid' WHERE status=1 AND id=$id");
-    $_SESSION['message'] = "User deleted!"; 
-      echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/Immunization.php');</script>";
+	
+  //  mysqli_query($conn, "UPDATE immunization SET status=0, deletedat='$date', deletedUserId='$userid' WHERE status=1 AND id=$id");
+  
+    $rec_del_pic = mysqli_query($conn, "SELECT * FROM immunization im WHERE im.id = $id AND
+		                       im.doseNo = (SELECT max(CAST(im1.doseNo AS SIGNED)) From immunization im1 where im1.picmeNo = im.picmeNo)");
+				          $n_del = mysqli_fetch_array($rec_del_pic);
+	          $Del_picmeNo = "";
+	          $Del_picmeNo = $n_del['picmeNo'];
+  
+    
+	
+	mysqli_query($conn, "DELETE FROM immunization WHERE id=$id");
+	 
+  //  $_SESSION['message'] = "User deleted!"; 
+	
+			
+      echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/ImmunizationDtl.php?History=$Del_picmeNo');</script>";
   }
 ?>
 <!-- Content wrapper -->
    <div class="content-wrapper">
             <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="container-xxl flex-grow-1 container-p-y"> 
               <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Immunization /</span> 
               <?php if($view == true) { 
                 echo "View";
               } else {
                 echo "Edit";
               } ?> Immunization
-              <a href="Immunization.php"><button type="submit" class="btn btn-primary" id="btnBack">
+              <a href="ImmunizationDtl.php?History=<?php echo $picmeNo; ?>"><button type="submit" class="btn btn-primary" id="btnBack">
                     <span class="bx bx-arrow-back"></span>&nbsp; Back
               </button></a>
             <?php if($_SESSION["usertype"] == '0' || $_SESSION["usertype"] == '1' || $_SESSION["usertype"] == '2') { ?>
-              <a href="../forms/ViewEditImmunization.php?del=<?php echo $id; ?>" onclick="return confirm('Are you sure to delete?')"><button type="submit" class="btn btn-danger btnSpace">
+              <?php
+			 // PRINT_R($picmeNo); EXIT;
+			  $rec_del_pic = mysqli_query($conn, "SELECT * FROM immunization im WHERE im.picmeNo = $picmeNo AND
+		                       im.doseNo = (SELECT max(CAST(im1.doseNo AS SIGNED)) From immunization im1 where im1.picmeNo = im.picmeNo)");
+				          $n_del = mysqli_fetch_array($rec_del_pic);
+	          $Del_picmeNo = "";
+	          $Del_picmeNo = $n_del['picmeNo'];
+			  
+			  if($n_del['id']==$id)
+			  {
+			  ?>
+			  	  <a href="../forms/ViewEditImmunization.php?del=<?php echo $n_del['id']; ?>" onclick="return confirm('Are you sure to delete?')"><button type="submit" class="btn btn-danger btnSpace">
                     <span class="bx bx-minus"></span>&nbsp; Delete
               </button></a>
+			  <?php }
+			  else
+			  { 
+		//  print_r("I am here!"); exit;
+		       echo "<script>alert('Can delete only the most recent dose !!!')</script>"; ?>
+				 <a href="../forms/ViewEditImmunization.php?view=<?php echo $id; ?>"><button type="submit" class="btn btn-danger btnSpace">
+                    <span class="bx bx-minus"></span>&nbsp; Delete
+              </button></a>  
+			  <?php } ?>
             <?php } ?>
               <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; ?>" onclick="fnImEnable()">
                     <span class="bx bx-edit"></span>&nbsp; Edit
@@ -201,14 +260,62 @@ if (!empty($query)) {
                             $query = mysqli_query($conn, "SELECT i.doseNo,e.enumid,e.enumvalue FROM immunization i join enumdata e on i.doseNo=e.enumid WHERE type=42 AND i.id=".$id);
                             while($status_list=mysqli_fetch_assoc($query)){
                                 ?>
-                                    <option value="<?php echo $status_list['enumid']; ?>">
-                                    <?php if($status_list['enumvalue']==$doseNo){ echo "selected"; } ?>
-                                    <?php echo $status_list['enumvalue']; ?>
-                                    <option value="1">Dose 1 (Day 45)</option>
-                                    <option value="2">Dose 2 (Day 75)</option>
-                                    <option value="3">Dose 3 (Day 105)</option>
-                                    <option value="4">Dose 4 (Day 270)</option>
-                                    <option value="5">Dose 5 (Day 480)</option>
+                                    <option value="<?php echo $status_list['enumid'];  ?>">
+									<?php echo $status_list['enumvalue']; ?>
+
+									<?php 
+								
+									if($status_list['enumid'] == 1)
+									{
+										
+										?>
+								        <option value>Choose </option>
+										<option value="1">Dose 1 (Day 45)</option>
+									<?php } ?>
+									
+									<?php 
+								
+									if($status_list['enumid'] == 2)
+									{
+										
+										?>
+										<option value>Choose </option>
+										<option value="2">Dose 2 (Day 75)</option>
+									<?php } ?>
+									
+									<?php 
+								
+									if($status_list['enumid'] == 3)
+									{
+										
+										?>
+										<option value>Choose </option>
+										<option value="3">Dose 3 (Day 105)</option>
+										
+									<?php } ?>
+									
+									<?php 
+								
+									if($status_list['enumid'] == 4)
+									{
+										
+										?>
+										<option value>Choose </option>
+										<option value="4">Dose 4 (Day 270)</option>
+										
+									<?php } ?>
+									
+									<?php 
+								
+									if($status_list['enumid'] == 5)
+									{
+										
+										?>
+										<option value>Choose </option>
+										<option value="5">Dose 5 (Day 480)</option>
+										
+									<?php } ?>
+									                                   
                                     </option>
                                     <?php } 
                                       ?>
@@ -220,15 +327,31 @@ if (!empty($query)) {
 						<div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">Dose Name <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                          <select required name="doseName[]" id="doseName" multiple class="form-select" disabled>
+                          
+						  
+						  
+						  <select required name="doseName[]" id="doseName" multiple class="form-select" disabled>
+						  
                           <?php 
+						 // print_r("I am here"); exit;
                             $query = mysqli_query($conn, "SELECT i.doseName,e.enumid,e.enumvalue FROM immunization i join enumdata e on i.doseName=e.enumid WHERE type=43 AND i.id=".$id);
-                            while($status_list=mysqli_fetch_array($query)){
+                            
+							while($status_list=mysqli_fetch_array($query)){
+							/*	$chk_dose_name = "";
+							    $chk_dose_name = $status_list['doseName']; 
+								print_r($chk_dose_name); //exit; */
+								$dose_ind = "Y";
+							
                               for($i=0; $i < count($dnArr); $i++) {
                                 ?>
+								
                                     <option value="<?php if(in_array($status_list['enumid'], $dnArr)){ echo "selected"; } ?>">
                                    
-                                    <?php if ($dnArr[$i] == "11") { echo "OPV-1";}elseif($dnArr[$i] == "12") { echo "Rota-1"; }
+                                    <?php 
+									
+								//	print_r("Hi! I am here!"); exit;
+									
+									if ($dnArr[$i] == "11") { echo "OPV-1";}elseif($dnArr[$i] == "12") { echo "Rota-1"; }
                                     elseif($dnArr[$i] == "13") { echo "IPV-1"; }elseif($dnArr[$i] == "14") { echo "PCV-1"; }
                                     elseif($dnArr[$i] == "15") { echo "Pentavalent-1"; } 
                                     
@@ -266,7 +389,7 @@ if (!empty($query)) {
                               aria-describedby="basic-icon-default-conpassword" 
                               value="<?php echo date("m/d/Y", strtotime($doseDueDate)); ?>" 
                               disabled
-                              required
+                              required 
                               />
                           </div>
                         </div>
@@ -518,6 +641,7 @@ if (!empty($query)) {
 					</div> -->
 					<div class="input-group" id="btnSaUp" style="display:none">
                     <input class="btn btn-primary" type="submit" id="update" name="update" value="Update">
+					              </button></a>
                       </div>
                       </form>
                     </div>

@@ -7,7 +7,7 @@
 <?php include ('require/header.php'); // Menu & Top Search
 if (isset($_GET['History'])) {
   $IM_picmeno = $_GET['History'];
-  $record = mysqli_query($conn, "SELECT * FROM ecregister ec WHERE ec.picmeNo=$IM_picmeno");
+  $record = mysqli_query($conn, "SELECT * FROM ecregister ec WHERE ec.picmeNo=$IM_picmeno AND ec.status != 0");
   $his = mysqli_fetch_array($record);
   $his_mot_name = $his['motheraadhaarname'];
     
@@ -90,7 +90,20 @@ $History = true;}
 								 $ini_pos = 0;
 								 $cur_pos = 0;
 								 $search_pos = 2;
+								 $search_val = "";
+								 $dose_name = "";
 	                             $sub_cnt = substr_count($wild_srch,$search_text_input);
+								 if($sub_cnt == 0)
+								 {
+								  $search_val = $wild_srch; 
+								  
+                                  $rec_enum = mysqli_query($conn, "SELECT * FROM enumdata ed WHERE ed.enumid = $search_val AND ed.type = 43");
+                                  $vac_nm = mysqli_fetch_array($rec_enum);
+ 								  $dose_name = $vac_nm['enumvalue'];
+								  //print_r($dose_name); exit;
+								 }
+								 else
+								 {
 								 while($sub_cnt >= 0)
 								 {
 								  if(stripos($wild_srch,$search_text_input)!==false) /*STRIPOS - Case incensitive search */
@@ -112,6 +125,7 @@ $History = true;}
 		                           $sub_cnt--;
 								   
 								 } }
+								 }
 							//	 print_r($dose_name); exit;?>
                                        <td><?php echo $dose_name; ?></td>
 									   <td><?php $dpd = date('d-m-Y', strtotime($row['doseDueDate'])); echo $dpd; ?></td>
