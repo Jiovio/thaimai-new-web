@@ -10,14 +10,24 @@ $picmeNo = ""; $doseNo = ""; $doseName = ""; $doseDueDate = ""; $doseProvidedDat
 	$id = 0;
   $view = false;
 	$update = false;
-  if (isset($_GET['view'])) {
-		$id = $_GET['view'];
+  if (isset($_GET['view']) OR isset($_GET['delview'])) {
+	    if(isset($_GET['view']))
+		{
+	     $id = $_GET['view'];		 
+		}
+	  
+		
+		$del_view_ind = "N";
+		if(isset($_GET['delview']))
+		{
+	     $del_view_ind = "Y";	
+         $id = $_GET['delview'];		 
+		}
 		$view = true;
 		$record = mysqli_query($conn, "SELECT * FROM immunization WHERE id=$id");
 			$n = mysqli_fetch_array($record);
 			$Del_rec_id = "";
-            $Del_rec_id = $id;
-			
+            $Del_rec_id = $id;		
 			
 
             $picmeNo = $n["picmeNo"]; 
@@ -196,6 +206,9 @@ if (!empty($query)) {echo "<script>alert('Updated Successfully');window.location
               <a href="ImmunizationDtl.php?History=<?php echo $picmeNo; ?>"><button type="submit" class="btn btn-primary" id="btnBack">
                     <span class="bx bx-arrow-back"></span>&nbsp; Back
               </button></a>
+			  <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; ?>" onclick="fnImEnable()">
+                    <span class="bx bx-edit"></span>&nbsp; Edit
+              </button>
             <?php if($_SESSION["usertype"] == '0' || $_SESSION["usertype"] == '1' || $_SESSION["usertype"] == '2') { ?>
               <?php
 			 // PRINT_R($picmeNo); EXIT;
@@ -205,7 +218,7 @@ if (!empty($query)) {echo "<script>alert('Updated Successfully');window.location
 	          $Del_picmeNo = "";
 	          $Del_picmeNo = $n_del['picmeNo'];
 			  
-			  if($n_del['id']==$id)
+			  if(($n_del['id']==$id))
 			  {
 			  ?>
 			  	  <a href="../forms/ViewEditImmunization.php?del=<?php echo $n_del['id']; ?>" onclick="return confirm('Are you sure to delete?')"><button type="submit" class="btn btn-danger btnSpace">
@@ -215,15 +228,22 @@ if (!empty($query)) {echo "<script>alert('Updated Successfully');window.location
 			  else
 			  { 
 		//  print_r("I am here!"); exit;
-		       echo "<script>alert('Can delete only the most recent dose !!!')</script>"; ?>
-				 <a href="../forms/ViewEditImmunization.php?view=<?php echo $id; ?>"><button type="submit" class="btn btn-danger btnSpace">
+		       if ($del_view_ind == "Y")
+			   { 
+		        echo "<script>alert('Can delete only the most recent dose !!!')</script>"; ?>
+				 <a href="../forms/ViewEditImmunization.php?delview=<?php echo $id; ?>"><button type="submit" class="btn btn-danger btnSpace">
                     <span class="bx bx-minus"></span>&nbsp; Delete
-              </button></a>  
-			  <?php } ?>
-            <?php } ?>
-              <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; ?>" onclick="fnImEnable()">
-                    <span class="bx bx-edit"></span>&nbsp; Edit
-              </button>
+              </button></a> 
+			   <?php }
+		   else
+		   { ?>
+		     <a href="../forms/ViewEditImmunization.php?delview=<?php echo $id; ?>"><button type="submit" class="btn btn-danger btnSpace">
+                    <span class="bx bx-minus"></span>&nbsp; Delete
+              </button></a>   
+			  
+			  
+			<?php }}} ?>
+              
 			</h4>
 			<!-- Basic Layout -->
               <div class="row">
