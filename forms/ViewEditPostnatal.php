@@ -7,11 +7,22 @@
       <!-- Menu -->
 <?php include ('require/header.php'); // Menu & Top Search
 $picmeNo = ""; $pncPeriod = ""; $motherPnc = ""; $ifaTabletStatus = ""; 
-$ppcMethod = ""; $mDangerSign = ""; $bloodSugar = ""; $weight = ""; $iDSigns = "";
+$ppcMethod = ""; $mDangerSign = ""; $bloodSugar = ""; $weight =  ""; $iDSigns = "";
 $id =0;
 
-  if (isset($_GET['view'])) {
-    $id = $_GET['view'];
+  if (isset($_GET['view']) OR isset($_GET['delview'])) {
+	   if(isset($_GET['view'])) /*Added Newly*/
+		{
+	     $id = $_GET['view'];		 
+		}
+  //  $id = $_GET['view'];
+  
+    $del_view_ind = "N";
+		if(isset($_GET['delview']))
+		{
+	     $del_view_ind = "Y";	
+         $id = $_GET['delview'];		 
+		}
     $view = true;
     $record = mysqli_query($conn, "SELECT * FROM postnatalvisit WHERE id=$id");
 
@@ -58,9 +69,19 @@ if (isset($_GET['del'])) {
     $id = $_GET['del'];
     date_default_timezone_set('Asia/Kolkata');
     $date = date('d-m-Y h:i:s');
-    mysqli_query($conn, "UPDATE postnatalvisit SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
-    $_SESSION['message'] = "User deleted!"; 
-    echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/PostnatalVisit.php');</script>";
+   // mysqli_query($conn, "UPDATE postnatalvisit SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
+   // $_SESSION['message'] = "User deleted!"; 
+   
+   $rec_del_pic = mysqli_query($conn, "SELECT * FROM postnatalvisit p WHERE $id = p.id AND
+		                       p.pncPeriod = (SELECT max(CAST(p1.pncPeriod AS SIGNED)) From postnatalvisit p1 where p1.picmeNo = p.picmeNo)");
+		      $n_del = mysqli_fetch_array($rec_del_pic);
+	          $Del_picmeNo = "";
+	          $Del_picmeNo = $n_del['picmeNo'];
+			//  print_r($Del_picmeNo); exit;
+	
+	mysqli_query($conn, "DELETE FROM postnatalvisit WHERE id=$id");
+	
+    echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/PostnatalVisitDtl.php?History=$Del_picmeNo');</script>";
   }
 ?>
 <!-- Content wrapper -->
@@ -75,17 +96,52 @@ if (isset($_GET['del'])) {
                   echo "Edit";
               } ?> Postnatal
             
-              <a href="PostnatalVisit.php"><button type="submit" class="btn btn-primary" id="btnBack">
+              <a href="PostnatalVisitDtl.php?History=<?php echo $picmeNo; ?>"><button type="submit" class="btn btn-primary" id="btnBack">
                     <span class="bx bx-arrow-back"></span>&nbsp; Back
               </button></a>
-            <?php if($_SESSION["usertype"] == '0' || $_SESSION["usertype"] == '1' || $_SESSION["usertype"] == '2') { ?>              
-              <a href="../forms/ViewEditPostnatal.php?del=<?php echo $id; ?>" onclick="return confirm('Are you sure to delete?')"><button type="submit" class="btn btn-danger btnSpace">
-                    <span class="bx bx-minus"></span>&nbsp; Delete
-              </button></a>
-            <?php } ?>
+            
               <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; ?>" onclick="fnPostEnable()">
                     <span class="bx bx-edit"></span>&nbsp; Edit
               </button>
+			  			  
+			  <?php if($_SESSION["usertype"] == '0' || $_SESSION["usertype"] == '1' || $_SESSION["usertype"] == '2') { ?>
+              <?php
+			 // PRINT_R($id); EXIT;
+			 
+			 
+			  $rec_del_pic = mysqli_query($conn, "SELECT * FROM postnatalvisit p WHERE $picmeNo = p.picmeNo AND
+		                       p.pncPeriod = (SELECT max(CAST(p1.pncPeriod AS SIGNED)) From postnatalvisit p1 where p1.picmeNo = p.picmeNo)");
+			  $n_del = "";
+			  $n_del = mysqli_fetch_array($rec_del_pic);
+	          $Del_picmeNo = "";
+	          $Del_picmeNo = $n_del['picmeNo'];
+			//  print_r($picmeNo."*".$n_del['id']."*".$id); exit;
+			  
+			  if(($n_del['id']==$id))
+			  {
+			  ?>
+			  	  <a href="../forms/ViewEditPostnatal.php?del=<?php echo $n_del['id']; ?>" onclick="return confirm('Are you sure to delete?')"><button type="submit" class="btn btn-danger btnSpace">
+                    <span class="bx bx-minus"></span>&nbsp; Delete
+              </button></a>
+			  <?php }
+			  else
+			  { 
+		//  print_r("I am here!"); exit;
+		       if ($del_view_ind == "Y")
+			   { 
+		        echo "<script>alert('Can delete only the most recent visit !!!')</script>"; ?>
+				 <a href="../forms/ViewEditPostnatal.php?delview=<?php echo $id; ?>"><button type="submit" class="btn btn-danger btnSpace">
+                    <span class="bx bx-minus"></span>&nbsp; Delete
+              </button></a> 
+			   <?php }
+		   else
+		   { ?>
+		     <a href="../forms/ViewEditPostnatal.php?delview=<?php echo $id; ?>"><button type="submit" class="btn btn-danger btnSpace">
+                    <span class="bx bx-minus"></span>&nbsp; Delete
+              </button></a>   
+			  
+			  
+			<?php }}} ?>
             
              </h4>
               <div class="row">
@@ -106,27 +162,58 @@ if (isset($_GET['del'])) {
                           </div>
                           <div class="mb-3 col-md-6">
                             <label class="form-label">PNC PERIOD <span class="mand">* </span></label>
-                            <select name="pncPeriod" required id="pncPeriod" class="form-select" disabled>
-                           <?php  
+                            <div class="input-group input-group-merge">
+							
+							<?php  
                             $query = "SELECT p.pncPeriod,enumid,enumvalue FROM postnatalvisit p join enumdata e on e.enumid=p.pncPeriod WHERE type=17 AND p.id=".$id;
                             $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$pncPeriod){ echo "selected"; } ?>
-                         <?php echo $listvalue['enumvalue']; ?>
-                                    <option value="1">1st day</option>
-                                    <option value="2">3rd day</option>
-                                    <option value="3">7th day</option>
-                                    <option value="4">14th day</option>
-                                    <option value="5">21st day</option>
-                                    <option value="6">28th day</option>
-                                    <option value="7">42nd day</option>
-
-                                </option>
-                          
-                          <?php  } 
-                              ?>
-                             </select>
+                            while($listvalue = mysqli_fetch_assoc($exequery)) {
+                            if($listvalue['enumid'] == 1)
+									{
+										$print_val = "1st day";
+									}
+							else
+								if($listvalue['enumid'] == 2)
+									{
+										$print_val = "3rd day";
+									}
+							else
+								if($listvalue['enumid'] == 3)
+									{
+										$print_val = "7th day";
+									}		
+							else
+								if($listvalue['enumid'] == 4)
+									{
+										$print_val = "14th day";
+									}
+							else
+								if($listvalue['enumid'] == 5)
+									{
+										$print_val = "21st day";
+									}
+							else
+								if($listvalue['enumid'] == 6)
+									{
+										$print_val = "28th day";
+									}
+							else
+								if($listvalue['enumid'] == 7)
+									{
+										$print_val = "42nd day";
+									}	
+									}
+								?>
+							<input
+                              type="text"
+                              class="form-control"
+                              id="pncPeriod"
+                              name="pncPeriod"
+                              placeholder=""
+                             value="<?php echo $print_val; ?>"   
+                            readonly = "readonly"
+                            />
+							
                           </div>
                           </div>
                         <div class="row">
@@ -142,7 +229,7 @@ if (isset($_GET['del'])) {
                               name="motherPnc"
                               placeholder=""
                              value="<?php echo date("m/d/Y", strtotime($motherPnc)); ?>"   
-                             disabled
+                            readonly = "readonly"
                             />
                           </div>
                           </div>

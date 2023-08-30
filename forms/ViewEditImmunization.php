@@ -409,6 +409,7 @@ if (!empty($query)) {echo "<script>alert('Updated Successfully');window.location
                               aria-describedby="basic-icon-default-conpassword" 
                               value="<?php echo date("m/d/Y", strtotime($doseDueDate)); ?>" 
                               disabled
+							  readonly = "readonly"
                               required 
                               />
                           </div>
