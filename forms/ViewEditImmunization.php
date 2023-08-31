@@ -132,7 +132,7 @@ compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE i
 	}
 	else
 	{
-	 $query = mysqli_query($conn, "UPDATE immunization SET 
+	 $query = mysqli_query($conn, "UPDATE immunization SET doseName = '$doseName',
 doseProvidedDate='$doseProvidedDate', breastFeeding='$breastFeeding', 
 compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
 	}	
