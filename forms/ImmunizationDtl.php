@@ -22,7 +22,10 @@ $History = true;}
            <!-- Hoverable Table rows -->
                  <div class="card">
                    <h5 class="card-header"><span class="text-muted fw-light">Immunization /</span> Immunization Header List /</span> Immunization Detail List
-                   <h5 class="card-header"><span class="text-muted fw-light"> PICME : </span> <?php echo $_GET['History']; ?> 
+                   <a href="Immunization.php?History=<?php echo $IM_picmeno; ?>"><button type="submit" class="btn btn-primary" id="btnBack">
+                    <span class="bx bx-arrow-back"></span>&nbsp; Back
+                   </button></a>
+				   <h5 class="card-header"><span class="text-muted fw-light"> PICME : </span> <?php echo $_GET['History']; ?> 
 				   <h5 class="card-header"><span class="text-muted fw-light"> Mother Name : </span> <?php echo $his_mot_name; ?>
                    </h5>
                    <div class="table-responsive text-nowrap">

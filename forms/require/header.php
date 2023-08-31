@@ -432,6 +432,12 @@ include ('preloader.php');
               </a>
             </li>
 			
+			<li class="menu-item">
+              <a href="PregnancyHistory.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-data"></i>
+                <div data-i18n="Pregnancy History">Pregnancy History</div>
+              </a>
+            </li>
 			
 			    <?php if(($usertype == 0) || ($usertype == 1) || ($usertype == 2)) { ?>
             <li class="menu-item">
