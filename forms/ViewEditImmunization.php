@@ -130,6 +130,7 @@ if($doseNo == 1) {
 	
 	if($dose_chg_val == 1)
 	{
+	//	print_r($doseProvidedDate); exit;
 	 $query = mysqli_query($conn, "UPDATE immunization SET doseName = '$doseName',
 doseProvidedDate='$doseProvidedDate', breastFeeding='$breastFeeding', 
 compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
