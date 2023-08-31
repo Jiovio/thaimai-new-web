@@ -55,9 +55,7 @@ if (! empty($_POST["update"])) {
   //$doseName = implode(",",$_POST["doseName"]); 
   
   $doseName = implode(",",$_POST["doseName"]);
- // print_r($chk_dose_name); exit;
- // print_r($doseName); exit;
-  
+   
 //$doseDueDate = $_POST["doseDueDate"];
   $doseProvidedDate = $_POST["doseProvidedDate"]; 
  // $query = mysqli_query($conn,"SELECT dd.deliverydate FROM immunization im JOIN deliverydetails dd ON dd.picmeno=im.picmeNo WHERE im.picmeNo='$picmeNo'");
@@ -123,14 +121,11 @@ if($doseNo == 1) {
 	
 	$wild_com = $doseName;
 	$wild_srch_com = str_replace(',', '', $wild_com);
-	
-	//print_r($doseName); exit;
-
+		
     $dose_chg_val = is_numeric($wild_srch_com);
 	
 	if($dose_chg_val == 1)
 	{
-	//	print_r($doseProvidedDate); exit;
 	 $query = mysqli_query($conn, "UPDATE immunization SET doseName = '$doseName',
 doseProvidedDate='$doseProvidedDate', breastFeeding='$breastFeeding', 
 compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
@@ -228,7 +223,6 @@ if (!empty($query)) {echo "<script>alert('Updated Successfully');window.location
 			  <?php }
 			  else
 			  { 
-		//  print_r("I am here!"); exit;
 		       if ($del_view_ind == "Y")
 			   { 
 		        echo "<script>alert('Can delete only the most recent dose !!!')</script>"; ?>
@@ -354,13 +348,10 @@ if (!empty($query)) {echo "<script>alert('Updated Successfully');window.location
 						  <select required name="doseName[]" id="doseName" multiple class="form-select" disabled>
 						  
                           <?php 
-						 // print_r("I am here"); exit;
                             $query = mysqli_query($conn, "SELECT i.doseName,e.enumid,e.enumvalue FROM immunization i join enumdata e on i.doseName=e.enumid WHERE type=43 AND i.id=".$id);
                             
 							while($status_list=mysqli_fetch_array($query)){
-							/*	$chk_dose_name = "";
-							    $chk_dose_name = $status_list['doseName']; 
-								print_r($chk_dose_name); //exit; */
+							
 								$dose_ind = "Y";
 							
                               for($i=0; $i < count($dnArr); $i++) {
@@ -369,9 +360,6 @@ if (!empty($query)) {echo "<script>alert('Updated Successfully');window.location
                                     <option value="<?php if(in_array($status_list['enumid'], $dnArr)){ echo "selected"; } ?>">
                                    
                                     <?php 
-									
-								//	print_r("Hi! I am here!"); exit;
-									
 									if ($dnArr[$i] == "11") { echo "OPV-1";}elseif($dnArr[$i] == "12") { echo "Rota-1"; }
                                     elseif($dnArr[$i] == "13") { echo "IPV-1"; }elseif($dnArr[$i] == "14") { echo "PCV-1"; }
                                     elseif($dnArr[$i] == "15") { echo "Pentavalent-1"; } 
