@@ -53,6 +53,7 @@ if (! empty($_POST["update"])) {
     $id = $_POST['id'];
   //$doseNo = $_POST["doseNo"]; 
   //$doseName = implode(",",$_POST["doseName"]); 
+  $picmeNo = $_POST["picmeNo"]; 
   
   $doseName = implode(",",$_POST["doseName"]);
    
@@ -132,11 +133,12 @@ compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE i
 	}
 	else
 	{
-	 $query = mysqli_query($conn, "UPDATE immunization SET doseName = '$doseName',
+	 $query = mysqli_query($conn, "UPDATE immunization SET 
 doseProvidedDate='$doseProvidedDate', breastFeeding='$breastFeeding', 
 compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
 	}	
-if (!empty($query)) {echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/ImmunizationDtl.php?History=$picmeNo');</script>";
+if (!empty($query)) {
+	echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/ImmunizationDtl.php?History=$picmeNo');</script>";
 
   } }
 
