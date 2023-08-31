@@ -162,7 +162,7 @@ if (isset($_GET['del'])) {
                           </div>
                           <div class="mb-3 col-md-6">
                             <label class="form-label">PNC PERIOD <span class="mand">* </span></label>
-                            <div class="input-group input-group-merge">
+                            
 							
 							<?php  
                             $query = "SELECT p.pncPeriod,enumid,enumvalue FROM postnatalvisit p join enumdata e on e.enumid=p.pncPeriod WHERE type=17 AND p.id=".$id;
