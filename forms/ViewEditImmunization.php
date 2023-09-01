@@ -348,14 +348,15 @@ if (!empty($query)) {
                                     <?php } 
                                       ?>
                              </select>
-							 <?php if(isset($_POST['formSubmit'])) 
+							 
+                            </div>
+                        </div>
+						<?php if(isset($_POST['formSubmit'])) 
                               { }
 					          else 
 					          {
 							   echo("\n<p>Dose Name Change? - Select Dose No</p>\n"); 
 							  } ?>
-                            </div>
-                        </div>
                     </div>
 					<div class="row">
 						<div class="col-6 mb-3">
@@ -414,13 +415,14 @@ if (!empty($query)) {
                             } 
                                       ?>
                              </select>
-							 <?php if(isset($_POST['formSubmit'])) 
+							 
+                          </div>
+						  <?php if(isset($_POST['formSubmit'])) 
                               { }
 					          else 
 					          {
 							   echo("\n<p>No Dose Change? - Select any/all of the existing dose name</p>\n"); 
 							  } ?>
-                          </div>
                         </div>
 						<div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">Dose Due Date <span class="mand">* </span></label>
