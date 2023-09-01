@@ -53,7 +53,7 @@ if (! empty($_POST["update"])) {
     $id = $_POST['id'];
   //$doseNo = $_POST["doseNo"]; 
   //$doseName = implode(",",$_POST["doseName"]); 
-  $picmeNo = $_POST["picmeNo"]; 
+ // $picmeNo = $_POST["picmeNo"]; 
   
   $doseName = implode(",",$_POST["doseName"]);
    
@@ -125,6 +125,16 @@ if($doseNo == 1) {
 		
     $dose_chg_val = is_numeric($wild_srch_com);
 	
+	$wild_com = $doseName;
+	$wild_srch_com = str_replace(',', '', $wild_com);
+		
+    $dose_chg_val = is_numeric($wild_srch_com);
+	
+	 $rec_del_pic = mysqli_query($conn, "SELECT * FROM immunization im WHERE im.id = $id");
+				          $n_del = mysqli_fetch_array($rec_del_pic);
+	          $Upd_picmeNo = "";
+	          $Upd_picmeNo = $n_del['picmeNo'];
+	
 	if($dose_chg_val == 1)
 	{
 	 $query = mysqli_query($conn, "UPDATE immunization SET doseName = '$doseName',
@@ -138,7 +148,7 @@ doseProvidedDate='$doseProvidedDate', breastFeeding='$breastFeeding',
 compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
 	}	
 if (!empty($query)) {
-	echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/ImmunizationDtl.php?History=$picmeNo');</script>";
+	echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/ImmunizationDtl.php?History=$Upd_picmeNo');</script>";
 
   } }
 
@@ -204,7 +214,8 @@ if (!empty($query)) {
               <a href="ImmunizationDtl.php?History=<?php echo $picmeNo; ?>"><button type="submit" class="btn btn-primary" id="btnBack">
                     <span class="bx bx-arrow-back"></span>&nbsp; Back
               </button></a>
-			  <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; ?>" onclick="fnImEnable()">
+			  <?php $Edit_ind = "N"; ?>
+			  <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; $Edit_ind = "Y"; ?>" onclick="fnImEnable()">
                     <span class="bx bx-edit"></span>&nbsp; Edit
               </button>
             <?php if($_SESSION["usertype"] == '0' || $_SESSION["usertype"] == '1' || $_SESSION["usertype"] == '2') { ?>
@@ -337,6 +348,12 @@ if (!empty($query)) {
                                     <?php } 
                                       ?>
                              </select>
+							 <?php if(isset($_POST['formSubmit'])) 
+                              { }
+					          else 
+					          {
+							   echo("<p>Dose Name Change? - Select Dose No</p>\n"); 
+							  } ?>
                             </div>
                         </div>
                     </div>
@@ -344,12 +361,24 @@ if (!empty($query)) {
 						<div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">Dose Name <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                          
+						  <?php
 						  
+						  $query   = mysqli_query($conn, "SELECT i.doseName,e.enumid,e.enumvalue FROM immunization i join enumdata e on i.doseName=e.enumid WHERE type=43 AND i.id=".$id);
+                          $qry_val = mysqli_fetch_array($query);
+						  $qry_val['doseName'] = $doseName;
 						  
-						  <select required name="doseName[]" id="doseName" multiple class="form-select" disabled>
+						//  print_r("Hi".$qry_val['doseName']); 
+						
+					//	print_r("Hi"."Bfr select"); 
 						  
+                          ?>
+						  
+						  <select required name="doseName[]" id="doseName" multiple class="form-select doseName" disabled>
+						  						  
                           <?php 
+						  
+						//  print_r("Hi"."Afr selectttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"); exit; 
+						  
                             $query = mysqli_query($conn, "SELECT i.doseName,e.enumid,e.enumvalue FROM immunization i join enumdata e on i.doseName=e.enumid WHERE type=43 AND i.id=".$id);
                             
 							while($status_list=mysqli_fetch_array($query)){
@@ -385,6 +414,12 @@ if (!empty($query)) {
                             } 
                                       ?>
                              </select>
+							 <?php if(isset($_POST['formSubmit'])) 
+                              { }
+					          else 
+					          {
+							   echo("<p>No Dose Change? - Select any/all of the existing dose name</p>\n"); 
+							  } ?>
                           </div>
                         </div>
 						<div class="col-6 mb-3">
