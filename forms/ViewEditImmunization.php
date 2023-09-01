@@ -350,13 +350,14 @@ if (!empty($query)) {
                              </select>
 							 
                             </div>
-                        </div>
-						<?php if(isset($_POST['formSubmit'])) 
+							<?php if(isset($_POST['formSubmit'])) 
                               { }
 					          else 
 					          {
 							   echo("\n<p>Dose Name Change? - Select Dose No</p>\n"); 
 							  } ?>
+                        </div>
+						
                     </div>
 					<div class="row">
 						<div class="col-6 mb-3">
