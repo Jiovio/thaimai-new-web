@@ -361,7 +361,8 @@ if (!empty($query)) {
 					<div class="row">
 						<div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">Dose Name <span class="mand">* </span></label>
-                         
+                         <div class="input-group input-group-merge">
+						  
 						  <select required name="doseName[]" id="doseName" multiple class="form-select doseName" disabled>
 						  						  
                           <?php 
