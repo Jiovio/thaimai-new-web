@@ -352,7 +352,7 @@ if (!empty($query)) {
                               { }
 					          else 
 					          {
-							   echo("<p>Dose Name Change? - Select Dose No</p>\n"); 
+							   echo("\n<p>Dose Name Change? - Select Dose No</p>\n"); 
 							  } ?>
                             </div>
                         </div>
@@ -418,7 +418,7 @@ if (!empty($query)) {
                               { }
 					          else 
 					          {
-							   echo("<p>No Dose Change? - Select any/all of the existing dose name</p>\n"); 
+							   echo("\n<p>No Dose Change? - Select any/all of the existing dose name</p>\n"); 
 							  } ?>
                           </div>
                         </div>
