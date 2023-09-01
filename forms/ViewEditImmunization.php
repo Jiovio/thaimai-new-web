@@ -15,7 +15,6 @@ $picmeNo = ""; $doseNo = ""; $doseName = ""; $doseDueDate = ""; $doseProvidedDat
 		{
 	     $id = $_GET['view'];		 
 		}
-	  
 		
 		$del_view_ind = "N";
 		if(isset($_GET['delview']))
@@ -288,7 +287,7 @@ if (!empty($query)) {
                             $query = mysqli_query($conn, "SELECT i.doseNo,e.enumid,e.enumvalue FROM immunization i join enumdata e on i.doseNo=e.enumid WHERE type=42 AND i.id=".$id);
                             while($status_list=mysqli_fetch_assoc($query)){
                                 ?>
-                                    <option value="<?php echo $status_list['enumid'];  ?>">
+                                    <option selected=true value="<?php echo $status_list['enumid'];  ?>">
 									<?php echo $status_list['enumvalue']; ?>
 
 									<?php 
@@ -362,25 +361,11 @@ if (!empty($query)) {
 					<div class="row">
 						<div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">Dose Name <span class="mand">* </span></label>
-                          <div class="input-group input-group-merge">
-						  <?php
-						  
-						  $query   = mysqli_query($conn, "SELECT i.doseName,e.enumid,e.enumvalue FROM immunization i join enumdata e on i.doseName=e.enumid WHERE type=43 AND i.id=".$id);
-                          $qry_val = mysqli_fetch_array($query);
-						  $qry_val['doseName'] = $doseName;
-						  
-						//  print_r("Hi".$qry_val['doseName']); 
-						
-					//	print_r("Hi"."Bfr select"); 
-						  
-                          ?>
-						  
+                         
 						  <select required name="doseName[]" id="doseName" multiple class="form-select doseName" disabled>
 						  						  
                           <?php 
-						  
-						//  print_r("Hi"."Afr selectttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"); exit; 
-						  
+						 
                             $query = mysqli_query($conn, "SELECT i.doseName,e.enumid,e.enumvalue FROM immunization i join enumdata e on i.doseName=e.enumid WHERE type=43 AND i.id=".$id);
                             
 							while($status_list=mysqli_fetch_array($query)){
@@ -388,9 +373,10 @@ if (!empty($query)) {
 								$dose_ind = "Y";
 							
                               for($i=0; $i < count($dnArr); $i++) {
+								  
                                 ?>
 								
-                                    <option value="<?php if(in_array($status_list['enumid'], $dnArr)){ echo "selected"; } ?>">
+                                    <option selected=true value="<?php if(in_array($status_list['enumid'], $dnArr)){ echo "selected"; } ?>">
                                    
                                     <?php 
 									if ($dnArr[$i] == "11") { echo "OPV-1";}elseif($dnArr[$i] == "12") { echo "Rota-1"; }
@@ -416,14 +402,7 @@ if (!empty($query)) {
                             } 
                                       ?>
                              </select>
-							 
                           </div>
-						  <?php if(isset($_POST['formSubmit'])) 
-                              { }
-					          else 
-					          {
-							   echo("\n<p>No Dose Change? - Select any/all of the existing dose name</p>\n"); 
-							  } ?>
                         </div>
 						<div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">Dose Due Date <span class="mand">* </span></label>
