@@ -121,12 +121,6 @@ if($doseNo == 1) {
 	
 	$wild_com = $doseName;
 	$wild_srch_com = str_replace(',', '', $wild_com);
-		
-    $dose_chg_val = is_numeric($wild_srch_com);
-	
-	$wild_com = $doseName;
-	$wild_srch_com = str_replace(',', '', $wild_com);
-		
     $dose_chg_val = is_numeric($wild_srch_com);
 	
 	 $rec_del_pic = mysqli_query($conn, "SELECT * FROM immunization im WHERE im.id = $id");
@@ -148,7 +142,7 @@ compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE i
 	}	
 if (!empty($query)) {
 	echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/ImmunizationDtl.php?History=$Upd_picmeNo');</script>";
-
+    
   } }
 
 
