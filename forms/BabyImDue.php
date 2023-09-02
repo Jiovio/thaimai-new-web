@@ -32,7 +32,9 @@
                       </tr>
                     </thead>
 <?php
- $listQry = "SELECT im.picmeno,im.createdUserId, ec.motheraadhaarname,im.FutureDoseDate,im.FutureDoseNo,ec.mothermobno,ec.PhcId,ec.BlockId,ec.HscId FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeno WHERE im.doseNo = (SELECT max(CAST(im.doseNo AS SIGNED))) AND date_format(str_to_date(im.FutureDoseDate, '%m/%d/%Y'), '%Y-%m-%d') >= DATE_FORMAT(NOW() ,'%Y-%m-01') AND im.status=1";
+ $listQry = "SELECT im.picmeno,im.createdUserId, ec.motheraadhaarname,im.FutureDoseDate,im.FutureDoseNo,ec.mothermobno,ec.PhcId,ec.BlockId,ec.HscId FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeno WHERE im.doseNo = (SELECT max(CAST(im.doseNo AS SIGNED))) AND 
+ str_to_date(im.FutureDoseDate, '%Y-%m-%d') >= DATE_FORMAT(NOW() ,'%Y-%m-01') AND im.status=1";
+ //date_format(str_to_date(im.FutureDoseDate, '%m/%d/%Y'), '%Y-%m-%d') >= DATE_FORMAT(NOW() ,'%Y-%m-01') AND im.status=1";
  $private = " AND im.createdUserId='".$userid."'";
  $orderQry = " ORDER BY ec.motheraadhaarname DESC";
   if(($usertype == 0) || ($usertype == 1)) {

@@ -29,9 +29,8 @@
                     </thead>
 <?php 
 $listQry = "SELECT av.picmeno,ec.motheraadhaarname,av.anvisitDate,av.avdueDate, ec.mothermobno,ec.BlockId,ec.PhcId,av.createdBy,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec ON av.picmeno=ec.picmeNo WHERE 
-date_format(str_to_date(av.anvisitDate, '%m/%d/%Y'), '%Y-%m-%d') >
-         date_format(str_to_date(av.avdueDate, '%m/%d/%Y'), '%Y-%m-%d')
-AND date_format(str_to_date(av.anvisitDate, '%m/%d/%Y'), '%Y-%m-%d') = CURRENT_DATE() 
+str_to_date(av.anvisitDate, '%Y-%m-%d') >
+         str_to_date(av.avdueDate, '%Y-%m-%d')
  AND av.status=1";
 
 $private = " AND av.createdBy='".$userid."'";
