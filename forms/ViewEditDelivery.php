@@ -54,8 +54,18 @@ if (isset($_GET['del'])) {
 $id = $_GET['del'];
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-Y h:i:s');
-mysqli_query($conn, "UPDATE deliverydetails SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
-$_SESSION['message'] = "User deleted!"; 
+//mysqli_query($conn, "UPDATE deliverydetails SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
+//$_SESSION['message'] = "User deleted!"; 
+
+$rec_del_pic = mysqli_query($conn, "SELECT * FROM deliverydetails WHERE id = $id");
+				          $n_del = mysqli_fetch_array($rec_del_pic);
+	          $Del_picmeNo = "";
+	          $Del_picmeNo = $n_del['picmeno'];
+			  
+			  mysqli_query($conn, "DELETE FROM deliverydetails WHERE id=$id");
+			  
+mysqli_query($conn, "DELETE FROM immunization WHERE picmeNo = $Del_picmeNo");
+mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
   echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/DeliveryDetails.php');</script>";
 }
 ?>
@@ -120,16 +130,17 @@ $_SESSION['message'] = "User deleted!";
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-email">DELIVERY DATE <span class="mand">* </span></label>
                             <input
-                              type="text"
+                              type="date"
                               name="deliverydate"
                               id="deliverydate"
                               class="form-control"
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-                              value="<?php echo date("m/d/Y", strtotime($deliverydate)); ?>"  
+                              value="<?php echo $deliverydate; ?>"  
                               disabled
                               required
+							  readonly = "readonly"
                             />
                           
                         </div>
@@ -519,6 +530,7 @@ $_SESSION['message'] = "User deleted!";
 
                           <div class="col-6 mb-3"  id="sncuDate" style="display: none;">
                           <label class="form-label" for="basic-icon-default-password">SNCU DATE</label>
+						 
                             <input
                               type="date"
                               name="sncudate"
@@ -567,22 +579,30 @@ $_SESSION['message'] = "User deleted!";
                         </div>
                  </div>
                  <div class="row">
-
+				 
+				 <?php
+				    //  $date="2013-03-15";
+					  
+					// $dt_ft = strval(date_format($date,"m/d/Y")); 
+				//	echo "string".$dt_ft; 
+                //    echo date($dt_ft,"Y/m/d"); exit;
+				 //$disp_date = date_format("2017/12/28","Y/m/d H:i:s"); print_r($disp_date); exit; ?>  
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">DISCHARGE DATE <span class="mand">* </span></label>
                             <input
-                              type="text"
+                              type="date"
                               name="dischargedate"
                               id="dischargedate"
                               class="form-control"
                               placeholder="DISCHARGE DATE"
                               aria-label="DISCHARGE DATE"
                               aria-describedby="basic-icon-default-password2"
-                              value="<?php echo date("m/d/Y", strtotime($dischargedate)); ?>"     
+							  
+                              value="<?php echo $dischargedate; ?>"     
                               disabled
                               required
                             />
-                          
+                        
                         </div>
                         
                         <div class="col-6 mb-3">
@@ -606,7 +626,7 @@ $_SESSION['message'] = "User deleted!";
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">BCG DATE</label>
                             <input
-                              type="text"
+                              type="date"
                               name="bcgdate"
                               id="bcgdate"
                               class="form-control"
@@ -617,7 +637,7 @@ $_SESSION['message'] = "User deleted!";
 							  value="<?php 
 							  if(isset($bcgdate))
 							  {
-								  echo date("m/d/Y", strtotime($bcgdate)); 
+								  echo $bcgdate; 
 							  }
 							  else
 							  {
@@ -631,14 +651,14 @@ $_SESSION['message'] = "User deleted!";
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">OPV-0 DATE <span class="mand">* </span></label>
                            <input
-                              type="text"
+                              type="date"
                               name="opvDdate"
                               id="opvDdate"
                               class="form-control"
                               placeholder="OPV-D DATE"
                               aria-label="OPV-D DATE"
                               aria-describedby="basic-icon-default-password2"
-                              value="<?php echo date("m/d/Y", strtotime($opvDdate)); ?>"   
+                              value="<?php echo $opvDdate; ?>"   
                               disabled
                             />
                          
@@ -650,7 +670,7 @@ $_SESSION['message'] = "User deleted!";
                           <label class="form-label" for="basic-icon-default-password">HEP-B DATE</label>
                           
                             <input
-                              type="text"
+                              type="date"
                               name="hebBdate"
                               id="hebBdate"
                               class="form-control"
@@ -661,7 +681,7 @@ $_SESSION['message'] = "User deleted!";
 							   value="<?php 
 							  if(isset($hebBdate))
 							  {
-								  echo date("m/d/Y", strtotime($hebBdate)); 
+								  echo $hebBdate; 
 							  }
 							  else
 							  {

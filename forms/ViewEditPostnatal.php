@@ -228,7 +228,7 @@ if (isset($_GET['del'])) {
                               id="motherPnc"
                               name="motherPnc"
                               placeholder=""
-                             value="<?php echo date("m/d/Y", strtotime($motherPnc)); ?>"   
+                             value="<?php echo $motherPnc; ?>"   
                             readonly = "readonly"
                             />
                           </div>
