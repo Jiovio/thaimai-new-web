@@ -44,7 +44,7 @@ $id =0;
 
  if (! empty($_POST["editpostnatal"])) {
     $id = $_POST["id"];
-    $pncPeriod = $_POST["pncPeriod"]; 
+  //  $pncPeriod = $_POST["pncPeriod"]; 
     $motherPnc = $_POST["motherPnc"];
     $ifaTabletStatus = $_POST["ifaTabletStatus"]; 
     $calcium = $_POST['calcium'];
@@ -58,11 +58,31 @@ $id =0;
     $bpDia = $_POST["bpDia"];  
     date_default_timezone_set('Asia/Kolkata');
     $date = date('d-m-Y h:i:s');
-
+				
+	$rec_del_pic = mysqli_query($conn, "SELECT * FROM postnatalvisit p WHERE $id = p.id");
+    $n_del = mysqli_fetch_array($rec_del_pic);
+	$Del_picmeNo = "";
+	$Del_picmeNo = $n_del['picmeNo'];
+	
+	$str_dt = "";
+	$str_dt = $_POST["motherPnc"];
+			  
+    $sub_cnt = 0;		
+    $sub_cnt = strpos(strval($str_dt),"-");
+	$dt_len = 0;
+	$dt_len = substr(strval($str_dt),0,($sub_cnt));
+	
+	if(strlen($dt_len) > 4 OR strlen($dt_len) < 4 OR (int)$str_dt < 1970 OR (int)$str_dt > 2023)
+	{
+	 echo "<script> alert('Invalid year. Not Updated'); window.location.replace('{$siteurl}/forms/ViewEditPostnatal.php?view=$id');</script>";
+	}		
+	else
+	{
     $query = mysqli_query($conn,"UPDATE postnatalvisit SET calcium='$calcium',pncPeriod='$pncPeriod',vitaminA='$vitaminA',motherPnc='$motherPnc',ifaTabletStatus='$ifaTabletStatus',ppcMethod='$ppcMethod',motherDangerSign='$mDangerSign',
     bloodSugar='$bloodSugar',infantWeight='$weight',infantDangerSigns='$iDSigns',bpSys='$bpSys',bpDia='$bpDia',updatedat='$date',updatedBy='$userid' WHERE id=".$id);
-    if (!empty($query)) {
-            echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/PostnatalVisit.php');</script>";
+    if (!empty($query)) { 
+            echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/PostnatalVisitDtl.php?History=$Del_picmeNo');</script>";
+	}
           } }
 
 if (isset($_GET['del'])) {
@@ -217,8 +237,7 @@ if (isset($_GET['del'])) {
                           </div>
                           </div>
                         <div class="row">
-
-                          <div class="mb-3 col-md-6">
+						                          <div class="mb-3 col-md-6">
                             <label for="zipCode" class="form-label">MOTHER PNC DATE </label>
                             <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-calendar"></i></span>
@@ -228,9 +247,13 @@ if (isset($_GET['del'])) {
                               id="motherPnc"
                               name="motherPnc"
                               placeholder=""
-                             value="<?php echo $motherPnc; ?>"   
-                            readonly = "readonly"
+							 
+                             value="<?php echo $motherPnc; ?>"
+							 disabled
+							 
                             />
+							
+							
                           </div>
                           </div>
                           <div class="mb-3 col-md-6">
