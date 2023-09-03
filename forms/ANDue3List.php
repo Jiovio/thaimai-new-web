@@ -37,6 +37,7 @@
                <th>S.No</th>     
                <th>RCH ID</th>
                <th>AN Registered Date</th>
+			   <th>EDD Date</th>
                <th>Block</th>
                <th>PHC</th>
                <th>HSC</th>
@@ -64,7 +65,7 @@
 		
 	  
       $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, av.residenttype, av.motherWeight, av.Hb, av.bpSys, av.bpDia, av.HighRisk, ec.address, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
-                  WHERE av.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND (TIMESTAMPDIFF(MONTH, CURRENT_DATE(), str_to_date(mh.edddate, '%m/%d/%Y')) <= 3)";  
+                  WHERE av.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND (TIMESTAMPDIFF(MONTH, CURRENT_DATE(), mh.edddate) <= 3)";  
 				 
 				// (mh.edddate = DATE_ADD(CURRENT_DATE(), INTERVAL 3 MONTH))";  
 				     		
@@ -149,6 +150,7 @@
                            <td><?php echo $cnt; ?></td>
 						   <td><?php echo $row['picmeno']; ?></td>
 					       <td><?php echo date('d-m-Y', strtotime($row['anRegDate'])); ?></td>
+						   <td><?php echo date('d-m-Y', strtotime($row['edddate'])); ?></td>
 				           <td><?php echo $rowh['BlockName']; ?></td>
                            <td><?php echo $rowh['PhcName']; ?></td>
                            <td><?php echo $rowh['HscName']; ?></td>
