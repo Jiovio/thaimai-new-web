@@ -49,7 +49,7 @@ $picmeNo = ""; $doseNo = ""; $doseName = ""; $doseDueDate = ""; $doseProvidedDat
             // $motherCovidVacBoosterDate = $n["motherCovidVacBoosterDate"]; 
 	}
 if (! empty($_POST["update"])) {
-	 print_r("I am here!"); exit;
+	
 
     $id = $_POST['id'];
   //$doseNo = $_POST["doseNo"]; 
@@ -61,7 +61,7 @@ if (! empty($_POST["update"])) {
 //$doseDueDate = $_POST["doseDueDate"];
 //print_r("before".$doseProvidedDate)  ; exit;
   $doseProvidedDate = $_POST["doseProvidedDate"];
-//print_r("after".$doseProvidedDate)  ; exit;
+print_r("after".$doseProvidedDate)  ; 
  // $query = mysqli_query($conn,"SELECT dd.deliverydate FROM immunization im JOIN deliverydetails dd ON dd.picmeno=im.picmeNo WHERE im.picmeNo='$picmeNo'");
  /* while ($fdate = mysqli_fetch_array($query)){
    $futdate = $fdate['deliverydate'];
@@ -132,16 +132,18 @@ if($doseNo == 1) {
 	          $Upd_picmeNo = "";
 	          $Upd_picmeNo = $n_del['picmeNo'];
 			  
-			  print_r($dose_chg_val); exit;
+			  print_r("dose".$dose_chg_val); 
 	
 	if($dose_chg_val == 1)
 	{
+		print_r("dchgd".$dose_chg_val); 
 	 $query = mysqli_query($conn, "UPDATE immunization SET doseName = '$doseName',
 doseProvidedDate='$doseProvidedDate', breastFeeding='$breastFeeding', 
 compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
 	}
 	else
 	{
+		print_r("dnchgd".$dose_chg_val); 
 	 $query = mysqli_query($conn, "UPDATE immunization SET 
 doseProvidedDate='$doseProvidedDate', breastFeeding='$breastFeeding', 
 compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
