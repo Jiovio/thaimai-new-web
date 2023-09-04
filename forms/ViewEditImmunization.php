@@ -66,7 +66,7 @@ print_r("after".$doseProvidedDate)  ;
 	          $Upd_picmeNo = "";
 	          $Upd_picmeNo = $n_del['picmeNo'];
 			  
-			  print_r("dose".$dose_chg_val); exit;
+			  print_r("dose".$dose_chg_val); 
 	
 	if($dose_chg_val == 1)
 	{
@@ -77,7 +77,7 @@ compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE i
 	}
 	else
 	{
-		print_r("dnchgd".$dose_chg_val); 
+		print_r("dnchgdno".$dose_chg_val); exit;
 	 $query = mysqli_query($conn, "UPDATE immunization SET 
 doseProvidedDate='$doseProvidedDate', breastFeeding='$breastFeeding', 
 compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
