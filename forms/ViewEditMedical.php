@@ -102,10 +102,21 @@ if (!empty($query)) {
 
 if (isset($_GET['del'])) {
   $id = $_GET['del'];
-  date_default_timezone_set('Asia/Kolkata');
-  $date = date('d-m-Y h:i:s');
-  mysqli_query($conn, "UPDATE medicalhistory SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
-  $_SESSION['message'] = "User deleted!"; 
+ // date_default_timezone_set('Asia/Kolkata');
+ // $date = date('d-m-Y h:i:s');
+  
+ // mysqli_query($conn, "UPDATE medicalhistory SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
+ // $_SESSION['message'] = "User deleted!"; 
+  
+  $rec_del_pic = mysqli_query($conn, "SELECT * FROM medicalhistory WHERE id = $id");
+				          $n_del = mysqli_fetch_array($rec_del_pic);
+	          $Del_picmeNo = "";
+	          $Del_picmeNo = $n_del['picmeno'];
+			  
+			  mysqli_query($conn, "DELETE FROM medicalhistory WHERE id=$id");
+			  mysqli_query($conn, "DELETE FROM deliverydetails WHERE picmeNo = $Del_picmeNo");
+              mysqli_query($conn, "DELETE FROM immunization WHERE picmeNo = $Del_picmeNo");
+              mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
   echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/MedicalHistory.php');</script>";
 }
 ?>
