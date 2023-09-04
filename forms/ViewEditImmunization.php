@@ -57,8 +57,9 @@ print_r("after".$doseProvidedDate)  ;
 	print_r("implode".$doseName)  ; 
 	$wild_com = $doseName;
 	$wild_srch_com = str_replace(',', '', $wild_com);
-	print_r("Before func change")  ; exit;
+	print_r("Before func change")  ; 
     $dose_chg_val = is_numeric($wild_srch_com);
+	print_r("after func change")  ; exit;
 	
 	 $rec_del_pic = mysqli_query($conn, "SELECT * FROM immunization im WHERE im.id = $id");
 				          $n_del = mysqli_fetch_array($rec_del_pic);
