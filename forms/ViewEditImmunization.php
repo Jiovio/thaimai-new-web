@@ -59,14 +59,14 @@ print_r("after".$doseProvidedDate)  ;
 	$wild_srch_com = str_replace(',', '', $wild_com);
 	print_r("Before func change")  ; 
     $dose_chg_val = is_numeric($wild_srch_com);
-	print_r("after func change")  ; exit;
+	print_r("after func change")  ; 
 	
 	 $rec_del_pic = mysqli_query($conn, "SELECT * FROM immunization im WHERE im.id = $id");
 				          $n_del = mysqli_fetch_array($rec_del_pic);
 	          $Upd_picmeNo = "";
 	          $Upd_picmeNo = $n_del['picmeNo'];
 			  
-			  print_r("dose".$dose_chg_val); 
+			  print_r("dose".$dose_chg_val); exit;
 	
 	if($dose_chg_val == 1)
 	{
