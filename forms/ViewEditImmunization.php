@@ -354,8 +354,7 @@ if (!empty($query)) {
                               aria-label="Dose Due Date"
                               aria-describedby="basic-icon-default-conpassword" 
                               value="<?php echo $doseDueDate; ?>" 
-							   <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
-							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							   
                               disabled
 							  readonly = "readonly"
                               required 
@@ -371,8 +370,8 @@ if (!empty($query)) {
                               type="date"
                               name="doseProvidedDate"
                               id="doseProvidedDate"
-                              class="form-control phone-mask"
-                              placeholder="Dose Provided Date"
+                              class="form-control"
+                              placeholder=""
                               aria-label="Dose Provided Date"
                               aria-describedby="basic-icon-default-mobile"
 							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
