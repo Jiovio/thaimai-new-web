@@ -50,11 +50,7 @@ $picmeNo = ""; $doseNo = ""; $doseName = ""; $doseDueDate = ""; $doseProvidedDat
 	}
 if (! empty($_POST["update"])) {
 	
-print_r("update")  ; 
-    $id = $_POST['id'];
-  //$doseNo = $_POST["doseNo"]; 
-  //$doseName = implode(",",$_POST["doseName"]); 
- // $picmeNo = $_POST["picmeNo"]; 
+print_r("update chk")  ; 
   
   $doseName = implode(",",$_POST["doseName"]);
    
