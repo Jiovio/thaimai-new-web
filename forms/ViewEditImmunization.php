@@ -141,6 +141,7 @@ compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE i
 	 $query = mysqli_query($conn, "UPDATE immunization SET 
 doseProvidedDate='$doseProvidedDate', breastFeeding='$breastFeeding', 
 compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
+print_r($id); exit;
 	}	
 if (!empty($query)) {
 	echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/ImmunizationDtl.php?History=$Upd_picmeNo');</script>";
