@@ -11,7 +11,7 @@ $picmeNo = ""; $doseNo = ""; $doseName = ""; $doseDueDate = ""; $doseProvidedDat
   $view = false;
 	$update = false;
   if (isset($_GET['view']) OR isset($_GET['delview'])) {
-	  print_r("I am here!"); exit;
+	 
 	    if(isset($_GET['view']))
 		{
 	     $id = $_GET['view'];		 
@@ -49,6 +49,7 @@ $picmeNo = ""; $doseNo = ""; $doseName = ""; $doseDueDate = ""; $doseProvidedDat
             // $motherCovidVacBoosterDate = $n["motherCovidVacBoosterDate"]; 
 	}
 if (! empty($_POST["update"])) {
+	 print_r("I am here!"); exit;
 
     $id = $_POST['id'];
   //$doseNo = $_POST["doseNo"]; 
