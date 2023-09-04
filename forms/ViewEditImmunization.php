@@ -50,7 +50,7 @@ $picmeNo = ""; $doseNo = ""; $doseName = ""; $doseDueDate = ""; $doseProvidedDat
 	}
 if (! empty($_POST["update"])) {
 	
-
+print_r("update")  ; exit;
     $id = $_POST['id'];
   //$doseNo = $_POST["doseNo"]; 
   //$doseName = implode(",",$_POST["doseName"]); 
@@ -59,7 +59,7 @@ if (! empty($_POST["update"])) {
   $doseName = implode(",",$_POST["doseName"]);
    
 //$doseDueDate = $_POST["doseDueDate"];
-//print_r("before".$doseProvidedDate)  ; exit;
+print_r("before".$doseProvidedDate)  ; exit;
   $doseProvidedDate = $_POST["doseProvidedDate"];
 print_r("after".$doseProvidedDate)  ; 
  // $query = mysqli_query($conn,"SELECT dd.deliverydate FROM immunization im JOIN deliverydetails dd ON dd.picmeno=im.picmeNo WHERE im.picmeNo='$picmeNo'");
