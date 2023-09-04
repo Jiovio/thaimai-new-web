@@ -130,6 +130,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-email">DELIVERY DATE <span class="mand">* </span></label>
                             <input
+							
                               type="date"
                               name="deliverydate"
                               id="deliverydate"
@@ -137,10 +138,12 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
                               value="<?php echo $deliverydate; ?>"  
                               disabled
                               required
-							  readonly = "readonly"
+							  
                             />
                           
                         </div>
@@ -528,17 +531,19 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                              </select>
                           </div>
 
-                          <div class="col-6 mb-3"  id="sncuDate" style="display: none;">
-                          <label class="form-label" for="basic-icon-default-password">SNCU DATE</label>
-						 
+                          <div class="col-6 mb-3">
+						     <label class="form-label" for="basic-icon-default-email">SNCU DATE</label>
+                            
                             <input
                               type="date"
                               name="sncudate"
                               id="sncudate"
                               class="form-control"
-                              placeholder="SNCU DATE"
-                              aria-label="SNCU DATE"
-                              aria-describedby="basic-icon-default-password2"
+                              placeholder=""
+                              aria-label=""
+                              aria-describedby="basic-icon-default-email2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
                               value="<?php echo $sncudate ?>"
                               disabled
                             />
@@ -546,32 +551,32 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                  </div>
                  <div class="row">
 
-                        <div class="col-6 mb-3"   id="sncuName" style="display: none;">
+                        <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">SNCU AREA NAME</label>
                             <input
                               type="text"
                               name="sncuAreaName"
                               id="sncuAreaName"
                               class="form-control"
-                              placeholder="SNCU AREA NAME"
-                              aria-label="SNCU AREA NAME"
-                              aria-describedby="basic-icon-default-password2"
+                              placeholder=""
+                              aria-label=""
+                              aria-describedby="basic-icon-default-email2"
                               value="<?php echo $sncuAreaName ?>"
                               disabled
                             />
                           
                         </div>
                        
-                        <div class="col-6 mb-3"   id="sncuCome" style="display: none;">
+                        <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">SNCU OUTCOME</label>
                             <input
                               type="text"
                               name="sncuOutcome"
                               id="sncuOutcome"
                               class="form-control"
-                              placeholder="SNCU OUTCOME"
-                              aria-label="SNCU OUTCOME"
-                              aria-describedby="basic-icon-default-password2"
+                              placeholder=""
+                              aria-label=""
+                              aria-describedby="basic-icon-default-email2"
                               value="<?php echo $sncuOutcome ?>"
                               disabled
                             />
@@ -597,6 +602,8 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder="DISCHARGE DATE"
                               aria-label="DISCHARGE DATE"
                               aria-describedby="basic-icon-default-password2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
 							  
                               value="<?php echo $dischargedate; ?>"     
                               disabled
@@ -633,7 +640,8 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder="BCG DATE"
                               aria-label="BCG DATE"
                               aria-describedby="basic-icon-default-password2"
-                              
+                              <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
 							  value="<?php 
 							  if(isset($bcgdate))
 							  {
@@ -658,6 +666,8 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder="OPV-D DATE"
                               aria-label="OPV-D DATE"
                               aria-describedby="basic-icon-default-password2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
                               value="<?php echo $opvDdate; ?>"   
                               disabled
                             />
@@ -677,7 +687,8 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder="HEB-B DATE"
                               aria-label="HEB-B DATE"
                               aria-describedby="basic-icon-default-password2"
-                               
+                               <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
 							   value="<?php 
 							  if(isset($hebBdate))
 							  {
