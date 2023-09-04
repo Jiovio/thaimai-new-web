@@ -51,13 +51,14 @@ $picmeNo = ""; $doseNo = ""; $doseName = ""; $doseDueDate = ""; $doseProvidedDat
 if (! empty($_POST["update"])) {
 	
 print_r("update chk")  ; 
+print_r("before".$doseProvidedDate)  ; 
+  $doseProvidedDate = $_POST["doseProvidedDate"];
+print_r("after".$doseProvidedDate)  ; 
   
   $doseName = implode(",",$_POST["doseName"]);
    
 //$doseDueDate = $_POST["doseDueDate"];
-print_r("before".$doseProvidedDate)  ; 
-  $doseProvidedDate = $_POST["doseProvidedDate"];
-print_r("after".$doseProvidedDate)  ; 
+
  // $query = mysqli_query($conn,"SELECT dd.deliverydate FROM immunization im JOIN deliverydetails dd ON dd.picmeno=im.picmeNo WHERE im.picmeNo='$picmeNo'");
  /* while ($fdate = mysqli_fetch_array($query)){
    $futdate = $fdate['deliverydate'];
