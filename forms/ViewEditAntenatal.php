@@ -85,9 +85,21 @@ anRegDate='$rgdate', mrmbsEligible='$mrmbs',MotherAge='$MotherAge',HusbandAge='$
  }
 if (isset($_GET['del'])) {
   $id = $_GET['del'];
-  date_default_timezone_set('Asia/Kolkata');
-  $date = date('d-m-Y h:i:s');
-  mysqli_query($conn, "UPDATE anregistration SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
+ // date_default_timezone_set('Asia/Kolkata');
+ // $date = date('d-m-Y h:i:s');
+ // mysqli_query($conn, "UPDATE anregistration SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
+ $rec_del_pic = mysqli_query($conn, "SELECT * FROM anregistration WHERE id = $id");
+			  $n_del = mysqli_fetch_array($rec_del_pic);
+	          $Del_picmeNo = "";
+	          $Del_picmeNo = $n_del['picmeno'];
+			  
+			  mysqli_query($conn, "DELETE FROM antenatalvisit WHERE picmeNo = $Del_picmeNo");
+              mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM immunization WHERE picmeNo = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM deliverydetails WHERE picmeNo = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM medicalhistory WHERE picmeNo = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM anregistration WHERE id=$id");
+			  
     echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/AnRegisterlist.php');</script>";
 }
 ?>        
@@ -176,12 +188,14 @@ if (isset($_GET['del'])) {
                         <div class="mb-3 col-md-6">
                             <label for="zipCode" class="form-label">PICME REGISTER DATE <span class="mand">* </span></label>
                             <input
-                              type="text"
+                              type="date"
                               class="form-control"
                               id="picmeRegDate"
                               name="picmeRegDate"
                               placeholder="PICME REGISTER DATE"
-                              value="<?php echo date("m/d/Y", strtotime($picmeRegDate)); ?>"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+                              value="<?php echo $picmeRegDate; ?>"
                               disabled
                               required
                             />
@@ -466,13 +480,14 @@ if (isset($_GET['del'])) {
                           <div class="mb-3 col-md-6">
                             <label for="zipCode" class="form-label">ANTENATAL REGISTER DATE <span class="mand">* </span></label>
                             <input
-                              type="text"
+                              type="date"
                               class="form-control"
                               id="anRegDate"
                               name="anRegDate" required
                               placeholder="ANTENATAL REGISTER DATE"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
                               value="<?php echo $rgdate; ?>"
-							  "<?php echo date("m/d/Y", strtotime($rgdate)); ?>"
 							  
                               disabled
                             />
