@@ -129,6 +129,8 @@ if($doseNo == 1) {
 				          $n_del = mysqli_fetch_array($rec_del_pic);
 	          $Upd_picmeNo = "";
 	          $Upd_picmeNo = $n_del['picmeNo'];
+			  
+			  print_r($dose_chg_val); exit;
 	
 	if($dose_chg_val == 1)
 	{
@@ -141,7 +143,7 @@ compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE i
 	 $query = mysqli_query($conn, "UPDATE immunization SET 
 doseProvidedDate='$doseProvidedDate', breastFeeding='$breastFeeding', 
 compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
-print_r($id); exit;
+
 	}	
 if (!empty($query)) {
 	echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/ImmunizationDtl.php?History=$Upd_picmeNo');</script>";
