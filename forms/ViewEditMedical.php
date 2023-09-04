@@ -183,14 +183,17 @@ if (isset($_GET['del'])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-email">LMP DATE <span class="mand">* </span></label>
                             <input
-                              type="text"
+                              type="date"
                               name="lmpdate"
                               id="lmpdate" required
                               class="form-control"
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-                              value="<?php echo date("m/d/Y", strtotime($lmpdate)); ?>"  
+							   <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+                              value="<?php echo $lmpdate; ?>"  
+							  disabled
                             />
                           
                         </div>
@@ -208,7 +211,8 @@ if (isset($_GET['del'])) {
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-password2"
-                              value="<?php echo date("m/d/Y", strtotime($edddate)); ?>" 
+                              value="<?php echo date('m-d-Y', strtotime($edddate)); ?>" 
+							  readonly="readonly"
                               disabled
                             />
                           
