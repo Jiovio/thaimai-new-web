@@ -289,7 +289,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-password">Dose Name <span class="mand">* </span></label>
                          <div class="input-group input-group-merge">
 						  
-						  <select required name="doseName[]" id="doseName" multiple class="form-select doseName" disabled>
+						  <select required name="doseName[]" id="doseName" multiple class="form-select doseName" >
 						  						  
                           <?php 
 						 
@@ -303,7 +303,7 @@ if (!empty($query)) {
 								  
                                 ?>
 								
-                                    <option selected=true value="<?php if(in_array($status_list['enumid'], $dnArr)){ echo "selected"; } ?>">
+                                    <option disabled selected=true value="<?php if(in_array($status_list['enumid'], $dnArr)){ echo "selected"; } ?>">
                                    
                                     <?php 
 									if ($dnArr[$i] == "11") { echo "OPV-1";}elseif($dnArr[$i] == "12") { echo "Rota-1"; }
