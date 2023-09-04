@@ -11,6 +11,7 @@ $picmeNo = ""; $doseNo = ""; $doseName = ""; $doseDueDate = ""; $doseProvidedDat
   $view = false;
 	$update = false;
   if (isset($_GET['view']) OR isset($_GET['delview'])) {
+	  print_r("I am here!"); exit;
 	    if(isset($_GET['view']))
 		{
 	     $id = $_GET['view'];		 
