@@ -64,26 +64,14 @@ $id =0;
 	$Del_picmeNo = "";
 	$Del_picmeNo = $n_del['picmeNo'];
 	
-	$str_dt = "";
-	$str_dt = $_POST["motherPnc"];
-			  
-    $sub_cnt = 0;		
-    $sub_cnt = strpos(strval($str_dt),"-");
-	$dt_len = 0;
-	$dt_len = substr(strval($str_dt),0,($sub_cnt));
 	
-	if(strlen($dt_len) > 4 OR strlen($dt_len) < 4 OR (int)$str_dt < 1970 OR (int)$str_dt > 2023)
-	{
-	 echo "<script> alert('Invalid year. Not Updated'); window.location.replace('{$siteurl}/forms/ViewEditPostnatal.php?view=$id');</script>";
-	}		
-	else
-	{
+	
     $query = mysqli_query($conn,"UPDATE postnatalvisit SET calcium='$calcium',pncPeriod='$pncPeriod',vitaminA='$vitaminA',motherPnc='$motherPnc',ifaTabletStatus='$ifaTabletStatus',ppcMethod='$ppcMethod',motherDangerSign='$mDangerSign',
     bloodSugar='$bloodSugar',infantWeight='$weight',infantDangerSigns='$iDSigns',bpSys='$bpSys',bpDia='$bpDia',updatedat='$date',updatedBy='$userid' WHERE id=".$id);
     if (!empty($query)) { 
             echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/PostnatalVisitDtl.php?History=$Del_picmeNo');</script>";
 	}
-          } }
+           }
 
 if (isset($_GET['del'])) {
     $id = $_GET['del'];
@@ -236,24 +224,21 @@ if (isset($_GET['del'])) {
 							
                           </div>
                           </div>
+						  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
                         <div class="row">
-						                          <div class="mb-3 col-md-6">
+						    <div class="mb-3 col-md-6">
                             <label for="zipCode" class="form-label">MOTHER PNC DATE </label>
                             <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-calendar"></i></span>
                             <input
-                              type="text"
+                              type="date"
                               class="form-control"
                               id="motherPnc"
                               name="motherPnc"
                               placeholder=""
-							 
+							 min="1970-01-01" max=<?php echo $cur_dt; ?>
                              value="<?php echo $motherPnc; ?>"
 							 disabled
-							 
                             />
-							
-							
                           </div>
                           </div>
                           <div class="mb-3 col-md-6">
