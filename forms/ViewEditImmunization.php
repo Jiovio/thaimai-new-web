@@ -40,11 +40,7 @@ $picmeNo = ""; $doseNo = ""; $doseName = ""; $doseDueDate = ""; $doseProvidedDat
             $compliFoodStart = $n["compliFoodStart"];
 	}
 if (! empty($_POST["update"])) {
-	
-print_r("update chk pls")  ; 
-print_r("before".$doseProvidedDate)  ; 
   $doseProvidedDate = $_POST["doseProvidedDate"];
-print_r("after".$doseProvidedDate)  ; 
   $breastFeeding = $_POST["breastFeeding"]; 
   $compliFoodStart = $_POST["compliFoodStart"];
   
@@ -54,30 +50,23 @@ print_r("after".$doseProvidedDate)  ;
 	
 	//$doseName = implode(",",$_POST["doseName"]);
 	$doseName = implode(",",$_POST["doseName"]);
-	print_r("implode".$doseName)  ; 
 	$wild_com = $doseName;
 	$wild_srch_com = str_replace(',', '', $wild_com);
-	print_r("Before func change")  ; 
     $dose_chg_val = is_numeric($wild_srch_com);
-	print_r("after func change")  ; 
 	
 	 $rec_del_pic = mysqli_query($conn, "SELECT * FROM immunization im WHERE im.id = $id");
 				          $n_del = mysqli_fetch_array($rec_del_pic);
 	          $Upd_picmeNo = "";
 	          $Upd_picmeNo = $n_del['picmeNo'];
-			  
-			  print_r("dose".$dose_chg_val); 
 	
 	if($dose_chg_val == 1)
 	{
-		print_r("dchgd".$dose_chg_val); 
 	 $query = mysqli_query($conn, "UPDATE immunization SET doseName = '$doseName',
 doseProvidedDate='$doseProvidedDate', breastFeeding='$breastFeeding', 
 compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
 	}
 	else
 	{
-		print_r("dnchgdno".$dose_chg_val); exit;
 	 $query = mysqli_query($conn, "UPDATE immunization SET 
 doseProvidedDate='$doseProvidedDate', breastFeeding='$breastFeeding', 
 compliFoodStart='$compliFoodStart',updatedat='$date',updUserId='$userid' WHERE id=$id");
