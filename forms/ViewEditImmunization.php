@@ -38,15 +38,6 @@ $picmeNo = ""; $doseNo = ""; $doseName = ""; $doseDueDate = ""; $doseProvidedDat
             $doseProvidedDate = $n["doseProvidedDate"]; 
             $breastFeeding = $n["breastFeeding"]; 
             $compliFoodStart = $n["compliFoodStart"];
-            // $motherCovidVac1Done = $n["motherCovidVac1Done"];
-            // $motherCovidVac1Type = $n["motherCovidVac1Type"];
-            // $motherCovidVac1Date = $n["motherCovidVac1Date"]; 
-            // $motherCovidVac2Done = $n["motherCovidVac2Done"];
-            // $motherCovidVac2Type = $n["motherCovidVac2Type"]; 
-            // $motherCovidVac2Date = $n["motherCovidVac2Date"]; 
-            // $motherCovidVacBoosterDone = $n["motherCovidVacBoosterDone"]; 
-            // $motherCovidVacBoosterType = $n["motherCovidVacBoosterType"];
-            // $motherCovidVacBoosterDate = $n["motherCovidVacBoosterDate"]; 
 	}
 if (! empty($_POST["update"])) {
 	
@@ -54,72 +45,16 @@ print_r("update chk")  ;
 print_r("before".$doseProvidedDate)  ; 
   $doseProvidedDate = $_POST["doseProvidedDate"];
 print_r("after".$doseProvidedDate)  ; 
-  
-  $doseName = implode(",",$_POST["doseName"]);
-   
-//$doseDueDate = $_POST["doseDueDate"];
-
- // $query = mysqli_query($conn,"SELECT dd.deliverydate FROM immunization im JOIN deliverydetails dd ON dd.picmeno=im.picmeNo WHERE im.picmeNo='$picmeNo'");
- /* while ($fdate = mysqli_fetch_array($query)){
-   $futdate = $fdate['deliverydate'];
-  }
-  if($doseNo == 1) {
-  $FutureDoseDate = date('Y-m-d', strtotime($futdate. '+ 74 days' ));
-  } if($doseNo == 2) {
-    $FutureDoseDate = date('Y-m-d', strtotime($futdate. '+ 104 days' ));
-  } if($doseNo == 3) {
-    $FutureDoseDate = date('Y-m-d', strtotime($futdate. '+ 269 days' ));
-  } if($doseNo == 4) {
-    $FutureDoseDate = date('Y-m-d', strtotime($futdate. '+ 479 days' ));
-  } 
-
-if($doseNo == 1) {
-  $FutureDoseNo = $doseNo + 1;
-  } else if($doseNo == 2) {
-  $FutureDoseNo = $doseNo + 1;
-  } else if($doseNo == 3) {
-  $FutureDoseNo = $doseNo + 1;
-  } else if($doseNo == 4) {
-  $FutureDoseNo = $doseNo + 1;
-  } */
-  
   $breastFeeding = $_POST["breastFeeding"]; 
   $compliFoodStart = $_POST["compliFoodStart"];
-  //  $motherCovidVac1Done = $_POST["motherCovidVac1Done"];
-  // $motherCovidVac1Type = $_POST["motherCovidVac1Type"];
-  // $motherCovidVac1Date = $_POST["motherCovidVac1Date"]; 
   
-  // if($motherCovidVac1Type == '1') {
-  //   $Fcov2DueDate = date('Y-m-d', strtotime($motherCovidVac1Date. '+ 30 days' ));
-  // } else if($motherCovidVac1Type == '2'){
-  //   $Fcov2DueDate = date('Y-m-d', strtotime($motherCovidVac1Date. '+ 90 days' ));  
-  // }
-
-  // $motherCovidVac2Done = $_POST["motherCovidVac2Done"];
-  // $motherCovidVac2Type = $_POST["motherCovidVac2Type"]; 
-  // $motherCovidVac2Date = $_POST["motherCovidVac2Date"];
   
-  // if($motherCovidVac2Type == '1') {
-  //   $FBcovDueDate = date('Y-m-d', strtotime($motherCovidVac2Date. '+ 180 days' ));
-  // } else if($motherCovidVac2Type == '2'){
-  //   $FBcovDueDate = date('Y-m-d', strtotime($motherCovidVac2Date. '+ 180 days' )); 
-  // }
-  // $motherCovidVacBoosterDone = $_POST["motherCovidVacBoosterDone"]; 
-  // $motherCovidVacBoosterType = $_POST["motherCovidVacBoosterType"];
-  // $motherCovidVacBoosterDate = $_POST["motherCovidVacBoosterDate"];
-
-  // if($motherCovidVac1Type == '1' || $motherCovidVac1Type == '2' ) {
-  //   $NextDoseName1 = $motherCovidVac1Type;
-  // }else if($motherCovidVac2Type == '1' || $motherCovidVac2Type == '2'){
-  //   $NextDoseName1 = $motherCovidVac2Type;
-    
-  // } else if($motherCovidVacBoosterType == '1' || $motherCovidVacBoosterType == '2'){
-  //   $NextDoseName1 = $motherCovidVacBoosterType;
-    
-  // }
     date_default_timezone_set('Asia/Kolkata');
     $date = date('d-m-Y h:i:s');
 	
+	//$doseName = implode(",",$_POST["doseName"]);
+	$doseName = implode(",",$_POST["doseName"]);
+	print_r("implode".$doseName)  ; 
 	$wild_com = $doseName;
 	$wild_srch_com = str_replace(',', '', $wild_com);
     $dose_chg_val = is_numeric($wild_srch_com);
