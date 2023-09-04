@@ -41,7 +41,7 @@ $picmeNo = ""; $doseNo = ""; $doseName = ""; $doseDueDate = ""; $doseProvidedDat
 	}
 if (! empty($_POST["update"])) {
 	
-print_r("update chk")  ; 
+print_r("update chk pls")  ; 
 print_r("before".$doseProvidedDate)  ; 
   $doseProvidedDate = $_POST["doseProvidedDate"];
 print_r("after".$doseProvidedDate)  ; 
