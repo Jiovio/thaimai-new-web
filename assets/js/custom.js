@@ -384,6 +384,19 @@ var c = document.getElementById("childDeath").value;
 
 var obscode = "G"+g+"P"+p+"L"+l+"A"+a+"C"+c;
 document.getElementById("obstetricCode").value = obscode; 
+
+if($('#gravida').val() > 2 || $('#para').val() > 2 ||  $('#childDeath').val() >2 ||
+    $('#abortion').val() > 2 || $('#livingChildren').val() > 2 || $('#motherWeight').val() <= 2 ||
+    $('#bpSys').val() >= 140 ||  $('#bpSys').val() >=90)
+    {
+      var hrpgcy = 1;
+    } 
+	else 
+{
+      var hrpgcy = 0;
+    }
+	document.getElementById("hrPregnancy").value = hrpgcy; 
+
 }
 
 function onlyNumbers(text) {  
