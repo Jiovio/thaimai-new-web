@@ -670,14 +670,14 @@ $('.highPregnancyCls').on('blur change', function (){
     var para = $('#para').val();
     var childDeath = $('#childDeath').val()
     
-    if($('#gravida').val() > 2 || $('#para').val() > 2 ||  $('#childDeath').val() >2 ||
-           $('#abortion').val() > 2 || $('#livingChildren').val() > 2 || $('#motherWeight').val() <= 2 ||
+/*    if($('#gravida').val() > 2 || $('#para').val() > 2 ||  $('#childDeath').val() >2 ||
+           $('#abortion').val() > 2 || $('#livingChildren').val() > 2 || $('#motherWeight').val() < 40 ||
            $('#bpSys').val() >= 140 ||  $('#bpSys').val() >=90
             ){
        $("#hrPregnancy").val(1).change();
     } else {
        $("#hrPregnancy").val(0).change();
-    }
+    } */
     
 //    var negative = true;
 //    if(tagId === 'gravida' || tagId === 'para' || tagId === 'childDeath' || tagId === 'abortion' || tagId === 'livingChildren'){
@@ -758,7 +758,7 @@ $('.anregisterPicmenoCls').on('blur change', function(){
             result = JSON.parse(response);
            
             if(result['result']=='success'){
-                 $("#hrPregnancy").val(result['highRisk']).change();
+             //    $("#hrPregnancy").val(result['highRisk']).change();
                   $("#obstetricCode").val(result['obcode']).change();
             } 
             

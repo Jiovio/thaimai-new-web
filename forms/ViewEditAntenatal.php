@@ -61,6 +61,8 @@ if (! empty($_POST['update'])) {
     $mrmbs = $_POST["mrmbsEligible"];
     $MotherAge = $_POST["MotherAge"]; 
     $HusbandAge = $_POST["HusbandAge"];
+	
+	//print_r($hrPreg); exit; 
 
  date_default_timezone_set('Asia/Kolkata');
  $date = date('d-m-Y h:i:s');
@@ -192,7 +194,7 @@ if (isset($_GET['del'])) {
                               class="form-control"
                               id="picmeRegDate"
                               name="picmeRegDate"
-                              placeholder="PICME REGISTER DATE"
+                              placeholder=""
 							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
 							   min="1970-01-01" max=<?php echo $cur_dt; ?>
                               value="<?php echo $picmeRegDate; ?>"
@@ -263,17 +265,19 @@ if (isset($_GET['del'])) {
                           <div class="mb-3 col-md-6">
                             <label class="form-label">GRAVIDA <span class="mand">* </span></label>
                             <?php if($update == true || $view == true) { ?>
-                            <select onfocus="this.value=''" name="gravida" id="gravida" class="form-select" value="<?php echo $gravida; ?>" disabled>
-                            <?php $list=mysqli_query($conn, "SELECT an.gravida,e.enumid,e.enumvalue from anregistration an join enumdata e ON e.enumid=an.gravida WHERE type=40 AND an.id=".$id);
+                            <select required name="gravida" id="gravida" onclick="Obcode()" class="form-select" value="<?php echo $gravida; ?>" disabled>
+                            <?php 
+							$list=mysqli_query($conn, "SELECT an.gravida,e.enumid,e.enumvalue from anregistration an join enumdata e ON e.enumid=an.gravida WHERE type=40 AND an.id=".$id);
                                 while($row_list=mysqli_fetch_assoc($list)){ ?>
                                 <option value="<?php echo $row_list['enumid']; ?>">
-                                <?php if($row_list['enumvalue']==$gravida) ?>
-                                <?php { echo $row_list['enumvalue']; } ?></option>
+                                <?php if($row_list['enumvalue']==$gravida)?>								
+                                <?php { echo $row_list['enumvalue']; } ?>
                                 <?php  
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=40";
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                          <option value="<?php echo $listvalue['enumid']; ?>">
+						  <?php echo $listvalue['enumvalue']; ?></option>
                            <?php } } ?>
                     </select>
                        <?php } ?>
@@ -283,7 +287,7 @@ if (isset($_GET['del'])) {
                           <div class="mb-3 col-md-6">
                           <label class="form-label">PARA <span class="mand">* </span></label>
                           <?php if($update == true || $view == true) { ?>
-                            <select required name="para" id="para" onfocus="this.value=''" class="form-select" value="<?php echo $para; ?>" disabled>
+                            <select required name="para" id="para" onclick="Obcode()" class="form-select" value="<?php echo $para; ?>" disabled>
                             <?php $list=mysqli_query($conn, "SELECT an.para,e.enumid,e.enumvalue from anregistration an join enumdata e ON e.enumid=an.para WHERE type=12 AND an.id=".$id);
                                 while($row_list=mysqli_fetch_assoc($list)){ ?>
                               <option value="<?php echo $row_list['enumid']; ?>">
@@ -301,7 +305,7 @@ if (isset($_GET['del'])) {
                           <div class="mb-3 col-md-6">
                           <label class="form-label">LIVING CHILDREN <span class="mand">* </span></label>
                           <?php if($update == true || $view == true) { ?>
-                            <select required name="livingChildren" id="livingChildren" onfocus="this.value=''" class="form-select" value="<?php echo $child; ?>" disabled>
+                            <select required name="livingChildren" id="livingChildren" onclick="Obcode()" class="form-select" value="<?php echo $child; ?>" disabled>
                             <?php $list=mysqli_query($conn, "SELECT an.livingChildren,e.enumid,e.enumvalue from anregistration an join enumdata e ON e.enumid=an.livingChildren WHERE type=12 AND an.id=".$id);
                                 while($row_list=mysqli_fetch_assoc($list)){ ?>
                                 <option value="<?php echo $row_list['enumid']; ?>">
@@ -322,7 +326,7 @@ if (isset($_GET['del'])) {
                           <div class="mb-3 col-md-6">
                           <label class="form-label">ABORTION <span class="mand">* </span></label>
                           <?php if($update == true || $view == true) { ?>
-                            <select required name="abortion" id="abortion" class="form-select" onfocus="this.value=''" disabled>
+                            <select required name="abortion" onclick="Obcode()" id="abortion" class="form-select" disabled>
                             <?php
 
                                 $list=mysqli_query($conn, "SELECT an.abortion,e.enumid,e.enumvalue from anregistration an join enumdata e ON e.enumid=an.abortion WHERE type=12 AND an.id=".$id);
@@ -348,7 +352,7 @@ if (isset($_GET['del'])) {
                             <div class="mb-3 col-md-6">
                           <label class="form-label">Child Death <span class="mand">* </span></label>
                           <?php if($update == true || $view == true) { ?>
-                            <select required name="childDeath" onclick="Obcode()" id="childDeath" onfocus="this.value=''" class="form-select" disabled>
+                            <select required name="childDeath" onclick="Obcode()" id="childDeath" class="form-select" disabled>
                             
                                 <?php
 
@@ -375,38 +379,17 @@ if (isset($_GET['del'])) {
                             </div>
                     <div class="row"> 
                           <div class="mb-3 col-md-6">
+						  
                             <label class="form-label">OBSTETRIC CODE<span class="mand"> * </span></label>
                             <input type="text" class="form-control" id="obstetricCode" value="<?php echo $obcode; ?>" name="obstetricCode" placeholder="Code" readonly />
                           </div>
-                          
+                         
                           <div class="mb-3 col-md-6">
                           <label class="form-label">HR Pregnancy<span class="mand"> * </span></label>
-                          <?php if($update == true || $view == true) { ?>
-                            <select name="hrPregnancy" id="hrPregnancy" class="form-select" disabled>
-                            
-                                <?php
-
-                                $list=mysqli_query($conn, "SELECT an.hrPregnancy,e.enumid,e.enumvalue from anregistration an join enumdata e ON e.enumid=an.hrPregnancy WHERE type=13 AND an.id=".$id);
-                                while($row_list=mysqli_fetch_assoc($list)){
-
-                                ?>
-
-                                <option value="<?php echo $row_list['enumid']; ?>">
-
-                                <?php if($row_list['enumvalue']==$ab) ?>
-                                
-                                <?php { echo $row_list['enumvalue']; } ?></option>
-                                <?php  
-                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                           <?php } } ?>
-                    </select>
-                       <?php } ?>
-                            </div> 
-
+                          <input type="text" class="form-control" id="hrPregnancy" value="<?php echo $hrPreg; ?>" name="hrPregnancy" placeholder="High Risk" readonly />
+                         
                             </div>
+							</div>
                         <div class="row">
                           <div class="mb-3 col-md-6">
                             <label class="form-label">MOTHER'S HEIGHT <span class="mand">* </span></label>
