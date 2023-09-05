@@ -64,7 +64,12 @@ if (! empty($_POST["update"])) {
   
   }
   $id = $_POST['id'];
-    $lmpdate = $_POST["lmpdate"]; $edddate = $_POST["edddate"]; $reg12weeks = $_POST["reg12weeks"];
+    $lmpdate = $_POST["lmpdate"]; 
+	$edddt = $_POST["edddate"]; 
+	print_r($edddt); 
+	$edddate = substr($edddt,6,4)."-".substr($edddt,3,2)."-".substr($edddt,0,2); 
+	//print_r(substr($edddt,6,4)."-".substr($edddt,3,2)."-".substr($edddt,0,2)); exit;
+	$reg12weeks = $_POST["reg12weeks"];
     $momBGtaken = $_POST["momBGtaken"]; $momBGtype = $_POST["momBGtype"]; 
     $pastillness = $_POST["pastillness"]; 
     $bleedtime = $_POST["bleedtime"]; $clottime = $_POST["clotTime"]; 
@@ -222,7 +227,14 @@ if (isset($_GET['del'])) {
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-password2"
-                              value="<?php echo date('m-d-Y', strtotime($edddate)); ?>" 
+							  
+							  <?php 
+							    $edddt = ""; /*2022-12-09 */
+							    $edddt = $edddate;
+	                            $eddate = substr($edddt,5,2)."-".substr($edddt,8,2)."-".substr($edddt,0,4); 
+							  ?>
+							  
+                              value="<?php echo $eddate; ?>" 
 							  readonly="readonly"
                               disabled
                             />
