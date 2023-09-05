@@ -410,6 +410,7 @@ if (isset($_GET['del'])) {
                               name="motherWeight" required
                               placeholder="Mother's Weight"
                               value="<?php echo $weight; ?>"
+							  onclick="Obcode()"
                               disabled
                             />
                           </div>
@@ -420,7 +421,7 @@ if (isset($_GET['del'])) {
                             <label class="form-label">BP SYSTOLIC <span class="mand">* </span></label>
                             <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-heart-circle"></i></span>
-                            <select class="50-200 form-control" id="bpSys" name="bpSys" placeholder="BP SYS" required disabled>
+                            <select class="50-200 form-control" id="bpSys" name="bpSys" placeholder="BP SYS" onclick="Obcode()" required disabled>
                                 <?php
 
                                 $list=mysqli_query($conn, "SELECT bpSys from anregistration WHERE id=".$id);
@@ -441,7 +442,7 @@ if (isset($_GET['del'])) {
                             <label class="form-label">BP DIASTOLIC <span class="mand">* </span></label>
                             <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-first-aid"></i></span>
-                            <select class="40-150 form-control" id="bpDia" name="bpDia" placeholder="BP DIA" required disabled>
+                            <select class="40-150 form-control" id="bpDia" name="bpDia" placeholder="BP DIA" onclick="Obcode()" required disabled>
                             <?php
 
                                 $list=mysqli_query($conn, "SELECT bpDia from anregistration WHERE id=".$id);
