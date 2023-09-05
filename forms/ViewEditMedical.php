@@ -66,9 +66,9 @@ if (! empty($_POST["update"])) {
   $id = $_POST['id'];
     $lmpdate = $_POST["lmpdate"]; 
 	$edddt = $_POST["edddate"]; 
-	print_r($edddt); 
-	$edddate = substr($edddt,6,4)."-".substr($edddt,3,2)."-".substr($edddt,0,2); 
-	//print_r(substr($edddt,6,4)."-".substr($edddt,3,2)."-".substr($edddt,0,2)); exit;
+	//print_r($edddt); 
+	$edddate = substr($edddt,6,4)."-".substr($edddt,0,2)."-".substr($edddt,3,2); /*mm/dd/yyyy*/
+	//print_r(substr($edddt,6,4)."-".substr($edddt,0,2)."-".substr($edddt,3,2)); exit;
 	$reg12weeks = $_POST["reg12weeks"];
     $momBGtaken = $_POST["momBGtaken"]; $momBGtype = $_POST["momBGtype"]; 
     $pastillness = $_POST["pastillness"]; 
@@ -197,19 +197,20 @@ if (isset($_GET['del'])) {
                           </div>
                           </div>
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">LMP DATE <span class="mand">* </span></label>
+						<?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+                          <label class="form-label" for="basic-icon-default-phone">LMP DATE <span class="mand">* </span></label>
                             <input
                               type="date"
                               name="lmpdate"
-                              id="lmpdate" required
+                              id="lmpdate" 
                               class="form-control"
                               placeholder=""
-                              aria-label=""
-                              aria-describedby="basic-icon-default-email2"
-							   <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+                              aria-label="LMP Date"
+                              aria-describedby="basic-icon-default-mobile"
 							   min="1970-01-01" max=<?php echo $cur_dt; ?>
                               value="<?php echo $lmpdate; ?>"  
 							  disabled
+							  required
                             />
                           
                         </div>
