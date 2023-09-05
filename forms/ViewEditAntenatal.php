@@ -15,18 +15,6 @@ if (isset($_GET['view'])) {
   $id = $_GET['view'];
   $view = true;
   
-  $hrPregind = 0;
-  $hrPregind = $hrPreg;
-  if($hrPregind==1)
-  {
-	$hrPreg = "Yes";  
-  }
-  else
-  {
-	$hrPreg = "No";    
-  }
-	  
-  
   $record = mysqli_query($conn, "SELECT * FROM anregistration WHERE id=$id");
   $vi = mysqli_fetch_array($record);
   $motheraadhaarid = $vi["motheraadhaarid"];
@@ -53,17 +41,6 @@ if (isset($_GET['view'])) {
 }
 
 if (! empty($_POST['update'])) {
-
-  $hrPregind = 0;
-  $hrPregind = $hrPreg;
-  if($hrPregind==1)
-  {
-	$hrPreg = "Yes";  
-  }
-  else
-  {
-	$hrPreg = "No";    
-  }
 	
     $id = $_POST["id"];
     $picmeRegDate =$_POST["picmeRegDate"];
@@ -410,6 +387,18 @@ if (isset($_GET['del'])) {
                          
                           <div class="mb-3 col-md-6">
                           <label class="form-label">HR Pregnancy<span class="mand"> * </span></label>
+						  <?php 
+                           $hrPregind = 0;
+                           $hrPregind = $hrPreg;
+                           if($hrPregind==1)
+                           {
+                        	$hrPreg = "Yes";  
+                           }
+                           else
+                           {
+	                        $hrPreg = "No";    
+                           }
+                          ?>
                           <input type="text" class="form-control" id="hrPregnancy" value="<?php echo $hrPreg; ?>" name="hrPregnancy" placeholder="High Risk" readonly />
                          
                             </div>
