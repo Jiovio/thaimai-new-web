@@ -15,6 +15,18 @@ if (isset($_GET['view'])) {
   $id = $_GET['view'];
   $view = true;
   
+  $hrPregind = 0;
+  $hrPregind = $hrPreg;
+  if($hrPregind==1)
+  {
+	$hrPreg = "Yes";  
+  }
+  else
+  {
+	$hrPreg = "No";    
+  }
+	  
+  
   $record = mysqli_query($conn, "SELECT * FROM anregistration WHERE id=$id");
   $vi = mysqli_fetch_array($record);
   $motheraadhaarid = $vi["motheraadhaarid"];
@@ -41,6 +53,18 @@ if (isset($_GET['view'])) {
 }
 
 if (! empty($_POST['update'])) {
+
+  $hrPregind = 0;
+  $hrPregind = $hrPreg;
+  if($hrPregind==1)
+  {
+	$hrPreg = "Yes";  
+  }
+  else
+  {
+	$hrPreg = "No";    
+  }
+	
     $id = $_POST["id"];
     $picmeRegDate =$_POST["picmeRegDate"];
     $residentType =$_POST["residentType"]; 
