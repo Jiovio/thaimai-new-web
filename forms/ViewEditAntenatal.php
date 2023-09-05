@@ -52,6 +52,14 @@ if (! empty($_POST['update'])) {
     $child = $_POST["livingChildren"]; 
     $ab = $_POST["abortion"]; 
     $cd = $_POST["childDeath"];
+	if($hrPreg=="Yes")
+                           {
+                        	$hrPreg = 1;  
+                           }
+                           else
+                           {
+	                        $hrPreg = 0;    
+                           }
     $hrPreg = $_POST["hrPregnancy"]; 
     $obcode = $_POST["obstetricCode"]; 
     $height = $_POST["motherHeight"];
