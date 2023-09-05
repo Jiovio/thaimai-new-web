@@ -398,11 +398,11 @@ if($('#gravida').val() > 2 || $('#para').val() > 2 ||  $('#childDeath').val() >2
     $('#abortion').val() > 2 || $('#livingChildren').val() > 2 || $('#motherWeight').val() < 40 ||
     $('#bpSys').val() >= 140 ||  $('#bpDia').val() >=90)
     {
-      var hrpgcy = 1;
+      var hrpgcy = "Yes";
     } 
 	else 
 {
-      var hrpgcy = 0;
+      var hrpgcy = "No";
     }
 	document.getElementById("hrPregnancy").value = hrpgcy; 
 
