@@ -385,11 +385,20 @@ var c = document.getElementById("childDeath").value;
 var obscode = "G"+g+"P"+p+"L"+l+"A"+a+"C"+c;
 document.getElementById("obstetricCode").value = obscode; 
 
+var gr = document.getElementById("childDeath").value;
+var par = document.getElementById("childDeath").value;
+var cd = document.getElementById("childDeath").value;
+var abr = document.getElementById("childDeath").value;
+var lc = document.getElementById("childDeath").value;
+var mw = document.getElementById("childDeath").value;
+var bpsy = document.getElementById("childDeath").value;
+var bpd = document.getElementById("childDeath").value;
+
 if($('#gravida').val() > 2 || $('#para').val() > 2 ||  $('#childDeath').val() >2 ||
-    $('#abortion').val() > 2 || $('#livingChildren').val() > 2 || $('#motherWeight').val() <= 2 ||
-    $('#bpSys').val() >= 140 ||  $('#bpSys').val() >=90)
+    $('#abortion').val() > 2 || $('#livingChildren').val() > 2 || $('#motherWeight').val() < 40 ||
+    $('#bpSys').val() >= 140 ||  $('#bpDia').val() >=90)
     {
-      var hrpgcy = 1;
+      var hrpgcy = 19;
     } 
 	else 
 {
