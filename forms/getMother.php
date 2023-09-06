@@ -42,6 +42,14 @@ $ab = $_POST["abortion"];
 $cd = $_POST["childDeath"];
 $hrPreg = $_POST["hrPregnancy"];
 //echo "hr-".$hrPreg; exit;
+if($hrPreg=="Yes")
+    {
+     $hrPreg = "1";  
+    }
+    else
+    {
+	 $hrPreg = "0";    
+    }
 $obcode = $_POST["obstetricCode"]; 
 $height = $_POST["motherHeight"];
 $weight = $_POST["motherWeight"]; 
@@ -187,7 +195,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                       </div>
                         <div class="mb-3 col-md-6">
                           <label class="form-label">GRAVIDA <span class="mand">* </span></label>
-                          <select name="gravida" required id="gravida" class="form-select highPregnancyCls">
+                          <select name="gravida" required id="gravida" onclick="Obcode()" class="form-select highPregnancyCls">
                         <option value="">Choose...</option>
                          <?php 
                           $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=40";
@@ -202,7 +210,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                       <div class="row">
                         <div class="mb-3 col-md-6">
                         <label class="form-label">PARA <span class="mand">* </span></label>
-                          <select name="para" required id="para" class="form-select highPregnancyCls">
+                          <select name="para" required id="para" onclick="Obcode()" class="form-select highPregnancyCls">
                         <option value="">Choose...</option>
                          <?php 
                           $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=12";
@@ -215,7 +223,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         
                         <div class="mb-3 col-md-6">
                         <label class="form-label">LIVING CHILDREN <span class="mand">* </span></label>
-                          <select name="livingChildren" required id="livingChildren" class="form-select highPregnancyCls">
+                          <select name="livingChildren" required id="livingChildren" onclick="Obcode()" class="form-select highPregnancyCls">
                         <option value="">Choose...</option>
                          <?php 
                           $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=12";
@@ -230,7 +238,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                       <div class="row">
                         <div class="mb-3 col-md-6">
                         <label class="form-label">ABORTION <span class="mand">* </span></label>
-                          <select name="abortion" required id="abortion" class="form-select highPregnancyCls">
+                          <select name="abortion" required id="abortion" onclick="Obcode()" class="form-select highPregnancyCls">
                         <option value="">Choose...</option>
                          <?php 
                           $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=12";
@@ -243,7 +251,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
 
                         <div class="mb-3 col-md-6">
                         <label class="form-label">Child Death <span class="mand">* </span></label>
-                          <select name="childDeath" onclick="Obcode()" required id="childDeath" class="form-select highPregnancyCls">
+                          <select name="childDeath" onclick="Obcode()" required id="childDeath" onclick="Obcode()" class="form-select highPregnancyCls">
                         <option value="">Choose...</option>
                          <?php 
                           $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=12";
@@ -263,15 +271,20 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
 
                         <div class="mb-3 col-md-6">
                         <label class="form-label">HR Pregnancy <span class="mand">* </span></label>
-                          <select name="hrPregnancy" required id="hrPregnancy" class="form-select">
-                        <option value="">Choose...</option>
-                         <?php 
-                          $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
-                          $exequery = mysqli_query($conn, $query);
-                          while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                        <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                         <?php } ?>
-                           </select>
+                          <?php 
+                           $hrPregind = 0;
+                           $hrPregind = $hrPreg;
+                           if($hrPregind==1)
+                           {
+                        	$hrPreg = "Yes";  
+                           }
+                           else
+                           {
+	                        $hrPreg = "No";    
+                           }
+                          ?>
+                          <input type="text" class="form-control" id="hrPregnancy" value="<?php echo $hrPreg; ?>" name="hrPregnancy" placeholder="High Risk" readonly />
+                         
                           </div>
                           
                         </div>
@@ -302,7 +315,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         <div class="mb-3 col-md-6">
                           <label class="form-label">BP Systolic <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                          <select class="50-200 form-control highPregnancyCls" id="bpSys" name="bpSys" placeholder="BP SYS" required>
+                          <select class="50-200 form-control highPregnancyCls" id="bpSys" name="bpSys" placeholder="BP SYS" onclick="Obcode()" required>
                           <option value="">Choose...</option>
                         </select>
                           </div>
@@ -311,7 +324,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         <div class="mb-3 col-md-6">
                           <label class="form-label">BP Diastolic <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                          <select class="40-150 form-control highPregnancyCls" id="bpDia" name="bpDia" placeholder="BP DIA" required>
+                          <select class="40-150 form-control highPregnancyCls" id="bpDia" name="bpDia" placeholder="BP DIA" onclick="Obcode()" required>
                           <option value="">Choose...</option>
                         </select>
                         </div>
