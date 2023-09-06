@@ -147,6 +147,7 @@ if (! empty($_POST["update"])) {
                               aria-label="EC FR No"
                               aria-describedby="basic-icon-default-fullname2"
                               disabled value="<?php echo substr($ecfrno,3); ?>"
+							  required
                             />
                           </div>
                         </div>
@@ -167,7 +168,7 @@ if (! empty($_POST["update"])) {
 							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
 							   min="1970-01-01" max=<?php echo $cur_dt; ?>
 							   disabled value="<?php echo $dateecreg; ?>"
-                              
+                              required
                             />
                           </div>
                         </div>
@@ -190,6 +191,7 @@ if (! empty($_POST["update"])) {
                               aria-label="MOTHER'S AADHAAR ID"
                               aria-describedby="basic-icon-default-password2"
                               value="<?php echo $maadhaarid; ?>"
+							  required
                             />
                           </div>
                         </div>
@@ -208,6 +210,7 @@ if (! empty($_POST["update"])) {
                               aria-label="MOTHER'S NAME AS PER AADHAAR"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $maadhaarname; ?>"
+							  required
                             />
                           </div>
                         </div>
@@ -229,6 +232,7 @@ if (! empty($_POST["update"])) {
                               aria-label="MOTHER'S FULL NAME"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $mfullname; ?>"
+							  required
                               
                             />
                           </div>
@@ -250,6 +254,7 @@ if (! empty($_POST["update"])) {
 							   min="1970-01-01" max=<?php echo $cur_dt; ?>
 							   class="form-control" onchange="fnCalMotAge();"
                               disabled value="<?php echo $mdob; ?>"
+							  required
                               
                             />
                           </div>
@@ -272,6 +277,7 @@ if (! empty($_POST["update"])) {
                               aria-label="MOTHER'S AGE AT MARRIAGE"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $magemarriage; ?>"
+							  required
                               
                             />
                           </div>
@@ -289,6 +295,7 @@ if (! empty($_POST["update"])) {
                               aria-label="MOTHER'S AGE AT EC REGISTRATION"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $mageecreg; ?>"
+							  required
                             />
                           </div>
                         </div>
@@ -312,6 +319,7 @@ if (! empty($_POST["update"])) {
                               aria-label="MOTHER'S MOBILE NUMBER"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $mmobno; ?>"
+							  required
                               
                             />
                           </div>
@@ -320,7 +328,7 @@ if (! empty($_POST["update"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">MOBILE BELONGS TO <span class="mand">* </span><span id="errMobPerson"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="mobileofperson" id="mobileofperson" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
+                          <select name="mobileofperson" id="mobileofperson" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled required>
                             
                                 <?php
 
@@ -350,7 +358,7 @@ if (! empty($_POST["update"])) {
                       <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">MOTHER'S EDUCATIONAL STATUS <span class="mand">* </span><span id="errMedustatus"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="motheredustatus" id="motheredustatus" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $motheredustatus; ?>" disabled>
+                          <select name="motheredustatus" id="motheredustatus" class="form-select" required id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $motheredustatus; ?>" disabled>
                             
                                 <?php
 
@@ -392,7 +400,7 @@ if (! empty($_POST["update"])) {
                     </div>
                     <div class="card-body">
 				<div class="errMsg" id="errMsg"></div>
-               		<input type="hidden" name="id" disabled value="<?php echo $id; ?>">
+               		<input type="hidden" required name="id" disabled value="<?php echo $id; ?>">
 						<div class="row">
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">HUSBAND'S AADHAAR ID <span id="errHaadhaarid"></span></label>
@@ -410,6 +418,7 @@ if (! empty($_POST["update"])) {
                               aria-label="HUSBAND'S AADHAAR ID"
                               aria-describedby="basic-icon-default-password2"
                              value="<?php echo $haadhaarid; ?>"
+							 required
                             />
                           </div>
                         </div>
@@ -429,6 +438,7 @@ if (! empty($_POST["update"])) {
                               aria-label="HUSBAND'S NAME AS PER AADHAAR"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $haadhaarname; ?>"
+							  required
                             />
                           </div>
                         </div>
@@ -448,7 +458,7 @@ if (! empty($_POST["update"])) {
                               aria-label="HUSBAND'S FULL NAME"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $hfullname; ?>"
-                              
+                              required
                             />
                           </div>
                         </div>
@@ -469,6 +479,7 @@ if (! empty($_POST["update"])) {
 							   min="1970-01-01" max=<?php echo $cur_dt; ?>
 							   class="form-control" onchange="fnCalHusAge();"
 							  disabled value="<?php echo $hdob; ?>"
+							  required
                             />
                           </div>
                         </div>
@@ -487,7 +498,7 @@ if (! empty($_POST["update"])) {
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $hagemarriage; ?>"
 							  
-							  disabled
+							  required
                               
                             />
                             
@@ -510,6 +521,7 @@ if (! empty($_POST["update"])) {
                               aria-describedby="basic-icon-default-mobile"
 							  value="<?php echo $hageecreg; ?>"
 							  disabled
+							  required
                              />
                           </div>
                         </div>
@@ -531,7 +543,7 @@ if (! empty($_POST["update"])) {
                               aria-label="HUSBAND'S MOBILE NUMBER"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $husmobno; ?>"
-                              
+                              required
                             />
                           </div>
                         </div>
@@ -539,7 +551,7 @@ if (! empty($_POST["update"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">HUSBAND'S EDUCATIONAL STATUS <span class="mand">* </span><span id="errhedustatus"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="husedustatus" id="husedustatus" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $husedustatus; ?>" disabled> 
+                          <select name="husedustatus" id="husedustatus" required class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $husedustatus; ?>" disabled> 
                                 <?php
 
                                 $list=mysqli_query($conn, "SELECT ec.husedustatus,e.enumid,e.enumvalue from ecregister ec join enumdata e on e.enumid=ec.husedustatus WHERE type=4 AND ec.id=".$id);
@@ -586,7 +598,7 @@ if (! empty($_POST["update"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">RELIGION <span class="mand">* </span><span id="errReligion"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="religion" id="religion" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
+                          <select name="religion" id="religion" class="form-select" required id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
                             
                                 <?php
 
@@ -617,7 +629,7 @@ if (! empty($_POST["update"])) {
 					  <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">Community <span class="mand">* </span><span id="errCaste"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="caste" id="caste" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
+                          <select name="caste" id="caste" class="form-select" required id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
                             
                                 <?php
 
@@ -650,7 +662,7 @@ if (! empty($_POST["update"])) {
                           <label class="form-label" for="basic-icon-default-phone">Name of the Block <span class="mand">* </span><span id="errBlockValue"></span></label>
                           <div class="input-group input-group-merge">
                             <?php if($update == true || $view == true) { ?>
-                          <select name="BlockId" id="BlockId" onchange="BlockOn()" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
+                          <select name="BlockId" id="BlockId" onchange="BlockOn()" required class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
                             
                                 <?php
 
@@ -685,7 +697,7 @@ if (! empty($_POST["update"])) {
                           <label class="form-label" for="basic-icon-default-phone">Name of the PHC <span class="mand">* </span><span id="errPhcValue"></span></label>
                           <div class="input-group input-group-merge">
                             <?php if($update == true || $view == true) { ?>
-                          <select name="PhcId" id="PhcId" onchange="PhcOn()" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
+                          <select name="PhcId" id="PhcId" onchange="PhcOn()" required class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
                             
                                 <?php
 
@@ -719,7 +731,7 @@ if (! empty($_POST["update"])) {
                           <label class="form-label" for="basic-icon-default-phone">Name of the HSC <span class="mand">* </span><span id="errHscValue"></span></label>
                           <div class="input-group input-group-merge">
                             <?php if($update == true || $view == true) { ?>
-                          <select name="HscId" id="HscId" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
+                          <select name="HscId" id="HscId" class="form-select" required id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
                             
                                 <?php
 
@@ -753,7 +765,7 @@ if (! empty($_POST["update"])) {
                           <label class="form-label" for="basic-icon-default-phone">Name of the Panchayat <span class="mand">* </span><span id="errPanchayat"></span></label>
                           <div class="input-group input-group-merge">
                             <?php if($update == true || $view == true) { ?>
-                          <select name="PanchayatId" id="PanchayatId" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
+                          <select name="PanchayatId" id="PanchayatId" class="form-select" required id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
                             
                                 <?php
 
@@ -788,7 +800,7 @@ if (! empty($_POST["update"])) {
                           <label class="form-label" for="basic-icon-default-phone">Name of the Village <span class="mand">* </span><span id="errVillage"></span></label>
                           <div class="input-group input-group-merge">
                             <?php if($update == true || $view == true) { ?>
-                          <select name="VillageId" id="VillageId" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
+                          <select name="VillageId" id="VillageId" class="form-select" required id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
                             
                                 <?php
 
@@ -825,12 +837,12 @@ if (! empty($_POST["update"])) {
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-map-pin"></i
                             ></span>
-                            <textarea id="address" name="address" class="form-control" cols="42" rows="3" disabled><?php  echo $address; ?></textarea>
+                            <textarea id="address" name="address" class="form-control" required cols="42" rows="3" disabled><?php  echo $address; ?></textarea>
                           </div>
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">PINCODE  <span id="errPincode"></span></label>
+                          <label class="form-label" for="basic-icon-default-email">PINCODE <span class="mand">* </span> <span id="errPincode"></span></label>
                           <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-map"></i></span>
                             <input
@@ -851,7 +863,7 @@ if (! empty($_POST["update"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">POVERTY STATUS <span class="mand">* </span><span id="errPoverty"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="povertystatus" id="povertystatus" ="" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $povertystatus; ?>" disabled>
+                          <select name="povertystatus" id="povertystatus" ="" class="form-select" required id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $povertystatus; ?>" disabled>
                             
                                 <?php
 
@@ -882,7 +894,7 @@ if (! empty($_POST["update"])) {
                           <label class="form-label" for="basic-icon-default-phone">MIGRANT STATUS <span class="mand">* </span><span id="errMigrant"></span></label>
                           <div class="input-group input-group-merge">
                             <?php //if($update == true || $view == true) { ?>
-                          <select name="migrantstatus" id="migrantstatus" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $migrantstatus; ?>" disabled >
+                          <select name="migrantstatus" id="migrantstatus" class="form-select" required id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $migrantstatus; ?>" disabled >
                             
                                 <?php
 
@@ -912,7 +924,7 @@ if (! empty($_POST["update"])) {
                       <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">RATION CARD TYPE <span class="mand">* </span><span id="errRtype"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="rationcardtype" id="rationcardtype" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
+                          <select name="rationcardtype" id="rationcardtype" class="form-select" required id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
                             
                                 <?php
 
@@ -953,7 +965,7 @@ if (! empty($_POST["update"])) {
                               aria-label="RATION CARD NUMBER"
                               aria-describedby="basic-icon-default-email2"
                               disabled value="<?php echo $rcnum; ?>"
-                              
+                              required
                             />
                           </div>
                         </div>
