@@ -56,10 +56,28 @@ if (! empty($_POST["update"])) {
 }
  if (isset($_GET['del'])) {
    $id = $_GET['del'];
-   date_default_timezone_set('Asia/Kolkata');
-   $date = date('d-m-Y h:i:s');
-   mysqli_query($conn, "UPDATE ecregister SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND  id=$id");
-     echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/EligibleCouple.php');</script>";
+ //  date_default_timezone_set('Asia/Kolkata');
+ //  $date = date('d-m-Y h:i:s');
+ //  mysqli_query($conn, "UPDATE ecregister SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND  id=$id");
+  
+    $rec_del_pic = mysqli_query($conn, "SELECT * FROM ecregister WHERE id = $id");
+			  $n_del = mysqli_fetch_array($rec_del_pic);
+	          $Del_picmeNo = "";
+	          $Del_picmeNo = $n_del['picmeno'];
+			  
+			  if(strlen($Del_picmeNo) > 0)
+			  {	  
+			  mysqli_query($conn, "DELETE FROM antenatalvisit WHERE picmeno = $Del_picmeNo");
+              mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM immunization WHERE picmeNo = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM deliverydetails WHERE picmeno = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM medicalhistory WHERE picmeno = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM anregistration WHERE picmeno = $Del_picmeNo");
+			  }
+			  mysqli_query($conn, "DELETE FROM ecregister WHERE id = $id");
+
+
+  echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/EligibleCouple.php');</script>";
  }
 ?>
 <!-- Content wrapper -->
@@ -135,18 +153,20 @@ if (! empty($_POST["update"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-email">DATE OF EC REG <span class="mand">* </span> <span id="errEcReg"></span></label>
                           <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                           
 							
 							
                             <input
-                              type="text"
+                              type="date"
                               name="dateecreg"
                               id="dateecreg"
                               class="form-control"
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-							   disabled value="<?php echo date("m/d/Y", strtotime($dateecreg)); ?>"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							   disabled value="<?php echo $dateecreg; ?>"
                               
                             />
                           </div>
@@ -217,16 +237,19 @@ if (! empty($_POST["update"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-email">MOTHER'S DATE OF BIRTH <span class="mand">* </span><span id="errMdob"></span></label>
                           <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                           
                             <input
-                              type="text"
+                              type="date"
                               name="motherdob"
                               id="motherdob"
                               class="form-control"
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-                              disabled value="<?php echo date("m/d/Y", strtotime($mdob)); ?>"
+							  <?php $cur_dt = date('Y-m-d', strtotime('-11 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							   class="form-control" onchange="fnCalMotAge();"
+                              disabled value="<?php echo $mdob; ?>"
                               
                             />
                           </div>
@@ -256,15 +279,11 @@ if (! empty($_POST["update"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">MOTHER'S AGE AT EC REGISTRATION <span class="mand">* </span><span id="errMageecreg"></span></label>
                           <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-mobile" class="input-group-text"
-                              ><i class="bx bx-user-minus"></i
-                            ></span>
-                            
+                                                      
                             <input
-                              type="text"
-                              min="11" max="99"
+                              type="number"
                               name="motherageecreg"
-                              id="motherageecreg" 
+                              id="motherageecreg" readonly=true
                               class="form-control phone-mask"
                               placeholder="MOTHER'S AGE AT EC REGISTRATION"
                               aria-label="MOTHER'S AGE AT EC REGISTRATION"
@@ -437,18 +456,19 @@ if (! empty($_POST["update"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-email">HUSBAND'S DATE OF BIRTH <span class="mand">* </span><span id="errhdob"></span></label>
                           <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                           
                             <input
-                              type="text"
+                              type="date"
                               name="husdob"
                               id="husdob"
                               class="form-control"
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-                              disabled value="<?php echo date("m/d/Y", strtotime($hdob)); ?>"
-							  
-                              
+							  <?php $cur_dt = date('Y-m-d', strtotime('-11 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							   class="form-control" onchange="fnCalHusAge();"
+							  disabled value="<?php echo $hdob; ?>"
                             />
                           </div>
                         </div>
@@ -456,12 +476,9 @@ if (! empty($_POST["update"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">HUSBAND'S AGE AT MARRIAGE <span class="mand">* </span><span id="errhagemarriage"></span></label>
                           <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-mobile" class="input-group-text"
-                              ><i class="bx bx-user-pin"></i
-                            ></span>
+                            
                             <input
                               type="number"
-                              min="11" max="99"
                               name="husagemarriage"
                               id="husagemarriage"
                               class="form-control phone-mask"
@@ -469,6 +486,8 @@ if (! empty($_POST["update"])) {
                               aria-label="HUSBAND'S AGE AT CONCEPTION"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $hagemarriage; ?>"
+							  
+							  disabled
                               
                             />
                             
@@ -481,18 +500,17 @@ if (! empty($_POST["update"])) {
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user-minus"></i
                             ></span>
-                            <input
-                              type="text"
-                              min="11" max="99"
+                           <input
+                              type="number"
                               name="husageecreg"
-                              id="husageecreg"
+                              id="husageecreg" readonly
                               class="form-control phone-mask"
-                              placeholder="HUSBAND'S AGE AT MARRIAGE"
-                              aria-label="HUSBAND'S AGE AT MARRIAGE"
+                              placeholder="HUSBAND'S AGE AT EC REGISTRATION"
+                              aria-label="HUSBAND'S AGE AT EC REGISTRATION"
                               aria-describedby="basic-icon-default-mobile"
-                              disabled value="<?php echo $hageecreg; ?>"
-                              
-                            />
+							  value="<?php echo $hageecreg; ?>"
+							  disabled
+                             />
                           </div>
                         </div>
 

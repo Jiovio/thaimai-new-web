@@ -105,11 +105,11 @@ if (isset($_GET['del'])) {
 	          $Del_picmeNo = "";
 	          $Del_picmeNo = $n_del['picmeno'];
 			  
-			  mysqli_query($conn, "DELETE FROM antenatalvisit WHERE picmeNo = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM antenatalvisit WHERE picmeno = $Del_picmeNo");
               mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
 			  mysqli_query($conn, "DELETE FROM immunization WHERE picmeNo = $Del_picmeNo");
-			  mysqli_query($conn, "DELETE FROM deliverydetails WHERE picmeNo = $Del_picmeNo");
-			  mysqli_query($conn, "DELETE FROM medicalhistory WHERE picmeNo = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM deliverydetails WHERE picmeno = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM medicalhistory WHERE picmeno = $Del_picmeNo");
 			  mysqli_query($conn, "DELETE FROM anregistration WHERE id=$id");
 			  
     echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/AnRegisterlist.php');</script>";

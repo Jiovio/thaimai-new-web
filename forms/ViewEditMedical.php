@@ -119,7 +119,7 @@ if (isset($_GET['del'])) {
 	          $Del_picmeNo = $n_del['picmeno'];
 			  
 			  mysqli_query($conn, "DELETE FROM medicalhistory WHERE id=$id");
-			  mysqli_query($conn, "DELETE FROM deliverydetails WHERE picmeNo = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM deliverydetails WHERE picmeno = $Del_picmeNo");
               mysqli_query($conn, "DELETE FROM immunization WHERE picmeNo = $Del_picmeNo");
               mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
   echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/MedicalHistory.php');</script>";
