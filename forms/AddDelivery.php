@@ -238,7 +238,7 @@ if (!empty($query)) {
                   <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">NO. OF LIVE BIRTH <span class="mand">* </span></label>
                             <input
-                              type="text"
+                              type="number"
                               name="noOfLiveBirth"
                               id="noOfLiveBirth"
                               class="form-control"
@@ -254,7 +254,7 @@ if (!empty($query)) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">NO. OF STILL BIRTH</label>
                             <input
-                              type="text"
+                              type="number"
                               name="noOfStillBirth"
                               id="noOfStillBirth"
                               class="form-control"
@@ -302,7 +302,8 @@ if (!empty($query)) {
                   <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">BIRTH WEIGHT <span class="mand">* </span></label>
                             <input
-                              type="text"
+                              type="number"
+							  step = "0.01"
                               name="birthWeight"
                               id="birthWeight"
                               class="form-control"

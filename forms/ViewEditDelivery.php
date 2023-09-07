@@ -302,7 +302,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY COMPLICATION <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="deliveryCompilcation" id="deliveryCompilcation" class="form-select" disabled>
+                          <select name="deliveryCompilcation" id="deliveryCompilcation" class="form-select" required disabled>
                           <?php   
                             $query = "SELECT dd.deliveryCompilcation,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.deliveryCompilcation WHERE type=37 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -356,7 +356,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                   <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">NO. OF LIVE BIRTH <span class="mand">* </span></label>
                             <input
-                              type="text"
+                              type="number"
                               name="noOfLiveBirth"
                               id="noOfLiveBirth"
                               class="form-control"
@@ -364,6 +364,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-label="NO OF LIVE BIRTH"
                               aria-describedby="basic-icon-default-password2"
                               value="<?php echo $noOfLiveBirth ?>"
+							  required
                               disabled 
                             />
                           </div>
@@ -373,7 +374,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">NO. OF STILL BIRTH</label>
                             <input
-                              type="text"
+                              type="number"
                               name="noOfStillBirth"
                               id="noOfStillBirth"
                               class="form-control"
@@ -426,7 +427,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                   <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">BIRTH WEIGHT <span class="mand">* </span></label>
                             <input
-                              type="text"
+                              type="number"
                               name="birthWeight"
                               id="birthWeight"
                               class="form-control"
@@ -434,6 +435,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-label="BIRTH WEIGHT"
                               aria-describedby="basic-icon-default-password2"
                               value="<?php echo $birthWeight ?>"
+							  step = "0.01"
                               disabled
                               required
                             />
@@ -444,7 +446,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">BIRTH HEIGHT</label>
                             <input
-                              type="text"
+                              type="number"
                               name="birthHeight"
                               id="birthHeight"
                               class="form-control"
@@ -668,7 +670,8 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-describedby="basic-icon-default-password2"
 							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
 							   min="1970-01-01" max=<?php echo $cur_dt; ?>
-                              value="<?php echo $opvDdate; ?>"   
+                              value="<?php echo $opvDdate; ?>"  
+                              required							  
                               disabled
                             />
                          
