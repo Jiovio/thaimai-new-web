@@ -110,6 +110,7 @@ if($mvid > 0) {
                               id="dateecreg"
                               class="form-control"
                               aria-describedby="basic-icon-default-email2"
+							  required
                               />
                           </div>
                         </div>
@@ -129,7 +130,7 @@ if($mvid > 0) {
                               placeholder="MOTHER'S AADHAAR ID"
                               aria-label="MOTHER'S AADHAAR ID"
                               aria-describedby="basic-icon-default-password2"
-                           
+                              required
                             />
                           </div>
                         </div>
@@ -148,7 +149,7 @@ if($mvid > 0) {
                               placeholder="MOTHER'S NAME AS PER AADHAAR"
                               aria-label="MOTHER'S NAME AS PER AADHAAR"
                               aria-describedby="basic-icon-default-mobile"
-                            
+                              required
                             />
                           </div>
                         </div>
@@ -168,7 +169,8 @@ if($mvid > 0) {
                               class="form-control phone-mask"
                               placeholder="MOTHER'S FULL NAME"
                               aria-label="MOTHER'S FULL NAME"
-                              aria-describedby="basic-icon-default-mobile"                        
+                              aria-describedby="basic-icon-default-mobile"    
+							  required
                             />
                           </div>
                         </div>
@@ -183,7 +185,7 @@ if($mvid > 0) {
                               id="motherdob"
                               class="form-control" onchange="fnCalMotAge();"
                               aria-describedby="basic-icon-default-email2"
-                           
+                              required
                             />
                           </div>
                         </div>
@@ -204,7 +206,7 @@ if($mvid > 0) {
                               placeholder="MOTHER'S AGE AT MARRIAGE"
                               aria-label="MOTHER'S AGE AT MARRIAGE"
                               aria-describedby="basic-icon-default-mobile"
-                             
+                              required
                             />
                             </div>
                           </div>
@@ -223,6 +225,7 @@ if($mvid > 0) {
                               placeholder="MOTHER'S AGE AT EC REGISTRATION"
                               aria-label="MOTHER'S AGE AT EC REGISTRATION"
                               aria-describedby="basic-icon-default-mobile"
+							  required
                              />
                           </div>
                         </div>
@@ -244,7 +247,7 @@ if($mvid > 0) {
                               placeholder="MOTHER'S MOBILE NUMBER"
                               aria-label="MOTHER'S MOBILE NUMBER"
                               aria-describedby="basic-icon-default-mobile"
-                             
+                              required
                             />
                           </div>
                         </div>
@@ -253,7 +256,7 @@ if($mvid > 0) {
                           <label class="form-label" for="basic-icon-default-phone">MOBILE BELONGS TO <span class="mand">* </span><span id="errMobPerson"></span></span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="mobileofperson" id="mobileofperson" class="form-select">
+                          <select name="mobileofperson" id="mobileofperson" class="form-select" required>
                           <option value="">Choose...</option>
                            
                            <?php   
@@ -272,7 +275,7 @@ if($mvid > 0) {
                           <label class="form-label" for="basic-icon-default-phone">MOTHER'S EDUCATIONAL STATUS <span class="mand">* </span><span id="errMedustatus"></span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="motheredustatus" id="motheredustatus" class="form-select">
+                          <select name="motheredustatus" id="motheredustatus" class="form-select" required>
                           <option value="">Choose...</option>
                            
                            <?php   
@@ -316,7 +319,7 @@ if($mvid > 0) {
                               placeholder="HUSBAND'S AADHAAR ID"
                               aria-label="HUSBAND'S AADHAAR ID"
                               aria-describedby="basic-icon-default-password2"
-                             
+                              required
                             />
                           </div>
                         </div>
@@ -334,7 +337,7 @@ if($mvid > 0) {
                               placeholder="HUSBAND'S NAME AS PER AADHAAR"
                               aria-label="HUSBAND'S NAME AS PER AADHAAR"
                               aria-describedby="basic-icon-default-mobile"
-                              
+                              required
                             />
                           </div>
                         </div>
@@ -353,7 +356,7 @@ if($mvid > 0) {
                               placeholder="HUSBAND'S FULL NAME"
                               aria-label="HUSBAND'S FULL NAME"
                               aria-describedby="basic-icon-default-mobile"
-                           
+                              required
                             />
                           </div>
                         </div>
@@ -368,7 +371,7 @@ if($mvid > 0) {
                               id="husdob"
                               class="form-control" onchange="fnCalHusAge();"
                               aria-describedby="basic-icon-default-email2"
-                             
+                               required
                             />
                           </div>
                         </div>
@@ -388,7 +391,7 @@ if($mvid > 0) {
                               placeholder="HUSBAND'S AGE AT MARRIAGE"
                               aria-label="HUSBAND'S AGE AT MARRIAGE"
                               aria-describedby="basic-icon-default-mobile"
-                             
+                              required
                             />
                           </div>
                         </div>
@@ -407,7 +410,7 @@ if($mvid > 0) {
                               placeholder="HUSBAND'S AGE AT EC REGISTRATION"
                               aria-label="HUSBAND'S AGE AT EC REGISTRATION"
                               aria-describedby="basic-icon-default-mobile"
-                             
+                              required
                             />
                           </div>
                         </div>
@@ -427,7 +430,7 @@ if($mvid > 0) {
                               placeholder="HUSBAND'S MOBILE NUMBER"
                               aria-label="HUSBAND'S MOBILE NUMBER"
                               aria-describedby="basic-icon-default-mobile"
-                             
+                              required
                             />
                           </div>
                         </div>
@@ -436,7 +439,7 @@ if($mvid > 0) {
                           <label class="form-label" for="basic-icon-default-phone">HUSBAND'S EDUCATIONAL STATUS <span class="mand">* </span><span id="errhedustatus"></span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="husedustatus" id="husedustatus" class="form-select">
+                          <select name="husedustatus" id="husedustatus" class="form-select" required>
                           <option value="">Choose...</option>
                            
                            <?php   
@@ -470,7 +473,7 @@ if($mvid > 0) {
                           <label class="form-label" for="basic-icon-default-phone">RELIGION <span class="mand">* </span><span id="errReligion"></span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="religion" id="religion" class="form-select">
+                          <select name="religion" id="religion" class="form-select" required>
                           <option value="">Choose...</option>
                            
                            <?php   
@@ -487,7 +490,7 @@ if($mvid > 0) {
                           <label class="form-label" for="basic-icon-default-phone">Community <span class="mand">* </span><span id="errCaste"></span></label>
                           <div class="input-group input-group-merge">
                         
-                          <select name="caste" id="caste" class="form-select">
+                          <select name="caste" id="caste" class="form-select" required>
                           <option value="">Choose...</option>
                            
                            <?php   
@@ -503,7 +506,7 @@ if($mvid > 0) {
           <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">Name of the Block <span class="mand">* </span><span id="errBlockValue"></span></label>
                           <div class="input-group input-group-merge">
-                          <select onchange="BlockOn()" name="BlockId" id="BlockId" class="form-select">
+                          <select onchange="BlockOn()" name="BlockId" id="BlockId" class="form-select" required>
                           <option value="">Choose...</option>
                            <?php  
                            if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) { 
@@ -522,7 +525,7 @@ if($mvid > 0) {
                           <label class="form-label" for="basic-icon-default-phone">Name of the PHC <span class="mand">* </span><span id="errPhcValue"></span></label>
                           <div class="input-group input-group-merge">
                       
-                          <select onchange="PhcOn()" name="PhcId" id="PhcId" class="form-select">
+                          <select onchange="PhcOn()" name="PhcId" id="PhcId" class="form-select" required>
                           <option value="">Choose...</option>
                            <?php   
                            if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
@@ -541,7 +544,7 @@ if($mvid > 0) {
                           <label class="form-label" for="basic-icon-default-phone">Name of the HSC <span class="mand">* </span><span id="errHscValue"></span></label>
                           <div class="input-group input-group-merge">
                       
-                          <select name="HscId" id="HscId" class="form-select">
+                          <select name="HscId" id="HscId" class="form-select" required>
                           <option value="">Choose...</option>
                            
                            <?php  
@@ -562,7 +565,7 @@ if($mvid > 0) {
                           <label class="form-label" for="basic-icon-default-phone">Name of the Panchayat <span class="mand">* </span><span id="errPanchayat"></span></label>
                           <div class="input-group input-group-merge">
                       
-                          <select name="PanchayatId" id="PanchayatId" class="form-select" id="inputGroupSelect04">
+                          <select name="PanchayatId" id="PanchayatId" class="form-select" id="inputGroupSelect04" required>
                           <option value="">Choose...</option>
                            
                            <?php   
@@ -579,7 +582,7 @@ if($mvid > 0) {
                           <label class="form-label" for="basic-icon-default-phone">Name of the Village<span class="mand">* </span><span id="errVillage"></span></label>
                           <div class="input-group input-group-merge">
                       
-                          <select name="VillageId" id="VillageId" class="form-select" id="inputGroupSelect04">
+                          <select name="VillageId" id="VillageId" class="form-select" id="inputGroupSelect04" required>
                           <option value="">Choose...</option>
                            
                            <?php   
@@ -597,7 +600,7 @@ if($mvid > 0) {
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-map-pin"></i></span>
-                              <textarea id="address" name="address" class="form-control" cols="42" rows="3"></textarea>
+                              <textarea id="address" name="address" class="form-control" required cols="42" rows="3"></textarea >
                           </div>
                         </div>
 
@@ -614,7 +617,7 @@ if($mvid > 0) {
                               placeholder="PINCODE"
                               aria-label="PINCODE"
                               aria-describedby="basic-icon-default-email2"
-                             
+                              required
                             />
                           </div>
                         </div>
@@ -623,7 +626,7 @@ if($mvid > 0) {
                           <label class="form-label" for="basic-icon-default-phone">POVERTY STATUS <span class="mand">* </span><span id="errPoverty"></span></label>
                           <div class="input-group input-group-merge">
                           
-                          <select name="povertystatus" id="povertystatus"="required" class="form-select">
+                          <select name="povertystatus" id="povertystatus"="required" required class="form-select">
                           <option value="">Choose...</option>
                            
                            <?php   
@@ -641,7 +644,7 @@ if($mvid > 0) {
                           <label class="form-label" for="basic-icon-default-phone">MIGRANT STATUS <span class="mand">* </span><span id="errMigrant"></span></label>
                           <div class="input-group input-group-merge">
                           
-                          <select name="migrantstatus" id="migrantstatus" class="form-select">
+                          <select name="migrantstatus" id="migrantstatus" required class="form-select">
                           <option value="">Choose...</option>
                            
                            <?php   
@@ -658,7 +661,7 @@ if($mvid > 0) {
                       <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">RATION CARD TYPE <span class="mand">* </span><span id="errRtype"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="rationcardtype" id="rationcardtype" class="form-select">
+                          <select name="rationcardtype" id="rationcardtype" required class="form-select">
                           <option value="">Choose...</option>
                            
                            <?php   
@@ -685,7 +688,7 @@ if($mvid > 0) {
                               placeholder="RATION CARD NUMBER"
                               aria-label="RATION CARD NUMBER"
                               aria-describedby="basic-icon-default-email2"
-                           
+                              required
                             />
                           </div>
                         </div>
