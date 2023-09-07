@@ -513,7 +513,7 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-phone">MOTHER HBSAG RESULT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <?php if($view == true) { ?>  
-                          <select required name="momhbresult" id="momhbresult" class="form-select" required disabled>
+                          <select required name="momhbresult" id="momhbresult" class="form-select" disabled>
                           
                            <?php   
                             $query = mysqli_query($conn, "SELECT m.momhbresult,e.enumid,e.enumvalue FROM medicalhistory m join enumdata e on m.momhbresult=e.enumid WHERE type=11 AND m.id=".$id);
@@ -565,7 +565,7 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-phone">HUSBAND HBSAG RESULT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <?php if($view == true) { ?>  
-                          <select required name="hushbresult" id="hushbresult" class="form-select" required disabled>
+                          <select required name="hushbresult" id="hushbresult" class="form-select" disabled>
                            <?php   
                             $query = mysqli_query($conn, "SELECT m.hushbresult,e.enumid,e.enumvalue FROM medicalhistory m join enumdata e on m.hushbresult=e.enumid WHERE type=11 AND m.id=".$id);
                             while($status_list=mysqli_fetch_assoc($query)){
@@ -615,7 +615,7 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-phone">MOTHER HIV TEST RESULT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             <?php if($view == true) { ?>
-                          <select required name="momhivtestresult" id="momhivtestresult" class="form-select" required disabled>
+                          <select required name="momhivtestresult" id="momhivtestresult" class="form-select" disabled>
                           
                            <?php   
                             $query = mysqli_query($conn, "SELECT m.momhivtestresult,e.enumid,e.enumvalue FROM medicalhistory m join enumdata e on m.momhivtestresult=e.enumid WHERE type=11 AND m.id=".$id);
@@ -860,6 +860,7 @@ if (isset($_GET['del'])) {
                               aria-describedby="basic-icon-default-password2"
                               value="<?php echo $hospitalname ?>"
                               disabled
+							  required
                             />  
                         </div>
                 </div>
