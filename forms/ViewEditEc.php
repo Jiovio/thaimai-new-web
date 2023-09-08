@@ -497,7 +497,7 @@ if (! empty($_POST["update"])) {
                               aria-label="HUSBAND'S AGE AT CONCEPTION"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $hagemarriage; ?>"
-							  
+							  min="11" max="99"
 							  required
                               
                             />

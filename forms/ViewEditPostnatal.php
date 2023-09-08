@@ -64,8 +64,6 @@ $id =0;
 	$Del_picmeNo = "";
 	$Del_picmeNo = $n_del['picmeNo'];
 	
-	
-	
     $query = mysqli_query($conn,"UPDATE postnatalvisit SET calcium='$calcium',pncPeriod='$pncPeriod',vitaminA='$vitaminA',motherPnc='$motherPnc',ifaTabletStatus='$ifaTabletStatus',ppcMethod='$ppcMethod',motherDangerSign='$mDangerSign',
     bloodSugar='$bloodSugar',infantWeight='$weight',infantDangerSigns='$iDSigns',bpSys='$bpSys',bpDia='$bpDia',updatedat='$date',updatedBy='$userid' WHERE id=".$id);
     if (!empty($query)) { 
@@ -159,8 +157,9 @@ if (isset($_GET['del'])) {
                     <hr class="my-0" />
                     <div class="card-body">
                       <form id="formAccountSettings" method="POST">
-                          <input type="hidden" name="id" value="<?php echo $id; ?>">
-                        <div class="row">
+                          <input type="hidden" name="id" oninput = "onlyNumbers(this.value)" value="<?php echo $id; ?>">
+                        <form action="" method="post" autocomplete="off" onSubmit="return PVPicmeValidation()">
+						<div class="row">
                           <div class="mb-3 col-md-6">
                             <label class="form-label">PICME NUMBER</label>
                             <div class="input-group input-group-merge">
@@ -365,26 +364,7 @@ if (isset($_GET['del'])) {
 
                           <div class="mb-3 col-md-6">
                           <label class="form-label">INFANT WEIGHT</label>
-                            <select name="infantWeight" id="infantWeight" class="form-select" disabled> 
-                           <?php  
-                          $query = "SELECT p.infantWeight,enumid,enumvalue FROM postnatalvisit p join enumdata e on e.enumid=p.infantWeight WHERE type=12 AND p.id=".$id;
-                          $exequery = mysqli_query($conn, $query);
-                          while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$weight){ } ?>
-                          <?php echo $listvalue['enumvalue']; ?>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                              </option>
-                          <?php  } 
-                              ?>
-                             </select>
+                          <input class="form-control" type="number" step="0.01" name="infantWeight" disabled id="infantWeight"/>
                             </div>
                             </div>
                         <div class="row">

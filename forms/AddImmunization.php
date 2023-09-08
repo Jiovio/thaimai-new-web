@@ -139,7 +139,7 @@ if($doseNo == 1) {
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
                           <div class="frmSearch">
-                          <input type="text" required id="picmenoImmune" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
+                          <input type="text" required id="picmenoImmune" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" min="100000000000" max="999999999999" class="form-control" />
                           <div id="suggesstion-box"></div>
                       </div>
                       </div>
@@ -148,6 +148,7 @@ if($doseNo == 1) {
                             <select required name="doseNo" id="doseNo" class="form-select">
                           <option value="">Choose...</option>
                            <?php 
+						   						
                             $query = "SELECT enumid,enumvalue,doseNo FROM enumdata WHERE type=42;";
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>

@@ -55,7 +55,7 @@ if (!empty($query)) {
               <div class="col-6 mb-3">
                   <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
                   <div class="frmSearch">
-                  <input type="text" required id="picmenoNew" name="picmeno" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
+                  <input type="number" required id="picmenoNew" name="picmeno" min="100000000000" max="999999999999" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
                   <div id="suggesstion-box"></div>
                  </div>
                 </div>
@@ -319,7 +319,7 @@ if (!empty($query)) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">BIRTH HEIGHT</label>
                             <input
-                              type="text"
+                              type="number"
                               name="birthHeight"
                               id="birthHeight"
                               class="form-control"

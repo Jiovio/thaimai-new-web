@@ -103,13 +103,14 @@ if($mvid > 0) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-email">DATE OF EC REG <span class="mand">* </span> <span id="errEcReg"></span><span id="Magemarriage"></span></label>
                           <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-calendar"></i></span>
                             <input
                               type="date"
                               name="dateecreg"
                               id="dateecreg"
                               class="form-control"
                               aria-describedby="basic-icon-default-email2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
 							  required
                               />
                           </div>
@@ -178,13 +179,16 @@ if($mvid > 0) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-email">MOTHER'S DATE OF BIRTH <span class="mand">* </span><span id="errMdob"></span></label>
                           <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-calendar"></i></span>
                             <input
                               type="date"
                               name="motherdob"
                               id="motherdob"
-                              class="form-control" onchange="fnCalMotAge();"
+                              class="form-control" 
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							  onchange="fnCalMotAge();"
                               aria-describedby="basic-icon-default-email2"
+							  
                               required
                             />
                           </div>
@@ -364,11 +368,12 @@ if($mvid > 0) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-email">HUSBAND'S DATE OF BIRTH <span class="mand">* </span><span id="errhdob"></span></label>
                           <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-calendar"></i></span>
                             <input
                               type="date"
                               name="husdob"
                               id="husdob"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
                               class="form-control" onchange="fnCalHusAge();"
                               aria-describedby="basic-icon-default-email2"
                                required
@@ -391,6 +396,7 @@ if($mvid > 0) {
                               placeholder="HUSBAND'S AGE AT MARRIAGE"
                               aria-label="HUSBAND'S AGE AT MARRIAGE"
                               aria-describedby="basic-icon-default-mobile"
+							  min="11" max="99"
                               required
                             />
                           </div>
