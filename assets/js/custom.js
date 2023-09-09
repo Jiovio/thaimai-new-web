@@ -479,7 +479,7 @@ function checkEC(motadhaar){
 
             if (result === '4')
             {
-                $('#suggesstion-box').html("<span style='color:red'>Aadhar not found in EC</span>");
+                $('#suggesstion-box').html("<span style='color:red'>Aadhar not found in EC.</span>");
                 return false;
             }	
         }
