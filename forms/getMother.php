@@ -98,7 +98,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         <div class="mb-3 col-md-4">
                         <label class="form-label" for="basic-icon-default-motheraathar">MOTHER'S AADHAAR ID <span class="mand">* </span> </span id="errPicmeno"><span></label>
                         <div class="input-group input-group-merge">
-                            <input type="text" name="motheraadhaarid" value="<?php echo $motheraadhaarid; ?>" class="form-control" readonly />
+                            <input type="text" name="motheraadhaarid" id="motheraadhaaridval" value="<?php echo $motheraadhaarid; ?>" class="form-control" readonly />
                         </div>
                       </div>
                       <div class="mb-3 col-md-4">
@@ -389,7 +389,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         </div>
                       </div>
                       <div class="mt-2">
-                      <input class="btn btn-primary" type="submit" name="anuser" value="Save">
+                      <input class="btn btn-primary" type="submit" name="anuser" value="Save" onclick="return addMothAadhar()">
                       </div>
                 </form>
                   </div>
