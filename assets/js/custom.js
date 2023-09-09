@@ -430,11 +430,11 @@ $('#picmeno').on('keydown keyup change', function(){
   }
 });
 
-/*$('#picmenoNew').on('keydown keyup change', function(){
+$('#picmenoNew').on('keydown keyup change', function(){
     var picmeno = $(this).val();
     checkDuplicatePicmeNo(picmeno);
    
-});*/
+});
 
 
 /* Medical History PICME - Starts */
@@ -465,23 +465,24 @@ function checkMedicaldetails(picmeno){
 		cache: false,
         success: function (result) {
             $('#suggesstion-box').html("")
-            if (result === '1') 
-			{
-               $('#suggesstion-box').html("<span style='color:red'>Medical history already exists for this picme.</span>");
-               return false;
+            result= $.trim(result);
+            if ($.trim(result) === '1')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>Medical history already exists for this picme.</span>");
+                return false;
             }
-			
-		/*	if (result === '3') 
-			{
-               $('#suggesstion-box').html("<span style='color:red'>Valid picme.</span>");
-               return true;
+
+            if (result === '3')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>Valid picme.</span>");
+                return true;
+            }
+
+            if (result === '4')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Registration</span>");
+                return false;
             }	
-			
-			if (result === '4') 
-			{
-               $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Registration</span>");
-               return false;
-            }	*/
         }
     });
 }

@@ -3,7 +3,7 @@
 include "../../config/db_connect.php";
 $picmeNo = $_POST["picmeno"];
 
-print_r("I am here"); 
+
 
 $medicalSql = mysqli_query($conn, "SELECT * FROM medicalhistory WHERE picmeno = '$picmeNo' order by id");
 $medicalData = mysqli_fetch_array($medicalSql);
