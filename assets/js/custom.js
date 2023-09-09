@@ -430,6 +430,56 @@ $('#picmeno').on('keydown keyup change', function(){
   }
 });
 
+/* Medical History PICME - Starts */
+/**
+ * Add Medical History picme no
+ * @returns {undefined}
+ */
+ 
+ $('#picmenomed').on('keydown keyup change', function(){
+    var mpicmeno = $(this).val();
+    checkMedicaldetails(mpicmeno);
+   
+});
+
+function addMedicalValidate(){
+    var mpicmeno = $('#picmenomed').val();
+ 
+    checkMedicaldetails(mpicmeno);
+}
+
+function checkMedicaldetails(mpicmeno){
+        $.ajax({
+        url: "ajax/MedicalDetails.php",
+        type: "POST",
+        data: {
+            mpicmeno: mpicmeno
+        },
+		cache: false,
+        success: function (result) {
+            $('#suggesstion-box').html("")
+            if (result === '1') 
+			{
+               $('#suggesstion-box').html("<span style='color:red'>Medical history already exists for this picme.</span>");
+               return false;
+            }
+			
+		/*	if (result === '3') 
+			{
+               $('#suggesstion-box').html("<span style='color:red'>Valid picme.</span>");
+               return true;
+            }	
+			
+			if (result === '4') 
+			{
+               $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Registration</span>");
+               return false;
+            }	*/
+        }
+    });
+}
+/* Medical History PICME - Ends */
+
 $('#picmenoNew').on('keydown keyup change', function(){
     var picmeno = $(this).val();
     checkDuplicatePicmeNo(picmeno);
