@@ -466,7 +466,7 @@ function checkMedicaldetails(picmeno){
         success: function (result) {
             $('#suggesstion-box').html("")
             result= $.trim(result);
-            if ($.trim(result) === '1')
+            if (result === '1')
             {
                 $('#suggesstion-box').html("<span style='color:red'>Medical history already exists for this picme.</span>");
                 return false;
@@ -594,7 +594,7 @@ function checkDuplicatePicmeNo(picmeno){
                return false;
             }
 			if (result === '3') {
-               $('#suggesstion-box').html("<span style='color:red'>Invalid picmeno.</span>");
+               $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Registration. </span>");
                return false;
             }
         }
