@@ -444,23 +444,23 @@ $('#picmeno').on('keydown keyup change', function(){
  */
  
  $('#picmenomed').on('keydown keyup change', function(){
-    var mpicmeno = $(this).val();
-    checkMedicaldetails(mpicmeno);
+    var picmeno = $(this).val();
+    checkMedicaldetails(picmeno);
    
 });
 
 function addMedicalValidate(){
-    var mpicmeno = $('#picmenomed').val();
+    var picmeno = $('#picmenomed').val();
  
-    checkMedicaldetails(mpicmeno);
+    checkMedicaldetails(picmeno);
 }
 
-function checkMedicaldetails(mpicmeno){
+function checkMedicaldetails(picmeno){
         $.ajax({
         url: "ajax/MedicalDetails.php",
         type: "POST",
         data: {
-            mpicmeno: mpicmeno
+            picmeno: picmeno
         },
 		cache: false,
         success: function (result) {
@@ -590,6 +590,10 @@ function checkDuplicatePicmeNo(picmeno){
             $('#suggesstion-box').html("")
             if (result === '1') {
                $('#suggesstion-box').html("<span style='color:red'>Delivery details already exists</span>");
+               return false;
+            }
+			if (result === '3') {
+               $('#suggesstion-box').html("<span style='color:red'>Invalid picmeno.</span>");
                return false;
             }
         }

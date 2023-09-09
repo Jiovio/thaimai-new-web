@@ -11,7 +11,7 @@ $medicalData = mysqli_fetch_array($medicalSql);
 if (!empty($medicalData)) {
     echo 1;
 } 
-/*else {
+else {
    $antenatalSql = mysqli_query($conn, "SELECT * FROM anregistration WHERE picmeno = '$picmeNo' order by id");
 $antenatalData = mysqli_fetch_array($antenatalSql);
 
@@ -20,7 +20,7 @@ if (!empty($antenatalData) && isset($antenatalData)) {
 } else {
    echo 4;
 }
-} */
+} 
 
 
 
