@@ -311,6 +311,7 @@ if (!empty($query)) {
                               placeholder="BIRTH WEIGHT"
                               aria-label="BIRTH WEIGHT"
                               aria-describedby="basic-icon-default-password2"
+							  min="1" max="6"
                               required
                             />
                           </div>
@@ -326,6 +327,7 @@ if (!empty($query)) {
                               class="form-control"
                               placeholder="BIRTH HEIGHT"
                               aria-label="BIRTH HEIGHT"
+							  min="30" max="100"
                               aria-describedby="basic-icon-default-password2"
                             />
                           </div>

@@ -438,6 +438,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-describedby="basic-icon-default-password2"
                               value="<?php echo $birthWeight ?>"
 							  step = "0.01"
+							  min="1" max="6"
                               disabled
                               required
                             />
@@ -456,6 +457,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-label="BIRTH HEIGHT"
                               aria-describedby="basic-icon-default-password2"
                               value="<?php echo $birthHeight ?>"
+							  min="30" max="100"
                               disabled
                             />
                           </div>
