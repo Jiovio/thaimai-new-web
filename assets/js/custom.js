@@ -430,6 +430,13 @@ $('#picmeno').on('keydown keyup change', function(){
   }
 });
 
+/*$('#picmenoNew').on('keydown keyup change', function(){
+    var picmeno = $(this).val();
+    checkDuplicatePicmeNo(picmeno);
+   
+});*/
+
+
 /* Medical History PICME - Starts */
 /**
  * Add Medical History picme no
@@ -480,11 +487,6 @@ function checkMedicaldetails(mpicmeno){
 }
 /* Medical History PICME - Ends */
 
-$('#picmenoNew').on('keydown keyup change', function(){
-    var picmeno = $(this).val();
-    checkDuplicatePicmeNo(picmeno);
-   
-});
 
 $('#picmenoImmune').on('keydown keyup change', function(){
     var picmeno = $('#picmenoImmune').val();
@@ -594,6 +596,30 @@ function checkDuplicatePicmeNo(picmeno){
     });
 }
 
+/* Postnatal */
+function validatePVPicme(){
+    var picmeno = $('#picmeno').val();
+    checkPVPicmeNo(picmeno);
+}
+
+function checkPVPicmeNo(picmeno){
+     $.ajax({
+        url: "ajax/PVPicmeValidation.php",
+        type: "POST",
+        data: {
+            picmeno: picmeno
+        },
+        cache: false,
+        success: function (result) {
+            $('#suggesstion-box').html("")
+            if (result === '1') {
+               $('#suggesstion-box').html("<span style='color:red'>Invalid picme no</span>");
+               return false;
+            }
+        }
+    });
+}
+
 
 function checkGCTWeekStatusDuplicate(picmeno, selectedValue, selectedText)
 {
@@ -619,6 +645,8 @@ function checkGCTWeekStatusDuplicate(picmeno, selectedValue, selectedText)
     }
     return resultParam;
 }
+
+
 
 $('#pncPeriod').change(function (){
      var picmeno = $('#picmenoPostNalVisit').val();

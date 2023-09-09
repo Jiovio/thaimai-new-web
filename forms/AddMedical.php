@@ -80,15 +80,14 @@ if (! empty($_POST["addMedical"])) {
                         <small class="float-end"><span class="mand">* </span> Fields are Mandatory</small>
                     </div>
                     <div class="card-body">
-                      
-                    <div id="response" class="<?php if(!empty($type)) { echo $type . " display-block"; } else { echo $type . " display-none"; } ?>"><?php if(!empty($emessage)) { echo $emessage; } ?></div>
-                    <br>
+                     <div class="errMsg" id="errMsg"></div> 
+                    
             <div class="row">
                 <div class="col-6 mb-3">
                 <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
                 <div class="frmSearch">
-                <input type="number" required id="picmeno" name="picmeno" min="100000000000" max="999999999999" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
-                <div id="suggesstion-box"></div>
+                <input type="number" required id="picmenomed" name="picmeno" min="100000000000" max="999999999999" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
+				<div id="suggesstion-box"></div>
                 </div>
                 </div>
                         <div class="col-6 mb-3">
@@ -622,7 +621,7 @@ if (! empty($_POST["addMedical"])) {
                 </div>
                 
               <div class="mt-2">
-                        <input class="btn btn-primary" type="submit" name="addMedical" value="Save">
+                        <input class="btn btn-primary" type="submit" name="addMedical" value="Save" onclick="return addMedicalValidate()">
                         </div>
               </div>
             </div>
