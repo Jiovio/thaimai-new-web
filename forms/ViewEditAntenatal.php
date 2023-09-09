@@ -417,7 +417,7 @@ if (isset($_GET['del'])) {
                             <label class="form-label">MOTHER'S HEIGHT <span class="mand">* </span></label>
                             <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-female"></i></span>
-                            <input class="form-control" type="text" id="motherHeight" value="<?php echo $height; ?>" name="motherHeight" placeholder="Height" disabled required/>
+                            <input class="form-control" type="text" id="motherHeight" min="70" max="200" value="<?php echo $height; ?>" name="motherHeight" placeholder="Height" disabled required/>
                           </div>
                           </div>
                             
@@ -431,6 +431,7 @@ if (isset($_GET['del'])) {
                               id="motherWeight"
                               name="motherWeight" required
                               placeholder="Mother's Weight"
+							  min="30" max="120"
                               value="<?php echo $weight; ?>"
 							  onclick="Obcode()"
                               disabled

@@ -292,7 +292,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         <div class="mb-3 col-md-6">
                           <label class="form-label">MOTHER'S HEIGHT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                          <input class="form-control" type="number" id="motherHeight" required name="motherHeight" placeholder="Height" />
+                          <input class="form-control" type="number" min="70" max="200" id="motherHeight" required name="motherHeight" placeholder="Height" />
                         </div>
                         </div>
                         
@@ -305,6 +305,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             id="motherWeight"
                             name="motherWeight"
                             placeholder="Mother Weight"
+							min="30" max="120"
                             required
                           />
                         </div>
