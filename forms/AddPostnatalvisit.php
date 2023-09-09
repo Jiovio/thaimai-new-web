@@ -182,7 +182,7 @@ if (! empty($_POST["addpostnatal"])) {
 
                           <div class="mb-3 col-md-6">
                           <label class="form-label">INFANT WEIGHT</label>
-                          <input class="form-control" type="number" step="0.001" name="infantWeight" id="infantWeight"/>
+                          <input class="form-control" type="number" step="0.001" min="1" max="6" name="infantWeight" id="infantWeight"/>
                            
                             </div>
                         </div>

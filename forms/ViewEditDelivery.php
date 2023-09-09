@@ -363,6 +363,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder="NO OF LIVE BIRTH"
                               aria-label="NO OF LIVE BIRTH"
                               aria-describedby="basic-icon-default-password2"
+							  min=0  max=10
                               value="<?php echo $noOfLiveBirth ?>"
 							  required
                               disabled 
@@ -381,6 +382,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder="NO OF STILL BIRTH"
                               aria-label="NO OF STILL BIRTH"
                               aria-describedby="basic-icon-default-password2"
+							  min=0  max=10
                               value="<?php echo $noOfStillBirth ?>"
                               disabled 
                             />

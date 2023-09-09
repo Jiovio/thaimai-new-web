@@ -242,6 +242,7 @@ if (!empty($query)) {
                               name="noOfLiveBirth"
                               id="noOfLiveBirth"
                               class="form-control"
+							  min=0  max=10
                               placeholder="NO OF LIVE BIRTH"
                               aria-label="NO OF LIVE BIRTH"
                               aria-describedby="basic-icon-default-password2"
@@ -261,7 +262,7 @@ if (!empty($query)) {
                               placeholder="NO OF STILL BIRTH"
                               aria-label="NO OF STILL BIRTH"
                               aria-describedby="basic-icon-default-password2"
-                        
+                              min=0  max=10
                             />
                           </div>
 
@@ -546,7 +547,9 @@ if (!empty($query)) {
                           </div>
                         </div>
                         <div class="mt-2">
-                        <input class="btn btn-primary" type="submit" name="addDelivery" value="Save" onclick="return validateAddDelivery()">
+                        <!--input class="btn btn-primary" type="submit" name="addDelivery" value="Save" onclick="return validateAddDelivery()"!--->
+						<input class="btn btn-primary" type="submit" name="addDelivery" value="Save">
+						
                         </div>
                 </div>
                 

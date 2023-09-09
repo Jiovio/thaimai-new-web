@@ -364,7 +364,7 @@ if (isset($_GET['del'])) {
 
                           <div class="mb-3 col-md-6">
                           <label class="form-label">INFANT WEIGHT</label>
-                          <input class="form-control" type="number" step="0.01" name="infantWeight" disabled id="infantWeight"/>
+                          <input class="form-control" type="number" step="0.01" min="1" max="6" name="infantWeight" disabled id="infantWeight"/>
                             </div>
                             </div>
                         <div class="row">

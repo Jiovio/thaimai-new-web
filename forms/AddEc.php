@@ -243,14 +243,15 @@ if($mvid > 0) {
                               ><i class="bx bx-mobile"></i
                             ></span>
                             <input
-                              type="text"
+							  type="tel" 
                                oninput = "MothermobonlyNumbers(this.value)"
                               name="mothermobno"
-                              id="mothermobno" maxlength="10"
+                              id="mothermobno" 
                               class="form-control phone-mask"
                               placeholder="MOTHER'S MOBILE NUMBER"
                               aria-label="MOTHER'S MOBILE NUMBER"
                               aria-describedby="basic-icon-default-mobile"
+							  pattern="[0-9]{3}[0-9]{3}[0-9]{4}" maxlength="10"
                               required
                             />
                           </div>
@@ -428,14 +429,15 @@ if($mvid > 0) {
                               ><i class="bx bx-mobile"></i
                             ></span>
                             <input
-                              type="text"
+                              type="tel"
                                oninput = "HusmobonlyNumbers(this.value)"
                               name="husmobno"
-                              id="husmobno" maxlength="10"
+                              id="husmobno" 
                               class="form-control phone-mask"
                               placeholder="HUSBAND'S MOBILE NUMBER"
                               aria-label="HUSBAND'S MOBILE NUMBER"
                               aria-describedby="basic-icon-default-mobile"
+							  pattern="[0-9]{3}[0-9]{3}[0-9]{4}" maxlength="10"
                               required
                             />
                           </div>
@@ -623,6 +625,7 @@ if($mvid > 0) {
                               placeholder="PINCODE"
                               aria-label="PINCODE"
                               aria-describedby="basic-icon-default-email2"
+							  pattern="[0-9]{6}"
                               required
                             />
                           </div>
@@ -694,6 +697,7 @@ if($mvid > 0) {
                               placeholder="RATION CARD NUMBER"
                               aria-label="RATION CARD NUMBER"
                               aria-describedby="basic-icon-default-email2"
+							  pattern="[0-9]{12}"
                               required
                             />
                           </div>

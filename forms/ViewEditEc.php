@@ -309,11 +309,11 @@ if (! empty($_POST["update"])) {
                               ><i class="bx bx-mobile"></i
                             ></span>
                             <input
-                              type="text"
+                              type="tel"
                               oninput = "MothermobonlyNumbers(this.value)"
                               name="mothermobno"
                               id="mothermobno"
-                              maxlength="10"
+                              pattern="[0-9]{3}[0-9]{3}[0-9]{4}" maxlength="10"
                               class="form-control phone-mask"
                               placeholder="MOTHER'S MOBILE NUMBER"
                               aria-label="MOTHER'S MOBILE NUMBER"
@@ -533,11 +533,11 @@ if (! empty($_POST["update"])) {
                               ><i class="bx bx-mobile"></i
                             ></span>
                             <input
-                              type="text"
+                              type="tel"
                               oninput = "HusmobonlyNumbers(this.value)"
                               name="husmobno"
                               id="husmobno"
-                              maxlength="10"
+                              pattern="[0-9]{3}[0-9]{3}[0-9]{4}" maxlength="10"
                               class="form-control phone-mask"
                               placeholder="HUSBAND'S MOBILE NUMBER"
                               aria-label="HUSBAND'S MOBILE NUMBER"
@@ -853,6 +853,7 @@ if (! empty($_POST["update"])) {
                               class="form-control"
                               placeholder="PINCODE"
                               aria-label="PINCODE"
+							  pattern="[0-9]{6}"
                               aria-describedby="basic-icon-default-email2"
                               disabled value="<?php echo $pincode; ?>"
                               
@@ -964,6 +965,7 @@ if (! empty($_POST["update"])) {
                               placeholder="RATION CARD NUMBER"
                               aria-label="RATION CARD NUMBER"
                               aria-describedby="basic-icon-default-email2"
+							  pattern="[0-9]{12}"
                               disabled value="<?php echo $rcnum; ?>"
                               required
                             />
