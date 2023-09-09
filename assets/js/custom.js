@@ -652,6 +652,10 @@ function checkDuplicatePicmeNo(picmeno){
                $('#suggesstion-box').html("<span style='color:red'>Picme not found in Medical History. </span>");
                return false;
             }
+			if (result === '5') {
+               $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Visit. </span>");
+               return false;
+            }
 			if (result === '2') {
                $('#suggesstion-box').html("<span style='color:red'>Valid picme. </span>");
                return false;
