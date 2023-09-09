@@ -29,7 +29,7 @@
         <div class="input-group input-group-merge">
         <span id="basic-icon-default-mobile" class="input-group-text">
         <i class="bx bx-id-card"></i></span>
-        <input type="text" required id="motheraadhaarid" name="motheraadhaarid" onchange="showMoDet(this.value)" oninput = "onlyAadhar(this.value)" placeholder="MOTHER'S AADHAAR ID" class="form-control" />
+        <input type="text" required id="motheraadhaaridval" name="motheraadhaarid" onchange="showMoDet(this.value)" oninput = "onlyAadhar(this.value)" placeholder="MOTHER'S AADHAAR ID" class="form-control" />
         </div>
         <div id="suggesstion-box"></div>
         <button id="genName" name="genName" class="btn btn-primary">Get Details</button>

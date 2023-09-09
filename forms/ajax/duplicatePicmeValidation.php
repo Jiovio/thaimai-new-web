@@ -15,7 +15,16 @@ if (!empty($AvCnt) && isset($AvCnt['deliveryCnt']) &&  $AvCnt['deliveryCnt'] > 0
    $ANReg_dt = mysqli_fetch_array($ANReg);
    if(!empty($ANReg_dt))
    {
+   $MedHis = mysqli_query($conn, "SELECT * FROM medicalhistory WHERE picmeno = '$picmeNo'");
+   $MedHis_dt = mysqli_fetch_array($MedHis);
+   if(!empty($MedHis_dt))
+   {
 	echo 2;   
+   } 
+   else
+	   {
+	echo 4;   
+   }  
    }
    else
    {

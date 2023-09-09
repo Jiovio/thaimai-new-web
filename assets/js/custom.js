@@ -436,6 +436,57 @@ $('#picmenoNew').on('keydown keyup change', function(){
    
 });
 
+/* AN Reg Mot Aadhar Id Val - Starts */
+/**
+ * Add Aadhar no
+ * @returns {undefined}
+ */
+ 
+ $('#motheraadhaaridval').on('keydown keyup change', function(){
+    var motadhaar = $(this).val();
+    checkEC(motadhaar);
+   
+});
+
+function addMothAadhar(){
+    var motadhaar = $('#motheraadhaaridval').val();
+ 
+    checkEC(motadhaar);
+}
+
+function checkEC(motadhaar){
+        $.ajax({
+        url: "ajax/ECAadharVal.php",
+        type: "POST",
+        data: {
+            motadhaar : motadhaar
+        },
+		cache: false,
+        success: function (result) {
+            $('#suggesstion-box').html("")
+            result= $.trim(result);
+            if (result === '1')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>AN Registration already done for this picme.</span>");
+                return false;
+            }
+
+            if (result === '3')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>Valid picme.</span>");
+                return true;
+            }
+
+            if (result === '4')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Registration</span>");
+                return false;
+            }	
+        }
+    });
+}
+/* Medical History PICME - Ends */
+
 
 /* Medical History PICME - Starts */
 /**
@@ -595,6 +646,14 @@ function checkDuplicatePicmeNo(picmeno){
             }
 			if (result === '3') {
                $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Registration. </span>");
+               return false;
+            }
+			if (result === '4') {
+               $('#suggesstion-box').html("<span style='color:red'>Picme not found in Medical History. </span>");
+               return false;
+            }
+			if (result === '2') {
+               $('#suggesstion-box').html("<span style='color:red'>Valid picme. </span>");
                return false;
             }
         }
