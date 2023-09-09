@@ -467,19 +467,19 @@ function checkEC(motadhaar){
             result= $.trim(result);
             if (result === '1')
             {
-                $('#suggesstion-box').html("<span style='color:red'>AN Registration already done for this picme.</span>");
+                $('#suggesstion-box').html("<span style='color:red'>AN Registration already done for this Aadhar.</span>");
                 return false;
             }
 
             if (result === '3')
             {
-                $('#suggesstion-box').html("<span style='color:red'>Valid picme.</span>");
+                $('#suggesstion-box').html("<span style='color:red'>Valid Aadhar.</span>");
                 return true;
             }
 
             if (result === '4')
             {
-                $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Registration</span>");
+                $('#suggesstion-box').html("<span style='color:red'>Aadhar not found in EC</span>");
                 return false;
             }	
         }
@@ -525,7 +525,7 @@ function checkMedicaldetails(picmeno){
 
             if (result === '3')
             {
-                $('#suggesstion-box').html("<span style='color:red'>Valid picme.</span>");
+                $('#suggesstion-box').html("<span style='color:red'>Valid Picme.</span>");
                 return true;
             }
 
