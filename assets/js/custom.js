@@ -487,7 +487,6 @@ function checkEC(motadhaar){
 }
 /* Medical History PICME - Ends */
 
-
 /* Medical History PICME - Starts */
 /**
  * Add Medical History picme no
@@ -643,6 +642,7 @@ function checkDuplicatePicmeNo(picmeno){
             if (result === '1') {
                $('#suggesstion-box').html("<span style='color:red'>Delivery details already exists</span>");
                return false;
+			   document.getElementById("picmenoNew").value = ""; 
             }
 			if (result === '3') {
                $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Registration. </span>");
