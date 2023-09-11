@@ -643,8 +643,8 @@ function checkDuplicatePicmeNo(picmeno){
 			  // document.getElementById ('picmenoNew').value = "";
 			  // document.getElementById ('picmenoNew').focus();
                $('#suggesstion-box').html("<span style='color:red'>Delivery details already exists</span>");
+			   var picmeno = "";
 			   $("#picmenoNew").attr('value', null);
-			   
                return false;
 			   
             }
