@@ -360,18 +360,18 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                       </div>
                 
                       <div class="row">
+					  <?php 
+						$rec_pic = mysqli_query($conn, "SELECT * FROM ecregister WHERE motheraadhaarid = $motheraadhaarid");
+			            $n_rec = mysqli_fetch_array($rec_pic);
+	                    $rec_Mage = "";
+	                    $rec_Mage = $n_rec['motheragemarriage'];
+						?>
                       <div class="mb-3 col-md-6">
                           <label class="form-label">Mother's Age at Conception <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <input
                             type="number"
-							<?php 
-						$rec_pic = mysqli_query($conn, "SELECT * FROM ecregister WHERE picmeno = $picmeno");
-			            $n_rec = mysqli_fetch_array($rec_pic);
-	                    $rec_Mage = "";
-	                    $rec_Mage = $n_rec['motheragemarriage'];
-						?>
-                              min="<?php echo $rec_Mage; ?>" max="99"
+							min="<?php echo $rec_Mage; ?>" max="99"
                             class="form-control"
                             id="MotherAge"
                             name="MotherAge"
@@ -380,17 +380,17 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                           />
                         </div>
                         </div>
+						 <?php 
+						$rec_pic = mysqli_query($conn, "SELECT * FROM ecregister WHERE motheraadhaarid = $motheraadhaarid");
+			            $n_rec = mysqli_fetch_array($rec_pic);
+	                    $rec_Hage = "";
+	                    $rec_Hage = $n_rec['husagemarriage'];
+						?>
                         <div class="mb-3 col-md-6">
                           <label class="form-label">Husband's Age at Conception <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <input
                             type="number"
-                             <?php 
-						$rec_pic = mysqli_query($conn, "SELECT * FROM ecregister WHERE picmeno = $picmeno");
-			            $n_rec = mysqli_fetch_array($rec_pic);
-	                    $rec_Hage = "";
-	                    $rec_Hage = $n_rec['husagemarriage'];
-						?>
                               min="<?php echo $rec_Hage; ?>" max="99"
                             class="form-control"
                             id="HusbandAge"
