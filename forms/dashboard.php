@@ -78,8 +78,8 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                               <img src="../assets/img/icons/unicons/cc-warning.png" style="cursor:default" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
-                          <span class="fw-semibold d-Block mb-1">Antenatal Registration</span>
-                          <h3 class="card-title mb-2"><?php echo $ArTot; ?></h3>
+                          <span class="fw-semibold d-Block mb-1" style="cursor:default">Antenatal Registration</span>
+                          <h3 class="card-title mb-2" style="cursor:default"><?php echo $ArTot; ?></h3>
                         </div>
                       </div>
                     </div>
@@ -92,8 +92,8 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                               <img src="../assets/img/icons/unicons/cc-success.png" style="cursor:default" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
-                          <span class="fw-semibold d-Block mb-1">Medical History</span>
-                          <h3 class="card-title mb-2"><?php echo $MhTot; ?></h3>
+                          <span class="fw-semibold d-Block mb-1" style="cursor:default">Medical History</span>
+                          <h3 class="card-title mb-2" style="cursor:default"><?php echo $MhTot; ?></h3>
                         </div>
                       </div>
                     </div> 
@@ -106,8 +106,8 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                               <img src="../assets/img/icons/unicons/cc-primary.png" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
-                          <span class="fw-semibold d-Block mb-1">Antenatal Visit</span>
-                          <h3 class="card-title mb-2"><?php echo $AvTot; ?></h3>
+                          <span class="fw-semibold d-Block mb-1" style="cursor:default">Antenatal Visit</span>
+                          <h3 class="card-title mb-2" style="cursor:default"><?php echo $AvTot; ?></h3>
                         </div>
                       </div>
                     
@@ -126,8 +126,8 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-Block mb-1">High Risk Mothers</span>
-                          <h3 class="card-title mb-2"><?php echo $HrTot; ?></h3>
+                          <span class="fw-semibold d-Block mb-1" style="cursor:default">High Risk Mothers</span>
+                          <h3 class="card-title mb-2" style="cursor:default"><?php echo $HrTot; ?></h3>
                         </div>
                       </div>
                     </div>
@@ -139,8 +139,8 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                               <img src="../assets/img/icons/unicons/wallet.png" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
-                          <span class="fw-semibold d-Block mb-1">Delivery Details</span>
-                         <h3 class="card-title mb-2"><?php echo $DdTot; ?></h3>
+                          <span class="fw-semibold d-Block mb-1" style="cursor:default">Delivery Details</span>
+                         <h3 class="card-title mb-2" style="cursor:default"><?php echo $DdTot; ?></h3>
                         </div>
                       </div>
                     </div>
@@ -153,8 +153,8 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                               <img src="../assets/img/icons/unicons/cc-warning.png" style="cursor:default" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
-                          <span class="fw-semibold d-Block mb-1">Immunization Details</span>
-                         <h3 class="card-title mb-2"><?php echo $ImTot; ?></h3>
+                          <span class="fw-semibold d-Block mb-1" style="cursor:default">Immunization Details</span>
+                         <h3 class="card-title mb-2" style="cursor:default"><?php echo $ImTot; ?></h3>
                         </div>
                       </div>
                     </div>
@@ -166,8 +166,8 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                               <img src="../assets/img/icons/unicons/chart.png" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
-                          <span class="fw-semibold d-Block mb-1">Postnatal Visit</span>
-                          <h3 class="card-title mb-2"><?php echo $PvTot; ?></h3>
+                          <span class="fw-semibold d-Block mb-1" style="cursor:default">Postnatal Visit</span>
+                          <h3 class="card-title mb-2" style="cursor:default"><?php echo $PvTot; ?></h3>
                         </div>
                       </div>
                     </div>
@@ -179,8 +179,8 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                               <img src="../assets/img/icons/unicons/cc-warning.png" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
-                          <span class="fw-semibold d-Block mb-1">Pregnancy Status</span>
-                          <h3 class="card-title mb-2"><?php echo $LmTot; ?></h3>
+                          <span class="fw-semibold d-Block mb-1" style="cursor:default">Pregnancy Status</span>
+                          <h3 class="card-title mb-2" style="cursor:default"><?php echo $LmTot; ?></h3>
                         </div>
                       </div>
                     </div>
@@ -197,8 +197,8 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-Block mb-1">Users</span>
-                          <h3 class="card-title mb-2"><?php echo $UsTot; ?></h3>
+                          <span class="fw-semibold d-Block mb-1" style="cursor:default">Users</span>
+                          <h3 class="card-title mb-2" style="cursor:default"><?php echo $UsTot; ?></h3>
                         </div>
                       </div>
                     </div>
@@ -210,8 +210,8 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                               <img src="../assets/img/icons/unicons/cc-success.png" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
-                          <span class="fw-semibold d-Block mb-1">Location Master</span>
-                          <h3 class="card-title mb-2"><?php echo $HsTot; ?></h3>
+                          <span class="fw-semibold d-Block mb-1" style="cursor:default">Location Master</span>
+                          <h3 class="card-title mb-2" style="cursor:default"><?php echo $HsTot; ?></h3>
                         </div>
                       </div>
                     </div>
@@ -224,8 +224,8 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                               <img src="../assets/img/icons/unicons/wallet.png" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
-                          <span class="fw-semibold d-Block mb-1">Private Hospitals</span>
-                          <h3 class="card-title mb-2"><?php echo $PhTot; ?></h3>
+                          <span class="fw-semibold d-Block mb-1" style="cursor:default">Private Hospitals</span>
+                          <h3 class="card-title mb-2" style="cursor:default"><?php echo $PhTot; ?></h3>
                         </div>
                       </div>
                     </div>
