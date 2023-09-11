@@ -8,9 +8,7 @@
 <?php include ('require/header.php'); // Menu & Top Search 
 $motheraadhaarid = ""; $residentType =""; $ptest = ""; $gravida = ""; $para = ""; $child = ""; $ab = "";
 $hrPreg = "" ; $obcode = ""; $height = ""; $weight = ""; $bp = ""; $dia = ""; $date = ""; $mrmbs = "";
-
 $id = 0; $update = false; $view = false; $url='AnRegisterlist.php'; 
-
 if (isset($_GET['view'])) {
   $id = $_GET['view'];
   $view = true;
@@ -39,7 +37,6 @@ if (isset($_GET['view'])) {
   $MotherAge = $vi["MotherAge"]; 
   $HusbandAge = $vi["HusbandAge"];
 }
-
 if (! empty($_POST['update'])) {
 	
     $id = $_POST["id"];
@@ -73,7 +70,6 @@ if (! empty($_POST['update'])) {
     $HusbandAge = $_POST["HusbandAge"];
 	
 	//print_r($hrPreg); exit; 
-
  date_default_timezone_set('Asia/Kolkata');
  $date = date('d-m-Y h:i:s');
 $uquery = mysqli_query($conn, "UPDATE anregistration SET picmeRegDate='$picmeRegDate',residentType='$residentType', pregnancyTestResult='$ptest', methodofConception='$methodofConception', gravida='$gravida', para='$para',
@@ -139,7 +135,6 @@ if (isset($_GET['del'])) {
                 <div class="card-body">
                 <form id="formAccountSettings" method="POST">
                 <input type="hidden" name="id" value="<?php echo $id; ?>">
-
                     <div class="row">                 
                     <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-password">MOTHER'S AADHAAR ID</label>
@@ -163,7 +158,6 @@ if (isset($_GET['del'])) {
                             
                           </div>
                         </div>
-
                         <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">HUSBAND NAME AS PER AADHAAR</label>
                           <div class="input-group input-group-merge">
@@ -338,14 +332,10 @@ if (isset($_GET['del'])) {
                           <?php if($update == true || $view == true) { ?>
                             <select required name="abortion" onclick="Obcode()" id="abortion" class="form-select" disabled>
                             <?php
-
                                 $list=mysqli_query($conn, "SELECT an.abortion,e.enumid,e.enumvalue from anregistration an join enumdata e ON e.enumid=an.abortion WHERE type=12 AND an.id=".$id);
                                 while($row_list=mysqli_fetch_assoc($list)){
-
                                 ?>
-
                                 <option value="<?php echo $row_list['enumid']; ?>">
-
                                 <?php if($row_list['enumvalue']==$ab) ?>
                                 
                                 <?php { echo $row_list['enumvalue']; } ?></option>
@@ -358,21 +348,16 @@ if (isset($_GET['del'])) {
                     </select>
                        <?php } ?>
                             </div>
-
                             <div class="mb-3 col-md-6">
                           <label class="form-label">Child Death <span class="mand">* </span></label>
                           <?php if($update == true || $view == true) { ?>
                             <select required name="childDeath" onclick="Obcode()" id="childDeath" class="form-select" disabled>
                             
                                 <?php
-
                                 $list=mysqli_query($conn, "SELECT an.childDeath,e.enumid,e.enumvalue from anregistration an join enumdata e ON e.enumid=an.childDeath WHERE type=12 AND an.id=".$id);
                                 while($row_list=mysqli_fetch_assoc($list)){
-
                                 ?>
-
                                 <option value="<?php echo $row_list['enumid']; ?>">
-
                                 <?php if($row_list['enumvalue']==$ab) ?>
                                 
                                 <?php { echo $row_list['enumvalue']; } ?></option>
@@ -446,13 +431,10 @@ if (isset($_GET['del'])) {
                             <span class="input-group-text"><i class="bx bx-heart-circle"></i></span>
                             <select class="50-200 form-control" id="bpSys" name="bpSys" placeholder="BP SYS" onclick="Obcode()" required disabled>
                                 <?php
-
                                 $list=mysqli_query($conn, "SELECT bpSys from anregistration WHERE id=".$id);
                                 while($row_list=mysqli_fetch_assoc($list)){
-
                                 ?>
                                 <option value="<?php echo $row_list['bpSys']; ?>">
-
                                 <?php if($row_list['bpSys']==$bp) ?>
                                 
                                 <?php { echo $row_list['bpSys']; } ?></option>
@@ -467,13 +449,10 @@ if (isset($_GET['del'])) {
                             <span class="input-group-text"><i class="bx bx-first-aid"></i></span>
                             <select class="40-150 form-control" id="bpDia" name="bpDia" placeholder="BP DIA" onclick="Obcode()" required disabled>
                             <?php
-
                                 $list=mysqli_query($conn, "SELECT bpDia from anregistration WHERE id=".$id);
                                 while($row_list=mysqli_fetch_assoc($list)){
-
                                 ?>
                                 <option value="<?php echo $row_list['bpDia']; ?>">
-
                                 <?php if($row_list['bpDia']==$dia) ?>
                                 
                                 <?php { echo $row_list['bpDia']; } ?></option>
@@ -499,20 +478,15 @@ if (isset($_GET['del'])) {
                               disabled
                             />
                           </div>
-
                           <div class="mb-3 col-md-6">
                             <label class="form-label" for="country">MRMBS ELIGIBLE <span class="mand">* </span></label>
                             <?php if($update == true || $view == true) { ?>
                             <select required name="mrmbsEligible" id="mrmbsEligible" class="form-select" value="<?php echo $mrmbs; ?>" disabled>                           
                                 <?php
-
                                 $list=mysqli_query($conn, "SELECT an.mrmbsEligible,e.enumid,e.enumvalue from anregistration an join enumdata e ON e.enumid=an.mrmbsEligible WHERE type=13 AND an.id=".$id);
                                 while($row_list=mysqli_fetch_assoc($list)){
-
                                 ?>
-
                                 <option value="<?php echo $row_list['enumid']; ?>">
-
                                 <?php if($row_list['enumvalue']==$mrmbs) ?>
                                 
                                 <?php { echo $row_list['enumvalue']; } ?></option>
@@ -525,15 +499,15 @@ if (isset($_GET['del'])) {
                     </select>
                        <?php } ?>
                           </div>
-                          
+
                           </div>
-                        <div class="row">
-						<?php 
+						  <?php 
 						$rec_pic = mysqli_query($conn, "SELECT * FROM ecregister WHERE picmeno = $picmeno");
 			            $n_rec = mysqli_fetch_array($rec_pic);
 	                    $rec_Mage = "";
 	                    $rec_Mage = $n_rec['motheragemarriage'];
 						?>
+                        <div class="row">
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Mother's Age at Conception <span class="mand">* </span></label>
                             <div class="input-group input-group-merge">
@@ -550,12 +524,18 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                           </div>
+                          <?php 
+						$rec_pic = mysqli_query($conn, "SELECT * FROM ecregister WHERE picmeno = $picmeno");
+			            $n_rec = mysqli_fetch_array($rec_pic);
+	                    $rec_Hage = "";
+	                    $rec_Hage = $n_rec['husagemarriage'];
+						?>
                           <div class="mb-3 col-md-6">
                             <label class="form-label">Husband's Age at Conception <span class="mand">* </span></label>
                             <div class="input-group input-group-merge">
                             <input
                               type="number"
-                              min="11" max="99"
+                              min="<?php echo $rec_Hage; ?>" max="99"
                               class="form-control"
                               id="HusbandAge"
                               name="HusbandAge"
