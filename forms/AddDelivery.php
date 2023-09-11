@@ -69,6 +69,7 @@ if (!empty($query)) {
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
+							  onclick="return validateAddDelivery()"
                                required
                             />
                           
