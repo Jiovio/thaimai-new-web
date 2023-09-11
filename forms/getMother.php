@@ -365,7 +365,13 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                           <div class="input-group input-group-merge">
                           <input
                             type="number"
-                            min="11" max="99"
+							<?php 
+						$rec_pic = mysqli_query($conn, "SELECT * FROM ecregister WHERE picmeno = $picmeno");
+			            $n_rec = mysqli_fetch_array($rec_pic);
+	                    $rec_Mage = "";
+	                    $rec_Mage = $n_rec['motheragemarriage'];
+						?>
+                              min="<?php echo $rec_Mage; ?>" max="99"
                             class="form-control"
                             id="MotherAge"
                             name="MotherAge"
@@ -379,7 +385,13 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                           <div class="input-group input-group-merge">
                           <input
                             type="number"
-                            min="11" max="99"
+                             <?php 
+						$rec_pic = mysqli_query($conn, "SELECT * FROM ecregister WHERE picmeno = $picmeno");
+			            $n_rec = mysqli_fetch_array($rec_pic);
+	                    $rec_Hage = "";
+	                    $rec_Hage = $n_rec['husagemarriage'];
+						?>
+                              min="<?php echo $rec_Hage; ?>" max="99"
                             class="form-control"
                             id="HusbandAge"
                             name="HusbandAge"
