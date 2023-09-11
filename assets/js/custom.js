@@ -643,25 +643,29 @@ function checkDuplicatePicmeNo(picmeno){
 			  // document.getElementById ('picmenoNew').value = "";
 			  // document.getElementById ('picmenoNew').focus();
                $('#suggesstion-box').html("<span style='color:red'>Delivery details already exists</span>");
-			   $("#picmenoNew").val('');
+			 //  $("#picmenoNew").val('');
 			   document.getElementById ('picmenoNew').focus();
-             //  return false;
+               return false;
 			   
             }
 			if (result === '3') {
                $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Registration. </span>");
+			   document.getElementById ('picmenoNew').focus();
                return false;
             }
 			if (result === '4') {
                $('#suggesstion-box').html("<span style='color:red'>Picme not found in Medical History. </span>");
+			   document.getElementById ('picmenoNew').focus();
                return false;
             }
 			if (result === '5') {
                $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Visit. </span>");
+			   document.getElementById ('picmenoNew').focus();
                return false;
             }
 			if (result === '2') {
                $('#suggesstion-box').html("<span style='color:red'>Valid picme. </span>");
+			   document.getElementById ('picmenoNew').focus();
                return true;
             }
         }

@@ -88,8 +88,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                      </a>
                     </div>
                     <div class="col-3 mb-4">
-                     <a onclick="return false" href="<?php echo $siteurl; ?>/forms/AntenatalVisit.php?b=<?php echo $bloName;  ?>&p=<?php echo $phcName  ?>&h=<?php echo $hscName; ?>">
-                      <div class="card">
+                     <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
@@ -100,7 +99,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                           <h3 class="card-title mb-2"><?php echo $AvTot; ?></h3>
                         </div>
                       </div>
-                     </a>
+                    
                     </div>
                     <div class="col-3 mb-4">
                      <a onclick="return false" href="<?php echo $siteurl; ?>/forms/MedicalHistory.php?b=<?php echo $bloName;  ?>&p=<?php echo $phcName  ?>&h=<?php echo $hscName; ?>">
