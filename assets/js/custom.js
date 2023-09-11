@@ -640,13 +640,10 @@ function checkDuplicatePicmeNo(picmeno){
         success: function (result) {
             $('#suggesstion-box').html("")
             if (result === '1') {
-			  // document.getElementById ('picmenoNew').value = "";
-			  // document.getElementById ('picmenoNew').focus();
                $('#suggesstion-box').html("<span style='color:red'>Delivery details already exists</span>");
-			   var picmeno = "";
-			   $("#picmenoNew").attr('value', null);
-               return false;
-			   
+			   $("#picmenoNew").val('');
+			   $("#picmenoNew").focus();
+             //  return false;
             }
 			if (result === '3') {
                $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Registration. </span>");
