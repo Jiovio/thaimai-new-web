@@ -641,7 +641,7 @@ function checkDuplicatePicmeNo(picmeno){
             $('#suggesstion-box').html("")
             if (result === '1') {
                $('#suggesstion-box').html("<span style='color:red'>Delivery details already exists</span>");
-			   $('#picmenoNew').attr('disabled', false);
+			   document.getElementById ('picmeno').focus ();
                return false;
 			   
             }
