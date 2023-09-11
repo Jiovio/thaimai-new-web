@@ -62,7 +62,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/wallet-info.png" alt="Credit Card" class="rounded" />
+                              <img src="../assets/img/icons/unicons/wallet-info.png" style="cursor:default" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
                           <span class="fw-semibold d-Block mb-1">Eligible Couples</span>
@@ -75,7 +75,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/cc-warning.png" alt="Credit Card" class="rounded" />
+                              <img src="../assets/img/icons/unicons/cc-warning.png" style="cursor:default" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
                           <span class="fw-semibold d-Block mb-1">Antenatal Registration</span>
@@ -89,7 +89,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/cc-success.png" alt="Credit Card" class="rounded" />
+                              <img src="../assets/img/icons/unicons/cc-success.png" style="cursor:default" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
                           <span class="fw-semibold d-Block mb-1">Medical History</span>
@@ -103,7 +103,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
+                              <img src="../assets/img/icons/unicons/cc-primary.png" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
                           <span class="fw-semibold d-Block mb-1">Antenatal Visit</span>
@@ -121,6 +121,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                               <img
                                 src="../assets/img/icons/unicons/cc-success.png"
                                 alt="chart success"
+								style="cursor:default"
                                 class="rounded"
                               />
                             </div>
@@ -135,7 +136,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/wallet.png" alt="Credit Card" class="rounded" />
+                              <img src="../assets/img/icons/unicons/wallet.png" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
                           <span class="fw-semibold d-Block mb-1">Delivery Details</span>
@@ -149,7 +150,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/cc-warning.png" style="cursor:default" alt="Credit Card" class="rounded" />
+                              <img src="../assets/img/icons/unicons/cc-warning.png" style="cursor:default" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
                           <span class="fw-semibold d-Block mb-1">Immunization Details</span>
@@ -162,7 +163,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/chart.png" alt="Credit Card" class="rounded" />
+                              <img src="../assets/img/icons/unicons/chart.png" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
                           <span class="fw-semibold d-Block mb-1">Postnatal Visit</span>
@@ -175,7 +176,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/cc-warning.png" alt="Credit Card" class="rounded" />
+                              <img src="../assets/img/icons/unicons/cc-warning.png" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
                           <span class="fw-semibold d-Block mb-1">Pregnancy Status</span>
@@ -192,6 +193,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                                 src="../assets/img/icons/unicons/chart.png"
                                 alt="chart success"
                                 class="rounded"
+								style="cursor:default"
                               />
                             </div>
                           </div>
@@ -205,7 +207,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/cc-success.png" alt="Credit Card" class="rounded" />
+                              <img src="../assets/img/icons/unicons/cc-success.png" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
                           <span class="fw-semibold d-Block mb-1">Location Master</span>
@@ -219,7 +221,7 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/wallet.png" alt="Credit Card" class="rounded" />
+                              <img src="../assets/img/icons/unicons/wallet.png" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
                           <span class="fw-semibold d-Block mb-1">Private Hospitals</span>
