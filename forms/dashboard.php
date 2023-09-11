@@ -65,8 +65,8 @@ $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $P
                               <img src="../assets/img/icons/unicons/wallet-info.png" style="cursor:default" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
-                          <span class="fw-semibold d-Block mb-1">Eligible Couples</span>
-                          <h3 class="card-title mb-2"><?php echo $EcTot; ?></h3>
+                          <span class="fw-semibold d-Block mb-1" style="cursor:default">Eligible Couples</span>
+                          <h3 class="card-title mb-2" style="cursor:default"><?php echo $EcTot; ?></h3>
                         </div>
                       </div>
                     </div>
