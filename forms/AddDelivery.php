@@ -40,7 +40,7 @@ if (!empty($query)) {
                     <span class="bx bx-arrow-back"></span>&nbsp; Back
               </button></a> 
 			</h4>
-            <form action="" autocomplete="off" method="post">
+            <form action="" autocomplete="off" method="post" id="del">
               <!-- Basic Layout -->
               <div class="row">
                 <div class="col-xl">
@@ -549,8 +549,8 @@ if (!empty($query)) {
                           </div>
                         </div>
                         <div class="mt-2">
-                        <!--input class="btn btn-primary" type="submit" name="addDelivery" value="Save" onclick="return validateAddDelivery()"!--->
-						<input class="btn btn-primary" type="submit" name="addDelivery" value="Save">
+                        <input class="btn btn-primary" type="submit" name="addDelivery" value="Save" onclick="return validateAddDelivery()">
+						
 						
                         </div>
                 </div>
