@@ -640,9 +640,10 @@ function checkDuplicatePicmeNo(picmeno){
         success: function (result) {
             $('#suggesstion-box').html("")
             if (result === '1') {
-				document.getElementById ('picmenoNew').value = "";
-			   document.getElementById ('picmenoNew').focus();
+			  // document.getElementById ('picmenoNew').value = "";
+			  // document.getElementById ('picmenoNew').focus();
                $('#suggesstion-box').html("<span style='color:red'>Delivery details already exists</span>");
+			   $("#picmenoNew").attr('value', null);
 			   
                return false;
 			   
