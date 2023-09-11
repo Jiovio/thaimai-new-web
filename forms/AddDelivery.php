@@ -86,6 +86,7 @@ if (!empty($query)) {
                               placeholder="DELIVERY TIME"
                               aria-label="DELIVERY TIME"
                               aria-describedby="basic-icon-default-password2"
+							  onclick="return validateAddDelivery()"
                               required
                             />
                           
@@ -101,7 +102,7 @@ if (!empty($query)) {
                               placeholder="DELIVERY DISTRICT"
                               aria-label="DELIVERY DISTRICT"
                               aria-describedby="basic-icon-default-mobile"
-                            
+                            onclick="return validateAddDelivery()"
                             />
                           
                         </div>
@@ -113,7 +114,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">HOSPITAL TYPE</label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="hospitaltype" id="hospitaltype" class="form-select">
+                          <select name="hospitaltype" id="hospitaltype" onclick="return validateAddDelivery()" class="form-select">
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=25";
@@ -137,7 +138,7 @@ if (!empty($query)) {
                               placeholder="HOSPITAL NAME"
                               aria-label="HOSPITAL NAME"
                               aria-describedby="basic-icon-default-email2"
-                            
+                              onclick="return validateAddDelivery()"
                             />
                           </div>
                         </div>
@@ -147,7 +148,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">CHILD GENDER <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select required name="childGender" id="childGender" class="form-select" >
+                          <select required name="childGender" id="childGender" onclick="return validateAddDelivery()" class="form-select" >
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=34";
@@ -165,7 +166,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY CONDUCTED BY <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select required name="deliveryConductBy" id="deliveryConductBy" class="form-select">
+                          <select required name="deliveryConductBy" id="deliveryConductBy" onclick="return validateAddDelivery()" class="form-select">
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=35";
@@ -185,7 +186,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY TYPE</label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="deliverytype" id="deliverytype" class="form-select" >
+                          <select name="deliverytype" id="deliverytype" onclick="return validateAddDelivery()" class="form-select" >
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=36";
@@ -202,7 +203,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY COMPLICATION <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="deliveryCompilcation" required id="deliveryCompilcation" class="form-select" >
+                          <select name="deliveryCompilcation" required id="deliveryCompilcation" onclick="return validateAddDelivery()" class="form-select" >
                           <option value="">Choose...</option>
                           <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=37";
@@ -222,7 +223,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY OUTCOME <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="deliveryOutcome" required id="deliveryOutcome" class="form-select" >
+                          <select name="deliveryOutcome" required id="deliveryOutcome" onclick="return validateAddDelivery()" class="form-select" >
                           <option value="">Choose...</option>
                           <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=38";
@@ -247,6 +248,7 @@ if (!empty($query)) {
                               placeholder="NO OF LIVE BIRTH"
                               aria-label="NO OF LIVE BIRTH"
                               aria-describedby="basic-icon-default-password2"
+							  onclick="return validateAddDelivery()"
                               required
                             />
                           </div>
@@ -264,6 +266,7 @@ if (!empty($query)) {
                               aria-label="NO OF STILL BIRTH"
                               aria-describedby="basic-icon-default-password2"
                               min=0  max=10
+							  onclick="return validateAddDelivery()"
                             />
                           </div>
 
@@ -277,7 +280,7 @@ if (!empty($query)) {
                               placeholder="INFANT ID"
                               aria-label="INFANT ID"
                               aria-describedby="basic-icon-default-password2"
-                        
+                              onclick="return validateAddDelivery()"
                             />
                           </div>
                  </div>
@@ -287,7 +290,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">BIRTH DETAILS <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select required name="birthDetails" id="birthDetails" class="form-select" >
+                          <select required name="birthDetails" id="birthDetails" onclick="return validateAddDelivery()" class="form-select" >
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=39";
@@ -313,6 +316,7 @@ if (!empty($query)) {
                               aria-label="BIRTH WEIGHT"
                               aria-describedby="basic-icon-default-password2"
 							  min="1" max="6"
+							  onclick="return validateAddDelivery()"
                               required
                             />
                           </div>
@@ -330,12 +334,13 @@ if (!empty($query)) {
                               aria-label="BIRTH HEIGHT"
 							  min="30" max="100"
                               aria-describedby="basic-icon-default-password2"
+							  onclick="return validateAddDelivery()"
                             />
                           </div>
                         
                         <div class="mb-3 col-md-6">
                             <label class="form-label">DELAYED CORD CLAMPING</label>
-                            <select name="delayedCClamping" id="delayedCClamping" class="form-select">
+                            <select name="delayedCClamping" id="delayedCClamping" onclick="return validateAddDelivery()" class="form-select">
                           <option value="">Choose...</option>
                            <?php  
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -352,7 +357,7 @@ if (!empty($query)) {
 
                           <div class="mb-3 col-md-6">
                             <label class="form-label">SKIN TO SKIN CONTACT</label>
-                            <select name="skintoskinContact" id="skintoskinContact" class="form-select">
+                            <select name="skintoskinContact" id="skintoskinContact" onclick="return validateAddDelivery()" class="form-select">
                           <option value="">Choose...</option>
                            
                            <?php  
@@ -370,7 +375,7 @@ if (!empty($query)) {
                         
                           <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">BREAST FEEDING Within Half Hour</label>
-                          <select required name="breastfeedInitiated" id="breastfeedInitiated" class="form-select">
+                          <select required name="breastfeedInitiated" id="breastfeedInitiated" class="form-select" onclick="return validateAddDelivery()">
                           <option value="">Choose...</option>
                            
                            <?php  
@@ -390,7 +395,7 @@ if (!empty($query)) {
 
                           <div class="mb-3 col-md-6">
                             <label class="form-label">ADMITTED SNCU <span class="mand">* </span></label>
-                            <select required name="admittedSncu" id="admittedSncu" class="form-select" onchange="SncuChange()">
+                            <select required name="admittedSncu" id="admittedSncu" class="form-select" onclick="return validateAddDelivery()" onchange="SncuChange()">
                           <option value="">Choose...</option>
                            
                            <?php  
@@ -406,7 +411,7 @@ if (!empty($query)) {
                              </select>
                           </div>
 
-                          <div class="col-6 mb-3" id="sncuDate" style="display: none;">
+                          <div class="col-6 mb-3" id="sncuDate" onclick="return validateAddDelivery()" style="display: none;">
                           <label class="form-label" for="basic-icon-default-password">SNCU DATE</label>
                             <input
                               type="date"
@@ -432,7 +437,7 @@ if (!empty($query)) {
                               placeholder="SNCU AREA NAME"
                               aria-label="SNCU AREA NAME"
                               aria-describedby="basic-icon-default-password2"
-                        
+                              onclick="return validateAddDelivery()"
                             />
                           
                         </div>
@@ -447,7 +452,7 @@ if (!empty($query)) {
                               placeholder="SNCU OUTCOME"
                               aria-label="SNCU OUTCOME"
                               aria-describedby="basic-icon-default-password2"
-                        
+                              onclick="return validateAddDelivery()"
                             />
                           
                         </div>
@@ -465,6 +470,7 @@ if (!empty($query)) {
                               aria-label="DISCHARGE DATE"
                               aria-describedby="basic-icon-default-password2"
                               required
+							  onclick="return validateAddDelivery()" 
                             />
                           
                         </div>
@@ -479,6 +485,7 @@ if (!empty($query)) {
                               placeholder="DISCHARGE TIME"
                               aria-label="DISCHARGE TIME"
                               aria-describedby="basic-icon-default-password2"
+							  onclick="return validateAddDelivery()"
                               required
                             />
                         </div>
@@ -495,7 +502,7 @@ if (!empty($query)) {
                               placeholder="BCG DATE"
                               aria-label="BCG DATE"
                               aria-describedby="basic-icon-default-password2"
-                        
+                              onclick="return validateAddDelivery()"
                             />
                           
                         </div>
@@ -510,6 +517,7 @@ if (!empty($query)) {
                               placeholder="OPV-D DATE"
                               aria-label="OPV-D DATE"
                               aria-describedby="basic-icon-default-password2"
+							  onclick="return validateAddDelivery()"
                               required
                             />
                          
@@ -528,12 +536,12 @@ if (!empty($query)) {
                               placeholder="HEB-B DATE"
                               aria-label="HEB-B DATE"
                               aria-describedby="basic-icon-default-password2"
-                        
+                              onclick="return validateAddDelivery()"
                             />  
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Vitamin K Injection</label>
-                            <select name="injuction" id="injuction" class="form-select">
+                            <select name="injuction" id="injuction" onclick="return validateAddDelivery()" class="form-select">
                           <option value="">Choose...</option>
                            
                            <?php  
