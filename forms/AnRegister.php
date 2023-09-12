@@ -20,7 +20,7 @@
                 <hr class="my-0" />
                 <div class="card-body">
         
-                <form method="POST" onclick="return addMothAadhar()" onsubmit="return addMothAadhar()" action="getMother.php">
+                <form method="POST" onsubmit="return addMothAadhar()" action="getMother.php">
                   <div class="row">
                   <div class="col-4 mb-3">
         <label class="form-label" for="basic-icon-default-fullname">MOTHER'S AADHAAR ID <span class="mand">* </span></label>
