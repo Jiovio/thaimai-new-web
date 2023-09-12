@@ -472,11 +472,11 @@ function checkEC(motadhaar){
 				return false;
             }
 
-            if (result === '3')
+         /*   if (result === '3')
             {
                 $('#suggesstion-box').html("<span style='color:red'>Valid Aadhar.</span>");
                 return true;
-            }
+            } */
 
             if (result === '4')
             {
@@ -525,11 +525,11 @@ function checkMedicaldetails(picmeno){
                 return false;
             }
 
-            if (result === '3')
+         /*   if (result === '3')
             {
                 $('#suggesstion-box').html("<span style='color:red'>Valid Picme.</span>");
                 return true;
-            }
+            } */
 
             if (result === '4')
             {
@@ -666,11 +666,11 @@ function checkDuplicatePicmeNo(picmeno){
 			   document.getElementById ('picmenoNew').focus();
                return false;
             }
-			if (result === '2') {
+		/*	if (result === '2') {
                $('#suggesstion-box').html("<span style='color:red'>Valid picme. </span>");
 			   document.getElementById ('picmenoNew').focus();
                return true;
-            }
+            } */
         }
     });
 }
