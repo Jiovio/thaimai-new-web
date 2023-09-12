@@ -770,13 +770,15 @@ function checkPostnalVisitPeriod(picmeno, pncperiod){
                 $('#pnc-period-box').html("<span style='color:red'>"+result['message']+"</span>");
                 $("#pncPeriod").val(result['selected']).change();
                } else {
-                    $('#suggesstion-box').html("<span style='color:red'>Please enter valid picme no</span>");
+                    $('#suggesstion-box').html("<span style='color:red'>Please enter valid picme no</span>");					
                }
+			   document.getElementById ('picmenoPostNalVisit').focus();
                resultParam =  false;
             }
             if(result['result']=='error'){
                 $('#pnc-period-box').html("<span style='color:red'>"+result['message']+"</span>");
                 $("#pncPeriod").val(result['selected']).change();
+				document.getElementById ('picmenoPostNalVisit').focus();
                 resultParam =  false;
             }
             
