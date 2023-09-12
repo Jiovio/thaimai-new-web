@@ -733,6 +733,7 @@ $('#pncPeriod').change(function (){
      $('#suggesstion-box').html("");
      if(picmeno == ""){
          $('#suggesstion-box').html("<span style='color:red'>Please enter picme no</span>");
+		 document.getElementById ('picmenoPostNalVisit').focus();
      } else {
          checkPostnalVisitPeriod(picmeno, pncperiod);
      }
