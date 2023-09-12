@@ -588,7 +588,8 @@ function checkImmunedetails(picmeno, place=''){
              $('#doseName').attr('disabled', true);
             if (result['result'] === 'fail') {
                $('#suggesstion-box').html("<span style='color:red'>This Picme number didn't have delivery details. \n\
-Please proceed with delivery date from delivery details</span>");
+Please proceed with delivery date from delivery details.</span>");
+               document.getElementById ('picmenoImmune').focus();
                returnParam= false;
             } else {
                 
@@ -602,6 +603,7 @@ Please proceed with delivery date from delivery details</span>");
                     $("#doseNo").val(result['doseNo']);
                     $("#doseDueDate").attr('value', result['doseDueDate']);
                     $("#doseDueDate").attr('readOnly', true);
+					document.getElementById ('picmenoImmune').focus();
                      returnParam =  false;
                 }           
                 

@@ -371,7 +371,7 @@ if($doseNo == 1) {
                         </div>
 					</div> -->
 					<div class="input-group">
-                                            <input class="btn btn-primary" type="submit" name="addImmunization" value="Save">
+                                            <input class="btn btn-primary" type="submit" name="addImmunization" value="Save" onclick="">
                       </div>
                       </form>
                     </div>
