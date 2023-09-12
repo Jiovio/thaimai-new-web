@@ -629,7 +629,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-describedby="basic-icon-default-password2"
 							   <?php 
 						if($deliverydate==$dischargedate)
-						{?>
+						{ ?>
 					           min= <?php echo $deliverytime; ?>
 						<?php	
 						}	
