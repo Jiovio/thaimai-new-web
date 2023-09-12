@@ -20,7 +20,7 @@
                 <hr class="my-0" />
                 <div class="card-body">
         
-                <form method="POST" onclick="return addMothAadhar()" action="getMother.php">
+                <form method="POST" onclick="return addMothAadhar()" onsubmit="return addMothAadhar()" action="getMother.php">
                   <div class="row">
                   <div class="col-4 mb-3">
         <label class="form-label" for="basic-icon-default-fullname">MOTHER'S AADHAAR ID <span class="mand">* </span></label>
@@ -32,8 +32,8 @@
         <input type="text" required id="motheraadhaaridval" name="motheraadhaarid" onchange="showMoDet(this.value)" oninput = "onlyAadhar(this.value)" placeholder="MOTHER'S AADHAAR ID" class="form-control" onclick="return addMothAadhar()"/>
         </div>
         <div id="suggesstion-box"></div>
-        <button id="genName" name="genName" class="btn btn-primary">Get Details</button>
-		<input class="btn btn-primary" type="submit" name="genName" onclick="return addMothAadhar()">
+        
+		<input id="genName" class="btn btn-primary" type="submit" name="genName" value="Get Details" onclick="return addMothAadhar()">
         </div>
         </div>
                     </div>
