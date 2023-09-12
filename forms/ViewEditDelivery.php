@@ -627,7 +627,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder="DISCHARGE TIME"
                               aria-label="DISCHARGE TIME"
                               aria-describedby="basic-icon-default-password2"
-					          min= <?php echo $deliverytime; ?>
+					          min= <?php if($deliverydate==$dischargedate){ echo $deliverytime;} ?>
                               value="<?php echo $dischargetime ?>"
                               disabled
                               required
