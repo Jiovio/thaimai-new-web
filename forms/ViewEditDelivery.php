@@ -549,7 +549,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
 							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
-							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							  min=<?php echo $deliverydate; ?>  max=<?php echo $cur_dt; ?>
                               value="<?php echo $sncudate ?>"
                               disabled
                             />
@@ -610,14 +610,13 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-describedby="basic-icon-default-password2"
 							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
 							   min=<?php echo $deliverydate; ?>  max=<?php echo $cur_dt; ?>
-							  
                               value="<?php echo $dischargedate; ?>"     
                               disabled
                               required
                             />
-                        
+                       
                         </div>
-                        
+                        <?php if()
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">DISCHARGE TIME <span class="mand">* </span></label>
                             <input
@@ -628,6 +627,13 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder="DISCHARGE TIME"
                               aria-label="DISCHARGE TIME"
                               aria-describedby="basic-icon-default-password2"
+							   <?php 
+						if($deliverydate==$dischargedate)
+						{?>
+					           min= <?php echo $deliverytime ?>
+						<?php	
+						}	
+							?>  
                               value="<?php echo $dischargetime ?>"
                               disabled
                               required
@@ -647,7 +653,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-label="BCG DATE"
                               aria-describedby="basic-icon-default-password2"
                               <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
-							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							   min=<?php echo $deliverydate; ?>  max=<?php echo $cur_dt; ?>
 							  value="<?php 
 							  if(isset($bcgdate))
 							  {
@@ -673,7 +679,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-label="OPV-D DATE"
                               aria-describedby="basic-icon-default-password2"
 							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
-							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							   min=<?php echo $deliverydate; ?>  max=<?php echo $cur_dt; ?>
                               value="<?php echo $opvDdate; ?>"  
                               required							  
                               disabled
@@ -695,7 +701,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-label="HEB-B DATE"
                               aria-describedby="basic-icon-default-password2"
                                <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
-							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							   min=<?php echo $deliverydate; ?>  max=<?php echo $cur_dt; ?>
 							   value="<?php 
 							  if(isset($hebBdate))
 							  {
