@@ -64,14 +64,14 @@ if (! empty($_POST["addpostnatal"])) {
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
                           <div class="frmSearch">
-                          <input type="number" required id="picmenoPostNalVisit" name="picmeNo" oninput = "onlyNumbers(this.value)" min="100000000000" max="999999999999" required placeholder="PICME Number" class="form-control" />
+                          <input type="number" required id="picmenoPostNalVisit" name="picmeNo" oninput = "onlyNumbers(this.value)" min="100000000000" max="999999999999" required placeholder="PICME Number" class="form-control" onclick="return checkPostnalVisitPeriod" />
                          
 						  <div id="suggesstion-box"></div>
                       </div>
                       </div>
                           <div class="mb-3 col-md-6">
                             <label class="form-label">PNC PERIOD <span class="mand">* </span></label>
-                            <select name="pncPeriod" required id="pncPeriod" class="form-select">
+                            <select name="pncPeriod" required id="pncPeriod" onclick="return checkPostnalVisitPeriod" class="form-select">
                           <option value="">Choose...</option>
                            
                            <?php 
@@ -98,13 +98,13 @@ if (! empty($_POST["addpostnatal"])) {
                               id="motherPnc"
                               name="motherPnc"
                               placeholder=""
-                            
+                              onclick="return checkPostnalVisitPeriod"
                             />
                           </div>
                           </div>
                           <div class="mb-3 col-md-6">
                             <label class="form-label">IFA TABLET</label>
-                            <select name="ifaTabletStatus" id="ifaTabletStatus" class="form-select">
+                            <select name="ifaTabletStatus" id="ifaTabletStatus" onclick="return checkPostnalVisitPeriod" class="form-select">
                           <option value="">Choose...</option>
                           <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
                             $exequery = mysqli_query($conn, $query);
@@ -118,7 +118,7 @@ if (! empty($_POST["addpostnatal"])) {
                         <div class="row">
                           <div class="mb-3 col-md-6">
                             <label class="form-label">Calcium</label>
-                            <select name="calcium" id="calcium" class="form-select">
+                            <select name="calcium" id="calcium" onclick="return checkPostnalVisitPeriod" class="form-select">
                           <option value="">Choose...</option>
                           <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
                             $exequery = mysqli_query($conn, $query);
@@ -130,7 +130,7 @@ if (! empty($_POST["addpostnatal"])) {
 
                           <div class="mb-3 col-md-6">
                           <label class="form-label">Family Welfare Method Accepted <span class="mand">* </span></label>
-                            <select name="ppcMethod" id="ppcMethod" class="form-select">
+                            <select name="ppcMethod" id="ppcMethod" onclick="return checkPostnalVisitPeriod" class="form-select">
                           <option value="">Choose...</option>
                           <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=29";
                             $exequery = mysqli_query($conn, $query);
@@ -150,12 +150,13 @@ if (! empty($_POST["addpostnatal"])) {
                               id="vitaminA"
                               name="vitaminA"
                               placeholder="Vitamin A Solution"
+							  onclick="return checkPostnalVisitPeriod"
                             />
                           </div>
                           </div> 
                           <div class="mb-3 col-md-6">
                           <label class="form-label">MOTHER DANGER SIGN <span class="mand">* </span></label>
-                            <select name="motherDangerSign" required id="motherDangerSign" class="form-select">
+                            <select name="motherDangerSign" required id="motherDangerSign" onclick="return checkPostnalVisitPeriod" class="form-select">
                           <option value="">Choose...</option>
                           <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=15";
                             $exequery = mysqli_query($conn, $query);
@@ -175,21 +176,21 @@ if (! empty($_POST["addpostnatal"])) {
                               id="bloodSugar"
                               name="bloodSugar"
                               placeholder="BLOOD SUGAR"
-                            
+                              onclick="return checkPostnalVisitPeriod"
                             />
                           </div>
                           </div> 
 
                           <div class="mb-3 col-md-6">
                           <label class="form-label">INFANT WEIGHT</label>
-                          <input class="form-control" type="number" step="0.001" min="1" max="6" name="infantWeight" id="infantWeight"/>
+                          <input class="form-control" type="number" step="0.001" min="1" max="6" name="infantWeight" id="infantWeight" onclick="return checkPostnalVisitPeriod" />
                            
                             </div>
                         </div>
                         <div class="row">
                           <div class="mb-3 col-md-6">
                           <label class="form-label">INFANT DANGER SIGNS <span class="mand">* </span></label>
-                            <select name="infantDangerSigns" required id="infantDangerSigns" class="form-select">
+                            <select name="infantDangerSigns" required id="infantDangerSigns" onclick="return checkPostnalVisitPeriod" class="form-select">
                           <option value="">Choose...</option>
                           <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=16";
                             $exequery = mysqli_query($conn, $query);
@@ -201,7 +202,7 @@ if (! empty($_POST["addpostnatal"])) {
                             <div class="col-md-6 mb-3">
                           <label class="form-label" for="basic-icon-default-motherWeight">BP Systolic</label>
                           <div class="input-group input-group-merge">
-                            <select class="50-200 form-control" id="bpSys" name="bpSys" placeholder="BP SYS">
+                            <select class="50-200 form-control" id="bpSys" name="bpSys" placeholder="BP SYS" onclick="return checkPostnalVisitPeriod" >
                               <option value="">Choose...</option>
                             </select>
                           </div>
@@ -211,14 +212,14 @@ if (! empty($_POST["addpostnatal"])) {
                           <div class="col-md-6 mb-3">
                           <label class="form-label" for="basic-icon-default-bpDia">BP Diastolic</label>
                           <div class="input-group input-group-merge">
-                            <select class="40-150 form-control" id="bpDia" name="bpDia" placeholder="BP DIA">
+                            <select class="40-150 form-control" id="bpDia" name="bpDia" onclick="return checkPostnalVisitPeriod" placeholder="BP DIA">
                           <option value="">Choose...</option>
                           </select>
                           </div>
                         </div>
                         </div>
                         <div class="mt-2">
-                        <input class="btn btn-primary" type="submit" name="addpostnatal" value="Save">
+                        <input class="btn btn-primary" type="submit" name="addpostnatal" value="Save" onclick="return checkPostnalVisitPeriod">
                         </div>
                       </form>
                     </div>
