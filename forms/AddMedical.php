@@ -86,7 +86,7 @@ if (! empty($_POST["addMedical"])) {
                 <div class="col-6 mb-3">
                 <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
                 <div class="frmSearch">
-                <input type="number" required id="picmenomed" name="picmeno" min="100000000000" max="999999999999" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" onclick="return addMedicalValidate()"/>
+                <input type="number" required id="picmenomed" name="picmeno" min="100000000000" max="999999999999" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" onclick="return addMedicalValidate()" />
 				<div id="suggesstion-box"></div>
                 </div>
                 </div>

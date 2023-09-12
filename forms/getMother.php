@@ -98,19 +98,19 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         <div class="mb-3 col-md-4">
                         <label class="form-label" for="basic-icon-default-motheraathar">MOTHER'S AADHAAR ID <span class="mand">* </span> </span id="errPicmeno"><span></label>
                         <div class="input-group input-group-merge">
-                            <input type="text" name="motheraadhaarid" id="motheraadhaaridval" onclick="return addMothAadhar()" value="<?php echo $motheraadhaarid; ?>" class="form-control" readonly />
+                            <input type="text" name="motheraadhaarid" id="motheraadhaaridval" value="<?php echo $motheraadhaarid; ?>" class="form-control" readonly />
                         </div>
                       </div>
                       <div class="mb-3 col-md-4">
                         <label class="form-label" for="basic-icon-default-mothername">MOTHER'S NAME AS PER AADHAAR <span class="mand">* </span> </span id="errPicmeno"><span></label>
                         <div class="input-group input-group-merge">
-                            <input type="text" value="<?php echo $mothername; ?>" class="form-control" disabled onclick="return addMothAadhar()" /> 
+                            <input type="text" value="<?php echo $mothername; ?>" class="form-control" disabled /> 
                       </div>
                       </div>
                       <div class="mb-3 col-md-4">
                         <label class="form-label" for="basic-icon-default-husname">HUSBAND NAME AS PER AADHAAR <span class="mand">* </span> </span id="errPicmeno"><span></label>
                         <div class="input-group input-group-merge">
-                        <input type="text" value="<?php echo $husname; ?>" class="form-control" onclick="return addMothAadhar()" disabled /> 
+                        <input type="text" value="<?php echo $husname; ?>" class="form-control" disabled /> 
                       </div>
                       </div>
                 </div><hr/>
@@ -130,7 +130,6 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             aria-label="PICME No."
                             aria-describedby="basic-icon-default-fullname2"
                             value ="<?php echo $picmeno; ?>"
-							onclick="return addMothAadhar()"
                           />
                         </div>
                       </div>
