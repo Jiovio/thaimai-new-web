@@ -468,18 +468,21 @@ function checkEC(motadhaar){
             if (result === '1')
             {
                 $('#suggesstion-box').html("<span style='color:red'>AN Registration already done for this Aadhar.</span>");
-                return false;
+                document.getElementById ('motheraadhaaridval').focus();
+				return false;
             }
 
             if (result === '3')
             {
                 $('#suggesstion-box').html("<span style='color:red'>Valid Aadhar.</span>");
+				document.getElementById ('motheraadhaaridval').focus();
                 return true;
             }
 
             if (result === '4')
             {
                 $('#suggesstion-box').html("<span style='color:red'>Aadhar not found in EC.</span>");
+				document.getElementById ('motheraadhaaridval').focus();
                 return false;
             }	
         }
@@ -640,10 +643,7 @@ function checkDuplicatePicmeNo(picmeno){
         success: function (result) {
             $('#suggesstion-box').html("")
             if (result === '1') {
-			  // document.getElementById ('picmenoNew').value = "";
-			  // document.getElementById ('picmenoNew').focus();
                $('#suggesstion-box').html("<span style='color:red'>Delivery details already exists</span>");
-			 //  $("#picmenoNew").val('');
 			   document.getElementById ('picmenoNew').focus();
                return false;
 			   
