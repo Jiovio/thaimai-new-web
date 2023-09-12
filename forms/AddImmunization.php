@@ -145,7 +145,7 @@ if($doseNo == 1) {
                       </div>
 						<div class="mb-3 col-md-6">
                           <label class="form-label">Dose No. <span class="mand">* </span></label>
-                            <select required name="doseNo" id="doseNo" class="form-select">
+                            <select required name="doseNo" id="doseNo" onclick="return addImmuneValidate()" class="form-select">
                           <option value="">Choose...</option>
                            <?php 
 						   						
