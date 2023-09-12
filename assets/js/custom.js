@@ -522,18 +522,21 @@ function checkMedicaldetails(picmeno){
             if (result === '1')
             {
                 $('#suggesstion-box').html("<span style='color:red'>Medical history already exists for this picme.</span>");
+				document.getElementById ('picmenomed').focus();
                 return false;
             }
 
             if (result === '3')
             {
                 $('#suggesstion-box').html("<span style='color:red'>Valid Picme.</span>");
+				document.getElementById ('picmenomed').focus();
                 return true;
             }
 
             if (result === '4')
             {
                 $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Registration</span>");
+				document.getElementById ('picmenomed').focus();
                 return false;
             }	
         }
