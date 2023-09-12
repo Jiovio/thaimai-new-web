@@ -32,9 +32,8 @@
         <input type="text" required id="motheraadhaaridval" name="motheraadhaarid" onchange="showMoDet(this.value)" oninput = "onlyAadhar(this.value)" placeholder="MOTHER'S AADHAAR ID" class="form-control" onclick="return addMothAadhar()"/>
         </div>
         <div id="suggesstion-box"></div>
-        
-		<input id="genName" class="btn btn-primary" type="submit" name="genName" value="Get Details" onclick="return addMothAadhar()">
-        </div>
+        <button id="genName" name="genName" class="btn btn-primary">Get Details</button>
+		</div>
         </div>
                     </div>
                     <div id="response" class="<?php if(!empty($type)) { echo $type . " display-block"; } else { echo $type . " display-none"; } ?>"><?php if(!empty($emessage)) { echo $emessage; } ?></div>
