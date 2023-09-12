@@ -475,7 +475,6 @@ function checkEC(motadhaar){
             if (result === '3')
             {
                 $('#suggesstion-box').html("<span style='color:red'>Valid Aadhar.</span>");
-				document.getElementById ('motheraadhaaridval').focus();
                 return true;
             }
 
@@ -529,7 +528,6 @@ function checkMedicaldetails(picmeno){
             if (result === '3')
             {
                 $('#suggesstion-box').html("<span style='color:red'>Valid Picme.</span>");
-				document.getElementById ('picmenomed').focus();
                 return true;
             }
 
