@@ -616,7 +616,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                             />
                        
                         </div>
-                        <?php if()
+                        
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">DISCHARGE TIME <span class="mand">* </span></label>
                             <input
@@ -630,7 +630,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
 							   <?php 
 						if($deliverydate==$dischargedate)
 						{?>
-					           min= <?php echo $deliverytime ?>
+					           min= <?php echo $deliverytime; ?>
 						<?php	
 						}	
 							?>  
