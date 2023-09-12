@@ -139,7 +139,7 @@ if($doseNo == 1) {
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
                           <div class="frmSearch">
-                          <input type="text" required id="picmenoImmune" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" min="100000000000" max="999999999999" class="form-control" />
+                          <input type="text" required id="picmenoImmune" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" min="100000000000" max="999999999999" class="form-control" onclick="return addImmuneValidate()" />
                           <div id="suggesstion-box"></div>
                       </div>
                       </div>
@@ -160,7 +160,7 @@ if($doseNo == 1) {
 					<div class="row">
 						<div class="mb-3 col-md-6">
                           <label class="form-label">Dose Name <span class="mand">* </span></label>
-                            <select required name="doseName[]" id="doseName" multiple="multiple" class="form-select" disabled>
+                            <select required name="doseName[]" id="doseName" multiple="multiple" class="form-select" onclick="return addImmuneValidate()" disabled>
                           <?php 
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=43;";
                             $exequery = mysqli_query($conn, $query);
@@ -182,6 +182,7 @@ if($doseNo == 1) {
                               placeholder="Dose Due Date"
                               aria-label="Dose Due Date"
                               aria-describedby="basic-icon-default-conpassword" 
+							  onclick="return addImmuneValidate()"
                               required
                             />
                           </div>
@@ -199,6 +200,7 @@ if($doseNo == 1) {
                               placeholder="Dose Provided Date"
                               aria-label="Dose Provided Date"
                               aria-describedby="basic-icon-default-mobile"
+							  onclick="return addImmuneValidate()"
                             required
                               />
                             
@@ -208,7 +210,7 @@ if($doseNo == 1) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">Breast Feeding</label>
                           <div class="input-group input-group-merge">
-                          <select name="breastFeeding" id="breastFeeding" class="form-select" value="<?php echo $usertype; ?>">
+                          <select name="breastFeeding" id="breastFeeding" class="form-select" value="<?php echo $usertype; ?>" onclick="return addImmuneValidate()" >
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -224,7 +226,7 @@ if($doseNo == 1) {
 						<div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">Complimentary Food Started ( 7th Month )</label>
                           <div class="input-group input-group-merge">
-                          <select name="compliFoodStart" id="compliFoodStart" class="form-select">
+                          <select name="compliFoodStart" id="compliFoodStart" onclick="return addImmuneValidate()" class="form-select">
                           <option value="">Choose...</option>
                           <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -371,7 +373,7 @@ if($doseNo == 1) {
                         </div>
 					</div> -->
 					<div class="input-group">
-                                            <input class="btn btn-primary" type="submit" name="addImmunization" value="Save" onclick="">
+                                            <input class="btn btn-primary" type="submit" name="addImmunization" value="Save" onclick="return addImmuneValidate()">
                       </div>
                       </form>
                     </div>
