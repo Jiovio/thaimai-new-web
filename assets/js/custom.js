@@ -682,8 +682,6 @@ function checkDuplicatePicmeNo(picmeno){
  * @returns {undefined}
  */
  
-  
- 
  $('#dischargedate').on('keydown keyup change', function(){
     var dischargedate = $('#dischargedate').val();
     checkdisdt(dischargedate);
@@ -700,15 +698,15 @@ function checkdisdt(dischargedate)
 {
 	if($('#dischargedate').val() < $('#deliverydate').val())
     {
-       $('#suggesstion-box').html("<span style='color:red'>Discharge date should be >= delivery date </span>");
-	   document.getElementById ('dischargedate').focus();
+       $('#dischargedate').val = $('#deliverydate').val();
     } 
 	
 	if($('#dischargedate').val() === $('#deliverydate').val())
     {
 		if($('#dischargetime').val() < $('#deliverytime').val())
-       $('#suggesstion-box').html("<span style='color:red'>Discharge time should be > delivery time </span>");
-	   document.getElementById ('dischargedate').focus();
+		{
+       $('#dischargetime').val = $('#deliverytime').val();
+	   }
     } 
 }
 
