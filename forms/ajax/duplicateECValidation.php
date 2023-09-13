@@ -1,6 +1,6 @@
 <?php
 include "../../config/db_connect.php";
-$ecfr = $_POST["ecfr"];
+$ecfr = $_POST["ecfrno"];
 
 
 
