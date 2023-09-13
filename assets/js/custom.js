@@ -382,7 +382,7 @@ x.style.display = "block";
  */
  
  $('#ecfrno').on('keydown keyup change', function(){
-    var ecfrno = $('#SelectHsc').val+$(this).val();
+    var ecfrno = $('#SelectHsc').val+$('#ecfrno').val();
     checkECdetails(ecfrno);
    
 });
