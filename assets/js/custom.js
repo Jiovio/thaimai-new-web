@@ -112,8 +112,8 @@ document.getElementById("HscId").value = "";
 
 function fnEnable() {
 //Mother Details
-document.getElementById("ecfr").disabled = false;
-document.getElementById("ecfrnono").disabled = false;
+document.getElementById("SelectHsc").disabled = false;
+document.getElementById("ecfrno").disabled = false;
 document.getElementById("dateecreg").disabled = false;
 document.getElementById("motheraadhaarname").disabled = false;
 document.getElementById("motherfullname").disabled = false;
@@ -382,13 +382,13 @@ x.style.display = "block";
  */
  
  $('#ecfrno').on('keydown keyup change', function(){
-    var ecfrno = $('#ecfr').val+$('#ecfrno').val;
+    var ecfrno = $('#SelectHsc').val+$(this).val();
     checkECdetails(ecfrno);
    
 });
 
 function addECValidate(){
-    var ecfrno = $('#ecfr').val+$('#ecfrno').val();
+    var ecfrno = $('#SelectHsc').val+$('#ecfrno').val();
  
     checkECdetails(ecfrno);
 }
@@ -1451,10 +1451,10 @@ window.location = $siteurl;
 }
 
 function FirstAlphabet() {
-var selectBox = document.getElementById("ecfr");
+var selectBox = document.getElementById("SelectHsc");
 var selectedValue = selectBox.options[selectBox.selectedIndex].value.substring(0,3); 
-document.getElementById("ecfrno").value = selectedValue;
-document.getElementById("ecfrnono").value = "";
+document.getElementById("ecfr").value = selectedValue;
+document.getElementById("ecfrno").value = "";
 }
 
 function totPregnancyChange() {
