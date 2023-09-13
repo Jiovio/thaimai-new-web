@@ -416,24 +416,24 @@ function checkECdetails(ecfrno){
 }
 /* ECFR No val - Ends */
 
-$('#motheraadhaaridv').on('keydown keyup change', function(){
-    var motadrid = $('#motheraadhaaridv').val();
-    checkECdetails(motadrid);
+$('#motheraadhaaridec').on('keydown keyup change', function(){
+    var motheraadhaarid = $('#motheraadhaaridec').val();
+    checkECdetails(motheraadhaarid);
    
 });
 
 function addECValidate(){
-    var motadrid = $('#motheraadhaaridv').val();
+    var motheraadhaarid = $('#motheraadhaaridec').val();
  
-    checkECdetails(motadrid);
+    checkECdetails(motheraadhaarid);
 }
 
-function checkECdetails(motadrid){
+function checkECdetails(motheraadhaarid){
         $.ajax({
         url: "ajax/duplicateECValidation.php",
         type: "POST",
         data: {
-            motadrid: motadrid
+            motheraadhaarid: motheraadhaarid
         },
 		cache: false,
         success: function (result) {
@@ -441,8 +441,8 @@ function checkECdetails(motadrid){
             result= $.trim(result);
             if (result === '1')
             {
-                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this ecfrnono.</span>");
-				document.getElementById ('motadrid').focus();
+                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this ecfrno.</span>");
+				document.getElementById ('motheraadhaaridec').focus();
                 return false;
             }
 
@@ -518,20 +518,20 @@ $('#picmenoNew').on('keydown keyup change', function(){
  * @returns {undefined}
  */
  
- $('#motheraadhaaridv').on('keydown keyup change', function(){
+ $('#motheraadhaaridval').on('keydown keyup change', function(){
     var motadhaar = $(this).val();
     checkEC(motadhaar);
    
 });
 
-$('#genName').on('keydown keyup change', function(){
-    var motadhaar = $('#motheraadhaaridv').val();
+$('#motheraadhaaridval').on('keydown keyup change', function(){
+    var motadhaar = $('#motheraadhaaridval').val();
     checkEC(motadhaar);
    
 });
 
 function addMothAadhar(){
-    var motadhaar = $('#motheraadhaaridv').val();
+    var motadhaar = $('#motheraadhaaridval').val();
  
     checkEC(motadhaar);
 }
@@ -550,7 +550,7 @@ function checkEC(motadhaar){
             if (result === '1')
             {
                 $('#suggesstion-box').html("<span style='color:red'>AN Registration already done for this Aadhar.</span>");
-                document.getElementById ('motheraadhaaridv').focus();
+                document.getElementById ('motheraadhaaridval').focus();
 				return false;
             }
 

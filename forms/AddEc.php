@@ -127,7 +127,7 @@ if($mvid > 0) {
                               type="text"
                               oninput = "MotheronlyNumbers(this.value)"
                               name="motheraadhaarid"
-                              id="motheraadhaarid"
+                              id="motheraadhaaridec"
                               maxlength="12"
                               class="form-control"
                               placeholder="MOTHER'S AADHAAR ID"
