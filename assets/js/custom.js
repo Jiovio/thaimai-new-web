@@ -113,7 +113,7 @@ document.getElementById("HscId").value = "";
 function fnEnable() {
 //Mother Details
 document.getElementById("SelectHsc").disabled = false;
-document.getElementById("ecfrno").disabled = false;
+document.getElementById("ecfrnono").disabled = false;
 document.getElementById("dateecreg").disabled = false;
 document.getElementById("motheraadhaarname").disabled = false;
 document.getElementById("motherfullname").disabled = false;
@@ -381,24 +381,24 @@ x.style.display = "block";
  * @returns {undefined}
  */
  
- $('#ecfr').on('keydown keyup change', function(){
-    var ecfr = $('#SelectHsc').val+$(this).val();
-    checkECdetails(ecfr);
+ $('#ecfrno').on('keydown keyup change', function(){
+    var ecfrno = $('#SelectHsc').val+$(this).val();
+    checkECdetails(ecfrno);
    
 });
 
 function addECValidate(){
-    var ecfr = $('#SelectHsc').val+$('#ecfr').val();
+    var ecfrno = $('#SelectHsc').val+$('#ecfrno').val();
  
-    checkECdetails(ecfr);
+    checkECdetails(ecfrno);
 }
 
-function checkECdetails(ecfr){
+function checkECdetails(ecfrno){
         $.ajax({
         url: "ajax/duplicateECValidation.php",
         type: "POST",
         data: {
-            ecfr: ecfr
+            ecfrno: ecfrno
         },
 		cache: false,
         success: function (result) {
@@ -406,8 +406,8 @@ function checkECdetails(ecfr){
             result= $.trim(result);
             if (result === '1')
             {
-                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this ecfrno.</span>");
-				document.getElementById ('ecfr').focus();
+                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this ecfrnono.</span>");
+				document.getElementById ('ecfrno').focus();
                 return false;
             }
 
@@ -1453,8 +1453,8 @@ window.location = $siteurl;
 function FirstAlphabet() {
 var selectBox = document.getElementById("SelectHsc");
 var selectedValue = selectBox.options[selectBox.selectedIndex].value.substring(0,3); 
-document.getElementById("ecfr").value = selectedValue;
-document.getElementById("ecfrno").value = "";
+document.getElementById("ecfrno").value = selectedValue;
+document.getElementById("ecfrnono").value = "";
 }
 
 function totPregnancyChange() {
