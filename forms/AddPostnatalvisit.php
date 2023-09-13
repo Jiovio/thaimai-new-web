@@ -130,7 +130,7 @@ if (! empty($_POST["addpostnatal"])) {
 
                           <div class="mb-3 col-md-6">
                           <label class="form-label">Family Welfare Method Accepted <span class="mand">* </span></label>
-                            <select name="ppcMethod" id="ppcMethod" onclick="return validatePostnalVisit()" class="form-select">
+                            <select name="ppcMethod" id="ppcMethod" onclick="return validatePostnalVisit()" class="form-select" required>
                           <option value="">Choose...</option>
                           <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=29";
                             $exequery = mysqli_query($conn, $query);
