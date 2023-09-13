@@ -382,7 +382,7 @@ x.style.display = "block";
  */
  
  $('#ecfrno').on('keydown keyup change', function(){
-    var ecfrno = $('#ecfr').val+$(this).val();
+    var ecfrno = $('#ecfr').val+$('#ecfrno').val;
     checkECdetails(ecfrno);
    
 });
