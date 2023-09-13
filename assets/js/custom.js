@@ -375,6 +375,47 @@ var x = document.getElementById("btnSaUp");
 x.style.display = "block";
 }
 
+/* ECFR No - Starts */
+/**
+ * Add ECFR No
+ * @returns {undefined}
+ */
+ 
+ $('#ecfr').on('keydown keyup change', function(){
+    var ecfr = $(this).val();
+    checkECdetails(ecfr);
+   
+});
+
+function addECValidate(){
+    var ecfr = $('#ecfr').val();
+ 
+    checkECdetails(ecfr);
+}
+
+function checkECdetails(ecfr){
+        $.ajax({
+        url: "ajax/duplicateECValidation.php",
+        type: "POST",
+        data: {
+            ecfr: ecfr
+        },
+		cache: false,
+        success: function (result) {
+            $('#suggesstion-box').html("")
+            result= $.trim(result);
+            if (result === '1')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this ecfrno.</span>");
+				document.getElementById ('ecfr').focus();
+                return false;
+            }
+
+        }
+    });
+}
+/* ECFR No val - Ends */
+
 function Obcode() {
 var g = document.getElementById("gravida").value;
 var p = document.getElementById("para").value;
