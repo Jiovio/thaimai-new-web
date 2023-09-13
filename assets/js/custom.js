@@ -675,12 +675,12 @@ function checkDuplicatePicmeNo(picmeno){
 			if (result === '6') {
                $('#suggesstion-box').html("<span style='color:red'>Discharge date should be >= delivery date </span>");
 			   document.getElementById ('dischargedate').focus();
-               return true;
+               return false;
             } 
 			if (result === '7') {
                $('#suggesstion-box').html("<span style='color:red'>Discharge time should be > delivery time </span>");
 			   document.getElementById ('dischargetime').focus();
-               return true;
+               return false;
             } 
         }
     });
