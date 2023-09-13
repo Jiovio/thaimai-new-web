@@ -28,7 +28,7 @@ if (! empty($_POST["addMedical"])) {
   }
   $picmeno = $_POST["picmeno"]; $lmpdate = $_POST["lmpdate"]; 
   $edddt = $_POST["edddate"]; 
-  $edddate = substr($edddt,6,4)."-".substr($edddt,0,2)."-".substr($edddt,3,2); /*mm/dd/yyyy*/
+  $edddate = substr($edddt,6,4)."-".substr($edddt,3,2)."-".substr($edddt,0,2); /*mm/dd/yyyy*/
   $reg12weeks = $_POST["reg12weeks"];
   $momBGtaken = $_POST["momBGtaken"]; $momBGtype = $_POST["momBGtype"]; 
   $pastillness = $_POST["pastillness"]; 
