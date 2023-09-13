@@ -483,20 +483,20 @@ $('#picmenoNew').on('keydown keyup change', function(){
  * @returns {undefined}
  */
  
- $('#motheraadhaaridv').on('keydown keyup change', function(){
+ $('#motheraadhaaridval').on('keydown keyup change', function(){
     var motadhaar = $(this).val();
     checkEC(motadhaar);
    
 });
 
 $('#genName').on('keydown keyup change', function(){
-    var motadhaar = $('#motheraadhaaridv').val();
+    var motadhaar = $('#motheraadhaaridval').val();
     checkEC(motadhaar);
    
 });
 
 function addMothAadhar(){
-    var motadhaar = $('#motheraadhaaridv').val();
+    var motadhaar = $('#motheraadhaaridval').val();
  
     checkEC(motadhaar);
 }
