@@ -457,7 +457,7 @@ if (!empty($query)) {
                           
                         </div>
                  </div>
-				 <?php print_r(post['deliverydate']; exit; ?>
+				 
                  <div class="row">
 
                         <div class="col-6 mb-3">
