@@ -49,10 +49,13 @@ if (! empty($_POST["update"])) {
     $date = date('d-m-Y h:i:s');
 	
 	//$doseName = implode(",",$_POST["doseName"]);
+	if(isset($_POST["doseName"]))
+	{	
 	$doseName = implode(",",$_POST["doseName"]);
 	$wild_com = $doseName;
 	$wild_srch_com = str_replace(',', '', $wild_com);
     $dose_chg_val = is_numeric($wild_srch_com);
+	}
 	
 	 $rec_del_pic = mysqli_query($conn, "SELECT * FROM immunization im WHERE im.id = $id");
 				          $n_del = mysqli_fetch_array($rec_del_pic);
