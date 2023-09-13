@@ -382,13 +382,13 @@ x.style.display = "block";
  */
  
  $('#ecfr').on('keydown keyup change', function(){
-    var ecfr = $(this).val();
+    var ecfr = $('#SelectHsc').val+$(this).val();
     checkECdetails(ecfr);
    
 });
 
 function addECValidate(){
-    var ecfr = $('#ecfr').val();
+    var ecfr = $('#SelectHsc').val+$('#ecfr').val();
  
     checkECdetails(ecfr);
 }
