@@ -23,23 +23,7 @@ if (!empty($AvCnt) && isset($AvCnt['deliveryCnt']) &&  $AvCnt['deliveryCnt'] > 0
    $AnVis_dt = mysqli_fetch_array($AnVis);
    if(!empty($AnVis_dt))
    {
-	   if(($AvCnt['deliverydate'] > $AvCnt['dischargedate']) AND isset($AvCnt['deliverydate']))
-	   {
-		   echo 6;
-	   }
-	   else
-	   {
-		if(($AvCnt['deliverydate'] = $AvCnt['dischargedate']) AND 
-		   ($AvCnt['deliverytime'] > $AvCnt['dischargetime']) AND
-		    AND isset(['deliverytime']))   
-		{
-			echo 7;
-		}
-		else
-		{
-     	echo 2;   
-		}
-	   }
+     	echo 2; 
    } 
    else
    {
