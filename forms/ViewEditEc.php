@@ -191,6 +191,7 @@ if (! empty($_POST["update"])) {
                               aria-label="MOTHER'S AADHAAR ID"
                               aria-describedby="basic-icon-default-password2"
                               value="<?php echo $maadhaarid; ?>"
+							  readonly="readonly"
 							  required
                             />
                           </div>
@@ -418,6 +419,7 @@ if (! empty($_POST["update"])) {
                               aria-label="HUSBAND'S AADHAAR ID"
                               aria-describedby="basic-icon-default-password2"
                              value="<?php echo $haadhaarid; ?>"
+							 readonly="readonly"
 							 required
                             />
                           </div>
