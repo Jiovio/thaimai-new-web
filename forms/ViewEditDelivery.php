@@ -148,6 +148,8 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                           
                         </div>
             </div>
+			
+				 <?php print_r($_POST['deliverydate']); ?>
                 <div class="row">
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">DELIVERY TIME <span class="mand">* </span></label>

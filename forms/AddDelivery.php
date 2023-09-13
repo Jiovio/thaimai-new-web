@@ -457,7 +457,6 @@ if (!empty($query)) {
                           
                         </div>
                  </div>
-				 <?php $_POST['deliverydate']; exit; ?>
 				 
                  <div class="row">
 
