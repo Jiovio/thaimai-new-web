@@ -76,7 +76,7 @@ if($mvid > 0) {
                               ><i class="bx bx-user"></i
                             ></span>
                             <span id="hscGen">
-                            <select name="Hsc" id="SelectHsc" onchange="FirstAlphabet()" class="form-select" onclick="return addECValidate()">
+                            <select name="Hsc" id="SelectHsc" onchange="FirstAlphabet()" class="form-select">
                             <option value="">Choose...</option>
                            
                            <?php   
@@ -97,6 +97,7 @@ if($mvid > 0) {
                               placeholder="EC FR No"
                               aria-label="EC FR No"
                               aria-describedby="basic-icon-default-ecfrno"
+							  onclick="return addECValidate()"
                             />
                           </div>
                         </div>
