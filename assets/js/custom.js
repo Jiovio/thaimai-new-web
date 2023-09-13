@@ -483,20 +483,20 @@ $('#picmenoNew').on('keydown keyup change', function(){
  * @returns {undefined}
  */
  
- $('#motheraadhaaridval').on('keydown keyup change', function(){
+ $('#motheraadhaaridv').on('keydown keyup change', function(){
     var motadhaar = $(this).val();
     checkEC(motadhaar);
    
 });
 
 $('#genName').on('keydown keyup change', function(){
-    var motadhaar = $('#motheraadhaaridval').val();
+    var motadhaar = $('#motheraadhaaridv').val();
     checkEC(motadhaar);
    
 });
 
 function addMothAadhar(){
-    var motadhaar = $('#motheraadhaaridval').val();
+    var motadhaar = $('#motheraadhaaridv').val();
  
     checkEC(motadhaar);
 }
@@ -515,7 +515,7 @@ function checkEC(motadhaar){
             if (result === '1')
             {
                 $('#suggesstion-box').html("<span style='color:red'>AN Registration already done for this Aadhar.</span>");
-                document.getElementById ('motheraadhaaridval').focus();
+                document.getElementById ('motheraadhaaridv').focus();
 				return false;
             }
 
