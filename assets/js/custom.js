@@ -672,43 +672,23 @@ function checkDuplicatePicmeNo(picmeno){
 			   document.getElementById ('picmenoNew').focus();
                return false;
             }
+            if (result === '6') {
+               $('#suggesstion-box').html("<span style='color:red'>Discharge date should be >= delivery date </span>");
+			   document.getElementById ('dischargedate').focus();
+               return false;
+            } 
+			if (result === '7') {
+               $('#suggesstion-box').html("<span style='color:red'>Discharge time should be > delivery time </span>");
+			   document.getElementById ('dischargetime').focus();
+               return false;
+            } 
+
+} 
 			
         }
     });
 }
 
-/**
- * Add delivery date
- * @returns {undefined}
- */
- 
- $('#dischargedate').on('keydown keyup change', function(){
-    var dischargedate = $('#dischargedate').val();
-    checkdisdt(dischargedate);
-   
-});
-
-$('#dischargedate').change(function (){
-     var dischargedate = $('#dischargedate').val();
- 
-    return checkdisdt(dischargedate);
-});
-
-function checkdisdt(dischargedate)
-{
-	if($('#dischargedate').val() < $('#deliverydate').val())
-    {
-       $('#dischargedate').val = $('#deliverydate').val();
-    } 
-	
-	if($('#dischargedate').val() === $('#deliverydate').val())
-    {
-		if($('#dischargetime').val() < $('#deliverytime').val())
-		{
-       $('#dischargetime').val = $('#deliverytime').val();
-	   }
-    } 
-}
 
 /* Postnatal */
 function validatePVPicme(){
