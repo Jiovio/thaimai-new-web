@@ -381,7 +381,7 @@ x.style.display = "block";
  * @returns {undefined}
  */
  
- $('#ecfrno').on('keydown keyup change', function(){
+ /*$('#ecfrno').on('keydown keyup change', function(){
     var ecfrno = $('#SelectHsc').val+$('#ecfrno').val();
     checkECdetails(ecfrno);
    
@@ -415,6 +415,41 @@ function checkECdetails(ecfrno){
     });
 }
 /* ECFR No val - Ends */
+
+$('#motheraadhaaridv').on('keydown keyup change', function(){
+    var motadrid = $('#motheraadhaaridv').val();
+    checkECdetails(motadrid);
+   
+});
+
+function addECValidate(){
+    var motadrid = $('#motheraadhaaridv').val();
+ 
+    checkECdetails(motadrid);
+}
+
+function checkECdetails(motadrid){
+        $.ajax({
+        url: "ajax/duplicateECValidation.php",
+        type: "POST",
+        data: {
+            motadrid: motadrid
+        },
+		cache: false,
+        success: function (result) {
+            $('#suggesstion-box').html("")
+            result= $.trim(result);
+            if (result === '1')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this ecfrnono.</span>");
+				document.getElementById ('motadrid').focus();
+                return false;
+            }
+
+        }
+    });
+}
+/* ECFR No val - Ends *
 
 function Obcode() {
 var g = document.getElementById("gravida").value;
@@ -483,20 +518,20 @@ $('#picmenoNew').on('keydown keyup change', function(){
  * @returns {undefined}
  */
  
- $('#motheraadhaaridval').on('keydown keyup change', function(){
+ $('#motheraadhaaridv').on('keydown keyup change', function(){
     var motadhaar = $(this).val();
     checkEC(motadhaar);
    
 });
 
 $('#genName').on('keydown keyup change', function(){
-    var motadhaar = $('#motheraadhaaridval').val();
+    var motadhaar = $('#motheraadhaaridv').val();
     checkEC(motadhaar);
    
 });
 
 function addMothAadhar(){
-    var motadhaar = $('#motheraadhaaridval').val();
+    var motadhaar = $('#motheraadhaaridv').val();
  
     checkEC(motadhaar);
 }
