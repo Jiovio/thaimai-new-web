@@ -184,7 +184,7 @@ if($mvid > 0) {
                               name="motherdob"
                               id="motherdob"
                               class="form-control" 
-							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							  <?php $cur_dt = date('Y-m-d', strtotime('-11 year')); ?>
 							   min="1970-01-01" max=<?php echo $cur_dt; ?>
 							  onchange="fnCalMotAge();"
                               aria-describedby="basic-icon-default-email2"
@@ -373,7 +373,7 @@ if($mvid > 0) {
                               type="date"
                               name="husdob"
                               id="husdob"
-							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							  <?php $cur_dt = date('Y-m-d', strtotime('-11 year')); ?>
 							   min="1970-01-01" max=<?php echo $cur_dt; ?>
                               class="form-control" onchange="fnCalHusAge();"
                               aria-describedby="basic-icon-default-email2"
