@@ -148,8 +148,6 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                           
                         </div>
             </div>
-			
-				 <?php print_r($_POST['deliverydate']); ?>
                 <div class="row">
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">DELIVERY TIME <span class="mand">* </span></label>
@@ -610,6 +608,8 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder="DISCHARGE DATE"
                               aria-label="DISCHARGE DATE"
                               aria-describedby="basic-icon-default-password2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min=<?php echo $_POST['deliverydate']; ?>  max=<?php echo $cur_dt; ?>
 							  
                               value="<?php echo $dischargedate; ?>"     
                               disabled
