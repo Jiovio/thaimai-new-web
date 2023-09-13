@@ -467,8 +467,6 @@ if (!empty($query)) {
                               id="dischargedate"
                               class="form-control"
 							 
-							  min="<?php echo $deliverydate ?>" 
-							  
                               placeholder="DISCHARGE DATE"
                               aria-label="DISCHARGE DATE"
                               aria-describedby="basic-icon-default-password2"

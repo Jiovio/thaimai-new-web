@@ -608,8 +608,6 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder="DISCHARGE DATE"
                               aria-label="DISCHARGE DATE"
                               aria-describedby="basic-icon-default-password2"
-							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
-							   min=<?php echo $deliverydate; ?>  max=<?php echo $cur_dt; ?>
                               value="<?php echo $dischargedate; ?>"     
                               disabled
                               required

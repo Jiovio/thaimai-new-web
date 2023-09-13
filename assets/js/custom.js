@@ -672,11 +672,16 @@ function checkDuplicatePicmeNo(picmeno){
 			   document.getElementById ('picmenoNew').focus();
                return false;
             }
-		/*	if (result === '2') {
-               $('#suggesstion-box').html("<span style='color:red'>Valid picme. </span>");
-			   document.getElementById ('picmenoNew').focus();
+			if (result === '6') {
+               $('#suggesstion-box').html("<span style='color:red'>Discharge date should be >= delivery date </span>");
+			   document.getElementById ('dischargedate').focus();
                return true;
-            } */
+            } 
+			if (result === '7') {
+               $('#suggesstion-box').html("<span style='color:red'>Discharge time should be > delivery time </span>");
+			   document.getElementById ('dischargetime').focus();
+               return true;
+            } 
         }
     });
 }
