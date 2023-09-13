@@ -457,6 +457,7 @@ if (!empty($query)) {
                           
                         </div>
                  </div>
+				 <?php print_r(post['deliverydate']; exit; ?>
                  <div class="row">
 
                         <div class="col-6 mb-3">
@@ -470,6 +471,8 @@ if (!empty($query)) {
                               placeholder="DISCHARGE DATE"
                               aria-label="DISCHARGE DATE"
                               aria-describedby="basic-icon-default-password2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							   min=<?php echo $deliverydate; ?>  max=<?php echo $cur_dt; ?>
                               required
 							  onclick="return validateAddDelivery()" 
                             />
