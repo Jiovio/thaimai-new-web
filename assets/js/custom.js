@@ -448,6 +448,12 @@ $('#picmenoNew').on('keydown keyup change', function(){
    
 });
 
+$('#genName').on('keydown keyup change', function(){
+    var motadhaar = $('#motheraadhaaridval').val();
+    checkEC(motadhaar);
+   
+});
+
 function addMothAadhar(){
     var motadhaar = $('#motheraadhaaridval').val();
  
