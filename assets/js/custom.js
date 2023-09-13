@@ -112,7 +112,7 @@ document.getElementById("HscId").value = "";
 
 function fnEnable() {
 //Mother Details
-document.getElementById("SelectHsc").disabled = false;
+document.getElementById("ecfr").disabled = false;
 document.getElementById("ecfrnono").disabled = false;
 document.getElementById("dateecreg").disabled = false;
 document.getElementById("motheraadhaarname").disabled = false;
@@ -382,13 +382,13 @@ x.style.display = "block";
  */
  
  $('#ecfrno').on('keydown keyup change', function(){
-    var ecfrno = $('#SelectHsc').val+$(this).val();
+    var ecfrno = $('#ecfr').val+$(this).val();
     checkECdetails(ecfrno);
    
 });
 
 function addECValidate(){
-    var ecfrno = $('#SelectHsc').val+$('#ecfrno').val();
+    var ecfrno = $('#ecfr').val+$('#ecfrno').val();
  
     checkECdetails(ecfrno);
 }
@@ -1451,7 +1451,7 @@ window.location = $siteurl;
 }
 
 function FirstAlphabet() {
-var selectBox = document.getElementById("SelectHsc");
+var selectBox = document.getElementById("ecfr");
 var selectedValue = selectBox.options[selectBox.selectedIndex].value.substring(0,3); 
 document.getElementById("ecfrno").value = selectedValue;
 document.getElementById("ecfrnono").value = "";
