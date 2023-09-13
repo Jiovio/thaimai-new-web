@@ -682,9 +682,6 @@ function checkDuplicatePicmeNo(picmeno){
 			   document.getElementById ('dischargetime').focus();
                return false;
             } 
-
-} 
-			
         }
     });
 }
