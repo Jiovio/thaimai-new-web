@@ -68,6 +68,8 @@ if($mvid > 0) {
                      
         <div id="response"
         class="<?php if(!empty($type)) { echo $type . " display-block"; } else { echo $type . " display-none"; } ?>"><?php if(!empty($emessage)) { echo $emessage; } ?></div>
+						
+						
 						<div class="row">
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-fullname">EC FR No <span class="mand">* </span><span id="errEcfrNo"></span></label>
@@ -113,11 +115,14 @@ if($mvid > 0) {
 							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
 							   min="1970-01-01" max=<?php echo $cur_dt; ?>
 							   onclick="return addECValidate()"
+							   
 							  required
                               />
+							  <div id="suggesstion-box"></div>
                           </div>
                         </div>
                         </div>
+						
                         <div class="row">
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">MOTHER'S AADHAAR ID <span class="mand">* </span> <span id="errmotherAadhaarid"></span></label>
@@ -136,6 +141,7 @@ if($mvid > 0) {
 							  onclick="return addECValidate()"
                               required
                             />
+							<div id="mot-sug-box"></div>
                           </div>
                         </div>
 
@@ -159,7 +165,7 @@ if($mvid > 0) {
                           </div>
                         </div>
                         </div>
-
+                        
                         <div class="row">
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">MOTHER'S FULL NAME <span class="mand">* </span><span id="errMfullname"></span></label>
@@ -326,7 +332,7 @@ if($mvid > 0) {
                               type="text"
                                oninput = "HusbandonlyNumbers(this.value)"
                               name="husbandaadhaarid"
-                              id="husbandaadhaarid"
+                              id="husbandaadhaaridec"
                               maxlength="12"
                               class="form-control"
                               placeholder="HUSBAND'S AADHAAR ID"
@@ -356,6 +362,7 @@ if($mvid > 0) {
                             />
                           </div>
                         </div>
+						<div id="Hus-Sug-box"></div>
 
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">HUSBAND'S FULL NAME <span class="mand">* </span><span id="errhfullname"></span></label>

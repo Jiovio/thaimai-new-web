@@ -443,32 +443,51 @@ $('#picmenoNew').on('keydown keyup change', function(){
  */
  
  $('#ecfrno').on('keydown keyup change', function(){
-    var ecfrno = $('#SelectHsc').val+$('#ecfrno').val();
-    checkECdetails(ecfrno);
+     var ecfrno = $('#ecfrno').val(); /*$('#ecfr').val + $('#ecfrno').val();*/
+    var ecfr   = $('#ecfr').val();
+    var motheraadhaarid = $('#motheraadhaaridec').val();
+	var husbandaadhaarid = $('#husbandaadhaaridec').val();
+    checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid);
    
 });
 
 function addECValidate(){
-    var ecfrno = $('#SelectHsc').val+$('#ecfrno').val();
- 
-    checkECdetails(ecfrno);
+     var ecfrno = $('#ecfrno').val(); /*$('#ecfr').val + $('#ecfrno').val();*/
+    var ecfr   = $('#ecfr').val();
+    var motheraadhaarid = $('#motheraadhaaridec').val();
+	var husbandaadhaarid = $('#husbandaadhaaridec').val();
+    checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid);
 }
 
-function checkECdetails(ecfrno){
+function checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid){
         $.ajax({
         url: "ajax/duplicateECValidation.php",
         type: "POST",
         data: {
-            ecfrno: ecfrno
+            ecfr: ecfr, ecfrno: ecfrno, motheraadhaarid: motheraadhaarid, husbandaadhaarid: husbandaadhaarid
         },
 		cache: false,
         success: function (result) {
             $('#suggesstion-box').html("");
+			$('#mot-sug-box').html("");
+			$('#Hus-Sug-box').html("");
             result= $.trim(result);
             if (result === '1')
             {
-                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this ecfrno.</span>");
+                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this Ecfrno.</span>");
 				document.getElementById ('ecfrno').focus();
+                return false;
+            }
+			if (result === '3')
+            {
+                $('#mot-sug-box').html("<span style='color:red'>EC registration already done for this Mother's Aadhar.</span>");
+				document.getElementById ('motheraadhaaridec').focus();
+                return false;
+            }
+			if (result === '4')
+            {
+                $('#Hus-Sug-box').html("<span style='color:red'>EC registration already done for this Father's Aadhar.</span>");
+				document.getElementById ('husbandaadhaaridec').focus();
                 return false;
             }
 
@@ -477,13 +496,28 @@ function checkECdetails(ecfrno){
 }
 /* ECFR No val - Ends */
 
-/*$('#motheraadhaaridec').on('keydown keyup change', function(){
+
+/* Mother Aadhar Duplication */
+$('#motheraadhaaridec').on('keydown keyup change', function(){
+     var ecfrno = $('#ecfrno').val(); /*$('#ecfr').val + $('#ecfrno').val();*/
+    var ecfr   = $('#ecfr').val();
     var motheraadhaarid = $('#motheraadhaaridec').val();
-    checkECdetails(motheraadhaarid);
+	var husbandaadhaarid = $('#husbandaadhaaridec').val();
+    checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid);
    
 });
 
-function addECValidate(){
+/* Husband Aadhar Duplication */
+$('#husbandaadhaaridec').on('keydown keyup change', function(){
+    var ecfrno = $('#ecfrno').val(); /*$('#ecfr').val + $('#ecfrno').val();*/
+    var ecfr   = $('#ecfr').val();
+    var motheraadhaarid = $('#motheraadhaaridec').val();
+	var husbandaadhaarid = $('#husbandaadhaaridec').val();
+    checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid);
+   
+});
+
+/*function addECValidate(){
     var motheraadhaarid = $('#motheraadhaaridec').val();
  
     checkECdetails(motheraadhaarid);
