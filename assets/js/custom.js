@@ -442,7 +442,7 @@ $('#picmenoNew').on('keydown keyup change', function(){
  * @returns {undefined}
  */
  
- *$('#ecfrno').on('keydown keyup change', function(){
+ $('#ecfrno').on('keydown keyup change', function(){
     var ecfrno = $('#SelectHsc').val+$('#ecfrno').val();
     checkECdetails(ecfrno);
    
