@@ -70,6 +70,7 @@ if($mvid > 0) {
         class="<?php if(!empty($type)) { echo $type . " display-block"; } else { echo $type . " display-none"; } ?>"><?php if(!empty($emessage)) { echo $emessage; } ?></div>
 						
 						
+					    <div id="suggesstion-box"></div>
 						<div class="row">
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-fullname">EC FR No <span class="mand">* </span><span id="errEcfrNo"></span></label>
@@ -96,7 +97,8 @@ if($mvid > 0) {
                               name="ecfrno"
                               class="form-control"
                               id="ecfrno"
-                              placeholder="EC FR No"
+                              placeholder="0000001"
+							  pattern="[0-9]{7}"
                               aria-label="EC FR No"
                               aria-describedby="basic-icon-default-ecfrno"
 							  onclick="return addECValidate()"
@@ -118,11 +120,12 @@ if($mvid > 0) {
 							   
 							  required
                               />
-							  <div id="suggesstion-box"></div>
                           </div>
                         </div>
                         </div>
 						
+                        
+						<div id="mot-sug-box"></div>
                         <div class="row">
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">MOTHER'S AADHAAR ID <span class="mand">* </span> <span id="errmotherAadhaarid"></span></label>
@@ -133,15 +136,14 @@ if($mvid > 0) {
                               oninput = "MotheronlyNumbers(this.value)"
                               name="motheraadhaarid"
                               id="motheraadhaaridec"
-                              maxlength="12"
+							  placeholder="123456789012"
+							  pattern="[0-9]{12}"                           
                               class="form-control"
-                              placeholder="MOTHER'S AADHAAR ID"
                               aria-label="MOTHER'S AADHAAR ID"
                               aria-describedby="basic-icon-default-password2"
 							  onclick="return addECValidate()"
                               required
                             />
-							<div id="mot-sug-box"></div>
                           </div>
                         </div>
 
@@ -165,7 +167,6 @@ if($mvid > 0) {
                           </div>
                         </div>
                         </div>
-                        
                         <div class="row">
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">MOTHER'S FULL NAME <span class="mand">* </span><span id="errMfullname"></span></label>
@@ -313,6 +314,8 @@ if($mvid > 0) {
 			</div>
 			</div><!--Mother Details Close-->
 			<!-- Father Details Start Layout -->
+			
+						
             <div class="row">
                 <div class="col-xl">
                   <div class="card mb-4">
@@ -323,6 +326,7 @@ if($mvid > 0) {
                     <div class="card-body">
 				<div class="errMsg" id="errMsg"></div>
                		<!-- <input type="hidden" name="id" disabled value="<?php echo $id; ?>"> -->
+					<div id="Hus-Sug-box"></div>
 						<div class="row">
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">HUSBAND'S AADHAAR ID <span class="mand">* </span>  <span style="color:red" class= "husmessage" id="husmessage"></span><span id="errHaadhaarid"></span></label>
@@ -333,9 +337,9 @@ if($mvid > 0) {
                                oninput = "HusbandonlyNumbers(this.value)"
                               name="husbandaadhaarid"
                               id="husbandaadhaaridec"
-                              maxlength="12"
+                              placeholder="123456789012"
+							  pattern="[0-9]{12}"   
                               class="form-control"
-                              placeholder="HUSBAND'S AADHAAR ID"
                               aria-label="HUSBAND'S AADHAAR ID"
                               aria-describedby="basic-icon-default-password2"
 							  onclick="return addECValidate()"
@@ -362,7 +366,6 @@ if($mvid > 0) {
                             />
                           </div>
                         </div>
-						<div id="Hus-Sug-box"></div>
 
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">HUSBAND'S FULL NAME <span class="mand">* </span><span id="errhfullname"></span></label>
