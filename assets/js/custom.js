@@ -375,6 +375,67 @@ var x = document.getElementById("btnSaUp");
 x.style.display = "block";
 }
 
+function Obcode() {
+var g = document.getElementById("gravida").value;
+var p = document.getElementById("para").value;
+var l = document.getElementById("livingChildren").value;
+var a = document.getElementById("abortion").value;
+var c = document.getElementById("childDeath").value;
+
+var obscode = "G"+g+"P"+p+"L"+l+"A"+a+"C"+c;
+document.getElementById("obstetricCode").value = obscode; 
+
+var gr = document.getElementById("childDeath").value;
+var par = document.getElementById("childDeath").value;
+var cd = document.getElementById("childDeath").value;
+var abr = document.getElementById("childDeath").value;
+var lc = document.getElementById("childDeath").value;
+var mw = document.getElementById("childDeath").value;
+var bpsy = document.getElementById("childDeath").value;
+var bpd = document.getElementById("childDeath").value;
+
+if($('#gravida').val() > 2 || $('#para').val() > 2 ||  $('#childDeath').val() >2 ||
+    $('#abortion').val() > 2 || $('#livingChildren').val() > 2 || $('#motherWeight').val() < 40 ||
+    $('#bpSys').val() >= 140 ||  $('#bpDia').val() >=90)
+    {
+      var hrpgcy = "Yes";
+    } 
+	else 
+{
+      var hrpgcy = "No";
+    }
+	document.getElementById("hrPregnancy").value = hrpgcy; 
+
+}
+
+function onlyNumbers(text) {  
+text = text.replace(/[^0-9]/g, '');
+// Set to HTML
+var inputResult   = document.getElementById('picmeno');
+inputResult.value = text;
+}
+var PminLength = 12;
+var PmaxLength = 12;
+$('#picmeno').on('keydown keyup change', function(){
+  var Pchar = $(this).val();
+  var PcharLength = $(this).val().length;
+  if(PcharLength < PminLength){
+      $('#Pmessage').text(' minimum'+PminLength+' required.');
+  }
+  else if(PcharLength > PmaxLength){
+      $('#Pmessage').text(' maximum '+PmaxLength+' allowed.');
+      $(this).val(Pchar.substring(0, PmaxLength));
+  }else{
+      $('#Pmessage').text('');
+  }
+});
+
+$('#picmenoNew').on('keydown keyup change', function(){
+    var picmeno = $(this).val();
+    checkDuplicatePicmeNo(picmeno);
+   
+});
+
 /* ECFR No - Starts */
 /**
  * Add ECFR No
@@ -450,67 +511,6 @@ function checkECdetails(motheraadhaarid){
     });
 }
 /* ECFR No val - Ends */
-
-function Obcode() {
-var g = document.getElementById("gravida").value;
-var p = document.getElementById("para").value;
-var l = document.getElementById("livingChildren").value;
-var a = document.getElementById("abortion").value;
-var c = document.getElementById("childDeath").value;
-
-var obscode = "G"+g+"P"+p+"L"+l+"A"+a+"C"+c;
-document.getElementById("obstetricCode").value = obscode; 
-
-var gr = document.getElementById("childDeath").value;
-var par = document.getElementById("childDeath").value;
-var cd = document.getElementById("childDeath").value;
-var abr = document.getElementById("childDeath").value;
-var lc = document.getElementById("childDeath").value;
-var mw = document.getElementById("childDeath").value;
-var bpsy = document.getElementById("childDeath").value;
-var bpd = document.getElementById("childDeath").value;
-
-if($('#gravida').val() > 2 || $('#para').val() > 2 ||  $('#childDeath').val() >2 ||
-    $('#abortion').val() > 2 || $('#livingChildren').val() > 2 || $('#motherWeight').val() < 40 ||
-    $('#bpSys').val() >= 140 ||  $('#bpDia').val() >=90)
-    {
-      var hrpgcy = "Yes";
-    } 
-	else 
-{
-      var hrpgcy = "No";
-    }
-	document.getElementById("hrPregnancy").value = hrpgcy; 
-
-}
-
-function onlyNumbers(text) {  
-text = text.replace(/[^0-9]/g, '');
-// Set to HTML
-var inputResult   = document.getElementById('picmeno');
-inputResult.value = text;
-}
-var PminLength = 12;
-var PmaxLength = 12;
-$('#picmeno').on('keydown keyup change', function(){
-  var Pchar = $(this).val();
-  var PcharLength = $(this).val().length;
-  if(PcharLength < PminLength){
-      $('#Pmessage').text(' minimum'+PminLength+' required.');
-  }
-  else if(PcharLength > PmaxLength){
-      $('#Pmessage').text(' maximum '+PmaxLength+' allowed.');
-      $(this).val(Pchar.substring(0, PmaxLength));
-  }else{
-      $('#Pmessage').text('');
-  }
-});
-
-$('#picmenoNew').on('keydown keyup change', function(){
-    var picmeno = $(this).val();
-    checkDuplicatePicmeNo(picmeno);
-   
-});
 
 /* AN Reg Mot Aadhar Id Val - Starts */
 /**
