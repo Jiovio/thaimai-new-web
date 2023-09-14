@@ -442,7 +442,7 @@ $('#picmenoNew').on('keydown keyup change', function(){
  * @returns {undefined}
  */
  
- /*$('#ecfrno').on('keydown keyup change', function(){
+ *$('#ecfrno').on('keydown keyup change', function(){
     var ecfrno = $('#SelectHsc').val+$('#ecfrno').val();
     checkECdetails(ecfrno);
    
@@ -463,11 +463,11 @@ function checkECdetails(ecfrno){
         },
 		cache: false,
         success: function (result) {
-            $('#suggesstion-box').html("")
+            $('#suggesstion-box').html("");
             result= $.trim(result);
             if (result === '1')
             {
-                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this ecfrnono.</span>");
+                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this ecfrno.</span>");
 				document.getElementById ('ecfrno').focus();
                 return false;
             }
@@ -477,7 +477,7 @@ function checkECdetails(ecfrno){
 }
 /* ECFR No val - Ends */
 
-$('#motheraadhaaridec').on('keydown keyup change', function(){
+/*$('#motheraadhaaridec').on('keydown keyup change', function(){
     var motheraadhaarid = $('#motheraadhaaridec').val();
     checkECdetails(motheraadhaarid);
    
