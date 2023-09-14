@@ -437,11 +437,11 @@ function checkECdetails(motheraadhaarid){
         },
 		cache: false,
         success: function (result) {
-            $('#suggesstion-box').html("")
+            $('#suggesstion-box').html("");
             result= $.trim(result);
             if (result === '1')
             {
-                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this ecfrno.</span>");
+                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this Aadhar.</span>");
 				document.getElementById ('motheraadhaaridec').focus();
                 return false;
             }
@@ -449,7 +449,7 @@ function checkECdetails(motheraadhaarid){
         }
     });
 }
-/* ECFR No val - Ends *
+/* ECFR No val - Ends */
 
 function Obcode() {
 var g = document.getElementById("gravida").value;
