@@ -42,7 +42,10 @@ $id = 0; $update = false; $view = false;
 if (! empty($_POST["update"])) {
  $id = $_POST['id'];
 
- $ecfr = $_POST["ecfr"]; $ecfrno = $_POST["ecfrno"]; $ecfrmrg = $ecfr.$ecfrno; $dateecreg = $_POST["dateecreg"]; $maadhaarname = $_POST["motheraadhaarname"]; $mfullname = $_POST["motherfullname"]; $mdob = $_POST["motherdob"]; $mageecreg = $_POST["motherageecreg"]; $magemarriage = $_POST["motheragemarriage"]; $mmobno = $_POST["mothermobno"]; $mobperson = $_POST["mobileofperson"]; $mstatus = $_POST["motheredustatus"]; $haadhaarname = $_POST["husbandaadhaarname"]; $hfullname = $_POST["husfullname"]; $hdob = $_POST["husdob"]; $hageecreg = $_POST["husageecreg"]; $hagemarriage = $_POST["husagemarriage"]; $husmobno = $_POST["husmobno"]; $hedustatus = $_POST["husedustatus"]; $religion = $_POST["religion"]; $caste = $_POST["caste"]; $BlockId = $_POST["BlockId"]; $PhcId = $_POST["PhcId"]; $HscId= $_POST["HscId"]; 
+ $ecfr = $_POST["ecfr"]; $ecfrno = $_POST["ecfrno"]; 
+ $ecfrmrg = $ecfr.$ecfrno; 
+// $ecfrmrg = $_POST["ecfrno"];
+ $dateecreg = $_POST["dateecreg"]; $maadhaarname = $_POST["motheraadhaarname"]; $mfullname = $_POST["motherfullname"]; $mdob = $_POST["motherdob"]; $mageecreg = $_POST["motherageecreg"]; $magemarriage = $_POST["motheragemarriage"]; $mmobno = $_POST["mothermobno"]; $mobperson = $_POST["mobileofperson"]; $mstatus = $_POST["motheredustatus"]; $haadhaarname = $_POST["husbandaadhaarname"]; $hfullname = $_POST["husfullname"]; $hdob = $_POST["husdob"]; $hageecreg = $_POST["husageecreg"]; $hagemarriage = $_POST["husagemarriage"]; $husmobno = $_POST["husmobno"]; $hedustatus = $_POST["husedustatus"]; $religion = $_POST["religion"]; $caste = $_POST["caste"]; $BlockId = $_POST["BlockId"]; $PhcId = $_POST["PhcId"]; $HscId= $_POST["HscId"]; 
  $PanchayatId = $_POST["PanchayatId"]; $VillageId = $_POST["VillageId"]; $address = $_POST["address"]; $pincode = $_POST["pincode"]; 
  $povertystatus = $_POST["povertystatus"]; $migrantstatus = $_POST["migrantstatus"]; $rctype = $_POST["rationcardtype"]; $rcnum = $_POST["rationcardnum"];
  date_default_timezone_set('Asia/Kolkata'); $date = date('d-m-Y h:i:s');
@@ -122,24 +125,19 @@ if (! empty($_POST["update"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-fullname">EC FR No <span class="mand">* </span><span id="errEcfrNo"></span></label>
                           <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-fullname2" class="input-group-text"
-                              ><i class="bx bx-user"></i
-                            ></span>
-                            <span id="hscGen">
-                            <select name="Hsc" id="SelectHsc" onchange="FirstAlphabet()" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon"  disabled>
-                            <option value="">Choose...</option>
-                           <?php   
-                            $query = "SELECT DISTINCT(HscCode),HscId FROM hscmaster ORDER BY HscId";
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['HscCode']; ?>"><?php echo $listvalue['HscCode']; ?></option>
-                          
-                          <?php  } ?>
-                             </select>
-                             </span>
-                            <input type="text" name="ecfr" class="form-control" id="ecfr" value="<?php if($ecfrno!=""){ echo substr($ecfrno,0,3); } ?>" readonly />
-                            <input
-                              type="text"
+                            
+                            
+							
+                            <input type="hidden" name="Hsc" id="SelectHsc" value = <?php echo substr($ecfrno,0,3); ?>  onchange="FirstAlphabet()" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon"  readonly disabled />
+                           
+                             
+							 <label class="lblViolet"><?php echo substr($ecfrno,0,3); ?>
+                              </label>
+                            <input type="hidden" name="ecfr" class="form-control" id="ecfr" value="<?php if($ecfrno!=""){ echo substr($ecfrno,0,3); } ?>" readonly />
+                            <label class="lblViolet"><?php echo substr($ecfrno,3); ?>
+                              </label>
+							<input
+                              type="hidden"
                               name="ecfrno"
                               class="form-control"
                               id="ecfrno" 
@@ -147,6 +145,7 @@ if (! empty($_POST["update"])) {
                               aria-label="EC FR No"
                               aria-describedby="basic-icon-default-fullname2"
                               disabled value="<?php echo substr($ecfrno,3); ?>"
+							  readonly
 							  required
                             />
                           </div>

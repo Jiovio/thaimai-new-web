@@ -8,6 +8,7 @@
 if (! empty($_POST["addEc"])) {   
   $CheckDuplicateMno = mysqli_query($conn,"SELECT motheraadhaarid,husbandaadhaarid FROM ecregister where motheraadhaarid='".$_POST["motheraadhaarid"]."' OR husbandaadhaarid='".$_POST["husbandaadhaarid"]."' ");
 
+$mvid = "";
 while($Mvalue = mysqli_fetch_array($CheckDuplicateMno)) {
   $mvid = $Mvalue["motheraadhaarid"];
   $mvid = $Mvalue["husbandaadhaarid"];
@@ -16,7 +17,8 @@ if($mvid > 0) {
     $type = "error";
     $emessage = "Duplicate Mother's Aadhaar No.";
  } else {
-  $ecfr = $_POST["ecfr"]; $ecfrno = $_POST["ecfrno"]; $ecfrmrg = $ecfr.$ecfrno;
+  $ecfr = $_POST["ecfr"]; $ecfrno = $_POST["ecfrno"]; $ecfrnoval = str_pad($ecfrno, 7, "0", STR_PAD_LEFT); 
+  $ecfrmrg = $ecfr.$ecfrnoval;  //print_r("Hi".$ecfrmrg); exit;
   $dateecreg = $_POST["dateecreg"]; $maadhaarid = $_POST["motheraadhaarid"]; $maadhaarname = $_POST["motheraadhaarname"];
   $mfullname = $_POST["motherfullname"]; $mdob = $_POST["motherdob"]; $mageecreg = $_POST["motherageecreg"]; $magemarriage = $_POST["motheragemarriage"];
   $mmobno = $_POST["mothermobno"];$mobperson = $_POST["mobileofperson"]; $mstatus = $_POST["motheredustatus"]; $haadhaarid = $_POST["husbandaadhaarid"];   
@@ -65,7 +67,8 @@ if($mvid > 0) {
                     </div>
                     <div class="card-body">
             <form action="" method="post" onSubmit="return EcFormValid(this);">
-                     
+			
+		                     
         <div id="response"
         class="<?php if(!empty($type)) { echo $type . " display-block"; } else { echo $type . " display-none"; } ?>"><?php if(!empty($emessage)) { echo $emessage; } ?></div>
 						
@@ -93,12 +96,11 @@ if($mvid > 0) {
                              </span>
                             <input type="text" name="ecfr" class="form-control" id="ecfr" readonly />
                             <input
-                              type="text"
+                              type="number"
                               name="ecfrno"
                               class="form-control"
                               id="ecfrno"
                               placeholder="0000001"
-							  pattern="[0-9]{7}"
                               aria-label="EC FR No"
                               aria-describedby="basic-icon-default-ecfrno"
 							  onclick="return addECValidate()"
@@ -114,7 +116,7 @@ if($mvid > 0) {
                               id="dateecreg"
                               class="form-control"
                               aria-describedby="basic-icon-default-email2"
-							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							  <?php $cur_dt = date('Y-m-d'); ?>
 							   min="1970-01-01" max=<?php echo $cur_dt; ?>
 							   onclick="return addECValidate()"
 							   
