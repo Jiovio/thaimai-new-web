@@ -134,6 +134,12 @@ if (isset($_GET['del'])) {
                 <hr class="my-0" />
                 <div class="card-body">
                 <form id="formAccountSettings" method="POST">
+				<?php 
+				 $CheckEC = mysqli_query($conn,"SELECT dateecreg FROM ecregister where motheraadhaarid = $motheraadhaarid");
+                 $FetEC = mysqli_fetch_array($CheckEC);
+				 $Ec_Reg_Dt = "";
+				 $Ec_Reg_Dt = $FetEC['dateecreg'];
+				 ?>
                 <input type="hidden" name="id" value="<?php echo $id; ?>">
                     <div class="row">                 
                     <div class="col-4 mb-3">
@@ -199,8 +205,8 @@ if (isset($_GET['del'])) {
                               id="picmeRegDate"
                               name="picmeRegDate"
                               placeholder=""
-							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
-							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							  <?php $cur_dt = date('Y-m-d', strtotime('+10 year')); ?>
+							   min=<?php echo $Ec_Reg_Dt; ?>  max=<?php echo $cur_dt; ?>
                               value="<?php echo $picmeRegDate; ?>"
                               disabled
                               required
@@ -471,8 +477,8 @@ if (isset($_GET['del'])) {
                               id="anRegDate"
                               name="anRegDate" required
                               placeholder="ANTENATAL REGISTER DATE"
-							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
-							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							  <?php $cur_dt = date('Y-m-d', strtotime('+10 year')); ?>
+							   min=<?php echo $Ec_Reg_Dt; ?>  max=<?php echo $cur_dt; ?>
                               value="<?php echo $rgdate; ?>"
 							  
                               disabled

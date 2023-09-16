@@ -94,11 +94,17 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                 <hr class="my-0" />
                   <div class="card-body">
                   <form onSubmit="return Arvalidate(this);" method="POST">
+				 <?php 
+				 $CheckEC = mysqli_query($conn,"SELECT dateecreg FROM ecregister where motheraadhaarid = $motheraadhaarid");
+                 $FetEC = mysqli_fetch_array($CheckEC);
+				 $Ec_Reg_Dt = "";
+				 $Ec_Reg_Dt = $FetEC['dateecreg'];
+				 ?>
                 <div class="row">
                         <div class="mb-3 col-md-4">
                         <label class="form-label" for="basic-icon-default-motheraathar">MOTHER'S AADHAAR ID <span class="mand">* </span> </span id="errPicmeno"><span></label>
                         <div class="input-group input-group-merge">
-                            <input type="text" name="motheraadhaarid" id="motheraadhaaridv" value="<?php echo $motheraadhaarid; ?>" class="form-control" readonly />
+                            <input type="text" name="motheraadhaarid" id="motheraadhaaridval" value="<?php echo $motheraadhaarid; ?>" class="form-control" readonly />
                         </div>
                       </div>
                       <div class="mb-3 col-md-4">
@@ -141,6 +147,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             class="form-control"
                             id="picmeRegDate"
                             name="picmeRegDate"
+							min=<?php echo $Ec_Reg_Dt; ?> 
                             placeholder="PICME REGISTER DATE"
                             required
                           />
@@ -341,6 +348,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             id="anRegDate"
                             name="anRegDate"
                             placeholder="ANTENATAL REGISTER DATE"
+							min=<?php echo $Ec_Reg_Dt; ?> 
                             required
                           />
                         </div>
