@@ -148,6 +148,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             id="picmeRegDate"
                             name="picmeRegDate"
 							min=<?php echo $Ec_Reg_Dt; ?> 
+							<?php $cur_dt = date('Y-m-d'); ?> max=<?php echo $cur_dt; ?>
                             placeholder="PICME REGISTER DATE"
                             required
                           />
@@ -349,6 +350,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             name="anRegDate"
                             placeholder="ANTENATAL REGISTER DATE"
 							min=<?php echo $Ec_Reg_Dt; ?> 
+							<?php $cur_dt = date('Y-m-d'); ?> max=<?php echo $cur_dt; ?>
                             required
                           />
                         </div>

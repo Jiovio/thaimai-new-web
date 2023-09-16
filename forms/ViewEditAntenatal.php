@@ -205,7 +205,7 @@ if (isset($_GET['del'])) {
                               id="picmeRegDate"
                               name="picmeRegDate"
                               placeholder=""
-							  <?php $cur_dt = date('Y-m-d', strtotime('+10 year')); ?>
+							  <?php $cur_dt = date('Y-m-d'); ?>
 							   min=<?php echo $Ec_Reg_Dt; ?>  max=<?php echo $cur_dt; ?>
                               value="<?php echo $picmeRegDate; ?>"
                               disabled
@@ -477,7 +477,7 @@ if (isset($_GET['del'])) {
                               id="anRegDate"
                               name="anRegDate" required
                               placeholder="ANTENATAL REGISTER DATE"
-							  <?php $cur_dt = date('Y-m-d', strtotime('+10 year')); ?>
+							  <?php $cur_dt = date('Y-m-d'); ?>
 							   min=<?php echo $Ec_Reg_Dt; ?>  max=<?php echo $cur_dt; ?>
                               value="<?php echo $rgdate; ?>"
 							  
