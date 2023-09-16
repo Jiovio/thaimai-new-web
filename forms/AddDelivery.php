@@ -69,8 +69,8 @@ if (!empty($query)) {
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-							  <?php $cur_dt = date('Y-m-d', strtotime()); ?>
-							  max=<?php echo $cur_dt; ?>
+							  <?php $cur_dt = date('Y-m-d'); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
 							  onclick="return validateAddDelivery()"
                                required
                             />
