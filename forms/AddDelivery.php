@@ -374,7 +374,7 @@ if (!empty($query)) {
                           </div>
                         
                           <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-password">BREAST FEEDING Within Half Hour</label>
+                          <label class="form-label" for="basic-icon-default-password">BREAST FEEDING Within Half Hour <span class="mand">* </span></label>
                           <select required name="breastfeedInitiated" id="breastfeedInitiated" class="form-select" onclick="return validateAddDelivery()">
                           <option value="">Choose...</option>
                            
@@ -458,21 +458,19 @@ if (!empty($query)) {
                         </div>
                  </div>
 				 
+				 
                  <div class="row">
-
                         <div class="col-6 mb-3">
+                        <div id="DISdt-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-password">DISCHARGE DATE <span class="mand">* </span></label>
                             <input
                               type="date"
                               name="dischargedate"
                               id="dischargedate"
                               class="form-control"
-							 
                               placeholder="DISCHARGE DATE"
                               aria-label="DISCHARGE DATE"
                               aria-describedby="basic-icon-default-password2"
-							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
-							   min=<?php echo $deliverydate; ?>  max=<?php echo $cur_dt; ?>
                               required
 							  onclick="return validateAddDelivery()" 
                             />
@@ -480,6 +478,7 @@ if (!empty($query)) {
                         </div>
                         
                         <div class="col-6 mb-3">
+						<div id="DIStm-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-password">DISCHARGE TIME <span class="mand">* </span></label>
                             <input
                               type="time"
@@ -494,9 +493,11 @@ if (!empty($query)) {
                             />
                         </div>
                  </div>
+				 
                  <div class="row">
-
+                 
                         <div class="col-6 mb-3">
+						<div id="BCG-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-password">BCG DATE</label>
                             <input
                               type="date"
@@ -512,6 +513,7 @@ if (!empty($query)) {
                         </div>
 
                         <div class="col-6 mb-3">
+						<div id="OPV-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-password">OPV-0 DATE <span class="mand">* </span></label>
                            <input
                               type="date"
@@ -527,9 +529,11 @@ if (!empty($query)) {
                          
                         </div>
                  </div>
+				 
                  <div class="row">
 
                         <div class="col-6 mb-3">
+						<div id="HEPB-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-password">HEP-B DATE</label>
                           
                             <input

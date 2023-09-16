@@ -760,7 +760,13 @@ function checkDuplicatePicmeNo(picmeno){
         },
         cache: false,
         success: function (result) {
-            $('#suggesstion-box').html("")
+            $('#suggesstion-box').html("");
+			$('#DISdt-suggesstion-box').html("");
+			$('#DIStm-suggesstion-box').html("");
+			$('#BCG-suggesstion-box').html("");
+			$('#OPV-suggesstion-box').html("");
+			$('#HEPB-suggesstion-box').html("");
+			
             if (result === '1') {
                $('#suggesstion-box').html("<span style='color:red'>Delivery details already exists</span>");
 			   document.getElementById ('picmenoNew').focus();
@@ -782,21 +788,134 @@ function checkDuplicatePicmeNo(picmeno){
 			   document.getElementById ('picmenoNew').focus();
                return false;
             }
-			if($('#deliverydate').val() > $('#dischargedate').val())
+			
+		  /*  var oth_dis_res = chkdischrg();
+			if (oth_dis_res === 'false') {
+              // $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Visit. </span>");
+			    document.getElementById ('picmenoNew').focus();
+               return false;
+            }*/
+			
+			if($('#deliverydate').val() != "" && $('#dischargedate').val() != "" &&
+			   ($('#deliverydate').val() > $('#dischargedate').val()))
             {
-               $('#suggesstion-box').html("<span style='color:red'>Discharge date should be >= delivery date </span>");
+               $('#DISdt-suggesstion-box').html("<span style='color:red'>Discharge date should be >= delivery date </span>");
 			   document.getElementById ('dischargedate').focus();
                return false;
             } 
-			/*if (result === '7') {
-               $('#suggesstion-box').html("<span style='color:red'>Discharge time should be > delivery time </span>");
+			if($('#deliverydate').val() != "" && $('#dischargedate').val() != "" &&
+			  ($('#deliverydate').val() === $('#dischargedate').val())          &&
+			   $('#dischargetime').val() != "")
+				{
+				if($('#deliverytime').val() >= $('#dischargetime').val())
+				{					
+               $('#DIStm-suggesstion-box').html("<span style='color:red'>Discharge time should be > delivery time </span>");
 			   document.getElementById ('dischargetime').focus();
                return false;
-            }  */
+				}
+            }  
+			if($('#deliverydate').val() != "" && $('#bcgdate').val() != "" &&
+			   ($('#deliverydate').val() > $('#bcgdate').val()))
+            {
+               $('#BCG-suggesstion-box').html("<span style='color:red'>BCG date should be >= delivery date </span>");
+			   document.getElementById ('bcgdate').focus();
+               return false;
+            } 
+			if($('#deliverydate').val() != "" && $('#opvDdate').val() != "" &&
+			   ($('#deliverydate').val() > $('#opvDdate').val()))
+            {
+               $('#OPV-suggesstion-box').html("<span style='color:red'>OPV-0 date should be >= delivery date </span>");
+			   document.getElementById ('opvDdate').focus();
+               return false;
+            } 
+			if($('#deliverydate').val() != "" && $('#hebBdate').val() != "" &&
+			   ($('#deliverydate').val() > $('#hebBdate').val()))
+            {
+               $('#HEPB-suggesstion-box').html("<span style='color:red'>HEP-B date should be >= delivery date </span>");
+			   document.getElementById ('hebBdate').focus();
+               return false;
+            } 
+			
         }
     });
 }
 
+/*$('#dischargedate').on('keydown keyup change', function(){
+    var dischargedate = $('#dischargedate').val();
+    chkdischrg(dischargedate);
+   
+});*/
+
+/*$('#dischargedate').change(function (){
+    var dischargedate = $('#dischargedate').val();
+    chkdischrg(dischargedate);
+});*/
+
+function validatedischrg(){
+   var dischargedate = $('#dischargedate').val();
+    return chkdischrg(dischargedate);
+}
+
+/*$('#dischargetime').on('keydown keyup change', function(){
+    var dischargedate = $('#dischargedate').val();
+	var dischargetime = $('#dischargetime').val();
+    validatedischrg(dischargedate, dischargetime);
+   
+});
+
+$('#dischargedate').change(function (dischargedate, dischargetime){
+    var dischargedate = $('#dischargedate').val();
+	var dischargetime = $('#dischargetime').val();
+    validatedischrg(dischargedate, dischargetime);
+});*/
+
+function chkdischrg()
+{
+	        $('#DISdt-suggesstion-box').html("");
+			$('#DIStm-suggesstion-box').html("");
+			$('#BCG-suggesstion-box').html("");
+			$('#OPV-suggesstion-box').html("");
+			$('#HEPB-suggesstion-box').html("");
+			if($('#deliverydate').val() != "" && $('#dischargedate').val() != "" &&
+			   ($('#deliverydate').val() > $('#dischargedate').val()))
+            {
+               $('#DISdt-suggesstion-box').html("<span style='color:red'>Discharge date should be >= delivery date </span>");
+			   document.getElementById ('dischargedate').focus();
+               return false;
+            } 
+			if($('#deliverydate').val() != "" && $('#dischargedate').val() != "" &&
+			  ($('#deliverydate').val() === $('#dischargedate').val())          &&
+			   $('#dischargetime').val() != "")
+				{
+				if($('#deliverytime').val() >= $('#dischargetime').val())
+				{					
+               $('#DIStm-suggesstion-box').html("<span style='color:red'>Discharge time should be > delivery time </span>");
+			   document.getElementById ('dischargetime').focus();
+               return false;
+				}
+            }  
+			if($('#deliverydate').val() != "" && $('#bcgdate').val() != "" &&
+			   ($('#deliverydate').val() > $('#bcgdate').val()))
+            {
+               $('#BCG-suggesstion-box').html("<span style='color:red'>BCG date should be >= delivery date </span>");
+			   document.getElementById ('bcgdate').focus();
+               return false;
+            } 
+			if($('#deliverydate').val() != "" && $('#opvDdate').val() != "" &&
+			   ($('#deliverydate').val() > $('#opvDdate').val()))
+            {
+               $('#OPV-suggesstion-box').html("<span style='color:red'>OPV-0 date should be >= delivery date </span>");
+			   document.getElementById ('opvDdate').focus();
+               return false;
+            } 
+			if($('#deliverydate').val() != "" && $('#hebBdate').val() != "" &&
+			   ($('#deliverydate').val() > $('#hebBdate').val()))
+            {
+               $('#HEPB-suggesstion-box').html("<span style='color:red'>HEP-B date should be >= delivery date </span>");
+			   document.getElementById ('hebBdate').focus();
+               return false;
+            } 
+}
 
 /* Postnatal */
 function validatePVPicme(){
