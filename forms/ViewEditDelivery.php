@@ -139,7 +139,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
 							   min="1970-01-01" max=<?php echo $cur_dt; ?>
                               value="<?php echo $deliverydate; ?>"  
                               disabled
@@ -559,7 +559,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-							  <?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
 							  min=<?php echo $deliverydate; ?>  max=<?php echo $cur_dt; ?>
                               value="<?php echo $sncudate ?>"
 							  onclick="return validatedischrg()"
@@ -624,6 +624,8 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder="DISCHARGE DATE"
                               aria-label="DISCHARGE DATE"
                               aria-describedby="basic-icon-default-password2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
 							  
                               value="<?php echo $dischargedate; ?>"
 
@@ -664,6 +666,8 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               type="date"
                               name="bcgdate"
                               id="bcgdate"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
                               class="form-control"
                               placeholder="BCG DATE"
                               aria-label="BCG DATE"
@@ -695,6 +699,8 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-label="OPV-D DATE"
                               aria-describedby="basic-icon-default-password2"
 							  onclick="return validatedischrg()"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
                               value="<?php echo $opvDdate; ?>"  
                               required							  
                               disabled
@@ -717,6 +723,8 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder="HEB-B DATE"
                               aria-label="HEB-B DATE"
                               aria-describedby="basic-icon-default-password2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
                               onclick="return validatedischrg()"
 							   value="<?php 
 							  if(isset($hebBdate))

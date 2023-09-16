@@ -419,6 +419,8 @@ if (!empty($query)) {
                               id="sncudate"
                               class="form-control"
                               placeholder="SNCU DATE"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
                               aria-label="SNCU DATE"
                               aria-describedby="basic-icon-default-password2"
                         
@@ -471,6 +473,8 @@ if (!empty($query)) {
                               placeholder="DISCHARGE DATE"
                               aria-label="DISCHARGE DATE"
                               aria-describedby="basic-icon-default-password2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
                               required
 							  onclick="return validateAddDelivery()" 
                             />
@@ -506,6 +510,8 @@ if (!empty($query)) {
                               class="form-control"
                               placeholder="BCG DATE"
                               aria-label="BCG DATE"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
                               aria-describedby="basic-icon-default-password2"
                               onclick="return validateAddDelivery()"
                             />
@@ -523,6 +529,8 @@ if (!empty($query)) {
                               placeholder="OPV-D DATE"
                               aria-label="OPV-D DATE"
                               aria-describedby="basic-icon-default-password2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
 							  onclick="return validateAddDelivery()"
                               required
                             />
@@ -544,6 +552,8 @@ if (!empty($query)) {
                               placeholder="HEB-B DATE"
                               aria-label="HEB-B DATE"
                               aria-describedby="basic-icon-default-password2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
                               onclick="return validateAddDelivery()"
                             />  
                         </div>
