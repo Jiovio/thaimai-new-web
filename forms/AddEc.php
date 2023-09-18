@@ -96,12 +96,14 @@ if($mvid > 0) {
                              </span>
                             <input type="text" name="ecfr" class="form-control" id="ecfr" readonly />
                             <input
-                              type="number"
+                              type="text"
                               name="ecfrno"
                               class="form-control"
                               id="ecfrno"
                               placeholder="0000001"
                               aria-label="EC FR No"
+							  maxlength='7'
+							  pattern='[0-9]{1,7}'
                               aria-describedby="basic-icon-default-ecfrno"
 							  onclick="return addECValidate()"
                             />
@@ -118,6 +120,8 @@ if($mvid > 0) {
                               aria-describedby="basic-icon-default-email2"
 							  <?php $cur_dt = date('Y-m-d'); ?>
 							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							   onchange="fnCalMotAge();"
+							   onchange="fnCalHusAge();"
 							   onclick="return addECValidate()"
 							   
 							  required
@@ -141,6 +145,7 @@ if($mvid > 0) {
 							  placeholder="123456789012"
 							  pattern="[0-9]{12}"                           
                               class="form-control"
+							  maxlength='12'
                               aria-label="MOTHER'S AADHAAR ID"
                               aria-describedby="basic-icon-default-password2"
 							  onclick="return addECValidate()"
@@ -208,6 +213,7 @@ if($mvid > 0) {
                           </div>
                         </div>
                         </div>
+						<div id="mot-mar-sug-box"></div>
                         <div class="row">
                          <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">MOTHER'S AGE AT MARRIAGE <span class="mand">* </span><span id="errMoAgeMrg"></span></label>
@@ -344,6 +350,7 @@ if($mvid > 0) {
                               class="form-control"
                               aria-label="HUSBAND'S AADHAAR ID"
                               aria-describedby="basic-icon-default-password2"
+							  maxlength='12'
 							  onclick="return addECValidate()"
                               required
                             />
@@ -405,7 +412,7 @@ if($mvid > 0) {
                             />
                           </div>
                         </div>
-
+                        <div id="Hus-mar-Sug-box"></div>
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">HUSBAND'S AGE AT MARRIAGE <span class="mand">* </span><span id="errhagemarriage"></span></label>
                           <div class="input-group input-group-merge">

@@ -448,7 +448,6 @@ $('#picmenoNew').on('keydown keyup change', function(){
     var motheraadhaarid = $('#motheraadhaaridec').val();
 	var husbandaadhaarid = $('#husbandaadhaaridec').val();
     checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid);
-   
 });
 
 function addECValidate(){
@@ -457,6 +456,7 @@ function addECValidate(){
     var motheraadhaarid = $('#motheraadhaaridec').val();
 	var husbandaadhaarid = $('#husbandaadhaaridec').val();
     checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid);
+	
 }
 
 function checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid){
@@ -471,6 +471,9 @@ function checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid){
             $('#suggesstion-box').html("");
 			$('#mot-sug-box').html("");
 			$('#Hus-Sug-box').html("");
+			$('#mot-mar-sug-box').html("");
+			$('#Hus-mar-Sug-box').html("");
+			
             result= $.trim(result);
             if (result === '1')
             {
@@ -490,7 +493,24 @@ function checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid){
 				document.getElementById ('husbandaadhaaridec').focus();
                 return false;
             }
+			if (result === '5')
+            {
+                $('#mot-sug-box').html("<span style='color:red'>EC registration already done using this aadhar for Father's Aadhar.</span>");
+				document.getElementById ('motheraadhaaridec').focus();
+                return false;
+            }
+			if (result === '6')
+            {
+                $('#Hus-Sug-box').html("<span style='color:red'>EC registration already done using this aadhar for Mother's Aadhar.</span>");
+				document.getElementById ('husbandaadhaaridec').focus();
+                return false;
+            }
+//	var ecmotage = document.getElementById("motherdob").value;
+//	var echusage = document.getElementById("husdob").value;
 
+	        fnCalMotAge();	
+	        fnCalHusAge();
+			
         }
     });
 }
@@ -1744,12 +1764,48 @@ function fnCalMotAge(){
   var MotDateinput = document.getElementById("motherdob").value;   
   // convert user input value into date object
   var motbirthDate = new Date(MotDateinput);
+ // var ecdate = new Date(ecregdate);
+  var ecregdate = document.getElementById("dateecreg").value;
+	var ecdate = new Date(ecregdate);
   
   // get difference from current date;
-  var mdiff=Date.now() - motbirthDate.getTime(); 
-  var  motAgeDate = new Date(mdiff); 
+ // var mdiff=Date.now() - motbirthDate.getTime(); 
+ // var  motAgeDate = new Date(mdiff); 
+ // var motCalcAge=   Math.abs(motAgeDate.getUTCFullYear() - 1970);
+  var mdiff=ecdate.getTime() - motbirthDate.getTime(); 
+  var motAgeDate = new Date(mdiff); 
   var motCalcAge=   Math.abs(motAgeDate.getUTCFullYear() - 1970);
   document.getElementById("motherageecreg").value = motCalcAge;  
+  
+  var HusDateinput = document.getElementById("husdob").value;   
+  // convert user input value into date object
+  var husbirthDate = new Date(HusDateinput);
+  
+  // get difference from current date;
+ // var hdiff=Date.now() - husbirthDate.getTime(); 
+ var hdiff=ecdate.getTime() - husbirthDate.getTime(); 
+  var  husAgeDate = new Date(hdiff); 
+  var husCalcAge=   Math.abs(husAgeDate.getUTCFullYear() - 1970);
+  document.getElementById("husageecreg").value = husCalcAge; 
+  
+  
+  if ( document.getElementById("motheragemarriage").value != "" &&
+	 (document.getElementById("motherageecreg").value < 
+	  document.getElementById("motheragemarriage").value)) 
+	 {
+	  $('#mot-mar-sug-box').html("<span style='color:red'>Mother's marriage age should be < mother's ec age. </span>");
+	  document.getElementById ('motheragemarriage').focus();
+      return false;	 
+	 }
+				
+ 	 if ( document.getElementById("husagemarriage").value != "" &&
+	    (document.getElementById("husageecreg").value <
+	     document.getElementById("husagemarriage").value))
+		{
+	    	$('#Hus-mar-Sug-box').html("<span style='color:red'>Father's marriage age should be < father's ec age. </span>");
+			document.getElementById ('husagemarriage').focus();
+            return false;	 
+		}	  
 }
 
 function fnCalHusAge(){
@@ -1757,8 +1813,12 @@ function fnCalHusAge(){
   // convert user input value into date object
   var husbirthDate = new Date(HusDateinput);
   
+   var ecregdate = document.getElementById("dateecreg").value;
+   var ecdate = new Date(ecregdate);
+  
   // get difference from current date;
-  var hdiff=Date.now() - husbirthDate.getTime(); 
+ // var hdiff=Date.now() - husbirthDate.getTime(); 
+ var hdiff=ecdate.getTime() - husbirthDate.getTime(); 
   var  husAgeDate = new Date(hdiff); 
   var husCalcAge=   Math.abs(husAgeDate.getUTCFullYear() - 1970);
   document.getElementById("husageecreg").value = husCalcAge;  
