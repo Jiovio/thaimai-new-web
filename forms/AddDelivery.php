@@ -40,6 +40,12 @@ if (!empty($query)) {
                     <span class="bx bx-arrow-back"></span>&nbsp; Back
               </button></a> 
 			</h4>
+			<?php 
+				/* $CheckANReg = mysqli_query($conn,"SELECT picmeRegDate FROM anregistration where picmeno = $motheraadhaarid");
+                 $FetEC = mysqli_fetch_array($CheckEC);
+				 $Ec_Reg_Dt = "";
+				 $Ec_Reg_Dt = $FetEC['dateecreg']; */
+				 ?>
             <form action="" autocomplete="off" method="post" id="del">
               <!-- Basic Layout -->
               <div class="row">
@@ -60,9 +66,11 @@ if (!empty($query)) {
                  </div>
                 </div>
                         <div class="col-6 mb-3">
+						<div id="deldt-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-email">DELIVERY DATE <span class="mand">* </span></label>
-                            <input
-                              type="date"
+                            
+							<input
+                             type="date"
                               name="deliverydate"
                               id="deliverydate"
                               class="form-control"
@@ -72,9 +80,10 @@ if (!empty($query)) {
 							  <?php $cur_dt = date('Y-m-d'); ?>
 							   min="1970-01-01" max=<?php echo $cur_dt; ?>
 							  onclick="return validateAddDelivery()"
+							  value = ""
                                required
                             />
-                          
+							
                         </div>
             </div>
                 <div class="row">
@@ -90,6 +99,7 @@ if (!empty($query)) {
                               aria-describedby="basic-icon-default-password2"
 							  onclick="return validateAddDelivery()"
                               required
+							  
                             />
                           
                         </div>

@@ -480,7 +480,7 @@ if (isset($_GET['del'])) {
 							  <?php $cur_dt = date('Y-m-d'); ?>
 							   min=<?php echo $Ec_Reg_Dt; ?>  max=<?php echo $cur_dt; ?>
                               value="<?php echo $rgdate; ?>"
-							  
+							  onclick="return addMothAadhar()"
                               disabled
                             />
                           </div>

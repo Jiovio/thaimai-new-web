@@ -98,13 +98,13 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
 				 $CheckEC = mysqli_query($conn,"SELECT dateecreg FROM ecregister where motheraadhaarid = $motheraadhaarid");
                  $FetEC = mysqli_fetch_array($CheckEC);
 				 $Ec_Reg_Dt = "";
-				 $Ec_Reg_Dt = $FetEC['dateecreg'];
+				 $Ec_Reg_Dt = $FetEC['dateecreg']; 
 				 ?>
                 <div class="row">
                         <div class="mb-3 col-md-4">
                         <label class="form-label" for="basic-icon-default-motheraathar">MOTHER'S AADHAAR ID <span class="mand">* </span> </span id="errPicmeno"><span></label>
                         <div class="input-group input-group-merge">
-                            <input type="text" name="motheraadhaarid" id="motheraadhaaridval" value="<?php echo $motheraadhaarid; ?>" class="form-control" readonly />
+                            <input type="text" name="motheraadhaarid" id="motheraadhaaridval" value="<?php echo $motheraadhaarid; ?>" class="form-control" onclick="return fnCalConAge()" readonly />
                         </div>
                       </div>
                       <div class="mb-3 col-md-4">
@@ -136,6 +136,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             aria-label="PICME No."
                             aria-describedby="basic-icon-default-fullname2"
                             value ="<?php echo $picmeno; ?>"
+							onclick="return addMothAadhar()"
                           />
                         </div>
                       </div>
@@ -147,17 +148,20 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             class="form-control"
                             id="picmeRegDate"
                             name="picmeRegDate"
+							
+							<?php $cur_dt = date('Y-m-d'); ?> 
 							min=<?php echo $Ec_Reg_Dt; ?> 
-							<?php $cur_dt = date('Y-m-d'); ?> max=<?php echo $cur_dt; ?>
-                            placeholder="PICME REGISTER DATE"
+                            value = <?php //echo $cur_dt; ?>	
+							max=<?php echo $cur_dt; ?>  					
                             required
+							onclick="return addMothAadhar()"
                           />
                         </div>
                         </div>
                       <div class="row">
                         <div class="mb-3 col-md-6">
                           <label class="form-label">RESIDENT TYPE <span class="mand">* </span></label>
-                          <select name="residentType" id="residentType" required class="form-select">
+                          <select name="residentType" id="residentType" required class="form-select" onclick="return addMothAadhar()">
                         <option value="">Choose...</option>
                          
                          <?php  
@@ -172,7 +176,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         <div class="mb-3 col-md-6">
                         <label class="form-label" for="basic-icon-default-pregnancyTestResult">PREGNANCY TEST RESULT <span class="mand">* </span></label>
                         <div class="input-group input-group-merge">
-                          <select required name="pregnancyTestResult" id="pregnancyTestResult" class="form-select">
+                          <select required name="pregnancyTestResult" id="pregnancyTestResult" class="form-select" onclick="return addMothAadhar()">
                           <option value="">Choose...</option>
                         <?php 
                           $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=11";
@@ -189,7 +193,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         <div class="mb-3 col-md-6">
                         <label class="form-label" for="basic-icon-default-methodofConception">Method Of Conception <span class="mand">* </span></label>
                         <div class="input-group input-group-merge">
-                          <select required name="methodofConception" id="methodofConception" class="form-select" >
+                          <select required name="methodofConception" id="methodofConception" class="form-select" onclick="return addMothAadhar()">
                         <option value="">Choose...</option>
                       <?php   
                           $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=45";
@@ -291,7 +295,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
 	                        $hrPreg = "No";    
                            }
                           ?>
-                          <input type="text" class="form-control" id="hrPregnancy" value="<?php echo $hrPreg; ?>" name="hrPregnancy" placeholder="High Risk" readonly />
+                          <input type="text" class="form-control" id="hrPregnancy" value="<?php echo $hrPreg; ?>" name="hrPregnancy" placeholder="High Risk" readonly onclick="return addMothAadhar()" />
                          
                           </div>
                           
@@ -300,7 +304,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         <div class="mb-3 col-md-6">
                           <label class="form-label">MOTHER'S HEIGHT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                          <input class="form-control" type="number" min="70" max="200" id="motherHeight" required name="motherHeight" placeholder="Height" />
+                          <input class="form-control" type="number" min="70" max="200" id="motherHeight" required name="motherHeight" placeholder="Height" onclick="return addMothAadhar()" />
                         </div>
                         </div>
                         
@@ -314,6 +318,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             name="motherWeight"
                             placeholder="Mother Weight"
 							min="30" max="120"
+							onclick="return addMothAadhar()"
                             required
                           />
                         </div>
@@ -351,13 +356,14 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             placeholder="ANTENATAL REGISTER DATE"
 							min=<?php echo $Ec_Reg_Dt; ?> 
 							<?php $cur_dt = date('Y-m-d'); ?> max=<?php echo $cur_dt; ?>
+                            onclick = "return addMothAadhar()"							
                             required
                           />
                         </div>
                         
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="country">MRMBS ELIGIBLE <span class="mand">* </span></label>
-                          <select required name="mrmbsEligible" id="mrmbsEligible" class="form-select">
+                          <select required name="mrmbsEligible" id="mrmbsEligible" onclick="return addMothAadhar()" class="form-select">
                         <option value="">Choose...</option>
                          <?php 
                           $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -382,11 +388,13 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                           <input
                             type="number"
 							min="<?php echo $rec_Mage; ?>" max="99"
+							onclick = "return addMothAadhar()"
                             class="form-control"
                             id="MotherAge"
                             name="MotherAge"
                             placeholder="Mother's Age"
                             required
+							readonly
                           />
                         </div>
                         </div>
@@ -401,12 +409,14 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                           <div class="input-group input-group-merge">
                           <input
                             type="number"
-                              min="<?php echo $rec_Hage; ?>" max="99"
+                            min="<?php echo $rec_Hage; ?>" max="99"
                             class="form-control"
                             id="HusbandAge"
                             name="HusbandAge"
                             placeholder="Husband's Age"
+							onclick = "return addMothAadhar()"
                             required
+							readonly
                           />
                         </div>
                         </div>

@@ -29,11 +29,25 @@
         <div class="input-group input-group-merge">
         <span id="basic-icon-default-mobile" class="input-group-text">
         <i class="bx bx-id-card"></i></span>
-        <input type="text" required id="motheraadhaaridval" name="motheraadhaarid" onchange="showMoDet(this.value)" oninput = "onlyAadhar(this.value)" placeholder="MOTHER'S AADHAAR ID" class="form-control" />
-        </div>
-        <div id="suggesstion-box"></div>
-        <button id="genName" name="genName" class="btn btn-primary"  onsubmit="return addMothAadhar()">Get Details</button>
+        <!--input type="text" required id="motheraadhaaridval" name="motheraadhaarid" onchange="showMoDet(this.value)" oninput = "onlyAadhar(this.value)" placeholder="MOTHER'S AADHAAR ID" class="form-control" /!-->
+        <input 
+		type="text"
+		id="motheraadhaaridval" 
+		name="motheraadhaarid"
+		placeholder="MOTHER'S AADHAAR ID" 
+		class="form-control"
+        pattern="[0-9]{12}"
+		maxlength='12'
+		onclick="return addMothAadhar()" 
+		required 		/>
+        
 		</div>
+        <div id="suggesstion-box"></div>
+		<div class="mt-2">
+                        <input class="btn btn-primary" id="genName" type="submit" name="genName" value="Get Details" 
+						       onclick="return addMothAadhar()">
+                        </div>
+        </div>
         </div>
                     </div>
                     <div id="response" class="<?php if(!empty($type)) { echo $type . " display-block"; } else { echo $type . " display-none"; } ?>"><?php if(!empty($emessage)) { echo $emessage; } ?></div>

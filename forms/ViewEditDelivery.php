@@ -111,24 +111,23 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
             <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-fullname">PICME No. <!--<span class="mand">* </span>--></label>
                           <div class="input-group input-group-merge">
-                            <!---input
-                              type="text"
-                              name="picmeNo"
-                              class="form-control"
-                              id="picmeNo"
+                            <input
+                              type="hidden"
+                              name="picmeno"
+                              class="lblViolet"
+                              id="picmenoNew"
                               placeholder="PICME No."
                               aria-label="PICME No."
                               aria-describedby="basic-icon-default-fullname2"
-                              value="<---?php echo $picmeno;  ?>"
-							  onclick="return validatedischrg()"
-                            disabled
+                              value="<?php echo $picmeno;  ?>"
+							  onclick="return validateEditDelivery()"
                             required
-                            /!---> 
-                            <label class="lblViolet"><?php echo $picmeno; ?>
-                              </label>
+                            > 
+                            <label class="lblViolet" id="picmenoNew"><?php echo $picmeno; ?> </label>
                           </div>
                         </div>
                         <div class="col-6 mb-3">
+						<div id="deldt-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-email">DELIVERY DATE <span class="mand">* </span></label>
                             <input
 							
@@ -144,7 +143,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               value="<?php echo $deliverydate; ?>"  
                               disabled
                               required
-							  onclick="return validatedischrg()"
+							  onclick="return validateEditDelivery()"
 							  
                             />
                           
@@ -164,7 +163,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               value="<?php echo $deliverytime ?>"
                               disabled
                               required
-							  onclick="return validatedischrg()"
+							  onclick="return validateEditDelivery()"
                             />
                           
                         </div>
@@ -181,7 +180,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-describedby="basic-icon-default-mobile"
                               value="<?php echo $deliverydistrict ?>"
                               disabled
-							  onclick="return validatedischrg()"
+							  onclick="return validateEditDelivery()"
                             />
                           
                         </div>
@@ -193,7 +192,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                           <label class="form-label" for="basic-icon-default-phone">HOSPITAL TYPE</label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="hospitaltype" id="hospitaltype" class="form-select" onclick="return validatedischrg()" disabled>
+                          <select name="hospitaltype" id="hospitaltype" class="form-select" onclick="return validateEditDelivery()" disabled>
                            <?php   
                             $query = "SELECT dd.hospitaltype,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.hospitaltype WHERE type=25 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -227,7 +226,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-label="HOSPITAL NAME"
                               aria-describedby="basic-icon-default-email2"
                               value="<?php echo $hospitalname ?>"
-							  onclick="return validatedischrg()"
+							  onclick="return validateEditDelivery()"
                               disabled 
                             />
                           </div>
@@ -238,7 +237,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                           <label class="form-label" for="basic-icon-default-phone">CHILD GENDER <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select required name="childGender" id="childGender" class="form-select" onclick="return validatedischrg()" disabled>
+                          <select required name="childGender" id="childGender" class="form-select" onclick="return validateEditDelivery()" disabled>
                            <?php   
                             $query = "SELECT dd.childGender,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.childGender WHERE type=34 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -259,7 +258,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY CONDUCTED BY <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select required name="deliveryConductBy" id="deliveryConductBy" class="form-select" onclick="return validatedischrg()" disabled>                           
+                          <select required name="deliveryConductBy" id="deliveryConductBy" class="form-select" onclick="return validateEditDelivery()" disabled>                           
                               <?php   
                             $query = "SELECT dd.deliveryConductBy,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.deliveryConductBy WHERE type=35 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -287,7 +286,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY TYPE</label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="deliverytype" id="deliverytype" class="form-select" onclick="return validatedischrg()" disabled>
+                          <select name="deliverytype" id="deliverytype" class="form-select" onclick="return validateEditDelivery()" disabled>
                            <?php   
                             $query = "SELECT dd.deliverytype,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.deliverytype WHERE type=36 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -308,7 +307,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY COMPLICATION <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="deliveryCompilcation" id="deliveryCompilcation" class="form-select" onclick="return validatedischrg()" required disabled>
+                          <select name="deliveryCompilcation" id="deliveryCompilcation" class="form-select" onclick="return validateEditDelivery()" required disabled>
                           <?php   
                             $query = "SELECT dd.deliveryCompilcation,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.deliveryCompilcation WHERE type=37 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -340,7 +339,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY OUTCOME <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select required name="deliveryOutcome" id="deliveryOutcome" class="form-select" onclick="return validatedischrg()" disabled>
+                          <select required name="deliveryOutcome" id="deliveryOutcome" class="form-select" onclick="return validateEditDelivery()" disabled>
                           <?php   
                             $query = "SELECT dd.deliveryOutcome,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.deliveryOutcome WHERE type=38 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -373,7 +372,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               value="<?php echo $noOfLiveBirth ?>"
 							  required
                               disabled 
-							  onclick="return validatedischrg()"
+							  onclick="return validateEditDelivery()"
                             />
                           </div>
                  </div>
@@ -391,7 +390,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-describedby="basic-icon-default-password2"
 							  min=0  max=10
                               value="<?php echo $noOfStillBirth ?>"
-							  onclick="return validatedischrg()"
+							  onclick="return validateEditDelivery()"
                               disabled 
                             />
                           </div>
@@ -407,7 +406,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-label="INFANT ID"
                               aria-describedby="basic-icon-default-password2"
                               value="<?php echo $infantId ?>"
-							  onclick="return validatedischrg()"
+							  onclick="return validateEditDelivery()"
                               disabled
                             />
                           </div>
@@ -418,7 +417,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                           <label class="form-label" for="basic-icon-default-phone">BIRTH DETAILS <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select required name="birthDetails" id="birthDetails" class="form-select" onclick="return validatedischrg()" disabled>
+                          <select required name="birthDetails" id="birthDetails" class="form-select" onclick="return validateEditDelivery()" disabled>
                            <?php   
                             $query = "SELECT dd.birthDetails,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.birthDetails WHERE type=39 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -448,7 +447,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               value="<?php echo $birthWeight ?>"
 							  step = "0.01"
 							  min="1" max="6"
-							  onclick="return validatedischrg()"
+							  onclick="return validateEditDelivery()"
                               disabled
                               required
                             />
@@ -468,14 +467,14 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-describedby="basic-icon-default-password2"
                               value="<?php echo $birthHeight ?>"
 							  min="30" max="100"
-							  onclick="return validatedischrg()"
+							  onclick="return validateEditDelivery()"
                               disabled
                             />
                           </div>
                         
                         <div class="mb-3 col-md-6">
                             <label class="form-label">DELAYED CORD CLAMPING</label>
-                            <select name="delayedCClamping" id="delayedCClamping" class="form-select" onclick="return validatedischrg()" disabled>
+                            <select name="delayedCClamping" id="delayedCClamping" class="form-select" onclick="return validateEditDelivery()" disabled>
                            <?php  
                             $query = "SELECT dd.delayedCClamping,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.delayedCClamping WHERE type=13 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -495,7 +494,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
 
                           <div class="mb-3 col-md-6">
                             <label class="form-label">SKIN TO SKIN CONTACT</label>
-                            <select name="skintoskinContact" id="skintoskinContact" class="form-select" onclick="return validatedischrg()" disabled> 
+                            <select name="skintoskinContact" id="skintoskinContact" class="form-select" onclick="return validateEditDelivery()" disabled> 
                            <?php  
                           $query = "SELECT dd.skintoskinContact,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.skintoskinContact WHERE type=13 AND dd.id=".$id;
                           $exequery = mysqli_query($conn, $query);
@@ -513,7 +512,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                         
                           <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">BREAST FEEDING Within Half Hour <span class="mand">* </span></label>
-                          <select required name="breastfeedInitiated" id="breastfeedInitiated" class="form-select" onclick="return validatedischrg()" disabled> 
+                          <select required name="breastfeedInitiated" id="breastfeedInitiated" class="form-select" onclick="return validateEditDelivery()" disabled> 
                            <?php  
                           $query = "SELECT dd.breastfeedInitiated,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.breastfeedInitiated WHERE type=13 AND dd.id=".$id;
                           $exequery = mysqli_query($conn, $query);
@@ -532,7 +531,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
 
                           <div class="mb-3 col-md-6">
                             <label class="form-label">ADMITTED SNCU <span class="mand">* </span></label>
-                            <select required name="admittedSncu" id="admittedSncu" class="form-select" onchange="SncuChange()" onclick="return validatedischrg()" disabled>  
+                            <select required name="admittedSncu" id="admittedSncu" class="form-select" onchange="SncuChange()" onclick="return validateEditDelivery()" disabled>  
                            <?php  
                           $query = "SELECT dd.admittedSncu,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.admittedSncu WHERE type=13 AND dd.id=".$id;
                           $exequery = mysqli_query($conn, $query);
@@ -562,7 +561,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
 							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
 							  min=<?php echo $deliverydate; ?>  max=<?php echo $cur_dt; ?>
                               value="<?php echo $sncudate ?>"
-							  onclick="return validatedischrg()"
+							  onclick="return validateEditDelivery()"
                               disabled
                             />
                           </div>
@@ -580,7 +579,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
                               value="<?php echo $sncuAreaName ?>"
-							  onclick="return validatedischrg()"
+							  onclick="return validateEditDelivery()"
                               disabled
                             />
                           
@@ -597,7 +596,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
                               value="<?php echo $sncuOutcome ?>"
-							  onclick="return validatedischrg()"
+							  onclick="return validateEditDelivery()"
                               disabled
                             />
                           
@@ -629,7 +628,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
 							  
                               value="<?php echo $dischargedate; ?>"
 
-						      onclick="return validatedischrg()"
+						      onclick="return validateEditDelivery()"
                               disabled
                               required
                             />
@@ -651,7 +650,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               value="<?php echo $dischargetime ?>"
                               disabled
 							  
-							  onclick="return validatedischrg()"
+							  onclick="return validateEditDelivery()"
                               required
                             />
                         </div>
@@ -672,7 +671,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder="BCG DATE"
                               aria-label="BCG DATE"
                               aria-describedby="basic-icon-default-password2"
-                              onclick="return validatedischrg()"
+                              onclick="return validateEditDelivery()"
 							  value="<?php 
 							  if(isset($bcgdate))
 							  {
@@ -698,7 +697,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               placeholder="OPV-D DATE"
                               aria-label="OPV-D DATE"
                               aria-describedby="basic-icon-default-password2"
-							  onclick="return validatedischrg()"
+							  onclick="return validateEditDelivery()"
 							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
 							  max=<?php echo $cur_dt; ?>
                               value="<?php echo $opvDdate; ?>"  
@@ -725,7 +724,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-describedby="basic-icon-default-password2"
 							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
 							  max=<?php echo $cur_dt; ?>
-                              onclick="return validatedischrg()"
+                              onclick="return validateEditDelivery()"
 							   value="<?php 
 							  if(isset($hebBdate))
 							  {
@@ -740,7 +739,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Vitamin K Injection</label>
-                            <select name="injuction" id="injuction" class="form-select" onclick="return validatedischrg()" disabled> 
+                            <select name="injuction" id="injuction" class="form-select" onclick="return validateEditDelivery()" disabled> 
                            <?php  
                           $query = "SELECT dd.injuction,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.injuction WHERE type=13 AND dd.id=".$id;
                           $exequery = mysqli_query($conn, $query);
@@ -757,7 +756,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                           </div>
                         </div>
                         <div class="input-group" id="btnSaUp" style="display:none">
-                          <input class="btn btn-primary" type="submit" id="update" name="editDelivery" value="Update" onclick="return validatedischrg()">
+                          <input class="btn btn-primary" type="submit" id="update" name="editDelivery" value="Update" onclick="return validateEditDelivery()">
                         </div>
                 </div>
                 
