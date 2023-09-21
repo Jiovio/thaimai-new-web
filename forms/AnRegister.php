@@ -20,7 +20,7 @@
                 <hr class="my-0" />
                 <div class="card-body">
         
-                <form method="POST" action="getMother.php">
+                <form method="POST" action="getMother.php" id="anregisterForm">
                   <div class="row">
                   <div class="col-4 mb-3">
         <label class="form-label" for="basic-icon-default-fullname">MOTHER'S AADHAAR ID <span class="mand">* </span></label>
@@ -45,7 +45,7 @@
         <div id="suggesstion-box"></div>
 		<div class="mt-2">
                         <input class="btn btn-primary" id="genName" type="submit" name="genName" value="Get Details" 
-						       onclick="return addMothAadhar()">
+						     >
                         </div>
         </div>
         </div>
