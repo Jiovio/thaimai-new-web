@@ -6,7 +6,7 @@
       <div class="layout-container">
         <!-- Menu -->
 <?php include ('require/header.php'); // Menu & Top Search 
-$id = 0; $view = false;
+$id = 0; $view = false; $edit = false;
 
 if (isset($_GET['view'])) {
 $id = $_GET['view'];
@@ -20,12 +20,15 @@ $deliverytype = $n["deliverytype"];$deliveryCompilcation = $n["deliveryCompilcat
 
 $noOfLiveBirth = $n["noOfLiveBirth"]; $noOfStillBirth = $n["noOfStillBirth"]; $infantId = $n["infantId"]; $birthDetails = $n["birthDetails"];
 $birthWeight = $n["birthWeight"]; $birthHeight = $n["birthHeight"]; $delayedCClamping = $n["delayedCClamping"]; $skintoskinContact = $n["skintoskinContact"];
-$breastfeedInitiated = $n["breastfeedInitiated"]; $admittedSncu = $n["admittedSncu"]; $sncudate = $n["sncudate"]; $sncuAreaName = $n["sncuAreaName"]; $sncuOutcome = $n["sncuOutcome"]; 
+$breastfeedInitiated = $n["breastfeedInitiated"]; $admittedSncu = $n["admittedSncu"]; 
+$admit_ind = ""; $admit_ind = $n["admittedSncu"];
+$sncudate = $n["sncudate"]; $sncuAreaName = $n["sncuAreaName"]; $sncuOutcome = $n["sncuOutcome"]; 
 $dischargedate = $n["dischargedate"]; $dischargetime = $n["dischargetime"]; $bcgdate = $n["bcgdate"]; $opvDdate = $n["opvDdate"];
 $hebBdate = $n["hebBdate"]; $injuction = $n["injuction"];
 }
 
 if (! empty($_POST["editDelivery"])) {
+	$edit = true;
 $id = $_POST["id"]; $deliverydate = $_POST["deliverydate"]; $deliverytime = $_POST["deliverytime"]; $deliverydistrict = $_POST["deliverydistrict"];
 $hospitaltype = $_POST["hospitaltype"]; $hospitalname = $_POST["hospitalname"]; $childGender = $_POST["childGender"]; $deliveryConductBy = $_POST["deliveryConductBy"];
 $deliverytype = $_POST["deliverytype"];$deliveryCompilcation = $_POST["deliveryCompilcation"]; $deliveryOutcome = $_POST["deliveryOutcome"];
@@ -531,7 +534,7 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
 
                           <div class="mb-3 col-md-6">
                             <label class="form-label">ADMITTED SNCU <span class="mand">* </span></label>
-                            <select required name="admittedSncu" id="admittedSncu" class="form-select" onchange="SncuChange()" onclick="return validateEditDelivery()" disabled>  
+                            <select required name="admittedSncu" id="admittedSncu" class="form-select" disabled onclick="return validateEditDelivery()" onchange="SncuChange()" >  
                            <?php  
                           $query = "SELECT dd.admittedSncu,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.admittedSncu WHERE type=13 AND dd.id=".$id;
                           $exequery = mysqli_query($conn, $query);
@@ -542,12 +545,20 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                        <option value="1">Yes</option>
                         <option value="0">No</option>
                               </option>
-                          <?php  } 
+                          <?php  }
                               ?>
                              </select>
                           </div>
-
-                          <div class="col-6 mb-3">
+						  
+                          <?php if ($admit_ind == 0) {  ?>
+                          <div class="col-6 mb-3" id="sncuDate" style="display: none;" >
+						  <?php } 
+						  else { ?>
+						  <div class="col-6 mb-3" id="sncuDate" >
+						  <?php } ?>
+						  
+							  
+						 <div id="sncudt-suggesstion-box" ></div>
 						     <label class="form-label" for="basic-icon-default-email">SNCU DATE</label>
                             
                             <input
@@ -559,16 +570,22 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
 							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
-							  min=<?php echo $deliverydate; ?>  max=<?php echo $cur_dt; ?>
-                              value="<?php echo $sncudate ?>"
+							  max=<?php echo $cur_dt; ?>
+                              value="<?php if($sncudate != ""){ echo $sncudate; } ?>"
 							  onclick="return validateEditDelivery()"
                               disabled
                             />
                           </div>
                  </div>
                  <div class="row">
-
-                        <div class="col-6 mb-3">
+				
+                          <?php if ($admit_ind == 0) {  ?>
+                          <div class="col-6 mb-3" id="sncuAreaName" style="display: none;">
+						  <?php } 
+						  else { ?>
+						  <div class="col-6 mb-3" id="sncuAreaName" >
+						  <?php } ?>
+						  
                           <label class="form-label" for="basic-icon-default-password">SNCU AREA NAME</label>
                             <input
                               type="text"
@@ -585,7 +602,14 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                           
                         </div>
                        
-                        <div class="col-6 mb-3">
+                        
+						  <?php if ($admit_ind == 0) {  ?>
+                          <div class="col-6 mb-3" id="sncuOutcome" style="display: none;">
+						  <?php } 
+						  else { ?>
+						  <div class="col-6 mb-3" id="sncuOutcome" >
+						  <?php } ?>
+						  
                           <label class="form-label" for="basic-icon-default-password">SNCU OUTCOME</label>
                             <input
                               type="text"

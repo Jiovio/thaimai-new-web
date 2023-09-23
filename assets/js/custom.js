@@ -292,6 +292,7 @@ document.getElementById("injuction").disabled = false;
 
 var x = document.getElementById("btnSaUp");
 x.style.display = "block";
+
 }
 
 function fnAnVisitEnable() {
@@ -851,6 +852,16 @@ function checkDuplicatePicmeNo(picmeno, predeldate){
                return false;
             }
 		//	}
+		
+		    if($('#sncudate').val() != "" && $('#deliverydate').val() != "" &&
+			   ($('#deliverydate').val() > $('#sncudate').val()))
+            {
+               $('#sncudt-suggesstion-box').html("<span style='color:red'>SNCU date should be >= delivery date </span>");
+			   document.getElementById ('sncudate').focus();
+               return false;
+            } 
+			
+			SncuChange();
 			
 			if($('#deliverydate').val() != "" && $('#dischargedate').val() != "" &&
 			   ($('#deliverydate').val() > $('#dischargedate').val()))
@@ -924,6 +935,7 @@ function checkEditPicmeNo(picmeno, predeldate){
 			$('#OPV-suggesstion-box').html("");
 			$('#HEPB-suggesstion-box').html("");
 			$('#deldt-suggesstion-box').html("");
+			$('#sncudt-suggesstion-box').html("");
 			
             /* It won't occur. But perform xtra check. */
 			if (result === '3') {
@@ -948,6 +960,16 @@ function checkEditPicmeNo(picmeno, predeldate){
                return false;
             }
 		//	}
+			
+			SncuChange();
+			
+			if($('#sncudate').val() != "" && $('#deliverydate').val() != "" &&
+			   ($('#deliverydate').val() > $('#sncudate').val()))
+            {
+               $('#sncudt-suggesstion-box').html("<span style='color:red'>SNCU date should be >= delivery date </span>");
+			   document.getElementById ('sncudate').focus();
+               return false;
+            } 
 			
 			if($('#deliverydate').val() != "" && $('#dischargedate').val() != "" &&
 			   ($('#deliverydate').val() > $('#dischargedate').val()))
@@ -989,7 +1011,15 @@ function checkEditPicmeNo(picmeno, predeldate){
                return false;
             } 
 			
-			
+var selectBox = document.getElementById("admittedSncu");
+var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+var sdate = document.getElementById("sncuDate"); 
+var sname = document.getElementById("sncuName");
+var scome = document.getElementById("sncuCome"); 
+if(selectedValue == "1") { sdate.style.display = "block"; }  else if(selectedValue == "0") { sdate.style.display = "none"; }
+if(selectedValue == "1") { sname.style.display = "block"; }  else if(selectedValue == "0") { sname.style.display = "none"; }
+if(selectedValue == "1") { scome.style.display = "block"; }   else if(selectedValue == "0") { scome.style.display = "none"; }
+
         }
     });
 }
