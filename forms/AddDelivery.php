@@ -12,7 +12,18 @@ if (! empty($_POST["addDelivery"])) {
 
   $noOfLiveBirth = $_POST["noOfLiveBirth"]; $noOfStillBirth = $_POST["noOfStillBirth"]; $infantId = $_POST["infantId"]; $birthDetails = $_POST["birthDetails"];
   $birthWeight = $_POST["birthWeight"]; $birthHeight = $_POST["birthHeight"]; $delayedCClamping = $_POST["delayedCClamping"]; $skintoskinContact = $_POST["skintoskinContact"];
- $breastfeedInitiated = $_POST["breastfeedInitiated"]; $admittedSncu = $_POST["admittedSncu"]; $sncudate = $_POST["sncudate"]; $sncuAreaName = $_POST["sncuAreaName"]; $sncuOutcome = $_POST["sncuOutcome"]; 
+ $breastfeedInitiated = $_POST["breastfeedInitiated"]; $admittedSncu = $_POST["admittedSncu"];
+  if($admittedSncu == 0)
+{
+$sncudate = "";
+$sncuAreaName = "";
+$sncuOutcome = "";
+}
+else	
+{
+$sncudate = $_POST["sncudate"]; $sncuAreaName = $_POST["sncuAreaName"]; $sncuOutcome = $_POST["sncuOutcome"]; 
+}
+
  $dischargedate = $_POST["dischargedate"]; $dischargetime = $_POST["dischargetime"]; $bcgdate = $_POST["bcgdate"]; $opvDdate = $_POST["opvDdate"];
  $hebBdate = $_POST["hebBdate"]; $injuction = $_POST["injuction"]; 
   
@@ -423,8 +434,9 @@ if (!empty($query)) {
                              </select>
                           </div>
 
-                          <div class="col-6 mb-3" id="sncuDate" onclick="return validateAddDelivery()" style="display: none;">
-                          <label class="form-label" for="basic-icon-default-password">SNCU DATE</label>
+                          <div class="col-6 mb-3" id="sncuDate" style="display: none;">
+                          <div id="sncudt-suggesstion-box"></div>
+						  <label class="form-label" for="basic-icon-default-password">SNCU DATE</label>
                             <input
                               type="date"
                               name="sncudate"
@@ -435,7 +447,7 @@ if (!empty($query)) {
 							  max=<?php echo $cur_dt; ?>
                               aria-label="SNCU DATE"
                               aria-describedby="basic-icon-default-password2"
-                        
+                              onclick="return validateAddDelivery()" 
                             />
                           </div>
                  </div>

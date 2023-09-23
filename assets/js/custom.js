@@ -852,7 +852,7 @@ function checkDuplicatePicmeNo(picmeno, predeldate){
                return false;
             } 
 			
-			SncuChange();
+			//SncuChange();
 			
 			if($('#deliverydate').val() != "" && $('#dischargedate').val() != "" &&
 			   ($('#deliverydate').val() > $('#dischargedate').val()))
@@ -952,7 +952,7 @@ function checkEditPicmeNo(picmeno, predeldate){
             }
 		//	}
 			
-			SncuChange();
+		//	SncuChange();
 			
 			if($('#sncudate').val() != "" && $('#deliverydate').val() != "" &&
 			   ($('#deliverydate').val() > $('#sncudate').val()))
@@ -1002,15 +1002,6 @@ function checkEditPicmeNo(picmeno, predeldate){
                return false;
             } 
 			
-var selectBox = document.getElementById("admittedSncu");
-var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-var sdate = document.getElementById("sncuDate"); 
-var sname = document.getElementById("sncuName");
-var scome = document.getElementById("sncuCome"); 
-if(selectedValue == "1") { sdate.style.display = "block"; }  else if(selectedValue == "0") { sdate.style.display = "none"; }
-if(selectedValue == "1") { sname.style.display = "block"; }  else if(selectedValue == "0") { sname.style.display = "none"; }
-if(selectedValue == "1") { scome.style.display = "block"; }   else if(selectedValue == "0") { scome.style.display = "none"; }
-
         }
     });
 }

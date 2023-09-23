@@ -22,7 +22,16 @@ $noOfLiveBirth = $n["noOfLiveBirth"]; $noOfStillBirth = $n["noOfStillBirth"]; $i
 $birthWeight = $n["birthWeight"]; $birthHeight = $n["birthHeight"]; $delayedCClamping = $n["delayedCClamping"]; $skintoskinContact = $n["skintoskinContact"];
 $breastfeedInitiated = $n["breastfeedInitiated"]; $admittedSncu = $n["admittedSncu"]; 
 $admit_ind = ""; $admit_ind = $n["admittedSncu"];
+if($admittedSncu == 0)
+{
+$sncudate = "";
+$sncuAreaName = "";
+$sncuOutcome = "";
+}
+else	
+{
 $sncudate = $n["sncudate"]; $sncuAreaName = $n["sncuAreaName"]; $sncuOutcome = $n["sncuOutcome"]; 
+}
 $dischargedate = $n["dischargedate"]; $dischargetime = $n["dischargetime"]; $bcgdate = $n["bcgdate"]; $opvDdate = $n["opvDdate"];
 $hebBdate = $n["hebBdate"]; $injuction = $n["injuction"];
 }
@@ -35,7 +44,17 @@ $deliverytype = $_POST["deliverytype"];$deliveryCompilcation = $_POST["deliveryC
 
 $noOfLiveBirth = $_POST["noOfLiveBirth"]; $noOfStillBirth = $_POST["noOfStillBirth"]; $infantId = $_POST["infantId"]; $birthDetails = $_POST["birthDetails"];
 $birthWeight = $_POST["birthWeight"]; $birthHeight = $_POST["birthHeight"]; $delayedCClamping = $_POST["delayedCClamping"]; $skintoskinContact = $_POST["skintoskinContact"];
-$breastfeedInitiated = $_POST["breastfeedInitiated"]; $admittedSncu = $_POST["admittedSncu"]; $sncudate = $_POST["sncudate"]; $sncuAreaName = $_POST["sncuAreaName"]; $sncuOutcome = $_POST["sncuOutcome"]; 
+$breastfeedInitiated = $_POST["breastfeedInitiated"]; $admittedSncu = $_POST["admittedSncu"]; 
+if($admittedSncu == 0)
+{
+$sncudate = "";
+$sncuAreaName = "";
+$sncuOutcome = "";
+}
+else	
+{
+$sncudate = $_POST["sncudate"]; $sncuAreaName = $_POST["sncuAreaName"]; $sncuOutcome = $_POST["sncuOutcome"]; 
+}
 $dischargedate = $_POST["dischargedate"]; $dischargetime = $_POST["dischargetime"]; $bcgdate = $_POST["bcgdate"]; $opvDdate = $_POST["opvDdate"];
 $hebBdate = $_POST["hebBdate"]; $injuction = $_POST["injuction"];
 date_default_timezone_set('Asia/Kolkata');
@@ -46,7 +65,8 @@ childGender='$childGender',DeliveryConductBy='$deliveryConductBy',Deliverytype='
 DeliveryCompilcation='$deliveryCompilcation',DeliveryOutcome='$deliveryOutcome',noOfLiveBirth='$noOfLiveBirth',
 noOfStillBirth='$noOfStillBirth',infantId='$infantId',birthDetails='$birthDetails',birthWeight='$birthWeight',
 birthHeight='$birthHeight',DelayedCClamping='$delayedCClamping',skintoskinContact='$skintoskinContact',
-breastfeedInitiated='$breastfeedInitiated',admittedSncu='$admittedSncu',sncudate='$sncudate',sncuAreaName='$sncuAreaName',
+breastfeedInitiated='$breastfeedInitiated',
+admittedSncu='$admittedSncu',sncudate='$sncudate',sncuAreaName='$sncuAreaName',
 sncuOutcome='$sncuOutcome',Dischargedate='$dischargedate',Dischargetime='$dischargetime',bcgdate='$bcgdate',
 opvDdate='$opvDdate',HebBdate='$hebBdate', injuction='$injuction',updatedat='$date',updatedBy='$userid' WHERE id=".$id);
 if (!empty($query)) {
@@ -550,14 +570,12 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                              </select>
                           </div>
 						  
-                          <?php if ($admit_ind == 0) {  ?>
+						  <?php if ($admit_ind == 0) {  ?>
                           <div class="col-6 mb-3" id="sncuDate" style="display: none;" >
 						  <?php } 
 						  else { ?>
 						  <div class="col-6 mb-3" id="sncuDate" >
 						  <?php } ?>
-						  
-							  
 						 <div id="sncudt-suggesstion-box" ></div>
 						     <label class="form-label" for="basic-icon-default-email">SNCU DATE</label>
                             
@@ -579,11 +597,13 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                  </div>
                  <div class="row">
 				
-                          <?php if ($admit_ind == 0) {  ?>
-                          <div class="col-6 mb-3" id="sncuAreaName" style="display: none;">
+                          
+
+						  <?php if ($admit_ind == 0) {  ?>
+                          <div class="col-6 mb-3"  id="sncuName" style="display: none;">
 						  <?php } 
 						  else { ?>
-						  <div class="col-6 mb-3" id="sncuAreaName" >
+						  <div class="col-6 mb-3" id="sncuName" >
 						  <?php } ?>
 						  
                           <label class="form-label" for="basic-icon-default-password">SNCU AREA NAME</label>
@@ -603,12 +623,14 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                         </div>
                        
                         
+						  
 						  <?php if ($admit_ind == 0) {  ?>
-                          <div class="col-6 mb-3" id="sncuOutcome" style="display: none;">
+                          <div class="col-6 mb-3"  id="sncuCome" style="display: none;">
 						  <?php } 
 						  else { ?>
-						  <div class="col-6 mb-3" id="sncuOutcome" >
+						  <div class="col-6 mb-3" id="sncuCome" >
 						  <?php } ?>
+						  
 						  
                           <label class="form-label" for="basic-icon-default-password">SNCU OUTCOME</label>
                             <input
