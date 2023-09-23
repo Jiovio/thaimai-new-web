@@ -202,7 +202,7 @@ if (!empty($query)) {
                		<input type="hidden" name="id" value="<?php echo $id; ?>">
 					<div class="row">
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-fullname">PICME No. <!--<span class="mand">* </span>--></label>
+                          <label class="form-label" for="basic-icon-default-fullname">RCHID (PICME) No. <!--<span class="mand">* </span>--></label>
                           <div class="input-group input-group-merge">
                           <label class="lblViolet"><?php echo $picmeNo; ?>
                               </label>

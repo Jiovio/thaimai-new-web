@@ -70,9 +70,9 @@ if (!empty($query)) {
 				<div class="errMsg" id="errMsg"></div>
             <div class="row">
               <div class="col-6 mb-3">
-                  <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
+                  <label class="form-label" for="basic-icon-default-fullname">RCHID (PICME) NUMBER <span class="mand">* </span></label>
                   <div class="frmSearch">
-                  <input type="number" required id="picmenoNew" name="picmeno" min="100000000000" max="999999999999" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
+                  <input type="number" required id="picmenoNew" name="picmeno" min="100000000000" max="999999999999" oninput = "onlyNumbers(this.value)" placeholder="RCHID (PICME) Number" class="form-control" />
                   <div id="suggesstion-box"></div>
                  </div>
                 </div>

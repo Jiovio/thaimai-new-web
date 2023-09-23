@@ -192,7 +192,7 @@ if (isset($_GET['del'])) {
 			<input type="hidden" name="id" value="<?php echo $id; ?>">
 					<div class="row">
                         <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-picmeno">PICME No. <!--<span class="mand">* </span>--> <span style="color:red" class= "Pmessage" id="Pmessage"></span></label>
+                          <label class="form-label" for="basic-icon-default-picmeno">RCHID (PICME) No. <!--<span class="mand">* </span>--> <span style="color:red" class= "Pmessage" id="Pmessage"></span></label>
                           <div class="input-group input-group-merge">
                           <label class="lblViolet"><?php echo $picmeno; ?>
                               </label>

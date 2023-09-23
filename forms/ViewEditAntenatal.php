@@ -190,7 +190,7 @@ if (isset($_GET['del'])) {
                       
                         <div class="row">
                         <div class="mb-3 col-md-6">
-                          <label class="form-label" for="basic-icon-default-password">PICME No. </label>
+                          <label class="form-label" for="basic-icon-default-password">RCHID (PICME) No. </label>
                           <div class="input-group input-group-merge">
                             <label class="lblViolet"><?php echo $picmeno; ?>
                               </label>
@@ -198,7 +198,7 @@ if (isset($_GET['del'])) {
                           </div>
                         </div>
                         <div class="mb-3 col-md-6">
-                            <label for="zipCode" class="form-label">PICME REGISTER DATE <span class="mand">* </span></label>
+                            <label for="zipCode" class="form-label">RCHID (PICME) REGISTER DATE <span class="mand">* </span></label>
                             <input
                               type="date"
                               class="form-control"

@@ -17,7 +17,7 @@ if (! empty($_POST["addMedical"])) {
   if($pNo > 0) {
    
   $type = "error";
-  $emessage = "Duplicate PICME No.";
+  $emessage = "Duplicate RCHID (PICME) No.";
   
    } else {
        $mname = mysqli_query($conn,"SELECT picmeNo,motheraadhaarname FROM ecregister where picmeNo='".$_POST["picmeno"]."' ");
@@ -87,9 +87,9 @@ if (! empty($_POST["addMedical"])) {
                     
             <div class="row">
                 <div class="col-6 mb-3">
-                <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
+                <label class="form-label" for="basic-icon-default-fullname">RCHID (PICME) NUMBER <span class="mand">* </span></label>
                 <div class="frmSearch">
-                <input type="number" required id="picmenomed" name="picmeno" min="100000000000" max="999999999999" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" onclick="return addMedicalValidate()" />
+                <input type="number" required id="picmenomed" name="picmeno" min="100000000000" max="999999999999" oninput = "onlyNumbers(this.value)" placeholder="RCHID (PICME) Number" class="form-control" onclick="return addMedicalValidate()" />
 				<div id="suggesstion-box"></div>
                 </div>
                 </div>
@@ -625,7 +625,7 @@ if (! empty($_POST["addMedical"])) {
                 </div>
                 
               <div class="mt-2">
-                        <input class="btn btn-primary" type="submit" name="addMedical" value="Save" onclick="return addMedicalValidate()"">
+                        <input class="btn btn-primary" type="submit" name="addMedical" value="Save" onclick="return addMedicalValidate()">
                         </div>
               </div>
             </div>

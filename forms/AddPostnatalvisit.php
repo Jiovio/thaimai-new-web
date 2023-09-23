@@ -62,9 +62,9 @@ if (! empty($_POST["addpostnatal"])) {
                       <form id="formAccountSettings" autocomplete="off" method="POST" onsubmit="return validatePostnalVisit()">
 					   <div class="row">
                         <div class="mb-3 col-md-6">
-                          <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-fullname">RCHID (PICME) NUMBER <span class="mand">* </span></label>
                           <div class="frmSearch">
-                          <input type="number" required id="picmenoPostNalVisit" name="picmeNo" oninput = "onlyNumbers(this.value)" min="100000000000" max="999999999999" required placeholder="PICME Number" class="form-control" onclick="return validatePostnalVisit()" />
+                          <input type="number" required id="picmenoPostNalVisit" name="picmeNo" oninput = "onlyNumbers(this.value)" min="100000000000" max="999999999999" required placeholder="RCHID (PICME) Number" class="form-control" onclick="return validatePostnalVisit()" />
                          
 						  <div id="suggesstion-box"></div>
                       </div>

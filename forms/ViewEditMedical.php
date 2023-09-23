@@ -181,7 +181,7 @@ if (isset($_GET['del'])) {
                		<input type="hidden" name="id" value="<?php echo $id; ?>">
 					    	<div class="row">
                 <div class="mb-3 col-md-6">
-                            <label class="form-label">PICME NUMBER <!--<span class="mand">* </span>--></label>
+                            <label class="form-label">RCHID (PICME) NUMBER <!--<span class="mand">* </span>--></label>
                             <div class="input-group input-group-merge">
                             <!-- <input
                               type="text"

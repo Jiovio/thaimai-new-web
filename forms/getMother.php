@@ -27,7 +27,7 @@ while($picvalue = mysqli_fetch_array($CheckDuplicatePno))
 
 if($pvalue > 0) {
   $type = "error";
-  $emessage = "Duplicate PICME No.";
+  $emessage = "Duplicate RCHID (PICME) No.";
 } else {
 $picmeno =$_POST["picmeno"];
 $picmeRegDate =$_POST["picmeRegDate"];
@@ -123,7 +123,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                       <div class="row">
                       <div class="mb-3 col-md-6">
                         
-                        <label class="form-label" for="basic-icon-default-picmeno">PICME No. <span class="mand">* </span> </span id="errPicmeno"><span></label>
+                        <label class="form-label" for="basic-icon-default-picmeno">RCHID (PICME) No. <span class="mand">* </span> </span id="errPicmeno"><span></label>
                         
                         <div class="input-group input-group-merge">
                           <input
@@ -132,8 +132,8 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             name="picmeno"
                             class="form-control anregisterPicmenoCls"
                             id="picmeno" min="100000000000" max="999999999999" required
-                            placeholder="PICME No."
-                            aria-label="PICME No."
+                            placeholder="RCHID (PICME) No."
+                            aria-label="RCHID (PICME) No."
                             aria-describedby="basic-icon-default-fullname2"
                             value ="<?php echo $picmeno; ?>"
 							onclick="return addMothAadhar()"
@@ -142,7 +142,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                       </div>
                       
                       <div class="mb-3 col-md-6">
-                          <label for="zipCode" class="form-label">PICME REGISTER DATE <span class="mand">* </span></label>
+                          <label for="zipCode" class="form-label">RCHID (PICME) REGISTER DATE <span class="mand">* </span></label>
                           <input
                             type="date"
                             class="form-control"

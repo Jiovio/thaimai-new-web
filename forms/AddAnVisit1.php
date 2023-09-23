@@ -28,9 +28,9 @@
 				<div id="firstDiv">
 					<div class="row">
           <div class="col-4 mb-3">
-        <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span><span id="errPicme"></span></label>
+        <label class="form-label" for="basic-icon-default-fullname">RCHID (PICME) NUMBER <span class="mand">* </span><span id="errPicme"></span></label>
         <div class="frmSearch">
-        <input type="text" required id="picmeno" name="picmeno" oninput = "onlyNumbers(this.value)" onkeyup="checkPicme(this.value); return false;" placeholder="PICME Number" class="form-control" />
+        <input type="text" required id="picmeno" name="picmeno" oninput = "onlyNumbers(this.value)" onkeyup="checkPicme(this.value); return false;" placeholder="RCHID (PICME) Number" class="form-control" />
         <div id="suggesstion-box"></div>
          </div>
                 </div>

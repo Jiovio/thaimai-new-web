@@ -132,15 +132,15 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                		<input type="hidden" name="id" value="<?php echo $id; ?>">
 						<div class="row">
             <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-fullname">PICME No. <!--<span class="mand">* </span>--></label>
+                          <label class="form-label" for="basic-icon-default-fullname">RCHID (PICME) No. <!--<span class="mand">* </span>--></label>
                           <div class="input-group input-group-merge">
                             <input
                               type="hidden"
                               name="picmeno"
                               class="lblViolet"
                               id="picmenoNew"
-                              placeholder="PICME No."
-                              aria-label="PICME No."
+                              placeholder="RCHID (PICME) No."
+                              aria-label="RCHID (PICME) No."
                               aria-describedby="basic-icon-default-fullname2"
                               value="<?php echo $picmeno;  ?>"
 							  onclick="return validateEditDelivery()"

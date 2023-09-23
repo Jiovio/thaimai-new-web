@@ -16,7 +16,7 @@ if (! empty($_POST["addImmunization"])) {
   if(empty($pid)) {
    
   $type = "error";
-  $emessage = "PICME No doesn't exist";
+  $emessage = "RCHID (PICME) No doesn't exist";
   
    } else {
   $picmeno = $_POST["picmeNo"]; 
@@ -137,9 +137,9 @@ if($doseNo == 1) {
                       <form action="" method="post" autocomplete="off" onSubmit="return addImmuneValidate()">
 					<div class="row">
                         <div class="mb-3 col-md-6">
-                          <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-fullname">RCHID (PICME) NUMBER <span class="mand">* </span></label>
                           <div class="frmSearch">
-                          <input type="text" required id="picmenoImmune" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" min="100000000000" max="999999999999" class="form-control" onclick="return addImmuneValidate()" />
+                          <input type="text" required id="picmenoImmune" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="RCHID (PICME) Number" min="100000000000" max="999999999999" class="form-control" onclick="return addImmuneValidate()" />
                           <div id="suggesstion-box"></div>
                       </div>
                       </div>
