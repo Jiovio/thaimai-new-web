@@ -7,7 +7,7 @@ $predeldate = $_POST["predeldate"];
 $AvCntmq = mysqli_query($conn, "SELECT * FROM deliverydetails WHERE picmeno = '$picmeNo'");
 $AvCnt = mysqli_fetch_array($AvCntmq);
 
-if (!empty($AvCnt) && isset($AvCnt['deliveryCnt']) &&  $AvCnt['deliveryCnt'] > 0) {
+if (!empty($AvCnt) && isset($AvCnt['deliveryCnt']) &&  $AvCnt['deliveryCnt'] > 0) {  
     echo 1;
 } else {
  //  echo 0;
