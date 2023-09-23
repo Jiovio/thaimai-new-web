@@ -590,71 +590,62 @@ $('#motheraadhaaridval').on('keydown keyup change', function(){
 function addMothAadhar(){
     var motadhaar = $('#motheraadhaaridval').val();
  
-    //return checkEC(motadhaar);
+    checkEC(motadhaar);
 }
 
-$("#anregisterForm").submit(function (e) {
-    //  e.preventDefault();
-      var motadhaar = $('#motheraadhaaridval').val();
-      console.log("result",checkEC(motadhaar));
-      return checkEC(motadhaar);
-});
-
-function checkEC(motadhaar) {
-    returnParam = true;
-    $.ajax({
+function checkEC(motadhaar){
+	    returnParam = true
+        $.ajax({
         url: "ajax/ECAadharVal.php",
-        async: false,
+		async:false,
         type: "POST",
         data: {
-            motadhaar: motadhaar
+            motadhaar : motadhaar
         },
-        cache: false,
+		cache: false,
         success: function (response) {
-            result = JSON.parse(response);
+			result = JSON.parse(response);
             $('#suggesstion-box').html("")
-            //  result= $.trim(result);
+          //  result= $.trim(result);
             if (result['result'] === '1')
             {
                 $('#suggesstion-box').html("<span style='color:red'>AN Registration already done for this Aadhar.</span>");
-                document.getElementById('motheraadhaaridval').focus();
-                returnParam =  false;
+                document.getElementById ('motheraadhaaridval').focus();
+				return false;
             }
 
             if (result['result'] === '3')
             {
-
-                /* Conception Age @ Medical History*/
+						
+			    /* Conception Age @ Medical History*/
                 var anregdate = document.getElementById("anRegDate").value;
                 var andate = new Date(anregdate);
-
+  
                 var MotDateinput = result['Motdob'];
                 var motbirthDate = new Date(MotDateinput);
-                var mdiff = andate.getTime() - motbirthDate.getTime();
-                var motAgeDate = new Date(mdiff);
-                var motCalcAge = Math.abs(motAgeDate.getUTCFullYear() - 1970);
-                document.getElementById("MotherAge").value = motCalcAge;
-
+                var mdiff=andate.getTime() - motbirthDate.getTime(); 
+                var motAgeDate = new Date(mdiff); 
+                var motCalcAge=   Math.abs(motAgeDate.getUTCFullYear() - 1970);
+                document.getElementById("MotherAge").value = motCalcAge;  
+  
                 var HusDateinput = result['Fatdob'];
                 var husbirthDate = new Date(HusDateinput);
-                var hdiff = andate.getTime() - husbirthDate.getTime();
-                var husAgeDate = new Date(hdiff);
-                var husCalcAge = Math.abs(husAgeDate.getUTCFullYear() - 1970);
-                document.getElementById("HusbandAge").value = husCalcAge;
-                /* Conception Age @ Medical History*/
-            }
+                var hdiff=andate.getTime() - husbirthDate.getTime(); 
+                var  husAgeDate = new Date(hdiff); 
+                var husCalcAge=   Math.abs(husAgeDate.getUTCFullYear() - 1970);
+                document.getElementById("HusbandAge").value = husCalcAge; 
+               /* Conception Age @ Medical History*/
+            } 
 
             if (result['result'] === '4')
             {
                 $('#suggesstion-box').html("<span style='color:red'>Aadhar not found in EC.</span>");
-                document.getElementById('motheraadhaaridval').focus();
-                returnParam = false;
+				document.getElementById ('motheraadhaaridval').focus();
+                return false;
             }
-
+			
         }
-        
     });
-   return returnParam;
 }
 /* Medical History PICME - Ends */
 
