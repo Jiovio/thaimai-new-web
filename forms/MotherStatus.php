@@ -31,7 +31,7 @@
                          <tr>
                <th>S.No</th> 
                <th>Mother Name</th>
-               <th>PICME Number</th>
+               <th>RCHID (PICME) Number</th>
                <th>Mother Status</th>
                          </tr>
                        </thead>
