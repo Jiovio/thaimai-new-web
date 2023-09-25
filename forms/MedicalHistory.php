@@ -32,7 +32,7 @@
                          <tr>
                <th>S.No</th> 
                <th>Mother Name</th>
-               <th>PICME Number</th>
+               <th>RCHID (PICME) Number</th>
                <th>Aadhaar Number</th>
                <th>LMP Date</th>
                <th>EDD Date</th>

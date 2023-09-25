@@ -32,7 +32,7 @@
                       <tr>
                         <th>S.No</th>
                         <th>Mother Name</th>
-                        <th>PICME No.</th>
+                        <th>RCHID (PICME) No.</th>
                         <th>Resident Type</th>
                         <th>Pregnancy Test Result</th>
                         <th>HR Pregnancy</th>

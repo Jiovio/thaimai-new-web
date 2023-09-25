@@ -34,7 +34,7 @@
                       <tr>
                         <th>S.No</th>    
                         <th>Mother Name</th>
-                        <th>PICME Number</th>
+                        <th>RCHID (PICME) Number</th>
                         <th>Delivery Date</th>
                         <th>Delivery Time</th>
 						<th>View</th>
