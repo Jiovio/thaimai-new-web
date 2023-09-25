@@ -181,7 +181,9 @@
 						//	print_r("break");
 				
 				$listQry_mh = "SELECT * FROM medicalhistory mh 
-	              WHERE mh.status!=0 AND mh.picmeno = $ar_picme";
+	              WHERE mh.status!=0 AND mh.picmeno = $ar_picme
+				  AND NOT EXISTS (SELECT antenatalvisit.picmeno FROM antenatalvisit 
+				  WHERE antenatalvisit.picmeno = mh.picmeno)";
 				$ExeQuery_mh = mysqli_query($conn,$listQry_mh);
 			
 				  if($ExeQuery_mh) { 

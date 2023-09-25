@@ -311,8 +311,10 @@ else
 				$row['pregnancyWeek'] = "";
 				$AR_High_Risk_Ind = "Not";
 				
-				$listQry_av = "SELECT * FROM antenatalvisit av 
-	              WHERE av.status!=0 AND av.picmeno = $ar_picme AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)";
+				$listQry_mh = "SELECT * FROM medicalhistory mh 
+	              WHERE mh.status!=0 AND mh.picmeno = $ar_picme
+				  AND NOT EXISTS (SELECT antenatalvisit.picmeno FROM antenatalvisit 
+				  WHERE antenatalvisit.picmeno = mh.picmeno)";
 				  $ExeQuery_av = mysqli_query($conn,$listQry_av);
 				  if($ExeQuery_av) { 
 				  while($row_av = mysqli_fetch_array($ExeQuery_av)) {
