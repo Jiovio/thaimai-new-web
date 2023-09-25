@@ -20,7 +20,7 @@
                     <thead>
                       <tr>
                         <th>S.No</th>            
-                        <th>PICME Number</th>
+                        <th>RCHID (PICME) Number</th>
 						            <th>Mother's Aadhaar Name</th>
                         <th>AV Due Date</th>
 						            <th>Mother's Mobile No.</th>

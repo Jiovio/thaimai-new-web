@@ -92,7 +92,7 @@ include "../config/db_connect.php";
 		foreach($developer_records as $record) {
 		 if(!$show_coloumn) {
 			 
-		$h = array("S.No","ECFR No","RCH ID","EC Registered Date","Mother's Aadhar No","Mother's Aadhar Name","Mother's Mobile No","Mother's Age @ EC Registration","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward");
+		$h = array("S.No","ECFR No","RCHID (PICME) No.","EC Registered Date","Mother's Aadhar No","Mother's Aadhar Name","Mother's Mobile No","Mother's Age @ EC Registration","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward");
 			
 		$excelData = implode("\t", array_values($h)) . "\n";
 		$show_coloumn = true;

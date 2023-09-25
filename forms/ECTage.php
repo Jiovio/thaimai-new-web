@@ -36,7 +36,7 @@
                          <tr>
                <th>S.No</th> 
 			   <th>ECFR No</th>
-               <th>RCH ID</th>
+               <th>RCHID (PICME) No.</th>
 			   <th>EC Registered Date</th>
 			   <th>Mother's Aadhar No</th>
 			   <th>Mother's Aadhar Name</th>

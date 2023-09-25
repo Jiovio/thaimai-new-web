@@ -174,7 +174,7 @@ include "../config/db_connect.php";
 		foreach($developer_records as $record) {
 		 if(!$show_coloumn) {
 			 
-		$h = array("S.No", "RCH ID","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Mother Name","Age","Husband Name","Mobile No", "Obstetric Score","Infant RCH ID","Infant Death Date","Gender","Infant Death Time","Infant Age @ Death","Infant Death District","Infant Death Place","Reason for Death");
+		$h = array("S.No", "RCHID (PICME) No.","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Mother Name","Age","Husband Name","Mobile No", "Obstetric Score","Infant RCH ID","Infant Death Date","Gender","Infant Death Time","Infant Age @ Death","Infant Death District","Infant Death Place","Reason for Death");
 			
 		$excelData = implode("\t", array_values($h)) . "\n";
 		$show_coloumn = true;	

@@ -36,7 +36,7 @@
                        <thead>
                          <tr>
                <th>S.No</th>            
-               <th>PICME No.</th>
+               <th>RCHID (PICME) No.</th>
                <th>Mother Name</th>
                <th>High Risk Factor</th>
                          </tr>  

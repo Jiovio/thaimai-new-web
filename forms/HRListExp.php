@@ -730,7 +730,7 @@ else
 		foreach($developer_records as $record) {
 		 if(!$show_coloumn) {
 			 
-		$h = array("S.No", "RCH ID","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Resident/Visitor","Mother Name","Age","Husband Name", "Mobile No","Obstetric score","LMP","EDD","Gestation Period in Weeks","High Risk Factor","Birth Plan","Referral Date","Referral Place");
+		$h = array("S.No", "RCHID (PICME) No.","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Resident/Visitor","Mother Name","Age","Husband Name", "Mobile No","Obstetric score","LMP","EDD","Gestation Period in Weeks","High Risk Factor","Birth Plan","Referral Date","Referral Place");
 			
 		$excelData = implode("\t", array_values($h)) . "\n";
 		$show_coloumn = true;

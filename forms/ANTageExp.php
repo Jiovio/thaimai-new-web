@@ -141,7 +141,7 @@ include "../config/db_connect.php";
 		foreach($developer_records as $record) {
 		 if(!$show_coloumn) {
 			 
-		$h = array("S.No", "RCH ID","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Resident/Visitor","Mother Name","Age","Husband Name", "Mobile No","Mother DOB", "Obstetric score","LMP","EDD","Late Registration (Yes/No)?");
+		$h = array("S.No", "RCHID (PICME) No.","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Resident/Visitor","Mother Name","Age","Husband Name", "Mobile No","Mother DOB", "Obstetric score","LMP","EDD","Late Registration (Yes/No)?");
 			
 		$excelData = implode("\t", array_values($h)) . "\n";
 		$show_coloumn = true;

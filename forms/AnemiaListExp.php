@@ -280,7 +280,7 @@ $ar_picme = $rows['picmeno'];
 		foreach($developer_records as $record) {
 		 if(!$show_coloumn) {
 			 
-		$h = array("S.No","RCH ID","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Resident/Visitor","Mother Name","Age","Husband Name", "Mobile No", "Obstetric score","LMP","EDD","Weight Gain","HB (Below 20 Weeks)", "HB (Between 20 - 27 Weeks)","Iron Sucrose Dose 1","Iron Sucrose Dose 2","Iron Sucrose Dose 3","Iron Sucrose Dose 4","Iron Sucrose Top up(1)","Iron Sucrose Top up(2)","HB (Between 28 - 34 Weeks)","FST (Between 28 - 34 Weeks)","Blood Transfusion (Between 28 - 34 Weeks)","HB (After 34 Weeks)","Blood Transfusion (After 34 Weeks)");
+		$h = array("S.No","RCHID (PICME) No.","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Resident/Visitor","Mother Name","Age","Husband Name", "Mobile No", "Obstetric score","LMP","EDD","Weight Gain","HB (Below 20 Weeks)", "HB (Between 20 - 27 Weeks)","Iron Sucrose Dose 1","Iron Sucrose Dose 2","Iron Sucrose Dose 3","Iron Sucrose Dose 4","Iron Sucrose Top up(1)","Iron Sucrose Top up(2)","HB (Between 28 - 34 Weeks)","FST (Between 28 - 34 Weeks)","Blood Transfusion (Between 28 - 34 Weeks)","HB (After 34 Weeks)","Blood Transfusion (After 34 Weeks)");
 			
 		$excelData = implode("\t", array_values($h)) . "\n";
 		$show_coloumn = true;

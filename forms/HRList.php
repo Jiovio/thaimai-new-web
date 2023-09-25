@@ -35,7 +35,7 @@
                         <thead>
                          <tr>
                <th>S.No</th>     
-               <th>RCH ID</th>
+               <th>RCHID (PICME) No.</th>
                <th>AN Registered Date</th>
                <th>Block</th>
                <th>PHC</th>

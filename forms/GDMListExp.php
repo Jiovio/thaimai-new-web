@@ -185,7 +185,7 @@ $gdm_picme = "";
 		foreach($developer_records as $record) {
 		 if(!$show_coloumn) {
 			 
-		$h = array("S.No", "RCH ID","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Resident/Visitor","Mother Name","Age","Husband Name", "Mobile No", "Obstetric score","LMP","EDD","Weight Gain","GCT Weeks (12-16)","GCT Weeks (24-28)","GCT Weeks (32-34)");
+		$h = array("S.No", "RCHID (PICME) No.","AN Registered Date","Block","PHC","HSC"," VP / TP / Mpty","Village / Ward","Resident/Visitor","Mother Name","Age","Husband Name", "Mobile No", "Obstetric score","LMP","EDD","Weight Gain","GCT Weeks (12-16)","GCT Weeks (24-28)","GCT Weeks (32-34)");
 			
 		$excelData = implode("\t", array_values($h)) . "\n";
 		$show_coloumn = true;
