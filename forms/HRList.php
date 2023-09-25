@@ -404,10 +404,10 @@ else
 							{
 							$row['symptomsHighRisk'] = $row_av['symptomsHighRisk'];
 							}
-							else
+						/*	else
 							{
 							$row['symptomsHighRisk'] = "Others";
-							}	
+							}	*/
 							 if(strlen($row_av['referralDate']) > 0)
 							 {
 							 $row['refdat'] = $row_av['referralDate'];
