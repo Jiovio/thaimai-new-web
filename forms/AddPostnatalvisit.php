@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
   <!-- Layout wrapper -->
   <div class="layout-wrapper layout-content-navbar">
@@ -7,7 +8,7 @@
 $pid = "";
 if (! empty($_POST["addpostnatal"])) { 
   
-  $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeNo FROM postnatalvisit where picmeNo='".$_POST["picmeNo"]."' ");
+  $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeNo FROM postnatalvisit where picmeNo='".$_POST["picmeNo"]."' AND pncPeriod='".$_POST["pncPeriod"]."'");
   
   while($Mvalue = mysqli_fetch_array($CheckDuplicatePno)) {
     $pid = $Mvalue["picmeNo"];
@@ -16,7 +17,7 @@ if (! empty($_POST["addpostnatal"])) {
   if($pid > 0) {
    
   $type = "error";
-  $emessage = "Duplicate PICME No.";
+  $emessage = "Selected ANC Period data is already entered for mentioned Picmeno";
   
    } else {
   $picmeNo =$_POST["picmeNo"]; 
@@ -36,7 +37,7 @@ if (! empty($_POST["addpostnatal"])) {
   $query = mysqli_query($conn,"INSERT INTO postnatalvisit (picmeno, pncPeriod, motherPnc, ifaTabletStatus,calcium, ppcMethod,vitaminA, motherDangerSign, bloodSugar, infantWeight, infantDangerSigns,bpSys,bpDia,createdBy) 
   VALUES ('$picmeNo','$pncPeriod','$motherPnc','$ifaTabletStatus','$calcium','$ppcMethod','$vitaminA','$mDangerSign','$bloodSugar','$weight','$iDSigns','$bpSys','$bpDia','$userid')");
   if (!empty($query)) {
-     echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/PostnatalVisit.php');</script>";
+     echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}/forms/PostnatalVisit.php');</script>";
    } 
   $motstatus = mysqli_query($conn, "UPDATE ecregister SET status=3 WHERE picmeNo='$picmeNo'");
   } } ?>
@@ -58,18 +59,19 @@ if (! empty($_POST["addpostnatal"])) {
                     <div class="card-body">
                     <div id="response" class="<?php if(!empty($type)) { echo $type . " display-block"; } else { echo $type . " display-none"; } ?>"><?php if(!empty($emessage)) { echo $emessage; } ?></div>
                     <br>
-                      <form id="formAccountSettings" autocomplete="off" method="POST">
-                        <div class="row">
+                      <form id="formAccountSettings" autocomplete="off" method="POST" onsubmit="return validatePostnalVisit()">
+					   <div class="row">
                         <div class="mb-3 col-md-6">
-                          <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-fullname">RCHID (PICME) NUMBER <span class="mand">* </span></label>
                           <div class="frmSearch">
-                          <input type="text" required id="picmeno" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
-                          <div id="suggesstion-box"></div>
+                          <input type="number" required id="picmenoPostNalVisit" name="picmeNo" oninput = "onlyNumbers(this.value)" min="100000000000" max="999999999999" required placeholder="RCHID (PICME) Number" class="form-control" onclick="return validatePostnalVisit()" />
+                         
+						  <div id="suggesstion-box"></div>
                       </div>
                       </div>
                           <div class="mb-3 col-md-6">
                             <label class="form-label">PNC PERIOD <span class="mand">* </span></label>
-                            <select name="pncPeriod" required id="pncPeriod" class="form-select">
+                            <select name="pncPeriod" required id="pncPeriod" onclick="return validatePostnalVisit()" class="form-select">
                           <option value="">Choose...</option>
                            
                            <?php 
@@ -81,6 +83,7 @@ if (! empty($_POST["addpostnatal"])) {
                           <?php  } 
                               ?>
                              </select>
+                            <div id="pnc-period-box"></div>
                           </div>
                           </div>
                         <div class="row">
@@ -95,13 +98,13 @@ if (! empty($_POST["addpostnatal"])) {
                               id="motherPnc"
                               name="motherPnc"
                               placeholder=""
-                            
+                              onclick="return validatePostnalVisit()"
                             />
                           </div>
                           </div>
                           <div class="mb-3 col-md-6">
                             <label class="form-label">IFA TABLET</label>
-                            <select name="ifaTabletStatus" id="ifaTabletStatus" class="form-select">
+                            <select name="ifaTabletStatus" id="ifaTabletStatus" onclick="return validatePostnalVisit()" class="form-select">
                           <option value="">Choose...</option>
                           <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
                             $exequery = mysqli_query($conn, $query);
@@ -115,7 +118,7 @@ if (! empty($_POST["addpostnatal"])) {
                         <div class="row">
                           <div class="mb-3 col-md-6">
                             <label class="form-label">Calcium</label>
-                            <select name="calcium" id="calcium" class="form-select">
+                            <select name="calcium" id="calcium" onclick="return validatePostnalVisit()" class="form-select">
                           <option value="">Choose...</option>
                           <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
                             $exequery = mysqli_query($conn, $query);
@@ -126,8 +129,8 @@ if (! empty($_POST["addpostnatal"])) {
                           </div>
 
                           <div class="mb-3 col-md-6">
-                          <label class="form-label">Family Welfare Method Accepted</label>
-                            <select name="ppcMethod" id="ppcMethod" class="form-select">
+                          <label class="form-label">Family Welfare Method Accepted <span class="mand">* </span></label>
+                            <select name="ppcMethod" id="ppcMethod" onclick="return validatePostnalVisit()" class="form-select" required>
                           <option value="">Choose...</option>
                           <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=29";
                             $exequery = mysqli_query($conn, $query);
@@ -147,12 +150,13 @@ if (! empty($_POST["addpostnatal"])) {
                               id="vitaminA"
                               name="vitaminA"
                               placeholder="Vitamin A Solution"
+							  onclick="return validatePostnalVisit()"
                             />
                           </div>
                           </div> 
                           <div class="mb-3 col-md-6">
                           <label class="form-label">MOTHER DANGER SIGN <span class="mand">* </span></label>
-                            <select name="motherDangerSign" required id="motherDangerSign" class="form-select">
+                            <select name="motherDangerSign" required id="motherDangerSign" onclick="return validatePostnalVisit()" class="form-select">
                           <option value="">Choose...</option>
                           <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=15";
                             $exequery = mysqli_query($conn, $query);
@@ -171,28 +175,22 @@ if (! empty($_POST["addpostnatal"])) {
                               class="form-control"
                               id="bloodSugar"
                               name="bloodSugar"
-                              placeholder="BLOOD SUGER"
-                            
+                              placeholder="BLOOD SUGAR"
+                              onclick="return validatePostnalVisit()"
                             />
                           </div>
                           </div> 
 
                           <div class="mb-3 col-md-6">
                           <label class="form-label">INFANT WEIGHT</label>
-                            <select name="infantWeight" id="infantWeight" class="form-select">
-                          <option value="">Choose...</option>
-                          <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=12";
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                          <?php  } ?>
-                             </select>
+                          <input class="form-control" type="number" step="0.001" min="1" max="6" name="infantWeight" id="infantWeight" onclick="return validatePostnalVisit()" />
+                           
                             </div>
                         </div>
                         <div class="row">
                           <div class="mb-3 col-md-6">
                           <label class="form-label">INFANT DANGER SIGNS <span class="mand">* </span></label>
-                            <select name="infantDangerSigns" required id="infantDangerSigns" class="form-select">
+                            <select name="infantDangerSigns" required id="infantDangerSigns" onclick="return validatePostnalVisit()" class="form-select">
                           <option value="">Choose...</option>
                           <?php $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=16";
                             $exequery = mysqli_query($conn, $query);
@@ -204,7 +202,7 @@ if (! empty($_POST["addpostnatal"])) {
                             <div class="col-md-6 mb-3">
                           <label class="form-label" for="basic-icon-default-motherWeight">BP Systolic</label>
                           <div class="input-group input-group-merge">
-                            <select class="50-200 form-control" id="bpSys" name="bpSys" placeholder="BP SYS">
+                            <select class="50-200 form-control" id="bpSys" name="bpSys" placeholder="BP SYS" onclick="return validatePostnalVisit()" >
                               <option value="">Choose...</option>
                             </select>
                           </div>
@@ -214,14 +212,14 @@ if (! empty($_POST["addpostnatal"])) {
                           <div class="col-md-6 mb-3">
                           <label class="form-label" for="basic-icon-default-bpDia">BP Diastolic</label>
                           <div class="input-group input-group-merge">
-                            <select class="40-150 form-control" id="bpDia" name="bpDia" placeholder="BP DIA">
+                            <select class="40-150 form-control" id="bpDia" name="bpDia" onclick="return validatePostnalVisit()" placeholder="BP DIA">
                           <option value="">Choose...</option>
                           </select>
                           </div>
                         </div>
                         </div>
                         <div class="mt-2">
-                        <input class="btn btn-primary" type="submit" name="addpostnatal" value="Save">
+                        <input class="btn btn-primary" type="submit" name="addpostnatal" value="Save" onclick="return validatePostnalVisit()">
                         </div>
                       </form>
                     </div>

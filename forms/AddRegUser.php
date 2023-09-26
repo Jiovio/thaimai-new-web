@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -10,7 +11,7 @@ if (! empty($_POST["adduser"])) {
     $member = new Member();
     $registrationResponse = $member->AddRegMember($userid);
     if (!empty($registrationResponse)) {
-        echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/UserManagement.php');</script>";
+        echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}/forms/UserManagement.php');</script>";
       } 
 }
 

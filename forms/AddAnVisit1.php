@@ -1,10 +1,11 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
 <?php include ('require/header.php'); // Menu & Top Search ?>
-          <!-- Content wrapper -->
+          <!-- Content wrapper --> 
           <div class="content-wrapper">
             <!-- Content -->
       <div class="container-xxl flex-grow-1 container-p-y">
@@ -27,9 +28,9 @@
 				<div id="firstDiv">
 					<div class="row">
           <div class="col-4 mb-3">
-        <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span><span id="errPicme"></span></label>
+        <label class="form-label" for="basic-icon-default-fullname">RCHID (PICME) NUMBER <span class="mand">* </span><span id="errPicme"></span></label>
         <div class="frmSearch">
-        <input type="text" required id="picmeno" name="picmeno" oninput = "onlyNumbers(this.value)" onkeyup="checkPicme(); return false;" placeholder="PICME Number" class="form-control" />
+        <input type="text" required id="picmeno" name="picmeno" oninput = "onlyNumbers(this.value)" onkeyup="checkPicme(this.value); return false;" placeholder="RCHID (PICME) Number" class="form-control" />
         <div id="suggesstion-box"></div>
          </div>
                 </div>
@@ -113,11 +114,12 @@
 					</div>
           <div class="row">
 						            <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-ancPeriod">Antenatal Period <span class="mand">* </span></label>
-                          <div class="input-group input-group-merge">
-                            <select class="1-15 form-control" id="ancPeriod" name="ancPeriod" required>
+                          <label class="form-label" for="basic-icon-default-ancPeriod">Antenatal Visit Count <span class="mand">* </span></label>
+                          <div class="input-group input-group-merge" id="ancSection">
+                              <input type="text" class="form-control" id="ancPeriod" name="ancPeriod" required/>
+<!--                            <select class="1-15 form-control" id="ancPeriod" name="ancPeriod" required>
                           <option value="">Choose...</option>
-                          </select>
+                          </select>-->
                           </div>
                         </div>
 						           <div class="col-4 mb-3">

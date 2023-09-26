@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -14,10 +14,17 @@ $id = 0; $update = false; $view = false;
    $id = $_GET['view']; $view = true;
    $record = mysqli_query($conn, "SELECT * FROM ecregister WHERE id=$id");
    $n = mysqli_fetch_array($record);
-   $ecfrno = $n["ecfrno"]; $dateecreg = $n["dateecreg"]; $maadhaarid = $n["motheraadhaarid"]; $maadhaarname = $n["motheraadhaarname"];
-   $mfullname = $n["motherfullname"]; $mdob = $n["motherdob"]; $mageecreg = $n["motherageecreg"]; $magemarriage = $n["motheragemarriage"];
+   $ecfrno = $n["ecfrno"];
+
+   $dateecreg = $n["dateecreg"]; 
+   $maadhaarid = $n["motheraadhaarid"]; $maadhaarname = $n["motheraadhaarname"];
+   $mfullname = $n["motherfullname"]; 
+   $mdob = $n["motherdob"]; 
+   $mageecreg = $n["motherageecreg"]; $magemarriage = $n["motheragemarriage"];
    $mmobno = $n["mothermobno"];$mobperson = $n["mobileofperson"]; $mstatus = $n["motheredustatus"]; $haadhaarid = $n["husbandaadhaarid"]; 
-   $haadhaarname = $n["husbandaadhaarname"]; $hfullname = $n["husfullname"]; $hdob = $n["husdob"]; $hageecreg = $n["husageecreg"]; 
+   $haadhaarname = $n["husbandaadhaarname"]; $hfullname = $n["husfullname"]; 
+   $hdob = $n["husdob"]; 
+   $hageecreg = $n["husageecreg"]; 
    $hagemarriage = $n["husagemarriage"]; $husmobno = $n["husmobno"]; $hedustatus = $n["husedustatus"]; $religion = $n["religion"]; 
    $caste = $n["caste"]; $BlockId = $n["BlockId"]; $PhcId = $n["PhcId"]; $HscId= $n["HscId"]; $PanchayatId= $n["PanchayatId"]; 
    $VillageId= $n["VillageId"]; $address = $n["address"]; $pincode = $n["pincode"]; $povertystatus = $n["povertystatus"]; 
@@ -35,7 +42,10 @@ $id = 0; $update = false; $view = false;
 if (! empty($_POST["update"])) {
  $id = $_POST['id'];
 
- $ecfr = $_POST["ecfr"]; $ecfrno = $_POST["ecfrno"]; $ecfrmrg = $ecfr.$ecfrno; $dateecreg = $_POST["dateecreg"]; $maadhaarname = $_POST["motheraadhaarname"]; $mfullname = $_POST["motherfullname"]; $mdob = $_POST["motherdob"]; $mageecreg = $_POST["motherageecreg"]; $magemarriage = $_POST["motheragemarriage"]; $mmobno = $_POST["mothermobno"]; $mobperson = $_POST["mobileofperson"]; $mstatus = $_POST["motheredustatus"]; $haadhaarname = $_POST["husbandaadhaarname"]; $hfullname = $_POST["husfullname"]; $hdob = $_POST["husdob"]; $hageecreg = $_POST["husageecreg"]; $hagemarriage = $_POST["husagemarriage"]; $husmobno = $_POST["husmobno"]; $hedustatus = $_POST["husedustatus"]; $religion = $_POST["religion"]; $caste = $_POST["caste"]; $BlockId = $_POST["BlockId"]; $PhcId = $_POST["PhcId"]; $HscId= $_POST["HscId"]; 
+ $ecfr = $_POST["ecfr"]; $ecfrno = $_POST["ecfrno"]; 
+ $ecfrmrg = $ecfr.$ecfrno; 
+// $ecfrmrg = $_POST["ecfrno"];
+ $dateecreg = $_POST["dateecreg"]; $maadhaarname = $_POST["motheraadhaarname"]; $mfullname = $_POST["motherfullname"]; $mdob = $_POST["motherdob"]; $mageecreg = $_POST["motherageecreg"]; $magemarriage = $_POST["motheragemarriage"]; $mmobno = $_POST["mothermobno"]; $mobperson = $_POST["mobileofperson"]; $mstatus = $_POST["motheredustatus"]; $haadhaarname = $_POST["husbandaadhaarname"]; $hfullname = $_POST["husfullname"]; $hdob = $_POST["husdob"]; $hageecreg = $_POST["husageecreg"]; $hagemarriage = $_POST["husagemarriage"]; $husmobno = $_POST["husmobno"]; $hedustatus = $_POST["husedustatus"]; $religion = $_POST["religion"]; $caste = $_POST["caste"]; $BlockId = $_POST["BlockId"]; $PhcId = $_POST["PhcId"]; $HscId= $_POST["HscId"]; 
  $PanchayatId = $_POST["PanchayatId"]; $VillageId = $_POST["VillageId"]; $address = $_POST["address"]; $pincode = $_POST["pincode"]; 
  $povertystatus = $_POST["povertystatus"]; $migrantstatus = $_POST["migrantstatus"]; $rctype = $_POST["rationcardtype"]; $rcnum = $_POST["rationcardnum"];
  date_default_timezone_set('Asia/Kolkata'); $date = date('d-m-Y h:i:s');
@@ -44,15 +54,33 @@ if (! empty($_POST["update"])) {
  rationcardnum='$rcnum', updatedat='$date', updatedBy='$userid' WHERE id=$id");
 
   if (!empty($uquery)) {
-  echo "<script>alert('Updated Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/EligibleCouple.php');</script>";
+  echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/EligibleCouple.php');</script>";
   }
 }
  if (isset($_GET['del'])) {
    $id = $_GET['del'];
-   date_default_timezone_set('Asia/Kolkata');
-   $date = date('d-m-Y h:i:s');
-   mysqli_query($conn, "UPDATE ecregister SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND  id=$id");
-     echo "<script>alert('Deleted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/EligibleCouple.php');</script>";
+ //  date_default_timezone_set('Asia/Kolkata');
+ //  $date = date('d-m-Y h:i:s');
+ //  mysqli_query($conn, "UPDATE ecregister SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND  id=$id");
+  
+    $rec_del_pic = mysqli_query($conn, "SELECT * FROM ecregister WHERE id = $id");
+			  $n_del = mysqli_fetch_array($rec_del_pic);
+	          $Del_picmeNo = "";
+	          $Del_picmeNo = $n_del['picmeno'];
+			  
+			  if(strlen($Del_picmeNo) > 0)
+			  {	  
+			  mysqli_query($conn, "DELETE FROM antenatalvisit WHERE picmeno = $Del_picmeNo");
+              mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM immunization WHERE picmeNo = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM deliverydetails WHERE picmeno = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM medicalhistory WHERE picmeno = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM anregistration WHERE picmeno = $Del_picmeNo");
+			  }
+			  mysqli_query($conn, "DELETE FROM ecregister WHERE id = $id");
+
+
+  echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/EligibleCouple.php');</script>";
  }
 ?>
 <!-- Content wrapper -->
@@ -88,7 +116,7 @@ if (! empty($_POST["update"])) {
                 <div class="col-xl">
                   <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-						<h4 class="fw-bold"><span class="text-muted fw-light">Mother Details</span></h4>
+						<h4 class="fw-bold"><span class="text-muted fw-light">Mother's Details</span></h4>
                         <small class="text-muted float-end"><span class="mand">* </span> Fields are Mandatory</small>
                     </div>
                     <div class="card-body">
@@ -97,24 +125,15 @@ if (! empty($_POST["update"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-fullname">EC FR No <span class="mand">* </span><span id="errEcfrNo"></span></label>
                           <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-fullname2" class="input-group-text"
-                              ><i class="bx bx-user"></i
-                            ></span>
-                            <span id="hscGen">
-                            <select name="Hsc" id="SelectHsc" onchange="FirstAlphabet()" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon"  disabled>
-                            <option value="">Choose...</option>
-                           <?php   
-                            $query = "SELECT DISTINCT(HscCode),HscId FROM hscmaster ORDER BY HscId";
-                            $exequery = mysqli_query($conn, $query);
-                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['HscCode']; ?>"><?php echo $listvalue['HscCode']; ?></option>
-                          
-                          <?php  } ?>
-                             </select>
-                             </span>
-                            <input type="text" name="ecfr" class="form-control" id="ecfr" value="<?php if($ecfrno!=""){ echo substr($ecfrno,0,3); } ?>" readonly />
-                            <input
-                              type="text"
+                            <input type="hidden" name="Hsc" id="SelectHsc" value = <?php echo substr($ecfrno,0,3); ?>  onchange="FirstAlphabet()" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon"  readonly disabled />
+                                                        
+							 <label class="lblViolet"><?php echo substr($ecfrno,0,3); ?>
+                              </label>
+                            <input type="hidden" name="ecfr" class="form-control" id="ecfr" value="<?php if($ecfrno!=""){ echo substr($ecfrno,0,3); } ?>" readonly />
+                            <label class="lblViolet"><?php echo substr($ecfrno,3); ?>
+                              </label>
+							<input
+                              type="hidden"
                               name="ecfrno"
                               class="form-control"
                               id="ecfrno" 
@@ -122,13 +141,16 @@ if (! empty($_POST["update"])) {
                               aria-label="EC FR No"
                               aria-describedby="basic-icon-default-fullname2"
                               disabled value="<?php echo substr($ecfrno,3); ?>"
+							  onchange="fnCalMotAge()"
+							  readonly
+							  required
                             />
                           </div>
                         </div>
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-email">DATE OF EC REG <span class="mand">* </span> <span id="errEcReg"></span></label>
                           <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+							
                             <input
                               type="date"
                               name="dateecreg"
@@ -137,11 +159,15 @@ if (! empty($_POST["update"])) {
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-                              disabled value="<?php echo $dateecreg; ?>"
-                              
+							  <?php $cur_dt = date('Y-m-d'); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							   disabled value="<?php echo $dateecreg; ?>"
+							   onchange="fnCalMotAge()"
+                              required
                             />
                           </div>
                         </div>
+						
                         </div>
                         <div class="row">
                         <div class="col-6 mb-3">
@@ -160,12 +186,15 @@ if (! empty($_POST["update"])) {
                               aria-label="MOTHER'S AADHAAR ID"
                               aria-describedby="basic-icon-default-password2"
                               value="<?php echo $maadhaarid; ?>"
+							  onchange="fnCalMotAge()"
+							  readonly
+							  required
                             />
                           </div>
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">MOTHER NAME AS PER AADHAAR <span class="mand">* </span><span id="errMName"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">MOTHER'S NAME AS PER AADHAAR <span class="mand">* </span><span id="errMName"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user-circle"></i></span>
@@ -174,10 +203,12 @@ if (! empty($_POST["update"])) {
                               name="motheraadhaarname"
                               id="motheraadhaarname" 
                               class="form-control phone-mask"
-                              placeholder="MOTHER NAME AS PER AADHAAR"
-                              aria-label="MOTHER NAME AS PER AADHAAR"
+                              placeholder="MOTHER'S NAME AS PER AADHAAR"
+                              aria-label="MOTHER'S NAME AS PER AADHAAR"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $maadhaarname; ?>"
+							  onchange="fnCalMotAge()"
+							  required
                             />
                           </div>
                         </div>
@@ -185,7 +216,7 @@ if (! empty($_POST["update"])) {
 
                         <div class="row">
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">MOTHER FULLNAME <span class="mand">* </span><span id="errMfullname"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">MOTHER'S FULL NAME <span class="mand">* </span><span id="errMfullname"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user-check"></i
@@ -195,36 +226,43 @@ if (! empty($_POST["update"])) {
                               name="motherfullname"
                               id="motherfullname"
                               class="form-control phone-mask"
-                              placeholder="MOTHER FULLNAME"
-                              aria-label="MOTHER FULLNAME"
+                              placeholder="MOTHER'S FULL NAME"
+                              aria-label="MOTHER'S FULL NAME"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $mfullname; ?>"
+							  onchange="fnCalMotAge()"
+							  required
                               
                             />
                           </div>
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">MOTHER DATE OF BIRTH <span class="mand">* </span><span id="errMdob"></span></label>
+                          <label class="form-label" for="basic-icon-default-email">MOTHER'S DATE OF BIRTH <span class="mand">* </span><span id="errMdob"></span></label>
                           <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                           
                             <input
                               type="date"
                               name="motherdob"
                               id="motherdob"
-                              class="form-control"
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('-11 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							   class="form-control" onchange="fnCalMotAge();"
                               disabled value="<?php echo $mdob; ?>"
+							  onchange="fnCalMotAge()"
+							  required
                               
                             />
                           </div>
                         </div>
                         </div>
+						<div id="mot-mar-Sug-box"></div>
                         <div class="row">
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">MOTHER AGE AT MARRIAGE <span class="mand">* </span><span id="errMoAgeMrg"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">MOTHER'S AGE AT MARRIAGE <span class="mand">* </span><span id="errMoAgeMrg"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user-pin"></i
@@ -235,31 +273,31 @@ if (! empty($_POST["update"])) {
                               name="motheragemarriage"
                               id="motheragemarriage"
                               class="form-control phone-mask"
-                              placeholder="MOTHER AGE AT MARRIAGE"
-                              aria-label="MOTHER AGE AT MARRIAGE"
+                              placeholder="MOTHER'S AGE AT MARRIAGE"
+                              aria-label="MOTHER'S AGE AT MARRIAGE"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $magemarriage; ?>"
+							  onchange="fnCalMotAge()"
+							  required
                               
                             />
                           </div>
                         </div>
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">MOTHER AGE AT EC Registration <span class="mand">* </span><span id="errMageecreg"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">MOTHER'S AGE AT EC REGISTRATION <span class="mand">* </span><span id="errMageecreg"></span></label>
                           <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-mobile" class="input-group-text"
-                              ><i class="bx bx-user-minus"></i
-                            ></span>
-                            
+                                                      
                             <input
-                              type="text"
-                              min="11" max="99"
+                              type="number"
                               name="motherageecreg"
-                              id="motherageecreg" 
+                              id="motherageecreg" readonly=true
                               class="form-control phone-mask"
-                              placeholder="MOTHER AGE AT REGISTRATION"
-                              aria-label="MOTHER AGE AT REGISTRATION"
+                              placeholder="MOTHER'S AGE AT EC REGISTRATION"
+                              aria-label="MOTHER'S AGE AT EC REGISTRATION"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $mageecreg; ?>"
+							  onchange="fnCalMotAge()"
+							  required
                             />
                           </div>
                         </div>
@@ -273,16 +311,18 @@ if (! empty($_POST["update"])) {
                               ><i class="bx bx-mobile"></i
                             ></span>
                             <input
-                              type="text"
+                              type="tel"
                               oninput = "MothermobonlyNumbers(this.value)"
                               name="mothermobno"
                               id="mothermobno"
-                              maxlength="10"
+                              pattern="[0-9]{3}[0-9]{3}[0-9]{4}" maxlength="10"
                               class="form-control phone-mask"
                               placeholder="MOTHER'S MOBILE NUMBER"
                               aria-label="MOTHER'S MOBILE NUMBER"
                               aria-describedby="basic-icon-default-mobile"
+							  onchange="fnCalMotAge()"
                               disabled value="<?php echo $mmobno; ?>"
+							  required
                               
                             />
                           </div>
@@ -291,7 +331,7 @@ if (! empty($_POST["update"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">MOBILE BELONGS TO <span class="mand">* </span><span id="errMobPerson"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="mobileofperson" id="mobileofperson" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
+                          <select name="mobileofperson" id="mobileofperson" class="form-select" onchange="fnCalMotAge()" id="inputGroupSelect04" aria-label="Example select with button addon" disabled required>
                             
                                 <?php
 
@@ -319,9 +359,9 @@ if (! empty($_POST["update"])) {
 
                       
                       <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">MOTHER EDUCATIONAL STATUS <span class="mand">* </span><span id="errMedustatus"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">MOTHER'S EDUCATIONAL STATUS <span class="mand">* </span><span id="errMedustatus"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="motheredustatus" id="motheredustatus" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $motheredustatus; ?>" disabled>
+                          <select name="motheredustatus" id="motheredustatus" class="form-select" onchange="fnCalMotAge()" required id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $motheredustatus; ?>" disabled>
                             
                                 <?php
 
@@ -358,15 +398,15 @@ if (! empty($_POST["update"])) {
                 <div class="col-xl">
                   <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-						<h4 class="fw-bold"><span class="text-muted fw-light">Father Details</span></h4>
+						<h4 class="fw-bold"><span class="text-muted fw-light">Father's Details</span></h4>
                         <small class="text-muted float-end"><span class="mand">* </span> Fields are Mandatory</small>
                     </div>
                     <div class="card-body">
 				<div class="errMsg" id="errMsg"></div>
-               		<input type="hidden" name="id" disabled value="<?php echo $id; ?>">
+               		<input type="hidden" required name="id" disabled value="<?php echo $id; ?>">
 						<div class="row">
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-password">HUSBAND AADHAAR ID <span id="errHaadhaarid"></span></label>
+                          <label class="form-label" for="basic-icon-default-password">HUSBAND'S AADHAAR ID <span id="errHaadhaarid"></span></label>
                           <div class="input-group input-group-merge">
                             <label class="lblViolet"><?php echo $haadhaarid; ?>
                               </label>
@@ -377,16 +417,19 @@ if (! empty($_POST["update"])) {
                               id="husbandaadhaarid"
                               maxlength="12"
                               class="form-control"
-                              placeholder="HUSBAND AADHAAR ID"
-                              aria-label="HUSBAND AADHAAR ID"
+                              placeholder="HUSBAND'S AADHAAR ID"
+                              aria-label="HUSBAND'S AADHAAR ID"
                               aria-describedby="basic-icon-default-password2"
                              value="<?php echo $haadhaarid; ?>"
+							 onchange="fnCalMotAge()"
+							 readonly
+							 required
                             />
                           </div>
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND NAME AS PER AADHAAR <span class="mand">* </span><span id="errhaadhaarname"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S NAME AS PER AADHAAR <span class="mand">* </span><span id="errhaadhaarname"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user"></i
@@ -396,16 +439,18 @@ if (! empty($_POST["update"])) {
                               name="husbandaadhaarname"
                               id="husbandaadhaarname" 
                               class="form-control phone-mask"
-                              placeholder="HUSBAND NAME AS PER AADHAAR"
-                              aria-label="HUSBAND NAME AS PER AADHAAR"
+                              placeholder="HUSBAND'S NAME AS PER AADHAAR"
+                              aria-label="HUSBAND'S NAME AS PER AADHAAR"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $haadhaarname; ?>"
+							  onchange="fnCalMotAge()"
+							  required
                             />
                           </div>
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND FULLNAME <span class="mand">* </span><span id="errhfullname"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S FULL NAME <span class="mand">* </span><span id="errhfullname"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user-check"></i
@@ -415,19 +460,20 @@ if (! empty($_POST["update"])) {
                               name="husfullname"
                               id="husfullname"
                               class="form-control phone-mask"
-                              placeholder="HUSBAND FULLNAME"
-                              aria-label="HUSBAND FULLNAME"
+                              placeholder="HUSBAND'S FULL NAME"
+                              aria-label="HUSBAND'S FULL NAME"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $hfullname; ?>"
-                              
+							  onchange="fnCalMotAge()"
+                              required
                             />
                           </div>
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">HUSBAND DATE OF BIRTH <span class="mand">* </span><span id="errhdob"></span></label>
+                          <label class="form-label" for="basic-icon-default-email">HUSBAND'S DATE OF BIRTH <span class="mand">* </span><span id="errhdob"></span></label>
                           <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                           
                             <input
                               type="date"
                               name="husdob"
@@ -436,28 +482,32 @@ if (! empty($_POST["update"])) {
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-                              disabled value="<?php echo $hdob; ?>"
-                              
+							  <?php $cur_dt = date('Y-m-d', strtotime('-11 year')); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							   class="form-control" onchange="fnCalHusAge();"
+							  disabled value="<?php echo $hdob; ?>"
+							  onchange="fnCalMotAge()"
+							  required
                             />
                           </div>
                         </div>
-                        
+                        <div id="Hus-mar-Sug-box"></div>
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND AGE AT MARRIAGE <span class="mand">* </span><span id="errhagemarriage"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S AGE AT MARRIAGE <span class="mand">* </span><span id="errhagemarriage"></span></label>
                           <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-mobile" class="input-group-text"
-                              ><i class="bx bx-user-pin"></i
-                            ></span>
+                            
                             <input
                               type="number"
-                              min="11" max="99"
                               name="husagemarriage"
                               id="husagemarriage"
                               class="form-control phone-mask"
-                              placeholder="HUSBAND AGE AT CONCEPTION"
-                              aria-label="HUSBAND AGE AT CONCEPTION"
+                              placeholder="HUSBAND'S AGE AT CONCEPTION"
+                              aria-label="HUSBAND'S AGE AT CONCEPTION"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $hagemarriage; ?>"
+							  min="11" max="99"
+							  onchange="fnCalMotAge()"
+							  required
                               
                             />
                             
@@ -465,52 +515,54 @@ if (! empty($_POST["update"])) {
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND AGE AT EC Registration <span class="mand">* </span><span id="errhageecreg"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S AGE AT EC Registration <span class="mand">* </span><span id="errhageecreg"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user-minus"></i
                             ></span>
-                            <input
-                              type="text"
-                              min="11" max="99"
+                           <input
+                              type="number"
                               name="husageecreg"
-                              id="husageecreg"
+                              id="husageecreg" readonly
                               class="form-control phone-mask"
-                              placeholder="HUSBAND AGE AT MARRIAGE"
-                              aria-label="HUSBAND AGE AT MARRIAGE"
+                              placeholder="HUSBAND'S AGE AT EC REGISTRATION"
+                              aria-label="HUSBAND'S AGE AT EC REGISTRATION"
                               aria-describedby="basic-icon-default-mobile"
-                              disabled value="<?php echo $hageecreg; ?>"
-                              
-                            />
+							  value="<?php echo $hageecreg; ?>"
+							  onchange="fnCalMotAge()"
+							  disabled
+							  required
+                             />
                           </div>
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND MOBILE NUMBER <span class="mand">* </span><span id="errhmob"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S MOBILE NUMBER <span class="mand">* </span><span id="errhmob"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-mobile"></i
                             ></span>
                             <input
-                              type="text"
+                              type="tel"
                               oninput = "HusmobonlyNumbers(this.value)"
                               name="husmobno"
                               id="husmobno"
-                              maxlength="10"
+                              pattern="[0-9]{3}[0-9]{3}[0-9]{4}" maxlength="10"
                               class="form-control phone-mask"
-                              placeholder="HUSBAND MOBILE NUMBER"
-                              aria-label="HUSBAND MOBILE NUMBER"
+                              placeholder="HUSBAND'S MOBILE NUMBER"
+                              aria-label="HUSBAND'S MOBILE NUMBER"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $husmobno; ?>"
-                              
+							  onchange="fnCalMotAge()"
+                              required
                             />
                           </div>
                         </div>
   
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND EDUCATIONAL STATUS <span class="mand">* </span><span id="errhedustatus"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S EDUCATIONAL STATUS <span class="mand">* </span><span id="errhedustatus"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="husedustatus" id="husedustatus" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $husedustatus; ?>" disabled> 
+                          <select name="husedustatus" id="husedustatus" onchange="fnCalMotAge()" required class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $husedustatus; ?>" disabled> 
                                 <?php
 
                                 $list=mysqli_query($conn, "SELECT ec.husedustatus,e.enumid,e.enumvalue from ecregister ec join enumdata e on e.enumid=ec.husedustatus WHERE type=4 AND ec.id=".$id);
@@ -557,7 +609,7 @@ if (! empty($_POST["update"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">RELIGION <span class="mand">* </span><span id="errReligion"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="religion" id="religion" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
+                          <select name="religion" id="religion" class="form-select" onchange="fnCalMotAge()" required id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
                             
                                 <?php
 
@@ -588,7 +640,7 @@ if (! empty($_POST["update"])) {
 					  <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">Community <span class="mand">* </span><span id="errCaste"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="caste" id="caste" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
+                          <select name="caste" id="caste" class="form-select" onchange="fnCalMotAge()" required id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
                             
                                 <?php
 
@@ -621,7 +673,7 @@ if (! empty($_POST["update"])) {
                           <label class="form-label" for="basic-icon-default-phone">Name of the Block <span class="mand">* </span><span id="errBlockValue"></span></label>
                           <div class="input-group input-group-merge">
                             <?php if($update == true || $view == true) { ?>
-                          <select name="BlockId" id="BlockId" onchange="BlockOn()" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
+                          <select name="BlockId" id="BlockId" onchange="BlockOn()" onchange="fnCalMotAge()" required class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
                             
                                 <?php
 
@@ -656,7 +708,7 @@ if (! empty($_POST["update"])) {
                           <label class="form-label" for="basic-icon-default-phone">Name of the PHC <span class="mand">* </span><span id="errPhcValue"></span></label>
                           <div class="input-group input-group-merge">
                             <?php if($update == true || $view == true) { ?>
-                          <select name="PhcId" id="PhcId" onchange="PhcOn()" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
+                          <select name="PhcId" id="PhcId" onchange="PhcOn()" required class="form-select" onchange="fnCalMotAge()" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
                             
                                 <?php
 
@@ -690,7 +742,7 @@ if (! empty($_POST["update"])) {
                           <label class="form-label" for="basic-icon-default-phone">Name of the HSC <span class="mand">* </span><span id="errHscValue"></span></label>
                           <div class="input-group input-group-merge">
                             <?php if($update == true || $view == true) { ?>
-                          <select name="HscId" id="HscId" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
+                          <select name="HscId" id="HscId" class="form-select" required onchange="fnCalMotAge()" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
                             
                                 <?php
 
@@ -724,7 +776,7 @@ if (! empty($_POST["update"])) {
                           <label class="form-label" for="basic-icon-default-phone">Name of the Panchayat <span class="mand">* </span><span id="errPanchayat"></span></label>
                           <div class="input-group input-group-merge">
                             <?php if($update == true || $view == true) { ?>
-                          <select name="PanchayatId" id="PanchayatId" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
+                          <select name="PanchayatId" id="PanchayatId" class="form-select" onchange="fnCalMotAge()" required id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
                             
                                 <?php
 
@@ -759,7 +811,7 @@ if (! empty($_POST["update"])) {
                           <label class="form-label" for="basic-icon-default-phone">Name of the Village <span class="mand">* </span><span id="errVillage"></span></label>
                           <div class="input-group input-group-merge">
                             <?php if($update == true || $view == true) { ?>
-                          <select name="VillageId" id="VillageId" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
+                          <select name="VillageId" id="VillageId" class="form-select" onchange="fnCalMotAge()" required id="inputGroupSelect04" aria-label="Example select with button addon" disabled>
                             
                                 <?php
 
@@ -796,12 +848,12 @@ if (! empty($_POST["update"])) {
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-map-pin"></i
                             ></span>
-                            <textarea id="address" name="address" class="form-control" cols="42" rows="3" disabled><?php  echo $address; ?></textarea>
+                            <textarea id="address" name="address" class="form-control" onchange="fnCalMotAge()" required cols="42" rows="3" disabled><?php  echo $address; ?></textarea>
                           </div>
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">PINCODE  <span id="errPincode"></span></label>
+                          <label class="form-label" for="basic-icon-default-email">PINCODE <span class="mand">* </span> <span id="errPincode"></span></label>
                           <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-map"></i></span>
                             <input
@@ -812,6 +864,8 @@ if (! empty($_POST["update"])) {
                               class="form-control"
                               placeholder="PINCODE"
                               aria-label="PINCODE"
+							  onchange="fnCalMotAge()"
+							  pattern="[0-9]{6}"
                               aria-describedby="basic-icon-default-email2"
                               disabled value="<?php echo $pincode; ?>"
                               
@@ -822,7 +876,7 @@ if (! empty($_POST["update"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">POVERTY STATUS <span class="mand">* </span><span id="errPoverty"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="povertystatus" id="povertystatus" ="" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $povertystatus; ?>" disabled>
+                          <select name="povertystatus" id="povertystatus" ="" class="form-select" onchange="fnCalMotAge()" required id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $povertystatus; ?>" disabled>
                             
                                 <?php
 
@@ -853,7 +907,7 @@ if (! empty($_POST["update"])) {
                           <label class="form-label" for="basic-icon-default-phone">MIGRANT STATUS <span class="mand">* </span><span id="errMigrant"></span></label>
                           <div class="input-group input-group-merge">
                             <?php //if($update == true || $view == true) { ?>
-                          <select name="migrantstatus" id="migrantstatus" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $migrantstatus; ?>" disabled >
+                          <select name="migrantstatus" id="migrantstatus" class="form-select" onchange="fnCalMotAge()" required id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $migrantstatus; ?>" disabled >
                             
                                 <?php
 
@@ -883,7 +937,7 @@ if (! empty($_POST["update"])) {
                       <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">RATION CARD TYPE <span class="mand">* </span><span id="errRtype"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="rationcardtype" id="rationcardtype" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
+                          <select name="rationcardtype" id="rationcardtype" class="form-select" onchange="fnCalMotAge()" required id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
                             
                                 <?php
 
@@ -923,15 +977,17 @@ if (! empty($_POST["update"])) {
                               placeholder="RATION CARD NUMBER"
                               aria-label="RATION CARD NUMBER"
                               aria-describedby="basic-icon-default-email2"
+							  pattern="[0-9]{12}"
+							  onchange="fnCalMotAge()"
                               disabled value="<?php echo $rcnum; ?>"
-                              
+                              required
                             />
                           </div>
                         </div>
                         
                       <div class="input-group" id="btnSaUp" style="display:none">
                             
-                        <input class="btn btn-primary" type="submit" id="update" name="update" value="Update">
+                        <input class="btn btn-primary" type="submit" id="update" name="update" value="Update" onchange="fnCalMotAge()">
                       </div>			
                 </div><!--Family Div row-->
 				</div>

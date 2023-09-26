@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <?php session_start(); ?>
 <body>
     <!-- Layout wrapper -->
@@ -5,7 +6,7 @@
       <div class="layout-container">
         <!-- Menu -->
 <?php include ('require/header.php'); // Menu & Top Search 
-$id = 0; $view = false;
+$id = 0; $view = false; $edit = false;
 
 if (isset($_GET['view'])) {
 $id = $_GET['view'];
@@ -19,19 +20,41 @@ $deliverytype = $n["deliverytype"];$deliveryCompilcation = $n["deliveryCompilcat
 
 $noOfLiveBirth = $n["noOfLiveBirth"]; $noOfStillBirth = $n["noOfStillBirth"]; $infantId = $n["infantId"]; $birthDetails = $n["birthDetails"];
 $birthWeight = $n["birthWeight"]; $birthHeight = $n["birthHeight"]; $delayedCClamping = $n["delayedCClamping"]; $skintoskinContact = $n["skintoskinContact"];
-$breastfeedInitiated = $n["breastfeedInitiated"]; $admittedSncu = $n["admittedSncu"]; $sncudate = $n["sncudate"]; $sncuAreaName = $n["sncuAreaName"]; $sncuOutcome = $n["sncuOutcome"]; 
+$breastfeedInitiated = $n["breastfeedInitiated"]; $admittedSncu = $n["admittedSncu"]; 
+$admit_ind = ""; $admit_ind = $n["admittedSncu"];
+if($admittedSncu == 0)
+{
+$sncudate = "";
+$sncuAreaName = "";
+$sncuOutcome = "";
+}
+else	
+{
+$sncudate = $n["sncudate"]; $sncuAreaName = $n["sncuAreaName"]; $sncuOutcome = $n["sncuOutcome"]; 
+}
 $dischargedate = $n["dischargedate"]; $dischargetime = $n["dischargetime"]; $bcgdate = $n["bcgdate"]; $opvDdate = $n["opvDdate"];
 $hebBdate = $n["hebBdate"]; $injuction = $n["injuction"];
 }
 
 if (! empty($_POST["editDelivery"])) {
+	$edit = true;
 $id = $_POST["id"]; $deliverydate = $_POST["deliverydate"]; $deliverytime = $_POST["deliverytime"]; $deliverydistrict = $_POST["deliverydistrict"];
 $hospitaltype = $_POST["hospitaltype"]; $hospitalname = $_POST["hospitalname"]; $childGender = $_POST["childGender"]; $deliveryConductBy = $_POST["deliveryConductBy"];
 $deliverytype = $_POST["deliverytype"];$deliveryCompilcation = $_POST["deliveryCompilcation"]; $deliveryOutcome = $_POST["deliveryOutcome"];
 
 $noOfLiveBirth = $_POST["noOfLiveBirth"]; $noOfStillBirth = $_POST["noOfStillBirth"]; $infantId = $_POST["infantId"]; $birthDetails = $_POST["birthDetails"];
 $birthWeight = $_POST["birthWeight"]; $birthHeight = $_POST["birthHeight"]; $delayedCClamping = $_POST["delayedCClamping"]; $skintoskinContact = $_POST["skintoskinContact"];
-$breastfeedInitiated = $_POST["breastfeedInitiated"]; $admittedSncu = $_POST["admittedSncu"]; $sncudate = $_POST["sncudate"]; $sncuAreaName = $_POST["sncuAreaName"]; $sncuOutcome = $_POST["sncuOutcome"]; 
+$breastfeedInitiated = $_POST["breastfeedInitiated"]; $admittedSncu = $_POST["admittedSncu"]; 
+if($admittedSncu == 0)
+{
+$sncudate = "";
+$sncuAreaName = "";
+$sncuOutcome = "";
+}
+else	
+{
+$sncudate = $_POST["sncudate"]; $sncuAreaName = $_POST["sncuAreaName"]; $sncuOutcome = $_POST["sncuOutcome"]; 
+}
 $dischargedate = $_POST["dischargedate"]; $dischargetime = $_POST["dischargetime"]; $bcgdate = $_POST["bcgdate"]; $opvDdate = $_POST["opvDdate"];
 $hebBdate = $_POST["hebBdate"]; $injuction = $_POST["injuction"];
 date_default_timezone_set('Asia/Kolkata');
@@ -42,20 +65,31 @@ childGender='$childGender',DeliveryConductBy='$deliveryConductBy',Deliverytype='
 DeliveryCompilcation='$deliveryCompilcation',DeliveryOutcome='$deliveryOutcome',noOfLiveBirth='$noOfLiveBirth',
 noOfStillBirth='$noOfStillBirth',infantId='$infantId',birthDetails='$birthDetails',birthWeight='$birthWeight',
 birthHeight='$birthHeight',DelayedCClamping='$delayedCClamping',skintoskinContact='$skintoskinContact',
-breastfeedInitiated='$breastfeedInitiated',admittedSncu='$admittedSncu',sncudate='$sncudate',sncuAreaName='$sncuAreaName',
+breastfeedInitiated='$breastfeedInitiated',
+admittedSncu='$admittedSncu',sncudate='$sncudate',sncuAreaName='$sncuAreaName',
 sncuOutcome='$sncuOutcome',Dischargedate='$dischargedate',Dischargetime='$dischargetime',bcgdate='$bcgdate',
 opvDdate='$opvDdate',HebBdate='$hebBdate', injuction='$injuction',updatedat='$date',updatedBy='$userid' WHERE id=".$id);
 if (!empty($query)) {
-            echo "<script>alert('Updated Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/DeliveryDetails.php');</script>";
+            echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/DeliveryDetails.php');</script>";
           } }
 
 if (isset($_GET['del'])) {
 $id = $_GET['del'];
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-Y h:i:s');
-mysqli_query($conn, "UPDATE deliverydetails SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
-$_SESSION['message'] = "User deleted!"; 
-  echo "<script>alert('Deleted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/DeliveryDetails.php');</script>";
+//mysqli_query($conn, "UPDATE deliverydetails SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
+//$_SESSION['message'] = "User deleted!"; 
+
+$rec_del_pic = mysqli_query($conn, "SELECT * FROM deliverydetails WHERE id = $id");
+				          $n_del = mysqli_fetch_array($rec_del_pic);
+	          $Del_picmeNo = "";
+	          $Del_picmeNo = $n_del['picmeno'];
+			  
+			  mysqli_query($conn, "DELETE FROM deliverydetails WHERE id=$id");
+			  
+mysqli_query($conn, "DELETE FROM immunization WHERE picmeNo = $Del_picmeNo");
+mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
+  echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/DeliveryDetails.php');</script>";
 }
 ?>
  <!-- Content wrapper -->
@@ -98,27 +132,28 @@ $_SESSION['message'] = "User deleted!";
                		<input type="hidden" name="id" value="<?php echo $id; ?>">
 						<div class="row">
             <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-fullname">PICME No. <!--<span class="mand">* </span>--></label>
+                          <label class="form-label" for="basic-icon-default-fullname">RCHID (PICME) No. <!--<span class="mand">* </span>--></label>
                           <div class="input-group input-group-merge">
-                            <!-- <input
-                              type="text"
-                              name="picmeNo"
-                              class="form-control"
-                              id="picmeNo"
-                              placeholder="PICME No."
-                              aria-label="PICME No."
+                            <input
+                              type="hidden"
+                              name="picmeno"
+                              class="lblViolet"
+                              id="picmenoNew"
+                              placeholder="RCHID (PICME) No."
+                              aria-label="RCHID (PICME) No."
                               aria-describedby="basic-icon-default-fullname2"
-                              value="<?php //echo $picmeno;  ?>"
-                            disabled
+                              value="<?php echo $picmeno;  ?>"
+							  onclick="return validateEditDelivery()"
                             required
-                            /> -->
-                            <label class="lblViolet"><?php echo $picmeno; ?>
-                              </label>
+                            > 
+                            <label class="lblViolet" id="picmenoNew"><?php echo $picmeno; ?> </label>
                           </div>
                         </div>
                         <div class="col-6 mb-3">
+						<div id="deldt-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-email">DELIVERY DATE <span class="mand">* </span></label>
                             <input
+							
                               type="date"
                               name="deliverydate"
                               id="deliverydate"
@@ -126,9 +161,13 @@ $_SESSION['message'] = "User deleted!";
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
-                              value="<?php echo $deliverydate ?>"
+							  <?php $cur_dt = date('Y-m-d'); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+                              value="<?php echo $deliverydate; ?>"  
                               disabled
                               required
+							  onclick="return validateEditDelivery()"
+							  
                             />
                           
                         </div>
@@ -147,6 +186,7 @@ $_SESSION['message'] = "User deleted!";
                               value="<?php echo $deliverytime ?>"
                               disabled
                               required
+							  onclick="return validateEditDelivery()"
                             />
                           
                         </div>
@@ -163,6 +203,7 @@ $_SESSION['message'] = "User deleted!";
                               aria-describedby="basic-icon-default-mobile"
                               value="<?php echo $deliverydistrict ?>"
                               disabled
+							  onclick="return validateEditDelivery()"
                             />
                           
                         </div>
@@ -174,7 +215,7 @@ $_SESSION['message'] = "User deleted!";
                           <label class="form-label" for="basic-icon-default-phone">HOSPITAL TYPE</label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="hospitaltype" id="hospitaltype" class="form-select" disabled>
+                          <select name="hospitaltype" id="hospitaltype" class="form-select" onclick="return validateEditDelivery()" disabled>
                            <?php   
                             $query = "SELECT dd.hospitaltype,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.hospitaltype WHERE type=25 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -190,6 +231,7 @@ $_SESSION['message'] = "User deleted!";
                           <option value="6">Private Hospital</option>
                           <option value="7">PNH</option></option>
                           <option value="8">Home</option></option>
+						  
                             <?php  } 
                                 ?>
                                </select>
@@ -207,6 +249,7 @@ $_SESSION['message'] = "User deleted!";
                               aria-label="HOSPITAL NAME"
                               aria-describedby="basic-icon-default-email2"
                               value="<?php echo $hospitalname ?>"
+							  onclick="return validateEditDelivery()"
                               disabled 
                             />
                           </div>
@@ -217,7 +260,7 @@ $_SESSION['message'] = "User deleted!";
                           <label class="form-label" for="basic-icon-default-phone">CHILD GENDER <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select required name="childGender" id="childGender" class="form-select" disabled>
+                          <select required name="childGender" id="childGender" class="form-select" onclick="return validateEditDelivery()" disabled>
                            <?php   
                             $query = "SELECT dd.childGender,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.childGender WHERE type=34 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -238,7 +281,7 @@ $_SESSION['message'] = "User deleted!";
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY CONDUCTED BY <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select required name="deliveryConductBy" id="deliveryConductBy" class="form-select" disabled>                           
+                          <select required name="deliveryConductBy" id="deliveryConductBy" class="form-select" onclick="return validateEditDelivery()" disabled>                           
                               <?php   
                             $query = "SELECT dd.deliveryConductBy,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.deliveryConductBy WHERE type=35 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -266,7 +309,7 @@ $_SESSION['message'] = "User deleted!";
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY TYPE</label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="deliverytype" id="deliverytype" class="form-select" disabled>
+                          <select name="deliverytype" id="deliverytype" class="form-select" onclick="return validateEditDelivery()" disabled>
                            <?php   
                             $query = "SELECT dd.deliverytype,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.deliverytype WHERE type=36 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -287,7 +330,7 @@ $_SESSION['message'] = "User deleted!";
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY COMPLICATION <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="deliveryCompilcation" id="deliveryCompilcation" class="form-select" disabled>
+                          <select name="deliveryCompilcation" id="deliveryCompilcation" class="form-select" onclick="return validateEditDelivery()" required disabled>
                           <?php   
                             $query = "SELECT dd.deliveryCompilcation,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.deliveryCompilcation WHERE type=37 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -319,7 +362,7 @@ $_SESSION['message'] = "User deleted!";
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY OUTCOME <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select required name="deliveryOutcome" id="deliveryOutcome" class="form-select" disabled>
+                          <select required name="deliveryOutcome" id="deliveryOutcome" class="form-select" onclick="return validateEditDelivery()" disabled>
                           <?php   
                             $query = "SELECT dd.deliveryOutcome,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.deliveryOutcome WHERE type=38 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -339,17 +382,20 @@ $_SESSION['message'] = "User deleted!";
                   </div>
 
                   <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-password">NO. OF LIVE BIRTH</label>
+                          <label class="form-label" for="basic-icon-default-password">NO. OF LIVE BIRTH <span class="mand">* </span></label>
                             <input
-                              type="text"
+                              type="number"
                               name="noOfLiveBirth"
                               id="noOfLiveBirth"
                               class="form-control"
                               placeholder="NO OF LIVE BIRTH"
                               aria-label="NO OF LIVE BIRTH"
                               aria-describedby="basic-icon-default-password2"
+							  min=0  max=10
                               value="<?php echo $noOfLiveBirth ?>"
+							  required
                               disabled 
+							  onclick="return validateEditDelivery()"
                             />
                           </div>
                  </div>
@@ -358,14 +404,16 @@ $_SESSION['message'] = "User deleted!";
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">NO. OF STILL BIRTH</label>
                             <input
-                              type="text"
+                              type="number"
                               name="noOfStillBirth"
                               id="noOfStillBirth"
                               class="form-control"
                               placeholder="NO OF STILL BIRTH"
                               aria-label="NO OF STILL BIRTH"
                               aria-describedby="basic-icon-default-password2"
+							  min=0  max=10
                               value="<?php echo $noOfStillBirth ?>"
+							  onclick="return validateEditDelivery()"
                               disabled 
                             />
                           </div>
@@ -381,6 +429,7 @@ $_SESSION['message'] = "User deleted!";
                               aria-label="INFANT ID"
                               aria-describedby="basic-icon-default-password2"
                               value="<?php echo $infantId ?>"
+							  onclick="return validateEditDelivery()"
                               disabled
                             />
                           </div>
@@ -391,7 +440,7 @@ $_SESSION['message'] = "User deleted!";
                           <label class="form-label" for="basic-icon-default-phone">BIRTH DETAILS <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select required name="birthDetails" id="birthDetails" class="form-select" disabled>
+                          <select required name="birthDetails" id="birthDetails" class="form-select" onclick="return validateEditDelivery()" disabled>
                            <?php   
                             $query = "SELECT dd.birthDetails,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.birthDetails WHERE type=39 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -411,7 +460,7 @@ $_SESSION['message'] = "User deleted!";
                   <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">BIRTH WEIGHT <span class="mand">* </span></label>
                             <input
-                              type="text"
+                              type="number"
                               name="birthWeight"
                               id="birthWeight"
                               class="form-control"
@@ -419,6 +468,9 @@ $_SESSION['message'] = "User deleted!";
                               aria-label="BIRTH WEIGHT"
                               aria-describedby="basic-icon-default-password2"
                               value="<?php echo $birthWeight ?>"
+							  step = "0.01"
+							  min="1" max="6"
+							  onclick="return validateEditDelivery()"
                               disabled
                               required
                             />
@@ -429,7 +481,7 @@ $_SESSION['message'] = "User deleted!";
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">BIRTH HEIGHT</label>
                             <input
-                              type="text"
+                              type="number"
                               name="birthHeight"
                               id="birthHeight"
                               class="form-control"
@@ -437,13 +489,15 @@ $_SESSION['message'] = "User deleted!";
                               aria-label="BIRTH HEIGHT"
                               aria-describedby="basic-icon-default-password2"
                               value="<?php echo $birthHeight ?>"
+							  min="30" max="100"
+							  onclick="return validateEditDelivery()"
                               disabled
                             />
                           </div>
                         
                         <div class="mb-3 col-md-6">
                             <label class="form-label">DELAYED CORD CLAMPING</label>
-                            <select name="delayedCClamping" id="delayedCClamping" class="form-select" disabled>
+                            <select name="delayedCClamping" id="delayedCClamping" class="form-select" onclick="return validateEditDelivery()" disabled>
                            <?php  
                             $query = "SELECT dd.delayedCClamping,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.delayedCClamping WHERE type=13 AND dd.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -463,7 +517,7 @@ $_SESSION['message'] = "User deleted!";
 
                           <div class="mb-3 col-md-6">
                             <label class="form-label">SKIN TO SKIN CONTACT</label>
-                            <select name="skintoskinContact" id="skintoskinContact" class="form-select" disabled> 
+                            <select name="skintoskinContact" id="skintoskinContact" class="form-select" onclick="return validateEditDelivery()" disabled> 
                            <?php  
                           $query = "SELECT dd.skintoskinContact,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.skintoskinContact WHERE type=13 AND dd.id=".$id;
                           $exequery = mysqli_query($conn, $query);
@@ -480,8 +534,8 @@ $_SESSION['message'] = "User deleted!";
                           </div>
                         
                           <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-password">BREAST FEEDING Within Half Hour</label>
-                          <select name="breastfeedInitiated" id="breastfeedInitiated" class="form-select" disabled> 
+                          <label class="form-label" for="basic-icon-default-password">BREAST FEEDING Within Half Hour <span class="mand">* </span></label>
+                          <select required name="breastfeedInitiated" id="breastfeedInitiated" class="form-select" onclick="return validateEditDelivery()" disabled> 
                            <?php  
                           $query = "SELECT dd.breastfeedInitiated,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.breastfeedInitiated WHERE type=13 AND dd.id=".$id;
                           $exequery = mysqli_query($conn, $query);
@@ -500,7 +554,7 @@ $_SESSION['message'] = "User deleted!";
 
                           <div class="mb-3 col-md-6">
                             <label class="form-label">ADMITTED SNCU <span class="mand">* </span></label>
-                            <select required name="admittedSncu" id="admittedSncu" class="form-select" onchange="SncuChange()" disabled>  
+                            <select required name="admittedSncu" id="admittedSncu" class="form-select" disabled onclick="return validateEditDelivery()" onchange="SncuChange()" >  
                            <?php  
                           $query = "SELECT dd.admittedSncu,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.admittedSncu WHERE type=13 AND dd.id=".$id;
                           $exequery = mysqli_query($conn, $query);
@@ -511,63 +565,101 @@ $_SESSION['message'] = "User deleted!";
                        <option value="1">Yes</option>
                         <option value="0">No</option>
                               </option>
-                          <?php  } 
+                          <?php  }
                               ?>
                              </select>
                           </div>
-
-                          <div class="col-6 mb-3"  id="sncuDate" style="display: none;">
-                          <label class="form-label" for="basic-icon-default-password">SNCU DATE</label>
+						  
+						  <?php if ($admit_ind == 0) {  ?>
+                          <div class="col-6 mb-3" id="sncuDate" style="display: none;" >
+						  <?php } 
+						  else { ?>
+						  <div class="col-6 mb-3" id="sncuDate" >
+						  <?php } ?>
+						 <div id="sncudt-suggesstion-box" ></div>
+						     <label class="form-label" for="basic-icon-default-email">SNCU DATE</label>
+                            
                             <input
                               type="date"
                               name="sncudate"
                               id="sncudate"
                               class="form-control"
-                              placeholder="SNCU DATE"
-                              aria-label="SNCU DATE"
-                              aria-describedby="basic-icon-default-password2"
-                              value="<?php echo $sncudate ?>"
+                              placeholder=""
+                              aria-label=""
+                              aria-describedby="basic-icon-default-email2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
+                              value="<?php if($sncudate != ""){ echo $sncudate; } ?>"
+							  onclick="return validateEditDelivery()"
                               disabled
                             />
                           </div>
                  </div>
                  <div class="row">
+				
+                          
 
-                        <div class="col-6 mb-3"   id="sncuName" style="display: none;">
+						  <?php if ($admit_ind == 0) {  ?>
+                          <div class="col-6 mb-3"  id="sncuName" style="display: none;">
+						  <?php } 
+						  else { ?>
+						  <div class="col-6 mb-3" id="sncuName" >
+						  <?php } ?>
+						  
                           <label class="form-label" for="basic-icon-default-password">SNCU AREA NAME</label>
                             <input
                               type="text"
                               name="sncuAreaName"
                               id="sncuAreaName"
                               class="form-control"
-                              placeholder="SNCU AREA NAME"
-                              aria-label="SNCU AREA NAME"
-                              aria-describedby="basic-icon-default-password2"
+                              placeholder=""
+                              aria-label=""
+                              aria-describedby="basic-icon-default-email2"
                               value="<?php echo $sncuAreaName ?>"
+							  onclick="return validateEditDelivery()"
                               disabled
                             />
                           
                         </div>
                        
-                        <div class="col-6 mb-3"   id="sncuCome" style="display: none;">
+                        
+						  
+						  <?php if ($admit_ind == 0) {  ?>
+                          <div class="col-6 mb-3"  id="sncuCome" style="display: none;">
+						  <?php } 
+						  else { ?>
+						  <div class="col-6 mb-3" id="sncuCome" >
+						  <?php } ?>
+						  
+						  
                           <label class="form-label" for="basic-icon-default-password">SNCU OUTCOME</label>
                             <input
                               type="text"
                               name="sncuOutcome"
                               id="sncuOutcome"
                               class="form-control"
-                              placeholder="SNCU OUTCOME"
-                              aria-label="SNCU OUTCOME"
-                              aria-describedby="basic-icon-default-password2"
+                              placeholder=""
+                              aria-label=""
+                              aria-describedby="basic-icon-default-email2"
                               value="<?php echo $sncuOutcome ?>"
+							  onclick="return validateEditDelivery()"
                               disabled
                             />
                           
                         </div>
                  </div>
+				 
                  <div class="row">
-
+				 
+				 <?php
+				    //  $date="2013-03-15";
+					  
+					// $dt_ft = strval(date_format($date,"m/d/Y")); 
+				//	echo "string".$dt_ft; 
+                //    echo date($dt_ft,"Y/m/d"); exit;
+				 //$disp_date = date_format("2017/12/28","Y/m/d H:i:s"); print_r($disp_date); exit; ?>  
                         <div class="col-6 mb-3">
+						<div id="DISdt-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-password">DISCHARGE DATE <span class="mand">* </span></label>
                             <input
                               type="date"
@@ -577,14 +669,20 @@ $_SESSION['message'] = "User deleted!";
                               placeholder="DISCHARGE DATE"
                               aria-label="DISCHARGE DATE"
                               aria-describedby="basic-icon-default-password2"
-                              value="<?php echo $dischargedate ?>"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
+							  
+                              value="<?php echo $dischargedate; ?>"
+
+						      onclick="return validateEditDelivery()"
                               disabled
                               required
                             />
-                          
+                       
                         </div>
                         
                         <div class="col-6 mb-3">
+						<div id="DIStm-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-password">DISCHARGE TIME <span class="mand">* </span></label>
                             <input
                               type="time"
@@ -594,32 +692,49 @@ $_SESSION['message'] = "User deleted!";
                               placeholder="DISCHARGE TIME"
                               aria-label="DISCHARGE TIME"
                               aria-describedby="basic-icon-default-password2"
+							  
                               value="<?php echo $dischargetime ?>"
                               disabled
+							  
+							  onclick="return validateEditDelivery()"
                               required
                             />
                         </div>
                  </div>
+				 
                  <div class="row">
 
                         <div class="col-6 mb-3">
+						<div id="BCG-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-password">BCG DATE</label>
                             <input
                               type="date"
                               name="bcgdate"
                               id="bcgdate"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
                               class="form-control"
                               placeholder="BCG DATE"
                               aria-label="BCG DATE"
                               aria-describedby="basic-icon-default-password2"
-                              value="<?php echo $bcgdate ?>"
+                              onclick="return validateEditDelivery()"
+							  value="<?php 
+							  if(isset($bcgdate))
+							  {
+								  echo $bcgdate; 
+							  }
+							  else
+							  {
+								echo $bcgdate;
+							  }; ?>"  
                               disabled
                             />
                           
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-password">OPV-0 DATE</label>
+						<div id="OPV-suggesstion-box"></div>
+                          <label class="form-label" for="basic-icon-default-password">OPV-0 DATE <span class="mand">* </span></label>
                            <input
                               type="date"
                               name="opvDdate"
@@ -628,15 +743,21 @@ $_SESSION['message'] = "User deleted!";
                               placeholder="OPV-D DATE"
                               aria-label="OPV-D DATE"
                               aria-describedby="basic-icon-default-password2"
-                              value="<?php echo $opvDdate ?>"
+							  onclick="return validateEditDelivery()"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
+                              value="<?php echo $opvDdate; ?>"  
+                              required							  
                               disabled
                             />
                          
                         </div>
                  </div>
+				 
                  <div class="row">
 
                         <div class="col-6 mb-3">
+						<div id="HEPB-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-password">HEP-B DATE</label>
                           
                             <input
@@ -647,13 +768,24 @@ $_SESSION['message'] = "User deleted!";
                               placeholder="HEB-B DATE"
                               aria-label="HEB-B DATE"
                               aria-describedby="basic-icon-default-password2"
-                              value="<?php echo $hebBdate ?>"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
+                              onclick="return validateEditDelivery()"
+							   value="<?php 
+							  if(isset($hebBdate))
+							  {
+								  echo $hebBdate; 
+							  }
+							  else
+							  {
+								echo $hebBdate;
+							  }; ?>"   
                               disabled
                             />  
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Vitamin K Injection</label>
-                            <select name="injuction" id="injuction" class="form-select" disabled> 
+                            <select name="injuction" id="injuction" class="form-select" onclick="return validateEditDelivery()" disabled> 
                            <?php  
                           $query = "SELECT dd.injuction,enumid,enumvalue FROM deliverydetails dd join enumdata e on e.enumid=dd.injuction WHERE type=13 AND dd.id=".$id;
                           $exequery = mysqli_query($conn, $query);
@@ -670,7 +802,7 @@ $_SESSION['message'] = "User deleted!";
                           </div>
                         </div>
                         <div class="input-group" id="btnSaUp" style="display:none">
-                          <input class="btn btn-primary" type="submit" id="update" name="editDelivery" value="Update">
+                          <input class="btn btn-primary" type="submit" id="update" name="editDelivery" value="Update" onclick="return validateEditDelivery()">
                         </div>
                 </div>
                 

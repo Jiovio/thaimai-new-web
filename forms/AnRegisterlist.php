@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -31,7 +32,7 @@
                       <tr>
                         <th>S.No</th>
                         <th>Mother Name</th>
-                        <th>PICME No.</th>
+                        <th>RCHID (PICME) No.</th>
                         <th>Resident Type</th>
                         <th>Pregnancy Test Result</th>
                         <th>HR Pregnancy</th>
@@ -39,7 +40,7 @@
                       </tr>
                     </thead>
 <?php
-  $listQry = "SELECT DISTINCT(an.motheraadhaarid),an.id,an.picmeno,ec.motheraadhaarname,an.residentType,an.pregnancyTestResult,an.gravida,an.para,an.hrPregnancy,an.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM anregistration an JOIN ecregister ec on ec.motheraadhaarid=an.motheraadhaarid WHERE an.status=1"; 
+  $listQry = "SELECT an.motheraadhaarid,an.id,an.picmeno,ec.motheraadhaarname,an.residentType,an.pregnancyTestResult,an.gravida,an.para,an.hrPregnancy,an.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM anregistration an JOIN ecregister ec on ec.motheraadhaarid=an.motheraadhaarid WHERE an.status=1"; 
   $private = " AND an.createdBy='".$userid."'";
   $orderQry = " ORDER BY ec.motheraadhaarname ASC";
     

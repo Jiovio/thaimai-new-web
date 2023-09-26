@@ -8,7 +8,7 @@
                 <div class="input-group input-group-merge">
                 <select name="category" id="category" class="form-select" onchange="SrchCtgy()" id="inputGroupSelect04">
                 <option value="">Choose...</option>
-                    <?php   
+                    <?php  
                         $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=50";
                         $exequery = mysqli_query($conn, $query);
                         while($listvalue = mysqli_fetch_assoc($exequery)) { ?>

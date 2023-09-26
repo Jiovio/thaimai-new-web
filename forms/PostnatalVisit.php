@@ -1,19 +1,19 @@
+<?php include ('require/topHeader.php'); ?>
 <?php session_start(); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-<?php include ('require/header.php'); // Menu
-	  if(($usertype == 0) || ($usertype == 1)) {
-	  include ('require/filter.php'); // Top Filter 
-}else if(($usertype == 2)) {
-    include ('require/Bfilter.php');
-}else if(($usertype == 3) || ($usertype == 4)) {
-    include ('require/Pfilter.php');
-} else {
-    include ('require/Hfilter.php'); // Top Filter
-}
+<?php include ('require/header.php'); // Menu & Top Search
+if (isset($_GET['History'])) {
+  $pv_picmeno = $_GET['History'];
+  $record = mysqli_query($conn, "SELECT * FROM ecregister ec WHERE ec.picmeNo=$pv_picmeno");
+  $his = mysqli_fetch_array($record);
+  $his_mot_name = $his['motheraadhaarname'];
+    
+$History = true;}
+  
 ?>
           <!-- Content wrapper -->
           <div class="content-wrapper">
@@ -22,19 +22,21 @@
                
                 <!-- Hoverable Table rows -->
                  <div class="card">
-                   <h5 class="card-header"><span class="text-muted fw-light">Postnatal Visit /</span> Postnatal Visit List
+                   <h5 class="card-header"><span class="text-muted fw-light">Postnatal Visit /</span> Postnatal Visit Header List /</span> Postnatal Visit Detail List
                    <a href="AddPostnatalvisit.php" id="add" type="button" class="btn btn-primary" style="float:right;">
                        <span class="bx bx-plus"></span>&nbsp; Add Postnatal Visit
                    </a>
                    </h5>
                    <div class="table-responsive text-nowrap">
            <div class="container">
-           <table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
+           <table id="postnalVisit-detail" class="display nowrap" cellspacing="0" width="100%">
                        <thead>
                          <tr>
-               <th>S.No</th> 
-               <th>Mother Name</th>
-               <th>PICME Number</th>
+               <th>S.No</th>
+               <th>RCHID (PICME) No.</th>
+			   <th>Mother Name</th>
+			   <th>PNC Period</th>
+               <th>Mother PNC</th>
                <th>IFA Tablet</th>
                <th>Mother Danger Sign</th>
                <th>Blood Sugar</th>
@@ -43,9 +45,10 @@
                        </thead>
    
     <?php 
-    $listQry = "SELECT DISTINCT(p.picmeNo),p.id,p.ifaTabletStatus,p.motherDangerSign,p.bloodSugar,ec.motheraadhaarname,ec.BlockId,ec.PhcId,ec.HscId FROM postnatalvisit p JOIN ecregister ec on ec.picmeNo=p.picmeno WHERE p.status=1";
+    $listQry = "SELECT DISTINCT(p.picmeNo),p.id,p.ifaTabletStatus,p.motherDangerSign,p.bloodSugar,p.pncPeriod,p.motherPnc, ec.motheraadhaarname,ec.BlockId,ec.PhcId,ec.HscId FROM postnatalvisit p JOIN ecregister ec on ec.picmeNo=p.picmeno 
+	            WHERE p.status=1 AND p.pncPeriod = (SELECT max(CAST(p1.pncPeriod AS SIGNED)) From postnatalvisit p1 where p1.picmeNo = p.picmeNo)";
     $private = " AND p.createdBy='".$userid."'";
-    $orderQry = " ORDER BY ec.motheraadhaarname ASC";
+    $orderQry = " ORDER BY p.picmeNo + p.pncPeriod ASC";
     if(($usertype == 0) || ($usertype == 1)) {
       if(isset($_POST['filter'])) {
         $bloName = $_POST['BlockId']; 
@@ -76,10 +79,13 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                     ?>
                                    <tr>
                                        <td><?php echo $cnt; ?></td>
-                                       <td><?php echo $row['motheraadhaarname']; ?></td>
                                        <td><?php echo $row['picmeNo']; ?></td>
+									   <td><?php echo $row['motheraadhaarname']; ?></td>
+									   <td><?php echo $row['pncPeriod']; ?></td>
+									   <td><?php $pnc = date('d-m-Y', strtotime($row['motherPnc'])); echo $pnc; ?></td>
+									   
                                        <td><?php $ts = $row['ifaTabletStatus'];
-                                       if($ts==1){ echo "Yes"; } elseif($ts==2){ echo "No"; }
+                                       if($ts==1){ echo "Yes"; } elseif($ts==0){ echo "No"; }
                                        ?></td>
                                <td><?php $ut = $row['motherDangerSign'];
                                 if($ut==1){ echo "PPH"; } elseif($ut==2){ echo "Fever"; } elseif($ut==3){ echo "Sepsis"; }
@@ -88,7 +94,7 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                 elseif($ut==8){ echo "None"; } elseif($ut==9){ echo "Any other specify"; } ?></td>
     
                                <td><?php echo $row['bloodSugar']; ?></td>
-                              <td ><a id="view" name="view" href="../forms/ViewEditPostnatal.php?view=<?php echo $row['id']; ?>" ><i  class="bx bx-show me-1"></i>View</a></td>
+                              <td ><a id="History" name="History" href="../forms/PostnatalVisitDtl.php?History=<?php echo $row['picmeNo']; ?>" ><i  class="bx bx-show me-1"></i>History</a></td>
 
 								</tr>
                        <?php 

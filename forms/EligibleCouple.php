@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -44,6 +45,21 @@
   $listQry = "SELECT DISTINCT(motheraadhaarid),id,ecfrno,dateecreg,motheraadhaarname,husbandaadhaarid,BlockId,PhcId,HscId,status FROM ecregister WHERE status!=0";
   $private = " AND ec.createdBy='".$userid."'";
   $orderQry = " ORDER BY motheraadhaarname ASC";
+
+  if(isset($_GET['b']) && !empty($_GET['b'])){
+      $_POST['BlockId'] = $_GET['b'];
+      $_POST['filter'] =1;
+  }
+  
+  if(isset($_GET['p']) && !empty($_GET['p'])){
+      $_POST['PhcId'] = $_GET['p'];
+      $_POST['filter'] =1;
+  }
+  
+   if(isset($_GET['h']) && !empty($_GET['h'])){
+      $_POST['HscId'] = $_GET['h'];
+      $_POST['filter'] =1;
+  }
 
   if(($usertype == 0) || ($usertype == 1)) {
     if(isset($_POST['filter'])) {

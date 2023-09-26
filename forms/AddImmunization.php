@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -5,16 +6,17 @@
         <!-- Menu -->
 <?php include ('require/header.php'); // Menu & Top Search
 if (! empty($_POST["addImmunization"])) {
-  $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeNo FROM immunization where picmeNo='".$_POST["picmeNo"]."' ");
-  
+  $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeNo FROM deliverydetails where picmeNo='".$_POST["picmeNo"]."' ");
+  $pid = 0;
   while($Mvalue = mysqli_fetch_array($CheckDuplicatePno)) {
+      
     $pid = $Mvalue["picmeNo"];
   
   } 
-  if($pid > 0) {
+  if(empty($pid)) {
    
   $type = "error";
-  $emessage = "Duplicate PICME No.";
+  $emessage = "RCHID (PICME) No doesn't exist";
   
    } else {
   $picmeno = $_POST["picmeNo"]; 
@@ -107,7 +109,7 @@ if($doseNo == 1) {
 //   print_r($query.'hhhhhhhh');
 //   exit;
     if (!empty($query)) {
-            echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/Immunization.php');</script>";
+            echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}/forms/Immunization.php');</script>";
     } } } ?>
           <!-- Content wrapper -->
           <div class="content-wrapper">
@@ -132,20 +134,21 @@ if($doseNo == 1) {
                     <div class="card-body">
                     <div id="response" class="<?php if(!empty($type)) { echo $type . " display-block"; } else { echo $type . " display-none"; } ?>"><?php if(!empty($emessage)) { echo $emessage; } ?></div>
                     <br>
-                      <form action="" method="post" autocomplete="off">
+                      <form action="" method="post" autocomplete="off" onSubmit="return addImmuneValidate()">
 					<div class="row">
                         <div class="mb-3 col-md-6">
-                          <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-fullname">RCHID (PICME) NUMBER <span class="mand">* </span></label>
                           <div class="frmSearch">
-                          <input type="text" required id="picmeno" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
+                          <input type="text" required id="picmenoImmune" name="picmeNo" oninput = "onlyNumbers(this.value)" placeholder="RCHID (PICME) Number" min="100000000000" max="999999999999" class="form-control" onclick="return addImmuneValidate()" />
                           <div id="suggesstion-box"></div>
                       </div>
                       </div>
 						<div class="mb-3 col-md-6">
                           <label class="form-label">Dose No. <span class="mand">* </span></label>
-                            <select required name="doseNo" id="doseNo" class="form-select">
+                            <select required name="doseNo" id="doseNo" class="form-select" onclick="return addImmuneValidate()" >
                           <option value="">Choose...</option>
                            <?php 
+						   						
                             $query = "SELECT enumid,enumvalue,doseNo FROM enumdata WHERE type=42;";
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
@@ -157,7 +160,7 @@ if($doseNo == 1) {
 					<div class="row">
 						<div class="mb-3 col-md-6">
                           <label class="form-label">Dose Name <span class="mand">* </span></label>
-                            <select required name="doseName[]" id="doseName" multiple="multiple" class="form-select" disabled>
+                            <select required name="doseName[]" id="doseName" multiple="multiple" class="form-select" onclick="return addImmuneValidate()" disabled>
                           <?php 
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=43;";
                             $exequery = mysqli_query($conn, $query);
@@ -179,6 +182,7 @@ if($doseNo == 1) {
                               placeholder="Dose Due Date"
                               aria-label="Dose Due Date"
                               aria-describedby="basic-icon-default-conpassword" 
+							  onclick="return addImmuneValidate()"
                               required
                             />
                           </div>
@@ -196,14 +200,17 @@ if($doseNo == 1) {
                               placeholder="Dose Provided Date"
                               aria-label="Dose Provided Date"
                               aria-describedby="basic-icon-default-mobile"
+							  onclick="return addImmuneValidate()"
                             required
                               />
+                            
                           </div>
+                          <div id="dose-provide-box"></div>
                         </div>
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">Breast Feeding</label>
                           <div class="input-group input-group-merge">
-                          <select name="breastFeeding" id="breastFeeding" class="form-select" value="<?php echo $usertype; ?>">
+                          <select name="breastFeeding" id="breastFeeding" class="form-select" value="<?php echo $usertype; ?>" onclick="return addImmuneValidate()" >
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -219,7 +226,7 @@ if($doseNo == 1) {
 						<div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">Complimentary Food Started ( 7th Month )</label>
                           <div class="input-group input-group-merge">
-                          <select name="compliFoodStart" id="compliFoodStart" class="form-select">
+                          <select name="compliFoodStart" id="compliFoodStart" onclick="return addImmuneValidate()" class="form-select">
                           <option value="">Choose...</option>
                           <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -366,7 +373,7 @@ if($doseNo == 1) {
                         </div>
 					</div> -->
 					<div class="input-group">
-                        <input class="btn btn-primary" type="submit" name="addImmunization" value="Save">
+                                            <input class="btn btn-primary" type="submit" name="addImmunization" value="Save" onclick="return addImmuneValidate()">
                       </div>
                       </form>
                     </div>

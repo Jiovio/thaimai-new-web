@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
   <!-- Layout wrapper -->
   <div class="layout-wrapper layout-content-navbar">
@@ -19,7 +20,7 @@
                 <hr class="my-0" />
                 <div class="card-body">
         
-                <form method="POST" action="getMother.php">
+                <form method="POST" action="getMother.php" id="anregisterForm">
                   <div class="row">
                   <div class="col-4 mb-3">
         <label class="form-label" for="basic-icon-default-fullname">MOTHER'S AADHAAR ID <span class="mand">* </span></label>
@@ -28,10 +29,24 @@
         <div class="input-group input-group-merge">
         <span id="basic-icon-default-mobile" class="input-group-text">
         <i class="bx bx-id-card"></i></span>
-        <input type="text" required id="motheraadhaarid" name="motheraadhaarid" onchange="showMoDet(this.value)" oninput = "onlyAadhar(this.value)" placeholder="MOTHER'S AADHAAR ID" class="form-control" />
-        </div>
+        <!--input type="text" required id="motheraadhaaridval" name="motheraadhaarid" onchange="showMoDet(this.value)" oninput = "onlyAadhar(this.value)" placeholder="MOTHER'S AADHAAR ID" class="form-control" /!-->
+        <input 
+		type="text"
+		id="motheraadhaaridval" 
+		name="motheraadhaarid"
+		placeholder="MOTHER'S AADHAAR ID" 
+		class="form-control"
+        pattern="[0-9]{12}"
+		maxlength='12'
+		onclick="return addMothAadhar()" 
+		required 		/>
+        
+		</div>
         <div id="suggesstion-box"></div>
-        <button id="genName" name="genName" class="btn btn-primary">Get Details</button>
+		<div class="mt-2">
+                        <input class="btn btn-primary" id="genName" type="submit" name="genName" value="Get Details" 
+						     >
+                        </div>
         </div>
         </div>
                     </div>

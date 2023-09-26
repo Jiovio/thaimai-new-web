@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -34,7 +34,7 @@
                       <tr>
                         <th>S.No</th>    
                         <th>Mother Name</th>
-                        <th>PICME Number</th>
+                        <th>RCHID (PICME) Number</th>
                         <th>Delivery Date</th>
                         <th>Delivery Time</th>
 						<th>View</th>

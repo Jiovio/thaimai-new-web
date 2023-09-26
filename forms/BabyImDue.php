@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
   <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -12,14 +13,15 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card">
-                <h5 class="card-header"><span class="text-muted fw-light">Current Month Due /</span> Baby Immunization Due List</h5>
+                <!--- <h5 class="card-header"><span class="text-muted fw-light">Current Month Due /</span> Baby Immunization Due List</h5> --->
+				<h5 class="card-header"><span class="text-muted fw-light"> Due List /</span> Baby Immunization Due List</h5>
 				<div class="table-responsive text-nowrap">
 				<div class="container">
 				<table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
                     <thead>
                       <tr>
                         <th>S.No</th>            
-                        <th>PICME Number</th>
+                        <th>RCHID (PICME) Number</th>
 						<th>Mother's Aadhaar Name</th>
                         <th>Immunization Due Date</th>
                         <th>Next Dose No.</th>
@@ -30,9 +32,11 @@
                       </tr>
                     </thead>
 <?php
- $listQry = "SELECT DISTINCT(im.picmeno),ec.motheraadhaarname,im.FutureDoseDate,im.FutureDoseNo,ec.mothermobno,ec.PhcId,u.name,ec.BlockId,ec.HscId FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeno JOIN users u on u.id=im.createdUserId WHERE FutureDoseDate>=DATE_FORMAT(NOW() ,'%Y-%m-01') AND im.status=1";
+ $listQry = "SELECT im.picmeno,im.createdUserId, ec.motheraadhaarname,im.FutureDoseDate,im.FutureDoseNo,ec.mothermobno,ec.PhcId,ec.BlockId,ec.HscId FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeno WHERE im.doseNo = (SELECT max(CAST(im.doseNo AS SIGNED))) AND 
+ str_to_date(im.FutureDoseDate, '%Y-%m-%d') >= DATE_FORMAT(NOW() ,'%Y-%m-01') AND im.status=1";
+ //date_format(str_to_date(im.FutureDoseDate, '%m/%d/%Y'), '%Y-%m-%d') >= DATE_FORMAT(NOW() ,'%Y-%m-01') AND im.status=1";
  $private = " AND im.createdUserId='".$userid."'";
- $orderQry = " ORDER BY ec.motheraadhaarname ASC";
+ $orderQry = " ORDER BY ec.motheraadhaarname DESC";
   if(($usertype == 0) || ($usertype == 1)) {
   if(isset($_POST['filter'])) {
     $bloName = $_POST['BlockId']; 
@@ -65,12 +69,12 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                     <td><?php echo $cnt; ?></td>
                                     <td><?php echo $row['picmeno']; ?></td>
 									<td><?php echo $row['motheraadhaarname']; ?></td>
-                                    <td><?php  $dd = date('d-m-Y',strtotime($row['FutureDoseDate'])); echo $dd; ?></td>
+                                    <td><?php  $dd = date('d-m-Y',strtotime($row['FutureDoseDate'])); echo $dd; ?></td> 
                                     <td><?php echo $row['FutureDoseNo']; ?></td>
                                     <td><?php echo $row['mothermobno']; ?></td>
 									<td><?php echo $row['PhcId']; ?></td>
-                                    <td><?php echo $row['name']; ?></td>
-									<!--<td><a href="../forms/ViewEditMedical.php?view=<?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>-->
+                                    <td><?php echo $row['createdUserId']; ?></td>
+									<!--<td><a href="../forms/ViewEditMedical.php?view=<//?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>-->
                                 </tr>
                     <?php 
                         $cnt++;

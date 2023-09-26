@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <?php
 require_once "../config/db_connect.php";
 $doseNo = $_POST["doseNo"];

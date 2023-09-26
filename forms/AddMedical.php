@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -16,7 +17,7 @@ if (! empty($_POST["addMedical"])) {
   if($pNo > 0) {
    
   $type = "error";
-  $emessage = "Duplicate PICME No.";
+  $emessage = "Duplicate RCHID (PICME) No.";
   
    } else {
        $mname = mysqli_query($conn,"SELECT picmeNo,motheraadhaarname FROM ecregister where picmeNo='".$_POST["picmeno"]."' ");
@@ -25,7 +26,10 @@ if (! empty($_POST["addMedical"])) {
     $mn = $MnameValue["motheraadhaarname"];
   
   }
-  $picmeno = $_POST["picmeno"]; $lmpdate = $_POST["lmpdate"]; $edddate = $_POST["edddate"]; $reg12weeks = $_POST["reg12weeks"];
+  $picmeno = $_POST["picmeno"]; $lmpdate = $_POST["lmpdate"]; 
+  $edddt = $_POST["edddate"]; 
+  $edddate = substr($edddt,6,4)."-".substr($edddt,3,2)."-".substr($edddt,0,2); /*mm/dd/yyyy*/
+  $reg12weeks = $_POST["reg12weeks"];
   $momBGtaken = $_POST["momBGtaken"]; $momBGtype = $_POST["momBGtype"]; 
   $pastillness = $_POST["pastillness"]; 
   $momVdrlRprResult = $_POST["momVdrlRprResult"]; 
@@ -47,7 +51,8 @@ if (! empty($_POST["addMedical"])) {
   VALUES ('$picmeno','$lmpdate','$edddate','$reg12weeks','$momBGtaken','$momBGtype','$pastillness','$bleedtime','$clottime','$momVdrlRprResult',
   '$husVdrlRprResult','$momhbresult','$hushbresult','$momhivtestresult',
   '$anyOtherInvest','$hushivtestresult','$totPregnancy','$placeDeliveryDistrict','$hospitaltype','$hospitalname','$userid')");
-  if(($pastillness !=100) || ($momVdrlRprResult == 1) || ($momhbresult == 1) || ($hushbresult == 1) || ($momhivtestresult == 1) || ($hushivtestresult == 1)) {
+  if(($pastillness !=100) || ($momVdrlRprResult == 1) || ($momhbresult == 1) || ($momhbresult == 3) || ($hushbresult == 1) ||  ($hushbresult == 3) || 
+          ($momhivtestresult == 1) ||  ($momhivtestresult == 3) || ($hushivtestresult == 1)  || ($hushivtestresult == 3)) {
     
   $hrqry = mysqli_query($conn,"INSERT INTO highriskmothers (picmeNo, motherName, highRiskFactor) 
   VALUES ('$picmeno','$mn','$pastillness')"); 
@@ -55,7 +60,7 @@ if (! empty($_POST["addMedical"])) {
   }
 
             if (!empty($query)) {
-              echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/MedicalHistory.php');</script>";
+              echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}/forms/MedicalHistory.php');</script>";
           }  }  }  ?>
 <!-- Content wrapper -->
       <div class="content-wrapper">
@@ -78,15 +83,14 @@ if (! empty($_POST["addMedical"])) {
                         <small class="float-end"><span class="mand">* </span> Fields are Mandatory</small>
                     </div>
                     <div class="card-body">
-                      
-                    <div id="response" class="<?php if(!empty($type)) { echo $type . " display-block"; } else { echo $type . " display-none"; } ?>"><?php if(!empty($emessage)) { echo $emessage; } ?></div>
-                    <br>
+                     <div class="errMsg" id="errMsg"></div> 
+                    
             <div class="row">
                 <div class="col-6 mb-3">
-                <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
+                <label class="form-label" for="basic-icon-default-fullname">RCHID (PICME) NUMBER <span class="mand">* </span></label>
                 <div class="frmSearch">
-                <input type="text" required id="picmeno" name="picmeno" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
-                <div id="suggesstion-box"></div>
+                <input type="number" required id="picmenomed" name="picmeno" min="100000000000" max="999999999999" oninput = "onlyNumbers(this.value)" placeholder="RCHID (PICME) Number" class="form-control" onclick="return addMedicalValidate()" />
+				<div id="suggesstion-box"></div>
                 </div>
                 </div>
                         <div class="col-6 mb-3">
@@ -99,6 +103,7 @@ if (! empty($_POST["addMedical"])) {
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
+							  onclick="return addMedicalValidate()"
                              />
                         </div>
                         </div>
@@ -106,21 +111,22 @@ if (! empty($_POST["addMedical"])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">EDD DATE <span class="mand">* </span></label>
                             <input
-                              type="date"
+                              type="text"
                               name="edddate"
                               id="edddate" required
                               class="form-control"
                               placeholder=""
                               aria-label=""
+                              readonly = true
                               aria-describedby="basic-icon-default-password2"
-                            
+                            onclick="return addMedicalValidate()"
                             />
                           
                         </div>
 
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">REGISTER 12 WEEKS <span class="mand">* </span></label>
-                          <select name="reg12weeks" id="reg12weeks" class="form-select" required>
+                          <select name="reg12weeks" id="reg12weeks" onclick="return addMedicalValidate()" class="form-select" required>
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -138,7 +144,7 @@ if (! empty($_POST["addMedical"])) {
                           <label class="form-label" for="basic-icon-default-phone">MOTHER BLOOD GROUP TAKEN <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="momBGtaken" id="momBGtaken" class="form-select" required>
+                          <select name="momBGtaken" id="momBGtaken" onclick="return addMedicalValidate()" class="form-select" required>
                           <option value="">Choose...</option>
 
                            <?php   
@@ -157,7 +163,7 @@ if (! empty($_POST["addMedical"])) {
                           <label class="form-label" for="basic-icon-default-phone">MOTHER BLOOD GROUP TYPE <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="momBGtype" id="momBGtype" class="form-select" required>
+                          <select name="momBGtype" id="momBGtype" onclick="return addMedicalValidate()" class="form-select" required>
                           <option value="">Choose...</option>
 
                            <?php   
@@ -179,7 +185,7 @@ if (! empty($_POST["addMedical"])) {
                           <label class="form-label" for="basic-icon-default-phone">PAST ILLNESS <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="pastillness" id="pastillness" class="form-select" required>
+                          <select name="pastillness" id="pastillness" class="form-select" onclick="return addMedicalValidate()" required>
                           <option value="">Choose...</option>
 
                            <?php   
@@ -204,7 +210,7 @@ if (! empty($_POST["addMedical"])) {
                               placeholder="Bleeding Time"
                               aria-label="Bleeding Time"
                               aria-describedby="basic-icon-default-email2"
-                            
+                              onclick="return addMedicalValidate()"
                             />
                           </div>
                           </div>
@@ -221,7 +227,7 @@ if (! empty($_POST["addMedical"])) {
                               placeholder="Clotting Time"
                               aria-label="Clotting Time"
                               aria-describedby="basic-icon-default-email2"
-                            
+                              onclick="return addMedicalValidate()"
                             />
                           </div> 
 
@@ -249,7 +255,7 @@ if (! empty($_POST["addMedical"])) {
                           <label class="form-label" for="basic-icon-default-phone">MOTHER VDRl RPR RESULT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="momVdrlRprResult" id="momVdrlRprResult" class="form-select" required>
+                          <select name="momVdrlRprResult" id="momVdrlRprResult" class="form-select" onclick="return addMedicalValidate()" required>
                           <option value="">Choose...</option>
 
                            <?php   
@@ -290,7 +296,7 @@ if (! empty($_POST["addMedical"])) {
                           <label class="form-label" for="basic-icon-default-phone">HUSBAND VDRl RPR RESULT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="husVdrlRprResult" id="husVdrlRprResult" class="form-select" required>
+                          <select name="husVdrlRprResult" id="husVdrlRprResult" class="form-select" onclick="return addMedicalValidate()" required>
                           <option value="">Choose...</option>
 
                            <?php   
@@ -331,7 +337,7 @@ if (! empty($_POST["addMedical"])) {
                           <label class="form-label" for="basic-icon-default-phone">MOTHER HBSAG RESULT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="momhbresult" id="momhbresult" class="form-select" required>
+                          <select name="momhbresult" id="momhbresult" class="form-select" onclick="return addMedicalValidate()" required>
                           <option value="">Choose...</option>
 
                            <?php   
@@ -372,7 +378,7 @@ if (! empty($_POST["addMedical"])) {
                           <label class="form-label" for="basic-icon-default-phone">HUSBAND HBSAG RESULT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="hushbresult" id="hushbresult" class="form-select" required>
+                          <select name="hushbresult" id="hushbresult" class="form-select" onclick="return addMedicalValidate()" required>
                           <option value="">Choose...</option>
 
                            <?php   
@@ -413,7 +419,7 @@ if (! empty($_POST["addMedical"])) {
                           <label class="form-label" for="basic-icon-default-phone">MOTHER HIV TEST RESULT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="momhivtestresult" id="momhivtestresult" class="form-select" required>
+                          <select name="momhivtestresult" id="momhivtestresult" class="form-select" onclick="return addMedicalValidate()" required>
                           <option value="">Choose...</option>
 
                            <?php   
@@ -455,7 +461,7 @@ if (! empty($_POST["addMedical"])) {
                           <label class="form-label" for="basic-icon-default-phone">HUSBAND HIV TEST RESULT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="hushivtestresult" id="hushivtestresult" class="form-select" required>
+                          <select name="hushivtestresult" id="hushivtestresult" class="form-select" onclick="return addMedicalValidate()" required>
                           <option value="">Choose...</option>
 
                            <?php   
@@ -480,7 +486,7 @@ if (! empty($_POST["addMedical"])) {
                               placeholder="Any Other Investigation"
                               aria-label="Any Other Investigation"
                               aria-describedby="basic-icon-default-email2"
-                              
+                              onclick="return addMedicalValidate()"
                             />
                           </div>
                         </div>
@@ -549,7 +555,7 @@ if (! empty($_POST["addMedical"])) {
                           <label class="form-label" for="basic-icon-default-phone">Total Number Of Pregnancy <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="totPregnancy" id="totPregnancy" onchange="totPregnancyChange()" class="form-select" required>
+                          <select name="totPregnancy" id="totPregnancy" onchange="totPregnancyChange()" class="form-select" onclick="return addMedicalValidate()" required>
                           <option value="">Choose...</option>
                         
                            <?php   
@@ -574,7 +580,7 @@ if (! empty($_POST["addMedical"])) {
                               placeholder="PREVIOUS DELIVERY DISTRICT"
                               aria-label="PREVIOUS DELIVERY DISTRICT"
                               aria-describedby="basic-icon-default-email2"
-                            
+                              onclick="return addMedicalValidate()"
                             />
                           </div>
                           <!-- </div>
@@ -585,7 +591,7 @@ if (! empty($_POST["addMedical"])) {
                           <label class="form-label" for="basic-icon-default-phone">PLACE OF DELIVERY Recommended <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="hospitaltype" id="hospitaltype" class="form-select" required>
+                          <select name="hospitaltype" id="hospitaltype" class="form-select" onclick="return addMedicalValidate()" required>
                           <option value="">Choose...</option>
                         
                            <?php   
@@ -613,13 +619,13 @@ if (! empty($_POST["addMedical"])) {
                               placeholder="HOSPITAL NAME"
                               aria-label="HOSPITAL NAME"
                               aria-describedby="basic-icon-default-password2"
-                        
+                              onclick="return addMedicalValidate()"
                             />  
                         </div>
                 </div>
                 
               <div class="mt-2">
-                        <input class="btn btn-primary" type="submit" name="addMedical" value="Save">
+                        <input class="btn btn-primary" type="submit" name="addMedical" value="Save" onclick="return addMedicalValidate()">
                         </div>
               </div>
             </div>

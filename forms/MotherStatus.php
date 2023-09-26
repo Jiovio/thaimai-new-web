@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -31,14 +31,15 @@
                          <tr>
                <th>S.No</th> 
                <th>Mother Name</th>
-               <th>PICME Number</th>
+               <th>RCHID (PICME) Number</th>
                <th>Mother Status</th>
                          </tr>
                        </thead>
    
     <?php 
-    $listQry = "SELECT * FROM `ecregister` WHERE status NOT IN(0,1)";
-    $private = " AND createdBy='".$userid."'";
+  //  $listQry = "SELECT * FROM `ecregister` WHERE status NOT IN(0,1) AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ec.picmeNo)";
+    $listQry = "SELECT * FROM `ecregister` ec WHERE status NOT IN(0,1) AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ec.picmeNo)";
+	$private = " AND createdBy='".$userid."'";
     $orderQry = " ORDER BY motheraadhaarname ASC";
     
     if(($usertype == 0) || ($usertype == 1)) {
@@ -75,7 +76,7 @@ $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$BlockId."'".$orderQry)
                                        <td><?php echo $row['picmeNo']; ?></td>
                                        <td><?php $mstatus=$row['status'];
                                        if($mstatus==2){ echo "Antenatal"; }
-                                       else if($mstatus==3){ echo "Postnatal"; }
+                                     //  else if($mstatus==3){ echo "Postnatal"; }
                                        else if($mstatus==5){ echo "Teenage Pregnancy"; } 
                                        else if($mstatus==6){ echo "High Risk Pregnancy"; } ?></td>
 								</tr>

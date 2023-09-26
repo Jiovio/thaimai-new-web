@@ -1,15 +1,22 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
 <?php ini_set('display_errors','1'); include ('require/header.php'); // Menu & Top Search
+$pregancyWeek1 = "";
+if(isset($_POST["pregnancyWeek1"]) && !empty($_POST["pregnancyWeek1"]))
+{
+    $pregancyWeek1 = intval(trim($_POST["pregnancyWeek1"]));
+}
+
 if (!empty($_POST["btnSecond"])) {
   $picmeno = $_POST["picmeno"];
   $fastingSugar = $_POST["fastingSugar"]; 
   $postPrandial = $_POST["postPrandial"]; 
   $gctStatus = $_POST["gctStatus"]; 
-  $gctValue = $_POST["gctValue"]; 
+  $gctValue = isset($_POST["gctValue"]) ? $_POST["gctValue"] : ""; 
   $tsh = $_POST["Tsh"];
   $Td1 = $_POST["Td1"];
   $TdDose = $_POST["TdDose"];
@@ -24,11 +31,11 @@ if (!empty($_POST["btnSecond"])) {
   $Dose1Date = $_POST["Dose1Date"];
   $Dose2Date = $_POST["Dose2Date"];
   $PreDate = $_POST["PreDate"];
-  $NoFolicAcid = $_POST["NoFolicAcid"];
-  $NoIFA = $_POST["NoIFA"]; 
-  $dateofIFA = $_POST["dateofIFA"]; 
-  $dateofAlbendazole = $_POST["dateofAlbendazole"];
-  $noCalcium = $_POST["noCalcium"];
+  $NoFolicAcid = isset($_POST["NoFolicAcid"]) ? $_POST["NoFolicAcid"] : "";
+  $NoIFA = isset($_POST["NoIFA"]) ? $_POST["NoIFA"] : ""; 
+  $dateofIFA = isset($_POST["dateofIFA"]) ? $_POST["dateofIFA"] : ""; 
+  $dateofAlbendazole = isset($_POST["dateofAlbendazole"]) ? $_POST["dateofAlbendazole"] : "" ;
+  $noCalcium = isset($_POST["noCalcium"]) ? $_POST["noCalcium"] : "";
 
  $query = mysqli_query($conn, "UPDATE antenatalvisit SET fastingSugar='$fastingSugar',postPrandial='$postPrandial',
  gctStatus='$gctStatus',gctValue='$gctValue',Tsh='$tsh',Td1='$Td1',TdDose='$TdDose',Td1Date='$Td1Date',Td2='$Td1',Td2Dose='$Td2Dose',
@@ -42,9 +49,9 @@ if (!empty($_POST["btnSecond"])) {
       <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
               <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Antenatal Visit /</span> Add Antenatal Visit
-              <a href="AntenatalVisit.php"><button type="submit" class="btn btn-primary" id="btnBack">
+              <button type="buttonn" class="btn btn-primary" id="btnBack" onclick="javascript:history.go(-1);return false;">
 				<span class="bx bx-arrow-back"></span>&nbsp; Back
-              </button></a>
+              </button>
 			</h4>
 			<!-- Basic Layout -->
               <div class="row">
@@ -72,8 +79,8 @@ if (!empty($_POST["btnSecond"])) {
                               id="calciumDate"
                               placeholder="Calcium Date"
                               aria-label="Calcium Date"
-                              aria-describedby="basic-icon-default-calciumDate"
-                              required
+                              aria-describedby="basic-icon-default-calciumDate"                              
+                              <?php if($pregancyWeek1 <= 12 && $pregancyWeek1!="") { ?> disabled="disabled" <?php } ?>
                             />
                           </div>
                         </div>
@@ -143,7 +150,7 @@ if (!empty($_POST["btnSecond"])) {
                           <label class="form-label" for="basic-icon-default-usgScanEdd">USG Scan Edd</label>
                           <div class="input-group input-group-merge">
                             <input
-                              type="text"
+                              type="date"
                               name="usgScanEdd"
                               class="form-control"
                               id="ScanEdd"

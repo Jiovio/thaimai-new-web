@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <?php
 include "../config/db_connect.php";
 if (! empty($_POST["keyword"])) {

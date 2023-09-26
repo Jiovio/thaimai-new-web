@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <?php session_start(); ?>
 <body>
     <!-- Layout wrapper -->
@@ -63,7 +64,12 @@ if (! empty($_POST["update"])) {
   
   }
   $id = $_POST['id'];
-    $lmpdate = $_POST["lmpdate"]; $edddate = $_POST["edddate"]; $reg12weeks = $_POST["reg12weeks"];
+    $lmpdate = $_POST["lmpdate"]; 
+	$edddt = $_POST["edddate"]; 
+	//print_r($edddt); 
+	$edddate = substr($edddt,6,4)."-".substr($edddt,0,2)."-".substr($edddt,3,2); /*mm/dd/yyyy*/
+	//print_r(substr($edddt,6,4)."-".substr($edddt,0,2)."-".substr($edddt,3,2)); exit;
+	$reg12weeks = $_POST["reg12weeks"];
     $momBGtaken = $_POST["momBGtaken"]; $momBGtype = $_POST["momBGtype"]; 
     $pastillness = $_POST["pastillness"]; 
     $bleedtime = $_POST["bleedtime"]; $clottime = $_POST["clotTime"]; 
@@ -96,16 +102,28 @@ if (! empty($_POST["update"])) {
 
       }
 if (!empty($query)) {
-  echo "<script>alert('Updated Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/MedicalHistory.php');</script>";
+  echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/MedicalHistory.php');</script>";
   } }
 
 if (isset($_GET['del'])) {
   $id = $_GET['del'];
-  date_default_timezone_set('Asia/Kolkata');
-  $date = date('d-m-Y h:i:s');
-  mysqli_query($conn, "UPDATE medicalhistory SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
-  $_SESSION['message'] = "User deleted!"; 
-  echo "<script>alert('Deleted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/MedicalHistory.php');</script>";
+ // date_default_timezone_set('Asia/Kolkata');
+ // $date = date('d-m-Y h:i:s');
+  
+ // mysqli_query($conn, "UPDATE medicalhistory SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
+ // $_SESSION['message'] = "User deleted!"; 
+  
+  $rec_del_pic = mysqli_query($conn, "SELECT * FROM medicalhistory WHERE id = $id");
+				          $n_del = mysqli_fetch_array($rec_del_pic);
+	          $Del_picmeNo = "";
+	          $Del_picmeNo = $n_del['picmeno'];
+			  
+			  mysqli_query($conn, "DELETE FROM medicalhistory WHERE id=$id");
+			  mysqli_query($conn, "DELETE FROM anregistration WHERE picmeno = $Del_picmeNo");
+			  mysqli_query($conn, "DELETE FROM deliverydetails WHERE picmeno = $Del_picmeNo");
+              mysqli_query($conn, "DELETE FROM immunization WHERE picmeNo = $Del_picmeNo");
+              mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
+  echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/MedicalHistory.php');</script>";
 }
 ?>
           <!-- Content wrapper -->
@@ -163,7 +181,7 @@ if (isset($_GET['del'])) {
                		<input type="hidden" name="id" value="<?php echo $id; ?>">
 					    	<div class="row">
                 <div class="mb-3 col-md-6">
-                            <label class="form-label">PICME NUMBER <!--<span class="mand">* </span>--></label>
+                            <label class="form-label">RCHID (PICME) NUMBER <!--<span class="mand">* </span>--></label>
                             <div class="input-group input-group-merge">
                             <!-- <input
                               type="text"
@@ -180,17 +198,20 @@ if (isset($_GET['del'])) {
                           </div>
                           </div>
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">LMP DATE <span class="mand">* </span></label>
+						<?php $cur_dt = date('Y-m-d', strtotime('+1 year')); ?>
+                          <label class="form-label" for="basic-icon-default-phone">LMP DATE <span class="mand">* </span></label>
                             <input
                               type="date"
                               name="lmpdate"
-                              id="lmpdate" required
+                              id="lmpdate" 
                               class="form-control"
                               placeholder=""
-                              aria-label=""
-                              aria-describedby="basic-icon-default-email2"
-                              value="<?php echo $lmpdate ?>"
-                              disabled
+                              aria-label="LMP Date"
+                              aria-describedby="basic-icon-default-mobile"
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+                              value="<?php echo $lmpdate; ?>"  
+							  disabled
+							  required
                             />
                           
                         </div>
@@ -201,14 +222,22 @@ if (isset($_GET['del'])) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">EDD DATE <span class="mand">* </span></label>
                             <input
-                              type="date"
+                              type="text"
                               name="edddate"
                               id="edddate" required
                               class="form-control"
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-password2"
-                              value="<?php echo $edddate ?>"
+							  
+							  <?php 
+							    $edddt = ""; /*2022-12-09 */
+							    $edddt = $edddate;
+	                            $eddate = substr($edddt,5,2)."-".substr($edddt,8,2)."-".substr($edddt,0,4); 
+							  ?>
+							  
+                              value="<?php echo $eddate; ?>" 
+							  readonly="readonly"
                               disabled
                             />
                           
@@ -485,7 +514,7 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-phone">MOTHER HBSAG RESULT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <?php if($view == true) { ?>  
-                          <select required name="momhbresult" id="momhbresult" class="form-select" required disabled>
+                          <select required name="momhbresult" id="momhbresult" class="form-select" disabled>
                           
                            <?php   
                             $query = mysqli_query($conn, "SELECT m.momhbresult,e.enumid,e.enumvalue FROM medicalhistory m join enumdata e on m.momhbresult=e.enumid WHERE type=11 AND m.id=".$id);
@@ -537,7 +566,7 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-phone">HUSBAND HBSAG RESULT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                           <?php if($view == true) { ?>  
-                          <select required name="hushbresult" id="hushbresult" class="form-select" required disabled>
+                          <select required name="hushbresult" id="hushbresult" class="form-select" disabled>
                            <?php   
                             $query = mysqli_query($conn, "SELECT m.hushbresult,e.enumid,e.enumvalue FROM medicalhistory m join enumdata e on m.hushbresult=e.enumid WHERE type=11 AND m.id=".$id);
                             while($status_list=mysqli_fetch_assoc($query)){
@@ -587,7 +616,7 @@ if (isset($_GET['del'])) {
                           <label class="form-label" for="basic-icon-default-phone">MOTHER HIV TEST RESULT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             <?php if($view == true) { ?>
-                          <select required name="momhivtestresult" id="momhivtestresult" class="form-select" required disabled>
+                          <select required name="momhivtestresult" id="momhivtestresult" class="form-select" disabled>
                           
                            <?php   
                             $query = mysqli_query($conn, "SELECT m.momhivtestresult,e.enumid,e.enumvalue FROM medicalhistory m join enumdata e on m.momhivtestresult=e.enumid WHERE type=11 AND m.id=".$id);
@@ -636,20 +665,6 @@ if (isset($_GET['del'])) {
                           </div> -->
                        
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">Any Other Investigation With Result </label>
-                            <input
-                              type="text"
-                              name="anyOtherInvest"
-                              id="anyOtherInvest"
-                              class="form-control"
-                              placeholder="Any Other Investigation"
-                              aria-label="Any Other Investigation"
-                              aria-describedby="basic-icon-default-email2"
-                              value="<?php  echo $anyOtherInvest ?>"
-                              disabled
-                            />
-                          </div>
-                        <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">HUSBAND HIV TEST RESULT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             <?php if($view == true) { ?>
@@ -673,6 +688,21 @@ if (isset($_GET['del'])) {
                                 <?php } ?>
                       </div>
                         </div>
+						
+						<div class="col-6 mb-3">
+                          <label class="form-label" for="basic-icon-default-email">Any Other Investigation With Result </label>
+                            <input
+                              type="text"
+                              name="anyOtherInvest"
+                              id="anyOtherInvest"
+                              class="form-control"
+                              placeholder="Any Other Investigation"
+                              aria-label="Any Other Investigation"
+                              aria-describedby="basic-icon-default-email2"
+                              value="<?php  echo $anyOtherInvest ?>"
+                              disabled
+                            />
+                          </div>
 
                         </div>
                         <div class="row">
@@ -777,14 +807,14 @@ if (isset($_GET['del'])) {
                       </div>
                         </div>
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">PLACE OF DELIVERY DISTRICT </label>
+                          <label class="form-label" for="basic-icon-default-email">PREVIOUS DELIVERY DISTRICT </label>
                             <input
                               type="text"
                               name="placeDeliveryDistrict"
                               id="placeDeliveryDistrict"
                               class="form-control"
-                              placeholder="PLACE OF DELIVERY DISTRICT"
-                              aria-label="PLACE OF DELIVERY DISTRICT"
+                              placeholder="PREVIOUS DELIVERY DISTRICT"
+                              aria-label="PREVIOUS DELIVERY DISTRICT"
                               aria-describedby="basic-icon-default-email2"
                               value="<?php echo $placeDeliveryDistrict ?>"
                               disabled
@@ -831,6 +861,7 @@ if (isset($_GET['del'])) {
                               aria-describedby="basic-icon-default-password2"
                               value="<?php echo $hospitalname ?>"
                               disabled
+							  required
                             />  
                         </div>
                 </div>

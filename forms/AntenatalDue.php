@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
   	<!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -19,9 +20,9 @@
                     <thead>
                       <tr>
                         <th>S.No</th>            
-                        <th>PICME Number</th>
+                        <th>RCHID (PICME) Number</th>
 						            <th>Mother's Aadhaar Name</th>
-                        <th>An Visit Date</th>
+                        <th>AV Due Date</th>
 						            <th>Mother's Mobile No.</th>
 						            <th>Village Id</th>
 						            <th>Entered By</th>
@@ -29,7 +30,10 @@
                       </tr>
                     </thead>
 <?php  
-$listQry = "SELECT DISTINCT(ec.picmeNo),ec.motheraadhaarname,av.avdueDate,ec.mothermobno,ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno LEFT JOIN users u on av.createdBy=u.id WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND MONTH(av.avdueDate) = MONTH(CURRENT_DATE()) AND av.status=1";
+
+$listQry = "SELECT DISTINCT(av.picmeno),ec.motheraadhaarname,av.avdueDate,ec.mothermobno, av.anvisitDate, ec.picmeNo, ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno 
+LEFT JOIN users u on av.createdBy=u.id 
+WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND Month(av.avdueDate) = Month(CURRENT_DATE()) AND av.status!=0";
 $private = " AND av.createdBy='".$userid."'";
 $orderQry = " ORDER BY ec.motheraadhaarname ASC";
 if(($usertype == 0) || ($usertype == 1)) {
@@ -57,21 +61,21 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
       $ExeQuery = mysqli_query($conn,$listQry.$private.$orderQry);
   }
                    if($ExeQuery) {
-                      $cnt=1;
+					                      $cnt=1;
                       while($row = mysqli_fetch_array($ExeQuery)) {
                     ?>
                                 <tr>
                                     <td><?php echo $cnt; ?></td>
                                     <td><?php echo $row['picmeNo']; ?></td>
 									<td><?php echo $row['motheraadhaarname']; ?></td>
-                                    <td><?php  $dd = date('d-m-Y',strtotime($row['avdueDate'])); echo $dd; ?></td>
+                                    <td><?php  $dd = date('m-d-Y',strtotime($row['avdueDate'])); echo $dd; ?></td>
                                     <td><?php echo $row['mothermobno']; ?></td>
 									<td><?php echo $row['PhcId']; ?></td>
                                     <td><?php echo $row['name']; ?></td>
 									<!--<td><a href="../forms/ViewEditMedical.php?view=<?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>-->
                                 </tr>
                     <?php 
-                        $cnt++;
+                        $cnt++; 
                       } 
                     } ?>
                     </table></div>

@@ -1,32 +1,37 @@
+<?php include ('require/topHeader.php'); ?>
 <?php 
 $ErCntmq = mysqli_query($conn,"SELECT COUNT(id) AS ErCnt FROM ecregister WHERE status!=0");
 $ErCnt = mysqli_fetch_array($ErCntmq);
 
-$ArCntmq = mysqli_query($conn,"SELECT COUNT(id) AS ArCnt FROM anregistration WHERE status=1");
+$ArCntmq = mysqli_query($conn,"SELECT COUNT(an.id) AS ArCnt FROM anregistration an JOIN ecregister ec on ec.motheraadhaarid=an.motheraadhaarid WHERE an.status=1");
 $ArCnt = mysqli_fetch_array($ArCntmq);
 
-$AvCntmq = mysqli_query($conn,"SELECT count(id) AS AvCnt FROM antenatalvisit WHERE status=1");
+$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1");
 $AvCnt = mysqli_fetch_array($AvCntmq);
 
-$MhCntmq = mysqli_query($conn,"SELECT count(id) AS MhCnt FROM medicalhistory WHERE status=1");
+$MhCntmq = mysqli_query($conn,"SELECT count(mh.id) AS MhCnt FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE mh.status=1");
 $MhCnt = mysqli_fetch_array($MhCntmq);
 
-$HrCntmq = mysqli_query($conn,"SELECT COUNT(av.symptomsHighRisk) AS HrCnt FROM antenatalvisit av JOIN ecregister ec on av.picmeNo=ec.picmeno WHERE av.symptomsHighRisk!=48 AND av.status=1");
+$HrCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(hr.picmeNo)) as HrCnt from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeNo WHERE hr.status!=0");
 $HrCnt = mysqli_fetch_array($HrCntmq);
 
-$DdCntmq = mysqli_query($conn,"SELECT COUNT(id) AS DdCnt FROM deliverydetails WHERE status=1");
+$DdCntmq = mysqli_query($conn,"SELECT COUNT(dd.id) AS DdCnt FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno WHERE dd.status=1");
 $DdCnt = mysqli_fetch_array($DdCntmq);
 
-$ImCntmq = mysqli_query($conn,"SELECT COUNT(id) AS ImCnt FROM immunization WHERE status=1");
+$ImCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(im.picmeNo)) AS ImCnt FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeNo WHERE im.status=1");
 $ImCnt = mysqli_fetch_array($ImCntmq);
 									
-$PvCntmq = mysqli_query($conn,"SELECT count(id) AS PvCnt FROM postnatalvisit WHERE status=1");
+$PvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(p.picmeNo)) AS PvCnt FROM postnatalvisit p JOIN ecregister ec on ec.picmeNo=p.picmeno WHERE p.status=1");
 $PvCnt = mysqli_fetch_array($PvCntmq);
     
-$UsCntmq = mysqli_query($conn,"SELECT COUNT(id) AS UsCnt FROM users WHERE status=1");
-$UsCnt = mysqli_fetch_array($UsCntmq);
-    
-$LmCntmq = mysqli_query($conn,"SELECT COUNT(id) AS LmCnt FROM ecregister WHERE status NOT IN(0,1)");
+$UsCntmq = mysqli_query($conn,"SELECT COUNT(id) AS UsCnt FROM users WHERE email !='test@thaimaiyudan.org' AND status='1' AND usertype NOT IN (0,1)");
+$UsCnt = mysqli_fetch_array($UsCntmq);   
+
+
+/* Restricted Delivery Detials Record in pregnancy status count - by Nithya*/     
+//$LmCntmq = mysqli_query($conn,"SELECT COUNT(id) AS LmCnt FROM ecregister WHERE status NOT IN(0,1) ");
+$LmCntmq = mysqli_query($conn,"SELECT COUNT(id) AS LmCnt FROM ecregister WHERE status NOT IN(0,1)  
+AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = ecregister.picmeNo)");
 $LmCnt = mysqli_fetch_array($LmCntmq);
     
 $HsCntmq = mysqli_query($conn,"SELECT COUNT(id) AS HsCnt FROM hscmaster");

@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -31,7 +32,7 @@
                          <tr>
                <th>S.No</th> 
                <th>Mother Name</th>
-               <th>PICME Number</th>
+               <th>RCHID (PICME) Number</th>
                <th>Aadhaar Number</th>
                <th>LMP Date</th>
                <th>EDD Date</th>
@@ -81,7 +82,7 @@
                                        <td><?php $lmp = date('d-m-Y', strtotime($row['lmpdate'])); echo $lmp;?></td>
                                        <td><?php $edd = date('d-m-Y', strtotime($row['edddate'])); echo $edd;?></td>
                                <td><?php $regweeks = $row['reg12weeks'];
-                                if($regweeks==1){ echo "Yes"; } elseif($regweeks==2){ echo "No"; } ?></td>
+                                if($regweeks==1){ echo "Yes"; } elseif($regweeks==0){ echo "No"; } ?></td>
                                 <td ><a id="view" name="view" href="../forms/ViewEditMedical.php?view=<?php echo $row['id']; ?>" ><i  class="bx bx-show me-1"></i>View</a></td>
                         </tr>
                        <?php 

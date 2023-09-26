@@ -9,13 +9,13 @@ if (isset($_SESSION["username"]) || isset($_SESSION["userid"]) || isset($_SESSIO
     $HscId = $_SESSION["HscId"];
     session_write_close();
 } else {
-    session_unset();
+   // session_unset();
     session_write_close();
     $url = "./index.php";
     header("Location: $url");
 }
 include "../config/db_connect.php";
- include ('preloader.php');
+include ('preloader.php');
 ?>
 
 <!DOCTYPE html>
@@ -33,12 +33,12 @@ include "../config/db_connect.php";
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-    <title>Thaimaiyudan</title>
+    <title>Savemom</title> 
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.png" height="100" />
+    <link rel="icon" type="image/x-icon" href="https://demo.savemom.in/assets/img/favicon/favicon.png" height="100" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -72,8 +72,8 @@ include "../config/db_connect.php";
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-			<img src="../assets/img/Thaimaiyudan-logo.png" class="w-px-40 h-auto rounded-circle" />
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">Thaimaiyudan</span>
+			<img src="../assets/img/Savemom-Logo.png" class="w-px-40 h-auto rounded-circle" />
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">Savemom</span>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-Block d-xl-none">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -119,28 +119,34 @@ include "../config/db_connect.php";
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-calendar"></i>
-                <div data-i18n=">Current Month Due">Current Month Due</div>
+                <div data-i18n=">Due List">Due List</div> 
               </a>
               <ul class="menu-sub">
+			  				<li class="menu-item">
+                  <a href="AntenatalDue.php" class="menu-link">
+                    <div data-i18n="Basic">Current Month Antenatal Due List</div>
+                  </a>
+                </li>
                 <li class="menu-item">
                   <a href="DeliveryDue.php" class="menu-link">
                     <div data-i18n="Basic">Delivery Due List</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="AntenatalDue.php" class="menu-link">
-                    <div data-i18n="Basic">Antenatal Due List</div>
+				<li class="menu-item">
+                  <a href="EDDCompletedDue.php" class="menu-link">
+                    <div data-i18n="Basic">EDD Crossed Mother's List</div>
                   </a>
-                </li>
                 <li class="menu-item">
                   <a href="BabyImDue.php" class="menu-link">
-                    <div data-i18n="Basic">Baby Immunization Due</div>
+                    <div data-i18n="Basic">Baby Immunization Due List</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="MotherImDue.php" class="menu-link">
-                    <div data-i18n="Basic">Mother Immunization Due</div>
-                  </a>
+               <!--   <a href="MotherImDue.php" class="menu-link"> !-->
+			   <a class="menu-link">
+                    <div data-i18n="Basic">Mother Immunization Due List (Future)</div>
+                 </a>
+                </li>
                 </li>
               </ul>
             </li>
@@ -149,12 +155,222 @@ include "../config/db_connect.php";
                 <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div data-i18n="Eligible Couples List">Notified List</div>
               </a>
-            </li>
+            </li>			  
             <li class="menu-item">
-              <a href="Reports.php" class="menu-link">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-id-card"></i>
-                <div data-i18n="Report">Report List</div>
-              </a>
+                <div data-i18n=">Reports">Reports</div>
+              </a>			  
+			  
+			  <ul class="menu-sub">       <!---- Creating Sub Menu under Reports ---->
+			     <li class="menu-item">   <!---- Creating Sub Menu Detail under Reports --->
+                    <!--- <a href="javascript:void(0);" class="menu-link menu-toggle"> -->
+				<!---	 <a href="javascript:void(0);" class="menu-link menu-toggle"> --->
+					 <a class="menu-link menu-toggle">
+					    <div data-i18n=">Eligible Couples List">Eligible Couples</div> 
+					 </a>	
+					
+				
+
+				<ul class="menu-sub"> 
+			        <li class="menu-item; style=menu-list-type:None" > 
+                        <a href="ECTage.php" class="menu-link">
+                           <div data-i18n="Basic"><i>Teenage List</i></div>
+                        </a>
+                    </li>
+					
+					
+                
+			        <li class="menu-item; style=menu-list-type:None" > 
+                        <a href="ECAbvTage.php" class="menu-link">
+                           <div data-i18n="Basic"><i>Above Teenage List</i></div>
+                        </a>
+                    </li>
+                 </ul>
+                </li>
+				</ul>
+			
+			
+			<ul class="menu-sub">       <!---- Creating Sub Menu under Reports ---->
+			     <li class="menu-item">   <!---- Creating Sub Menu Detail under Reports --->
+                    <!--- <a href="javascript:void(0);" class="menu-link menu-toggle"> -->
+					 <a href="javascript:void(0);" class="menu-link menu-toggle">
+					    <div data-i18n=">Eligible Couples List">AN Registration</div> 
+					 </a>	
+					
+					<ul class="menu-sub"> <!---- Creating Sub Sub Menu Header ---->
+			             <li class="menu-item; style=menu-list-type:None" >  
+                             <a href="ANTage.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>Teenage Pregnancy List</i></div>
+                             </a>
+                         </li>
+                     </ul>
+					 
+					 <ul class="menu-sub"> <!---- Creating Sub Sub Menu Header ---->
+			             <li class="menu-item; style=menu-list-type:None" >  
+                             <a href="PANTage.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>Potential Teenage Pregnancy List</i></div>
+                             </a>
+                         </li>
+                     </ul>
+                 </li>
+			</ul>
+			
+			<ul class="menu-sub">       <!---- Creating Sub Menu under Reports ---->
+			     <li class="menu-item">   <!---- Creating Sub Menu Detail under Reports --->
+                    <!--- <a href="javascript:void(0);" class="menu-link menu-toggle"> -->
+					 <a href="javascript:void(0);" class="menu-link menu-toggle">
+					    <div data-i18n=">Eligible Couples List">Antenatal Visit</div> 
+					 </a>	
+					
+					<ul class="menu-sub" style="list-style-type:square !important"> <!---- Creating Sub Sub Menu Header ---->
+			             <li class="menu-item; style=menu-list-type:None" > 
+                             <a href="ANVisitList.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>Antenatal Visit List</i></div>
+                             </a>
+                         </li>
+                     
+					     <li class="menu-item; style=menu-list-type:None" >  
+                             <a href="ANDue3List.php" class="menu-link">
+                                <div data-i18n="Basic"><i>Delivery Due List (3 Months EDD)</i></div>
+                             </a>
+                         </li>
+                       </ul>                  			 
+                 </li>
+			</ul>
+				
+             <ul class="menu-sub">       <!---- Creating Sub Menu under Reports ---->
+			     <li class="menu-item">   <!---- Creating Sub Menu Detail under Reports --->
+                    <!--- <a href="javascript:void(0);" class="menu-link menu-toggle"> -->
+					 <a href="javascript:void(0);" class="menu-link menu-toggle">
+					    <div data-i18n=">Eligible Couples List">Delivery Details</div> 
+					 </a>	
+					
+					<ul class="menu-sub"> <!---- Creating Sub Sub Menu Header ---->
+			             <li class="menu-item; style=menu-list-type:None" >  
+                             <a href="DDList.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>Delivered List</i></div>
+                             </a>
+                         </li>
+                     
+					
+			             <li class="menu-item; style=menu-list-type:None" >  
+                              <a href="InfDthList.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>Infant Death List</i></div>
+                              </a>
+                         </li>
+                    
+					 
+			             <li class="menu-item; style=menu-list-type:None" > 
+                         <!---     <a href="" class="menu-link">  --->
+						      <a class="menu-link">
+                                 <div data-i18n="Basic"><i>Maternal Death List (FUTURE) </i></div>
+                              </a>
+                         </li>
+                     </ul>
+                 </li>
+			</ul>    
+			
+			<ul class="menu-sub">       <!---- Creating Sub Menu under Reports ---->
+			     <li class="menu-item">   <!---- Creating Sub Menu Detail under Reports --->
+                    <!--- <a href="javascript:void(0);" class="menu-link menu-toggle"> -->
+					 <a href="javascript:void(0);" class="menu-link menu-toggle">
+					    <div data-i18n=">Eligible Couples List">Postnatal Visit</div> 
+					 </a>	
+					
+					<ul class="menu-sub"> <!---- Creating Sub Sub Menu Header ---->
+			             
+			             <li class="menu-item; style=menu-list-type:None" > 
+                             <a href="ECTMList.php" class="menu-link">
+                                <div data-i18n="Basic"><i>ECs Following Temporary Methods</i></div>
+                             </a>
+                         </li>
+                     
+					 
+			             <li class="menu-item; style=menu-list-type:None" > 
+                             <a href="ECPrmntList.php" class="menu-link">
+                                <div data-i18n="Basic"><i>ECs Following Permanent Methods</i></div>
+                             </a>
+                         </li>
+                     
+					  
+			             <li class="menu-item; style=menu-list-type:None" >  
+                             <a href="ECAnyList.php" class="menu-link">
+                                <div data-i18n="Basic"><i>ECs Following Any Other Methods (Future) </i></div>
+                             </a>
+                         </li>
+                     
+					  
+			             <li class="menu-item; style=menu-list-type:None" >  
+                             <a href="ECNFWList.php" class="menu-link">
+                                <div data-i18n="Basic"><i>ECs Not following Any Family Welfare Methods</i></div>
+                             </a>
+                         </li>
+                     
+                     </ul>
+                 </li>
+			</ul>    
+			
+			
+			
+			<ul class="menu-sub">       <!---- Creating Sub Menu under Reports ---->
+			     <li class="menu-item">   <!---- Creating Sub Menu Detail under Reports --->
+                    <!--- <a href="javascript:void(0);" class="menu-link menu-toggle"> -->
+					 <a href="javascript:void(0);" class="menu-link menu-toggle">
+					    <div data-i18n=">Eligible Couples List">High Risk</div> 
+					 </a>	
+					
+					<ul class="menu-sub"> <!---- Creating Sub Sub Menu Header ---->
+			             <li class="menu-item; style=menu-list-type:None" >  
+                             <a href="HRList.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>High Risk</i></div>
+                             </a>
+                         </li>
+                    
+			             <li class="menu-item; style=menu-list-type:None" > 
+                              <a href="HOBList.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>HOB</i></div>
+                              </a>
+                         </li>
+                    
+			             <li class="menu-item; style=menu-list-type:None" >  
+                              <a href="GDMList.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>GDM</i></div>
+                              </a>
+                         </li>
+                     
+			             <li class="menu-item; style=menu-list-type:None" >  
+                              <a href="AnemiaList.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>Anemia</i></div>
+                              </a>
+                         </li>
+                     
+			             <li class="menu-item; style=menu-list-type:None" >  
+                              <a href="PIHList.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>PIH</i></div>
+                              </a>
+                         </li>
+                     </ul>
+                 </li>
+			</ul>    
+				 
+						
+		<!---		 <ul class="menu-sub">
+			       
+			    <li class="menu-item">
+                  <a href="AllReports.php" class="menu-link">
+                    <div data-i18n="Basic">Test : Antenatal Visit List</div>
+                  </a>
+				</li>
+				
+                <li class="menu-item">
+                  <a href="Reports.php" class="menu-link">
+                    <div data-i18n="Basic">Pre Report</div>
+                  </a>
+                </li> 
+				
+                </li>
+              </ul> --->
             </li>
             <li class="menu-item">
               <a href="EligibleCouple.php" class="menu-link">
@@ -215,6 +431,14 @@ include "../config/db_connect.php";
                 <div data-i18n="Postnatal Visit">Pregnancy Status</div>
               </a>
             </li>
+			
+			<li class="menu-item">
+              <a href="PregnancyHistory.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-data"></i>
+                <div data-i18n="Pregnancy History">Pregnancy History</div>
+              </a>
+            </li>
+			
 			    <?php if(($usertype == 0) || ($usertype == 1) || ($usertype == 2)) { ?>
             <li class="menu-item">
               <a href="UserManagement.php" class="menu-link">

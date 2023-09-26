@@ -1,5 +1,98 @@
 $(document).ready(function() {
   $('#users-detail').dataTable();
+  $('#highRisk-mother-detail').dataTable();
+  $('#antenetal-visit-detail').dataTable();
+  $('#immunization-detail').dataTable();
+  $('#postnalVisit-detail').dataTable();
+  $('#edit').click(function() {
+    var disabled = $("#name").prop('disabled');
+    if (disabled) {
+      $("#name").prop('disabled', false);		// if disabled, enable
+    } else {
+      $("#name").prop('disabled', true);		// if enabled, disable
+    }
+  });
+//grouping tables based on column
+  /*  const dataListTable = {
+        '0': {'id': 'antenetal-visit-detail', 'group_column': 2},
+        '1': {'id': 'immunization-detail', 'group_column': 2},
+       '2': {'id': 'highRisk-mother-detail', 'group_column': 1}, /Unique picme - so no need to group
+        '3': {'id': 'postnalVisit-detail', 'group_column': 2}
+    }; */
+//	const dataListTable = {
+//        '0': {'id': 'antenetal-visit-detail', 'group_column': 2},
+//        '1': {'id': 'immunization-detail', 'group_column': 2},
+//        '3': {'id': 'postnalVisit-detail', 'group_column': 2}
+//    };
+//    for (var keys in dataListTable) {
+//        var groupColumn = dataListTable[keys]['group_column'];
+//        var tableID = dataListTable[keys]['id'];
+//        var ascRecords = dataListTable[keys]['desc'];
+//        var table1 = $('#' + tableID).DataTable({
+//            columnDefs: [{visible: false, targets: groupColumn, orderData: [0, ascRecords]}],
+//            order: [[0, 'asc']],
+//            displayLength: 10,
+//
+//            drawCallback: function (settings) {
+//                var api = this.api();
+//                var rows = api.rows({page: 'current'}).nodes();
+//                var last = null;
+//
+//                api.column(groupColumn, {page: 'current'})
+//                        .data()
+//                        .each(function (group, i) {
+//                            if (last !== group) {
+//                                $(rows)
+//                                        .eq(i)
+//                                        .before(
+//                                                '<tr class="group"><td colspan="5" style="font-weight:bold">' +
+//                                                group +
+//                                                '</td></tr>'
+//                                                );
+//
+//                                last = group;
+//                            }
+//                        });
+//            }
+//        });
+//    }
+//   
+   new DataTable('#antenetal-visit-detail', {
+    orderFixed: [3, 'asc'],
+    rowGroup: {
+        dataSrc: 2
+    }
+});
+   
+/*   var groupColumn = 3;
+var table1 = $('#antenetal-visit-detail').DataTable({
+    columnDefs: [{ visible: false, targets: groupColumn }],
+    order: [[groupColumn, 'asc']],
+    displayLength: 25,
+    drawCallback: function (settings) {
+        var api = this.api();
+        var rows = api.rows({ page: 'current' }).nodes();
+        var last = null;
+ 
+        api.column(groupColumn, { page: 'current' })
+            .data()
+            .each(function (group, i) {
+                if (last !== group) {
+                    $(rows)
+                        .eq(i)
+                        .before(
+                            '<tr class="group"><td colspan="5">' +
+                                group +
+                                '</td></tr>'
+                        );
+ 
+                    last = group;
+                }
+            });
+    }
+}); */
+   
+   
   $('#edit').click(function() {
     var disabled = $("#name").prop('disabled');
     if (disabled) {
@@ -199,6 +292,7 @@ document.getElementById("injuction").disabled = false;
 
 var x = document.getElementById("btnSaUp");
 x.style.display = "block";
+
 }
 
 function fnAnVisitEnable() {
@@ -291,6 +385,28 @@ var c = document.getElementById("childDeath").value;
 
 var obscode = "G"+g+"P"+p+"L"+l+"A"+a+"C"+c;
 document.getElementById("obstetricCode").value = obscode; 
+
+var gr = document.getElementById("childDeath").value;
+var par = document.getElementById("childDeath").value;
+var cd = document.getElementById("childDeath").value;
+var abr = document.getElementById("childDeath").value;
+var lc = document.getElementById("childDeath").value;
+var mw = document.getElementById("childDeath").value;
+var bpsy = document.getElementById("childDeath").value;
+var bpd = document.getElementById("childDeath").value;
+
+if($('#gravida').val() > 2 || $('#para').val() > 2 ||  $('#childDeath').val() >2 ||
+    $('#abortion').val() > 2 || $('#livingChildren').val() > 2 || $('#motherWeight').val() < 40 ||
+    $('#bpSys').val() >= 140 ||  $('#bpDia').val() >=90)
+    {
+      var hrpgcy = "Yes";
+    } 
+	else 
+{
+      var hrpgcy = "No";
+    }
+	document.getElementById("hrPregnancy").value = hrpgcy; 
+
 }
 
 function onlyNumbers(text) {  
@@ -315,6 +431,958 @@ $('#picmeno').on('keydown keyup change', function(){
   }
 });
 
+$('#picmenoNew').on('keydown keyup change', function(){
+    var picmeno = $(this).val();
+	var predeldate = $('#deliverydate').val();
+    checkDuplicatePicmeNo(picmeno, predeldate);
+   
+});
+
+/* ECFR No - Starts */
+/**
+ * Add ECFR No
+ * @returns {undefined}
+ */
+ 
+ $('#ecfrno').on('keydown keyup change', function(){
+     var ecfrno = $('#ecfrno').val(); /*$('#ecfr').val + $('#ecfrno').val();*/
+    var ecfr   = $('#ecfr').val();
+    var motheraadhaarid = $('#motheraadhaaridec').val();
+	var husbandaadhaarid = $('#husbandaadhaaridec').val();
+    checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid);
+});
+
+function addECValidate(){
+     var ecfrno = $('#ecfrno').val(); /*$('#ecfr').val + $('#ecfrno').val();*/
+    var ecfr   = $('#ecfr').val();
+    var motheraadhaarid = $('#motheraadhaaridec').val();
+	var husbandaadhaarid = $('#husbandaadhaaridec').val();
+    checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid);
+	
+}
+
+function checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid){
+        $.ajax({
+        url: "ajax/duplicateECValidation.php",
+		async:false,
+        type: "POST",
+        data: {
+            ecfr: ecfr, ecfrno: ecfrno, motheraadhaarid: motheraadhaarid, husbandaadhaarid: husbandaadhaarid
+        },
+		cache: false,
+        success: function (result) {
+            $('#suggesstion-box').html("");
+			$('#mot-sug-box').html("");
+			$('#Hus-Sug-box').html("");
+			$('#mot-mar-sug-box').html("");
+			$('#Hus-mar-Sug-box').html("");
+			
+            result= $.trim(result);
+            if (result === '1')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this Ecfrno.</span>");
+				document.getElementById ('ecfrno').focus();
+                return false;
+            }
+			if (result === '3')
+            {
+                $('#mot-sug-box').html("<span style='color:red'>EC registration already done for this Mother's Aadhar.</span>");
+				document.getElementById ('motheraadhaaridec').focus();
+                return false;
+            }
+			if (result === '4')
+            {
+                $('#Hus-Sug-box').html("<span style='color:red'>EC registration already done for this Father's Aadhar.</span>");
+				document.getElementById ('husbandaadhaaridec').focus();
+                return false;
+            }
+			if (result === '5')
+            {
+                $('#mot-sug-box').html("<span style='color:red'>EC registration already done using this aadhar for Father's Aadhar.</span>");
+				document.getElementById ('motheraadhaaridec').focus();
+                return false;
+            }
+			if (result === '6')
+            {
+                $('#Hus-Sug-box').html("<span style='color:red'>EC registration already done using this aadhar for Mother's Aadhar.</span>");
+				document.getElementById ('husbandaadhaaridec').focus();
+                return false;
+            }
+//	var ecmotage = document.getElementById("motherdob").value;
+//	var echusage = document.getElementById("husdob").value;
+
+	        fnCalMotAge();	
+	        fnCalHusAge();
+			
+        }
+    });
+}
+/* ECFR No val - Ends */
+
+
+/* Mother Aadhar Duplication */
+$('#motheraadhaaridec').on('keydown keyup change', function(){
+     var ecfrno = $('#ecfrno').val(); /*$('#ecfr').val + $('#ecfrno').val();*/
+    var ecfr   = $('#ecfr').val();
+    var motheraadhaarid = $('#motheraadhaaridec').val();
+	var husbandaadhaarid = $('#husbandaadhaaridec').val();
+    checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid);
+   
+});
+
+/* Husband Aadhar Duplication */
+$('#husbandaadhaaridec').on('keydown keyup change', function(){
+    var ecfrno = $('#ecfrno').val(); /*$('#ecfr').val + $('#ecfrno').val();*/
+    var ecfr   = $('#ecfr').val();
+    var motheraadhaarid = $('#motheraadhaaridec').val();
+	var husbandaadhaarid = $('#husbandaadhaaridec').val();
+    checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid);
+   
+});
+
+/*function addECValidate(){
+    var motheraadhaarid = $('#motheraadhaaridec').val();
+ 
+    checkECdetails(motheraadhaarid);
+}
+
+function checkECdetails(motheraadhaarid){
+        $.ajax({
+        url: "ajax/duplicateECValidation.php",
+        type: "POST",
+        data: {
+            motheraadhaarid: motheraadhaarid
+        },
+		cache: false,
+        success: function (result) {
+            $('#suggesstion-box').html("");
+            result= $.trim(result);
+            if (result === '1')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this Aadhar.</span>");
+				document.getElementById ('motheraadhaaridec').focus();
+                return false;
+            }
+
+        }
+    });
+}
+/* ECFR No val - Ends */
+
+/* AN Reg Mot Aadhar Id Val - Starts */
+/**
+ * Add Aadhar no
+ * @returns {undefined}
+ */
+ 
+ $('#motheraadhaaridval').on('keydown keyup change', function(){
+    var motadhaar = $(this).val();
+    checkEC(motadhaar);
+   
+});
+
+$('#motheraadhaaridval').on('keydown keyup change', function(){
+    var motadhaar = $('#motheraadhaaridval').val();
+    checkEC(motadhaar);
+   
+});
+
+function addMothAadhar(){
+    var motadhaar = $('#motheraadhaaridval').val();
+ 
+    checkEC(motadhaar);
+}
+
+function checkEC(motadhaar){
+	    returnParam = true
+        $.ajax({
+        url: "ajax/ECAadharVal.php",
+		async:false,
+        type: "POST",
+        data: {
+            motadhaar : motadhaar
+        },
+		cache: false,
+        success: function (response) {
+			result = JSON.parse(response);
+            $('#suggesstion-box').html("")
+          //  result= $.trim(result);
+            if (result['result'] === '1')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>AN Registration already done for this Aadhar.</span>");
+                document.getElementById ('motheraadhaaridval').focus();
+				return false;
+            }
+
+            if (result['result'] === '3')
+            {
+						
+			    /* Conception Age @ Medical History*/
+                var anregdate = document.getElementById("anRegDate").value;
+                var andate = new Date(anregdate);
+  
+                var MotDateinput = result['Motdob'];
+                var motbirthDate = new Date(MotDateinput);
+                var mdiff=andate.getTime() - motbirthDate.getTime(); 
+                var motAgeDate = new Date(mdiff); 
+                var motCalcAge=   Math.abs(motAgeDate.getUTCFullYear() - 1970);
+                document.getElementById("MotherAge").value = motCalcAge;  
+  
+                var HusDateinput = result['Fatdob'];
+                var husbirthDate = new Date(HusDateinput);
+                var hdiff=andate.getTime() - husbirthDate.getTime(); 
+                var  husAgeDate = new Date(hdiff); 
+                var husCalcAge=   Math.abs(husAgeDate.getUTCFullYear() - 1970);
+                document.getElementById("HusbandAge").value = husCalcAge; 
+               /* Conception Age @ Medical History*/
+            } 
+
+            if (result['result'] === '4')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>Aadhar not found in EC.</span>");
+				document.getElementById ('motheraadhaaridval').focus();
+                return false;
+            }
+			
+        }
+    });
+}
+/* Medical History PICME - Ends */
+
+/* Medical History PICME - Starts */
+/**
+ * Add Medical History picme no
+ * @returns {undefined}
+ */
+ 
+ $('#picmenomed').on('keydown keyup change', function(){
+    var picmeno = $(this).val();
+    checkMedicaldetails(picmeno);
+   
+});
+
+function addMedicalValidate(){
+    var picmeno = $('#picmenomed').val();
+ 
+    checkMedicaldetails(picmeno);
+}
+
+function checkMedicaldetails(picmeno){
+        $.ajax({
+        url: "ajax/MedicalDetails.php",
+		async:false,
+        type: "POST",
+        data: {
+            picmeno: picmeno
+        },
+		cache: false,
+        success: function (result) {
+            $('#suggesstion-box').html("")
+            result= $.trim(result);
+            if (result === '1')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>Medical history already exists for this picme.</span>");
+				document.getElementById ('picmenomed').focus();
+                return false;
+            }
+
+         /*   if (result === '3')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>Valid Picme.</span>");
+                return true;
+            } */
+
+            if (result === '4')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Registration</span>");
+				document.getElementById ('picmenomed').focus();
+                return false;
+            }
+        }
+    });
+}
+/* Medical History PICME - Ends */
+
+
+$('#picmenoImmune').on('keydown keyup change', function(){
+    var picmeno = $('#picmenoImmune').val();
+    checkImmunedetails(picmeno);
+   
+});
+
+$('#doseNo').change(function (){
+     var picmeno = $('#picmenoImmune').val();
+ 
+    return checkImmunedetails(picmeno);
+});
+
+$('#doseProvidedDate').change(function(){
+     var picmeno = $('#picmenoImmune').val();
+     var doseProvidedDateVal = $(this).val();
+     checkImmunedetails(picmeno, 'date');
+});
+
+function addImmuneValidate(){
+    var picmeno = $('#picmenoImmune').val();
+ 
+    return checkImmunedetails(picmeno,"");
+}
+
+
+function checkImmunedetails(picmeno, place=''){
+      returnParam = true
+      $.ajax({
+        url: "ajax/immunizationDetails.php",
+        async: false,
+        type: "POST",
+        data: {
+            picmeno: picmeno, doseProvidedDateVal: $('#doseProvidedDate').val()
+        },
+        cache: false,
+        success: function (response) {
+          
+            result = JSON.parse(response);
+            $('#suggesstion-box').html("");
+            $('#dose-provide-box').html("");
+             $('#doseName').attr('disabled', true);
+            if (result['result'] === 'fail') {
+               $('#suggesstion-box').html("<span style='color:red'>This Picme number didn't have delivery details. \n\
+Please proceed with delivery date from delivery details.</span>");
+               document.getElementById ('picmenoImmune').focus();
+               returnParam= false;
+            } else {
+                
+                if(result['result']=='error'){
+                    if(place===''){
+                    $('#suggesstion-box').html("<span style='color:red'>"+result['message']+"</span>");
+                   } else {
+                       $('#dose-provide-box').html("<span style='color:red'>"+result['message']+"</span>");
+                   }
+                    $('#doseName').attr('disabled', false);
+                    $("#doseNo").val(result['doseNo']);
+                    $("#doseDueDate").attr('value', result['doseDueDate']);
+                    $("#doseDueDate").attr('readOnly', true);
+					document.getElementById ('picmenoImmune').focus();
+                     returnParam =  false;
+                }           
+                
+                 
+                if (result['result'] == 'success') {
+                    $('#suggesstion-box').html("<span style='color:red'>" + result['message'] + "</span>");
+                    $("#doseNo").val(result['doseNo']);
+                    $('#doseName').removeAttr('disabled');
+                    $("#doseDueDate").attr('value', result['doseDueDate']);
+                    $("#doseDueDate").attr('readOnly', true);
+                     returnParam = true;
+                    //   $("#doseDueDate").attr('value', result['doseDueDate']).change();
+                    // $("#doseDueDate").val(result['doseDueDate']);
+
+                }
+            }
+        }
+    });
+    console.log(returnParam)
+    return returnParam;
+}
+
+
+
+/**
+ * Add delivery picme no
+ * @returns {undefined}
+ */
+function validateAddDelivery(){
+    var picmeno = $('#picmenoNew').val();
+	var predeldate = $('#deliverydate').val();
+    checkDuplicatePicmeNo(picmeno, predeldate);
+}
+
+function checkDuplicatePicmeNo(picmeno, predeldate){
+     $.ajax({
+        url: "ajax/duplicatePicmeValidation.php",
+       async:false,
+	   type: "POST",
+        data: {
+            picmeno: picmeno, predeldate: predeldate
+        },
+        cache: false,
+        success: function (result) {
+            $('#suggesstion-box').html("");
+			$('#DISdt-suggesstion-box').html("");
+			$('#DIStm-suggesstion-box').html("");
+			$('#BCG-suggesstion-box').html("");
+			$('#OPV-suggesstion-box').html("");
+			$('#HEPB-suggesstion-box').html("");
+			$('#deldt-suggesstion-box').html("");
+			
+            if (result === '1') {
+               $('#suggesstion-box').html("<span style='color:red'>Delivery details already exists</span>");
+			   document.getElementById ('picmenoNew').focus();
+               return false;
+			   
+            }
+			if (result === '3') {
+               $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Registration. </span>");
+			   document.getElementById ('picmenoNew').focus();
+               return false;
+            }
+			if (result === '4') {
+               $('#suggesstion-box').html("<span style='color:red'>Picme not found in Medical History. </span>");
+			   document.getElementById ('picmenoNew').focus();
+               return false;
+            }
+			if (result === '5') {
+               $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Visit. </span>");
+			   document.getElementById ('picmenoNew').focus();
+               return false;
+            }
+			if (result === '6') {
+			// document.getElementById("deliverydate").value = result;
+               $('#deldt-suggesstion-box').html("<span style='color:red'>Delivery date should be >= AN recent visit date. </span>");
+			    document.getElementById ('deliverydate').focus();
+               return false;
+            }
+		//	}
+		
+		    if($('#sncudate').val() != "" && $('#deliverydate').val() != "" &&
+			   ($('#deliverydate').val() > $('#sncudate').val()))
+            {
+               $('#sncudt-suggesstion-box').html("<span style='color:red'>SNCU date should be >= delivery date </span>");
+			   document.getElementById ('sncudate').focus();
+               return false;
+            } 
+			
+			//SncuChange();
+			
+			if($('#deliverydate').val() != "" && $('#dischargedate').val() != "" &&
+			   ($('#deliverydate').val() > $('#dischargedate').val()))
+            {
+               $('#DISdt-suggesstion-box').html("<span style='color:red'>Discharge date should be >= delivery date </span>");
+			   document.getElementById ('dischargedate').focus();
+               return false;
+            } 
+			if($('#deliverydate').val() != "" && $('#dischargedate').val() != "" &&
+			  ($('#deliverydate').val() === $('#dischargedate').val())          &&
+			   $('#dischargetime').val() != "")
+				{
+				if($('#deliverytime').val() >= $('#dischargetime').val())
+				{					
+               $('#DIStm-suggesstion-box').html("<span style='color:red'>Discharge time should be > delivery time </span>");
+			   document.getElementById ('dischargetime').focus();
+               return false;
+				}
+            }  
+			if($('#deliverydate').val() != "" && $('#bcgdate').val() != "" &&
+			   ($('#deliverydate').val() > $('#bcgdate').val()))
+            {
+               $('#BCG-suggesstion-box').html("<span style='color:red'>BCG date should be >= delivery date </span>");
+			   document.getElementById ('bcgdate').focus();
+               return false;
+            } 
+			if($('#deliverydate').val() != "" && $('#opvDdate').val() != "" &&
+			   ($('#deliverydate').val() > $('#opvDdate').val()))
+            {
+               $('#OPV-suggesstion-box').html("<span style='color:red'>OPV-0 date should be >= delivery date </span>");
+			   document.getElementById ('opvDdate').focus();
+               return false;
+            } 
+			if($('#deliverydate').val() != "" && $('#hebBdate').val() != "" &&
+			   ($('#deliverydate').val() > $('#hebBdate').val()))
+            {
+               $('#HEPB-suggesstion-box').html("<span style='color:red'>HEP-B date should be >= delivery date </span>");
+			   document.getElementById ('hebBdate').focus();
+               return false;
+            } 
+			
+			
+        }
+    });
+}
+
+/**
+ * Edit delivery picme no
+ * @returns {undefined}
+ */
+function validateEditDelivery(){
+    var picmeno = $('#picmenoNew').val();
+	var predeldate = $('#deliverydate').val();
+    checkEditPicmeNo(picmeno, predeldate);
+}
+
+function checkEditPicmeNo(picmeno, predeldate){
+     $.ajax({
+        url: "ajax/duplicatePicmeValidation.php",
+       async:false,
+	   type: "POST",
+        data: {
+            picmeno: picmeno, predeldate: predeldate
+        },
+        cache: false,
+        success: function (result) {
+            $('#suggesstion-box').html("");
+			$('#DISdt-suggesstion-box').html("");
+			$('#DIStm-suggesstion-box').html("");
+			$('#BCG-suggesstion-box').html("");
+			$('#OPV-suggesstion-box').html("");
+			$('#HEPB-suggesstion-box').html("");
+			$('#deldt-suggesstion-box').html("");
+			$('#sncudt-suggesstion-box').html("");
+			
+            /* It won't occur. But perform xtra check. */
+			if (result === '3') {
+               $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Registration. </span>");
+			   document.getElementById ('picmenoNew').focus();
+               return false;
+            }
+			if (result === '4') {
+               $('#suggesstion-box').html("<span style='color:red'>Picme not found in Medical History. </span>");
+			   document.getElementById ('picmenoNew').focus();
+               return false;
+            }
+			if (result === '5') {
+               $('#suggesstion-box').html("<span style='color:red'>Picme not found in AN Visit. </span>");
+			   document.getElementById ('picmenoNew').focus();
+               return false;
+            }
+			if (result === '6') {
+			// document.getElementById("deliverydate").value = result;
+               $('#deldt-suggesstion-box').html("<span style='color:red'>Delivery date should be >= AN recent visit date. </span>");
+			    document.getElementById ('deliverydate').focus();
+               return false;
+            }
+		//	}
+			
+		//	SncuChange();
+			
+			if($('#sncudate').val() != "" && $('#deliverydate').val() != "" &&
+			   ($('#deliverydate').val() > $('#sncudate').val()))
+            {
+               $('#sncudt-suggesstion-box').html("<span style='color:red'>SNCU date should be >= delivery date </span>");
+			   document.getElementById ('sncudate').focus();
+               return false;
+            } 
+			
+			if($('#deliverydate').val() != "" && $('#dischargedate').val() != "" &&
+			   ($('#deliverydate').val() > $('#dischargedate').val()))
+            {
+               $('#DISdt-suggesstion-box').html("<span style='color:red'>Discharge date should be >= delivery date </span>");
+			   document.getElementById ('dischargedate').focus();
+               return false;
+            } 
+			if($('#deliverydate').val() != "" && $('#dischargedate').val() != "" &&
+			  ($('#deliverydate').val() === $('#dischargedate').val())          &&
+			   $('#dischargetime').val() != "")
+				{
+				if($('#deliverytime').val() >= $('#dischargetime').val())
+				{					
+               $('#DIStm-suggesstion-box').html("<span style='color:red'>Discharge time should be > delivery time </span>");
+			   document.getElementById ('dischargetime').focus();
+               return false;
+				}
+            }  
+			if($('#deliverydate').val() != "" && $('#bcgdate').val() != "" &&
+			   ($('#deliverydate').val() > $('#bcgdate').val()))
+            {
+               $('#BCG-suggesstion-box').html("<span style='color:red'>BCG date should be >= delivery date </span>");
+			   document.getElementById ('bcgdate').focus();
+               return false;
+            } 
+			if($('#deliverydate').val() != "" && $('#opvDdate').val() != "" &&
+			   ($('#deliverydate').val() > $('#opvDdate').val()))
+            {
+               $('#OPV-suggesstion-box').html("<span style='color:red'>OPV-0 date should be >= delivery date </span>");
+			   document.getElementById ('opvDdate').focus();
+               return false;
+            } 
+			if($('#deliverydate').val() != "" && $('#hebBdate').val() != "" &&
+			   ($('#deliverydate').val() > $('#hebBdate').val()))
+            {
+               $('#HEPB-suggesstion-box').html("<span style='color:red'>HEP-B date should be >= delivery date </span>");
+			   document.getElementById ('hebBdate').focus();
+               return false;
+            } 
+			
+        }
+    });
+}
+
+/* Postnatal */
+function validatePVPicme(){
+    var picmeno = $('#picmeno').val();
+    checkPVPicmeNo(picmeno);
+}
+
+function checkPVPicmeNo(picmeno){
+     $.ajax({
+        url: "ajax/PVPicmeValidation.php",
+        async:false,
+		type: "POST",
+        data: {
+            picmeno: picmeno
+        },
+        cache: false,
+        success: function (result) {
+            $('#suggesstion-box').html("")
+            if (result === '1') {
+               $('#suggesstion-box').html("<span style='color:red'>Invalid picme no</span>");
+               return false;
+            }
+        }
+    });
+}
+
+
+function checkGCTWeekStatusDuplicate(picmeno, selectedValue, selectedText)
+{
+    resultParam = true;
+    if (selectedText != "Not Done") {
+        $.ajax({
+            url: "ajax/ANVisitValidation.php",
+			async:false,
+            type: "POST",
+            data: {
+                picmeno: picmeno, gctStatus: selectedValue
+            },
+            cache: false,
+            success: function (response) {
+                result = JSON.parse(response);
+                $('#gctWeekStatus_box').html("")
+                if (result['result'] === 'fail') {
+                    $('#gctWeekStatus_box').html("<span style='color:red'>" + result['message'] + "</span>");
+                    resultParam = false;
+                }
+            }
+        });
+    }
+    return resultParam;
+}
+
+
+
+$('#pncPeriod').change(function (){
+     var picmeno = $('#picmenoPostNalVisit').val();
+     var pncperiod = $(this).val();     
+     $('#suggesstion-box').html("");
+     if(picmeno == ""){
+         $('#suggesstion-box').html("<span style='color:red'>Please enter picme no</span>");
+		 document.getElementById ('picmenoPostNalVisit').focus();
+     } else {
+         checkPostnalVisitPeriod(picmeno, pncperiod);
+     }
+});
+
+$('#picmenoPostNalVisit').on('blur change click', function () {
+    var picmeno = $('#picmenoPostNalVisit').val();
+    $('#suggesstion-box').html("");
+    $('#pnc-period-box').html("");
+    var pncperiod = $('#pncPeriod').val();
+    if(pncperiod==""){
+        $('#pnc-period-box').html("<span style='color:red'>Please select PNC period for evaluation before Picme no</span>");
+       
+    } else {
+        checkPostnalVisitPeriod(picmeno, pncperiod);
+    }
+});
+
+function checkPostnalVisitPeriod(picmeno, pncperiod){
+    resultParam = true;
+    $('#suggesstion-box').html("");
+      $.ajax({
+        url: "ajax/checkPostNalVisitPeriod.php",
+        async: false,
+        type: "POST",
+        data: {
+            picmeno: picmeno, pncPeriod:pncperiod
+        },
+        cache: false,
+        success: function (response) {
+             result = JSON.parse(response);
+             $('#pnc-period-box').html("");
+            if (result['result'] === 'fail') {
+               if(result['place']==''){
+                $('#pnc-period-box').html("<span style='color:red'>"+result['message']+"</span>");
+                $("#pncPeriod").val(result['selected']).change();
+               } else {
+                    $('#suggesstion-box').html("<span style='color:red'>Please enter valid picme no</span>");					
+               }
+			   document.getElementById ('picmenoPostNalVisit').focus();
+               resultParam =  false;
+            }
+            if(result['result']=='error'){
+                $('#pnc-period-box').html("<span style='color:red'>"+result['message']+"</span>");
+                $("#pncPeriod").val(result['selected']).change();
+				document.getElementById ('picmenoPostNalVisit').focus();
+                resultParam =  false;
+            }
+            
+        }
+    });
+    return resultParam;
+}
+
+function validatePostnalVisit(){
+    var picmeno = $('#picmenoPostNalVisit').val();
+    var pncperiod = $('#pncPeriod').val();
+    return checkPostnalVisitPeriod(picmeno, pncperiod);
+}
+
+
+$('#lmpdate').on('blur change', function(){
+  var lmpdate = $(this).val();
+  if(lmpdate != ""){
+     lmpdateAr = lmpdate.split("-");
+     formattedLmpdateAr = lmpdateAr[0] + "/" +  lmpdateAr[1] + "/" + lmpdateAr[2];
+    var newDate = formatDate(addDays(new Date(formattedLmpdateAr), 280));
+   
+    $('#edddate').val(newDate)
+  }
+});
+//for retrieve total no of pregnancy when enter picme number in medical history
+$('#picmeno').on('blur change click', function () {
+    var picmeno = $(this).val();
+    var anvisitDate = $('#anvisitDate').val();
+    $.ajax({
+        url: "getGravida.php",
+        type: "POST",
+        data: {
+            picmeno: picmeno
+        },
+        cache: false,
+        success: function (result) {
+            if (result !== "") {
+                $("#totPregnancy").val(result).change();
+                $("#totPregnancy").attr("disabled", true);
+                if($('#pregnancyResult').length > 0 && $('#pregnancyResult').val() != ''){
+                    $('#pregnancyResult').val(result);
+                } else {
+                     $('<input>').attr({
+                    type: 'hidden',
+                    name: 'totPregnancy',
+                    value: result,
+                    id : 'pregnancyResult'
+                }).appendTo('#placeDelivery');
+                }
+            }
+        }
+    });
+    checkPicme(picmeno, anvisitDate);
+});
+
+$('#anvisitDate').on('blur change click', function () {
+    anvisitDate = $(this).val();
+    var picmeno = $('#picmeno').val();
+    if (anvisitDate != "") {
+      
+        checkPicme(picmeno, anvisitDate);
+    }
+});
+
+
+$('.highPregnancyCls').on('blur change', function (){
+    var tagId = $(this).attr('id');
+    var gravidaVal = $('#gravida').val();
+    var para = $('#para').val();
+    var childDeath = $('#childDeath').val()
+    
+/*    if($('#gravida').val() > 2 || $('#para').val() > 2 ||  $('#childDeath').val() >2 ||
+           $('#abortion').val() > 2 || $('#livingChildren').val() > 2 || $('#motherWeight').val() < 40 ||
+           $('#bpSys').val() >= 140 ||  $('#bpSys').val() >=90
+            ){
+       $("#hrPregnancy").val(1).change();
+    } else {
+       $("#hrPregnancy").val(0).change();
+    } */
+    
+//    var negative = true;
+//    if(tagId === 'gravida' || tagId === 'para' || tagId === 'childDeath' || tagId === 'abortion' || tagId === 'livingChildren'){
+//       var checkVal =  $('#'+tagId).val();
+//       if(checkVal > 2){
+//             $("#hrPregnancy").val(1).change();
+//       } else {
+//            $("#hrPregnancy").val(0).change();
+//       }
+//    } 
+    
+//   
+//    if(tagId == 'motherWeight '){
+//       var checkVal =  $('#'+tagId).val();
+//       if(checkVal <= 40){
+//             $("#hrPregnancy").val(1).change();
+//       } else {
+//            $("#hrPregnancy").val(0).change();
+//       }
+//    }
+//    
+//    if(tagId == 'bpSys'){
+//         var checkVal =  $('#'+tagId).val();
+//       if(checkVal >= 140){
+//             $("#hrPregnancy").val(1).change();
+//       } else {
+//            $("#hrPregnancy").val(0).change();
+//       }
+//    } 
+//    
+//    if(tagId == 'childDeath'){
+//          var checkVal =  $('#'+tagId).val();
+//       if(bpDia  >= 90){
+//             $("#hrPregnancy").val(1).change();
+//       } else {
+//            $("#hrPregnancy").val(0).change();
+//       }
+//    }
+});
+
+/**
+ * Anvisit - Step2 - number of IFA related process
+ * @param {type} date *
+ */
+
+
+$('#HscId').on('change', function(){
+    hscId = $(this).val();
+    $.ajax({
+        url: "ajax/getPanchayat.php",
+        type: "POST",
+        data: {
+            hscId: hscId,
+            type:'hsc'
+        },
+        cache: false,
+        success: function (result) {
+            $("#PanchayatId").html(result);
+            $("#PanchayatId").prop('disabled', false);
+            $("#PanchayatId").focus();
+        }
+    });
+});
+
+
+
+$('.anregisterPicmenoCls').on('blur change', function(){
+    picmeno =  $(this).val();
+     $.ajax({
+        url: "ajax/AnVisitData.php",
+        type: "POST",
+        async: false,
+        data: {
+            picmeno: picmeno         
+        },
+        cache: false,
+        success: function (response) {
+            result = JSON.parse(response);
+           
+            if(result['result']=='success'){
+             //    $("#hrPregnancy").val(result['highRisk']).change();
+                  $("#obstetricCode").val(result['obcode']).change();
+            } 
+            
+        }
+    });
+});
+
+$('#PanchayatId').on('change', function(){
+    panchayatId = $(this).val();
+    $.ajax({
+        url: "ajax/getPanchayat.php",
+        type: "POST",
+        data: {
+            panchayatId: panchayatId,
+            type : 'panchayat'
+        },
+        cache: false,
+        success: function (result) {
+            $("#VillageId").html(result);
+            $("#VillageId").prop('disabled', false);
+            $("#VillageId").focus();
+        }
+    });
+});
+
+
+
+
+$('#lmpdate').on('blur change', function(){
+  var lmpdate = $(this).val();
+  if(lmpdate != ""){
+     lmpdateAr = lmpdate.split("-");
+     formattedLmpdateAr = lmpdateAr[0] + "/" +  lmpdateAr[1] + "/" + lmpdateAr[2];
+    var newDate = formatDate(addDays(new Date(formattedLmpdateAr), 280));
+   
+    $('#edddate').val(newDate)
+  }
+});
+
+/**
+ * 
+ * @param {type} val ->picme no
+ * @param {type} anvisitDate
+ * @returns {undefined}
+ */
+function checkPicme(val, anvisitDate)
+{    
+    $('#pregnancyWeek').val("");
+//    $('#pregnancyWeek').attr("readOnly", false);
+     $.ajax({
+        url: "ajax/fetchPregnancyWeek.php",
+        type: "POST",
+        data: {
+            picmeno: val, anvisitDate : anvisitDate
+        },
+        cache: false,
+        success: function (result) {
+            if (result !== "") {      
+                resultAr = result.split("-#@#-")
+                if(resultAr[0] !==0){
+                    $("#ancPeriod").val(resultAr[0]).change();   
+                    $("#ancPeriod").attr("disabled", true);
+                if($('#ancPeriodCount').length > 0 && $('#ancPeriodCount').val() != ''){
+                    $('#ancPeriodCount').val(resultAr[0]);
+                } else {
+                     $('<input>').attr({
+                    type: 'hidden',
+                    name: 'ancPeriod',
+                    value: result,
+                    id : 'ancPeriodCount'
+                }).appendTo('#ancSection');
+                }
+                }
+                $('#pregnancyWeek').val("");
+                  $("#ancPeriod").val(resultAr[0]).change();   
+//                $('#pregnancyWeek').attr("readOnly", false);
+                if(resultAr[1] !=='0' && resultAr[1] !==""){
+                    console.log(resultAr[1])
+                    $('#pregnancyWeek').val(resultAr[1]);
+//                    $('#pregnancyWeek').attr("readOnly", true);
+                }
+            }
+        }
+    });
+}
+
+
+function formatDate(date) {
+    day = date.getDate();
+    month = (date.getMonth() + 1)
+    if(day < 10){
+        day = '0'+day;
+        
+    }
+    
+    if(month < 10){
+        month = '0'+month;
+    }
+    
+    
+    return day + '/' + month + '/' + date.getFullYear();
+}
+
+// Correct
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(date.getDate() + days);
+    return result;
+}
+
 function CovidChange() {
 var selectBox = document.getElementById("Covidvac");
 var selectedValue = selectBox.options[selectBox.selectedIndex].value;
@@ -331,7 +1399,7 @@ var selectBox = document.getElementById("Td1");
 var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 var Tddose1 = document.getElementById("Tddose1"); 
 var Tddate1 = document.getElementById("Tddate1");
-if(selectedValue == "1") { Tddose1.style.display = "block"; } else if(selectedValue == "0") { Tddose1.style.display = "none"; }
+//if(selectedValue == "1") { Tddose1.style.display = "block"; } else if(selectedValue == "0") { Tddose1.style.display = "none"; }
 if(selectedValue == "1") { Tddate1.style.display = "block"; } else if(selectedValue == "0") { Tddate1.style.display = "none"; }
 }
 function Td2Change() {
@@ -339,7 +1407,7 @@ var selectBox = document.getElementById("Td2");
 var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 var Tddose2 = document.getElementById("Tddose2"); 
 var Tddate2 = document.getElementById("Tddate2");
-if(selectedValue == "1") { Tddose2.style.display = "block"; } else if(selectedValue == "0") { Tddose2.style.display = "none"; }
+//if(selectedValue == "1") { Tddose2.style.display = "block"; } else if(selectedValue == "0") { Tddose2.style.display = "none"; }
 if(selectedValue == "1") { Tddate2.style.display = "block"; } else if(selectedValue == "0") { Tddate2.style.display = "none"; }
 }
 
@@ -349,7 +1417,7 @@ var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 var Bdose = document.getElementById("Bdose");
 var TdB = document.getElementById("TdB"); 
 
-if(selectedValue == "1") { Bdose.style.display = "block"; } else if(selectedValue == "0") { Bdose.style.display = "none"; }
+//if(selectedValue == "1") { Bdose.style.display = "block"; } else if(selectedValue == "0") { Bdose.style.display = "none"; }
 if(selectedValue == "1") { TdB.style.display = "block"; } else if(selectedValue == "0") { TdB.style.display = "none"; }
 }
 function UrinetestChange() {
@@ -361,6 +1429,25 @@ var ap = document.getElementById("urineAP");
 if(selectedValue == "1") { sp.style.display = "block"; } else if(selectedValue == "0") { sp.style.display = "none"; }
 if(selectedValue == "1") { ap.style.display = "block"; } else if(selectedValue == "0") { ap.style.display = "none"; }
 }
+
+function gctChange(picmeno)
+{
+    var selectBox = document.getElementById("gctStatus");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].text;
+    var selectedIndex = selectBox.options[selectBox.selectedIndex].value;
+    $('#gctValue').attr('disabled', false);
+    if (selectedValue == 'Not Done') {
+        $('#gctValue').attr('disabled', true);
+    }
+    return checkGCTWeekStatusDuplicate(picmeno, selectedIndex, selectedValue)
+}
+
+function validateGctChange(){
+    
+    var picmeNum = $('#picmepage2').val();
+    return gctChange(picmeNum);
+}
+
 function usgChange() {
 var selectBox = document.getElementById("wusgTaken"); 
 var selectedValue = selectBox.options[selectBox.selectedIndex].value;
@@ -502,7 +1589,20 @@ $("#doseName").focus();
 }
 });
 });  
+
+
+
 }); 
+
+var table = $('#users-detail').DataTable({
+}).on('search.dt', function() {
+  var input = $('.dataTables_filter input')[0];
+  $('#search_text_input').val(input.value);
+  console.log(input.value)
+})
+
+
+
 
 function RefChange() {
 var selectBox = document.getElementById("referralFacility");
@@ -653,17 +1753,20 @@ $("#picmeno").keyup(function() {
       data: 'keyword=' + $(this).val(),
       beforeSend: function() {
           $("#picmeno").css("background", "#FFF url(LoaderIcon.jpeg) no-repeat 165px");
+          
       },
       success: function(data) {
           $("#suggesstion-box").show();
           $("#suggesstion-box").html(data);
           $("#picmeno").css("background", "#FFF");
+          
       }
   });
 });
 });
 function selectPicme(val) {
 $("#picmeno").val(val);
+
 $("#suggesstion-box").hide();
 }
 
@@ -731,12 +1834,48 @@ function fnCalMotAge(){
   var MotDateinput = document.getElementById("motherdob").value;   
   // convert user input value into date object
   var motbirthDate = new Date(MotDateinput);
+ // var ecdate = new Date(ecregdate);
+  var ecregdate = document.getElementById("dateecreg").value;
+	var ecdate = new Date(ecregdate);
   
   // get difference from current date;
-  var mdiff=Date.now() - motbirthDate.getTime(); 
-  var  motAgeDate = new Date(mdiff); 
+ // var mdiff=Date.now() - motbirthDate.getTime(); 
+ // var  motAgeDate = new Date(mdiff); 
+ // var motCalcAge=   Math.abs(motAgeDate.getUTCFullYear() - 1970);
+  var mdiff=ecdate.getTime() - motbirthDate.getTime(); 
+  var motAgeDate = new Date(mdiff); 
   var motCalcAge=   Math.abs(motAgeDate.getUTCFullYear() - 1970);
   document.getElementById("motherageecreg").value = motCalcAge;  
+  
+  var HusDateinput = document.getElementById("husdob").value;   
+  // convert user input value into date object
+  var husbirthDate = new Date(HusDateinput);
+  
+  // get difference from current date;
+ // var hdiff=Date.now() - husbirthDate.getTime(); 
+ var hdiff=ecdate.getTime() - husbirthDate.getTime(); 
+  var  husAgeDate = new Date(hdiff); 
+  var husCalcAge=   Math.abs(husAgeDate.getUTCFullYear() - 1970);
+  document.getElementById("husageecreg").value = husCalcAge; 
+  
+  
+  if ( document.getElementById("motheragemarriage").value != "" &&
+	 (document.getElementById("motherageecreg").value < 
+	  document.getElementById("motheragemarriage").value)) 
+	 {
+	  $('#mot-mar-sug-box').html("<span style='color:red'>Mother's marriage age should be < mother's ec age. </span>");
+	  document.getElementById ('motheragemarriage').focus();
+      return false;	 
+	 }
+				
+ 	 if ( document.getElementById("husagemarriage").value != "" &&
+	    (document.getElementById("husageecreg").value <
+	     document.getElementById("husagemarriage").value))
+		{
+	    	$('#Hus-mar-Sug-box').html("<span style='color:red'>Father's marriage age should be < father's ec age. </span>");
+			document.getElementById ('husagemarriage').focus();
+            return false;	 
+		}	  
 }
 
 function fnCalHusAge(){
@@ -744,9 +1883,14 @@ function fnCalHusAge(){
   // convert user input value into date object
   var husbirthDate = new Date(HusDateinput);
   
+   var ecregdate = document.getElementById("dateecreg").value;
+   var ecdate = new Date(ecregdate);
+  
   // get difference from current date;
-  var hdiff=Date.now() - husbirthDate.getTime(); 
+ // var hdiff=Date.now() - husbirthDate.getTime(); 
+ var hdiff=ecdate.getTime() - husbirthDate.getTime(); 
   var  husAgeDate = new Date(hdiff); 
   var husCalcAge=   Math.abs(husAgeDate.getUTCFullYear() - 1970);
   document.getElementById("husageecreg").value = husCalcAge;  
 }
+

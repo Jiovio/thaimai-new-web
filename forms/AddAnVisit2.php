@@ -1,9 +1,16 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
 <?php include ('require/header.php'); // Menu & Top Search 
+$pregancyWeek1 = "";
+if(isset($_POST["pregnancyWeek"]) && !empty($_POST["pregnancyWeek"]))
+{
+    $pregancyWeek1 = intval(trim($_POST["pregnancyWeek"]));
+}
+$picmeno ="0";
 if (!empty($_POST["btnFirst"])) {
 //   $CheckDuplicatePno = mysqli_query($conn,"SELECT picmeno FROM antenatalvisit where picmeno='".$_POST["picmeno"]."' ");
 //   while($picvalue = mysqli_fetch_array($CheckDuplicatePno))
@@ -44,9 +51,9 @@ if (!empty($_POST["btnFirst"])) {
 
             <div class="container-xxl flex-grow-1 container-p-y">
               <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Antenatal Visit /</span> Add Antenatal Visit
-              <a href="AntenatalVisit.php"><button type="submit" class="btn btn-primary" id="btnBack">
+              <button type="submit" class="btn btn-primary" id="btnBack" onclick="history.back()">
 				<span class="bx bx-arrow-back"></span>&nbsp; Back
-              </button></a>
+              </button>
 			</h4>
 			<!-- Basic Layout -->
               <div class="row">
@@ -64,8 +71,8 @@ if (!empty($_POST["btnFirst"])) {
 
 			<div id="secondDiv">
 			
-                           <form action="AddAnVisit3.php" method="post">
-			<input type="hidden" name="picmeno" value="<?php echo $picmeno ?>">
+                           <form action="AddAnVisit3.php" method="post" onsubmit="return validateGctChange()">
+			<input type="hidden" name="picmeno" value="<?php echo $picmeno ?>" id="picmepage2">
 					<div class="row">
 						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-fastingSugar">Fasting Sugar </label>
@@ -87,7 +94,7 @@ if (!empty($_POST["btnFirst"])) {
 						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-gctStatus">GCT Week Status <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                          <select name="gctStatus" id="gctStatus" class="form-select" onchange="usgChange()">
+                              <select name="gctStatus" id="gctStatus" class="form-select" onchange="gctChange(<?php echo $picmeno;  ?>)" required>
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=46";
@@ -97,12 +104,13 @@ if (!empty($_POST["btnFirst"])) {
                           <?php } ?>
                              </select>
                           </div>
+                          <div id="gctWeekStatus_box"></div>
                         </div>
                        
                         <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-gctValue">GCT Value <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-gctValue">GCT Value </label>
                           <div class="input-group input-group-merge">
-                          <select class="60-400 form-control" id="gctValue" name="gctValue">
+                              <select class="60-400 form-control" id="gctValue" name="gctValue">
                           <option value="">Choose...</option>
                           </select>
                           </div>
@@ -111,16 +119,18 @@ if (!empty($_POST["btnFirst"])) {
 						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-Tsh">TSH </label>
                           <div class="input-group input-group-merge">
-                          <select class="60-400 form-control" id="Tsh" name="Tsh">
+                          <select class="form-control" id="Tsh" name="Tsh">
                           <option value="">Choose...</option>
+                          <option value="yes">Yes</option>
+                           <option value="no">No</option>
                           </select>
                           </div>
                         </div>
                         
                         <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-TdBoosterDate">Td1 (Yes / No) <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-TdBoosterDate">Td1 (Yes / No) </label>
                           <div class="input-group input-group-merge">
-                          <select required name="Td1" id="Td1" class="form-select" onchange="Td1Change()">
+                          <select name="Td1" id="Td1" class="form-select" onchange="Td1Change()">
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -165,9 +175,9 @@ if (!empty($_POST["btnFirst"])) {
                         </div>
                         
                         <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-TdBoosterDate">Td2 (Yes / No) <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-TdBoosterDate">Td2 (Yes / No)</label>
                           <div class="input-group input-group-merge">
-                          <select required name="Td2" id="Td2" class="form-select" onchange="Td2Change()">
+                          <select name="Td2" id="Td2" class="form-select" onchange="Td2Change()">
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -211,9 +221,9 @@ if (!empty($_POST["btnFirst"])) {
                         </div>
                         
           <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-TdBoosterDate">Td Booster (Yes / No) <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-TdBoosterDate">Td Booster (Yes / No)</label>
                           <div class="input-group input-group-merge">
-                          <select required name="Tdb" id="Tdb" class="form-select" onchange="TdBChange()">
+                          <select name="Tdb" id="Tdb" class="form-select" onchange="TdBChange()">
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -320,20 +330,26 @@ if (!empty($_POST["btnFirst"])) {
 					<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-NoFolicAcid">Number of Folic Acid </label>
                           <div class="input-group input-group-merge">
-                          <select class="1-50 form-control" id="NoFolicAcid" name="NoFolicAcid">
-                          <option value="">Choose...</option>
-                          </select>
+                              <input type="number"  id="NoFolicAcid" name="NoFolicAcid" min="1" max="30" class="form-control" <?php if($pregancyWeek1 > 12) { ?> disabled="disabled" <?php } ?>/>
+                        
                           </div>
                     </div>
                     
 					<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-NoIFA">Number of IFA </label>
-                          <div class="input-group input-group-merge">
-                          <select class="1-50 form-control" id="NoIFA" name="NoIFA">
+                          <div class="input-group input-group-merge">        
+                              <select class="form-control" id="NoIFA" name="NoIFA" <?php if($pregancyWeek1 <= 12) { ?> disabled="disabled" <?php } ?>>
                           <option value="">Choose...</option>
+                          <?php
+                          for ($j=1; $j < 61; $j++){
+                          ?>
+                          <option value ="<?php echo $j;?>"><?php echo $j;?></option>
+                          <?php
+                          } ?>
                           </select>
                           </div>
                     </div>
+                          
                     
 						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-dateofIFA">Date Of IFA </label>
@@ -346,6 +362,7 @@ if (!empty($_POST["btnFirst"])) {
                               placeholder="Date Of IFA"
                               aria-label="Date Of IFA"
                               aria-describedby="basic-icon-default-dateofIFA"
+                              <?php if($pregancyWeek1 <= 12) { ?> disabled="disabled" <?php } ?>
                                />
                           </div>
                         </div>
@@ -361,7 +378,7 @@ if (!empty($_POST["btnFirst"])) {
                               placeholder="Date Of Albendazole"
                               aria-label="Date Of Albendazole"
                               aria-describedby="basic-icon-default-dateofAlbendazole"
-                              
+                              <?php if($pregancyWeek1 <= 12) { ?> disabled="disabled" <?php } ?>
                               />
                           </div>
                         </div>
@@ -369,12 +386,18 @@ if (!empty($_POST["btnFirst"])) {
 						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-noCalcium">No. of Calcium </label>
                           <div class="input-group input-group-merge">
-                          <select class="1-50 form-control" id="noCalcium" name="noCalcium">
+                          <select class="form-control" id="noCalcium" name="noCalcium" <?php if($pregancyWeek1 <= 12) { ?> disabled="disabled" <?php } ?>>
                           <option value="">Choose...</option>
+                          <?php
+                           for($i=1; $i<=60; $i++){
+                               echo "<option value=".$i.">".$i."</option>";
+                           }
+                          ?>
                           </select>
                           </div>
                         </div>
 					</div>
+                        <input type="hidden" name="pregnancyWeek1" value="<?php echo $pregancyWeek1; ?>" />
 <input class="btn btn-primary" type="submit" name="btnSecond" value="NEXT">
 			</form>
 			</div>

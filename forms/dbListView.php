@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <div class="table-responsive text-nowrap">
 		<div class="container">
 				<table id="users-detail" class="display nowrap" cellspacing="0" width="100%">

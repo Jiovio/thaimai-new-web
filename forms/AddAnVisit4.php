@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -6,7 +7,7 @@
 <?php include ('require/header.php'); // Menu & Top Search
 if (!empty($_POST["btnThird"])) {
   $picmeno = $_POST["picmeno"];
-   $calciumDate =$_POST["calciumDate"]; 
+   $calciumDate = isset($_POST["calciumDate"]) ? $_POST["calciumDate"] : ""; 
    $sizeUterusinWeeks = $_POST["sizeUterusinWeeks"]; 
    
   $filename = $_FILES["usgreport"]["name"];
@@ -36,7 +37,7 @@ $usgFetalPosition1 = $_POST["usgFetalPosition1"];
 $usgFetalMovement1 = $_POST["usgFetalMovement1"];
 $liquor2 = $_POST["liquor2"]; 
 $usgFetalHeartRate2 = $_POST["usgFetalHeartRate2"];
-$usgFetalPosition2 = $_POST["usgFetalPosition2"]; 
+$usgFetalPosition2 = isset($_POST["usgFetalPosition2"]) ? $_POST["usgFetalPosition2"] : ""; 
 $usgFetalMovement2 = $_POST["usgFetalMovement2"];
 $placenta = $_POST["placenta"];
 $usgResult = $_POST["usgResult"];
@@ -71,7 +72,7 @@ if (!empty($_POST["btnFourth"])) {
 referralFacility='$referralFacility',referralPlace='$referralPlace',bloodTransfusion='$bloodTransfusion',bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',
    noOfIVDoses='$nooIVdoses' WHERE picmeno=".$picmeno);
    if (!empty($query)) {
-            echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/AntenatalVisit.php');</script>";
+            echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}/forms/AntenatalVisit.php');</script>";
           }
 	if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
       
@@ -92,9 +93,9 @@ $highrisk = mysqli_query($conn, "UPDATE ecregister ec INNER JOIN antenatalvisit 
 
             <div class="container-xxl flex-grow-1 container-p-y">
               <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Antenatal Visit /</span> Add Antenatal Visit
-              <a href="AntenatalVisit.php"><button type="submit" class="btn btn-primary" id="btnBack">
+           <button type="submit" class="btn btn-primary" id="btnBack" onclick="history.back()">
 				<span class="bx bx-arrow-back"></span>&nbsp; Back
-              </button></a>
+              </button>
 			</h4>
       
 			<!-- Basic Layout -->
@@ -169,7 +170,7 @@ $highrisk = mysqli_query($conn, "UPDATE ecregister ec INNER JOIN antenatalvisit 
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                          <option value="<?php echo $listvalue['enumid']; ?>" <?php if($HighRisk==$listvalue['enumid']) { ?>  selected <?php } ?>><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
                           </div>
@@ -297,15 +298,15 @@ $highrisk = mysqli_query($conn, "UPDATE ecregister ec INNER JOIN antenatalvisit 
                         </div>
 					
 				                <div class="col-4 mb-3" id="ivDoses" style="display: none;">
-                          <label class="form-label" for="basic-icon-default-noOfIVDoses">NO. of Units / IV Doses <!--<span class="mand">* </span>--></label>
+                          <label class="form-label" for="basic-icon-default-noOfIVDoses">No. of Units / IV Doses <!--<span class="mand">* </span>--></label>
                           <div class="input-group input-group-merge">
                             <input
                               type="text"
                               name="noOfIVDoses"
                               class="form-control"
                               id="noOfIVDoses"
-                              placeholder="NO. of IV Doses"
-                              aria-label="NO. of IV Doses"
+                              placeholder="No. of Units / IV Doses"
+                              aria-label="No. of Units / IV Doses"
                               aria-describedby="basic-icon-default-noOfIVDoses"
                                />
                           </div>

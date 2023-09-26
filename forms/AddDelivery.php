@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -11,7 +12,18 @@ if (! empty($_POST["addDelivery"])) {
 
   $noOfLiveBirth = $_POST["noOfLiveBirth"]; $noOfStillBirth = $_POST["noOfStillBirth"]; $infantId = $_POST["infantId"]; $birthDetails = $_POST["birthDetails"];
   $birthWeight = $_POST["birthWeight"]; $birthHeight = $_POST["birthHeight"]; $delayedCClamping = $_POST["delayedCClamping"]; $skintoskinContact = $_POST["skintoskinContact"];
- $breastfeedInitiated = $_POST["breastfeedInitiated"]; $admittedSncu = $_POST["admittedSncu"]; $sncudate = $_POST["sncudate"]; $sncuAreaName = $_POST["sncuAreaName"]; $sncuOutcome = $_POST["sncuOutcome"]; 
+ $breastfeedInitiated = $_POST["breastfeedInitiated"]; $admittedSncu = $_POST["admittedSncu"];
+  if($admittedSncu == 0)
+{
+$sncudate = "";
+$sncuAreaName = "";
+$sncuOutcome = "";
+}
+else	
+{
+$sncudate = $_POST["sncudate"]; $sncuAreaName = $_POST["sncuAreaName"]; $sncuOutcome = $_POST["sncuOutcome"]; 
+}
+
  $dischargedate = $_POST["dischargedate"]; $dischargetime = $_POST["dischargetime"]; $bcgdate = $_POST["bcgdate"]; $opvDdate = $_POST["opvDdate"];
  $hebBdate = $_POST["hebBdate"]; $injuction = $_POST["injuction"]; 
   
@@ -25,7 +37,7 @@ if (! empty($_POST["addDelivery"])) {
   '$skintoskinContact','$breastfeedInitiated','$admittedSncu','$sncudate','$sncuAreaName','$sncuOutcome','$dischargedate','$dischargetime','$bcgdate','$opvDdate','$hebBdate','$injuction','$userid')");
 
 if (!empty($query)) {
-            echo "<script>alert('Inserted Successfully');window.location.replace('http://admin.thaimaiyudan.org/forms/DeliveryDetails.php');</script>";
+            echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}/forms/DeliveryDetails.php');</script>";
           } }
 ?>
           <!-- Content wrapper -->
@@ -39,7 +51,13 @@ if (!empty($query)) {
                     <span class="bx bx-arrow-back"></span>&nbsp; Back
               </button></a> 
 			</h4>
-            <form action="" autocomplete="off" method="post">
+			<?php 
+				/* $CheckANReg = mysqli_query($conn,"SELECT picmeRegDate FROM anregistration where picmeno = $motheraadhaarid");
+                 $FetEC = mysqli_fetch_array($CheckEC);
+				 $Ec_Reg_Dt = "";
+				 $Ec_Reg_Dt = $FetEC['dateecreg']; */
+				 ?>
+            <form action="" autocomplete="off" method="post" id="del">
               <!-- Basic Layout -->
               <div class="row">
                 <div class="col-xl">
@@ -52,25 +70,31 @@ if (!empty($query)) {
 				<div class="errMsg" id="errMsg"></div>
             <div class="row">
               <div class="col-6 mb-3">
-                  <label class="form-label" for="basic-icon-default-fullname">PICME NUMBER <span class="mand">* </span></label>
+                  <label class="form-label" for="basic-icon-default-fullname">RCHID (PICME) NUMBER <span class="mand">* </span></label>
                   <div class="frmSearch">
-                  <input type="text" required id="picmeno" name="picmeno" oninput = "onlyNumbers(this.value)" placeholder="PICME Number" class="form-control" />
+                  <input type="number" required id="picmenoNew" name="picmeno" min="100000000000" max="999999999999" oninput = "onlyNumbers(this.value)" placeholder="RCHID (PICME) Number" class="form-control" />
                   <div id="suggesstion-box"></div>
                  </div>
                 </div>
                         <div class="col-6 mb-3">
+						<div id="deldt-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-email">DELIVERY DATE <span class="mand">* </span></label>
-                            <input
-                              type="date"
+                            
+							<input
+                             type="date"
                               name="deliverydate"
                               id="deliverydate"
                               class="form-control"
                               placeholder=""
                               aria-label=""
                               aria-describedby="basic-icon-default-email2"
+							  <?php $cur_dt = date('Y-m-d'); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+							  onclick="return validateAddDelivery()"
+							  value = ""
                                required
                             />
-                          
+							
                         </div>
             </div>
                 <div class="row">
@@ -84,7 +108,9 @@ if (!empty($query)) {
                               placeholder="DELIVERY TIME"
                               aria-label="DELIVERY TIME"
                               aria-describedby="basic-icon-default-password2"
+							  onclick="return validateAddDelivery()"
                               required
+							  
                             />
                           
                         </div>
@@ -99,7 +125,7 @@ if (!empty($query)) {
                               placeholder="DELIVERY DISTRICT"
                               aria-label="DELIVERY DISTRICT"
                               aria-describedby="basic-icon-default-mobile"
-                            
+                            onclick="return validateAddDelivery()"
                             />
                           
                         </div>
@@ -111,7 +137,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">HOSPITAL TYPE</label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="hospitaltype" id="hospitaltype" class="form-select">
+                          <select name="hospitaltype" id="hospitaltype" onclick="return validateAddDelivery()" class="form-select">
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=25";
@@ -135,7 +161,7 @@ if (!empty($query)) {
                               placeholder="HOSPITAL NAME"
                               aria-label="HOSPITAL NAME"
                               aria-describedby="basic-icon-default-email2"
-                            
+                              onclick="return validateAddDelivery()"
                             />
                           </div>
                         </div>
@@ -145,7 +171,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">CHILD GENDER <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select required name="childGender" id="childGender" class="form-select" >
+                          <select required name="childGender" id="childGender" onclick="return validateAddDelivery()" class="form-select" >
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=34";
@@ -163,7 +189,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY CONDUCTED BY <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select required name="deliveryConductBy" id="deliveryConductBy" class="form-select">
+                          <select required name="deliveryConductBy" id="deliveryConductBy" onclick="return validateAddDelivery()" class="form-select">
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=35";
@@ -183,7 +209,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY TYPE</label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="deliverytype" id="deliverytype" class="form-select" >
+                          <select name="deliverytype" id="deliverytype" onclick="return validateAddDelivery()" class="form-select" >
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=36";
@@ -200,7 +226,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY COMPLICATION <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="deliveryCompilcation" required id="deliveryCompilcation" class="form-select" >
+                          <select name="deliveryCompilcation" required id="deliveryCompilcation" onclick="return validateAddDelivery()" class="form-select" >
                           <option value="">Choose...</option>
                           <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=37";
@@ -220,7 +246,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">DELIVERY OUTCOME <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="deliveryOutcome" required id="deliveryOutcome" class="form-select" >
+                          <select name="deliveryOutcome" required id="deliveryOutcome" onclick="return validateAddDelivery()" class="form-select" >
                           <option value="">Choose...</option>
                           <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=38";
@@ -237,13 +263,15 @@ if (!empty($query)) {
                   <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">NO. OF LIVE BIRTH <span class="mand">* </span></label>
                             <input
-                              type="text"
+                              type="number"
                               name="noOfLiveBirth"
                               id="noOfLiveBirth"
                               class="form-control"
+							  min=0  max=10
                               placeholder="NO OF LIVE BIRTH"
                               aria-label="NO OF LIVE BIRTH"
                               aria-describedby="basic-icon-default-password2"
+							  onclick="return validateAddDelivery()"
                               required
                             />
                           </div>
@@ -253,14 +281,15 @@ if (!empty($query)) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">NO. OF STILL BIRTH</label>
                             <input
-                              type="text"
+                              type="number"
                               name="noOfStillBirth"
                               id="noOfStillBirth"
                               class="form-control"
                               placeholder="NO OF STILL BIRTH"
                               aria-label="NO OF STILL BIRTH"
                               aria-describedby="basic-icon-default-password2"
-                        
+                              min=0  max=10
+							  onclick="return validateAddDelivery()"
                             />
                           </div>
 
@@ -274,7 +303,7 @@ if (!empty($query)) {
                               placeholder="INFANT ID"
                               aria-label="INFANT ID"
                               aria-describedby="basic-icon-default-password2"
-                        
+                              onclick="return validateAddDelivery()"
                             />
                           </div>
                  </div>
@@ -284,7 +313,7 @@ if (!empty($query)) {
                           <label class="form-label" for="basic-icon-default-phone">BIRTH DETAILS <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                 
-                          <select required name="birthDetails" id="birthDetails" class="form-select" >
+                          <select required name="birthDetails" id="birthDetails" onclick="return validateAddDelivery()" class="form-select" >
                           <option value="">Choose...</option>
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=39";
@@ -301,13 +330,16 @@ if (!empty($query)) {
                   <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">BIRTH WEIGHT <span class="mand">* </span></label>
                             <input
-                              type="text"
+                              type="number"
+							  step = "0.01"
                               name="birthWeight"
                               id="birthWeight"
                               class="form-control"
                               placeholder="BIRTH WEIGHT"
                               aria-label="BIRTH WEIGHT"
                               aria-describedby="basic-icon-default-password2"
+							  min="1" max="6"
+							  onclick="return validateAddDelivery()"
                               required
                             />
                           </div>
@@ -317,19 +349,21 @@ if (!empty($query)) {
                         <div class="col-6 mb-3">
                           <label class="form-label" for="basic-icon-default-password">BIRTH HEIGHT</label>
                             <input
-                              type="text"
+                              type="number"
                               name="birthHeight"
                               id="birthHeight"
                               class="form-control"
                               placeholder="BIRTH HEIGHT"
                               aria-label="BIRTH HEIGHT"
+							  min="30" max="100"
                               aria-describedby="basic-icon-default-password2"
+							  onclick="return validateAddDelivery()"
                             />
                           </div>
                         
                         <div class="mb-3 col-md-6">
                             <label class="form-label">DELAYED CORD CLAMPING</label>
-                            <select name="delayedCClamping" id="delayedCClamping" class="form-select">
+                            <select name="delayedCClamping" id="delayedCClamping" onclick="return validateAddDelivery()" class="form-select">
                           <option value="">Choose...</option>
                            <?php  
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -346,7 +380,7 @@ if (!empty($query)) {
 
                           <div class="mb-3 col-md-6">
                             <label class="form-label">SKIN TO SKIN CONTACT</label>
-                            <select name="skintoskinContact" id="skintoskinContact" class="form-select">
+                            <select name="skintoskinContact" id="skintoskinContact" onclick="return validateAddDelivery()" class="form-select">
                           <option value="">Choose...</option>
                            
                            <?php  
@@ -363,8 +397,8 @@ if (!empty($query)) {
                           </div>
                         
                           <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-password">BREAST FEEDING Within Half Hour</label>
-                          <select required name="breastfeedInitiated" id="breastfeedInitiated" class="form-select">
+                          <label class="form-label" for="basic-icon-default-password">BREAST FEEDING Within Half Hour <span class="mand">* </span></label>
+                          <select required name="breastfeedInitiated" id="breastfeedInitiated" class="form-select" onclick="return validateAddDelivery()">
                           <option value="">Choose...</option>
                            
                            <?php  
@@ -384,7 +418,7 @@ if (!empty($query)) {
 
                           <div class="mb-3 col-md-6">
                             <label class="form-label">ADMITTED SNCU <span class="mand">* </span></label>
-                            <select required name="admittedSncu" id="admittedSncu" class="form-select" onchange="SncuChange()">
+                            <select required name="admittedSncu" id="admittedSncu" class="form-select" onclick="return validateAddDelivery()" onchange="SncuChange()">
                           <option value="">Choose...</option>
                            
                            <?php  
@@ -401,16 +435,19 @@ if (!empty($query)) {
                           </div>
 
                           <div class="col-6 mb-3" id="sncuDate" style="display: none;">
-                          <label class="form-label" for="basic-icon-default-password">SNCU DATE</label>
+                          <div id="sncudt-suggesstion-box"></div>
+						  <label class="form-label" for="basic-icon-default-password">SNCU DATE</label>
                             <input
                               type="date"
                               name="sncudate"
                               id="sncudate"
                               class="form-control"
                               placeholder="SNCU DATE"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
                               aria-label="SNCU DATE"
                               aria-describedby="basic-icon-default-password2"
-                        
+                              onclick="return validateAddDelivery()" 
                             />
                           </div>
                  </div>
@@ -426,7 +463,7 @@ if (!empty($query)) {
                               placeholder="SNCU AREA NAME"
                               aria-label="SNCU AREA NAME"
                               aria-describedby="basic-icon-default-password2"
-                        
+                              onclick="return validateAddDelivery()"
                             />
                           
                         </div>
@@ -441,14 +478,16 @@ if (!empty($query)) {
                               placeholder="SNCU OUTCOME"
                               aria-label="SNCU OUTCOME"
                               aria-describedby="basic-icon-default-password2"
-                        
+                              onclick="return validateAddDelivery()"
                             />
                           
                         </div>
                  </div>
+				 
+				 
                  <div class="row">
-
                         <div class="col-6 mb-3">
+                        <div id="DISdt-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-password">DISCHARGE DATE <span class="mand">* </span></label>
                             <input
                               type="date"
@@ -458,12 +497,16 @@ if (!empty($query)) {
                               placeholder="DISCHARGE DATE"
                               aria-label="DISCHARGE DATE"
                               aria-describedby="basic-icon-default-password2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
                               required
+							  onclick="return validateAddDelivery()" 
                             />
                           
                         </div>
                         
                         <div class="col-6 mb-3">
+						<div id="DIStm-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-password">DISCHARGE TIME <span class="mand">* </span></label>
                             <input
                               type="time"
@@ -473,13 +516,16 @@ if (!empty($query)) {
                               placeholder="DISCHARGE TIME"
                               aria-label="DISCHARGE TIME"
                               aria-describedby="basic-icon-default-password2"
+							  onclick="return validateAddDelivery()"
                               required
                             />
                         </div>
                  </div>
+				 
                  <div class="row">
-
+                 
                         <div class="col-6 mb-3">
+						<div id="BCG-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-password">BCG DATE</label>
                             <input
                               type="date"
@@ -488,13 +534,16 @@ if (!empty($query)) {
                               class="form-control"
                               placeholder="BCG DATE"
                               aria-label="BCG DATE"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
                               aria-describedby="basic-icon-default-password2"
-                        
+                              onclick="return validateAddDelivery()"
                             />
                           
                         </div>
 
                         <div class="col-6 mb-3">
+						<div id="OPV-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-password">OPV-0 DATE <span class="mand">* </span></label>
                            <input
                               type="date"
@@ -504,14 +553,19 @@ if (!empty($query)) {
                               placeholder="OPV-D DATE"
                               aria-label="OPV-D DATE"
                               aria-describedby="basic-icon-default-password2"
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
+							  onclick="return validateAddDelivery()"
                               required
                             />
                          
                         </div>
                  </div>
+				 
                  <div class="row">
 
                         <div class="col-6 mb-3">
+						<div id="HEPB-suggesstion-box"></div>
                           <label class="form-label" for="basic-icon-default-password">HEP-B DATE</label>
                           
                             <input
@@ -522,12 +576,14 @@ if (!empty($query)) {
                               placeholder="HEB-B DATE"
                               aria-label="HEB-B DATE"
                               aria-describedby="basic-icon-default-password2"
-                        
+							  <?php $cur_dt = date('Y-m-d', strtotime('+1 month')); ?>
+							  max=<?php echo $cur_dt; ?>
+                              onclick="return validateAddDelivery()"
                             />  
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Vitamin K Injection</label>
-                            <select name="injuction" id="injuction" class="form-select">
+                            <select name="injuction" id="injuction" onclick="return validateAddDelivery()" class="form-select">
                           <option value="">Choose...</option>
                            
                            <?php  
@@ -544,7 +600,9 @@ if (!empty($query)) {
                           </div>
                         </div>
                         <div class="mt-2">
-                        <input class="btn btn-primary" type="submit" name="addDelivery" value="Save">
+                        <input class="btn btn-primary" type="submit" name="addDelivery" value="Save" onclick="return validateAddDelivery()">
+						
+						
                         </div>
                 </div>
                 

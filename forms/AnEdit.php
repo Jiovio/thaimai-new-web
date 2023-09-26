@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <?php
 // required headers
 header("Access-Control-Allow-Origin: *");

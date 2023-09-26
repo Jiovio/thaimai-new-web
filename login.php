@@ -23,7 +23,7 @@ if (! empty($_POST["login-btn"])) {
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Login - Thaimaiyudan</title>
+    <title>Login - Savemom</title>
 
     <meta name="description" content="" />
 
@@ -69,10 +69,10 @@ if (! empty($_POST["login-btn"])) {
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
-			  <img src="assets/img/Thaimaiyudan-logo.png" class="w-px-50 rounded-circle">
+			  <img src="assets/img/Savemom-Logo.png" class="w-px-50 rounded-circle">
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Welcome to Thaimaiyudan! 👋</h4>
+              <h4 class="mb-2" style="padding-left:50px">Welcome to Savemom! 👋</h4>
 			  <form name="login" action="" method="post" onsubmit="return loginValidation()" style="margin-top: 1.5em;">
         <?php if(!empty($loginResult)){ ?>
 				  <div class="errMsg"><?php echo $loginResult;?></div>
