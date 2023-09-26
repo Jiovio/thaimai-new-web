@@ -2,7 +2,7 @@ name: Deploy to cPanel
 on:
   push:
     branches:
-      - main
+      - client-master
 jobs:
   FTP-Deploy-Action:
     name: FTP-Deploy-Action
@@ -18,3 +18,4 @@ jobs:
           ftp-server: ${{ secrets.FTP_SERVER }}
           ftp-username: ${{ secrets.FTP_USERNAME }}
           ftp-password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: public_html/dhule.savemom.in/
