@@ -161,7 +161,7 @@ if (isset($_GET['del'])) {
                         <form action="" method="post" autocomplete="off" onSubmit="return PVPicmeValidation()">
 						<div class="row">
                           <div class="mb-3 col-md-6">
-                            <label class="form-label">PICME NUMBER</label>
+                            <label class="form-label">RCHID (PICME) NUMBER</label>
                             <div class="input-group input-group-merge">
                             <label class="lblViolet"><?php echo $picmeNo; ?>
                               </label>
@@ -399,7 +399,6 @@ if (isset($_GET['del'])) {
                                     <option value="18">Baby of Mother with HIV</option>
                                     <option value="19">Motherless Baby</option>
                                     <option value="20">None</option>
-                                    <option value="21">Any Other Specify</option>
                                </option>
                           <?php  } 
                               ?>
