@@ -1,3 +1,4 @@
+<?php include ('require/topHeader.php'); ?>
 <body>
   <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -34,7 +35,7 @@
                         <thead>
                          <tr>
                <th>S.No</th>     
-               <th>RCH ID</th>
+               <th>RCHID (PICME) No.</th>
                <th>AN Registered Date</th>
                <th>Block</th>
                <th>PHC</th>
@@ -58,7 +59,7 @@
                        </thead>  
     <?php
 
-        $listQry = "SELECT ar.hrPregnancy,ar.gravida,ar.para,ar.livingChildren,ar.abortion,ar.childDeath,ar.bpSys,ar.bpDia,ar.motherWeight,ar.updatedat, ar.createdat,ar.picmeno,ar.residentType, ec.motherdob, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno
+        $listQry = "SELECT ar.hrPregnancy,ar.gravida,ar.para,ar.livingChildren,ar.abortion,ar.childDeath,ar.bpSys,ar.bpDia,ar.motherWeight, ar.motherHeight, ar.updatedat, ar.createdat,ar.picmeno,ar.residentType, ec.motherdob, ar.id, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, ec.motheraadhaarname,ar.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno FROM anregistration ar JOIN ecregister ec on ec.picmeNo=ar.picmeno
 	             WHERE ar.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ar.picmeno)";
 									 
 	  $private = " AND ar.createdBy='".$userid."'";
@@ -159,7 +160,7 @@
 							$row['symptomsHighRisk'] = "Weight below 40 kg";	
 							}
 							else
-								if($row['bpSys'] >= "140" OR $row['bpDia'] >= "90") 
+								if($row['bpSys'] > "130" OR $row['bpDia'] > "90") 
 							{
 							$row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia";	
 							} 
@@ -168,7 +169,16 @@
 							{
 							$row['symptomsHighRisk'] = "Teenage Pregnancy";	
 							} 
-							
+							else
+								if($row['MotherAge'] > "30") 
+							{
+							$row['symptomsHighRisk'] = "Mothers age > 30";	
+							} 
+							else
+								if($row['motherHeight'] < "145") 
+							{
+							$row['symptomsHighRisk'] = "Height below 145 cm";	
+							} 
 							
 							$lmp_fmt = "";
 							$edd_fmt = "";
@@ -180,10 +190,13 @@
 						//	print_r("break");
 				
 				$listQry_mh = "SELECT * FROM medicalhistory mh 
-	              WHERE mh.status!=0 AND mh.picmeno = $ar_picme";
+	              WHERE mh.status!=0 AND mh.picmeno = $ar_picme
+				  AND NOT EXISTS (SELECT antenatalvisit.picmeno FROM antenatalvisit 
+				  WHERE antenatalvisit.picmeno = mh.picmeno)";
 				$ExeQuery_mh = mysqli_query($conn,$listQry_mh);
 			
 				  if($ExeQuery_mh) { 
+				  $ar_mh_fnd = "Y";
 				  while($row_mh = mysqli_fetch_array($ExeQuery_mh)) {
 					  
 					  
@@ -256,13 +269,13 @@
 														 if($row_mh['momVdrlRprResult'] == "1") 
 							{
 							
-							$row['symptomsHighRisk'] = "Mom's VDRL Positive";	
+							$row['symptomsHighRisk'] = "Moms VDRL Positive";	
 							}
 							else		
 														 if($row_mh['husVdrlRprResult'] == "1") 
 							{
 							
-							$row['symptomsHighRisk'] = "Husband's VDRL Positive";	
+							$row['symptomsHighRisk'] = "Husbands VDRL Positive";	
 							}
 														 else
 															
@@ -363,8 +376,17 @@ else
                             if($row_mh['pastillness'] == "112")
                             {
                              $row['symptomsHighRisk'] = "Hypothyroidism";
-                            }								
-											  
+                            }  
+							
+							if($row_mh['momBGtype'] == "5" OR
+							   $row_mh['momBGtype'] == "6" OR
+							   $row_mh['momBGtype'] == "7" OR
+							   $row_mh['momBGtype'] == "8" OR
+							   $row_mh['momBGtype'] == "10")
+							   {
+                             $row['symptomsHighRisk'] = "Negative Blood Group";
+                            }  
+							
 					  
 					  if($row_mh['momVdrlRprResult'] == "1" OR 
 					  //   $row_mh['momVdrlRprResult'] == "3" OR 
@@ -379,6 +401,11 @@ else
 						 $row_mh['hushivtestresult'] == "1" OR 
 					//	 $row_mh['hushivtestresult'] == "3" OR 
 						 $row_mh['totPregnancy'] > "2" OR 
+						 $row_mh['momBGtype'] == "5" OR 
+						 $row_mh['momBGtype'] == "6" OR 
+						 $row_mh['momBGtype'] == "7" OR 
+						 $row_mh['momBGtype'] == "8" OR 
+						 $row_mh['momBGtype'] == "10" OR 
 						 $row_mh['pastillness'] != "100")
 				{
 					
@@ -391,27 +418,47 @@ else
 								
 				$row['pregnancyWeek'] = "";
 				//$row_av = "";
-				$AR_High_Risk_Ind = "Not";
+				$AR_High_Risk_Ind = "N";
+				$AV_Rec_fnd = "N";
 				$listQry_av = "SELECT * FROM antenatalvisit av 
-	              WHERE av.status!=0 AND av.picmeno = $ar_picme AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)";
+	              WHERE av.status!=0 AND av.picmeno = $ar_picme AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = $ar_picme)";
 				  $ExeQuery_av = mysqli_query($conn,$listQry_av);
 				  if($ExeQuery_av) { 
 				  while($row_av = mysqli_fetch_array($ExeQuery_av)) {
+					  
+				  $AV_Rec_fnd = "Y";
 					  $row['pregnancyWeek'] = $row_av['pregnancyWeek'];
 							
 							if(strlen($row_av['symptomsHighRisk']) > 0)
 							{
 							$row['symptomsHighRisk'] = $row_av['symptomsHighRisk'];
 							}
-							else
+						/*	else
 							{
 							$row['symptomsHighRisk'] = "Others";
-							}	
+							}	*/
 							 if(strlen($row_av['referralDate']) > 0)
 							 {
 							 $row['refdat'] = $row_av['referralDate'];
 							 
 							 }
+							 
+						/*	 if($row_av['Tsh'] > 2.5 AND $row_av['Tsh'] < 4)	
+							{
+							$row['symptomsHighRisk'] = "Possibility to Miscarriage";
+							}
+							if($row_av['Tsh'] > 4.87)	
+							{
+							$row['symptomsHighRisk'] = "hyperthyroidism";
+							} */
+							
+							if($row_av['Tsh'] == "yes")	
+							{
+							$row['symptomsHighRisk'] = "hyperthyroidism";
+							}
+							
+							
+							 
 							 
 							 if(strlen($row_av['referralPlace']) > 0)
 							 {
@@ -703,13 +750,71 @@ else
                                            $row['symptomsHighRisk'] = "None"; 	
 										   }
 							 }
+							 
+							 if($row_av['fastingSugar'] > 110)	
+							{
+							$row['symptomsHighRisk'] = "High Blood Pressure";
+							}
+							if($row_av['postPrandial'] > 140)	
+							{
+							$row['symptomsHighRisk'] = "Gestational Diabetes";
+							}
+							if($row_av['fetalHeartRate'] < 100 AND $row_av['fetalHeartRate'] != "")
+							{
+							$row['symptomsHighRisk'] = "Bradyhardic";
+							}
+							if($row_av['fetalHeartRate'] > 170)	
+							{
+							$row['symptomsHighRisk'] = "Fetal Distress";
+							}
+							if($row_av['fetalPosition'] == 1)	
+							{
+							$row['symptomsHighRisk'] = "Abnormal Fetal Position";
+							}
+							if($row_av['fetalMovement'] == 4)
+							{
+							$row['symptomsHighRisk'] = "Absent Fetal Movement";
+							}
+							 
+					/*	 if($row['picmeno']=="133769876543"){
+						print_r($AV_Rec_fnd.$High_Risk_Ind.
+						$row_av['HighRisk'].
+						$row_av['Hb'].
+						$row_av['urineSugarPresent'].
+						$row_av['urineAlbuminPresent'].
+						$row_av['gctValue'].
+						$row_av['bpSys'].
+						$row_av['bpDia'].
+						$row_av['Tsh'].
+						$row_av['fastingSugar'].
+						$row_av['postPrandial']."*".
+						$row_av['fetalHeartRate']."*".
+						$row_av['fetalPosition'].
+						$row_av['fetalMovement']."&".
+						$row_av['symptomsHighRisk']."&".
+						$row_av['motherWeight']
+						);print_r("After"); exit;} */
 							
 					  $AR_High_Risk_Ind = "N";
-					  if($row_av['HighRisk'] == "1" OR $row_av['Hb'] < "10" OR $row_av['urineSugarPresent'] == "1" OR $row_av['urineAlbuminPresent']  == "1" OR $row_av['gctValue']  >= "190" OR $row_av['bpSys']  >= "140" OR $row_av['bpDia']  >= "90" OR $row_av['motherWeight'] <= "40") 
+					  if($row_av['HighRisk'] == "1" OR 
+					     $row_av['Hb'] < "10" OR 
+						 $row_av['urineSugarPresent'] == "1" OR 
+						 $row_av['urineAlbuminPresent'] == "1" OR 
+						 $row_av['gctValue']  > "140" OR 
+						 $row_av['bpSys']  > "130" OR 
+						 $row_av['bpDia']  > "90" OR 
+						 $row_av['Tsh'] == "yes" OR 
+						 $row_av['fastingSugar'] > "110" OR 
+						 $row_av['postPrandial'] > "140" OR 
+						 ($row_av['fetalHeartRate'] < "100" AND $row_av['fetalHeartRate'] != "") OR
+						 $row_av['fetalHeartRate'] > "170" OR
+						 $row_av['fetalPosition'] == "1" OR
+						 $row_av['fetalMovement'] == "4" OR
+						 $row_av['motherWeight'] <= "40") 
 					  {
 					
 				            $High_Risk_Ind = "Y";
-							$AR_High_Risk_Ind = "N";
+							$AR_High_Risk_Ind = "Y";
 							 
 							
 				  }}	}	
@@ -726,26 +831,34 @@ else
 						$row['VillageId']==$rowh['VillageId'] AND
 						$row['PanchayatId']==$rowh['PanchayatId'])
 						{
-							
-							
 							//(ar.gravida > 2 OR ar.para > 2 OR ar.livingChildren > 2 OR ar.abortion > 2 OR ar.childDeath > 2 OR ar.bpSys >= 140 OR ar.bpDia >= 90 OR ar.motherWeight <= 40)"; 
         		
-										 /*  if($row['picmeno']=="133010407072"){
-						print_r($High_Risk_Ind);print_r("After");}*/
+										  //  if($row['picmeno']=="133010118352"){
+												
+					//	print_r("Here!".$High_Risk_Ind.$AV_Rec_fnd);exit;}
 									   
-									   if($AR_High_Risk_Ind == "Not")
-									   {
-										   if($High_Risk_Ind == "N")
+									   
+										   if($High_Risk_Ind == "N" AND $AV_Rec_fnd == "N")
 										   {
-											   if($row['gravida'] > "2" OR $row['para'] > "2" OR $row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2" OR $row['bpSys'] >= "140" OR $row['bpDia'] >= "90" OR $row['motherWeight'] <= "40" OR $row['MotherAge'] < "18" OR $row['hrPregnancy'] == "1")
-        		
+											   if($row['gravida'] > "2" OR 
+											      $row['para'] > "2" OR 
+												  $row['livingChildren'] > "2" OR 
+												  $row['abortion'] > "2" OR 
+												  $row['childDeath'] > "2" OR 
+												  $row['bpSys'] > "130" OR 
+												  $row['bpDia'] > "90" OR 
+												  $row['motherWeight'] <= "40" OR 
+												  $row['motherHeight'] < "145" OR 
+												  $row['MotherAge'] < "18" OR 
+												  $row['MotherAge'] > "30" OR 
+												  $row['hrPregnancy'] == "1")
 											   {
-												$High_Risk_Ind = "Y";   
-												/* if($row['picmeno']=="133010407072"){
-						print_r($High_Risk_Ind);exit;}*/
+												$High_Risk_Ind = "Y"; 
+												  
+												
 											   }
 										   }
-									   }
+									   
 										    if($High_Risk_Ind == "Y")
 											{
                        ?>
