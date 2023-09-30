@@ -18,16 +18,21 @@ $History = true;}
     <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
+			
 
            <!-- Hoverable Table rows -->
                  <div class="card">
                    <h5 class="card-header"><span class="text-muted fw-light">Immunization /</span> Immunization Header List /</span> Immunization Detail List
-                   <a href="Immunization.php?History=<?php echo $IM_picmeno; ?>"><button type="submit" class="btn btn-primary" id="btnBack">
+                   	   
+				   <a href="Immunization.php?History=<?php echo $IM_picmeno; ?>"><button type="submit" class="btn btn-primary" id="btnBack">
                     <span class="bx bx-arrow-back"></span>&nbsp; Back
                    </button></a>
 				   <h5 class="card-header"><span class="text-muted fw-light"> PICME : </span> <?php echo $_GET['History']; ?> 
 				   <h5 class="card-header"><span class="text-muted fw-light"> Mother Name : </span> <?php echo $his_mot_name; ?>
-                   </h5>
+                   <a href="AddImmunizationDtl.php?picmeNo=<?php echo $_GET['History']; ?>" id="add" type="button" class="btn btn-primary" style="float:right;">
+                       <span class="bx bx-plus"></span>&nbsp; Add Details
+                   </a>
+				   </h5>
                    <div class="table-responsive text-nowrap">
            <div class="container">
            <table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
@@ -129,11 +134,16 @@ $History = true;}
 								   
 								 } }
 								 }
-							//	 print_r($dose_name); exit;?>
+								?>
                                        <td><?php echo $dose_name; ?></td>
 									   <td><?php $dpd = date('d-m-Y', strtotime($row['doseDueDate'])); echo $dpd; ?></td>
                                        <td><?php $dosepd = date('d-m-Y', strtotime($row['doseProvidedDate'])); echo $dosepd; ?></td>
-									   <td><?php $futpd = date('d-m-Y', strtotime($row['FutureDoseDate'])); echo $futpd; ?></td>
+									   <td><?php
+									   if(strlen($row['FutureDoseDate']) > 0 )
+									   { $futpd = date('d-m-Y', strtotime($row['FutureDoseDate']));} 
+								       else
+									   { $futpd = ""; print_r($row['FutureDoseDate']);}  
+								   echo $futpd; ?></td>
                              <td ><a id="view" name="view" href="../forms/ViewEditImmunization.php?view=<?php echo $row['id']; ?>" ><i  class="bx bx-show me-1"></i>View</a></td>
 				    </tr>
                        <?php 

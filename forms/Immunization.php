@@ -143,7 +143,12 @@
                                        
 									   <td><?php $dpd = date('d-m-Y', strtotime($row['doseDueDate'])); echo $dpd; ?></td>
                                        <td><?php $dosepd = date('d-m-Y', strtotime($row['doseProvidedDate'])); echo $dosepd; ?></td>
-                                       <td><?php $futpd = date('d-m-Y', strtotime($row['FutureDoseDate'])); echo $futpd; ?></td>
+                                       <td><?php
+									   if(strlen($row['FutureDoseDate']) > 0 )
+									   { $futpd = date('d-m-Y', strtotime($row['FutureDoseDate']));} 
+								       else
+									   { $futpd = ""; print_r($row['FutureDoseDate']);}  
+								   echo $futpd; ?></td>
 						   <td ><a id="History" name="History" href="../forms/ImmunizationDtl.php?History=<?php echo $row['picmeNo']; ?>" ><i  class="bx bx-show me-1"></i>History</a></td>
 		                     </tr>
                        <?php 

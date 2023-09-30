@@ -77,7 +77,7 @@
                		<input type="hidden" name="id" value="<?php echo $id; ?>">
 						<div class="row">
                         <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-picmeNo">PICME Number</label>
+                          <label class="form-label" for="basic-icon-default-picmeNo">RCHID (PICME) Number</label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-picmeNo" class="input-group-text"
                               ><i class="bx bx-food-menu"></i

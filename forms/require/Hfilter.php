@@ -1,4 +1,4 @@
-<!-- Category Filter - Starts-->
+<!-- Category Filter - Starts--> 
 <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse" style="margin: 10px 0px;">
 	<form action="" method="post" id="searchform" style="width:98%; margin-block-end:0em;">	
             <div class="searchBox">
