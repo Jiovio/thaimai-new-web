@@ -27,7 +27,9 @@ $History = true;}
               </button></a>
 				  <h5 class="card-header"><span class="text-muted fw-light"> PICME : </span> <?php echo $_GET['History']; ?> 
 				   <h5 class="card-header"><span class="text-muted fw-light"> Mother Name : </span> <?php echo $his_mot_name; ?>
-                   
+                   <a href="AddPostnatalvisitDtl.php?picmeNo=<?php echo $_GET['History']; ?>" id="add" type="button" class="btn btn-primary" style="float:right;">
+                       <span class="bx bx-plus"></span>&nbsp; Add Details
+                   </a>
                    </a>
                    </h5>
                    <div class="table-responsive text-nowrap">
