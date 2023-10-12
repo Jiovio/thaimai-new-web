@@ -16,8 +16,6 @@ if (!empty($antVisitData) && $antVisitData != 0) {
     if ((($antVisitData['Hb'] > 10 ) || ($antVisitData['urineSugarPresent'] == 1) || $antVisitData['urineAlbuminPresent'] == 1) || $antVisitData['gctValue'] >= "190" OR $antVisitData['Tsh'] > "4.87" OR $antVisitData['bpSys'] >= "140" OR $antVisitData['bpDia'] >= "90" OR $antVisitData['motherWeight'] <= "40") {
         $result['highRisk'] = 1;
     } 
-   
-    
 }
 $anRegSql1 = mysqli_query($conn, "SELECT * FROM anregistration WHERE picmeno = '$picmeNo' AND hrPregnancy=1 order by id desc LIMIT 0,1");
 $anRegData1 = mysqli_fetch_array($anRegSql1);
@@ -28,7 +26,7 @@ $result['obcode'] = "";
 if (!empty($anRegData) && $anRegData != 0) {
     $result['result'] = "success";
     $result['obcode'] = $anRegData['obstetricCode'];
+	$result['picmeno'] = $anRegData['picmeno'];
 } 
-
 echo json_encode($result);
 return;

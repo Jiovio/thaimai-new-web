@@ -45,7 +45,7 @@
         <div id="suggesstion-box"></div>
 		<div class="mt-2">
                         <input class="btn btn-primary" id="genName" type="submit" name="genName" value="Get Details" 
-						     >
+						      >
                         </div>
         </div>
         </div>

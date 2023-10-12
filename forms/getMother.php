@@ -127,18 +127,20 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         
                         <div class="input-group input-group-merge">
                           <input
-                          oninput = "onlyNumbers(this.value)"
-                            type="number"
+                          
+                            type="text"
                             name="picmeno"
+							oninput = "onlyNumbers(this.value)"
                             class="form-control anregisterPicmenoCls"
-                            id="picmeno" min="100000000000" max="999999999999" required
+                            id="picmeno" required
                             placeholder="RCHID (PICME) No."
                             aria-label="RCHID (PICME) No."
+							maxlength=12
                             aria-describedby="basic-icon-default-fullname2"
                             value ="<?php echo $picmeno; ?>"
-							onclick="return addMothAadhar()"
                           />
                         </div>
+						<div id="suggesstion-box"></div>
                       </div>
                       
                       <div class="mb-3 col-md-6">
@@ -281,30 +283,14 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                           <input type="text" class="form-control" id="obstetricCode" name="obstetricCode" placeholder="Code" readonly />
                         </div>
 
-                        <div class="mb-3 col-md-6">
-                        <label class="form-label">HR Pregnancy <span class="mand">* </span></label>
-                          <?php 
-                           $hrPregind = 0;
-                           $hrPregind = $hrPreg;
-                           if($hrPregind==1)
-                           {
-                        	$hrPreg = "Yes";  
-                           }
-                           else
-                           {
-	                        $hrPreg = "No";    
-                           }
-                          ?>
-                          <input type="text" class="form-control" id="hrPregnancy" value="<?php echo $hrPreg; ?>" name="hrPregnancy" placeholder="High Risk" readonly onclick="return addMothAadhar()" />
-                         
-                          </div>
+                        
                           
                         </div>
                       <div class="row">
                         <div class="mb-3 col-md-6">
                           <label class="form-label">MOTHER'S HEIGHT <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                          <input class="form-control" type="number" min="70" max="200" id="motherHeight" required name="motherHeight" placeholder="Height" onclick="return addMothAadhar()" />
+                          <input class="form-control" type="number" min="70" max="200" id="motherHeight" onclick="Obcode()" required name="motherHeight" placeholder="Height" />
                         </div>
                         </div>
                         
@@ -318,7 +304,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             name="motherWeight"
                             placeholder="Mother Weight"
 							min="30" max="120"
-							onclick="return addMothAadhar()"
+							onclick="Obcode()"
                             required
                           />
                         </div>
@@ -345,6 +331,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         </div>
                         
                       </div>
+					  <?php $cur_dt_now = ""; $cur_dt_now = date('Y-m-d'); ?> 
                       <div class="row">
                         <div class="mb-3 col-md-6">
                           <label for="zipCode" class="form-label">ANTENATAL REGISTER DATE <span class="mand">* </span></label>
@@ -354,8 +341,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             id="anRegDate"
                             name="anRegDate"
                             placeholder="ANTENATAL REGISTER DATE"
-							min=<?php echo $Ec_Reg_Dt; ?> 
-							<?php $cur_dt = date('Y-m-d'); ?> max=<?php echo $cur_dt; ?>
+							min=<?php echo $Ec_Reg_Dt; ?>
                             onclick = "return addMothAadhar()"							
                             required
                           />
@@ -388,7 +374,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                           <input
                             type="number"
 							min="<?php echo $rec_Mage; ?>" max="99"
-							onclick = "return addMothAadhar()"
+							onclick="Obcode()"
                             class="form-control"
                             id="MotherAge"
                             name="MotherAge"
@@ -414,16 +400,55 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             id="HusbandAge"
                             name="HusbandAge"
                             placeholder="Husband's Age"
-							onclick = "return addMothAadhar()"
+							onclick="Obcode()"
                             required
 							readonly
                           />
                         </div>
                         </div>
                       </div>
+					  
+					 
+                
+                    <div class="row">
+						<h4 class="fw-bold"><span class="text-danger">High Risk Details </span></h4>
+                    </div>
+					
+					
+						<div class="row">
+						
+						<div class="mb-3 col-md-6">
+                        <label class="form-label">HR Pregnancy </label>
+                          <?php 
+                           $hrPregind = 0;
+                           $hrPregind = $hrPreg;
+                           if($hrPregind==1)
+                           {
+                        	$hrPreg = "Yes";  
+                           }
+                           else
+                           {
+	                        $hrPreg = "No";    
+                           }
+                          ?>
+                          <input type="text" class="form-control" id="hrPregnancy" value="<?php echo $hrPreg; ?>" name="hrPregnancy" placeholder="High Risk" readonly onclick="return addMothAadhar()" />
+                         
+                          </div>
+						  
+						  <div class="mb-3 col-md-6">
+                        <label class="form-label">High Risk Factor </label>
+                          <?php 
+                           
+                          ?>
+                          <input type="text" class="form-control" id="hrFactor" name="hrFactor" placeholder="High Risk Factor" readonly onclick="return addMothAadhar()" />
+                         
+                          </div>
+						</div>
+						
                       <div class="mt-2">
                       <input class="btn btn-primary" type="submit" name="anuser" value="Save" onclick="return addMothAadhar()">
                       </div>
+					  
                 </form>
                   </div>
                   <!-- /Account -->

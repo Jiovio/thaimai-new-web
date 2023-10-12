@@ -377,6 +377,7 @@ x.style.display = "block";
 }
 
 function Obcode() {
+	document.getElementById("obstetricCode").value = "";
 var g = document.getElementById("gravida").value;
 var p = document.getElementById("para").value;
 var l = document.getElementById("livingChildren").value;
@@ -386,18 +387,18 @@ var c = document.getElementById("childDeath").value;
 var obscode = "G"+g+"P"+p+"L"+l+"A"+a+"C"+c;
 document.getElementById("obstetricCode").value = obscode; 
 
-var gr = document.getElementById("childDeath").value;
-var par = document.getElementById("childDeath").value;
-var cd = document.getElementById("childDeath").value;
-var abr = document.getElementById("childDeath").value;
-var lc = document.getElementById("childDeath").value;
-var mw = document.getElementById("childDeath").value;
-var bpsy = document.getElementById("childDeath").value;
-var bpd = document.getElementById("childDeath").value;
-
-if($('#gravida').val() > 2 || $('#para').val() > 2 ||  $('#childDeath').val() >2 ||
-    $('#abortion').val() > 2 || $('#livingChildren').val() > 2 || $('#motherWeight').val() < 40 ||
-    $('#bpSys').val() >= 140 ||  $('#bpDia').val() >=90)
+if($('#gravida').val() > 2 || 
+   $('#para').val() > 2 ||  
+   $('#childDeath').val() >2 ||
+   $('#abortion').val() > 2 || 
+	$('#livingChildren').val() > 2 || 
+	($('#motherWeight').val() < 40 && $('#motherWeight').val() != 0) ||
+	($('#motherHeight').val() < 145 && $('#motherHeight').val() != 0) ||
+    $('#bpSys').val() > 130 ||  
+	$('#bpDia').val() > 90 ||	
+	($('#MotherAge').val() > 30) ||
+	($('#MotherAge').val() < 18 && $('#MotherAge').val() != 0) 
+	)
     {
       var hrpgcy = "Yes";
     } 
@@ -405,8 +406,52 @@ if($('#gravida').val() > 2 || $('#para').val() > 2 ||  $('#childDeath').val() >2
 {
       var hrpgcy = "No";
     }
+	
 	document.getElementById("hrPregnancy").value = hrpgcy; 
+	
+	document.getElementById("hrFactor").value = "";
+	if($('#gravida').val() > 2 ||
+     $('#childDeath').val() >2 ||
+     $('#abortion').val() > 2 || 
+  	 $('#livingChildren').val() > 2 
+	 )
+    {
+      document.getElementById("hrFactor").value = "Multiple Pregnancy"; 
+    } 
+	else
+		if($('#para').val() >  2
+	 )
+    {
+      document.getElementById("hrFactor").value = "Multi Para"; 
+    } 
+	else
 
+	
+	if($('#motherHeight').val() < 145 && $('#motherHeight').val() != 0 )
+    {
+      document.getElementById("hrFactor").value = "Height below 145 cm"; 
+    } 
+	else
+		if($('#motherWeight').val() < 40 && $('#motherWeight').val() != 0 )
+    {
+      document.getElementById("hrFactor").value = "Weight below 40 kg"; 
+    } 
+	else
+	if($('#bpSys').val() > 130 ||
+     $('#bpDia').val() > 90 )
+	{
+      document.getElementById("hrFactor").value = "PIH/Pre Eclampsia/Eclampsia"; 
+    } 
+	else
+	if($('#MotherAge').val() < 18 && $('#MotherAge').val() != 0)
+	{
+      document.getElementById("hrFactor").value = "Teenage Pregnancy"; 
+    } 
+	else
+	if($('#MotherAge').val() > 30)
+	{
+      document.getElementById("hrFactor").value = "Mothers age > 30"; 
+    } 
 }
 
 function onlyNumbers(text) {  
@@ -591,6 +636,7 @@ function addMothAadhar(){
     var motadhaar = $('#motheraadhaaridval').val();
  
     //return checkEC(motadhaar);
+	checkEC(motadhaar);
 }
 
 $("#anregisterForm").submit(function (e) {
@@ -599,6 +645,7 @@ $("#anregisterForm").submit(function (e) {
       console.log("result",checkEC(motadhaar));
       return checkEC(motadhaar);
 });
+
 
 function checkEC(motadhaar) {
     returnParam = true;
@@ -620,8 +667,8 @@ function checkEC(motadhaar) {
                 document.getElementById('motheraadhaaridval').focus();
                 returnParam =  false;
             }
-
-            if (result['result'] === '3')
+			
+			            if (result['result'] === '3')
             {
 
                 /* Conception Age @ Medical History*/
@@ -656,6 +703,7 @@ function checkEC(motadhaar) {
     });
    return returnParam;
 }
+
 /* Medical History PICME - Ends */
 
 /* Medical History PICME - Starts */
@@ -1269,6 +1317,9 @@ $('#HscId').on('change', function(){
 
 $('.anregisterPicmenoCls').on('blur change', function(){
     picmeno =  $(this).val();
+	$('#suggesstion-box').html("");
+	document.getElementById ('picmeno').val = "";
+	resultParam =  true;
      $.ajax({
         url: "ajax/AnVisitData.php",
         type: "POST",
@@ -1283,8 +1334,15 @@ $('.anregisterPicmenoCls').on('blur change', function(){
             if(result['result']=='success'){
              //    $("#hrPregnancy").val(result['highRisk']).change();
                   $("#obstetricCode").val(result['obcode']).change();
+				 if(result['picmeno'] != "")
+				  {
+                $('#suggesstion-box').html("<span style='color:red'>Picmeno already exists. Please enter a new picme no.</span>");
+				document.getElementById ('picmeno').focus();
+                resultParam =  false;
+            }
+					  
             } 
-            
+			           
         }
     });
 });
