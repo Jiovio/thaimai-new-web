@@ -102,9 +102,9 @@ if (isset($_GET['del'])) {
                   echo "Edit";
               } ?> Postnatal
             
-              <a href="PostnatalVisitDtl.php?History=<?php echo $picmeNo; ?>"><button type="submit" class="btn btn-primary" id="btnBack">
-                    <span class="bx bx-arrow-back"></span>&nbsp; Back
-              </button></a>
+              <button type="button" class="btn btn-primary" id="btnBack" onclick="history.go(-1)">
+				<span class="bx bx-arrow-back"></span>&nbsp; Back
+              </button>
             
               <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; ?>" onclick="fnPostEnable()">
                     <span class="bx bx-edit"></span>&nbsp; Edit

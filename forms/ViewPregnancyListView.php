@@ -46,10 +46,10 @@
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Eligible Couple / </span>Mother Basic Details
-               
-				<a href="dashboard.php"><button type="submit" class="btn btn-primary" id="btnBack">
-                    <span class="bx bx-arrow-back"></span>&nbsp; Back</button>
-                </a>
+                
+				<button type="button" class="btn btn-primary" id="btnBack" onclick="history.go(-1)">
+				<span class="bx bx-arrow-back"></span>&nbsp; Back
+              </button>
              </h4>
 
         <form action="" method="post">
@@ -277,12 +277,13 @@
                         </div>			
                 </div><!--Father Div row-->
 				<?php if($pv == !''){ ?>
-				<a href="../forms/ViewEditPostnatal.php?view=<?php echo $pvid; ?>">
-					<button type="button" class="btn btn-primary btnForm">
+				<a href="../forms/PostnatalVisitDtl.php?History=<?php echo $picmeNo; ?>" >
+				<button type="button" class="btn btn-primary btnForm">
                     <span class="bx bx-clinic"></span>&nbsp; Postnatal</button>
+					
 				</a>
 				<?php } if($im == !''){ ?>
-				<a href="../forms/ViewEditImmunization.php?view=<?php echo $imid; ?>">
+				<a href="../forms/ImmunizationDtl.php?History=<?php echo $picmeNo; ?>" >
 					<button type="button" class="btn btn-primary btnForm">
                     <span class="bx bx-test-tube"></span>&nbsp; Immunization</button>
 				</a>
@@ -297,7 +298,7 @@
                     <span class="bx bx-user-plus"></span>&nbsp; Med History</button>
 				</a>
 				<?php } if($av == !''){ ?>
-				<a href="../forms/ViewEditAnVisit.php?view=<?php echo $avid; ?>">
+				<a href="../forms/AntenatalVisitDtl.php?History=<?php echo $picmeNo; ?>" >
 					<button type="button" class="btn btn-primary btnForm">
                     <span class="bx bx-user-check"></span>&nbsp; An Visit</button>
 				</a>

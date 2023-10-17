@@ -5,8 +5,24 @@
       <div class="layout-container">
         <!-- Menu -->
 <?php include ('require/header.php'); // Menu & Top Search
-if (isset($_GET['view'])) {
-  $id = $_GET['view'];
+$picmeNo = ""; 
+	$id = 0;
+ $view = false;
+$update = false;
+
+		if (isset($_GET['view']) OR isset($_GET['delview'])) {
+	   if(isset($_GET['view'])) /*Added Newly*/
+		{
+	     $id = $_GET['view'];		 
+		}
+  //  $id = $_GET['view'];
+  
+    $del_view_ind = "N";
+		if(isset($_GET['delview']))
+		{
+	     $del_view_ind = "Y";	
+         $id = $_GET['delview'];		 
+		}
   $view = true;
   $record = mysqli_query($conn, "SELECT * FROM antenatalvisit WHERE id=$id");
   $AnData = mysqli_fetch_array($record);
@@ -147,13 +163,24 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 } else {
   $uqry= mysqli_query($conn,"UPDATE highriskmothers SET status=0 WHERE picmeno='$picmeno'");
 }
-if (isset($_GET['del'])) {
+if (isset($_GET['del'])) 
+{
   $id = $_GET['del'];
   date_default_timezone_set('Asia/Kolkata');
   $date = date('d-m-Y h:i:s');
-  mysqli_query($conn, "UPDATE antenatalvisit SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
-  $_SESSION['message'] = "User deleted!"; 
-    echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/AntenatalVisit.php');</script>";
+//  mysqli_query($conn, "UPDATE antenatalvisit SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
+//  $_SESSION['message'] = "User deleted!"; 
+  $rec_del_pic = mysqli_query($conn, "SELECT * FROM antenatalvisit an WHERE $id = an.id AND
+		                       an.ancPeriod = (SELECT max(CAST(an1.ancPeriod AS SIGNED)) From antenatalvisit an1 where an1.picmeno = an.picmeno)");
+  $n_del = mysqli_fetch_array($rec_del_pic);
+  $Del_picmeno = "";
+  $Del_picmeno = $n_del['picmeno'];  
+  mysqli_query($conn, "DELETE FROM antenatalvisit WHERE id=$id"); 
+  mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeno");
+  mysqli_query($conn, "DELETE FROM immunization WHERE picmeNo = $Del_picmeno");
+  mysqli_query($conn, "DELETE FROM deliverydetails WHERE picmeno = $Del_picmeno");
+
+    echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/AntenatalVisitDtl.php?History=$Del_picmeno');</script>";
 }
 ?>
           <!-- Content wrapper -->
@@ -162,18 +189,57 @@ if (isset($_GET['del'])) {
 
             <div class="container-xxl flex-grow-1 container-p-y">
               <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Antenatal Visit /</span> View Antenatal Visit
-              <a href="AntenatalVisit.php"><button type="submit" class="btn btn-primary" id="btnBack">
-                    <span class="bx bx-arrow-back"></span>&nbsp; Back
-              </button></a>
-
-              <?php if($_SESSION["usertype"] == '0' || $_SESSION["usertype"] == '1' || $_SESSION["usertype"] == '2') { ?>
-              <a href="../forms/ViewEditAnVisit.php?del=<?php echo $id; ?>" onclick="return confirm('Are you sure to delete?')"><button type="submit" class="btn btn-danger btnSpace">
-                    <span class="bx bx-minus"></span>&nbsp; Delete
-              </button></a>
-              <?php } ?>
-              <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; ?>" onclick="fnAnVisitEnable()" >
+              <button type="button" class="btn btn-primary" id="btnBack" onclick="history.go(-1)">
+				<span class="bx bx-arrow-back"></span>&nbsp; Back
+              </button>
+			  <?php $Edit_ind = "N"; ?>
+			  <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; $Edit_ind = "Y"; ?>" onclick="fnAnVisitEnable()">
                     <span class="bx bx-edit"></span>&nbsp; Edit
               </button>
+
+              <?php if($_SESSION["usertype"] == '0' || $_SESSION["usertype"] == '1' || $_SESSION["usertype"] == '2') { ?>
+			  <?php
+			  
+			 $rec_del_pic = mysqli_query($conn, "SELECT * FROM antenatalvisit an WHERE $picmeno = an.picmeno AND
+		                       an.ancPeriod = (SELECT max(CAST(an1.ancPeriod AS SIGNED)) From antenatalvisit an1 where an1.picmeno = an.picmeno)");
+							   
+							//   print_r($picmeno); exit;
+			  $n_del = "";
+			  $n_del = mysqli_fetch_array($rec_del_pic);
+	          $Del_picmeno = "";
+	          $Del_picmeno = $n_del['picmeno'];
+			  
+			//  $picmeno = $An["picmeno"];
+			
+			  
+			  if(($n_del['id']==$id))
+			  {
+			  ?>
+			  	  <a href="../forms/ViewEditAnVisit.php?del=<?php echo $n_del['id']; ?>" onclick="return confirm('Are you sure to delete?')"><button type="submit" class="btn btn-danger btnSpace">
+                    <span class="bx bx-minus"></span>&nbsp; Delete
+              </button></a>
+			  <?php }
+			  else
+			  {
+		       if ($del_view_ind == "Y")
+			   { 
+		    
+		 //  print_r($n_del['id'].$id.$del_view_ind); exit;
+		  // print_r("I am here pa!"); exit;
+		        echo "<script>alert('Can delete only the most recent visit !!!')</script>"; ?>
+								 <a href="../forms/ViewEditAnVisit.php?delview=<?php echo $id; ?>"><button type="submit" class="btn btn-danger btnSpace">
+                    <span class="bx bx-minus"></span>&nbsp; Delete
+              </button></a> 
+			   <?php }
+		   else
+		   { ?>
+		     <a href="../forms/ViewEditAnVisit.php?delview=<?php echo $id; ?>"><button type="submit" class="btn btn-danger btnSpace">
+                    <span class="bx bx-minus"></span>&nbsp; Delete
+              </button></a>   
+			  
+			  
+			<?php }}} ?>
+             
 			</h4>
       
 			<!-- Basic Layout -->
@@ -282,7 +348,7 @@ if (isset($_GET['del'])) {
                                     $exequery = mysqli_query($conn, $dquery);
                                     while($listvalue = mysqli_fetch_assoc($exequery)) { 
                                     ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                          <option selected=true value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
                                <?php } } ?>
                                 </select>
                           </div>
@@ -299,7 +365,9 @@ if (isset($_GET['del'])) {
                               placeholder="Antenatal Visit Date"
                               aria-label="Antenatal Visit Date"
                               aria-describedby="basic-icon-default-anvisitDate"
-                              value="<?php echo date("m/d/Y", strtotime($anvisitDate)); ?>"  
+							  <?php $cur_dt = date('Y-m-d'); ?>
+							   min="1970-01-01" max=<?php echo $cur_dt; ?>
+                              value="<?php echo $anvisitDate; ?>"  
                               disabled
                               required
                             />

@@ -104,9 +104,9 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
                 echo "Edit";
               } ?> Delivery
               
-              <a href="DeliveryDetails.php"><button type="submit" class="btn btn-primary" id="btnBack">
-                    <span class="bx bx-arrow-back"></span>&nbsp; Back
-              </button></a>
+              <button type="button" class="btn btn-primary" id="btnBack" onclick="history.go(-1)">
+				<span class="bx bx-arrow-back"></span>&nbsp; Back
+              </button>
             <?php if($_SESSION["usertype"] == '0' || $_SESSION["usertype"] == '1' || $_SESSION["usertype"] == '2') { ?>              
               <a href="../forms/ViewEditDelivery.php?del=<?php echo $id; ?>" onclick="return confirm('Are you sure to delete?')"><button type="submit" class="btn btn-danger btnSpace">
                     <span class="bx bx-minus"></span>&nbsp; Delete

@@ -1,4 +1,3 @@
-<?php include ('require/topHeader.php'); ?>
 <?php 
 session_start();
 if (isset($_SESSION["username"]) || isset($_SESSION["userid"]) || isset($_SESSION["usertype"]) || isset($_SESSION["BlockId"]) || isset($_SESSION["PhcId"]) || isset($_SESSION["HscId"])) {
@@ -34,12 +33,12 @@ include ('preloader.php');
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-    <title>Savemom</title>
+    <title>Savemom</title> 
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.png" height="100" />
+    <link rel="icon" type="image/x-icon" href="https://demo.savemom.in/assets/img/favicon/favicon.png" height="100" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -73,8 +72,8 @@ include ('preloader.php');
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-			<img src="../assets/img/Thaimaiyudan-logo.png" class="w-px-40 h-auto rounded-circle" />
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">Thaimaiyudan</span>
+			<img src="../assets/img/Savemom-Logo.png" class="w-px-40 h-auto rounded-circle" />
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">Savemom</span>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-Block d-xl-none">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -206,6 +205,14 @@ include ('preloader.php');
                              </a>
                          </li>
                      </ul>
+					 
+					 <ul class="menu-sub"> <!---- Creating Sub Sub Menu Header ---->
+			             <li class="menu-item; style=menu-list-type:None" >  
+                             <a href="PANTage.php" class="menu-link">
+                                 <div data-i18n="Basic"><i>Potential Teenage Pregnancy List</i></div>
+                             </a>
+                         </li>
+                     </ul>
                  </li>
 			</ul>
 			
@@ -224,7 +231,7 @@ include ('preloader.php');
                          </li>
                      
 					     <li class="menu-item; style=menu-list-type:None" >  
-                             <a href="DDue3List.php" class="menu-link">
+                             <a href="ANDue3List.php" class="menu-link">
                                 <div data-i18n="Basic"><i>Delivery Due List (3 Months EDD)</i></div>
                              </a>
                          </li>
@@ -289,7 +296,7 @@ include ('preloader.php');
 					  
 			             <li class="menu-item; style=menu-list-type:None" >  
                              <a href="ECAnyList.php" class="menu-link">
-                                <div data-i18n="Basic"><i>ECs Following Any Other Methods</i></div>
+                                <div data-i18n="Basic"><i>ECs Following Any Other Methods (Future) </i></div>
                              </a>
                          </li>
                      
@@ -424,6 +431,14 @@ include ('preloader.php');
                 <div data-i18n="Postnatal Visit">Pregnancy Status</div>
               </a>
             </li>
+			
+			<li class="menu-item">
+              <a href="PrgncyHis.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-data"></i>
+                <div data-i18n="Pregnancy History">Pregnancy History</div>
+              </a>
+            </li>
+			
 			    <?php if(($usertype == 0) || ($usertype == 1) || ($usertype == 2)) { ?>
             <li class="menu-item">
               <a href="UserManagement.php" class="menu-link">

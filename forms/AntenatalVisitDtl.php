@@ -22,6 +22,9 @@ $History = true;}
                 <!-- Hoverable Table rows -->
                  <div class="card">
                    <h5 class="card-header"><span class="text-muted fw-light">Antenatal Visit /</span> Antenatal Visit Header List /</span> Antenatal Visit Detail List
+                  <button type="button" class="btn btn-primary" id="btnBack" onclick="history.go(-1)">
+				<span class="bx bx-arrow-back"></span>&nbsp; Back
+              </button>
 		           <h5 class="card-header"><span class="text-muted fw-light"> PICME : </span> <?php echo $_GET['History']; ?> 
 				  <h5 class="card-header"> <span class="text-muted fw-light"> Mother Name : </span> <?php echo $his_mot_name; ?>
 				  </h5>

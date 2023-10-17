@@ -139,9 +139,9 @@ if (!empty($query)) {
               } else {
                 echo "Edit";
               } ?> Immunization
-              <a href="ImmunizationDtl.php?History=<?php echo $picmeNo; ?>"><button type="submit" class="btn btn-primary" id="btnBack">
-                    <span class="bx bx-arrow-back"></span>&nbsp; Back
-              </button></a>
+              <button type="button" class="btn btn-primary" id="btnBack" onclick="history.go(-1)">
+				<span class="bx bx-arrow-back"></span>&nbsp; Back
+              </button>
 			  <?php $Edit_ind = "N"; ?>
 			  <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; $Edit_ind = "Y"; ?>" onclick="fnImEnable()">
                     <span class="bx bx-edit"></span>&nbsp; Edit
