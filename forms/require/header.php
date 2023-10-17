@@ -433,7 +433,7 @@ include ('preloader.php');
             </li>
 			
 			<li class="menu-item">
-              <a href="PregnancyHistory.php" class="menu-link">
+              <a href="PrgncyHis.php" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-data"></i>
                 <div data-i18n="Pregnancy History">Pregnancy History</div>
               </a>
