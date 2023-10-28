@@ -307,9 +307,9 @@ $usr_typ = "N";
 if(isset($Checkusr_val))
 {
   $usr_typ = "Y";
- // $usr_typ = $Checkusr_val["usertype"]; 
+  $usr_typ = $Checkusr_val["usertype"]; 
 }
- // print_r($usr_typ);
+  print_r($usr_typ);
 ?>
 <?php if($usr_typ == 'Y') { ?>
 					<div class="col-4 mb-4">
