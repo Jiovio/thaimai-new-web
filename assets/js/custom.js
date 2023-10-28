@@ -299,10 +299,10 @@ function fnAnVisitEnable() {
 document.getElementById("residenttype").disabled = false;
 document.getElementById("physicalpresent").disabled = false;
 document.getElementById("placeofvisit").disabled = false;
-document.getElementById("abortion").disabled = false;
+//document.getElementById("abortion").disabled = false;
 document.getElementById("anvisitDate").disabled = false;
-document.getElementById("ancPeriod").disabled = false;
-document.getElementById("pregnancyWeek").disabled = false;
+//document.getElementById("ancPeriod").disabled = false;
+//document.getElementById("pregnancyWeek").disabled = false;
 document.getElementById("motherWeight").disabled = false;
 document.getElementById("bpSys").disabled = false;
 document.getElementById("bpDia").disabled = false;
@@ -574,6 +574,304 @@ $('#motheraadhaaridec').on('keydown keyup change', function(){
     checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid);
    
 });
+
+
+/*IFA & Calcium Starts*/
+
+$("#prescform").submit(function (e) {
+    //  e.preventDefault();
+      console.log("result",checkPicmeAN());
+      return checkPicmeAN();
+});
+
+function manifacal(){
+    var ifa = $('#NoIFA').val(); /*$('#ecfr').val + $('#ecfrno').val();*/
+    var calcium = $('#noCalcium').val();
+	var ifadate= $('#dateofIFA').val();
+	var caldate = $('#calciumDate').val();
+	
+	
+	$('#dtifa-sug-box').html("");
+	$('#dtcal-Sug-box').html("");
+	if (ifa > 0)
+    {
+	 $("#dateofIFA").attr("readonly", false);
+       if(ifadate === "") 	
+      {		 
+       $('#dtifa-sug-box').html("<span style='color:red'>IFA date is required.</span>");
+	   document.getElementById ('dateofIFA').focus();
+       return false;
+      }
+	/* if(ifadate != "") 	
+     {	
+	   document.getElementById ('dateofIFA').focus();
+       return false;
+     }*/
+    }
+	if (ifa === "")
+	{
+	$("#dateofIFA").val("");
+	$("#dateofIFA").attr("readonly", true);
+	}
+		
+	if (calcium > 0)
+    {
+		$("#calciumDate").attr("readonly", false);
+		if(caldate === "") 	
+      {
+       $('#dtcal-Sug-box').html("<span style='color:red'>Calcium date is required.</span>");
+	   document.getElementById ('calciumDate').focus();
+       return false;
+	  }
+	/*  if(caldate != "") 	
+     {	
+	   document.getElementById ('calciumDate').focus();
+     }*/
+    }
+	if (calcium === "")
+	{
+	$("#calciumDate").val("");	
+	$("#calciumDate").attr("readonly", true);
+	}
+}
+
+function checkPicmeAN()
+{   
+    var picmeno = $('#AVpicmeno').val(); 
+    var albndate = $('#dateofAlbendazole').val();
+	var ifadate= $('#dateofIFA').val();
+	var caldate = $('#calciumDate').val();
+	
+     $.ajax({
+        url: "ajax/fetchANdate.php",
+		async: false,
+        type: "POST",
+        data: {
+            picmeno: picmeno
+        },
+        cache: false,
+        success: function (result) {
+			$('#suggesstion-box').html("");
+			
+			if (caldate === "")
+			{	
+			$('#calciumDate').val(result);
+			}
+			if (ifadate === "")
+			{	
+	        $('#dateofIFA').val(result);
+			}
+			/*if (albndate === "")
+			{	
+	        $('#dateofAlbendazole').val(result);
+			}*/
+			
+			manifacal();
+						
+			if ((result > caldate || result < caldate) && caldate!= "")
+			{
+				 $('#dtcal-sug-box').html("<span style='color:red'>Calcium Date should be = an visit date</span>");	
+				 document.getElementById ('calciumDate').focus();
+                return false;
+			
+			}	
+			if ((result > ifadate || result < ifadate) && ifadate!="")
+			{
+				 $('#dtifa-sug-box').html("<span style='color:red'>IFA Date should be = an visit date</span>");	
+				 document.getElementById ('dateofIFA').focus();
+                return false;
+			
+			}	
+			if ((result > albndate || result < albndate) && albndate!="")
+			{
+				 $('#suggesstion-box').html("<span style='color:red'>Albendazole Date should be = an visit date</span>");	
+				 document.getElementById ('dateofAlbendazole').focus();
+                 return false;
+			}
+        }
+    });
+}
+
+/**/
+
+function checkPicmeAV()
+{
+	$("#ancPeriod").attr("readonly", true);
+	$("#pregnancyWeek").attr("readonly", true);
+	var picmeno = $('#AVpicmeno').val();
+	var anvisitDate = $('#anvisitDate').val();
+    checkPicme(picmeno, anvisitDate);
+}
+
+/**
+ * 
+ * @param {type} val ->picme no
+ * @param {type} anvisitDate
+ * @returns {undefined}
+ */
+function checkPicme(val, anvisitDate)
+{    
+    $('#pregnancyWeek').val("");
+     $.ajax({
+        url: "ajax/fetchPregnancyWeek.php",
+		async: false,
+        type: "POST",
+        data: {
+            picmeno: val, anvisitDate : anvisitDate
+        },
+        cache: false,
+        success: function (result) {
+			$('#suggesstion-box').html("");
+			$('#avdt-suggesstion-box').html("");
+			if (result === '1')
+			{
+				 $('#suggesstion-box').html("<span style='color:red'>Please enter valid picme no.</span>");	
+				 document.getElementById ('AVpicmeno').focus();
+                return false;
+			
+			}	
+			if (result === '2')
+			{
+				 $('#suggesstion-box').html("<span style='color:red'>During a prior antenatal appointment, the mother had an abortion. Since antenatal visits are not permitted.</span>");	
+				 document.getElementById ('AVpicmeno').focus();
+                return false;
+			
+			}
+            
+			if (result === '3')
+			{
+				 $('#avdt-suggesstion-box').html("<span style='color:red'>Already entry happened for this date.  Please select a new date.</span>");	
+				 document.getElementById ('anvisitDate').focus();
+                return false;
+			}			
+					
+			if (result === '4')
+			{
+				 $('#avdt-suggesstion-box').html("<span style='color:red'>AN visit date should be greater than the previous AN visit date.</span>");	
+				 document.getElementById ('anvisitDate').focus();
+                return false;
+			} 			
+		
+            if (result !== "") {      
+                resultAr = result.split("-#@#-")
+                if(resultAr[0] !==0){
+                    $("#ancPeriod").val(resultAr[0]).change();   
+                    $("#ancPeriod").attr("readonly", true);
+                if($('#ancPeriodCount').length > 0 && $('#ancPeriodCount').val() != ''){
+                    $('#ancPeriodCount').val(resultAr[0]);
+                } else {
+                     $('<input>').attr({
+                    type: 'hidden',
+                    name: 'ancPeriod',
+                    value: result,
+                    id : 'ancPeriodCount'
+                }).appendTo('#ancSection');
+                }
+                }
+                $('#pregnancyWeek').val("");
+                  $("#ancPeriod").val(resultAr[0]).change();   
+                $('#pregnancyWeek').attr("readOnly", true);
+                if(resultAr[1] !=='0' && resultAr[1] !==""){
+                    console.log(resultAr[1])
+                    $('#pregnancyWeek').val(resultAr[1]);
+                   $('#pregnancyWeek').attr("readOnly", true);
+					
+                }
+				
+            }
+        }
+    });
+}
+
+function checkCovid()
+{
+            var Td1_YON = $('#Td1').val();
+			var Td2_YON = $('#Td2').val();
+			var Tdb_YON = $('#Tdb').val();
+			
+			
+			if (Td1_YON === 1 || Td2_YON === 1 || Tdb_YON === 1)
+			{
+			 $("#Covidvac").attr("readonly", true);
+			}
+			
+			/*if ((Td1_YON === 0 && Td2_YON === 0 && Tdb_YON === 0) || 
+			    (Td1_YON === "" && Td2_YON === "" && Tdb_YON === "") ||
+			    (Td1_YON === 0 && Td2_YON === "" && Tdb_YON === "") ||
+                (Td1_YON === "" && Td2_YON === 0 && Tdb_YON === "")	||
+				(Td1_YON === "" && Td2_YON === "" && Tdb_YON === 0))
+			{
+			 $("#Covidvac").attr("readonly", false);
+			}
+			
+			if (Td1_YON === 1 || Td2_YON === 1 || Tdb_YON === 1)
+			{
+			 $("#Covidvac").attr("readonly", true);
+			}*/
+} 
+			
+
+/**/
+
+/*IFA & Calcium Ends*/
+
+function checkECdetails(ecfr, ecfrno, motheraadhaarid, husbandaadhaarid){
+        $.ajax({
+        url: "ajax/duplicateECValidation.php",
+		async:false,
+        type: "POST",
+        data: {
+            ecfr: ecfr, ecfrno: ecfrno, motheraadhaarid: motheraadhaarid, husbandaadhaarid: husbandaadhaarid
+        },
+		cache: false,
+        success: function (result) {
+            $('#suggesstion-box').html("");
+			$('#mot-sug-box').html("");
+			$('#Hus-Sug-box').html("");
+			$('#mot-mar-sug-box').html("");
+			$('#Hus-mar-Sug-box').html("");
+			
+            result= $.trim(result);
+            if (result === '1')
+            {
+                $('#suggesstion-box').html("<span style='color:red'>EC registration already done for this Ecfrno.</span>");
+				document.getElementById ('ecfrno').focus();
+                return false;
+            }
+			if (result === '3')
+            {
+                $('#mot-sug-box').html("<span style='color:red'>EC registration already done for this Mother's Aadhar.</span>");
+				document.getElementById ('motheraadhaaridec').focus();
+                return false;
+            }
+			if (result === '4')
+            {
+                $('#Hus-Sug-box').html("<span style='color:red'>EC registration already done for this Father's Aadhar.</span>");
+				document.getElementById ('husbandaadhaaridec').focus();
+                return false;
+            }
+			if (result === '5')
+            {
+                $('#mot-sug-box').html("<span style='color:red'>EC registration already done using this aadhar for Father's Aadhar.</span>");
+				document.getElementById ('motheraadhaaridec').focus();
+                return false;
+            }
+			if (result === '6')
+            {
+                $('#Hus-Sug-box').html("<span style='color:red'>EC registration already done using this aadhar for Mother's Aadhar.</span>");
+				document.getElementById ('husbandaadhaaridec').focus();
+                return false;
+            }
+//	var ecmotage = document.getElementById("motherdob").value;
+//	var echusage = document.getElementById("husdob").value;
+
+	        fnCalMotAge();	
+	        fnCalHusAge();
+			
+        }
+    });
+}
+/* ECFR No val - Ends */
 
 /* Husband Aadhar Duplication */
 $('#husbandaadhaaridec').on('keydown keyup change', function(){
@@ -1222,17 +1520,17 @@ $('#picmeno').on('blur change click', function () {
             }
         }
     });
-    checkPicme(picmeno, anvisitDate);
+  //  checkPicme(picmeno, anvisitDate);
 });
 
-$('#anvisitDate').on('blur change click', function () {
+/*$('#anvisitDate').on('blur change click', function () {
     anvisitDate = $(this).val();
     var picmeno = $('#picmeno').val();
     if (anvisitDate != "") {
       
         checkPicme(picmeno, anvisitDate);
     }
-});
+});*/
 
 
 $('.highPregnancyCls').on('blur change', function (){
@@ -1379,6 +1677,78 @@ $('#lmpdate').on('blur change', function(){
   }
 });
 
+/*To avoid input (character by character) check included the below function */
+$('#AVpicmeno').on('keydown keyup change', function(){
+    var picmeno = $(this).val();
+	var anvisitDate = $('#anvisitDate').val();
+    checkPicme(picmeno, anvisitDate);
+   
+});
+
+$('#AVpicmeno').on('keydown keyup change', function(){
+    var picmeno = $('#AVpicmeno').val();
+    var anvisitDate = $('#anvisitDate').val();
+    checkPicme(picmeno, anvisitDate);
+   
+});
+
+$("#AVaddForm").submit(function (e) {
+    // e.preventDefault();
+    var picmeno = $('#AVBpicmeno').val();
+	console.log("return",checkAVBPicme(picmeno));
+	return checkAVBPicme(picmeno);
+ 
+});
+
+function checkAVBPicme(val)
+{ 
+//alert(val)   
+    returnParam = true;
+     $.ajax({
+        url: "ajax/fetchAVPicme.php",
+		async: false,
+        type: "POST",
+        data: {
+            picmeno: val
+        },
+        cache: false,
+        success: function (response) {
+			result = JSON.parse(response);
+			$('#suggesstion-box').html("");
+			 if (result['result'] === '1')
+			{
+				 $('#suggesstion-box').html("<span style='color:red'>Please enter valid picme no.</span>");	
+				 document.getElementById ('AVBpicmeno').focus();
+                returnParam = false;
+			
+			}	
+			if (result['result'] === '2')
+			{
+				 $('#suggesstion-box').html("<span style='color:red'>During a prior antenatal appointment, the mother had an abortion. Since antenatal visits are not permitted.</span>");	
+				 document.getElementById ('AVBpicmeno').focus();
+                returnParam = false;
+			}
+        }
+    });
+	return returnParam;
+}
+
+/*$("#anregisterForm").submit(function (e) {
+    //  e.preventDefault();
+      var motadhaar = $('#motheraadhaaridval').val();
+      console.log("result",checkEC(motadhaar));
+      return checkEC(motadhaar);
+});*/
+
+function checkPicmeAV()
+{
+	$("#ancPeriod").attr("readonly", true);
+	$("#pregnancyWeek").attr("readonly", true);
+	var picmeno = $('#AVpicmeno').val();
+	var anvisitDate = $('#anvisitDate').val();
+    checkPicme(picmeno, anvisitDate);
+}
+
 /**
  * 
  * @param {type} val ->picme no
@@ -1388,20 +1758,51 @@ $('#lmpdate').on('blur change', function(){
 function checkPicme(val, anvisitDate)
 {    
     $('#pregnancyWeek').val("");
-//    $('#pregnancyWeek').attr("readOnly", false);
      $.ajax({
         url: "ajax/fetchPregnancyWeek.php",
+		async: false,
         type: "POST",
         data: {
             picmeno: val, anvisitDate : anvisitDate
         },
         cache: false,
         success: function (result) {
+			$('#suggesstion-box').html("");
+			$('#avdt-suggesstion-box').html("");
+			if (result === '1')
+			{
+				 $('#suggesstion-box').html("<span style='color:red'>Please enter valid picme no.</span>");	
+				 document.getElementById ('AVpicmeno').focus();
+                return false;
+			
+			}	
+			if (result === '2')
+			{
+				 $('#suggesstion-box').html("<span style='color:red'>During a prior antenatal appointment, the mother had an abortion. Since antenatal visits are not permitted.</span>");	
+				 document.getElementById ('AVpicmeno').focus();
+                return false;
+			
+			}	
+					
+			if (result === '3')
+			{
+				 $('#avdt-suggesstion-box').html("<span style='color:red'>Already entry happened for this date. Please select a new date.</span>");	
+				 document.getElementById ('anvisitDate').focus();
+                return false;
+			}			
+					
+			if (result === '4')
+			{
+				 $('#avdt-suggesstion-box').html("<span style='color:red'>AN visit date should be greater than the previous AN visit date.</span>");	
+				 document.getElementById ('anvisitDate').focus();
+                return false;
+			} 
+			
             if (result !== "") {      
                 resultAr = result.split("-#@#-")
                 if(resultAr[0] !==0){
                     $("#ancPeriod").val(resultAr[0]).change();   
-                    $("#ancPeriod").attr("disabled", true);
+                    $("#ancPeriod").attr("readonly", true);
                 if($('#ancPeriodCount').length > 0 && $('#ancPeriodCount').val() != ''){
                     $('#ancPeriodCount').val(resultAr[0]);
                 } else {
@@ -1415,17 +1816,18 @@ function checkPicme(val, anvisitDate)
                 }
                 $('#pregnancyWeek').val("");
                   $("#ancPeriod").val(resultAr[0]).change();   
-//                $('#pregnancyWeek').attr("readOnly", false);
+                $('#pregnancyWeek').attr("readOnly", true);
                 if(resultAr[1] !=='0' && resultAr[1] !==""){
                     console.log(resultAr[1])
                     $('#pregnancyWeek').val(resultAr[1]);
-//                    $('#pregnancyWeek').attr("readOnly", true);
+                   $('#pregnancyWeek').attr("readOnly", true);
+					
                 }
+				
             }
         }
     });
 }
-
 
 function formatDate(date) {
     day = date.getDate();
@@ -1463,11 +1865,23 @@ if(selectedValue == "1") { pd.style.display = "block"; } else if(selectedValue =
 
 function Td1Change() {
 var selectBox = document.getElementById("Td1");
+
 var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 var Tddose1 = document.getElementById("Tddose1"); 
 var Tddate1 = document.getElementById("Tddate1");
 //if(selectedValue == "1") { Tddose1.style.display = "block"; } else if(selectedValue == "0") { Tddose1.style.display = "none"; }
 if(selectedValue == "1") { Tddate1.style.display = "block"; } else if(selectedValue == "0") { Tddate1.style.display = "none"; }
+if (selectedValue == "0")
+{
+Covidvacn.style.display = "block";
+}
+if (selectedValue == "1")
+{
+document.getElementById("Covidvac").value = "0";	
+Covidvacn.style.display = "none";
+CovidChange();
+}
+
 }
 function Td2Change() {
 var selectBox = document.getElementById("Td2");
@@ -1476,6 +1890,16 @@ var Tddose2 = document.getElementById("Tddose2");
 var Tddate2 = document.getElementById("Tddate2");
 //if(selectedValue == "1") { Tddose2.style.display = "block"; } else if(selectedValue == "0") { Tddose2.style.display = "none"; }
 if(selectedValue == "1") { Tddate2.style.display = "block"; } else if(selectedValue == "0") { Tddate2.style.display = "none"; }
+if (selectedValue == "0")
+{
+Covidvacn.style.display = "block";
+}
+if (selectedValue == "1")
+{
+document.getElementById("Covidvac").value = "0";	
+Covidvacn.style.display = "none";
+CovidChange();
+}
 }
 
 function TdBChange() {
@@ -1486,6 +1910,16 @@ var TdB = document.getElementById("TdB");
 
 //if(selectedValue == "1") { Bdose.style.display = "block"; } else if(selectedValue == "0") { Bdose.style.display = "none"; }
 if(selectedValue == "1") { TdB.style.display = "block"; } else if(selectedValue == "0") { TdB.style.display = "none"; }
+if (selectedValue == "0")
+{
+Covidvacn.style.display = "block";
+}
+if (selectedValue == "1")
+{
+document.getElementById("Covidvac").value = "0";	
+Covidvacn.style.display = "none";
+CovidChange();
+}
 }
 function UrinetestChange() {
 var selectBox = document.getElementById("urineTestStatus");
@@ -1526,6 +1960,7 @@ var sed = document.getElementById("usgScanEdd");
 var usgt = document.getElementById("usgScanStatus"); 
 var fh = document.getElementById("usgFundalHeight");
 var suw = document.getElementById("usgSizeUterusWeek"); 
+var usw = document.getElementById("sizeUterusinWeeks"); 
 var fs = document.getElementById("usgFetusStatus");
 var gs = document.getElementById("gestationSac"); 
 var pla = document.getElementById("placenta");
@@ -1542,6 +1977,7 @@ if(selectedValue == "1") { sed.style.display = "block"; } else if(selectedValue 
 if(selectedValue == "1") { usgt.style.display = "block"; } else if(selectedValue == "0"){ usgt.style.display = "none"; } 
 if(selectedValue == "1") { fh.style.display = "block"; } else if(selectedValue == "0"){ fh.style.display = "none"; } 
 if(selectedValue == "1") { suw.style.display = "block"; } else if(selectedValue == "0"){ suw.style.display = "none"; } 
+if(selectedValue == "1") { usw.style.display = "block"; } else if(selectedValue == "0"){ usw.style.display = "none"; } 
 if(selectedValue == "1") { fs.style.display = "block"; } else if(selectedValue == "0"){ fs.style.display = "none"; }  
 if(selectedValue == "1") { gs.style.display = "block"; } else if(selectedValue == "0"){ gs.style.display = "none"; } 
 if(selectedValue == "1") { pla.style.display = "block"; } else if(selectedValue == "0"){ pla.style.display = "none"; } 
@@ -1891,6 +2327,9 @@ var ivDoses = document.getElementById("ivDoses");
 
 if(selectedValue == "1") { symptom.style.display = "block"; } else if(selectedValue == "0") { symptom.style.display = "none"; } 
 if(selectedValue == "1") { refFacility.style.display = "block"; } else if(selectedValue == "0") { refFacility.style.display = "none"; } 
+if(selectedValue == "0") { refDist.style.display = "none"; }
+if(selectedValue == "0") { refPlace.style.display = "none"; }
+if(selectedValue == "0") { refDate.style.display = "none"; }
 if(selectedValue == "1") { bTrans.style.display = "block"; } else if(selectedValue == "0") { bTrans.style.display = "none"; } 
 if(selectedValue == "1") { transDate.style.display = "block"; } else if(selectedValue == "0"){ transDate.style.display = "none"; } 
 if(selectedValue == "1") { placeAdmin.style.display = "block"; } else if(selectedValue == "0"){ placeAdmin.style.display = "none"; } 

@@ -2,6 +2,37 @@
 include "../../config/db_connect.php";
 $picmeNo = $_POST["picmeno"];
 
+$medicalSql = mysqli_query($conn, "SELECT * FROM medicalhistory WHERE picmeNo = '$picmeNo' order by id desc LIMIT 0,1");
+$medicalData = mysqli_fetch_array($medicalSql);
+
+
+if(empty($medicalData) || $medicalData==0)
+{
+    echo 1;
+    return;
+}
+
+$Checkabortion = mysqli_query($conn,"SELECT picmeno, abortion, anvisitDate FROM antenatalvisit where picmeno='".$_POST["picmeno"]."' order by id desc LIMIT 0,1");
+$CheckabortionData = mysqli_fetch_array($Checkabortion); 
+
+if (!empty($CheckabortionData)) {
+  $newabortion = $CheckabortionData["abortion"];
+  $preavdate = $CheckabortionData["anvisitDate"];
+  if($newabortion==1){
+	  echo "2";  
+    return;   
+  }
+  $new_avdate = $_POST['anvisitDate'];
+  if(strlen($new_avdate) > 0 && $preavdate == $new_avdate){
+	  echo "3";  
+    return;   
+  } 
+   if(strlen($new_avdate) > 0 && $preavdate > $new_avdate){
+	  echo "4";  
+    return;   
+  } 
+} 
+
 $AvCntmq = mysqli_query($conn, "SELECT count(av.id) AS AvCnt FROM antenatalvisit as av WHERE av.picmeno = '$picmeNo'");
 $AvCnt = mysqli_fetch_array($AvCntmq);
 $ArTot = $AvCnt['AvCnt'] + 1;
