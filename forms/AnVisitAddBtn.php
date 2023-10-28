@@ -310,7 +310,7 @@ if(isset($Checkusr_val))
   $usr_ty = $userid; 
   
 }
-  print_r($usr_typ."usertype".$Checkusr_val['usertype']);
+  //print_r($usr_typ."usertype".$Checkusr_val['usertype']);
 ?>
 <?php if($usr_typ == 'Y') { ?>
 					<div class="col-4 mb-4">
