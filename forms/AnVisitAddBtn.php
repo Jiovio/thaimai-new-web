@@ -307,7 +307,7 @@ $usr_typ = "N";
 if(isset($Checkusr_val))
 {
   $usr_typ = "Y";
-  $usr_typ = $Checkusr_val["usertype"]; 
+  $usr_typ = '".$userid."'; 
 }
   print_r($usr_typ);
 ?>
