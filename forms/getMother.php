@@ -431,7 +431,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
 	                        $hrPreg = "No";    
                            }
                           ?>
-                          <input type="text" class="form-control" id="hrPregnancy" value="<?php echo $hrPreg; ?>" name="hrPregnancy" placeholder="High Risk" readonly onclick="return addMothAadhar()" />
+                          <input type="text" style="color: red;" class="form-control" id="hrPregnancy" value="<?php echo $hrPreg; ?>" name="hrPregnancy" placeholder="High Risk" readonly onclick="return addMothAadhar()" />
                          
                           </div>
 						  
@@ -440,7 +440,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                           <?php 
                            
                           ?>
-                          <input type="text" class="form-control" id="hrFactor" name="hrFactor" placeholder="High Risk Factor" readonly onclick="return addMothAadhar()" />
+                          <input type="text" class="form-control" id="hrFactor" style="color: red;" name="hrFactor" placeholder="High Risk Factor" readonly onclick="return addMothAadhar()" />
                          
                           </div>
 						</div>

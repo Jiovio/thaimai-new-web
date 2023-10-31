@@ -385,24 +385,7 @@ if (isset($_GET['del'])) {
                             <input type="text" class="form-control" id="obstetricCode" value="<?php echo $obcode; ?>" name="obstetricCode" placeholder="Code" readonly />
                           </div>
                          
-                          <div class="mb-3 col-md-6">
-                          <label class="form-label">HR Pregnancy<span class="mand"> * </span></label>
-						  <?php 
-                           $hrPregind = 0;
-                           $hrPregind = $hrPreg;
-                           if($hrPregind==1)
-                           {
-                        	$hrPreg = "Yes";  
-                           }
-                           else
-                           {
-	                        $hrPreg = "No";    
-                           }
-                          ?>
-                          <input type="text" class="form-control" id="hrPregnancy" value="<?php echo $hrPreg; ?>" name="hrPregnancy" placeholder="High Risk" readonly />
-                         
-                            </div>
-							</div>
+                          
                         <div class="row">
                           <div class="mb-3 col-md-6">
                             <label class="form-label">MOTHER'S HEIGHT <span class="mand">* </span></label>
@@ -552,6 +535,38 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                           </div>
+						  
+					    <div class="row">
+						<h4 class="fw-bold"><span class="text-danger">High Risk Details </span></h4>
+                        </div>
+						  
+						  <div class="mb-3 col-md-6">
+                          <label class="form-label">HR Pregnancy<span class="mand"> * </span></label>
+						  <?php 
+                           $hrPregind = 0;
+                           $hrPregind = $hrPreg;
+                           if($hrPregind==1)
+                           {
+                        	$hrPreg = "Yes";  
+                           }
+                           else
+                           {
+	                        $hrPreg = "No";    
+                           }
+                          ?>
+                          <input type="text" class="form-control" style="color: red;" id="hrPregnancy" value="<?php echo $hrPreg; ?>" name="hrPregnancy" placeholder="High Risk" readonly />
+                         
+                            </div>
+							
+							<div class="mb-3 col-md-6">
+                        <label class="form-label">High Risk Factor </label>
+                          <?php 
+                           
+                          ?>
+                          <input type="text" class="form-control" style="color: red;" id="hrFactor" name="hrFactor" placeholder="High Risk Factor" readonly onclick="return addMothAadhar()" />
+                         
+                          </div>
+						  
                         </div>
                         <div class="input-group" id="btnSaUp" style="display:none">
                     <input class="btn btn-primary" type="submit" id="update" name="update" value="Update">
