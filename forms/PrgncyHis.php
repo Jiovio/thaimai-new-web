@@ -102,7 +102,7 @@ $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$BlockId."'".$orderQry)
 									   else if($mstatus==8){ echo "Immunization"; }
 									   else if($mstatus==3){ echo "Postnatal"; }
 									   ?></td>
-                                    <td><a href="../forms/ViewPregnancyListView.php?view=<?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>
+                                    <td><a href="../forms/ViewPregnancyListViewPH.php?view=<?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>
                                 </tr>
                     <?php 
                         $cnt++;
