@@ -6,7 +6,7 @@
         <!-- Menu -->
 <?php include ('require/header.php'); // Menu & Top Search
 $picmeno = ""; 
-$id = 0;
+	$id = 0;
 $view = false;
 $update = false;
 $HR_Ind = "N";
@@ -17,14 +17,12 @@ $anc_dt = "";
 $edd_dt = "";
 $symptomsHighRisk = "";
 $mn = "";
-$view_ind = "f";
-
-
 
 		if (isset($_GET['view']) OR isset($_GET['delview'])) {
 	   if(isset($_GET['view'])) /*Added Newly*/
 		{
-	     $id = $_GET['view'];	 
+	     $id = $_GET['view'];
+         $view_ind = "f";		 
 		}
   //  $id = $_GET['view'];
   
@@ -212,14 +210,8 @@ if(isset($medicalData))
  $edd_max_dt = date('Y-m-d', strtotime($edd_dt. '+ 1 Months' ));   
 }
 
-if (! empty($_POST["edit"])) {
-  $view_ind = "n";
-}
-
 if (! empty($_POST["editVisit"])) {
   $view = false;
-  
- // print_r("Hi nithya! Here i am!"); exit;
   
   $id =$_POST["id"]; $residenttype = $_POST["residenttype"]; 
   $physicalpresent = $_POST["physicalpresent"]; $placeofvisit = $_POST["placeofvisit"]; $abortion = $_POST["abortion"];
@@ -302,25 +294,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 } else {
   $uqry= mysqli_query($conn,"UPDATE highriskmothers SET status=0 WHERE picmeno='$picmeno'");
 }
-if (isset($_GET['del'])) 
-{
-  $id = $_GET['del'];
-  date_default_timezone_set('Asia/Kolkata');
-  $date = date('d-m-Y h:i:s');
-//  mysqli_query($conn, "UPDATE antenatalvisit SET status=0, deletedat='$date', deletedBy='$userid' WHERE status=1 AND id=$id");
-//  $_SESSION['message'] = "User deleted!"; 
-  $rec_del_pic = mysqli_query($conn, "SELECT * FROM antenatalvisit an WHERE $id = an.id AND
-		                       an.ancPeriod = (SELECT max(CAST(an1.ancPeriod AS SIGNED)) From antenatalvisit an1 where an1.picmeno = an.picmeno)");
-  $n_del = mysqli_fetch_array($rec_del_pic);
-  $Del_picmeno = "";
-  $Del_picmeno = $n_del['picmeno'];  
-  mysqli_query($conn, "DELETE FROM antenatalvisit WHERE id=$id"); 
-  mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeno");
-  mysqli_query($conn, "DELETE FROM immunization WHERE picmeNo = $Del_picmeno");
-  mysqli_query($conn, "DELETE FROM deliverydetails WHERE picmeno = $Del_picmeno");
 
-    echo "<script>alert('Deleted Successfully');window.location.replace('{$siteurl}/forms/AntenatalVisitDtl.php?History=$Del_picmeno');</script>";
-}
 ?>
           <!-- Content wrapper -->
           <div class="content-wrapper">
@@ -328,17 +302,11 @@ if (isset($_GET['del']))
 
             <div class="container-xxl flex-grow-1 container-p-y">
               <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Antenatal Visit /</span> View Antenatal Visit
-              			  
-			  <a href="AntenatalVisitDtl.php?History=<?php echo $picmeno ; ?>" ><button type="submit" class="btn btn-primary" id="btnBack">
+             
+			 <a href="ViewEditAnVisit.php?view=<?php echo $id; ?>" ><button type="submit" class="btn btn-primary" id="btnBack">
 				<span class="bx bx-arrow-back"></span>&nbsp; Back
-              </button></a>			  
-			 
-			  <?php $Edit_ind = "N";?>
-			  <a href="EditAnVisit.php?view=<?php echo $id; ?>" ><button type="submit" name="edit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; ?>" onclick="fnAnVisitEnable()">
-              <span class="bx bx-edit"></span>&nbsp; Edit
-              </button>
+              </button></a>
 			  
-			  	  
               <?php if($_SESSION["usertype"] == '0' || $_SESSION["usertype"] == '1' || $_SESSION["usertype"] == '2') { ?>
 			  <?php
 			  
@@ -349,34 +317,7 @@ if (isset($_GET['del']))
 			  $n_del = mysqli_fetch_array($rec_del_pic);
 	          $Del_picmeno = "";
 	          $Del_picmeno = $n_del['picmeno'];
-			  
-			//  $picmeno = $An["picmeno"];
-			
-			  
-			  if(($n_del['id']==$id))
-			  {
-			  ?>
-			  	  <a href="../forms/ViewEditAnVisit.php?del=<?php echo $n_del['id']; ?>" onclick="return confirm('Are you sure to delete?')"><button type="submit" class="btn btn-danger btnSpace">
-                    <span class="bx bx-minus"></span>&nbsp; Delete
-              </button></a>
-			  <?php }
-			  else
-			  {
-		       if ($del_view_ind == "Y")
-			   {
-		        echo "<script>alert('Can delete only the most recent visit !!!')</script>"; ?>
-								 <a href="../forms/ViewEditAnVisit.php?delview=<?php echo $id; ?>"><button type="submit" class="btn btn-danger btnSpace">
-                    <span class="bx bx-minus"></span>&nbsp; Delete
-              </button></a> 
-			   <?php }
-		   else
-		   { ?>
-		     <a href="../forms/ViewEditAnVisit.php?delview=<?php echo $id; ?>"><button type="submit" class="btn btn-danger btnSpace">
-                    <span class="bx bx-minus"></span>&nbsp; Delete
-              </button></a>   
-			  
-			  
-			<?php }}} ?>
+			  } ?>
              
 			</h4>
 			
@@ -412,7 +353,7 @@ if (isset($_GET['del']))
 						            <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-phone">Resident Type  <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                          <select required name="residenttype" id="residenttype" class="form-select" disabled>
+                          <select required name="residenttype" id="residenttype" class="form-select">
                            <?php   
                              $query = "SELECT av.residenttype,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.residenttype WHERE type=10 AND av.id=".$id;
                              $exequery = mysqli_query($conn, $query);
@@ -434,7 +375,7 @@ if (isset($_GET['del']))
 						            <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-physicalpresent">Physical Present<span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                          <select required name="physicalpresent" id="physicalpresent" class="form-select" disabled>
+                          <select required name="physicalpresent" id="physicalpresent" class="form-select">
                            <?php   
                             $query = "SELECT av.physicalpresent,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.physicalpresent WHERE type=13 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -457,7 +398,7 @@ if (isset($_GET['del']))
                           <label class="form-label" for="basic-icon-default-placeofvisit">Place of Visit <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
 
-                          <select required name="placeofvisit" id="placeofvisit" class="form-select" disabled>
+                          <select required name="placeofvisit" id="placeofvisit" class="form-select">
                            <?php   
                             $query = "SELECT av.placeofvisit,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.placeofvisit WHERE type=25 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -526,7 +467,7 @@ if (isset($_GET['del']))
 							  
 								  echo $anvisitDate; 
 							   ?>"   	
-                              disabled
+                              readonly
                               required
                             />
                           </div>
@@ -535,7 +476,7 @@ if (isset($_GET['del']))
                           <label class="form-label" for="basic-icon-default-ancPeriod">Antenatal Visit Count <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
 						    <input hidden id="ancPeriod" name="ancPeriod" value=<?php echo $ancPeriod; ?> / >
-                            <select class="40-150 form-control" id="ancPeriod" name="ancPeriod" placeholder="Antenatal Period" required disabled>
+                            <select class="40-150 form-control" id="ancPeriod" name="ancPeriod" readonly placeholder="Antenatal Period" required>
 							
                             <?php
 
@@ -565,8 +506,8 @@ if (isset($_GET['del']))
                               aria-label="Pregnancy Week"
                               aria-describedby="basic-icon-default-pregnancyWeek"
                               value="<?php echo $pregnancyWeek ?>"
-                              disabled
                               required
+							  readonly 
                             />
                           </div>
                         </div>
@@ -581,16 +522,16 @@ if (isset($_GET['del']))
                               id="motherWeight"
                               placeholder="Mother Weight"
                               aria-label="Mother Weight"
+							  onclick="HRInd()"
                               aria-describedby="basic-icon-default-motherWeight"
                               value="<?php echo $motherWeight ?>"
-                              disabled
                             />
                           </div>
                         </div>
 						             <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-motherWeight">BP Systolic <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                            <select class="50-200 form-control" id="bpSys" name="bpSys" placeholder="BP SYS" required disabled>
+                            <select class="50-200 form-control" id="bpSys" name="bpSys" onclick="HRInd()" placeholder="BP SYS" required>
                             <?php
 
                             $list=mysqli_query($conn, "SELECT bpSys from antenatalvisit WHERE id=".$id);
@@ -609,7 +550,7 @@ if (isset($_GET['del']))
                         <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-bpDia">BP Diastolic <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                            <select class="40-150 form-control" id="bpDia" name="bpDia" placeholder="BP DIA" required disabled>
+                            <select class="40-150 form-control" id="bpDia" name="bpDia" onclick="HRInd()" placeholder="BP DIA" required >
                             <?php
 
                               $list=mysqli_query($conn, "SELECT bpDia from antenatalvisit WHERE id=".$id);
@@ -635,16 +576,17 @@ if (isset($_GET['del']))
                               id="Hb"
                               placeholder="Hb"
                               aria-label="Hb"
+							  onclick="HRInd()"
                               aria-describedby="basic-icon-default-Hb"
                               value="<?php echo $Hb ?>"
-                              disabled
+                             
                             />
                           </div>
                         </div>
 						<div class="col-4 mb-3">
                             <label class="form-label" for="basic-icon-default-urineTestStatus">Urine Test Status <span class="mand">* </span></label>
                             <div class="input-group input-group-merge">
-                            <select onchange="UrinetestChange()" required name="urineTestStatus" id="urineTestStatus" class="form-select" disabled>
+                            <select onchange="UrinetestChange()" required name="urineTestStatus" id="urineTestStatus" class="form-select">
                            <?php   
                             $query = "SELECT av.urineTestStatus,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.urineTestStatus WHERE type=13 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -665,7 +607,7 @@ if (isset($_GET['del']))
                           <div class="col-4 mb-3" id="urineSP">
                             <label class="form-label" for="basic-icon-default-urineSugarPresent">Urine Sugar Present <!--<span class="mand">* </span>--></label>
                             <div class="input-group input-group-merge">
-                              <select name="urineSugarPresent" id="urineSugarPresent" class="form-select" disabled>
+                              <select name="urineSugarPresent" id="urineSugarPresent" onclick="HRInd()" class="form-select">
                            <?php   
                             $query = "SELECT av.urineSugarPresent,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.urineSugarPresent WHERE type=13 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -686,7 +628,7 @@ if (isset($_GET['del']))
                           <div class="col-4 mb-3" id="urineAP">
                             <label class="form-label" for="basic-icon-default-urineAlbuminPresent">Urine Albumin Present <!--<span class="mand">* </span>--></label>
                             <div class="input-group input-group-merge">
-                            <select name="urineAlbuminPresent" id="urineAlbuminPresent" class="form-select" disabled>
+                            <select name="urineAlbuminPresent" id="urineAlbuminPresent" onclick="HRInd()" class="form-select">
                            <?php   
                             $query = "SELECT av.urineAlbuminPresent,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.urineAlbuminPresent WHERE type=13 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -720,7 +662,7 @@ if (isset($_GET['del']))
 						            <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-fastingSugar">Fasting Sugar</label>
                           <div class="input-group input-group-merge">
-                            <select class="60-400 form-control" id="fastingSugar" name="fastingSugar" disabled>
+                            <select class="60-400 form-control" id="fastingSugar" onclick="HRInd()" name="fastingSugar">
                             <?php
 
                               $list=mysqli_query($conn, "SELECT fastingSugar from antenatalvisit WHERE id=".$id);
@@ -739,7 +681,7 @@ if (isset($_GET['del']))
 						             <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-postPrandial">Post Prandial</label>
                           <div class="input-group input-group-merge">
-                            <select class="60-400 form-control" id="postPrandial" name="postPrandial" disabled>
+                            <select class="60-400 form-control" id="postPrandial" onclick="HRInd()" name="postPrandial">
                             <?php
 
                               $list=mysqli_query($conn, "SELECT postPrandial from antenatalvisit WHERE id=".$id);
@@ -774,7 +716,7 @@ if (isset($_GET['del']))
                         <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-gctValue">GCT Value <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-                            <select class="60-400 form-control" id="gctValue" name="gctValue" required disabled>
+                            <select class="60-400 form-control" id="gctValue" name="gctValue" required>
                             <?php
 
                               $list=mysqli_query($conn, "SELECT gctValue from antenatalvisit WHERE id=".$id);
@@ -806,7 +748,7 @@ if (isset($_GET['del']))
                           <label class="form-label" for="basic-icon-default-Tsh">TSH</label>
                           <div class="input-group input-group-merge">
                             
-					    <select class="form-select" id="Tsh" name="Tsh" disabled>
+					    <select class="form-select" id="Tsh" name="Tsh">
 						<?php   
                             $query = "SELECT av.Tsh,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.Tsh WHERE type=13 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -861,7 +803,7 @@ if (isset($_GET['del']))
                           </div>
                         </div>
                 
-					                           <div class="col-4 mb-3" id="Tddate1">
+                        <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-Td1Date">Td1 Date</label>
                           <div class="input-group input-group-merge">
                            
@@ -912,7 +854,7 @@ if (isset($_GET['del']))
                           </div>
                         </div>
 
-                        <div class="col-4 mb-3"  id="Tddate2">
+                        <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-Td1Date">Td2 Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -962,7 +904,7 @@ if (isset($_GET['del']))
                           </div>
                         </div>
                       						
-						<div class="col-4 mb-3" id="TdB">
+						<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-TdBoosterDate">Td Booster Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -989,6 +931,7 @@ if (isset($_GET['del']))
                           </div>
                         </div>
 						</div>
+						
 						<div class="row">
                         <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-TdBoosterDate">Covid vaccination </label>
@@ -1013,7 +956,7 @@ if (isset($_GET['del']))
                         </div>
 						</div>
 						<div class="row">
-                        <div class="col-4 mb-3" id="dose1" >
+                        <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-Dose1Date">Dose1 Date </label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1038,7 +981,7 @@ if (isset($_GET['del']))
                               />
                           </div>
                         </div>
-                        <div class="col-4 mb-3" id="dose2" >
+                        <div class="col-4 mb-3" >
                           <label class="form-label" for="basic-icon-default-Dose2Date">Dose2 date </label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1063,7 +1006,7 @@ if (isset($_GET['del']))
                               />
                           </div>
                         </div>
-                        <div class="col-4 mb-3" id="predose" >
+                        <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-PreDate">Precaution Dose Date </label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1132,7 +1075,7 @@ if (isset($_GET['del']))
 					      <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-NoIFA">Number of IFA</label>
                           <div class="input-group input-group-merge">
-                            <select class="1-60 form-control" id="NoIFA" name="NoIFA" onclick="return checkPicmeAN()" disabled <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> disabled="disabled" <?php } ?>>
+                            <select class="1-60 form-control" id="NoIFA" name="NoIFA" onclick="return checkPicmeAN()" <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> disabled="disabled" <?php } ?>>
                             <?php
                               $list=mysqli_query($conn, "SELECT NoIFA from antenatalvisit WHERE id=".$id);
                               while($row_list=mysqli_fetch_assoc($list)){
@@ -1164,11 +1107,11 @@ if (isset($_GET['del']))
                               name="dateofIFA"
                               class="form-control"
                               id="dateofIFA"
-							  readonly
                               placeholder="Date Of IFA"
                               aria-label="Date Of IFA"
 							  onclick="return checkPicmeAN()"
                               aria-describedby="basic-icon-default-dateofIFA"
+							  readonly
 							  
 							  <?php $cur_dt = date('Y-m-d'); ?>
 							  min=<?php echo $anvisitDate; ?> max=<?php echo $cur_dt; ?>
@@ -1199,8 +1142,7 @@ if (isset($_GET['del']))
 							  onclick="return checkPicmeAN()"
 							  <?php $cur_dt = date('Y-m-d'); ?>
 							  min=<?php echo $cur_dt; ?> max=<?php echo $cur_dt; ?>
-							  <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> disabled="disabled" <?php } ?>
-							  disabled
+							  <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> readonly="readonly" <?php } ?>
                               aria-label="Date Of Albendazole"
                               aria-describedby="basic-icon-default-dateofAlbendazole"
 							  <?php $cur_dt = date('Y-m-d');?> 
@@ -1217,7 +1159,7 @@ if (isset($_GET['del']))
                           <label class="form-label" for="basic-icon-default-noCalcium">No. of Calcium</label>
                           <div class="input-group input-group-merge">
                             <select class="1-60 form-control" id="noCalcium" 
-							onclick="return checkPicmeAN()" disabled name="noCalcium" <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> disabled="disabled" <?php } ?> >
+							onclick="return checkPicmeAN()" name="noCalcium" <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> readonly="readonly" <?php } ?> >
                             <?php
 
                               $list=mysqli_query($conn, "SELECT noCalcium from antenatalvisit WHERE id=".$id);
@@ -1251,12 +1193,12 @@ if (isset($_GET['del']))
 							  <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> readonly="readonly" <?php } ?>
                               id="calciumDate"
                               placeholder="Calcium Date"
-							  readonly
 							<?php $cur_dt = date('Y-m-d'); ?>
 							  min=<?php echo $anvisitDate; ?> max=<?php echo $cur_dt; ?>
                               aria-label="Calcium Date"
                               aria-describedby="basic-icon-default-calciumDate"
                               <?php $cur_dt = date('Y-m-d'); ?>
+							  readonly
                               value="<?php 
 							  if(isset($calciumDate))
 							  {
@@ -1284,7 +1226,7 @@ if (isset($_GET['del']))
 				<div class="col-4 mb-3" >
                           <label class="form-label" for="basic-icon-default-physicalpresent">Whether USG Taken </label>
                           <div class="input-group input-group-merge">
-                          <select name="wusgTaken" id="wusgTaken" class="form-select" onchange="usgChange()" disabled>
+                          <select name="wusgTaken" id="wusgTaken" class="form-select" onchange="usgChange()">
 						  <?php if(isset($wusgTaken)) {
                           
                                 $list=mysqli_query($conn, "SELECT av.wusgTaken,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.wusgTaken WHERE type=13 AND av.id=".$id);
@@ -1317,7 +1259,7 @@ if (isset($_GET['del']))
                           </div>
                           </div>
 						  
-						  <div class="col-4 mb-3" id="usgDoneDate" >
+						  <div class="col-4 mb-3" id="usgDoneDate"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgDoneDate">USG Done Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1339,13 +1281,12 @@ if (isset($_GET['del']))
 							  else
 							  {
 								echo $usgDoneDate;
-							  }; ?>"   
-                              disabled
+							  }; ?>"
                             />
                           </div>
                         </div>
                         
-						<div class="col-4 mb-3" id="usgScanEdd">
+						<div class="col-4 mb-3" id="usgScanEdd"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgScanEdd">USG Scan Edd</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1361,13 +1302,12 @@ if (isset($_GET['del']))
 						  else 
 						  {echo $edd_dt;} ?>"
                                min=<?php echo $edd_min_dt; ?>
-                               max=<?php echo $edd_max_dt; ?> 
-                              disabled
+                               max=<?php echo $edd_max_dt; ?>
                             />
                           </div>
                         </div>
 						
-						<div class="col-4 mb-3" id="usgSizeUterusWeek" >
+						<div class="col-4 mb-3" id="usgSizeUterusWeek"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgSizeUterusWeek">USG Size Uterus Week</label>
                           <div class="input-group input-group-merge">
 						  <input hidden
@@ -1391,7 +1331,7 @@ if (isset($_GET['del']))
                               placeholder="USG Size Uterus"
                               aria-label="USG Size Uterus"
                               aria-describedby="basic-icon-default-usgSizeUterusWeek"
-                              disabled
+							  readonly
 							  value="<?php 
 							  if (isset($usgSizeUterusWeek))
 							  {
@@ -1405,7 +1345,7 @@ if (isset($_GET['del']))
                           </div>
                         </div>
                         
-					      <div class="col-4 mb-3" id="sizeUterusinWeeks" >
+					      <div class="col-4 mb-3" id="sizeUterusinWeeks"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-sizeUterusinWeeks">Uterus Size In Weeks </label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1417,15 +1357,14 @@ if (isset($_GET['del']))
                               aria-label="Size Uterus In Weeks"
                               aria-describedby="basic-icon-default-sizeUterusinWeeks"
                               value="<?php echo $sizeUterusinWeeks ?>"
-							  disabled
                             />
                           </div>
                         </div>
                           
-						<div class="col-4 mb-3" id="placenta"  >
+						<div class="col-4 mb-3" id="placenta"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-phone">Placenta</label>
                           <div class="input-group input-group-merge">
-                          <select name="placenta" id="pla" class="form-select" disabled>
+                          <select name="placenta" id="pla" class="form-select">
                           <?php
 						  
 						  if (isset($placenta) && !empty($placenta))
@@ -1454,7 +1393,7 @@ if (isset($_GET['del']))
 						           </div>
 					           </div>
 							   
-							   <div class="col-4 mb-3" id="usgFundalHeight" >
+							   <div class="col-4 mb-3" id="usgFundalHeight"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgFundalHeight">USG FUNDAL HEIGHT</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1466,17 +1405,15 @@ if (isset($_GET['del']))
                               aria-label="USG Fundal Height"
                               aria-describedby="basic-icon-default-usgFundalHeight"
                               value="<?php echo $usgFundalHeight ?>"
-                              disabled
                             />
                           </div>
                         </div>
-						
-						<div class="col-4 mb-3" id="usgFetusStatus" >
+						<div class="col-4 mb-3" id="usgFetusStatus"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-phone">USG Fetus Status</label>
                           <div class="input-group input-group-merge">
-                          <select name="usgFetusStatus" id="FetusStatus" class="form-select" disabled>
+                          <select name="usgFetusStatus" id="FetusStatus" class="form-select" >
                           <?php
-						    if(isset($usgFetusStatus))
+						    if(isset($usgFetusStatus) && !empty($usgFetusStatus))
 							{
                             $query = "SELECT av.usgFetusStatus,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetusStatus WHERE type=30 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -1502,12 +1439,12 @@ if (isset($_GET['del']))
 						  </div>
 					    </div>
 						
-						<div class="col-4 mb-3" id="gestationSac" >
+						<div class="col-4 mb-3" id="gestationSac"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-phone">Gestation Sac</label>
                           <div class="input-group input-group-merge">
-                          <select name="gestationSac" id="gestation" class="form-select" onchange="gsacField()" disabled>
+                          <select name="gestationSac" id="gestation" class="form-select" onchange="gsacField()" >
                           <?php
-						  if(isset($gestationSac))
+						  if(isset($gestationSac) && !empty($gestationSac))
 						  {
                             $query = "SELECT av.gestationSac,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.gestationSac WHERE type=31 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -1532,14 +1469,15 @@ if (isset($_GET['del']))
                                 </select>
 						             </div>
 					             </div>
+								 </div>
 								 
-							
-						  <div class="col-4 mb-3" id="liquor1" class="liquor" >
+							<div class="row">
+						  <div class="col-4 mb-3" id="liquor1" class="liquor"  onchange="gsacField()" style="display:none;">
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 1</label>
                           <div class="input-group input-group-merge">
-                          <select name="liquor" id="liquorop" class="form-select" disabled>
+                          <select name="liquor" id="liquorop" onclick="HRInd()" class="form-select" >
                           <?php
-						    if(isset($liquor1))
+						    if(isset($liquor1) && !empty($liquor1))
 							{
                             $query = "SELECT av.liquor,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.liquor WHERE type=28 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -1567,7 +1505,7 @@ if (isset($_GET['del']))
 								</div>
 
                                 <div class="row">
-					          	<div class="col-4 mb-3" id="usgFetalHeartRate1" class="usgFetalHeartRate" >
+					          	<div class="col-4 mb-3" id="usgFetalHeartRate1" class="usgFetalHeartRate"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 1</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1575,22 +1513,23 @@ if (isset($_GET['del']))
                               name="usgFetalHeartRate"
                               class="form-control"
                               id="usgFetalHeartRate"
+							  onclick="HRInd()"
                               placeholder="USG FOETAL Heart Rate"
                               aria-label="USG FOETAL Heart Rate"
                               aria-describedby="basic-icon-default-usgFetalHeartRate"
                               value="<?php echo $usgFetalHeartRate1 ?>"
-                              disabled
+							  onclick="HRInd()"
                             />
                           </div>
                         </div>
                         
-					            	<div class="col-4 mb-3" id="usgFetalPosition1" class="usgFetalPosition" >
+					            	<div class="col-4 mb-3" id="usgFetalPosition1" class="usgFetalPosition"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 1</label>
                           <div class="input-group input-group-merge">
-                          <select name="usgFetalPosition" id="usgFetalPosition" class="form-select" disabled>
+                          <select name="usgFetalPosition" id="usgFetalPosition" onclick="HRInd()" class="form-select">
 
                             <?php
-							if(isset($usgFetalPosition1))
+							if(isset($usgFetalPosition1) && !empty($usgFetalPosition1))
 							{
                             $query = "SELECT av.usgFetalPosition,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalPosition WHERE type=32 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -1616,13 +1555,13 @@ if (isset($_GET['del']))
                           </div>
                         </div>
                         
-					      <div class="col-4 mb-3" id="usgFetalMovement1" class="usgFetalMovement" >
+					      <div class="col-4 mb-3" id="usgFetalMovement1" class="usgFetalMovement"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 1</label>
                           <div class="input-group input-group-merge">
-                          <select name="usgFetalMovement" id="usgFetalMovement" class="form-select" disabled>
+                          <select name="usgFetalMovement" id="usgFetalMovement" onclick="HRInd()" class="form-select">
 
                             <?php
-							if(isset($usgFetalMovement1))
+							if(isset($usgFetalMovement1) && !empty($usgFetalMovement1))
 							{
                           $query = "SELECT av.usgFetalMovement,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalMovement WHERE type=28 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
@@ -1650,13 +1589,13 @@ if (isset($_GET['del']))
 						</div>
 						
 						<div class="row">
-                        <div class="col-4 mb-3" id="liquor2" class="liquor" >
+                        <div class="col-4 mb-3" id="liquor2" class="liquor"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 2</label>
                           <div class="input-group input-group-merge">
-                          <select  name="liquor1" id="liquor1value" class="form-select" disabled>
+                          <select  name="liquor1" id="liquor1value" onclick="HRInd()" class="form-select" >
                           <!-- <option value="">Choose...</option> -->
                           <?php
-						  if(isset($liquor2)) {
+						  if(isset($liquor2) && !empty($liquor2)) {
                             $query = "SELECT av.liquor1,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.liquor1 WHERE type=28 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
@@ -1684,30 +1623,30 @@ if (isset($_GET['del']))
 								
 								
                       <div class="row">
-					          	<div class="col-4 mb-3" id="usgFetalHeartRate2" class="usgFetalHeartRate" >
+					          	<div class="col-4 mb-3" id="usgFetalHeartRate2" class="usgFetalHeartRate"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 2</label>
                           <div class="input-group input-group-merge">
                             <input
                               type="text"
                               name="usgFetalHeartRate1"
                               class="form-control"
+							  onclick="HRInd()"
                               id="usgFetalHeartRate1value"
                               placeholder="USG FOETAL Heart Rate"
                               aria-label="USG FOETAL Heart Rate"
                               aria-describedby="basic-icon-default-usgFetalHeartRate"
                               value="<?php echo $usgFetalHeartRate2 ?>"
-                              disabled
                               />
                           </div>
                         </div>
                        
-					      <div class="col-4 mb-3" id="usgFetalPosition2" class="usgFetalPosition" >
+					      <div class="col-4 mb-3" id="usgFetalPosition2" class="usgFetalPosition"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 2</label>
                           <div class="input-group input-group-merge">
-                          <select  name="usgFetalPosition1" id="usgFetalPosition1value" class="form-select" disabled>
+                          <select  name="usgFetalPosition1" id="usgFetalPosition1value" onclick="HRInd()" class="form-select">
                           <!-- <option value="">Choose...</option> -->
                           <?php
-						  if(isset($usgFetalPosition2)){
+						  if(isset($usgFetalPosition2) && !empty($usgFetalPosition2)){
                             $query = "SELECT av.usgFetalPosition1,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalPosition1 WHERE type=32 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
@@ -1731,13 +1670,13 @@ if (isset($_GET['del']))
                                 </select>
                           </div>
                         </div> 
-					      <div class="col-4 mb-3" id="usgFetalMovement2" class="usgFetalMovement" >
+					      <div class="col-4 mb-3" id="usgFetalMovement2" class="usgFetalMovement"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 2</label>
                           <div class="input-group input-group-merge">
-                          <select  name="usgFetalMovement1" id="usgFetalMovement1value" class="form-select" disabled>
+                          <select  name="usgFetalMovement1" id="usgFetalMovement1value" onclick="HRInd()" class="form-select" >
                           <!-- <option value="">Choose...</option> -->
                           <?php
-						  if(isset($usgFetalMovement2)){
+						  if(isset($usgFetalMovement2) && !empty($usgFetalMovement2)){
                           $query = "SELECT av.usgFetalMovement1,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalMovement1 WHERE type=28 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
@@ -1764,13 +1703,13 @@ if (isset($_GET['del']))
 						</div>
 
                         <div class="row">    
-                        <div class="col-4 mb-3" id="liquor3" class="liquor" >
+                        <div class="col-4 mb-3" id="liquor3" class="liquor"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 3</label>
                           <div class="input-group input-group-merge">
-                          <select  name="liquor2" id="liquor2value" class="form-select" disabled>
+                          <select  name="liquor2" id="liquor2value" onclick="HRInd()" class="form-select">
                           <!-- <option value="">Choose...</option> -->
                           <?php
-						  if(isset($liquor3)) {
+						  if(isset($liquor3) && !empty($liquor3)) {
                             $query = "SELECT av.liquor2,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.liquor2 WHERE type=28 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
@@ -1797,11 +1736,12 @@ if (isset($_GET['del']))
 								</div>
                       
 					  <div class="row">  
-					          	<div class="col-4 mb-3" id="usgFetalHeartRate3" class="usgFetalHeartRate" >
+					          	<div class="col-4 mb-3" id="usgFetalHeartRate3" class="usgFetalHeartRate"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 3</label>
                           <div class="input-group input-group-merge">
                             <input
                               type="text"
+							  onclick="HRInd()"
                               name="usgFetalHeartRate2"
                               class="form-control"
                               id="usgFetalHeartRate2value"
@@ -1809,18 +1749,17 @@ if (isset($_GET['del']))
                               aria-label="USG FOETAL Heart Rate"
                               aria-describedby="basic-icon-default-usgFetalHeartRate"
                               value="<?php echo $usgFetalHeartRate3 ?>"
-                              disabled
                               />
                           </div>
                         </div>
                        
-					       <div class="col-4 mb-3" id="usgFetalPosition3" class="usgFetalPosition" >
+					       <div class="col-4 mb-3" id="usgFetalPosition3" class="usgFetalPosition"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 3</label>
                           <div class="input-group input-group-merge">
-                          <select  name="usgFetalPosition2" id="usgFetalPosition2value" class="form-select"  disabled>
+                          <select  name="usgFetalPosition2" id="usgFetalPosition2value" onclick="HRInd()" class="form-select">
                           <!-- <option value="">Choose...</option> -->
                           <?php
-						  if(isset($usgFetalPosition3)) {
+						  if(isset($usgFetalPosition3) && !empty($usgFetalPosition3)) {
                             $query = "SELECT av.usgFetalPosition2,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalPosition2 WHERE type=32 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
@@ -1844,13 +1783,13 @@ if (isset($_GET['del']))
                                 </select>
                           </div>
                         </div> 
-					      <div class="col-4 mb-3" id="usgFetalMovement3" class="usgFetalMovement" >
+					      <div class="col-4 mb-3" id="usgFetalMovement3" class="usgFetalMovement"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 3</label>
                           <div class="input-group input-group-merge">
-                          <select  name="usgFetalMovement2" id="usgFetalMovement2value" class="form-select" disabled>
+                          <select  name="usgFetalMovement2" id="usgFetalMovement2value" onclick="HRInd()" class="form-select">
                           <!-- <option value="">Choose...</option> -->
                           <?php
-						  if(isset($usgFetalMovement3)) {
+						  if(isset($usgFetalMovement3) && !empty($usgFetalMovement3)) {
                           $query = "SELECT av.usgFetalMovement2,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgFetalMovement2 WHERE type=28 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
@@ -1874,13 +1813,13 @@ if (isset($_GET['del']))
                                 </select>
                           </div>
                         </div>
-</div>						
-
+</div>					</div>	
+</div>
                         <div class="row"> 
-						  <div class="col-4 mb-3" id="usgResult" >
+						  <div class="col-4 mb-3" id="usgResult"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgResult">USG Result</label>
                           <div class="input-group input-group-merge">
-                          <select name="usgResult" id="Result" class="form-select" disabled>
+                          <select name="usgResult" id="Result" class="form-select">
                           <?php
 						  if(isset($usgResult)) {
                             $query = "SELECT av.usgResult,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgResult WHERE type=27 AND av.id=".$id;
@@ -1907,7 +1846,7 @@ if (isset($_GET['del']))
 						             </div>
 					              </div>
                            
-						  <div class="col-4 mb-3" id="usgRemarks" >
+						  <div class="col-4 mb-3" id="usgRemarks"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgRemarks">USG Remarks</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1919,17 +1858,16 @@ if (isset($_GET['del']))
                               aria-label="USG Remarks"
                               aria-describedby="basic-icon-default-usgRemarks"
                               value="<?php echo $usgRemarks ?>"
-                              disabled
                             />
                           </div>
                         </div>
 						
-					      <div class="col-4 mb-3" id="usgScanStatus" >
+					      <div class="col-4 mb-3" id="usgScanStatus"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgTrimester">USG Scan Status</label>
                           <div class="input-group input-group-merge">
-                          <select  name="usgScanStatus" id="ScanStatus" class="form-select" disabled>
+                          <select  name="usgScanStatus" id="ScanStatus" class="form-select" >
                           <?php
-						  if(isset($usgScanStatus)) {
+						  if(isset($usgScanStatus) && !empty($usgScanStatus)) {
                             $query = "SELECT av.usgScanStatus,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgScanStatus WHERE type=48 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
@@ -1954,7 +1892,7 @@ if (isset($_GET['del']))
                           </div>
                         </div>  						
 							   
-                        <div class="col-4 mb-3" id="takenStatus" >
+                        <div class="col-4 mb-3" id="takenStatus"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgDoneDate">USG Report</label>
                            <a href="<?php echo $siteurl."/usgDocument/".$usgreport; ?>" target="_blank"><button type="button" class="btn btn btn-primary">View USG Status</button></a>
                           <div class="input-group input-group-merge">
@@ -1967,12 +1905,13 @@ if (isset($_GET['del']))
                               aria-label="USG Taken Status"
                               aria-describedby="basic-icon-default-usgDoneDate"
                               accept="image/png, image/jpeg, application/pdf"
-                              disabled
                             />
                           </div>
                         </div>
 						</div>
 						  </div>
+						</div>  
+						</div>
 						</div>
 						  
 				<div class="row">
@@ -1988,22 +1927,20 @@ if (isset($_GET['del']))
                         <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-highRisk">Symptoms High Risk </label>
                           <div class="input-group input-group-merge">
+						  
 						  <?php if (isset($HighRisk)) { ?>
-						  <select name="HighRisk" id="highRisk" class="form-select" onsubmit="SymHighRishChange()" disabled>
-						  <?php 
-                                $list=mysqli_query($conn, "SELECT av.HighRisk,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.HighRisk WHERE type=13 AND av.id=".$id);
-
-                                while($row_list=mysqli_fetch_assoc($list)){
-
-                                ?>
-
-                                <option value="<?php echo $row_list['enumid']; ?>">
-
-                                <?php if($row_list['enumvalue']== $HighRisk)?>
-                                
-                                <?php { echo $row_list['enumvalue']; } ?></option>
-						  <?php } } else { if($HR_Ind == "N") {; ?>
-                          <select name="HighRisk" disabled id="highRisk" onClick="SymHighRishChange()" class="form-select">
+						  <select required name="HighRisk" id="HighRisk" onChange="SymHighRishChange()" class="form-select">
+                          <option value="">Choose...</option>
+                          <?php
+                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>" 
+						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php } ?>
+                             </select>
+							 <?php } else { if($HR_Ind == "N") {; ?>
+                          <select name="HighRisk" id="highRisk" onClick="SymHighRishChange()" class="form-select">
 						  
 						  <option value="">Choose...</option>
                           <?php
@@ -2026,16 +1963,18 @@ if (isset($_GET['del']))
                              </select>
 						  <?php } }?> 
                            </select>
+						  
                           </div>
                         </div>
-						
-						  <div class="col-4 mb-3" id="symptom" >
+						<?php print_r("Hi".$symptomsHighRisk); ?>
+						  <div class="col-4 mb-3" id="symptom" style="display:none;" >
 						 
                           <label class="form-label" for="basic-icon-default-symptomsHighRisk">Symptoms High Risk During Visit <!--<span class="mand">* </span>--></label>
                           <div class="input-group input-group-merge">
 						  
-                             <?php if(isset($symptomsHighRisk)) {; ?>
-						  <select name="symptomsHighRisk" id="symptomsHighRisk" disabled class="form-select">
+                            
+                          <?php if(isset($symptomsHighRisk)) {; ?>
+						  <select name="symptomsHighRisk" id="symptomsHighRisk" style="color: red;" onload="HighRiskMand()" class="form-select" >
                                 <?php
                                 $list=mysqli_query($conn, "SELECT av.symptomsHighRisk,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.symptomsHighRisk WHERE type=51 AND av.id=".$id);
 
@@ -2058,34 +1997,30 @@ if (isset($_GET['del']))
                           <?php $symptomsHighRisk = "";} } ?>
                            </select>
 						  
-                          <?php } else { if($HR_Ind == "N") {; ?>
-                            <select name="symptomsHighRisk" id="symptomsHighRisk" disabled onClick="HighRiskMand()" class="form-select" >
-                          <option value="">Choose...</option>
-                        
+                          <?php } else { 
+						  
+						  if(empty($symptomsHighRisk)) { ?>
+						  <option value="">Choose...</option>
+                           
                            <?php   
+						  } 
+
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=51";
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { 
                                 ?>
-                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                          
-                          <?php  } ?>
-                             </select>
-							  <?php } else {?> 
-							  <input name="symptomsHighRisk" style="color: red;" disabled id="symptomsHighRisk"
-                              value = "<?php echo $HR_val; ?>"  							  
-							  class="form-select" >
-                          
-							 <?php } ?>
-                           </select>
-						   <?php } ?>
+								 <?php if(isset($symptomsHighRisk)) {; ?>
+						  
+						  <option value="<?php echo $symptomsHighRisk; ?>" 
+						  
+						  <?php }}} ?>
                           </div>
 						  <div id="hr-man-sug-box"></div>
                         </div>
-                        <div class="col-4 mb-3" id="refFacility" >
+                        <div class="col-4 mb-3" id="refFacility" <?php if(($HighRisk=="0") AND empty($referralFacility)) {;?>  style="display:none;" <?php }; ?>>
                           <label class="form-label" for="basic-icon-default-referralFacility">Referral Facility <!--<span class="mand">* </span>--></label>
                           <div class="input-group input-group-merge">
-                          <select name="referralFacility" id="referralFacility" class="form-select" onchange="RefChange()" disabled>
+                          <select name="referralFacility" id="referralFacility" class="form-select" onchange="RefChange()">
                           <?php 
 							if(isset($referralFacility ))
 							{
@@ -2105,7 +2040,7 @@ if (isset($_GET['del']))
                                     ?>
                           <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
 							<?php } }} else { ?>
-								 <option value="">Choose...</option>
+						  <option value="">Choose...</option>
                           <?php
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
                             $exequery = mysqli_query($conn, $query);
@@ -2115,7 +2050,7 @@ if (isset($_GET['del']))
                                 </select>
                           </div>
                         </div>
-                        <div class="col-4 mb-3" id="refDist" >
+                        <div class="col-4 mb-3" id="refDist" <?php if(empty($referralDistrict)) { ?>  style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-referralDistrict">Referral District </label>
                           <div class="input-group input-group-merge">
                             <input
@@ -2128,12 +2063,11 @@ if (isset($_GET['del']))
                               aria-describedby="basic-icon-default-referralDistrict"                             
                               value="<?php if(isset($referralDistrict ))
 							{ echo $referralDistrict; } ?>"
-                              disabled
                               />
                           </div>
                         </div>
 
-						            <div class="col-4 mb-3"  id="refPlace" >
+						            <div class="col-4 mb-3"  id="refPlace" <?php if(empty($referralPlace)) { ?>   style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-referralDate">Referral Place </label>
                           <div class="input-group input-group-merge">
                             <input
@@ -2145,12 +2079,11 @@ if (isset($_GET['del']))
                               aria-label="Referral Place"
                               aria-describedby="basic-icon-default-referralDate"
                               value="<?php echo $referralPlace ?>"
-                              disabled
                               />
                           </div>
                         </div>
 
-						  <div class="col-4 mb-3"  id="refDate" >
+						  <div class="col-4 mb-3"  id="refDate" <?php if(empty($referralDate)) { ?>  style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-referralDate">Referral Date </label>
                           <div class="input-group input-group-merge">
                             <input
@@ -2161,22 +2094,25 @@ if (isset($_GET['del']))
                               placeholder="Referral Date"
                               aria-label="Referral Date"
                               aria-describedby="basic-icon-default-referralDate"
+							  readonly
                               
 							  value="<?php 
 							  if(isset($referralDate))
 							  {
 								  echo $referralDate; 
 							  }
-							  ?>"   
-                              disabled
+							  else
+							  {
+								echo $anc_dt; 
+							  }; ?>" 
                               />
                           </div>
                         </div> 
 						
-<div class="col-4 mb-3" id="bTrans" >
+<div class="col-4 mb-3" id="bTrans" style="display:none;" >
                           <label class="form-label" for="basic-icon-default-bloodTransfusion">Transfusion</label>
                           <div class="input-group input-group-merge">
-                          <select name="bloodTransfusion" id="bloodTransfusion" disabled class="form-select" <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?> >
+                          <select name="bloodTransfusion" id="bloodTransfusion" class="form-select" <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?> >
                 <?php if(isset($bloodTransfusion))
 				{
 					$query = "SELECT av.bloodTransfusion,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.bloodTransfusion WHERE type=44 AND av.id=".$id;
@@ -2204,7 +2140,7 @@ if (isset($_GET['del']))
                           </div>
                         </div>
                         
-                        <div class="col-4 mb-3" id="transDate" >
+                        <div class="col-4 mb-3" id="transDate" style="display:none;">
                           <label class="form-label" for="basic-icon-default-bloodTransfusionDate">Transfusion Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -2226,14 +2162,12 @@ if (isset($_GET['del']))
 							  }; ?>" 
 							  min=<?php echo $anc_dt; ?> 
        						  max=<?php echo $trns_dt; ?> 
-                              <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?>	
-                             
-                              disabled
+                              <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?>
                             />
                           </div>
                         </div>
                       
-				           <div class="col-4 mb-3" id="placeAdmin" >
+				           <div class="col-4 mb-3" id="placeAdmin" style="display:none;" >
                           <label class="form-label" for="basic-icon-default-placeAdministered">Place Administered</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -2246,11 +2180,10 @@ if (isset($_GET['del']))
                               aria-describedby="basic-icon-default-placeAdministered"
 							  <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?>
                               value="<?php echo $placeAdministrator ?>"
-                              disabled
                             />
                           </div>
                         </div>
-				                <div class="col-4 mb-3" id="ivDoses" >
+				                <div class="col-4 mb-3" id="ivDoses" style="display:none;" >
                           <label class="form-label" for="basic-icon-default-noOfIVDoses">No. of Units / IV Doses</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -2264,13 +2197,14 @@ if (isset($_GET['del']))
                               value="<?php echo $nooIVdoses ?>"
 							  <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?>
 							  min=1 max=4
-                              disabled
                             />
                           </div>
                         </div>
-                        <div class="input-group" id="btnSaUp" style="display:none">
+						</div>
+						
+                        
                           <input class="btn btn-primary" type="submit" id="update" name="editVisit" onClick="HighRiskMand()" value="Update">
-                        </div>
+                        
                             </div>
                       </div>
                   </form>
