@@ -24,7 +24,7 @@
                 <!-- Hoverable Table rows -->
                  <div class="card">
                    <h5 class="card-header"><span class="text-muted fw-light">Antenatal Visit /</span> Antenatal Visit Header List
-                   <a href="AnVisit.php" id="add" type="button" class="btn btn-primary" style="float:right;">
+                   <a href="AddAnVisit1.php" id="add" type="button" class="btn btn-primary" style="float:right;">
 						<span class="bx bx-plus"></span>&nbsp; Add Antenatal Visit
 					</a>
                    </h5>
