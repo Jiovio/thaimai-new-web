@@ -1591,7 +1591,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						</div>
 						<?php print_r("Ges-Sac".$gestationSac); ?>
 						<div class="row">
-                        <div class="col-4 mb-3" id="liquor2" class="liquor"  <?php if($gestationSac != "3") {?> style="display:none;" <?php } ?> >
+                        <div class="col-4 mb-3" id="liquor2" class="liquor"  <?php if(($gestationSac != 3) AND ($gestationSac != 2)) {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 2</label>
                           <div class="input-group input-group-merge">
                           <select  name="liquor1" id="liquor1value" onclick="HRInd()" class="form-select" >
@@ -1625,7 +1625,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 								
 								
                       <div class="row">
-					          	<div class="col-4 mb-3" id="usgFetalHeartRate2" class="usgFetalHeartRate"  style="display:none;">
+					          	<div class="col-4 mb-3" id="usgFetalHeartRate2" class="usgFetalHeartRate"  <?php if(($gestationSac != 3) AND ($gestationSac != 2)) {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 2</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1642,7 +1642,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
                        
-					      <div class="col-4 mb-3" id="usgFetalPosition2" class="usgFetalPosition"  style="display:none;">
+					      <div class="col-4 mb-3" id="usgFetalPosition2" class="usgFetalPosition"  <?php if(($gestationSac != 3) AND ($gestationSac != 2)) {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 2</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFetalPosition1" id="usgFetalPosition1value" onclick="HRInd()" class="form-select">
@@ -1672,7 +1672,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                                 </select>
                           </div>
                         </div> 
-					      <div class="col-4 mb-3" id="usgFetalMovement2" class="usgFetalMovement"  style="display:none;">
+					      <div class="col-4 mb-3" id="usgFetalMovement2" class="usgFetalMovement"  <?php if(($gestationSac != 3) AND ($gestationSac != 2)) {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 2</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFetalMovement1" id="usgFetalMovement1value" onclick="HRInd()" class="form-select" >
@@ -1705,7 +1705,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						</div>
 
                         <div class="row">    
-                        <div class="col-4 mb-3" id="liquor3" class="liquor"  style="display:none;">
+                        <div class="col-4 mb-3" id="liquor3" class="liquor"  <?php if($gestationSac != 3) {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 3</label>
                           <div class="input-group input-group-merge">
                           <select  name="liquor2" id="liquor2value" onclick="HRInd()" class="form-select">
@@ -1738,7 +1738,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 								</div>
                       
 					  <div class="row">  
-					          	<div class="col-4 mb-3" id="usgFetalHeartRate3" class="usgFetalHeartRate"  style="display:none;">
+					          	<div class="col-4 mb-3" id="usgFetalHeartRate3" class="usgFetalHeartRate"  <?php if($gestationSac != 3) {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 3</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1755,7 +1755,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
                        
-					       <div class="col-4 mb-3" id="usgFetalPosition3" class="usgFetalPosition"  style="display:none;">
+					       <div class="col-4 mb-3" id="usgFetalPosition3" class="usgFetalPosition"  <?php if($gestationSac != 3) {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 3</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFetalPosition2" id="usgFetalPosition2value" onclick="HRInd()" class="form-select">
@@ -1785,7 +1785,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                                 </select>
                           </div>
                         </div> 
-					      <div class="col-4 mb-3" id="usgFetalMovement3" class="usgFetalMovement"  style="display:none;">
+					      <div class="col-4 mb-3" id="usgFetalMovement3" class="usgFetalMovement"  <?php if($gestationSac != 3) {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 3</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgFetalMovement2" id="usgFetalMovement2value" onclick="HRInd()" class="form-select">
