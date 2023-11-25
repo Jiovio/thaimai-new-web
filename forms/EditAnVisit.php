@@ -1259,7 +1259,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                           </div>
 						  
-						  <div class="col-4 mb-3" id="usgDoneDate"  style="display:none;">
+						  <div class="col-4 mb-3" id="usgDoneDate"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgDoneDate">USG Done Date</label>
                           <div class="input-group input-group-merge">
                             <input
