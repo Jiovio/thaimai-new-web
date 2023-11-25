@@ -1226,7 +1226,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 				<div class="col-4 mb-3" >
                           <label class="form-label" for="basic-icon-default-physicalpresent">Whether USG Taken </label>
                           <div class="input-group input-group-merge">
-                          <select name="wusgTaken" id="wusgTaken" class="form-select" onchange="usgChange()">
+                          <select name="wusgTaken" id="wusgTaken" class="form-select" disabled onchange="usgChange()">
 						  <?php if(isset($wusgTaken)) {
                           
                                 $list=mysqli_query($conn, "SELECT av.wusgTaken,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.wusgTaken WHERE type=13 AND av.id=".$id);
