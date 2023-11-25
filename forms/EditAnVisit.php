@@ -1589,7 +1589,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
 						</div>
-						
+						<?php print_r("Ges-Sac".$gestationSac); ?>
 						<div class="row">
                         <div class="col-4 mb-3" id="liquor2" class="liquor"  <?php if($gestationSac != 2 OR $gestationSac != 3) {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 2</label>
