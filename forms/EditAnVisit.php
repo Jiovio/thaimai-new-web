@@ -1821,7 +1821,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						  <div class="col-4 mb-3" id="usgResult"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgResult">USG Result</label>
                           <div class="input-group input-group-merge">
-                          <select name="usgResult" id="Result" class="form-select">
+                          <select disabled name="usgResult" id="Result" class="form-select">
                           <?php
 						  if(isset($usgResult)) {
                             $query = "SELECT av.usgResult,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.usgResult WHERE type=27 AND av.id=".$id;
@@ -1899,6 +1899,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                            <a href="<?php echo $siteurl."/usgDocument/".$usgreport; ?>" target="_blank"><button type="button" class="btn btn btn-primary">View USG Status</button></a>
                           <div class="input-group input-group-merge">
                             <input
+							  disabled
                               type="file"
                               name="usgreport"
                               class="form-control"
