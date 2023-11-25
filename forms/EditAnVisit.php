@@ -1259,7 +1259,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                           </div>
 						  
-						  <div class="col-4 mb-3" id="usgDoneDate"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+						  <div class="col-4 mb-3" id="usgDoneDate"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgDoneDate">USG Done Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1270,7 +1270,6 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                               placeholder="USG Done Date"
                               aria-label="USG Done Date"
                               aria-describedby="basic-icon-default-usgDoneDate"
-							  disabled
 							  <?php $cur_dt = date('Y-m-d'); ?>
                               min=<?php echo $anv_dt; ?>
 							  max=<?php echo $cur_dt; ?>
@@ -1287,7 +1286,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
                         
-						<div class="col-4 mb-3" id="usgScanEdd"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+						<div class="col-4 mb-3" id="usgScanEdd"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgScanEdd">USG Scan Edd</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1298,7 +1297,6 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                               placeholder="USG Scan Edd"
                               aria-label="USG Scan Edd"
                               aria-describedby="basic-icon-default-usgScanEdd"
-							  disabled
                               value="<?php if(isset($usgScanEdd)) 
 							  { echo $usgScanEdd; } 
 						  else 
@@ -1309,7 +1307,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
 						
-						<div class="col-4 mb-3" id="usgSizeUterusWeek"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+						<div class="col-4 mb-3" id="usgSizeUterusWeek"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-usgSizeUterusWeek">USG Size Uterus Week</label>
                           <div class="input-group input-group-merge">
 						  <input hidden
@@ -1441,10 +1439,10 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						  </div>
 					    </div>
 						
-						<div class="col-4 mb-3" id="gestationSac"  <div class="col-4 mb-3" id="liquor1" class="liquor"  onchange="gsacField()" <?php if($gestationSac != "1") {?> style="display:none;" <?php } ?> >
+						<div class="col-4 mb-3" id="gestationSac"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-phone">Gestation Sac</label>
                           <div class="input-group input-group-merge">
-                          <select name="gestationSac" disabled id="gestation" class="form-select" onchange="gsacField()" >
+                          <select name="gestationSac" id="gestation" class="form-select" onchange="gsacField()" >
                           <?php
 						  if(isset($gestationSac) && !empty($gestationSac))
 						  {
@@ -1472,9 +1470,9 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						             </div>
 					             </div>
 								 </div>
-								 
+								 <?php print_r($gestationSac); ?>
 							<div class="row">
-						  <div class="col-4 mb-3" id="liquor1" class="liquor"  onchange="gsacField()" style="display:none;">
+						  <div class="col-4 mb-3" id="liquor1" class="liquor"  onchange="gsacField()" <?php if($gestationSac != "1") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 1</label>
                           <div class="input-group input-group-merge">
                           <select name="liquor" id="liquorop" onclick="HRInd()" class="form-select" >
