@@ -1270,6 +1270,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                               placeholder="USG Done Date"
                               aria-label="USG Done Date"
                               aria-describedby="basic-icon-default-usgDoneDate"
+							  disabled
 							  <?php $cur_dt = date('Y-m-d'); ?>
                               min=<?php echo $anv_dt; ?>
 							  max=<?php echo $cur_dt; ?>
@@ -1297,6 +1298,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                               placeholder="USG Scan Edd"
                               aria-label="USG Scan Edd"
                               aria-describedby="basic-icon-default-usgScanEdd"
+							  disable
                               value="<?php if(isset($usgScanEdd)) 
 							  { echo $usgScanEdd; } 
 						  else 
@@ -1442,7 +1444,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						<div class="col-4 mb-3" id="gestationSac"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-phone">Gestation Sac</label>
                           <div class="input-group input-group-merge">
-                          <select name="gestationSac" id="gestation" class="form-select" onchange="gsacField()" >
+                          <select name="gestationSac" disabled id="gestation" class="form-select" onchange="gsacField()" >
                           <?php
 						  if(isset($gestationSac) && !empty($gestationSac))
 						  {
