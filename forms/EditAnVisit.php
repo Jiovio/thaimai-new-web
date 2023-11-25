@@ -1347,7 +1347,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
                         
-					      <div class="col-4 mb-3" id="sizeUterusinWeeks"  style="display:none;">
+					      <div class="col-4 mb-3" id="sizeUterusinWeeks"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-sizeUterusinWeeks">Uterus Size In Weeks </label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1363,7 +1363,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
                           
-						<div class="col-4 mb-3" id="placenta"  style="display:none;">
+						<div class="col-4 mb-3" id="placenta"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-phone">Placenta</label>
                           <div class="input-group input-group-merge">
                           <select name="placenta" id="pla" class="form-select">
@@ -1395,7 +1395,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						           </div>
 					           </div>
 							   
-							   <div class="col-4 mb-3" id="usgFundalHeight"  style="display:none;">
+							   <div class="col-4 mb-3" id="usgFundalHeight"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgFundalHeight">USG FUNDAL HEIGHT</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1410,7 +1410,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                             />
                           </div>
                         </div>
-						<div class="col-4 mb-3" id="usgFetusStatus"  style="display:none;">
+						<div class="col-4 mb-3" id="usgFetusStatus"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-phone">USG Fetus Status</label>
                           <div class="input-group input-group-merge">
                           <select name="usgFetusStatus" id="FetusStatus" class="form-select" >
@@ -1441,7 +1441,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						  </div>
 					    </div>
 						
-						<div class="col-4 mb-3" id="gestationSac"  <div class="col-4 mb-3" id="liquor1" class="liquor"  onchange="gsacField()" <?php if($gestationSac != "1") {?> style="display:none;" <?php } ?> >
+						<div class="col-4 mb-3" id="gestationSac"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-phone">Gestation Sac</label>
                           <div class="input-group input-group-merge">
                           <select name="gestationSac" disabled id="gestation" class="form-select" onchange="gsacField()" >
@@ -1474,7 +1474,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 								 </div>
 								 
 							<div class="row">
-						  <div class="col-4 mb-3" id="liquor1" class="liquor"  onchange="gsacField()" style="display:none;">
+						  <div class="col-4 mb-3" id="liquor1" class="liquor"  onchange="gsacField()" <?php if($gestationSac != "1") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 1</label>
                           <div class="input-group input-group-merge">
                           <select name="liquor" id="liquorop" onclick="HRInd()" class="form-select" >
