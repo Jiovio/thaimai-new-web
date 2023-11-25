@@ -1347,7 +1347,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
                         
-					      <div class="col-4 mb-3" id="sizeUterusinWeeks"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+					      <div class="col-4 mb-3" id="sizeUterusinWeeks"  style="display:none;">
                           <label class="form-label" for="basic-icon-default-sizeUterusinWeeks">Uterus Size In Weeks </label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1441,7 +1441,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						  </div>
 					    </div>
 						
-						<div class="col-4 mb-3" id="gestationSac"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+						<div class="col-4 mb-3" id="gestationSac"  <div class="col-4 mb-3" id="liquor1" class="liquor"  onchange="gsacField()" <?php if($gestationSac != "1") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-phone">Gestation Sac</label>
                           <div class="input-group input-group-merge">
                           <select name="gestationSac" disabled id="gestation" class="form-select" onchange="gsacField()" >
