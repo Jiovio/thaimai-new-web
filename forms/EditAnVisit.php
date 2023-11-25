@@ -1287,7 +1287,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
                         
-						<div class="col-4 mb-3" id="usgScanEdd"  style="display:none;">
+						<div class="col-4 mb-3" id="usgScanEdd"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgScanEdd">USG Scan Edd</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1298,7 +1298,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                               placeholder="USG Scan Edd"
                               aria-label="USG Scan Edd"
                               aria-describedby="basic-icon-default-usgScanEdd"
-							  disable
+							  disabled
                               value="<?php if(isset($usgScanEdd)) 
 							  { echo $usgScanEdd; } 
 						  else 
@@ -1309,7 +1309,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
 						
-						<div class="col-4 mb-3" id="usgSizeUterusWeek"  style="display:none;">
+						<div class="col-4 mb-3" id="usgSizeUterusWeek"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgSizeUterusWeek">USG Size Uterus Week</label>
                           <div class="input-group input-group-merge">
 						  <input hidden
@@ -1347,7 +1347,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
                         
-					      <div class="col-4 mb-3" id="sizeUterusinWeeks"  style="display:none;">
+					      <div class="col-4 mb-3" id="sizeUterusinWeeks"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-sizeUterusinWeeks">Uterus Size In Weeks </label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1441,7 +1441,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						  </div>
 					    </div>
 						
-						<div class="col-4 mb-3" id="gestationSac"  style="display:none;">
+						<div class="col-4 mb-3" id="gestationSac"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-phone">Gestation Sac</label>
                           <div class="input-group input-group-merge">
                           <select name="gestationSac" disabled id="gestation" class="form-select" onchange="gsacField()" >
