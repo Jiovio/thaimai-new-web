@@ -1818,7 +1818,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 </div>					</div>	
 </div>
                         <div class="row"> 
-						  <div class="col-4 mb-3" id="usgResult"  style="display:none;">
+						  <div class="col-4 mb-3" id="usgResult"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgResult">USG Result</label>
                           <div class="input-group input-group-merge">
                           <select disabled name="usgResult" id="Result" class="form-select">
@@ -1848,7 +1848,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						             </div>
 					              </div>
                            
-						  <div class="col-4 mb-3" id="usgRemarks"  style="display:none;">
+						  <div class="col-4 mb-3" id="usgRemarks"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgRemarks">USG Remarks</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1864,7 +1864,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
 						
-					      <div class="col-4 mb-3" id="usgScanStatus"  style="display:none;">
+					      <div class="col-4 mb-3" id="usgScanStatus"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgTrimester">USG Scan Status</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgScanStatus" id="ScanStatus" class="form-select" >
@@ -1894,7 +1894,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>  						
 							   
-                        <div class="col-4 mb-3" id="takenStatus"  style="display:none;">
+                        <div class="col-4 mb-3" id="takenStatus"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgDoneDate">USG Report</label>
                            <a href="<?php echo $siteurl."/usgDocument/".$usgreport; ?>" target="_blank"><button type="button" class="btn btn btn-primary">View USG Status</button></a>
                           <div class="input-group input-group-merge">
