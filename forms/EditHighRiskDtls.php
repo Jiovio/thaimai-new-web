@@ -27,6 +27,7 @@ $id = $CheckANV_PrgWk_val["id"];
 if(isset($CheckANV_PrgWk_val["pregnancyWeek"]) && !empty($CheckANV_PrgWk_val["pregnancyWeek"]))
 {
   //print_r($CheckANV_PrgWk_val["ancPeriod"]); exit;
+  print_r("Testing"); exit;
   $anc_cnt = $CheckANV_PrgWk_val["ancPeriod"]; 
   $anc_dt = $CheckANV_PrgWk_val["anvisitDate"];
   $trns_dt = date('Y-m-d', strtotime($anc_dt. '+ 14 days' ));
