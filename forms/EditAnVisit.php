@@ -1846,7 +1846,6 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                                 </select>
 						             </div>
 					              </div>
-								  </div>
                            
 						  <div class="col-4 mb-3" id="usgRemarks"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgRemarks">USG Remarks</label>
