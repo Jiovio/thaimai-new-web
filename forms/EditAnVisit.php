@@ -1919,6 +1919,21 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						
 						</div>					</div>	
 </div> </div>
+
+<?php
+$Checkusr = mysqli_query($conn,"SELECT * FROM users where id='".$userid."' AND (usertype=1 OR usertype=0)");
+$Checkusr_val = mysqli_fetch_array($Checkusr);
+
+$usr_typ = "N";
+if(isset($Checkusr_val))
+{
+  $usr_typ = "Y";
+  $usr_ty = $userid; 
+  
+}
+  //print_r($usr_typ."usertype".$Checkusr_val['usertype']);
+?>
+<?php if($usr_typ == 'Y') { ?>
 						  
 				<div class="row">
                 <div class="col-xl">
@@ -1934,7 +1949,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                     Update
               </button></a></span>
 				
-				
+				<?php } ?>
 				
 				
 				
