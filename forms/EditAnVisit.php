@@ -1139,6 +1139,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                               name="dateofAlbendazole"
                               class="form-control"
                               id="dateofAlbendazole"
+							  disabled
                               placeholder="Date Of Albendazole"
 							  onclick="return checkPicmeAN()"
 							  <?php $cur_dt = date('Y-m-d'); ?>
