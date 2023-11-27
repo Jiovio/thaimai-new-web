@@ -199,7 +199,7 @@ if(isset($An["pregnancyWeek"]) && !empty($An["pregnancyWeek"]))
  $anv_min_dt = date('Y-m-d', strtotime($anv_dt. '- 1 Months' ));
 }
 
-print_r("HR Ind".$HR_Ind);
+//print_r("HR Ind".$HR_Ind);
 
 $medicalSql = mysqli_query($conn, "SELECT * FROM medicalhistory WHERE picmeNo = '$picmeno' order by id desc LIMIT 0,1");
 $medicalData = mysqli_fetch_array($medicalSql);

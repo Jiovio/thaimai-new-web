@@ -27,7 +27,7 @@ $id = $CheckANV_PrgWk_val["id"];
 if(isset($CheckANV_PrgWk_val["pregnancyWeek"]) && !empty($CheckANV_PrgWk_val["pregnancyWeek"]))
 {
   //print_r($CheckANV_PrgWk_val["ancPeriod"]); exit;
-  print_r("Testing"); exit;
+ // print_r("Testing"); exit;
   $anc_cnt = $CheckANV_PrgWk_val["ancPeriod"]; 
   $anc_dt = $CheckANV_PrgWk_val["anvisitDate"];
   $trns_dt = date('Y-m-d', strtotime($anc_dt. '+ 14 days' ));
@@ -39,16 +39,16 @@ if(isset($CheckANV_PrgWk_val["pregnancyWeek"]) && !empty($CheckANV_PrgWk_val["pr
  $CheckANV_PrgWk_val["Tsh"] == 'yes' OR 
  $CheckANV_PrgWk_val["bpSys"] > 130 OR 
  $CheckANV_PrgWk_val["bpDia"] > 90 OR 
- ($CheckANV_PrgWk_val["motherWeight"] != "" AND $CheckANV_PrgWk_val["motherWeight"] < 40) OR 
+ ($CheckANV_PrgWk_val["motherWeight"] > 0 AND $CheckANV_PrgWk_val["motherWeight"] < 40) OR 
  $CheckANV_PrgWk_val["fastingSugar"] > 110 OR 
  $CheckANV_PrgWk_val["postPrandial"] > 140 OR 
- ($CheckANV_PrgWk_val["fetalHeartRate"] != "" AND $CheckANV_PrgWk_val["fetalHeartRate"] < 100) OR 
+ ($CheckANV_PrgWk_val["fetalHeartRate"] > 0 AND $CheckANV_PrgWk_val["fetalHeartRate"] < 100) OR 
  $CheckANV_PrgWk_val["fetalHeartRate"] > 170 OR 
  $CheckANV_PrgWk_val["fetalPosition"] == 2 OR 
  $CheckANV_PrgWk_val["fetalMovement"] == 4)
  {
 	$HR_Ind = "Y"; 
-	if($CheckANV_PrgWk_val["Hb"] != "" AND $CheckANV_PrgWk_val["Hb"] < 10)
+	if($CheckANV_PrgWk_val["Hb"] > 0 AND $CheckANV_PrgWk_val["Hb"] < 10)
 	{
 	 $HR_val = 'Severe Anaemia';	
 	}
@@ -83,7 +83,7 @@ if(isset($CheckANV_PrgWk_val["pregnancyWeek"]) && !empty($CheckANV_PrgWk_val["pr
 	 $HR_val = 'PIH/Pre Eclampsia/Eclampsia';	
 	}
 	else
-	if($CheckANV_PrgWk_val["motherWeight"] != "" AND $CheckANV_PrgWk_val["motherWeight"] < 40)
+	if($CheckANV_PrgWk_val["motherWeight"] > 0 AND $CheckANV_PrgWk_val["motherWeight"] < 40)
 	{
 	 $HR_val = 'Weight below 40 kg';	
 	}
@@ -98,7 +98,7 @@ if(isset($CheckANV_PrgWk_val["pregnancyWeek"]) && !empty($CheckANV_PrgWk_val["pr
 	 $HR_val = 'Gestational Diabetes';	
 	}
 	else
-	if($CheckANV_PrgWk_val["fetalHeartRate"] != "" AND $CheckANV_PrgWk_val["fetalHeartRate"] < 100)
+	if($CheckANV_PrgWk_val["fetalHeartRate"] > 0 AND $CheckANV_PrgWk_val["fetalHeartRate"] < 100)
 	{
 	 $HR_val = 'Bradyhardic';	
 	}
