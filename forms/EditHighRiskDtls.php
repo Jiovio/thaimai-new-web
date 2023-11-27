@@ -21,6 +21,8 @@ $trns_dt = "";
 $HR_Ind = "N";
 $HR_val = "";
 $Mis_Crg = "N";
+$id = "";
+$id = $CheckANV_PrgWk_val["id"];
 
 if(isset($CheckANV_PrgWk_val["pregnancyWeek"]) && !empty($CheckANV_PrgWk_val["pregnancyWeek"]))
 {
@@ -150,9 +152,9 @@ if (! empty($_POST["HRDtls"])) {
           <div class="content-wrapper">
             <!-- Content -->
       <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Antenatal Visit /</span> Add Antenatal Visit
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Antenatal Visit /</span> Edit High Risk Details
                 
-			  <a href="AnVisitAddBtn.php?History=<?php echo $AV_picmeno; ?>" ><button type="submit" class="btn btn-primary" id="btnBack">
+			  <a href="EditAnVisit.php?view=<?php echo $id; ?>" ><button type="submit" class="btn btn-primary" id="btnBack">
                     <span class="bx bx-arrow-back"></span>&nbsp; Back
               </button></a>
 			        </h4>
