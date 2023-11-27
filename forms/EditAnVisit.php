@@ -1945,7 +1945,7 @@ if(isset($Checkusr_val))
                     <div class="card-body">
 				<div class="errMsg" id="errMsg"></div>
 				
-				<a href="AddHighRiskDtls.php?History=<?php echo $picmeno; ?>" ><span button type="button" class="btn btn-primary" id="AddHighRisk">
+				<a href="EditHighRiskDtls.php?History=<?php echo $picmeno; ?>" ><span button type="button" class="btn btn-primary" id="AddHighRisk">
                     Update
               </button></a></span>
 				
