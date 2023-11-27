@@ -145,7 +145,7 @@ if (! empty($_POST["HRDtls"])) {
 		   placeAdministrator = '$placeAdministrator', noOfIVDoses = '$nooIVdoses' WHERE picmeno='$picmeno' AND ancPeriod=$anc_cnt");
  
             if (!empty($query)) {
-              echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}/forms/AnVisitAddBtn.php?History=$AV_picmeno');</script>";
+              echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/EditAnVisit.php?view=$id');</script>";
             } 
 } 
 ?>
@@ -359,7 +359,7 @@ if (! empty($_POST["HRDtls"])) {
 					    </div>				
 								
              </div>
-			 <input type="submit" name="HRDtls" value="Save" id="HRDtls" class="btn btn-primary" onclick="return checkPicmeAV()">
+			 <input type="submit" name="HRDtls" value="Update" id="HRDtls" class="btn btn-primary" onclick="return checkPicmeAV()">
 			</div>
 				
                     </form>
