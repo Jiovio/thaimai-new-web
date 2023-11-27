@@ -1918,7 +1918,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						</div>
 						
 						</div>					</div>	
-</div>
+</div> </div>
 						  
 				<div class="row">
                 <div class="col-xl">
