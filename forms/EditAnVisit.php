@@ -1816,7 +1816,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
 
-                        <div class="row"> 
+                        
 						  <div class="col-4 mb-3" id="usgResult"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgResult">USG Result</label>
                           <div class="input-group input-group-merge">
