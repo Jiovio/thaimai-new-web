@@ -1909,6 +1909,8 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                               accept="image/png, image/jpeg, application/pdf"
                             />
                           </div>
+						  <input class="btn btn-primary" type="submit" id="update" name="editVisit" onClick="HighRiskMand()" value="Update">
+						  
                         </div>
 						</div>
 						  </div>
@@ -1930,7 +1932,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 				<div class="errMsg" id="errMsg"></div>
 				
 				<a href="AddHighRiskDtls.php?History=<?php echo $picmeno; ?>" ><span button type="button" class="btn btn-primary" id="AddHighRisk">
-                    <span class="bx bx-plus"></span>&nbsp; Add
+                    <span class="bx bx-plus"></span>&nbsp; Update
               </button></a></span>
 				
 				
@@ -1939,7 +1941,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 				
 						
                         
-                          <input class="btn btn-primary" type="submit" id="update" name="editVisit" onClick="HighRiskMand()" value="Update">
+                          
                         
                             </div>
                       </div>
