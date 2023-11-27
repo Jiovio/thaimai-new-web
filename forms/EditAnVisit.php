@@ -1931,7 +1931,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 				<div class="errMsg" id="errMsg"></div>
 				
 				<a href="AddHighRiskDtls.php?History=<?php echo $picmeno; ?>" ><span button type="button" class="btn btn-primary" id="AddHighRisk">
-                    <span class="bx bx-plus"></span>&nbsp; Update
+                    Update
               </button></a></span>
 				
 				
