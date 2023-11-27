@@ -1909,11 +1909,9 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                               accept="image/png, image/jpeg, application/pdf"
                             />
                           </div>
-						 
                         </div>
-						 <input class="btn btn-primary" type="submit" id="update" name="editVisit" onClick="HighRiskMand()" value="Update">
-						  
 						</div>
+						<input class="btn btn-primary" type="submit" id="update" name="editVisit" onClick="HighRiskMand()" value="Update">
 						  </div>
 						</div>  
 						</div>
