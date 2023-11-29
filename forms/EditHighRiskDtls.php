@@ -23,6 +23,16 @@ $HR_val = "";
 $Mis_Crg = "N";
 $id = "";
 $id = $CheckANV_PrgWk_val["id"];
+$HighRisk = $An["HighRisk"];
+$symptomsHighRisk = $An["symptomsHighRisk"];
+$referralDate = $An["referralDate"]; 
+$referralDistrict = $An["referralDistrict"];
+$referralFacility = $An["referralFacility"]; 
+$referralPlace = $An["referralPlace"];
+$bloodTransfusion = $An["bloodTransfusion"];
+$bloodTransfusionDate = $An["bloodTransfusionDate"];
+$placeAdministrator = $An["placeAdministrator"];
+$nooIVdoses = $An["noOfIVDoses"];
 
 if(isset($CheckANV_PrgWk_val["pregnancyWeek"]) && !empty($CheckANV_PrgWk_val["pregnancyWeek"]))
 {
@@ -179,7 +189,7 @@ if (! empty($_POST["HRDtls"])) {
 		<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-highRisk">Symptoms High Risk <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-						  <?php if($HR_Ind == "N") {; ?>
+						  <?php if($HR_Ind == "N" AND empty($HighRisk)) {; ?>
                           <select required name="HighRisk" id="highRisk" onChange="SymHighRishChange()" class="form-select">
                           <option value="">Choose...</option>
                           <?php
@@ -191,6 +201,18 @@ if (! empty($_POST["HRDtls"])) {
                           <?php } ?>
                              </select>
 							 <?php } else {?> 
+							 <?php if($HR_Ind == "N" AND !empty($HighRisk)) {; ?>
+                          <select required name="HighRisk" id="highRisk" onChange="SymHighRishChange()" class="form-select">
+                          <option value="">Choose...</option>
+                          <?php
+                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>" 
+						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php } ?>
+                             </select>
+							 <?php }} else {?> 
 							 <select disabled required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
                           <?php
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13 AND enumid=1";
