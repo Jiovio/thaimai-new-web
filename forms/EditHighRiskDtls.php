@@ -324,9 +324,34 @@ if (! empty($_POST["HRDtls"])) {
                           <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
                           <?php $symptomsHighRisk = "";} } ?>
                            </select>
+						   <select name="symptomsHighRisk" id="symptomsHighRisk" hidden style="color: red;" class="form-select">
+                                <?php
+                                $list=mysqli_query($conn, "SELECT av.symptomsHighRisk,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.symptomsHighRisk WHERE type=51 AND av.id=".$id);
+
+                                while($row_list=mysqli_fetch_assoc($list)){
+
+                                ?>
+
+                                <option value="<?php echo $row_list['enumid']; ?>">
+
+                                <?php if($row_list['enumvalue']== $symptomsHighRisk)?>
+                                
+                                <?php { echo $row_list['enumvalue']; } ?></option>
+                                <?php 
+                                $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=51";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { 
+                              ?>
+                          
+                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php $symptomsHighRisk = "";} } ?>
+                           </select>
 						  
 								  <?php } else { ?>
 						  <input disabled name="symptomsHighRisk" style="color: red;" id="symptomsHighRisk"
+                              value = "<?php echo $HR_val;  ?>"  							  
+							  class="form-select" >
+							  <input hidden name="symptomsHighRisk" style="color: red;" id="symptomsHighRisk"
                               value = "<?php echo $HR_val;  ?>"  							  
 							  class="form-select" >
 								  <?php } ?>
