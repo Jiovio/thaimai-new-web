@@ -362,9 +362,25 @@ if (! empty($_POST["HRDtls"])) {
 						<div class="col-4 mb-3" id="refFacility" <?php if(($HR_Ind == "N") AND ($HighRisk == 0)) {;?> style="display: none;" <?php }; ?>>
                           <label class="form-label" for="basic-icon-default-referralFacility">Referral Facility </label>
                           <div class="input-group input-group-merge">
-						  <?php if(isset($referralFacility)) { ?> 
-						  <input type="hidden" name="referralFacility" id="referralFacility" value="<?php echo $referralFacility; ?>">
-						  <?php } else { ?>
+						  <?php 
+						  if(isset($referralFacility ))
+							{
+                            $query = "SELECT av.referralFacility,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.referralFacility WHERE type=13 AND av.id=".$id;
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { 
+							
+							?>
+							
+                          <option value="<?php echo $listvalue['enumid']; ?>">
+                          <?php if($listvalue['enumvalue']==$referralFacility) ?>
+                         <?php { echo $listvalue['enumvalue']; } ?>
+                         <?php 
+                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
+                                    $exequery = mysqli_query($conn, $dquery);
+                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
+                                    ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+							<?php } }} else { ?>
                           <select name="referralFacility" id="referralFacility" class="form-select" onchange="RefChange()">
                           <option value="">Choose...</option>
                           <?php
