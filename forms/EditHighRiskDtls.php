@@ -213,10 +213,10 @@ if (! empty($_POST["HRDtls"])) {
 						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
-							 <input type="hidden" name="HighRisk" value="<?php echo $listvalue['enumvalue']; ?>">
+							 
 							 <?php } else {?> 
 							 <?php if($HR_Ind == "N" AND ($HighRisk == 1)) {; ?>
-                          <select disabled required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
+                          <select readonly=readonly required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
                           
                           <?php
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13 AND enumid=1";
@@ -226,10 +226,10 @@ if (! empty($_POST["HRDtls"])) {
 						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
-							 <input type="hidden" name="HighRisk" value="<?php echo $listvalue['enumvalue']; ?>">
+							 
 							 <?php } else {?> 
 							 <?php if($HR_Ind == "N" AND ($HighRisk == 0)) {; ?>
-                          <select disabled required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
+                          <select readonly=readonly required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
                           
                           <?php
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13 AND enumid=0";
@@ -239,9 +239,9 @@ if (! empty($_POST["HRDtls"])) {
 						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
-							 <input type="hidden" name="HighRisk" value="<?php echo $listvalue['enumvalue']; ?>">
+							 
 							 <?php } else {?> 
-							 <select disabled required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
+							 <select readonly=readonly required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
                           <?php
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13 AND enumid=1";
                             $exequery = mysqli_query($conn, $query);
@@ -250,7 +250,7 @@ if (! empty($_POST["HRDtls"])) {
 						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
-							 <input type="hidden" name="HighRisk" value="<?php echo $listvalue['enumvalue']; ?>">
+							 
 							 <?php }}} ?> 
                           </div>
                         </div>
