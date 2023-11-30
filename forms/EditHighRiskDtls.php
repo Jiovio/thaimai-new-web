@@ -364,6 +364,7 @@ if (! empty($_POST["HRDtls"])) {
                           <div class="input-group input-group-merge">
 						  <?php if(isset($referralFacility)) { ?> 
 						  <input type="hidden" name="referralFacility" id="referralFacility" value="<?php echo $referralFacility; ?>">
+						  <?php } else { ?>
                           <select name="referralFacility" id="referralFacility" class="form-select" onchange="RefChange()">
                           <option value="">Choose...</option>
                           <?php
@@ -371,7 +372,7 @@ if (! empty($_POST["HRDtls"])) {
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                          <?php } ?>
+                          <?php }} ?>
                              </select>
                           </div>
                         </div>
