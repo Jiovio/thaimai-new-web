@@ -223,7 +223,7 @@ if (! empty($_POST["HRDtls"])) {
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['enumid']; ?>" 
-						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
+						  <selected disabled><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
 							 
@@ -236,7 +236,7 @@ if (! empty($_POST["HRDtls"])) {
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['enumid']; ?>" 
-						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
+						  <selected disabled><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
 							 
@@ -247,7 +247,7 @@ if (! empty($_POST["HRDtls"])) {
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['enumid']; ?>" 
-						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
+						  <selected disabled><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
 							 
