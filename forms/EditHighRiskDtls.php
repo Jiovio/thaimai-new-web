@@ -362,6 +362,8 @@ if (! empty($_POST["HRDtls"])) {
 						<div class="col-4 mb-3" id="refFacility" <?php if(($HR_Ind == "N") AND ($HighRisk == 0)) {;?> style="display: none;" <?php }; ?>>
                           <label class="form-label" for="basic-icon-default-referralFacility">Referral Facility </label>
                           <div class="input-group input-group-merge">
+						  <?php if(isset($referralFacility)) { ?> 
+						  <input type="hidden" name="referralFacility" id="referralFacility" value="<?php echo $referralFacility; ?>">
                           <select name="referralFacility" id="referralFacility" class="form-select" onchange="RefChange()">
                           <option value="">Choose...</option>
                           <?php
