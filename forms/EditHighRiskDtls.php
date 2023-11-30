@@ -148,8 +148,9 @@ if(isset($CheckANV_PrgWk_val["pregnancyWeek"]) && !empty($CheckANV_PrgWk_val["pr
 
 if (! empty($_POST["HRDtls"])) {
   $picmeno =$AV_picmeno;
- // print_r("test".$_POST['HighRisk'])
+ 
   $HighRisk = $_POST['HighRisk'];
+  print_r("test".$HighRisk); exit;
   $symptomsHighRisk = $_POST['symptomsHighRisk'];
   $referralDate = $_POST["referralDate"]; 
    $referralDistrict = $_POST["referralDistrict"]; 
