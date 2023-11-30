@@ -24,7 +24,7 @@ $mn = "";
 	     $id = $_GET['view'];
          $view_ind = "f";		 
 		}
-  //  $id = $_GET['view'];
+   $Edit_id = $_GET['view'];
   
     $del_view_ind = "N";
 		if(isset($_GET['delview']))
@@ -1922,6 +1922,8 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						</div>					</div>	
 </div> </div>
 
+<?php print_r("Here".$Edit_id); ?>
+
 <?php
 $Checkusr = mysqli_query($conn,"SELECT * FROM users where id='".$userid."' AND (usertype=1 OR usertype=0)");
 $Checkusr_val = mysqli_fetch_array($Checkusr);
@@ -1947,7 +1949,9 @@ if(isset($Checkusr_val))
                     <div class="card-body">
 				<div class="errMsg" id="errMsg"></div>
 				
-				<a href="EditHighRiskDtls.php?History=<?php echo $picmeno; ?>" ><span button type="button" class="btn btn-primary" id="AddHighRisk">
+				
+				
+				<a href="EditHighRiskDtls.php?History=<?php echo $id; ?>" ><span button type="button" class="btn btn-primary" id="AddHighRisk">
                     Update
               </button></a></span>
 				

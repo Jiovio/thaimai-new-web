@@ -8,12 +8,9 @@
 // Including the Code - Add !
 
 if (isset($_GET['History'])) {
-  $AV_picmeno = $_GET['History'];
-  $picmeno =$AV_picmeno;
+	$id = $_GET['History'];
  }
  
-$CheckANV_PrgWk = mysqli_query($conn,"SELECT * FROM antenatalvisit where picmeno=$AV_picmeno order by id desc LIMIT 0,1");
-$CheckANV_PrgWk_val = mysqli_fetch_array($CheckANV_PrgWk);
 
 $anc_cnt = "";
 $anc_dt = "";
@@ -21,18 +18,28 @@ $trns_dt = "";
 $HR_Ind = "N";
 $HR_val = "";
 $Mis_Crg = "N";
+
+ 
+$CheckANV_PrgWk = mysqli_query($conn,"SELECT * FROM antenatalvisit where id=$id");
+$CheckANV_PrgWk_val = mysqli_fetch_array($CheckANV_PrgWk);
+
 $id = "";
+
 $id = $CheckANV_PrgWk_val["id"];
-$HighRisk = $An["HighRisk"];
-$symptomsHighRisk = $An["symptomsHighRisk"];
-$referralDate = $An["referralDate"]; 
-$referralDistrict = $An["referralDistrict"];
-$referralFacility = $An["referralFacility"]; 
-$referralPlace = $An["referralPlace"];
-$bloodTransfusion = $An["bloodTransfusion"];
-$bloodTransfusionDate = $An["bloodTransfusionDate"];
-$placeAdministrator = $An["placeAdministrator"];
-$nooIVdoses = $An["noOfIVDoses"];
+$AV_picmeno = $CheckANV_PrgWk_val["picmeno"];
+$picmeno =$AV_picmeno;
+$HighRisk = $CheckANV_PrgWk_val["HighRisk"];
+$HighRisk_val = $CheckANV_PrgWk_val["HighRisk"];
+print_r("Hi".$HighRisk_val);
+$symptomsHighRisk = $CheckANV_PrgWk_val["symptomsHighRisk"];
+$referralDate = $CheckANV_PrgWk_val["referralDate"]; 
+$referralDistrict = $CheckANV_PrgWk_val["referralDistrict"];
+$referralFacility = $CheckANV_PrgWk_val["referralFacility"]; 
+$referralPlace = $CheckANV_PrgWk_val["referralPlace"];
+$bloodTransfusion = $CheckANV_PrgWk_val["bloodTransfusion"];
+$bloodTransfusionDate = $CheckANV_PrgWk_val["bloodTransfusionDate"];
+$placeAdministrator = $CheckANV_PrgWk_val["placeAdministrator"];
+$nooIVdoses = $CheckANV_PrgWk_val["noOfIVDoses"];
 
 if(isset($CheckANV_PrgWk_val["pregnancyWeek"]) && !empty($CheckANV_PrgWk_val["pregnancyWeek"]))
 {
@@ -136,8 +143,12 @@ if(isset($CheckANV_PrgWk_val["pregnancyWeek"]) && !empty($CheckANV_PrgWk_val["pr
  }
 }
 
+
+//print_r("HighRisk".$HighRisk."HR_Ind".$HR_Ind);
+
 if (! empty($_POST["HRDtls"])) {
   $picmeno =$AV_picmeno;
+ // print_r("test".$_POST['HighRisk'])
   $HighRisk = $_POST['HighRisk'];
   $symptomsHighRisk = $_POST['symptomsHighRisk'];
   $referralDate = $_POST["referralDate"]; 
@@ -155,7 +166,7 @@ if (! empty($_POST["HRDtls"])) {
 		   placeAdministrator = '$placeAdministrator', noOfIVDoses = '$nooIVdoses' WHERE picmeno='$picmeno' AND ancPeriod=$anc_cnt");
  
             if (!empty($query)) {
-              echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/EditAnVisit.php?view=$id');</script>";
+              echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/AntenatalVisitDtl.php?History=$picmeno');</script>";
             } 
 } 
 ?>
@@ -185,11 +196,13 @@ if (! empty($_POST["HRDtls"])) {
 					<div class="row">
         
         <input type="text" required id="AVpicmeno" hidden name="picmeno" oninput = "onlyNumbers(this.value)" onclick="return checkPicmeAV()" value="<?php echo $AV_picmeno; ?>" placeholder="RCHID (PICME) Number" class="form-control" />
-				
+		
+
+		
 		<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-highRisk">Symptoms High Risk <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-						  <?php if($HR_Ind == "N" AND empty($HighRisk)) {; ?>
+						  <?php if($HR_Ind == "N" AND ($HighRisk != 0 AND $HighRisk != 1)) {; ?>
                           <select required name="HighRisk" id="highRisk" onChange="SymHighRishChange()" class="form-select">
                           <option value="">Choose...</option>
                           <?php
@@ -200,19 +213,34 @@ if (! empty($_POST["HRDtls"])) {
 						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
+							 <input type="hidden" name="HighRisk" value="<?php echo $listvalue['enumvalue']; ?>">
 							 <?php } else {?> 
-							 <?php if($HR_Ind == "N" AND !empty($HighRisk)) {; ?>
-                          <select required name="HighRisk" id="highRisk" onChange="SymHighRishChange()" class="form-select">
-                          <option value="">Choose...</option>
+							 <?php if($HR_Ind == "N" AND ($HighRisk == 1)) {; ?>
+                          <select disabled required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
+                          
                           <?php
-                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
+                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13 AND enumid=1";
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['enumid']; ?>" 
 						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
-							 <?php }} else {?> 
+							 <input type="hidden" name="HighRisk" value="<?php echo $listvalue['enumvalue']; ?>">
+							 <?php } else {?> 
+							 <?php if($HR_Ind == "N" AND ($HighRisk == 0)) {; ?>
+                          <select disabled required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
+                          
+                          <?php
+                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13 AND enumid=0";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>" 
+						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php } ?>
+                             </select>
+							 <input type="hidden" name="HighRisk" value="<?php echo $listvalue['enumvalue']; ?>">
+							 <?php } else {?> 
 							 <select disabled required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
                           <?php
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13 AND enumid=1";
@@ -222,14 +250,15 @@ if (! empty($_POST["HRDtls"])) {
 						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
-							<?php } ?> 
+							 <input type="hidden" name="HighRisk" value="<?php echo $listvalue['enumvalue']; ?>">
+							 <?php }}} ?> 
                           </div>
                         </div>
 						
-						   <div class="col-4 mb-3" id="symptom" <?php if($HR_Ind == "N") {;?> style="display: none;" <?php }; ?> >
+						   <div class="col-4 mb-3" id="symptom" <?php if(($HR_Ind == "N") AND ($HighRisk == 0)) {;?> style="display: none;" <?php }; ?> >
                           <label class="form-label" for="basic-icon-default-symptomsHighRisk"> Symptoms High Risk During Visit <!--<span class="mand">* </span>--></label>
                           <div class="input-group input-group-merge">
-						  <?php if($HR_Ind == "N") {; ?>
+						  <?php if(($HR_Ind == "N") AND ($HighRisk == 0)) {; ?>
                             <select name="symptomsHighRisk" id="symptomsHighRisk" class="form-select" >
                           <option value="">Choose...</option>
                         
@@ -242,16 +271,40 @@ if (! empty($_POST["HRDtls"])) {
                           
                           <?php  } ?>
                              </select>
-							  <?php } else {?> 
-							  <input disabled name="symptomsHighRisk" style="color: red;" id="symptomsHighRisk"
-                              value = "<?php echo $HR_val; ?>"  							  
-							  class="form-select" >
+							  <?php } else 
+								  if (empty($HR_val) AND isset($symptomsHighRisk)) {?> 
+						  <select name="symptomsHighRisk" id="symptomsHighRisk" disabled style="color: red;" class="form-select">
+                                <?php
+                                $list=mysqli_query($conn, "SELECT av.symptomsHighRisk,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.symptomsHighRisk WHERE type=51 AND av.id=".$id);
+
+                                while($row_list=mysqli_fetch_assoc($list)){
+
+                                ?>
+
+                                <option value="<?php echo $row_list['enumid']; ?>">
+
+                                <?php if($row_list['enumvalue']== $symptomsHighRisk)?>
+                                
+                                <?php { echo $row_list['enumvalue']; } ?></option>
+                                <?php 
+                                $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=51";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { 
+                              ?>
                           
-							 <?php } ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php $symptomsHighRisk = "";} } ?>
+                           </select>
+						  
+								  <?php } else { ?>
+						  <input disabled name="symptomsHighRisk" style="color: red;" id="symptomsHighRisk"
+                              value = "<?php echo $HR_val;  ?>"  							  
+							  class="form-select" >
+								  <?php } ?>
                           </div>
                         </div>
-						
-						<div class="col-4 mb-3" id="refFacility" <?php if($HR_Ind == "N") {;?> style="display: none;" <?php }; ?>>
+						<?php print_r("REf".$referralFacility); ?>
+						<div class="col-4 mb-3" id="refFacility" <?php if(($HR_Ind == "N") AND ($HighRisk == 0)) {;?> style="display: none;" <?php }; ?>>
                           <label class="form-label" for="basic-icon-default-referralFacility">Referral Facility </label>
                           <div class="input-group input-group-merge">
                           <select name="referralFacility" id="referralFacility" class="form-select" onchange="RefChange()">
@@ -265,7 +318,7 @@ if (! empty($_POST["HRDtls"])) {
                              </select>
                           </div>
                         </div>
-                        <div class="col-4 mb-3" id="refDist" style="display: none;">
+                        <div class="col-4 mb-3" id="refDist" <?php if(($HR_Ind == "N") AND (empty($referralFacility) OR $referralFacility == 0)) {;?> style="display: none;" <?php }; ?>>
                           <label class="form-label" for="basic-icon-default-referralDistrict">Referral District </label>
                           <div class="input-group input-group-merge">
                             <input
@@ -281,7 +334,7 @@ if (! empty($_POST["HRDtls"])) {
                           </div>
                         </div>
 
-						            <div class="col-4 mb-3"  id="refPlace" style="display: none;">
+						            <div class="col-4 mb-3"  id="refPlace" <?php if(($HR_Ind == "N") AND (empty($referralFacility) OR $referralFacility == 0)) {;?> style="display: none;" <?php }; ?>
                           <label class="form-label" for="basic-icon-default-referralDate">Referral Place </label>
                           <div class="input-group input-group-merge">
                             <input
@@ -297,7 +350,7 @@ if (! empty($_POST["HRDtls"])) {
                           </div>
                         </div>
 
-						<div class="col-4 mb-3"  id="refDate" style="display: none;">
+						<div class="col-4 mb-3"  id="refDate" <?php if(($HR_Ind == "N") AND (empty($referralFacility) OR $referralFacility == 0)) {;?> style="display: none;" <?php }; ?>
                           <label class="form-label" for="basic-icon-default-referralDate">Referral Date </label>
                           <div class="input-group input-group-merge">
                             <input
