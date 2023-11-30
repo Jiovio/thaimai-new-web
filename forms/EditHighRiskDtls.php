@@ -150,8 +150,9 @@ if (! empty($_POST["HRDtls"])) {
   $picmeno =$AV_picmeno;
  
   $HighRisk = $_POST['HighRisk'];
-  print_r("test".$HighRisk); exit;
+ 
   $symptomsHighRisk = $_POST['symptomsHighRisk'];
+   print_r("test".$HighRisk.$symptomsHighRisk); exit;
   $referralDate = $_POST["referralDate"]; 
    $referralDistrict = $_POST["referralDistrict"]; 
    $referralFacility = $_POST["referralFacility"];
