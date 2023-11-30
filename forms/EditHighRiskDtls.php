@@ -227,7 +227,16 @@ if (! empty($_POST["HRDtls"])) {
 						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
-							 
+							 <select hidden required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
+                          
+                          <?php
+                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13 AND enumid=1";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>" 
+						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php } ?>
+                             </select>
 							 <?php } else {?> 
 							 <?php if($HR_Ind == "N" AND ($HighRisk == 0)) {; ?>
                           <select disabled required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
@@ -240,9 +249,28 @@ if (! empty($_POST["HRDtls"])) {
 						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
                           <?php } ?>
                              </select>
+							 <select hidden required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
+                          
+                          <?php
+                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13 AND enumid=0";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>" 
+						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php } ?>
+                             </select>
 							
 							 <?php } else {?> 
 							 <select disabled required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
+                          <?php
+                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13 AND enumid=1";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>" 
+						  <selected ><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php } ?>
+                             </select>
+							 <select hidden required name="HighRisk" style="color: red;" id="highRisk" onClick="SymHighRishChange()" class="form-select">
                           <?php
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13 AND enumid=1";
                             $exequery = mysqli_query($conn, $query);
