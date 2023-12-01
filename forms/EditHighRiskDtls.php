@@ -358,7 +358,6 @@ if (! empty($_POST["HRDtls"])) {
 								  <?php } ?>
                           </div>
                         </div>
-						<?php print_r("REf".$referralFacility); ?>
 						<div class="col-4 mb-3" id="refFacility" <?php if(($HR_Ind == "N") AND ($HighRisk == 0)) {;?> style="display: none;" <?php }; ?>>
                           <label class="form-label" for="basic-icon-default-referralFacility">Referral Facility </label>
                           <div class="input-group input-group-merge">
@@ -382,56 +381,36 @@ if (! empty($_POST["HRDtls"])) {
                                     ?>
                           <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
 							<?php } }} else { ?>
-                          <select name="referralFacility" id="referralFacility" class="form-select" onchange="RefChange()">
                           <option value="">Choose...</option>
                           <?php
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                          <?php }} ?>
+							<?php }}?>
                              </select>
                           </div>
                         </div>
                         <div class="col-4 mb-3" id="refDist" <?php if(($HR_Ind == "N") AND (empty($referralFacility) OR $referralFacility == 0)) {;?> style="display: none;" <?php }; ?>>
                           <label class="form-label" for="basic-icon-default-referralDistrict">Referral District </label>
                           <div class="input-group input-group-merge">
-						  <?php 
-						  if(isset($referralDistrict))
-							{ ?>
-								<input
+							<input
                               type="text"
-							  hidden
                               name="referralDistrict"
                               class="form-control"
                               id="referralDistrict"
                               placeholder="Referral District"
                               aria-label="Referral District"
                               aria-describedby="basic-icon-default-referralDistrict"
-							  value = <?php if(isset($referralDistrict)) { echo $referralDistrict; } ?> 
+							  value = <?php if(isset($referralDistrict)) { echo $referralDistrict; } else { echo ""; } ?> 
                               /> 
-							  <?php } ?>
                           </div>
                         </div>
 
 						            <div class="col-4 mb-3"  id="refPlace" <?php if(($HR_Ind == "N") AND (empty($referralFacility) OR $referralFacility == 0)) {;?> style="display: none;" <?php }; ?>
                           <label class="form-label" for="basic-icon-default-referralDate">Referral Place </label>
                           <div class="input-group input-group-merge">
-						  <?php 
-						  if(isset($referralPlace))
-							{ ?>
-						<input
-                              type="text"
-							  hidden
-                              name="referralPlace"
-                              class="form-control"
-                              id="referralPlace"
-                              placeholder="Referral Place"
-                              aria-label="Referral Place"
-                              aria-describedby="basic-icon-default-referralDate"
-                              
-                              />
-							  <?php else { ?>
+						  
                             <input
                               type="text"
                               name="referralPlace"
@@ -440,29 +419,15 @@ if (! empty($_POST["HRDtls"])) {
                               placeholder="Referral Place"
                               aria-label="Referral Place"
                               aria-describedby="basic-icon-default-referralDate"
+							  value = <?php if(isset($referralPlace)) { echo $referralPlace; } ?> 
                               />
-							  <?php } ?>
                           </div>
                         </div>
 
+                        <?php $cur_dt = date('Y-m-d'); ?>
 						<div class="col-4 mb-3"  id="refDate" <?php if(($HR_Ind == "N") AND (empty($referralFacility) OR $referralFacility == 0)) {;?> style="display: none;" <?php }; ?>
                           <label class="form-label" for="basic-icon-default-referralDate">Referral Date </label>
                           <div class="input-group input-group-merge">
-						   <?php 
-						  if(isset($referralDate))
-							{ ?>
-                            <input
-                              type="date"
-                              name="referralDate"
-                              class="form-control"
-                              id="referralDate"
-                              placeholder="Referral Date"
-                              aria-label="Referral Date"
-                              aria-describedby="basic-icon-default-referralDate"
-                              value = <?php echo $referralDate; ?>
-							  readonly
-                              />
-							  <?php else { ?>
 							  <input
                               type="date"
                               name="referralDate"
@@ -471,10 +436,9 @@ if (! empty($_POST["HRDtls"])) {
                               placeholder="Referral Date"
                               aria-label="Referral Date"
                               aria-describedby="basic-icon-default-referralDate"
-                              value = <?php echo $anc_dt; ?>
+                              value = <?php if(isset($referralDate)) { echo $referralDate; } else {echo $cur_dt; } ?>
 							  readonly
                               />
-							  <?php } ?>
                           </div>
                         </div> 
 						
