@@ -558,7 +558,22 @@ if (! empty($_POST["HRDtls"])) {
 						           <div class="col-4 mb-3" id="placeAdmin" <?php if($Mis_Crg == "N") {;?> style="display: none;" <?php }; ?>>
                           <label class="form-label" for="basic-icon-default-placeAdministered">Place Administered <!--<span class="mand">* </span>--></label>
                           <div class="input-group input-group-merge">
+						  <?php 
+						  if(isset($placeAdministrator) AND !empty($placeAdministrator))
+							{ ?>
                             <input
+                              type="text"
+                              name="placeAdministrator"
+                              class="form-control"
+                              id="placeAdministrator"
+                              placeholder="Place Administered"
+                              aria-label="Place Administered"
+                              aria-describedby="basic-icon-default-placeAdministered"
+							   value = <?php echo $placeAdministrator; ?>
+							  <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?>
+                               />
+							   <?php } else { ?>
+							   <input
                               type="text"
                               name="placeAdministrator"
                               class="form-control"
@@ -568,12 +583,17 @@ if (! empty($_POST["HRDtls"])) {
                               aria-describedby="basic-icon-default-placeAdministered"
 							  <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?>
                                />
+							   <?php } ?>
+							   
                           </div>
                         </div>
 					
 				        <div class="col-4 mb-3" id="ivDoses" <?php if($Mis_Crg == "N") {;?> style="display: none;" <?php }; ?> >
                         <label class="form-label" for="basic-icon-default-noOfIVDoses">No. of Units / IV Doses <!--<span class="mand">* </span>--></label>
                         <div class="input-group input-group-merge">
+						<?php 
+						  if(isset($noOfIVDoses) AND !empty($noOfIVDoses))
+							{ ?>
                             <input
                               type="number"
                               name="noOfIVDoses"
@@ -584,7 +604,21 @@ if (! empty($_POST["HRDtls"])) {
                               aria-describedby="basic-icon-default-noOfIVDoses"
 							  <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?>
 							  min=1 max=4
+							  value = <?php echo $noOfIVDoses; ?>
                                />
+							   <?php } else { ?>
+							   <input
+                              type="number"
+                              name="noOfIVDoses"
+                              class="form-control"
+                              id="noOfIVDoses"
+                              placeholder="No. of Units / IV Doses"
+                              aria-label="No. of Units / IV Doses"
+                              aria-describedby="basic-icon-default-noOfIVDoses"
+							  <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?>
+							  min=1 max=4
+                               />
+							    <?php } ?>
                         </div>
                         </div>
 					    </div>				
