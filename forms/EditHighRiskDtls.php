@@ -164,7 +164,7 @@ if (! empty($_POST["HRDtls"])) {
   $picmeno =$AV_picmeno;
  
   $HighRisk = $_POST['HighRisk'];
-  print_r("Hello"."Here".$_POST['symptomsHighRisk']); exit;
+  print_r("Hello"."Here".$HighRisk.$_POST['symptomsHighRisk']); exit;
  if(isset($HighRisk) AND $HighRisk==1)
  {
   $symptomsHighRisk = $_POST['symptomsHighRisk'];
