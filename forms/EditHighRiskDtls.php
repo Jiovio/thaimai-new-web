@@ -164,7 +164,7 @@ if (! empty($_POST["HRDtls"])) {
   $picmeno =$AV_picmeno;
  
   $HighRisk = $_POST['HighRisk'];
-  print_r("Hello"."Here".$HighRisk.$_POST['symptomsHighRisk']); 
+//  print_r("Hello"."Here".$HighRisk.$_POST['symptomsHighRisk']); 
  if(isset($HighRisk) AND ($HighRisk==1))
  {
   $symptomsHighRisk = $_POST['symptomsHighRisk'];
@@ -194,7 +194,7 @@ if (! empty($_POST["HRDtls"])) {
    $placeAdministrator = $_POST["placeAdministrator"]; 
    $nooIVdoses = $_POST["noOfIVDoses"];  
    
-   print_r("Test".$symptomsHighRisk); exit;
+ //  print_r("Test".$symptomsHighRisk); exit;
   
   $query = mysqli_query($conn, "UPDATE antenatalvisit SET HighRisk='$HighRisk',symptomsHighRisk='$symptomsHighRisk',
            referralDate = '$referralDate', referralDistrict = '$referralDistrict', referralFacility = '$referralFacility',
@@ -322,7 +322,7 @@ if (! empty($_POST["HRDtls"])) {
 						   <div class="col-4 mb-3" id="symptom" <?php if(($HR_Ind == "N") AND ($HighRisk == 0)) {;?> style="display: none;" <?php }; ?> >
                           <label class="form-label" for="basic-icon-default-symptomsHighRisk"> Symptoms High Risk During Visit <!--<span class="mand">* </span>--></label>
                           <div class="input-group input-group-merge">
-						  <?php if(($HR_Ind == "N") AND ($HighRisk == 0)) {; ?>
+						  <?php if(($HR_Ind == "N") AND ($HighRisk == 1)) {; ?>
                             <select name="symptomsHighRisk" id="symptomsHighRisk" class="form-select" >
                           <option value="">Choose...</option>
                         
