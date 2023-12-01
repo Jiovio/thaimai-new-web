@@ -523,6 +523,9 @@ if (! empty($_POST["HRDtls"])) {
                         <div class="col-4 mb-3" id="transDate" <?php if($Mis_Crg == "N") {;?> style="display: none;" <?php }; ?>>
                           <label class="form-label" for="basic-icon-default-bloodTransfusionDate">Transfusion Date <!--<span class="mand">* </span>--></label>
                           <div class="input-group input-group-merge">
+						  <?php 
+						  if(isset($bloodTransfusionDate) AND !empty($bloodTransfusionDate))
+							{ ?>
                             <input
                               type="date"
                               name="bloodTransfusionDate"
@@ -533,8 +536,23 @@ if (! empty($_POST["HRDtls"])) {
                               aria-describedby="basic-icon-default-bloodTransfusionDate"
 							  min=<?php echo $anc_dt; ?> 
        						  max=<?php echo $trns_dt; ?> 
+							  value = <?php echo $bloodTransfusionDate; ?>
                               <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?>							  
                                />
+							    <?php } else { ?>
+								<input
+                              type="date"
+                              name="bloodTransfusionDate"
+                              class="form-control"
+                              id="bloodTransfusionDate"
+                              placeholder="USG REPORT URL"
+                              aria-label="USG REPORT URL"
+                              aria-describedby="basic-icon-default-bloodTransfusionDate"
+							  min=<?php echo $anc_dt; ?> 
+       						  max=<?php echo $trns_dt; ?>
+                              <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?>							  
+                               />
+							   <?php } ?>
                           </div>
                         </div>
 						           <div class="col-4 mb-3" id="placeAdmin" <?php if($Mis_Crg == "N") {;?> style="display: none;" <?php }; ?>>
