@@ -168,12 +168,12 @@ if (! empty($_POST["HRDtls"])) {
  if(isset($HighRisk) AND ($HighRisk==1))
  {
   $symptomsHighRisk = $_POST['symptomsHighRisk'];
-  print_r("Nithya"); exit;
+//  print_r("Nithya"); exit;
  }
  else
  {
 	$symptomsHighRisk = ""; 
-	print_r("!!!!Nithya!!!"); exit;
+//	print_r("!!!!Nithya!!!"); exit;
  }
   // print_r("test".$HighRisk.$symptomsHighRisk); exit;
   $referralFacility = $_POST["referralFacility"];
@@ -194,7 +194,7 @@ if (! empty($_POST["HRDtls"])) {
    $placeAdministrator = $_POST["placeAdministrator"]; 
    $nooIVdoses = $_POST["noOfIVDoses"];  
    
-   print_r("Test");
+   print_r("Test".$symptomsHighRisk); exit;
   
   $query = mysqli_query($conn, "UPDATE antenatalvisit SET HighRisk='$HighRisk',symptomsHighRisk='$symptomsHighRisk',
            referralDate = '$referralDate', referralDistrict = '$referralDistrict', referralFacility = '$referralFacility',
