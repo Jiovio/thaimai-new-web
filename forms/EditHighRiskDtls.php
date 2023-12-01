@@ -138,7 +138,11 @@ if(isset($CheckANV_PrgWk_val["pregnancyWeek"]) && !empty($CheckANV_PrgWk_val["pr
 	if($CheckANV_PrgWk_val["Hb"] > 0 AND $CheckANV_PrgWk_val["Hb"] < 7)
 	{
 	 $HR_val = 'Chance to Miscarriage';	
-     $Mis_Crg = "Y";	 
+     $Mis_Crg = "Y";	
+     $bloodTransfusion = ""; 
+     $bloodTransfusionDate = ""; 
+     $placeAdministrator = ""; 
+     $nooIVdoses = "";  	 
 	}
  }
 }
