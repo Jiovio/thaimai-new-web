@@ -164,6 +164,7 @@ if (! empty($_POST["HRDtls"])) {
   $picmeno =$AV_picmeno;
  
   $HighRisk = $_POST['HighRisk'];
+  print_r("Hello".$_POST['symptomsHighRisk']);
  if(isset($HighRisk) AND $HighRisk==1)
  {
   $symptomsHighRisk = $_POST['symptomsHighRisk'];
@@ -354,7 +355,7 @@ if (! empty($_POST["HRDtls"])) {
                               ?>
                           
                           <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
-                          <?php $symptomsHighRisk = "";} } ?>
+                          <?php } } ?>
                            </select>
 						   <select name="symptomsHighRisk" id="symptomsHighRisk" hidden style="color: red;" class="form-select">
                                 <?php
