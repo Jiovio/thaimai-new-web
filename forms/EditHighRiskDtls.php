@@ -604,7 +604,7 @@ if (! empty($_POST["HRDtls"])) {
                               aria-describedby="basic-icon-default-noOfIVDoses"
 							  <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?>
 							  min=1 max=4
-							  value = <?php echo $noOfIVDoses; ?>
+							  value = <?php echo $nooIVdoses; ?>
                                />
 							   <?php } else { ?>
 							   <input
