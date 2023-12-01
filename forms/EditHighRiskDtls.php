@@ -40,6 +40,7 @@ $bloodTransfusion = $CheckANV_PrgWk_val["bloodTransfusion"];
 $bloodTransfusionDate = $CheckANV_PrgWk_val["bloodTransfusionDate"];
 $placeAdministrator = $CheckANV_PrgWk_val["placeAdministrator"];
 $nooIVdoses = $CheckANV_PrgWk_val["noOfIVDoses"];
+print_r("$nooIVdoses".$nooIVdoses);
 
 if(isset($CheckANV_PrgWk_val["pregnancyWeek"]) && !empty($CheckANV_PrgWk_val["pregnancyWeek"]))
 {
