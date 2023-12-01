@@ -40,7 +40,7 @@ $bloodTransfusion = $CheckANV_PrgWk_val["bloodTransfusion"];
 $bloodTransfusionDate = $CheckANV_PrgWk_val["bloodTransfusionDate"];
 $placeAdministrator = $CheckANV_PrgWk_val["placeAdministrator"];
 $nooIVdoses = $CheckANV_PrgWk_val["noOfIVDoses"];
-print_r("$nooIVdoses".$nooIVdoses);
+//print_r("$nooIVdoses".$nooIVdoses);
 
 if(isset($CheckANV_PrgWk_val["pregnancyWeek"]) && !empty($CheckANV_PrgWk_val["pregnancyWeek"]))
 {
@@ -593,7 +593,7 @@ if (! empty($_POST["HRDtls"])) {
                         <label class="form-label" for="basic-icon-default-noOfIVDoses">No. of Units / IV Doses <!--<span class="mand">* </span>--></label>
                         <div class="input-group input-group-merge">
 						<?php 
-						  if(isset($noOfIVDoses) AND !empty($noOfIVDoses))
+						  if(isset($nooIVdoses) AND !empty($nooIVdoses))
 							{ ?>
                             <input
                               type="number"
