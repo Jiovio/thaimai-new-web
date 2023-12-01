@@ -151,7 +151,13 @@ if(isset($CheckANV_PrgWk_val["pregnancyWeek"]) && !empty($CheckANV_PrgWk_val["pr
  }
 }
 
-
+if($Mis_Crg == "N")
+{
+	 $bloodTransfusion = ""; 
+     $bloodTransfusionDate = ""; 
+     $placeAdministrator = ""; 
+     $nooIVdoses = "";	
+	}
 //print_r("HighRisk".$HighRisk."HR_Ind".$HR_Ind);
 
 if (! empty($_POST["HRDtls"])) {
