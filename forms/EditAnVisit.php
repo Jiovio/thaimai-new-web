@@ -229,10 +229,11 @@ if (! empty($_POST["editVisit"])) {
   $dateofAlbendazole = $_POST["dateofAlbendazole"]; $noCalcium = $_POST["noCalcium"];
   $calciumDate = $_POST["calciumDate"];
   $sizeUterusinWeeks = $_POST["sizeUterusinWeeks"];
-  $methodofConception = $_POST["methodofConception"]; $AnyOtherSpecify = $_POST["AnyOtherSpecify"]; $HighRisk = $_POST["HighRisk"];
+  $methodofConception = $_POST["methodofConception"]; $AnyOtherSpecify = $_POST["AnyOtherSpecify"]; 
+  /* $HighRisk = $_POST["HighRisk"];
   $symptomsHighRisk = $_POST["symptomsHighRisk"];
   $referralDate = $_POST["referralDate"]; $referralDistrict = $_POST["referralDistrict"];
-  $referralFacility = $_POST["referralFacility"]; $referralPlace = $_POST["referralPlace"];
+  $referralFacility = $_POST["referralFacility"]; $referralPlace = $_POST["referralPlace"]; */
   $wusgTaken = $_POST["wusgTaken"];
   $filename = $_FILES["usgreport"]["name"];
   $tempname = $_FILES["usgreport"]["tmp_name"];
@@ -254,8 +255,8 @@ if (! empty($_POST["editVisit"])) {
   $usgFetalMovement3 = $_POST["usgFetalMovement2"];
   $placenta = $_POST["placenta"];
   $usgResult = $_POST["usgResult"]; $usgRemarks = $_POST["usgRemarks"]; 
-  $bloodTransfusion = $_POST["bloodTransfusion"]; $bloodTransfusionDate = $_POST["bloodTransfusionDate"];
-  $placeAdministrator = $_POST["placeAdministrator"]; $nooIVdoses = $_POST["noOfIVDoses"];
+ /* $bloodTransfusion = $_POST["bloodTransfusion"]; $bloodTransfusionDate = $_POST["bloodTransfusionDate"];
+  $placeAdministrator = $_POST["placeAdministrator"]; $nooIVdoses = $_POST["noOfIVDoses"]; */
   date_default_timezone_set('Asia/Kolkata');
   $date = date('d-m-Y h:i:s');
   
@@ -267,15 +268,14 @@ if (! empty($_POST["editVisit"])) {
   TdDose='$TdDose',Td2Dose='$Td2Dose',Td1Date='$Td1Date',TdBdose='$TdBdose',TdBoosterDate='$TdBoosterDate',covidvac='$Covidvac',Dose1Date='$Dose1Date',Dose2Date='$Dose2Date',
 preDate='$PreDate',NoFolicAcid='$NoFolicAcid',NoIFA='$NoIFA',
   DateofIFA='$dateofIFA',DateofAlbendazole='$dateofAlbendazole',noCalcium='$noCalcium',calciumDate='$calciumDate',
-  sizeUterusinWeeks='$sizeUterusinWeeks',methodofConception='$methodofConception',AnyOtherSpecify='$AnyOtherSpecify',HighRisk='$HighRisk',symptomsHighRisk='$symptomsHighRisk',referralDate='$referralDate',
-  referralDistrict='$referralDistrict',referralFacility='$referralFacility',referralPlace='$referralPlace',wusgTaken='$wusgTaken',usgreport='$filename',
+  sizeUterusinWeeks='$sizeUterusinWeeks',methodofConception='$methodofConception',AnyOtherSpecify='$AnyOtherSpecify',
+  wusgTaken='$wusgTaken',usgreport='$filename',
   usgDoneDate='$usgDoneDate',usgScanEdd='$usgScanEdd',usgScanStatus='$usgScanStatus',usgFundalHeight='$usgFundalHeight',
   usgSizeUterusWeek='$usgSizeUterusWeek',usgFetusStatus='$usgFetusStatus',gestationSac='$gestationSac',liquor='$liquor1',
   usgFetalHeartRate='$usgFetalHeartRate1',usgFetalPosition='$usgFetalPosition1',usgFetalMovement='$usgFetalMovement1',liquor1='$liquor2',
 usgFetalHeartRate1='$usgFetalHeartRate2',usgFetalPosition1='$usgFetalPosition2',usgFetalMovement1='$usgFetalMovemen2',liquor2='$liquor3',
 usgFetalHeartRate2='$usgFetalHeartRate3',usgFetalPosition2='$usgFetalPosition3',usgFetalMovement2='$usgFetalMovement3',placenta='$placenta',
-  usgResult='$usgResult',usgRemarks='$usgRemarks',bloodTransfusion='$bloodTransfusion',
-  bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',noOfIVDoses='$nooIVdoses',
+  usgResult='$usgResult',usgRemarks='$usgRemarks',
   updatedat='$date',updatedBy='$userid' WHERE id=".$id);
   if (!empty($query)) {
             echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/AntenatalVisitDtl.php?History=$picmeno');</script>";
@@ -1921,8 +1921,6 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						
 						</div>					</div>	
 </div> </div>
-
-<?php print_r("Here".$Edit_id); ?>
 
 <?php
 $Checkusr = mysqli_query($conn,"SELECT * FROM users where id='".$userid."' AND (usertype=1 OR usertype=0)");
