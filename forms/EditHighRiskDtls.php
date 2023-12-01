@@ -165,7 +165,7 @@ if (! empty($_POST["HRDtls"])) {
  
   $HighRisk = $_POST['HighRisk'];
   print_r("Hello"."Here".$HighRisk.$_POST['symptomsHighRisk']); 
- if(isset($HighRisk) AND $HighRisk==1)
+ if(isset($HighRisk) AND ($HighRisk==1))
  {
   $symptomsHighRisk = $_POST['symptomsHighRisk'];
   print_r("Nithya"); 
@@ -173,6 +173,7 @@ if (! empty($_POST["HRDtls"])) {
  else
  {
 	$symptomsHighRisk = ""; 
+	print_r("!!!!Nithya"); 
  }
   // print_r("test".$HighRisk.$symptomsHighRisk); exit;
   $referralFacility = $_POST["referralFacility"];
