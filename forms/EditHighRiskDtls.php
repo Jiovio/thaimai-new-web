@@ -505,7 +505,7 @@ if (! empty($_POST["HRDtls"])) {
                           <?php } ?>
                              </select>
 							 <?php } else { ?>
-							 <select name="bloodTransfusion" id="bloodTransfusion" hidden class="form-select" <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?> >
+							 <select name="bloodTransfusion" id="bloodTransfusion" class="form-select" <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?> >
                           <option value="">Choose...</option>
                           <?php
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=44";
