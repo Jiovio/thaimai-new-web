@@ -284,7 +284,7 @@ if (! empty($_POST["update"])) {
                           </div>
                         </div>
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">MOTHER'S AGE AT EC REGISTRATION <span class="mand">* </span><span id="errMageecreg"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">MOTHER'S AGE AT EC REGISTRATION <span id="errMageecreg"></span></label>
                           <div class="input-group input-group-merge">
                                                       
                             <input
@@ -297,7 +297,6 @@ if (! empty($_POST["update"])) {
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $mageecreg; ?>"
 							  onchange="fnCalMotAge()"
-							  required
                             />
                           </div>
                         </div>
@@ -429,7 +428,7 @@ if (! empty($_POST["update"])) {
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S NAME AS PER AADHAAR <span class="mand">* </span><span id="errhaadhaarname"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S NAME AS PER AADHAAR <span id="errhaadhaarname"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user"></i
@@ -444,7 +443,6 @@ if (! empty($_POST["update"])) {
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $haadhaarname; ?>"
 							  onchange="fnCalMotAge()"
-							  required
                             />
                           </div>
                         </div>
@@ -471,7 +469,7 @@ if (! empty($_POST["update"])) {
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">HUSBAND'S DATE OF BIRTH <span class="mand">* </span><span id="errhdob"></span></label>
+                          <label class="form-label" for="basic-icon-default-email">HUSBAND'S DATE OF BIRTH <span id="errhdob"></span></label>
                           <div class="input-group input-group-merge">
                            
                             <input
@@ -487,13 +485,12 @@ if (! empty($_POST["update"])) {
 							   class="form-control" onchange="fnCalHusAge();"
 							  disabled value="<?php echo $hdob; ?>"
 							  onchange="fnCalMotAge()"
-							  required
                             />
                           </div>
                         </div>
                         <div id="Hus-mar-Sug-box"></div>
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S AGE AT MARRIAGE <span class="mand">* </span><span id="errhagemarriage"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S AGE AT MARRIAGE <span id="errhagemarriage"></span></label>
                           <div class="input-group input-group-merge">
                             
                             <input
@@ -507,15 +504,13 @@ if (! empty($_POST["update"])) {
                               disabled value="<?php echo $hagemarriage; ?>"
 							  min="11" max="99"
 							  onchange="fnCalMotAge()"
-							  required
-                              
                             />
                             
                           </div>
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S AGE AT EC Registration <span class="mand">* </span><span id="errhageecreg"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S AGE AT EC Registration <span id="errhageecreg"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user-minus"></i
@@ -531,13 +526,12 @@ if (! empty($_POST["update"])) {
 							  value="<?php echo $hageecreg; ?>"
 							  onchange="fnCalMotAge()"
 							  disabled
-							  required
                              />
                           </div>
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S MOBILE NUMBER <span class="mand">* </span><span id="errhmob"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S MOBILE NUMBER <span id="errhmob"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-mobile"></i
@@ -554,15 +548,14 @@ if (! empty($_POST["update"])) {
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $husmobno; ?>"
 							  onchange="fnCalMotAge()"
-                              required
                             />
                           </div>
                         </div>
   
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S EDUCATIONAL STATUS <span class="mand">* </span><span id="errhedustatus"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S EDUCATIONAL STATUS <span id="errhedustatus"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="husedustatus" id="husedustatus" onchange="fnCalMotAge()" required class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $husedustatus; ?>" disabled> 
+                          <select name="husedustatus" id="husedustatus" onchange="fnCalMotAge()" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" value="<?php echo $husedustatus; ?>" disabled> 
                                 <?php
 
                                 $list=mysqli_query($conn, "SELECT ec.husedustatus,e.enumid,e.enumvalue from ecregister ec join enumdata e on e.enumid=ec.husedustatus WHERE type=4 AND ec.id=".$id);
@@ -935,9 +928,9 @@ if (! empty($_POST["update"])) {
                       </div>  
 
                       <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">RATION CARD TYPE <span class="mand">* </span><span id="errRtype"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">RATION CARD TYPE <span id="errRtype"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="rationcardtype" id="rationcardtype" class="form-select" onchange="fnCalMotAge()" required id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
+                          <select name="rationcardtype" id="rationcardtype" class="form-select" onchange="fnCalMotAge()" id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
                             
                                 <?php
 
@@ -965,7 +958,7 @@ if (! empty($_POST["update"])) {
                       </div>
 					  
                       <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">RATION CARD NUMBER <span class="mand">* </span><span id="errRcardnum"></span></label>
+                          <label class="form-label" for="basic-icon-default-email">RATION CARD NUMBER <span id="errRcardnum"></span></label>
                           <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-id-card"></i></span>
                             <input
@@ -980,7 +973,6 @@ if (! empty($_POST["update"])) {
 							  pattern="[0-9]{12}"
 							  onchange="fnCalMotAge()"
                               disabled value="<?php echo $rcnum; ?>"
-                              required
                             />
                           </div>
                         </div>
