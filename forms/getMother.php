@@ -176,9 +176,9 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         </div>
                         
                         <div class="mb-3 col-md-6">
-                        <label class="form-label" for="basic-icon-default-pregnancyTestResult">PREGNANCY TEST RESULT <span class="mand">* </span></label>
+                        <label class="form-label" for="basic-icon-default-pregnancyTestResult">PREGNANCY TEST RESULT </label>
                         <div class="input-group input-group-merge">
-                          <select required name="pregnancyTestResult" id="pregnancyTestResult" class="form-select" onclick="return addMothAadhar()">
+                          <select name="pregnancyTestResult" id="pregnancyTestResult" class="form-select" onclick="return addMothAadhar()">
                           <option value="">Choose...</option>
                         <?php 
                           $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=11";
@@ -279,7 +279,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                           </div>
                       <div class="row">                            
                         <div class="mb-3 col-md-6">
-                          <label class="form-label">OBSTETRIC CODE <span class="mand">* </span></label>
+                          <label class="form-label">OBSTETRIC CODE </label>
                           <input type="text" class="form-control" id="obstetricCode" name="obstetricCode" placeholder="Code" readonly />
                         </div>
 
@@ -348,8 +348,8 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                         </div>
                         
                         <div class="mb-3 col-md-6">
-                          <label class="form-label" for="country">MRMBS ELIGIBLE <span class="mand">* </span></label>
-                          <select required name="mrmbsEligible" id="mrmbsEligible" onclick="return addMothAadhar()" class="form-select">
+                          <label class="form-label" for="country">MRMBS ELIGIBLE </label>
+                          <select name="mrmbsEligible" id="mrmbsEligible" onclick="return addMothAadhar()" class="form-select">
                         <option value="">Choose...</option>
                          <?php 
                           $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -369,7 +369,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
 	                    $rec_Mage = $n_rec['motheragemarriage'];
 						?>
                       <div class="mb-3 col-md-6">
-                          <label class="form-label">Mother's Age at Conception <span class="mand">* </span></label>
+                          <label class="form-label">Mother's Age at Conception </label>
                           <div class="input-group input-group-merge">
                           <input
                             type="number"
@@ -379,7 +379,6 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             id="MotherAge"
                             name="MotherAge"
                             placeholder="Mother's Age"
-                            required
 							readonly
                           />
                         </div>
@@ -391,7 +390,7 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
 	                    $rec_Hage = $n_rec['husagemarriage'];
 						?>
                         <div class="mb-3 col-md-6">
-                          <label class="form-label">Husband's Age at Conception <span class="mand">* </span></label>
+                          <label class="form-label">Husband's Age at Conception </label>
                           <div class="input-group input-group-merge">
                           <input
                             type="number"
@@ -401,7 +400,6 @@ $teenqy = mysqli_query($conn,"UPDATE ecregister SET status=5 WHERE motheraadhaar
                             name="HusbandAge"
                             placeholder="Husband's Age"
 							onclick="Obcode()"
-                            required
 							readonly
                           />
                         </div>
