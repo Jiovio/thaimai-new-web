@@ -385,7 +385,7 @@ if (isset($_GET['del'])) {
                             <input type="text" class="form-control" id="obstetricCode" value="<?php echo $obcode; ?>" name="obstetricCode" placeholder="Code" readonly />
                           </div>
                          
-                          
+                       </div>   
                         <div class="row">
                           <div class="mb-3 col-md-6">
                             <label class="form-label">MOTHER'S HEIGHT <span class="mand">* </span></label>
