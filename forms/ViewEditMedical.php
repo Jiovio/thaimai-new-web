@@ -274,10 +274,10 @@ if (isset($_GET['del'])) {
                         <div class="row">
                          
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">MOTHER BLOOD GROUP TAKEN</label>
+                          <label class="form-label" for="basic-icon-default-phone">MOTHER BLOOD GROUP TAKEN <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
                             <?php if($view == true) { ?>
-                          <select name="momBGtaken" id="momBGtaken" class="form-select" disabled>
+                          <select name="momBGtaken" id="momBGtaken" class="form-select" required disabled>
                            <?php   
                             $query = mysqli_query($conn, "SELECT m.momBGtaken,e.enumid,e.enumvalue FROM medicalhistory m join enumdata e on m.momBGtaken=e.enumid WHERE type=20 AND m.id=".$id);
                             while($status_list=mysqli_fetch_assoc($query)){
