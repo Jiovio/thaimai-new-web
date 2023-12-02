@@ -220,11 +220,11 @@ if (isset($_GET['del'])) {
                         
                   <div class="row">
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-password">EDD DATE <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-password">EDD DATE </label>
                             <input
                               type="text"
                               name="edddate"
-                              id="edddate" required
+                              id="edddate"
                               class="form-control"
                               placeholder=""
                               aria-label=""
@@ -459,10 +459,10 @@ if (isset($_GET['del'])) {
                         </div>
                         <div class="row">
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND VDRl RPR RESULT <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND VDRl RPR RESULT </label>
                           <div class="input-group input-group-merge">
                             <?php if($view == true) { ?>
-                          <select required name="husVdrlRprResult" id="husVdrlRprResult" class="form-select" disabled>
+                          <select name="husVdrlRprResult" id="husVdrlRprResult" class="form-select" disabled>
 
                            <?php   
                               $query = mysqli_query($conn, "SELECT m.husVdrlRprResult,e.enumid,e.enumvalue FROM medicalhistory m join enumdata e on m.husVdrlRprResult=e.enumid WHERE type=26 AND m.id=".$id);
@@ -511,10 +511,10 @@ if (isset($_GET['del'])) {
                         </div> -->
                         
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">MOTHER HBSAG RESULT <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-phone">MOTHER HBSAG RESULT </label>
                           <div class="input-group input-group-merge">
                           <?php if($view == true) { ?>  
-                          <select required name="momhbresult" id="momhbresult" class="form-select" disabled>
+                          <select name="momhbresult" id="momhbresult" class="form-select" disabled>
                           
                            <?php   
                             $query = mysqli_query($conn, "SELECT m.momhbresult,e.enumid,e.enumvalue FROM medicalhistory m join enumdata e on m.momhbresult=e.enumid WHERE type=11 AND m.id=".$id);
@@ -563,10 +563,10 @@ if (isset($_GET['del'])) {
                         </div> -->
                         
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND HBSAG RESULT <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND HBSAG RESULT </label>
                           <div class="input-group input-group-merge">
                           <?php if($view == true) { ?>  
-                          <select required name="hushbresult" id="hushbresult" class="form-select" disabled>
+                          <select name="hushbresult" id="hushbresult" class="form-select" disabled>
                            <?php   
                             $query = mysqli_query($conn, "SELECT m.hushbresult,e.enumid,e.enumvalue FROM medicalhistory m join enumdata e on m.hushbresult=e.enumid WHERE type=11 AND m.id=".$id);
                             while($status_list=mysqli_fetch_assoc($query)){
@@ -665,10 +665,10 @@ if (isset($_GET['del'])) {
                           </div> -->
                        
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND HIV TEST RESULT <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND HIV TEST RESULT </label>
                           <div class="input-group input-group-merge">
                             <?php if($view == true) { ?>
-                          <select name="hushivtestresult" id="hushivtestresult" class="form-select" required disabled>
+                          <select name="hushivtestresult" id="hushivtestresult" class="form-select" disabled>
                            <?php   
                             $query = mysqli_query($conn, "SELECT m.hushivtestresult,e.enumid,e.enumvalue FROM medicalhistory m join enumdata e on m.hushivtestresult=e.enumid WHERE type=11 AND m.id=".$id);
                             while($status_list=mysqli_fetch_assoc($query)){
@@ -783,10 +783,10 @@ if (isset($_GET['del'])) {
                       </div>
                         </div> -->
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">Total Number Of Pregnancy <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-phone">Total Number Of Pregnancy </label>
                           <div class="input-group input-group-merge">
                             <?php if($view == true) { ?>
-                          <select required name="totPregnancy" id="totPregnancy" class="form-select" disabled>
+                          <select name="totPregnancy" id="totPregnancy" class="form-select" disabled>
                            <?php   
                             $query = mysqli_query($conn, "SELECT m.totPregnancy,e.enumid,e.enumvalue FROM medicalhistory m join enumdata e on m.totPregnancy=e.enumid WHERE type=52 AND m.id=".$id);
                             while($status_list=mysqli_fetch_assoc($query)){

@@ -109,11 +109,11 @@ if (! empty($_POST["addMedical"])) {
                         </div>
                         <div class="row">
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-password">EDD DATE <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-password">EDD DATE </label>
                             <input
                               type="text"
                               name="edddate"
-                              id="edddate" required
+                              id="edddate" 
                               class="form-control"
                               placeholder=""
                               aria-label=""
@@ -293,10 +293,10 @@ if (! empty($_POST["addMedical"])) {
                         <div class="row">
                     
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND VDRl RPR RESULT <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND VDRl RPR RESULT </label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="husVdrlRprResult" id="husVdrlRprResult" class="form-select" onclick="return addMedicalValidate()" required>
+                          <select name="husVdrlRprResult" id="husVdrlRprResult" class="form-select" onclick="return addMedicalValidate()">
                           <option value="">Choose...</option>
 
                            <?php   
@@ -334,10 +334,10 @@ if (! empty($_POST["addMedical"])) {
                         <div class="row"> -->
                     
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">MOTHER HBSAG RESULT <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-phone">MOTHER HBSAG RESULT </label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="momhbresult" id="momhbresult" class="form-select" onclick="return addMedicalValidate()" required>
+                          <select name="momhbresult" id="momhbresult" class="form-select" onclick="return addMedicalValidate()">
                           <option value="">Choose...</option>
 
                            <?php   
@@ -375,10 +375,10 @@ if (! empty($_POST["addMedical"])) {
                         <div class="row">
                     
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND HBSAG RESULT <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND HBSAG RESULT </label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="hushbresult" id="hushbresult" class="form-select" onclick="return addMedicalValidate()" required>
+                          <select name="hushbresult" id="hushbresult" class="form-select" onclick="return addMedicalValidate()">
                           <option value="">Choose...</option>
 
                            <?php   
@@ -458,10 +458,10 @@ if (! empty($_POST["addMedical"])) {
                         <div class="row"> -->
                          
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND HIV TEST RESULT <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND HIV TEST RESULT </label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="hushivtestresult" id="hushivtestresult" class="form-select" onclick="return addMedicalValidate()" required>
+                          <select name="hushivtestresult" id="hushivtestresult" class="form-select" onclick="return addMedicalValidate()">
                           <option value="">Choose...</option>
 
                            <?php   
@@ -552,10 +552,10 @@ if (! empty($_POST["addMedical"])) {
                       </div>
                   </div> -->
                   <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">Total Number Of Pregnancy <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-phone">Total Number Of Pregnancy </label>
                           <div class="input-group input-group-merge">
                 
-                          <select name="totPregnancy" id="totPregnancy" onchange="totPregnancyChange()" class="form-select" onclick="return addMedicalValidate()" required>
+                          <select name="totPregnancy" id="totPregnancy" onchange="totPregnancyChange()" class="form-select" onclick="return addMedicalValidate()">
                           <option value="">Choose...</option>
                         
                            <?php   

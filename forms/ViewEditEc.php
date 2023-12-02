@@ -846,7 +846,7 @@ if (! empty($_POST["update"])) {
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">PINCODE <span class="mand">* </span> <span id="errPincode"></span></label>
+                          <label class="form-label" for="basic-icon-default-email">PINCODE  <span id="errPincode"></span></label>
                           <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-map"></i></span>
                             <input
