@@ -19,6 +19,16 @@ $HR_Ind = "N";
 $HR_val = "";
 $Mis_Crg = "N";
 
+     $bloodTransfusion = ""; 
+     $bloodTransfusionDate = ""; 
+     $placeAdministrator = ""; 
+     $nooIVdoses = "";	
+	 $HighRisk = "";
+	 $symptomsHighRisk = ""; 
+	 $referralDate = "";
+     $referralDistrict = "";
+     $referralPlace = "";
+     $referralFacility = "";  
  
 $CheckANV_PrgWk = mysqli_query($conn,"SELECT * FROM antenatalvisit where id=$id");
 $CheckANV_PrgWk_val = mysqli_fetch_array($CheckANV_PrgWk);
@@ -161,6 +171,17 @@ if($Mis_Crg == "N")
 //print_r("HighRisk".$HighRisk."HR_Ind".$HR_Ind);
 
 if (! empty($_POST["HRDtls"])) {
+	$bloodTransfusion = ""; 
+     $bloodTransfusionDate = ""; 
+     $placeAdministrator = ""; 
+     $nooIVdoses = "";	
+	 $HighRisk = "";
+	 $symptomsHighRisk = ""; 
+	 $referralDate = "";
+     $referralDistrict = "";
+     $referralPlace = "";
+     $referralFacility = "";
+	 
   $picmeno =$AV_picmeno;
  
   $HighRisk = $_POST['HighRisk'];
@@ -194,7 +215,7 @@ if (! empty($_POST["HRDtls"])) {
    $placeAdministrator = $_POST["placeAdministrator"]; 
    $nooIVdoses = $_POST["noOfIVDoses"];  
    
- //  print_r("Test".$symptomsHighRisk); exit;
+ // print_r("Test".$referralDistrict.$referralPlace.$anc_cnt); exit;
   
   $query = mysqli_query($conn, "UPDATE antenatalvisit SET HighRisk='$HighRisk',symptomsHighRisk='$symptomsHighRisk',
            referralDate = '$referralDate', referralDistrict = '$referralDistrict', referralFacility = '$referralFacility',
@@ -238,7 +259,7 @@ if (! empty($_POST["HRDtls"])) {
 		<div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-highRisk">Symptoms High Risk <span class="mand">* </span></label>
                           <div class="input-group input-group-merge">
-						  <?php if($HR_Ind == "N" AND ($HighRisk != 0 AND $HighRisk != 1)) {; ?>
+						  <?php if($HR_Ind == "N" AND ($HighRisk != 1 AND $HighRisk != 0)) {; ?>
                           <select required name="HighRisk" id="highRisk" onChange="SymHighRishChange()" class="form-select">
                           <option value="">Choose...</option>
                           <?php
@@ -319,10 +340,10 @@ if (! empty($_POST["HRDtls"])) {
                           </div>
                         </div>
 						
-						   <div class="col-4 mb-3" id="symptom" <?php if(($HR_Ind == "N") AND ($HighRisk == 0)) {;?> style="display: none;" <?php }; ?> >
+						   <div class="col-4 mb-3" id="symptom" <?php if(($HR_Ind == "N") AND ($HighRisk == 0 OR $HighRisk == "")) {;?> style="display: none;" <?php }; ?> >
                           <label class="form-label" for="basic-icon-default-symptomsHighRisk"> Symptoms High Risk During Visit <!--<span class="mand">* </span>--></label>
                           <div class="input-group input-group-merge">
-						  <?php if(($HR_Ind == "N") AND ($HighRisk == 1)) {; ?>
+						  <?php if(($HR_Ind == "N") AND ((($HighRisk == 1) AND empty($symptomsHighRisk))) OR (empty($HighRisk) AND ($HR_Ind == "N"))) {; ?>
                             <select name="symptomsHighRisk" id="symptomsHighRisk" class="form-select" >
                           <option value="">Choose...</option>
                         
@@ -392,7 +413,7 @@ if (! empty($_POST["HRDtls"])) {
 								  <?php } ?>
                           </div>
                         </div>
-						<div class="col-4 mb-3" id="refFacility" <?php if(($HR_Ind == "N") AND ($HighRisk == 0)) {;?> style="display: none;" <?php }; ?>>
+						<div class="col-4 mb-3" id="refFacility" <?php if(($HR_Ind == "N") AND ($HighRisk == 0 OR $HighRisk == "")) {;?> style="display: none;" <?php }; ?>>
                           <label class="form-label" for="basic-icon-default-referralFacility">Referral Facility </label>
                           <div class="input-group input-group-merge">
 						  <select name="referralFacility" id="referralFacility" class="form-select" onchange="RefChange()">
@@ -425,7 +446,8 @@ if (! empty($_POST["HRDtls"])) {
                              </select>
                           </div>
                         </div>
-                        <div class="col-4 mb-3" id="refDist" <?php if((empty($referralFacility) OR $referralFacility == 0)) {;?> style="display: none;" <?php }; ?>>
+						
+                        <div class="col-4 mb-3" id="refDist" <?php if((empty($referralFacility) OR $referralFacility == 0 OR $HighRisk == 0)) {;?> style="display: none;" <?php }; ?>>
                           <label class="form-label" for="basic-icon-default-referralDistrict">Referral District </label>
                           <div class="input-group input-group-merge">
 						  <?php if(isset($referralDistrict) AND !empty($referralDistrict)) { ?>
@@ -437,7 +459,7 @@ if (! empty($_POST["HRDtls"])) {
                               placeholder="Referral District"
                               aria-label="Referral District"
                               aria-describedby="basic-icon-default-referralDistrict"
-							  value = <?php echo $referralDistrict; ?> 
+							  value = "<?php echo $referralDistrict; ?>" 
                               /> 
 						  <?php } else { ?>
 						  <input
@@ -454,7 +476,7 @@ if (! empty($_POST["HRDtls"])) {
                           </div>
                         </div>
 
-						            <div class="col-4 mb-3"  id="refPlace" <?php if((empty($referralFacility) OR $referralFacility == 0)) {;?> style="display: none;" <?php }; ?>
+						            <div class="col-4 mb-3"  id="refPlace" <?php if((empty($referralFacility) OR $referralFacility == 0 OR $HighRisk == 0)) {;?> style="display: none;" <?php }; ?>
                           <label class="form-label" for="basic-icon-default-referralDate">Referral Place </label>
                           <div class="input-group input-group-merge">
 						  <?php 
@@ -468,7 +490,7 @@ if (! empty($_POST["HRDtls"])) {
                               placeholder="Referral Place"
                               aria-label="Referral Place"
                               aria-describedby="basic-icon-default-referralDate"
-							  value = <?php echo $referralPlace; ?> 
+							  value = "<?php echo $referralPlace; ?>" 
                               />
 							  <?php } else { ?>
 							  <input
@@ -485,7 +507,7 @@ if (! empty($_POST["HRDtls"])) {
                         </div>
 
                         <?php $cur_dt = date('Y-m-d'); ?>
-						<div class="col-4 mb-3"  id="refDate" <?php if((empty($referralFacility) OR $referralFacility == 0)) {;?> style="display: none;" <?php }; ?>
+						<div class="col-4 mb-3"  id="refDate" <?php if((empty($referralFacility) OR $referralFacility == 0 OR $HighRisk == 0)) {;?> style="display: none;" <?php }; ?>
                           <label class="form-label" for="basic-icon-default-referralDate">Referral Date </label>
                           <div class="input-group input-group-merge">
 							  <input
@@ -496,7 +518,7 @@ if (! empty($_POST["HRDtls"])) {
                               placeholder="Referral Date"
                               aria-label="Referral Date"
                               aria-describedby="basic-icon-default-referralDate"
-                              value = <?php if(isset($referralDate) AND !empty($referralDate)) { echo $referralDate; } else {echo $cur_dt; } ?>
+                              value = "<?php if(isset($referralDate) AND !empty($referralDate)) { echo $referralDate; } else {echo $cur_dt; } ?>"
 							  readonly
                               />
                           </div>
@@ -546,7 +568,7 @@ if (! empty($_POST["HRDtls"])) {
                               aria-describedby="basic-icon-default-bloodTransfusionDate"
 							  min=<?php echo $anc_dt; ?> 
        						  max=<?php echo $trns_dt; ?> 
-							  value = <?php echo $bloodTransfusionDate; ?>
+							  value = "<?php echo $bloodTransfusionDate; ?>"
                               <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?>							  
                                />
 							    <?php } else { ?>
@@ -579,7 +601,7 @@ if (! empty($_POST["HRDtls"])) {
                               placeholder="Place Administered"
                               aria-label="Place Administered"
                               aria-describedby="basic-icon-default-placeAdministered"
-							   value = <?php echo $placeAdministrator; ?>
+							   value = "<?php echo $placeAdministrator; ?>"
 							  <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?>
                                />
 							   <?php } else { ?>
@@ -614,7 +636,7 @@ if (! empty($_POST["HRDtls"])) {
                               aria-describedby="basic-icon-default-noOfIVDoses"
 							  <?php if($Mis_Crg == "Y") {; ?> required <?php }; ?>
 							  min=1 max=4
-							  value = <?php echo $nooIVdoses; ?>
+							  value = "<?php echo $nooIVdoses; ?>"
                                />
 							   <?php } else { ?>
 							   <input

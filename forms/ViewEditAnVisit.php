@@ -48,7 +48,7 @@ $view_ind = "f";
   $urineAlbuminPresent = $An["urineAlbuminPresent"]; $bloodSugartest =$An["bloodSugartest"]; 
   $fastingSugar = $An["fastingSugar"]; $postPrandial = $An["postPrandial"]; 
   $gctStatus = $An["gctStatus"];  $gctValue = $An["gctValue"]; 
-  $tsh = $An["Tsh"]; $Td1 = $An["Td1"]; $TdDose = $An["TdDose"]; $Td2 = $An["Td2"]; $Td2Dose = $An["Td2Dose"]; $Td1Date = $An["Td1Date"]; 
+  $Tsh = $An["Tsh"]; $Td1 = $An["Td1"]; $TdDose = $An["TdDose"]; $Td2 = $An["Td2"]; $Td2Dose = $An["Td2Dose"]; $Td1Date = $An["Td1Date"]; 
   $Tdb = $An["Tdb"]; $TdBdose = $An["TdBdose"]; $TdBoosterDate = $An["TdBoosterDate"]; $Covidvac = $An["Covidvac"]; 
   $Dose1Date = $An["Dose1Date"]; $Dose2Date = $An["Dose2Date"]; $PreDate = $An["PreDate"]; $NoFolicAcid = $An["NoFolicAcid"]; $NoIFA = $An["NoIFA"]; 
   $dateofIFA = $An["dateofIFA"]; $dateofAlbendazole = $An["dateofAlbendazole"]; $noCalcium = $An["noCalcium"];
@@ -270,7 +270,7 @@ if (! empty($_POST["editVisit"])) {
   placeofvisit='$placeofvisit',abortion='$abortion',anvisitDate='$anvisitDate',avduedate='$avduedate',avTag='1',ancPeriod='$ancPeriod',pregnancyWeek='$pregnancyWeek',
   motherWeight='$motherWeight',bpSys='$bpSys',bpDia='$bpDia',Hb='$Hb',urineTestStatus='$urineTestStatus',
   urineSugarPresent='$urineSugarPresent',urineAlbuminPresent='$urineAlbuminPresent',bloodSugartest='$bloodSugartest',fastingSugar='$fastingSugar',
-  postPrandial='$postPrandial',gctStatus='$gctStatus',gctValue='$gctValue',Tsh='$tsh',
+  postPrandial='$postPrandial',gctStatus='$gctStatus',gctValue='$gctValue',Tsh='$Tsh',
   TdDose='$TdDose',Td2Dose='$Td2Dose',Td1Date='$Td1Date',TdBdose='$TdBdose',TdBoosterDate='$TdBoosterDate',covidvac='$Covidvac',Dose1Date='$Dose1Date',Dose2Date='$Dose2Date',
 preDate='$PreDate',NoFolicAcid='$NoFolicAcid',NoIFA='$NoIFA',
   DateofIFA='$dateofIFA',DateofAlbendazole='$dateofAlbendazole',noCalcium='$noCalcium',calciumDate='$calciumDate',
@@ -758,9 +758,9 @@ if (isset($_GET['del']))
 						 </div>
 						            <div class="row">
 						            <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-gctStatus">GCT Week Status <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-gctStatus">GCT Week Status </label>
                           <div class="input-group input-group-merge">
-                          <select required name="gctStatus" id="gctStatus" class="form-select" onchange="usgChange()" disabled>
+                          <select name="gctStatus" id="gctStatus" class="form-select" onchange="usgChange()" disabled>
                           <!-- <option value="">Choose...</option> -->
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=46";
@@ -772,9 +772,9 @@ if (isset($_GET['del']))
                           </div>
                         </div>
                         <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-gctValue">GCT Value <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-gctValue">GCT Value </span></label>
                           <div class="input-group input-group-merge">
-                            <select class="60-400 form-control" id="gctValue" name="gctValue" required disabled>
+                            <select class="60-400 form-control" id="gctValue" name="gctValue" disabled>
                             <?php
 
                               $list=mysqli_query($conn, "SELECT gctValue from antenatalvisit WHERE id=".$id);
@@ -807,12 +807,13 @@ if (isset($_GET['del']))
                           <div class="input-group input-group-merge">
                             
 					    <select class="form-select" id="Tsh" name="Tsh" disabled>
+						
 						<?php   
                             $query = "SELECT av.Tsh,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.Tsh WHERE type=13 AND av.id=".$id;
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$tsh) ?>
+                          <?php if($listvalue['enumvalue']==$Tsh) ?>
                          <?php { echo $listvalue['enumvalue']; } ?>
                          <?php 
                                     $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -1196,9 +1197,8 @@ if (isset($_GET['del']))
                               class="form-control"
                               id="dateofAlbendazole"
                               placeholder="Date Of Albendazole"
-							  onclick="return checkPicmeAN()"
 							  <?php $cur_dt = date('Y-m-d'); ?>
-							  min=<?php echo $cur_dt; ?> max=<?php echo $cur_dt; ?>
+							  min=<?php echo $anvisitDate; ?> max=<?php echo $cur_dt; ?>
 							  <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> disabled="disabled" <?php } ?>
 							  disabled
                               aria-label="Date Of Albendazole"
@@ -1357,9 +1357,10 @@ if (isset($_GET['del']))
                               aria-label="USG Scan Edd"
                               aria-describedby="basic-icon-default-usgScanEdd"
                               value="<?php if(isset($usgScanEdd)) 
-							  { echo $usgScanEdd; } 
-						  else 
-						  {echo $edd_dt;} ?>"
+							  { echo $usgScanEdd; }
+						   else 
+						      {if($wusgTaken==1) { echo $edd_dt;}	}		
+						   ?>"
                                min=<?php echo $edd_min_dt; ?>
                                max=<?php echo $edd_max_dt; ?> 
                               disabled
@@ -1381,8 +1382,9 @@ if (isset($_GET['del']))
 							  }
 							  else
 							  {
-							  echo $pregnancyWeek; 
-							  } ?>" />
+							  {if($wusgTaken==1) { echo $pregnancyWeek;}	}	 
+							  } 
+							   ?>" />
                             <input
                               type="text"
                               name="usgSizeUterusWeek"
@@ -1399,8 +1401,9 @@ if (isset($_GET['del']))
 							  }
 							  else
 							  {
-							  echo $pregnancyWeek; 
-							  } ?>"
+							  {if($wusgTaken==1) { echo $pregnancyWeek;}	}	 
+							  } 
+							  ?>"
                               />
                           </div>
                         </div>
