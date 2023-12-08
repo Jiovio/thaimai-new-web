@@ -1202,7 +1202,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           <label class="form-label" for="basic-icon-default-noCalcium">No. of Calcium</label>
                           <div class="input-group input-group-merge">
                             <select class="1-60 form-control" id="noCalcium" 
-							 name="noCalcium" <?php if((($pregnancyWeek <= 12) AND ($view != true)) OR (empty($NoIFA))) { ?> disabled="disabled" <?php } ?>>
+							 name="noCalcium" <?php if((($pregnancyWeek <= 12) AND ($view != true)) OR (empty($noCalcium))) { ?> disabled="disabled" <?php } ?>>
                             <?php
 
                               $list=mysqli_query($conn, "SELECT noCalcium from antenatalvisit WHERE id=".$id);
