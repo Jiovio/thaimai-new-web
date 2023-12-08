@@ -1074,7 +1074,6 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						  </select>
                           </div>
                         </div>
-						<?php print_r("NoofIFA".$NoIFA.$view); ?>
 					      <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-NoIFA">Number of IFA</label>
                           <div class="input-group input-group-merge">
