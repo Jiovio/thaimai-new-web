@@ -46,7 +46,7 @@ $mn = "";
   $urineAlbuminPresent = $An["urineAlbuminPresent"]; $bloodSugartest =$An["bloodSugartest"]; 
   $fastingSugar = $An["fastingSugar"]; $postPrandial = $An["postPrandial"]; 
   $gctStatus = $An["gctStatus"];  $gctValue = $An["gctValue"]; 
-  $tsh = $An["Tsh"]; $Td1 = $An["Td1"]; $TdDose = $An["TdDose"]; $Td2 = $An["Td2"]; $Td2Dose = $An["Td2Dose"]; $Td1Date = $An["Td1Date"]; 
+  $Tsh = $An["Tsh"]; $Td1 = $An["Td1"]; $TdDose = $An["TdDose"]; $Td2 = $An["Td2"]; $Td2Dose = $An["Td2Dose"]; $Td1Date = $An["Td1Date"]; 
   $Tdb = $An["Tdb"]; $TdBdose = $An["TdBdose"]; $TdBoosterDate = $An["TdBoosterDate"]; $Covidvac = $An["Covidvac"]; 
   $Dose1Date = $An["Dose1Date"]; $Dose2Date = $An["Dose2Date"]; $PreDate = $An["PreDate"]; $NoFolicAcid = $An["NoFolicAcid"]; $NoIFA = $An["NoIFA"]; 
   $dateofIFA = $An["dateofIFA"]; $dateofAlbendazole = $An["dateofAlbendazole"]; $noCalcium = $An["noCalcium"];
@@ -222,6 +222,7 @@ if (! empty($_POST["editVisit"])) {
   $urineTestStatus = $_POST["urineTestStatus"]; $urineSugarPresent = $_POST["urineSugarPresent"];
   $urineAlbuminPresent = $_POST["urineAlbuminPresent"]; $bloodSugartest =$_POST["bloodSugartest"]; 
   $fastingSugar = $_POST["fastingSugar"]; $postPrandial = $_POST["postPrandial"]; $gctStatus = $_POST["gctStatus"];  $gctValue = $_POST["gctValue"]; 
+ // print_r($_POST["Tsh"]); exit;
   $Tsh = $_POST["Tsh"]; $Td1 = $_POST["Td1"]; $TdDose = $_POST["TdDose"]; $Td2 = $_POST["Td2"]; $Td2Dose = $_POST["Td2Dose"]; $Td1Date = $_POST["Td1Date"]; 
   $Tdb = $_POST["Tdb"]; $TdBdose = $An["TdBdose"]; $TdBoosterDate = $_POST["TdBoosterDate"]; $Covidvac = $_POST["Covidvac"]; 
   $Dose1Date = $_POST["Dose1Date"]; $Dose2Date = $_POST["Dose2Date"]; $PreDate = $_POST["PreDate"]; 
@@ -229,11 +230,10 @@ if (! empty($_POST["editVisit"])) {
   $dateofAlbendazole = $_POST["dateofAlbendazole"]; $noCalcium = $_POST["noCalcium"];
   $calciumDate = $_POST["calciumDate"];
   $sizeUterusinWeeks = $_POST["sizeUterusinWeeks"];
-  $methodofConception = $_POST["methodofConception"]; $AnyOtherSpecify = $_POST["AnyOtherSpecify"]; 
-  /* $HighRisk = $_POST["HighRisk"];
+  $methodofConception = $_POST["methodofConception"]; $AnyOtherSpecify = $_POST["AnyOtherSpecify"]; $HighRisk = $_POST["HighRisk"];
   $symptomsHighRisk = $_POST["symptomsHighRisk"];
   $referralDate = $_POST["referralDate"]; $referralDistrict = $_POST["referralDistrict"];
-  $referralFacility = $_POST["referralFacility"]; $referralPlace = $_POST["referralPlace"]; */
+  $referralFacility = $_POST["referralFacility"]; $referralPlace = $_POST["referralPlace"];
   $wusgTaken = $_POST["wusgTaken"];
   $filename = $_FILES["usgreport"]["name"];
   $tempname = $_FILES["usgreport"]["tmp_name"];
@@ -255,8 +255,8 @@ if (! empty($_POST["editVisit"])) {
   $usgFetalMovement3 = $_POST["usgFetalMovement2"];
   $placenta = $_POST["placenta"];
   $usgResult = $_POST["usgResult"]; $usgRemarks = $_POST["usgRemarks"]; 
- /* $bloodTransfusion = $_POST["bloodTransfusion"]; $bloodTransfusionDate = $_POST["bloodTransfusionDate"];
-  $placeAdministrator = $_POST["placeAdministrator"]; $nooIVdoses = $_POST["noOfIVDoses"]; */
+  $bloodTransfusion = $_POST["bloodTransfusion"]; $bloodTransfusionDate = $_POST["bloodTransfusionDate"];
+  $placeAdministrator = $_POST["placeAdministrator"]; $nooIVdoses = $_POST["noOfIVDoses"];
   date_default_timezone_set('Asia/Kolkata');
   $date = date('d-m-Y h:i:s');
   
@@ -264,18 +264,19 @@ if (! empty($_POST["editVisit"])) {
   placeofvisit='$placeofvisit',abortion='$abortion',anvisitDate='$anvisitDate',avduedate='$avduedate',avTag='1',ancPeriod='$ancPeriod',pregnancyWeek='$pregnancyWeek',
   motherWeight='$motherWeight',bpSys='$bpSys',bpDia='$bpDia',Hb='$Hb',urineTestStatus='$urineTestStatus',
   urineSugarPresent='$urineSugarPresent',urineAlbuminPresent='$urineAlbuminPresent',bloodSugartest='$bloodSugartest',fastingSugar='$fastingSugar',
-  postPrandial='$postPrandial',gctStatus='$gctStatus',gctValue='$gctValue',Tsh='$tsh',
+  postPrandial='$postPrandial',gctStatus='$gctStatus',gctValue='$gctValue',Tsh='$Tsh',
   TdDose='$TdDose',Td2Dose='$Td2Dose',Td1Date='$Td1Date',TdBdose='$TdBdose',TdBoosterDate='$TdBoosterDate',covidvac='$Covidvac',Dose1Date='$Dose1Date',Dose2Date='$Dose2Date',
 preDate='$PreDate',NoFolicAcid='$NoFolicAcid',NoIFA='$NoIFA',
   DateofIFA='$dateofIFA',DateofAlbendazole='$dateofAlbendazole',noCalcium='$noCalcium',calciumDate='$calciumDate',
-  sizeUterusinWeeks='$sizeUterusinWeeks',methodofConception='$methodofConception',AnyOtherSpecify='$AnyOtherSpecify',
-  wusgTaken='$wusgTaken',usgreport='$filename',
+  sizeUterusinWeeks='$sizeUterusinWeeks',methodofConception='$methodofConception',AnyOtherSpecify='$AnyOtherSpecify',HighRisk='$HighRisk',symptomsHighRisk='$symptomsHighRisk',referralDate='$referralDate',
+  referralDistrict='$referralDistrict',referralFacility='$referralFacility',referralPlace='$referralPlace',wusgTaken='$wusgTaken',usgreport='$filename',
   usgDoneDate='$usgDoneDate',usgScanEdd='$usgScanEdd',usgScanStatus='$usgScanStatus',usgFundalHeight='$usgFundalHeight',
   usgSizeUterusWeek='$usgSizeUterusWeek',usgFetusStatus='$usgFetusStatus',gestationSac='$gestationSac',liquor='$liquor1',
   usgFetalHeartRate='$usgFetalHeartRate1',usgFetalPosition='$usgFetalPosition1',usgFetalMovement='$usgFetalMovement1',liquor1='$liquor2',
-usgFetalHeartRate1='$usgFetalHeartRate2',usgFetalPosition1='$usgFetalPosition2',usgFetalMovement1='$usgFetalMovemen2',liquor2='$liquor3',
+usgFetalHeartRate1='$usgFetalHeartRate2',usgFetalPosition1='$usgFetalPosition2',usgFetalMovement1='$usgFetalMovement2',liquor2='$liquor3',
 usgFetalHeartRate2='$usgFetalHeartRate3',usgFetalPosition2='$usgFetalPosition3',usgFetalMovement2='$usgFetalMovement3',placenta='$placenta',
-  usgResult='$usgResult',usgRemarks='$usgRemarks',
+  usgResult='$usgResult',usgRemarks='$usgRemarks',bloodTransfusion='$bloodTransfusion',
+  bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',noOfIVDoses='$nooIVdoses',
   updatedat='$date',updatedBy='$userid' WHERE id=".$id);
   if (!empty($query)) {
             echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/AntenatalVisitDtl.php?History=$picmeno');</script>";
@@ -701,9 +702,9 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						 </div>
 						            <div class="row">
 						            <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-gctStatus">GCT Week Status <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-gctStatus">GCT Week Status </label>
                           <div class="input-group input-group-merge">
-                          <select required name="gctStatus" id="gctStatus" class="form-select" onchange="usgChange()" disabled>
+                          <select name="gctStatus" id="gctStatus" class="form-select" onchange="usgChange()" disabled>
                           <!-- <option value="">Choose...</option> -->
                            <?php   
                             $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=46";
@@ -715,9 +716,9 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
                         <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-gctValue">GCT Value <span class="mand">* </span></label>
+                          <label class="form-label" for="basic-icon-default-gctValue">GCT Value </label>
                           <div class="input-group input-group-merge">
-                            <select class="60-400 form-control" id="gctValue" name="gctValue" required>
+                            <select class="60-400 form-control" id="gctValue" name="gctValue">
                             <?php
 
                               $list=mysqli_query($conn, "SELECT gctValue from antenatalvisit WHERE id=".$id);
@@ -755,7 +756,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                             $exequery = mysqli_query($conn, $query);
                             while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
                           <option value="<?php echo $listvalue['enumid']; ?>">
-                          <?php if($listvalue['enumvalue']==$tsh) ?>
+                          <?php if($listvalue['enumvalue']==$Tsh) ?>
                          <?php { echo $listvalue['enumvalue']; } ?>
                          <?php 
                                     $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
@@ -1073,10 +1074,11 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						  </select>
                           </div>
                         </div>
+						<?php print_r("NoofIFA".$NoIFA.$view); ?>
 					      <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-NoIFA">Number of IFA</label>
                           <div class="input-group input-group-merge">
-                            <select class="1-60 form-control" id="NoIFA" name="NoIFA" onclick="return checkPicmeAN()" <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> disabled="disabled" <?php } ?>>
+                            <select class="1-60 form-control" id="NoIFA" name="NoIFA" <?php if((($pregnancyWeek <= 12) AND ($view != true)) OR (empty($NoIFA))) { ?> disabled="disabled" <?php } ?>>
                             <?php
                               $list=mysqli_query($conn, "SELECT NoIFA from antenatalvisit WHERE id=".$id);
                               while($row_list=mysqli_fetch_assoc($list)){
@@ -1102,7 +1104,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						  <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-dateofIFA">Date Of IFA</label>
                           <div class="input-group input-group-merge">
-						  
+						    
                             <input
                               type="date"
                               name="dateofIFA"
@@ -1112,13 +1114,28 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                               aria-label="Date Of IFA"
 							  onclick="return checkPicmeAN()"
                               aria-describedby="basic-icon-default-dateofIFA"
-							  readonly
+							  disabled
 							  
 							  <?php $cur_dt = date('Y-m-d'); ?>
+							  min=<?php echo $anvisitDate; ?> max=<?php echo $anvisitDate; ?>
+							  value="<?php 
+							  if(isset($dateofIFA))
+							  {
+								  echo $dateofIFA; 
+							  } ?>"
+                               />
+							   <input
+                              type="date"
+                              name="dateofIFA"
+                              class="form-control"
+                              id="dateofIFA"
+                              placeholder="Date Of IFA"
+                              aria-label="Date Of IFA"
+							  onclick="return checkPicmeAN()"
+                              aria-describedby="basic-icon-default-dateofIFA"
+							  hidden
+							  <?php $cur_dt = date('Y-m-d'); ?>
 							  min=<?php echo $anvisitDate; ?> max=<?php echo $cur_dt; ?>
-							  <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> readonly="readonly" <?php } ?>
-							  
-							  
 							  value="<?php 
 							  if(isset($dateofIFA))
 							  {
@@ -1139,12 +1156,36 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                               name="dateofAlbendazole"
                               class="form-control"
                               id="dateofAlbendazole"
-							  disabled
                               placeholder="Date Of Albendazole"
 							  onclick="return checkPicmeAN()"
+							  disabled
 							  <?php $cur_dt = date('Y-m-d'); ?>
-							  min=<?php echo $cur_dt; ?> max=<?php echo $cur_dt; ?>
-							  <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> readonly="readonly" <?php } ?>
+							  min=<?php echo $anvisitDate; ?> max=<?php echo $anvisitDate; ?>
+							  <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> disabled="disabled" 
+							   <?php } ?>
+                              aria-label="Date Of Albendazole"
+                              aria-describedby="basic-icon-default-dateofAlbendazole"
+							  <?php $cur_dt = date('Y-m-d');?> 
+                              value="<?php 
+							  if(isset($dateofAlbendazole))
+							  {
+								  echo $dateofAlbendazole; 
+							  }
+							  ?>"
+							   
+                            />
+							<input
+                              type="date"
+                              name="dateofAlbendazole"
+                              class="form-control"
+                              id="dateofAlbendazole"
+                              placeholder="Date Of Albendazole"
+							  onclick="return checkPicmeAN()"
+							  hidden
+							  <?php $cur_dt = date('Y-m-d'); ?>
+							  min=<?php echo $anvisitDate; ?> max=<?php echo $anvisitDate; ?>
+							  <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> disabled="disabled" 
+							   <?php } ?>
                               aria-label="Date Of Albendazole"
                               aria-describedby="basic-icon-default-dateofAlbendazole"
 							  <?php $cur_dt = date('Y-m-d');?> 
@@ -1153,7 +1194,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 							  {
 								  echo $dateofAlbendazole; 
 							  } ?>"
-							  
+							   
                             />
                           </div>
                         </div>
@@ -1161,7 +1202,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           <label class="form-label" for="basic-icon-default-noCalcium">No. of Calcium</label>
                           <div class="input-group input-group-merge">
                             <select class="1-60 form-control" id="noCalcium" 
-							onclick="return checkPicmeAN()" name="noCalcium" <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> readonly="readonly" <?php } ?> >
+							 name="noCalcium" <?php if((($pregnancyWeek <= 12) AND ($view != true)) OR (empty($NoIFA))) { ?> disabled="disabled" <?php } ?>>
                             <?php
 
                               $list=mysqli_query($conn, "SELECT noCalcium from antenatalvisit WHERE id=".$id);
@@ -1192,15 +1233,15 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                               name="calciumDate"
                               class="form-control"
 							  onclick="return checkPicmeAN()"
-							  <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> readonly="readonly" <?php } ?>
+							  <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> disabled="disabled" <?php } ?>
                               id="calciumDate"
                               placeholder="Calcium Date"
 							<?php $cur_dt = date('Y-m-d'); ?>
-							  min=<?php echo $anvisitDate; ?> max=<?php echo $cur_dt; ?>
+							  min=<?php echo $anvisitDate; ?> max=<?php echo $anvisitDate; ?>
                               aria-label="Calcium Date"
                               aria-describedby="basic-icon-default-calciumDate"
                               <?php $cur_dt = date('Y-m-d'); ?>
-							  readonly
+							  disabled
                               value="<?php 
 							  if(isset($calciumDate))
 							  {
@@ -1208,7 +1249,27 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 							  
 							  } ?>"
                             />
-							
+							<input
+                              type="date"
+                              name="calciumDate"
+                              class="form-control"
+							  onclick="return checkPicmeAN()"
+							  <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> disabled="disabled" <?php } ?>
+                              id="calciumDate"
+                              placeholder="Calcium Date"
+							<?php $cur_dt = date('Y-m-d'); ?>
+							  min=<?php echo $anvisitDate; ?> max=<?php echo $cur_dt; ?>
+                              aria-label="Calcium Date"
+                              aria-describedby="basic-icon-default-calciumDate"
+                              <?php $cur_dt = date('Y-m-d'); ?>
+							  hidden
+                              value="<?php 
+							  if(isset($calciumDate))
+							  {
+								  echo $calciumDate; 
+							  
+							  } ?>"
+                            />
                           </div>
                         </div>
 						</div>
@@ -1228,7 +1289,37 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 				<div class="col-4 mb-3" >
                           <label class="form-label" for="basic-icon-default-physicalpresent">Whether USG Taken </label>
                           <div class="input-group input-group-merge">
-                          <select name="wusgTaken" id="wusgTaken" class="form-select" disabled onchange="usgChange()">
+                          <select name="wusgTaken" id="wusgTaken" disabled class="form-select" onchange="usgChange()">
+						  <?php if(isset($wusgTaken)) {
+                          
+                                $list=mysqli_query($conn, "SELECT av.wusgTaken,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.wusgTaken WHERE type=13 AND av.id=".$id);
+
+                                while($row_list=mysqli_fetch_assoc($list)){
+
+                                ?>
+
+                                <option value="<?php echo $row_list['enumid']; ?>">
+
+                                <?php if($row_list['enumvalue']== $wusgTaken)?>
+                                
+                                <?php { echo $row_list['enumvalue']; } ?></option>
+                                <?php 
+                                $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { 
+                              ?>
+                          
+                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php } } } else { ?>
+						  <option value="">Choose...</option>
+                           <?php   
+                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=13";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php }} ?>
+                           </select>
+						   <select name="wusgTaken" id="wusgTaken" hidden class="form-select" onchange="usgChange()">
 						  <?php if(isset($wusgTaken)) {
                           
                                 $list=mysqli_query($conn, "SELECT av.wusgTaken,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.wusgTaken WHERE type=13 AND av.id=".$id);
@@ -1272,7 +1363,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                               placeholder="USG Done Date"
                               aria-label="USG Done Date"
                               aria-describedby="basic-icon-default-usgDoneDate"
-							  disabled
+							  readonly=readonly
 							  <?php $cur_dt = date('Y-m-d'); ?>
                               min=<?php echo $anv_dt; ?>
 							  max=<?php echo $cur_dt; ?>
@@ -1289,7 +1380,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
                         
-						<div class="col-4 mb-3" id="usgScanEdd"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+						<div class="col-4 mb-3" id="usgScanEdd"  <?php if($wusgTaken == "0" OR empty($wusgTaken)) {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgScanEdd">USG Scan Edd</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1300,7 +1391,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                               placeholder="USG Scan Edd"
                               aria-label="USG Scan Edd"
                               aria-describedby="basic-icon-default-usgScanEdd"
-							  disabled
+							  readonly=readonly
                               value="<?php if(isset($usgScanEdd)) 
 							  { echo $usgScanEdd; } 
 						  else 
@@ -1311,7 +1402,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
 						
-						<div class="col-4 mb-3" id="usgSizeUterusWeek"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+						<div class="col-4 mb-3" id="usgSizeUterusWeek"  <?php if($wusgTaken == "0" OR empty($wusgTaken)) {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgSizeUterusWeek">USG Size Uterus Week</label>
                           <div class="input-group input-group-merge">
 						  <input hidden
@@ -1349,7 +1440,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
                         
-					      <div class="col-4 mb-3" id="sizeUterusinWeeks"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+					      <div class="col-4 mb-3" id="sizeUterusinWeeks"  <?php if($wusgTaken == "0" OR empty($wusgTaken)) {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-sizeUterusinWeeks">Uterus Size In Weeks </label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1365,7 +1456,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
                           
-						<div class="col-4 mb-3" id="placenta"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+						<div class="col-4 mb-3" id="placenta"  <?php if($wusgTaken == "0" OR empty($wusgTaken)) {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-phone">Placenta</label>
                           <div class="input-group input-group-merge">
                           <select name="placenta" id="pla" class="form-select">
@@ -1397,7 +1488,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						           </div>
 					           </div>
 							   
-							   <div class="col-4 mb-3" id="usgFundalHeight"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+							   <div class="col-4 mb-3" id="usgFundalHeight"  <?php if($wusgTaken == "0" OR empty($wusgTaken)) {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgFundalHeight">USG FUNDAL HEIGHT</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1471,6 +1562,32 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
                           <?php }} ?>
                                 </select>
+								<select name="gestationSac" hidden id="gestation" class="form-select" onchange="gsacField()" >
+                          <?php
+						  if(isset($gestationSac) && !empty($gestationSac))
+						  {
+                            $query = "SELECT av.gestationSac,enumid,enumvalue FROM antenatalvisit av join enumdata e on e.enumid=av.gestationSac WHERE type=31 AND av.id=".$id;
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>">
+                          <?php if($listvalue['enumvalue']==$gestationSac){ echo "selected"; } ?>
+                         <?php echo $listvalue['enumvalue']; ?>
+                         <?php 
+                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=31";
+                                    $exequery = mysqli_query($conn, $dquery);
+                                    while($listvalue = mysqli_fetch_assoc($exequery)) { 
+                                    ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+						  <?php } }} else { ?>
+						  <option value="">Choose...</option>
+                          <?php
+                            $query = "SELECT enumid,enumvalue FROM enumdata WHERE type=31";
+                            $exequery = mysqli_query($conn, $query);
+                            while($listvalue = mysqli_fetch_assoc($exequery)) { ?>
+                          <option value="<?php echo $listvalue['enumid']; ?>"><?php echo $listvalue['enumvalue']; ?></option>
+                          <?php }} ?>
+                                </select>
+								
 						             </div>
 					             </div>
 								 </div>
@@ -1771,7 +1888,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           <?php if($listvalue['enumvalue']==$usgFetalPosition3) ?>
                          <?php { echo $listvalue['enumvalue']; } ?>
                          <?php 
-                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=20";
+                                    $dquery = "SELECT enumid,enumvalue FROM enumdata WHERE type=32";
                                     $exequery = mysqli_query($conn, $dquery);
                                     while($listvalue = mysqli_fetch_assoc($exequery)) { 
                                     ?>
