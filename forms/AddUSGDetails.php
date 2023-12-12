@@ -56,16 +56,7 @@ $picmeno ="0";
 if (! empty($_POST["USGDtls"])) {
   $picmeno =$AV_picmeno;
  // print_r($picmeno);
-  
-  $filename = $_FILES["usgreport"]["name"];
-
-  $tempname = $_FILES["usgreport"]["tmp_name"];
-
-  $folder = "../usgDocument/" . $filename; 
-  
-// Now let's move the uploaded image into the folder: image
-
-  move_uploaded_file($tempname, $folder);
+ 
 $wusgTaken = $_POST["wusgTaken"];
 
 $usgDoneDate = $_POST["usgDoneDate"]; 
@@ -92,6 +83,38 @@ $usgFetalMovement2 = $_POST["usgFetalMovement2"];
 $placenta = $_POST["placenta"];
 $usgResult = $_POST["usgResult"];
 $usgRemarks = $_POST["usgRemarks"];
+//$filename = ""; 
+if(isset($_FILES['usgreportname']))
+{
+	print_r("HEllo!"); exit;
+}
+else
+{
+	print_r("failure!"); exit;
+}
+     $filename=$_FILES['usgreportname']['name']; 
+	 print_r("Filename".$_FILES['usgreportname']['name']); exit;
+     $imageArr=explode('.',$filename); //first index is file name and second index file type
+     $rand=rand(10000,99999);
+     $newImageName=$imageArr[0].$rand.'.'.$imageArr[1];
+     $uploadPath= "../usgDocument/" . $filename; 
+     $isUploaded=move_uploaded_file($_FILES["usgreport"]["tmp_name"],$uploadPath);
+     if($isUploaded)
+       echo 'successfully file uploaded';
+     else
+       echo 'something went wrong'; 
+    exit;
+ /* $filename = $_FILES["usgreport"]["name"];
+  
+  $tempname = $_FILES["usgreport"]["tmp_name"];
+  
+  $folder = "../usgDocument/" . $filename; */
+  
+   
+  
+// Now let's move the uploaded image into the folder: image
+
+  move_uploaded_file($tempname, $folder);
   
   $query = mysqli_query($conn,"UPDATE antenatalvisit SET  
   wusgTaken = '$wusgTaken',
@@ -540,7 +563,7 @@ usgRemarks = '$usgRemarks' WHERE picmeno='$picmeno' AND ancPeriod = '$anc_cnt'")
                               aria-label="USG Taken Status"
                               aria-describedby="basic-icon-default-usgDoneDate"
                               accept="image/png, image/jpeg, application/pdf"
-                           />
+                           />                           
                           </div>
                         </div>
                         </div>				
