@@ -199,8 +199,6 @@ if(isset($An["pregnancyWeek"]) && !empty($An["pregnancyWeek"]))
  $anv_min_dt = date('Y-m-d', strtotime($anv_dt. '- 1 Months' ));
 }
 
-//print_r("HR Ind".$HR_Ind);
-
 $medicalSql = mysqli_query($conn, "SELECT * FROM medicalhistory WHERE picmeNo = '$picmeno' order by id desc LIMIT 0,1");
 $medicalData = mysqli_fetch_array($medicalSql);
 
@@ -222,7 +220,6 @@ if (! empty($_POST["editVisit"])) {
   $urineTestStatus = $_POST["urineTestStatus"]; $urineSugarPresent = $_POST["urineSugarPresent"];
   $urineAlbuminPresent = $_POST["urineAlbuminPresent"]; $bloodSugartest =$_POST["bloodSugartest"]; 
   $fastingSugar = $_POST["fastingSugar"]; $postPrandial = $_POST["postPrandial"]; $gctStatus = $_POST["gctStatus"];  $gctValue = $_POST["gctValue"]; 
- // print_r($_POST["Tsh"]); exit;
   $Tsh = $_POST["Tsh"]; $Td1 = $_POST["Td1"]; $TdDose = $_POST["TdDose"]; $Td2 = $_POST["Td2"]; $Td2Dose = $_POST["Td2Dose"]; $Td1Date = $_POST["Td1Date"]; 
   $Tdb = $_POST["Tdb"]; $TdBdose = $An["TdBdose"]; $TdBoosterDate = $_POST["TdBoosterDate"]; $Covidvac = $_POST["Covidvac"]; 
   $Dose1Date = $_POST["Dose1Date"]; $Dose2Date = $_POST["Dose2Date"]; $PreDate = $_POST["PreDate"]; 
@@ -235,11 +232,12 @@ if (! empty($_POST["editVisit"])) {
   $referralDate = $_POST["referralDate"]; $referralDistrict = $_POST["referralDistrict"];
   $referralFacility = $_POST["referralFacility"]; $referralPlace = $_POST["referralPlace"];
   $wusgTaken = $_POST["wusgTaken"];
-  $filename = $_FILES["usgreport"]["name"];
+ /* $filename = $_FILES["usgreport"]["name"];
   $tempname = $_FILES["usgreport"]["tmp_name"];
   $folder = "../usgDocument/" . $filename;
- // Now let's move the uploaded image into the folder: image
-  move_uploaded_file($tempname, $folder);
+  
+  // Now let's move the uploaded image into the folder: image
+  move_uploaded_file($tempname, $folder); */
 
   $usgDoneDate = $_POST["usgDoneDate"];
   $usgScanEdd = $_POST["usgScanEdd"]; $usgScanStatus = $_POST["usgScanStatus"]; $usgFundalHeight = $_POST["usgFundalHeight"];
@@ -260,7 +258,45 @@ if (! empty($_POST["editVisit"])) {
   date_default_timezone_set('Asia/Kolkata');
   $date = date('d-m-Y h:i:s');
   
-  $query = mysqli_query($conn,"UPDATE antenatalvisit SET residenttype='$residenttype',physicalpresent='$physicalpresent',
+  if(isset($_FILES['usgreport'])){
+	 $filename = $_FILES["usgreport"]["name"];
+  
+     $tempname = $_FILES["usgreport"]["tmp_name"];
+  
+     $folder = "../usgDocument/" . $filename;
+	 
+      // Check if file was uploaded without errors
+    if(isset($_FILES["usgreport"]) && $_FILES["usgreport"]["error"] == 0){
+        $allowed = array("pdf" => "application/pdf", "jpeg" => "image/jpeg", "png" => "image/png");
+        $filename = $_FILES["usgreport"]["name"];
+        $filetype = $_FILES["usgreport"]["type"];
+        $filesize = $_FILES["usgreport"]["size"];
+		
+		
+	    // Validate file extension
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+    /*    if(!array_key_exists($ext, $allowed)) 
+			die("Error: Please select a valid file format (png/jpeg/pdf)."); */
+		
+    
+        // Validate file size - 10MB maximum
+    /*    $maxsize = 10 * 1024 * 1024;
+        if($filesize > $maxsize) die("Error: File size is larger than the allowed limit."); */
+		
+        // Validate type of the file
+       
+	   if(in_array($filetype, $allowed)){
+		  
+            // Check whether file exists before uploading it			
+            if(file_exists("../usgDocument/" . $filename)){
+			//	print_r("already exists"); exit; 
+			//exit('<title>Error Page</title>'."already exists".'<footer>Test Footer</footer>');
+				//echo $filename . " is already exists."; exit;
+				echo "<script>alert('$filename is already exists.');window.location.replace('{$siteurl}/forms/EditAnVisit.php?view=$id');</script>";
+        
+            } else{
+                if(move_uploaded_file($_FILES["usgreport"]["tmp_name"], "../usgDocument/" . $filename)){
+					 $query = mysqli_query($conn,"UPDATE antenatalvisit SET residenttype='$residenttype',physicalpresent='$physicalpresent',
   placeofvisit='$placeofvisit',abortion='$abortion',anvisitDate='$anvisitDate',avduedate='$avduedate',avTag='1',ancPeriod='$ancPeriod',pregnancyWeek='$pregnancyWeek',
   motherWeight='$motherWeight',bpSys='$bpSys',bpDia='$bpDia',Hb='$Hb',urineTestStatus='$urineTestStatus',
   urineSugarPresent='$urineSugarPresent',urineAlbuminPresent='$urineAlbuminPresent',bloodSugartest='$bloodSugartest',fastingSugar='$fastingSugar',
@@ -277,14 +313,12 @@ usgFetalHeartRate1='$usgFetalHeartRate2',usgFetalPosition1='$usgFetalPosition2',
 usgFetalHeartRate2='$usgFetalHeartRate3',usgFetalPosition2='$usgFetalPosition3',usgFetalMovement2='$usgFetalMovement3',placenta='$placenta',
   usgResult='$usgResult',usgRemarks='$usgRemarks',bloodTransfusion='$bloodTransfusion',
   bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',noOfIVDoses='$nooIVdoses',
-  updatedat='$date',updatedBy='$userid' WHERE id=".$id);
+  updatedat='$date',updatedBy='$userid', usgreport='$filename' WHERE id=".$id);
   if (!empty($query)) {
             echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/AntenatalVisitDtl.php?History=$picmeno');</script>";
           }
           $highrisk = mysqli_query($conn, "UPDATE ecregister ec INNER JOIN antenatalvisit av ON ec.picmeNo=av.picmeno SET ec.status=6 WHERE av.symptomsHighRisk NOT IN('1','48') AND av.picmeNo=".$picmeno);
-         
-}
-if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
+         if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
       
   $getMname = mysqli_query($conn,"SELECT motheraadhaarname FROM ecregister WHERE picmeNo='$picmeno'");
   while($value = mysqli_fetch_array($getMname)) {
@@ -296,6 +330,25 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 } else {
   $uqry= mysqli_query($conn,"UPDATE highriskmothers SET status=0 WHERE picmeno='$picmeno'");
 }
+                }else{
+
+                  
+				   echo "<script>alert('File is not uploaded.');window.location.replace('{$siteurl}/forms/EditAnVisit.php?view=$id');</script>";
+        
+                }
+                
+            } 
+        } else{
+           
+			echo "<script>alert('There was a problem uploading your file. Please try again.');window.location.replace('{$siteurl}/forms/EditAnVisit.php?view=$id');</script>";
+        
+        } 
+    }
+   }
+  
+ 
+}
+
 
 ?>
           <!-- Content wrapper -->
@@ -1351,7 +1404,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                           </div>
 						  
-						  <div class="col-4 mb-3" id="usgDoneDate"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+						  <div class="col-4 mb-3" id="usgDoneDate"  <?php if($wusgTaken == "0" OR $wusgTaken == "") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgDoneDate">USG Done Date</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1502,7 +1555,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                             />
                           </div>
                         </div>
-						<div class="col-4 mb-3" id="usgFetusStatus"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+						<div class="col-4 mb-3" id="usgFetusStatus"  <?php if($wusgTaken == "0" OR $wusgTaken == "") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-phone">USG Fetus Status</label>
                           <div class="input-group input-group-merge">
                           <select name="usgFetusStatus" id="FetusStatus" class="form-select" >
@@ -1533,7 +1586,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						  </div>
 					    </div>
 						
-						<div class="col-4 mb-3" id="gestationSac"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+						<div class="col-4 mb-3" id="gestationSac"  <?php if($wusgTaken == "0" OR $wusgTaken == "") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-phone">Gestation Sac</label>
                           <div class="input-group input-group-merge">
                           <select name="gestationSac" disabled id="gestation" class="form-select" onchange="gsacField()" >
@@ -1592,7 +1645,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 								 </div>
 								 
 							<div class="row">
-						  <div class="col-4 mb-3" id="liquor1" class="liquor"  onchange="gsacField()" <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+						  <div class="col-4 mb-3" id="liquor1" class="liquor"  onchange="gsacField()" <?php if($wusgTaken == "0" OR $wusgTaken == "") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-liquor">Liquor 1</label>
                           <div class="input-group input-group-merge">
                           <select name="liquor" id="liquorop" onclick="HRInd()" class="form-select" >
@@ -1625,7 +1678,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 								</div>
 
                                 <div class="row">
-					          	<div class="col-4 mb-3" id="usgFetalHeartRate1" class="usgFetalHeartRate"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+					          	<div class="col-4 mb-3" id="usgFetalHeartRate1" class="usgFetalHeartRate"  <?php if($wusgTaken == "0" OR $wusgTaken == "") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgFetalHeartRate">USG FOETAL Heart Rate 1</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1643,7 +1696,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
                         
-					            	<div class="col-4 mb-3" id="usgFetalPosition1" class="usgFetalPosition"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+					            	<div class="col-4 mb-3" id="usgFetalPosition1" class="usgFetalPosition"  <?php if($wusgTaken == "0" OR $wusgTaken == "") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgFetalPosition">USG FOETAL Presentation 1</label>
                           <div class="input-group input-group-merge">
                           <select name="usgFetalPosition" id="usgFetalPosition" onclick="HRInd()" class="form-select">
@@ -1675,7 +1728,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
                         
-					      <div class="col-4 mb-3" id="usgFetalMovement1" class="usgFetalMovement"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+					      <div class="col-4 mb-3" id="usgFetalMovement1" class="usgFetalMovement"  <?php if($wusgTaken == "0" OR $wusgTaken == "") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgFetalMovement">USG FOETAL Movement 1</label>
                           <div class="input-group input-group-merge">
                           <select name="usgFetalMovement" id="usgFetalMovement" onclick="HRInd()" class="form-select">
@@ -1935,7 +1988,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                         </div>
 
                         
-						  <div class="col-4 mb-3" id="usgResult"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+						  <div class="col-4 mb-3" id="usgResult"  <?php if($wusgTaken == "0" OR $wusgTaken == "") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgResult">USG Result</label>
                           <div class="input-group input-group-merge">
                           <select disabled name="usgResult" id="Result" class="form-select">
@@ -1965,7 +2018,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
 						             </div>
 					              </div>
                            
-						  <div class="col-4 mb-3" id="usgRemarks"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+						  <div class="col-4 mb-3" id="usgRemarks"  <?php if($wusgTaken == "0" OR $wusgTaken == "") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgRemarks">USG Remarks</label>
                           <div class="input-group input-group-merge">
                             <input
@@ -1981,7 +2034,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                           </div>
                         </div>
 						
-					      <div class="col-4 mb-3" id="usgScanStatus"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+					      <div class="col-4 mb-3" id="usgScanStatus"  <?php if($wusgTaken == "0" OR $wusgTaken == "") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgTrimester">USG Scan Status</label>
                           <div class="input-group input-group-merge">
                           <select  name="usgScanStatus" id="ScanStatus" class="form-select" >
@@ -2010,13 +2063,12 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                                 </select>
                           </div>
                         </div>  						
-							   
-                        <div class="col-4 mb-3" id="takenStatus"  <?php if($wusgTaken == "0") {?> style="display:none;" <?php } ?> >
+							  
+                        <div class="col-4 mb-3" id="takenStatus"  <?php if($wusgTaken == "0" OR $wusgTaken == "") {?> style="display:none;" <?php } ?> >
                           <label class="form-label" for="basic-icon-default-usgDoneDate">USG Report</label>
                            <a href="<?php echo $siteurl."/usgDocument/".$usgreport; ?>" target="_blank"><button type="button" class="btn btn btn-primary">View USG Status</button></a>
                           <div class="input-group input-group-merge">
                             <input
-							  disabled
                               type="file"
                               name="usgreport"
                               class="form-control"
@@ -2025,6 +2077,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
                               aria-label="USG Taken Status"
                               aria-describedby="basic-icon-default-usgDoneDate"
                               accept="image/png, image/jpeg, application/pdf"
+							  onclick = uploadFile()
                             />
                           </div>
                         </div>
@@ -2049,7 +2102,7 @@ if(isset($Checkusr_val))
   $usr_ty = $userid; 
   
 }
-  //print_r($usr_typ."usertype".$Checkusr_val['usertype']);
+ 
 ?>
 <?php if($usr_typ == 'Y') { ?>
 						  
@@ -2066,7 +2119,7 @@ if(isset($Checkusr_val))
 				
 				
 				<a href="EditHighRiskDtls.php?History=<?php echo $id; ?>" ><span button type="button" class="btn btn-primary" id="AddHighRisk">
-                    Update
+                    Edit
               </button></a></span>
 				
 				<?php } ?>
