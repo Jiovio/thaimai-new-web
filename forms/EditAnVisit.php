@@ -258,6 +258,9 @@ if (! empty($_POST["editVisit"])) {
   date_default_timezone_set('Asia/Kolkata');
   $date = date('d-m-Y h:i:s');
   
+  
+   print_r("id".$id."file"); exit;
+   
   if(isset($_FILES['usgreport'])){
 	 $filename = $_FILES["usgreport"]["name"];
   
@@ -316,7 +319,6 @@ usgFetalHeartRate2='$usgFetalHeartRate3',usgFetalPosition2='$usgFetalPosition3',
   usgResult='$usgResult',usgRemarks='$usgRemarks',bloodTransfusion='$bloodTransfusion',
   bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',noOfIVDoses='$nooIVdoses',
   updatedat='$date',updatedBy='$userid', usgreport='$filename' WHERE id=".$id);
-   print_r($id."file".!empty($query)); exit;
   if (!empty($query)) {
             echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/AntenatalVisitDtl.php?History=$picmeno');</script>";
           }
