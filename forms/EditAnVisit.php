@@ -259,9 +259,10 @@ if (! empty($_POST["editVisit"])) {
   $date = date('d-m-Y h:i:s');
   
   
-   print_r("id".$id."file"); exit;
+   print_r("id".$id."file1"); 
    
   if(isset($_FILES['usgreport'])){
+	  print_r("id".$id."file2"); 
 	 $filename = $_FILES["usgreport"]["name"];
   
      $tempname = $_FILES["usgreport"]["tmp_name"];
@@ -270,6 +271,7 @@ if (! empty($_POST["editVisit"])) {
 	 
       // Check if file was uploaded without errors
     if(isset($_FILES["usgreport"]) && $_FILES["usgreport"]["error"] == 0){
+		print_r("id".$id."file3"); exit;
         $allowed = array("pdf" => "application/pdf", "jpeg" => "image/jpeg", "png" => "image/png");
         $filename = $_FILES["usgreport"]["name"];
         $filetype = $_FILES["usgreport"]["type"];
@@ -290,7 +292,7 @@ if (! empty($_POST["editVisit"])) {
 		
 		
 	   if(in_array($filetype, $allowed)){
-		 
+		 print_r("id".$id."file4"); exit;
        
             // Check whether file exists before uploading it			
             if(file_exists("../usgDocument/" . $filename)){
