@@ -285,7 +285,7 @@ if (! empty($_POST["editVisit"])) {
 		
         // Validate type of the file
 		
-		print_r("file".$filetype."ext".$allowed); exit;
+		print_r("file".in_array($filetype, $allowed)); exit;
        
 	   if(in_array($filetype, $allowed)){
 		  
