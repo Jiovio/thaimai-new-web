@@ -292,10 +292,11 @@ if (! empty($_POST["editVisit"])) {
 		
 		
 	   if(in_array($filetype, $allowed)){
-		 print_r("id".$id."file4"); exit;
+		 print_r("id".$id."file4"); 
        
             // Check whether file exists before uploading it			
             if(file_exists("../usgDocument/" . $filename)){
+				print_r("id".$id."file6imp"); exit;
 			//	print_r("already exists"); exit; 
 			//exit('<title>Error Page</title>'."already exists".'<footer>Test Footer</footer>');
 				//echo $filename . " is already exists."; exit;
