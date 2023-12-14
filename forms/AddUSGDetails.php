@@ -83,40 +83,59 @@ $usgFetalMovement2 = $_POST["usgFetalMovement2"];
 $placenta = $_POST["placenta"];
 $usgResult = $_POST["usgResult"];
 $usgRemarks = $_POST["usgRemarks"];
-//$filename = ""; 
-if(isset($_FILES['usgreportname']))
-{
-	print_r("HEllo!"); exit;
-}
-else
-{
-	print_r("failure!"); exit;
-}
-     $filename=$_FILES['usgreportname']['name']; 
-	 print_r("Filename".$_FILES['usgreportname']['name']); exit;
+
+  /*   $filename=$_FILES['usgreport']['name'];
      $imageArr=explode('.',$filename); //first index is file name and second index file type
      $rand=rand(10000,99999);
      $newImageName=$imageArr[0].$rand.'.'.$imageArr[1];
-     $uploadPath= "../usgDocument/" . $filename; 
-     $isUploaded=move_uploaded_file($_FILES["usgreport"]["tmp_name"],$uploadPath);
+     $folder= "../usgDocument/" . $filename; 
+     $isUploaded=move_uploaded_file($_FILES["usgreport"]["tmp_name"],$folder);
      if($isUploaded)
        echo 'successfully file uploaded';
      else
        echo 'something went wrong'; 
-    exit;
- /* $filename = $_FILES["usgreport"]["name"];
-  
-  $tempname = $_FILES["usgreport"]["tmp_name"];
-  
-  $folder = "../usgDocument/" . $filename; */
-  
-   
+    exit; */
   
 // Now let's move the uploaded image into the folder: image
 
-  move_uploaded_file($tempname, $folder);
+ // move_uploaded_file($tempname, $folder);
+ 
+ if(isset($_FILES['usgreport'])){
+	 $filename = $_FILES["usgreport"]["name"];
   
-  $query = mysqli_query($conn,"UPDATE antenatalvisit SET  
+     $tempname = $_FILES["usgreport"]["tmp_name"];
+  
+     $folder = "../usgDocument/" . $filename; 
+	 
+      // Check if file was uploaded without errors
+    if(isset($_FILES["usgreport"]) && $_FILES["usgreport"]["error"] == 0){
+		
+        $allowed = array("pdf" => "application/pdf", "jpeg" => "image/jpeg", "png" => "image/png");
+        $filename = $_FILES["usgreport"]["name"];
+        $filetype = $_FILES["usgreport"]["type"];
+        $filesize = $_FILES["usgreport"]["size"];
+    
+        // Validate file extension
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+   /*     if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format."); */
+    
+        // Validate file size - 10MB maximum
+   /*     $maxsize = 10 * 1024 * 1024;
+        if($filesize > $maxsize) die("Error: File size is larger than the allowed limit."); */
+    
+        // Validate type of the file
+        if(in_array($filetype, $allowed)){
+            // Check whether file exists before uploading it
+            if(file_exists("../usgDocument/" . $filename)){
+				//$siteurl."/usgDocument/".$usgreport
+				
+                echo "<script>alert('$filename is already exists.');window.location.replace('{$siteurl}/forms/AddUSGDetails.php?History=$picmeno');</script>";
+        
+            } else{
+                if(move_uploaded_file($_FILES["usgreport"]["tmp_name"], "../usgDocument/" . $filename)){
+                  //  echo "Your file was uploaded successfully.";
+				//  echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/AddUSGDetails.php?History=$picmeno');</script>";
+         $query = mysqli_query($conn,"UPDATE antenatalvisit SET  
   wusgTaken = '$wusgTaken',
 usgDoneDate = '$usgDoneDate', 
 usgScanEdd = '$usgScanEdd',
@@ -140,10 +159,24 @@ usgFetalPosition2 = '$usgFetalPosition2',
 usgFetalMovement2 = '$usgFetalMovement2',
 placenta = '$placenta',
 usgResult = '$usgResult',
-usgRemarks = '$usgRemarks' WHERE picmeno='$picmeno' AND ancPeriod = '$anc_cnt'");
+usgRemarks = '$usgRemarks', usgreport='$filename' WHERE picmeno='$picmeno' AND ancPeriod = '$anc_cnt'");
             if (!empty($query)) {
               echo "<script>alert('Inserted Successfully');window.location.replace('{$siteurl}/forms/AnVisitAddBtn.php?History=$AV_picmeno');</script>";
             } 
+                }else{
+				   echo "<script>alert('File is not uploaded.');window.location.replace('{$siteurl}/forms/AddUSGDetails.php?History=$picmeno');</script>";
+        
+                }
+                
+            } 
+        } else{
+            echo "<script>alert('There was a problem uploading your file. Please try again.');window.location.replace('{$siteurl}/forms/AddUSGDetails.php?History=$picmeno');</script>";
+        
+        }
+    }
+   }
+  
+  
 } 
 ?>
           <!-- Content wrapper -->
@@ -171,7 +204,7 @@ usgRemarks = '$usgRemarks' WHERE picmeno='$picmeno' AND ancPeriod = '$anc_cnt'")
 			
 			
  <!----                          <form action="AddAnVisit3.php" method="post" onsubmit="return validateGctChange()"> !--->
-			<form id="prescform" action="" method="post" onclick="return checkPicmeAN()">	
+			<form id="prescform" action="" method="post" onsubmit="return checkPicmeAN()" enctype="multipart/form-data">	
 			
 			<input type="text" required id="AVpicmeno" hidden name="picmeno" value="<?php echo $AV_picmeno; ?>" class="form-control" />
 

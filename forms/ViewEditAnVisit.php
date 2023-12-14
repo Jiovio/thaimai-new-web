@@ -63,8 +63,8 @@ $view_ind = "f";
   $referralFacility = $An["referralFacility"]; $referralPlace = $An["referralPlace"];
 //   $usgStatus = $An["usgTakenStatus"]; 
 //   $usgtakenStatus = str_replace('..', '', $usgStatus);
-$wusgTaken = $An["wusgTaken"];
-  $usgStatus = $An["usgreport"]; 
+  $wusgTaken = $An["wusgTaken"];  
+  $usgStatus = $An["usgreport"];   
   $usgreport = str_replace('..', '', $usgStatus);
   $usgDoneDate = $An["usgDoneDate"];
   $usgScanEdd = $An["usgScanEdd"];  $usgScanStatus = $An["usgScanStatus"]; $usgFundalHeight = $An["usgFundalHeight"];
@@ -218,8 +218,7 @@ if (! empty($_POST["edit"])) {
 
 if (! empty($_POST["editVisit"])) {
   $view = false;
-  
- // print_r("Hi nithya! Here i am!"); exit;
+ 
   
   $id =$_POST["id"]; $residenttype = $_POST["residenttype"]; 
   $physicalpresent = $_POST["physicalpresent"]; $placeofvisit = $_POST["placeofvisit"]; $abortion = $_POST["abortion"];
@@ -241,11 +240,11 @@ if (! empty($_POST["editVisit"])) {
   $referralDate = $_POST["referralDate"]; $referralDistrict = $_POST["referralDistrict"];
   $referralFacility = $_POST["referralFacility"]; $referralPlace = $_POST["referralPlace"];
   $wusgTaken = $_POST["wusgTaken"];
-  $filename = $_FILES["usgreport"]["name"];
+/*  $filename = $_FILES["usgreport"]["name"];
   $tempname = $_FILES["usgreport"]["tmp_name"];
-  $folder = "../usgDocument/" . $filename;
+  $folder = "../usgDocument/" . $filename; */
  // Now let's move the uploaded image into the folder: image
-  move_uploaded_file($tempname, $folder);
+ // move_uploaded_file($tempname, $folder);
 
   $usgDoneDate = $_POST["usgDoneDate"];
   $usgScanEdd = $_POST["usgScanEdd"]; $usgScanStatus = $_POST["usgScanStatus"]; $usgFundalHeight = $_POST["usgFundalHeight"];
@@ -1107,7 +1106,7 @@ if (isset($_GET['del']))
 						            <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-NoFolicAcid">Number of Folic Acid</label>
                           <div class="input-group input-group-merge"> 
-                            <select class="form-select" id="NoFolicAcid" onclick="return checkPicmeAN()" name="NoFolicAcid" <?php if($pregnancyWeek > 12) { ?> disabled="disabled" <?php } ?>>
+                            <select class="form-select" disabled id="NoFolicAcid" onclick="return checkPicmeAN()" name="NoFolicAcid" <?php if($pregnancyWeek > 12) { ?> disabled="disabled" <?php } ?>>
 							<?php
                               $list=mysqli_query($conn, "SELECT NoFolicAcid from antenatalvisit WHERE id=".$id);
                               while($row_list=mysqli_fetch_assoc($list)){
@@ -1133,7 +1132,7 @@ if (isset($_GET['del']))
 					      <div class="col-4 mb-3">
                           <label class="form-label" for="basic-icon-default-NoIFA">Number of IFA</label>
                           <div class="input-group input-group-merge">
-                            <select class="1-60 form-control" id="NoIFA" name="NoIFA" onclick="return checkPicmeAN()" disabled <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> disabled="disabled" <?php } ?>>
+                            <select class="1-60 form-control" disabled id="NoIFA" name="NoIFA" onclick="return checkPicmeAN()" disabled <?php if($pregnancyWeek <= 12 AND ($view != true)) { ?> disabled="disabled" <?php } ?>>
                             <?php
                               $list=mysqli_query($conn, "SELECT NoIFA from antenatalvisit WHERE id=".$id);
                               while($row_list=mysqli_fetch_assoc($list)){
@@ -1195,6 +1194,7 @@ if (isset($_GET['del']))
                               type="date"
                               name="dateofAlbendazole"
                               class="form-control"
+							  
                               id="dateofAlbendazole"
                               placeholder="Date Of Albendazole"
 							  <?php $cur_dt = date('Y-m-d'); ?>
@@ -1956,22 +1956,11 @@ if (isset($_GET['del']))
                                 </select>
                           </div>
                         </div>  						
-							   
-                        <div class="col-4 mb-3" id="takenStatus" >
+							
+					  <div class="col-4 mb-3" id="takenStatus" >
                           <label class="form-label" for="basic-icon-default-usgDoneDate">USG Report</label>
-                           <a href="<?php echo $siteurl."/usgDocument/".$usgreport; ?>" target="_blank"><button type="button" class="btn btn btn-primary">View USG Status</button></a>
+                           <a href="<?php echo $siteurl."/usgDocument/".$usgreport; ?>" target="_blank"><button type="button" class="btn btn btn-primary">View USG Report</button></a>
                           <div class="input-group input-group-merge">
-                            <input
-                              type="file"
-                              name="usgreport"
-                              class="form-control"
-                              id="usgreport"
-                              placeholder="USG Taken Status"
-                              aria-label="USG Taken Status"
-                              aria-describedby="basic-icon-default-usgDoneDate"
-                              accept="image/png, image/jpeg, application/pdf"
-                              disabled
-                            />
                           </div>
                         </div>
 						</div>
