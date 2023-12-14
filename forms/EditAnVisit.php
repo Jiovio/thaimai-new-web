@@ -304,7 +304,7 @@ if (! empty($_POST["editVisit"])) {
         
             } else{
 				 print_r("id".$id."file5imp".move_uploaded_file($_FILES["usgreport"]["tmp_name"], "../usgDocument/" . $filename)); 
-                if(move_uploaded_file($_FILES["usgreport"]["tmp_name"], "../usgDocument/" . $filename)){
+                if(move_uploaded_file($tempname, $folder)){
 					print_r("id".$id."file7imp"); 
 					 $query = mysqli_query($conn,"UPDATE antenatalvisit SET residenttype='$residenttype',physicalpresent='$physicalpresent',
   placeofvisit='$placeofvisit',abortion='$abortion',anvisitDate='$anvisitDate',avduedate='$avduedate',avTag='1',ancPeriod='$ancPeriod',pregnancyWeek='$pregnancyWeek',
