@@ -287,7 +287,7 @@ if (! empty($_POST["editVisit"])) {
 		
 		
 	   if(in_array($filetype, $allowed)){
-		  print_r("file".move_uploaded_file($_FILES["usgreport"]["tmp_name"], "../usgDocument/" . $filename)); exit;
+		 
        
             // Check whether file exists before uploading it			
             if(file_exists("../usgDocument/" . $filename)){
@@ -316,6 +316,7 @@ usgFetalHeartRate2='$usgFetalHeartRate3',usgFetalPosition2='$usgFetalPosition3',
   usgResult='$usgResult',usgRemarks='$usgRemarks',bloodTransfusion='$bloodTransfusion',
   bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',noOfIVDoses='$nooIVdoses',
   updatedat='$date',updatedBy='$userid', usgreport='$filename' WHERE id=".$id);
+   print_r($id."file".!empty($query)); exit;
   if (!empty($query)) {
             echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/AntenatalVisitDtl.php?History=$picmeno');</script>";
           }
