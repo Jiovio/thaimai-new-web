@@ -284,6 +284,8 @@ if (! empty($_POST["editVisit"])) {
         if($filesize > $maxsize) die("Error: File size is larger than the allowed limit."); */
 		
         // Validate type of the file
+		
+		print_r("file".$filetype."ext".$allowed); exit;
        
 	   if(in_array($filetype, $allowed)){
 		  
