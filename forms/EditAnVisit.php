@@ -258,11 +258,7 @@ if (! empty($_POST["editVisit"])) {
   date_default_timezone_set('Asia/Kolkata');
   $date = date('d-m-Y h:i:s');
   
-  
-   print_r("id".$id."file1"); 
-   
   if(isset($_FILES['usgreport'])){
-	  print_r("id".$id."file2"); 
 	 $filename = $_FILES["usgreport"]["name"];
   
      $tempname = $_FILES["usgreport"]["tmp_name"];
@@ -271,7 +267,6 @@ if (! empty($_POST["editVisit"])) {
 	 
       // Check if file was uploaded without errors
     if(isset($_FILES["usgreport"]) && $_FILES["usgreport"]["error"] == 0){
-		print_r("id".$id."file3"); 
         $allowed = array("pdf" => "application/pdf", "jpeg" => "image/jpeg", "png" => "image/png");
         $filename = $_FILES["usgreport"]["name"];
         $filetype = $_FILES["usgreport"]["type"];
@@ -289,23 +284,18 @@ if (! empty($_POST["editVisit"])) {
         if($filesize > $maxsize) die("Error: File size is larger than the allowed limit."); */
 		
         // Validate type of the file
-		
-		
-	   if(in_array($filetype, $allowed)){
-		 print_r("id".$id."file4"); 
        
+	   if(in_array($filetype, $allowed)){
+		  
             // Check whether file exists before uploading it			
             if(file_exists("../usgDocument/" . $filename)){
-				print_r("id".$id."file6imp"); exit;
 			//	print_r("already exists"); exit; 
 			//exit('<title>Error Page</title>'."already exists".'<footer>Test Footer</footer>');
 				//echo $filename . " is already exists."; exit;
 				echo "<script>alert('$filename is already exists.');window.location.replace('{$siteurl}/forms/EditAnVisit.php?view=$id');</script>";
         
             } else{
-				 print_r("id".$id."file5imp".move_uploaded_file($_FILES["usgreport"]["tmp_name"], "../usgDocument/" . $filename)); 
-                if(move_uploaded_file($tempname, $folder)){
-					print_r("id".$id."file7imp"); 
+                if(move_uploaded_file($_FILES["usgreport"]["tmp_name"], "../usgDocument/" . $filename)){
 					 $query = mysqli_query($conn,"UPDATE antenatalvisit SET residenttype='$residenttype',physicalpresent='$physicalpresent',
   placeofvisit='$placeofvisit',abortion='$abortion',anvisitDate='$anvisitDate',avduedate='$avduedate',avTag='1',ancPeriod='$ancPeriod',pregnancyWeek='$pregnancyWeek',
   motherWeight='$motherWeight',bpSys='$bpSys',bpDia='$bpDia',Hb='$Hb',urineTestStatus='$urineTestStatus',
@@ -325,7 +315,6 @@ usgFetalHeartRate2='$usgFetalHeartRate3',usgFetalPosition2='$usgFetalPosition3',
   bloodTransfusionDate='$bloodTransfusionDate',placeAdministrator='$placeAdministrator',noOfIVDoses='$nooIVdoses',
   updatedat='$date',updatedBy='$userid', usgreport='$filename' WHERE id=".$id);
   if (!empty($query)) {
-	  print_r("id".$id."file8imp"); exit;
             echo "<script>alert('Updated Successfully');window.location.replace('{$siteurl}/forms/AntenatalVisitDtl.php?History=$picmeno');</script>";
           }
           $highrisk = mysqli_query($conn, "UPDATE ecregister ec INNER JOIN antenatalvisit av ON ec.picmeNo=av.picmeno SET ec.status=6 WHERE av.symptomsHighRisk NOT IN('1','48') AND av.picmeNo=".$picmeno);
@@ -343,7 +332,7 @@ usgFetalHeartRate2='$usgFetalHeartRate3',usgFetalPosition2='$usgFetalPosition3',
 }
                 }else{
 
-                  print_r("id".$id."file9imp"); exit;
+                  
 				   echo "<script>alert('File is not uploaded.');window.location.replace('{$siteurl}/forms/EditAnVisit.php?view=$id');</script>";
         
                 }
