@@ -271,7 +271,7 @@ if (! empty($_POST["editVisit"])) {
 	 
       // Check if file was uploaded without errors
     if(isset($_FILES["usgreport"]) && $_FILES["usgreport"]["error"] == 0){
-		print_r("id".$id."file3"); exit;
+		print_r("id".$id."file3"); 
         $allowed = array("pdf" => "application/pdf", "jpeg" => "image/jpeg", "png" => "image/png");
         $filename = $_FILES["usgreport"]["name"];
         $filetype = $_FILES["usgreport"]["type"];
@@ -302,6 +302,7 @@ if (! empty($_POST["editVisit"])) {
 				echo "<script>alert('$filename is already exists.');window.location.replace('{$siteurl}/forms/EditAnVisit.php?view=$id');</script>";
         
             } else{
+				 print_r("id".$id."file5imp"); exit;
                 if(move_uploaded_file($_FILES["usgreport"]["tmp_name"], "../usgDocument/" . $filename)){
 					 $query = mysqli_query($conn,"UPDATE antenatalvisit SET residenttype='$residenttype',physicalpresent='$physicalpresent',
   placeofvisit='$placeofvisit',abortion='$abortion',anvisitDate='$anvisitDate',avduedate='$avduedate',avTag='1',ancPeriod='$ancPeriod',pregnancyWeek='$pregnancyWeek',
