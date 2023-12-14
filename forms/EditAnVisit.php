@@ -285,10 +285,10 @@ if (! empty($_POST["editVisit"])) {
 		
         // Validate type of the file
 		
-		print_r("file".in_array($filetype, $allowed)); exit;
-       
+		
 	   if(in_array($filetype, $allowed)){
-		  
+		  print_r("file".move_uploaded_file($_FILES["usgreport"]["tmp_name"], "../usgDocument/" . $filename)); exit;
+       
             // Check whether file exists before uploading it			
             if(file_exists("../usgDocument/" . $filename)){
 			//	print_r("already exists"); exit; 
