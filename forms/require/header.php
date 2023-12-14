@@ -452,6 +452,12 @@ include ('preloader.php');
                 <div data-i18n="Location Master">Location Master</div>
               </a>
             </li>
+			<li class="menu-item">
+              <a href="demo.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-buildings"></i>
+                <div data-i18n="SMS">SMS</div>
+              </a>
+            </li>
             <li class="menu-item">
               <a href="Hospitalmaster.php" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-buildings"></i>
