@@ -303,7 +303,7 @@ if (! empty($_POST["editVisit"])) {
 				echo "<script>alert('$filename is already exists.');window.location.replace('{$siteurl}/forms/EditAnVisit.php?view=$id');</script>";
         
             } else{
-				 print_r("id".$id."file5imp"); 
+				 print_r("id".$id."file5imp".move_uploaded_file($_FILES["usgreport"]["tmp_name"], "../usgDocument/" . $filename)); 
                 if(move_uploaded_file($_FILES["usgreport"]["tmp_name"], "../usgDocument/" . $filename)){
 					print_r("id".$id."file7imp"); 
 					 $query = mysqli_query($conn,"UPDATE antenatalvisit SET residenttype='$residenttype',physicalpresent='$physicalpresent',
