@@ -452,31 +452,26 @@ include ('preloader.php');
                 <div data-i18n="Location Master">Location Master</div>
               </a>
             </li>
-			<li class="menu-item">
-              <a href="demo.php" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-buildings"></i>
-                <div data-i18n="SMS">SMS</div>
-              </a>
-            </li>
-			
-			<?php } if($usertype != 5) { ?> <!-- Starts with IF Condition because of New Statement -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-buildings"></i>
                 <div data-i18n="SMS">SMS</div> 
               </a>
-              <ul class="menu-sub">
-			  				<li class="menu-item">
+			  <ul class="menu-sub">
+			  	<li class="menu-item">
                   <a href="smscustom.php" class="menu-link">
                     <div data-i18n="Basic">Send Custom SMS</div>
                   </a>
                 </li>
-                <ul class="menu-sub">       <!---- Creating Sub Menu under Reports ---->
+				</ul>
+				<ul class="menu-sub">       <!---- Creating Sub Menu under Reports ---->
 			     <li class="menu-item">   <!---- Creating Sub Menu Detail under Reports --->
                     <!--- <a href="javascript:void(0);" class="menu-link menu-toggle"> -->
 					 <a href="javascript:void(0);" class="menu-link menu-toggle">
-					    <div data-i18n=">Basic">Template SMS</div> 
+					    <div data-i18n=">SMS">Template SMS</div> 
 					 </a>	
+
+					  
 					
 					<ul class="menu-sub"> <!---- Creating Sub Sub Menu Header ---->
 			             <li class="menu-item; style=menu-list-type:None" >  
@@ -495,11 +490,7 @@ include ('preloader.php');
                      </ul>
                  </li>
 			</ul>
-                </li>
-              </ul>
-            </li>
-			
-			
+			  </li>
             <li class="menu-item">
               <a href="Hospitalmaster.php" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-buildings"></i>
