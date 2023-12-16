@@ -4,16 +4,13 @@
 	</head>
 	<body>
 	<div class="container">
-	<h1>PHP Send SMS</h1>
+	<h1>Thankyou Template SMS</h1>
 		<form method="post" action='phpsendsmstemp2.php'>
 		<div class="form-group">
 			<label for="phoneno">Mobile Number</label>
 			<input type="text" name="phoneno" class="form-control" placeholder="Enter Phone Number" >
 		</div>
-		<div class="form-group">
-			<label for="exampleFormControlTextarea3">Enter Text Message</label>
-			<textarea class="form-control" name="smstext" rows="7"></textarea>
-		</div>
+		
 		<div class="form-group">
 			<input type="submit" name="submit" class="btn btn-primary" value="Send Message">
 		</div>	
