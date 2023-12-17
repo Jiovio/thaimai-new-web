@@ -4,7 +4,7 @@
 	</head>
 	<body>
 	<div class="container">
-	<h1>PHP Send SMS</h1>
+	<h1>Custom SMS</h1>
 		<form method="post" action='phpsendsmscustom.php'>
 		<div class="form-group">
 			<label for="phoneno">Mobile Number</label>
