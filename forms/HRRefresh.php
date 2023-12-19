@@ -26,6 +26,8 @@ include ('require/Refheader.php');
 
     /* ------------------------------------------------------- AN Registration --------------------------------------------------------------------*/
 
+    print_r("AN Registration1");
+	
     $listQry_anreg_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) 
 	SELECT DISTINCT(picmeno),status from anregistration 
 	WHERE (anregistration.gravida > 2 OR 
@@ -43,7 +45,9 @@ include ('require/Refheader.php');
 AND NOT EXISTS (SELECT antenatalvisit.picmeno FROM antenatalvisit WHERE antenatalvisit.picmeno = anregistration.picmeno)
 AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = anregistration.picmeno)");  
 
-    $listQry_anreg_upd_1 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN ecregister ON highriskmothers.picmeNo = ecregister.picmeNo SET highriskmothers.motherName = ecregister.motheraadhaarname");
+    print_r("AN Registration2"); exit;
+	
+	$listQry_anreg_upd_1 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN ecregister ON highriskmothers.picmeNo = ecregister.picmeNo SET highriskmothers.motherName = ecregister.motheraadhaarname");
 
     $listQry_anreg_upd_2 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno 
 	SET highriskmothers.highRiskFactor = 'Multi Para' 
