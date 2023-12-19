@@ -63,7 +63,7 @@ $listQry_anreg_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,s
 AND NOT EXISTS (SELECT antenatalvisit.picmeno FROM antenatalvisit WHERE antenatalvisit.picmeno = anregistration.picmeno)
 AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = anregistration.picmeno)");  
 
- //   print_r("AN Registration2"); exit;
+   print_r("AN Registration2"); exit;
 	
 	$listQry_anreg_upd_1 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN ecregister ON highriskmothers.picmeNo = ecregister.picmeNo SET highriskmothers.motherName = ecregister.motheraadhaarname");
 
