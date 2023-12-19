@@ -10,8 +10,6 @@ include ('require/Refheader.php');
   
   $listQry_trunc = mysqli_query($conn,"TRUNCATE highriskmothers");
   
-  print_r("I am 1");
-  
   /* ------------------------------------------------------- EC Register --------------------------------------------------------------------*/
 
     /*$listQry_ecreg_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) SELECT motheraadhaarid,status from ecregister WHERE (ecregister.picmeNo = " ")");  
@@ -44,8 +42,6 @@ include ('require/Refheader.php');
 		   anregistration.MotherAge > 30) 
 AND NOT EXISTS (SELECT antenatalvisit.picmeno FROM antenatalvisit WHERE antenatalvisit.picmeno = anregistration.picmeno)
 AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = anregistration.picmeno)");  
-
-print_r("I am 2");
 
     $listQry_anreg_upd_1 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN ecregister ON highriskmothers.picmeNo = ecregister.picmeNo SET highriskmothers.motherName = ecregister.motheraadhaarname");
 
@@ -85,9 +81,7 @@ print_r("I am 2");
   /*   $listQry_MH_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) SELECT DISTINCT(picmeno),status from medicalhistory WHERE (medicalhistory.momhivtestresult = 1 OR medicalhistory.hushivtestresult = 1 OR medicalhistory.momVdrlRprResult = 1 OR medicalhistory.husVdrlRprResult = 1 OR medicalhistory.momhbresult = 1 OR medicalhistory.hushbresult = 1 OR medicalhistory.totPregnancy > 2 OR medicalhistory.momhbresult = 3 OR medicalhistory.hushbresult = 3 OR medicalhistory.momhivtestresult = 3 OR medicalhistory.hushivtestresult = 3 OR medicalhistory.pastillness = 101 OR medicalhistory.pastillness = 102 OR medicalhistory.pastillness = 103 OR medicalhistory.pastillness = 104 OR medicalhistory.pastillness = 105 OR medicalhistory.pastillness = 106 OR medicalhistory.pastillness = 107 OR medicalhistory.pastillness = 108 OR medicalhistory.pastillness = 109 OR medicalhistory.pastillness = 110 OR medicalhistory.pastillness = 111 OR medicalhistory.pastillness = 112) 
 	 AND NOT EXISTS (SELECT antenatalvisit.picmeno FROM antenatalvisit WHERE antenatalvisit.picmeno = medicalhistory.picmeno)
 	 AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = medicalhistory.picmeno)"); */
-	 
-	  print_r("I am 2");
-	 
+		 
 	 $listQry_MH_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) SELECT DISTINCT(picmeno),status from medicalhistory WHERE (medicalhistory.momhivtestresult = 1 OR medicalhistory.hushivtestresult = 1 OR medicalhistory.momVdrlRprResult = 1 OR medicalhistory.husVdrlRprResult = 1 OR medicalhistory.momhbresult = 1 OR medicalhistory.hushbresult = 1 OR medicalhistory.totPregnancy > 2 OR medicalhistory.pastillness = 101 OR medicalhistory.pastillness = 102 OR medicalhistory.pastillness = 103 OR medicalhistory.pastillness = 104 OR medicalhistory.pastillness = 105 OR medicalhistory.pastillness = 106 OR medicalhistory.pastillness = 107 OR medicalhistory.pastillness = 108 OR medicalhistory.pastillness = 109 OR medicalhistory.pastillness = 110 OR medicalhistory.pastillness = 111 OR medicalhistory.pastillness = 112 OR medicalhistory.momBGtype = 5 OR 
 	 medicalhistory.momBGtype = 6 OR medicalhistory.momBGtype = 7 OR medicalhistory.momBGtype = 8 OR medicalhistory.momBGtype = 10) 
 	 AND NOT EXISTS (SELECT antenatalvisit.picmeno FROM antenatalvisit WHERE antenatalvisit.picmeno = medicalhistory.picmeno)
@@ -152,7 +146,6 @@ print_r("I am 2");
 	
 	/* ------------------------------------------------------- antenatalvisit -----------------------------------------------------------*/
 
-     print_r("I am 3"); exit;
 
 	$listQry_AV_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) SELECT picmeno,status from antenatalvisit av WHERE (av.HighRisk = 1 OR av.Hb < 10 OR av.urineSugarPresent = 1 OR av.urineAlbuminPresent = 1 OR av.gctValue > 140 
 	OR av.Tsh = 'yes' OR av.bpSys > 130 OR av.bpDia > 90 OR av.motherWeight <= 40
