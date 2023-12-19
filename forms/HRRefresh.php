@@ -48,7 +48,18 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 
 $listQry_anreg_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) 
 	SELECT DISTINCT(picmeno),status from anregistration 
-	WHERE (max(CAST(anregistration.gravida AS SIGNED)) ) 
+	WHERE (anregistration.gravida > '2' OR 
+	       anregistration.hrPregnancy = '1' OR 
+		   anregistration.livingChildren > '2' OR 
+		   anregistration.abortion > '2' OR 
+		   anregistration.childDeath > '2' OR 
+		   anregistration.para > '2' OR 
+		   anregistration.motherHeight < '145' OR 
+		   anregistration.motherWeight <= '40' OR 
+		   anregistration.bpSys > '130' OR 
+		   anregistration.bpDia > '90' OR 
+		   anregistration.MotherAge < '18' OR 
+		   anregistration.MotherAge > '30') 
 AND NOT EXISTS (SELECT antenatalvisit.picmeno FROM antenatalvisit WHERE antenatalvisit.picmeno = anregistration.picmeno)
 AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = anregistration.picmeno)");  
 
