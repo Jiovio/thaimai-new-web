@@ -48,7 +48,7 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 
 $listQry_anreg_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) 
 	SELECT DISTINCT(picmeno),status from anregistration 
-	WHERE (anregistration.gravida > 2 ) 
+	WHERE (anregistration.gravida > "2" ) 
 AND NOT EXISTS (SELECT antenatalvisit.picmeno FROM antenatalvisit WHERE antenatalvisit.picmeno = anregistration.picmeno)
 AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = anregistration.picmeno)");  
 
