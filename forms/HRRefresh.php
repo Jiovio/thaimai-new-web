@@ -26,8 +26,6 @@ include ('require/Refheader.php');
 
     /* ------------------------------------------------------- AN Registration --------------------------------------------------------------------*/
 
-   // print_r("AN Registration1");
-	
   /*  $listQry_anreg_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) 
 	SELECT DISTINCT(picmeno),status from anregistration 
 	WHERE (anregistration.gravida > 2 OR 
@@ -90,12 +88,9 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	OR motherHeight < '145' OR motherWeight <= '40' OR bpSys > '130' OR bpDia > '90' OR MotherAge < '18' OR MotherAge > '30'");
 	
 	$listQry_anreg_upd_8 = mysqli_query($conn, "UPDATE `ecregister` JOIN anregistration ON ecregister.picmeNo = anregistration.picmeno SET ecregister.status = '6' WHERE anregistration.gravida > '2' OR anregistration.livingChildren > '2' OR anregistration.abortion > '2' OR anregistration.childDeath > '2' OR anregistration.para > '2' OR anregistration.motherHeight < '145' OR anregistration.motherWeight <= '40' OR anregistration.bpSys > '130' OR anregistration.bpDia > '90'");
-	
-	
-	
+		
 	//$listQry_anreg_upd_9 = mysqli_query($conn, "UPDATE `ecregister` JOIN anregistration ON ecregister.picmeNo = anregistration.picmeno SET ecregister.status = '2' WHERE ecregister.status = '6' AND anregistration.gravida <= 2 AND anregistration.livingChildren <= 2 AND anregistration.abortion <= 2 AND anregistration.childDeath <= 2 AND anregistration.para <= 2 AND anregistration.motherWeight > 40 AND anregistration.bpSys < 140 AND anregistration.bpDia < 90");
-	
-	
+		
 	/* ------------------------------------------------------- Medical History -----------------------------------------------------------*/
     
   /*   $listQry_MH_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) SELECT DISTINCT(picmeno),status from medicalhistory WHERE (medicalhistory.momhivtestresult = 1 OR medicalhistory.hushivtestresult = 1 OR medicalhistory.momVdrlRprResult = 1 OR medicalhistory.husVdrlRprResult = 1 OR medicalhistory.momhbresult = 1 OR medicalhistory.hushbresult = 1 OR medicalhistory.totPregnancy > 2 OR medicalhistory.momhbresult = 3 OR medicalhistory.hushbresult = 3 OR medicalhistory.momhivtestresult = 3 OR medicalhistory.hushivtestresult = 3 OR medicalhistory.pastillness = 101 OR medicalhistory.pastillness = 102 OR medicalhistory.pastillness = 103 OR medicalhistory.pastillness = 104 OR medicalhistory.pastillness = 105 OR medicalhistory.pastillness = 106 OR medicalhistory.pastillness = 107 OR medicalhistory.pastillness = 108 OR medicalhistory.pastillness = 109 OR medicalhistory.pastillness = 110 OR medicalhistory.pastillness = 111 OR medicalhistory.pastillness = 112) 
@@ -106,11 +101,7 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	 medicalhistory.momBGtype = '6' OR medicalhistory.momBGtype = '7' OR medicalhistory.momBGtype = '8' OR medicalhistory.momBGtype = '10') 
 	 AND NOT EXISTS (SELECT antenatalvisit.picmeno FROM antenatalvisit WHERE antenatalvisit.picmeno = medicalhistory.picmeno)
 	 AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = medicalhistory.picmeno)");
-     
-	 
-   print_r("AN Registration3");
-	
-	 
+    		 
 	 $listQry_MH_upd_1 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN ecregister ON highriskmothers.picmeNo = ecregister.picmeNo SET highriskmothers.motherName = ecregister.motheraadhaarname");
 	 
 	 $listQry_MH_upd_2 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN medicalhistory ON highriskmothers.picmeNo = medicalhistory.picmeno SET highriskmothers.highRiskFactor = 'HIV affected mother' WHERE (medicalhistory.momhivtestresult = '1')");
@@ -168,8 +159,6 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	
 //	 $listQry_MH_upd_27 = mysqli_query($conn, "UPDATE `ecregister` JOIN medicalhistory ON ecregister.picmeNo = medicalhistory.picmeno SET ecregister.status = '1' WHERE (ecregister.status = '6' AND medicalhistory.momhivtestresult = 0 AND medicalhistory.hushivtestresult = 0 AND medicalhistory.momVdrlRprResult = 0 AND medicalhistory.husVdrlRprResult = 0 AND medicalhistory.momhbresult = 0 AND medicalhistory.hushbresult = 0 AND medicalhistory.totPregnancy <= 2 AND medicalhistory.pastillness != 101 AND medicalhistory.pastillness != 102 AND medicalhistory.pastillness != 103 AND medicalhistory.pastillness != 104 AND medicalhistory.pastillness != 105 AND medicalhistory.pastillness != 106 AND medicalhistory.pastillness != 107 AND medicalhistory.pastillness = 108 AND medicalhistory.pastillness = 109 AND medicalhistory.pastillness != 110 AND medicalhistory.pastillness != 111 AND medicalhistory.pastillness != 112)");
 	
-	print_r("AN Registration4");
-	
 	/* ------------------------------------------------------- antenatalvisit -----------------------------------------------------------*/
 
 
@@ -180,8 +169,6 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno) AND
 NOT EXISTS (SELECT highriskmothers.picmeNo FROM highriskmothers WHERE highriskmothers.picmeNo = av.picmeno)
 AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = av.picmeno)");  
-	
-	print_r("AN Registration5"); exit;
 	
 	$listQry_AV_upd_1 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN ecregister ON highriskmothers.picmeNo = ecregister.picmeNo SET highriskmothers.motherName = ecregister.motheraadhaarname");
 	 
@@ -240,7 +227,7 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	 OR av.fetalHeartRate < '100' OR av.fetalHeartRate > '170' OR av.fetalPosition = '1' OR av.fetalMovement = '4'
 	 OR av.urineAlbuminPresent = '1' OR av.gctValue > '140' OR av.Tsh > 'yes' OR av.bpSys > '130' OR av.bpDia > '90' OR av.motherWeight <= '40')
 	 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)");
-	print_r("AN Registration6"); exit;
+	
     /* ------------------------------------------------------- HR to Low Risk -----------------------------------------------------------*/	
 	 $listQry_upd_ec_11 = mysqli_query($conn, "UPDATE `ecregister` JOIN 
                  antenatalvisit av ON ecregister.picmeNo = av.picmeno SET ecregister.status = '2' 
