@@ -1,29 +1,48 @@
 <?php
-
+ include ('require/header.php'); // Menu & Top Search
 // Authentication key
 /*$authKey = "YOUR_AUTH_KEY";*/
 $authKey = "SnfxKFPjD4A5m0dgLhJ9XypUwuvrc7Ye2oQVzRI3lBNMsOWbka9nKXSteZrjxFuqP8poHTRUvs3AJ4YC";
 
+$picmeNo = "";
+if(isset($_POST['picmeNo']))
+{
+ $picmeNo = $_POST['picmeNo'];	
+}
+
+//print_r($picmeNo); exit;
+
+$record = mysqli_query($conn, "SELECT * FROM ecregister ec WHERE ec.picmeNo=$picmeNo");
+$his = mysqli_fetch_array($record);
+$his_mot_name = $his['motheraadhaarname'];
+
+//print_r($his['mothermobno']); exit;
+
 // Also add muliple mobile numbers, separated by comma
-$phoneNumber = $_POST['phoneno'];
+$phoneNumber = $his['mothermobno'];
+
+//Template message
+$message = $_POST['smstype'];	
+
+//print_r($message); exit;
 
 // route4 sender id should be 6 characters long.
 $senderId = "SAVMOM";
 
 // Patient name to send
-$patient = $_POST['patient'];
+$patient = $his['motheraadhaarname']."(".$his['picmeNo'].")";
 
 // POST parameters
 $fields = array(
     "sender_id" => $senderId,
 //    "message" => (string) $message,
-    "message" => 162768,
+    "message" => $message,
     "language" => "english",
     "route" => "dlt",
    "numbers" => $phoneNumber,
    "variables_values" => $patient,
   //  "numbers" => '7667878400',
-    "flash" => "1"
+    "flash" => "0"
 );
 
 $curl = curl_init();
