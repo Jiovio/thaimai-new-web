@@ -454,7 +454,7 @@ include ('preloader.php');
             </li>
 			<li class="menu-item">
               <a href="demo.php" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-buildings"></i>
+                <i class="menu-icon tf-icons far fa-comment-dots"></i>
                 <div data-i18n="SMS">SMS</div>
               </a>
             </li>
