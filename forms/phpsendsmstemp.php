@@ -29,8 +29,23 @@ $message = $_POST['smstype'];
 // route4 sender id should be 6 characters long.
 $senderId = "SAVMOM";
 
+//print_r($his['motheraadhaarmarathiname']); exit;
+
 // Patient name to send
-$patient = $his['motheraadhaarname']."(".$his['picmeNo'].")";
+$patient = "";
+if ($message == '163449')
+{
+$record_sms = mysqli_query($conn, "SELECT * FROM sms sm WHERE sm.picmeNo=$picmeNo");
+$his_sms = mysqli_fetch_array($record_sms);
+$his_sms_mot_name = $his_sms['motheraadhaarmarathiname'];
+$patient = $his_sms_mot_name;
+}
+else
+{
+$patient = $his_mot_name;	
+}
+
+//print_r("mother no".$phoneNumber); exit;
 
 // POST parameters
 $fields = array(
