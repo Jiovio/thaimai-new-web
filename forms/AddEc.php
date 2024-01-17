@@ -703,9 +703,9 @@ if($mvid > 0) {
                       </div>  
 
                       <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">RATION CARD TYPE <span class="mand">* </span><span id="errRtype"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">RATION CARD TYPE <span id="errRtype"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="rationcardtype" id="rationcardtype" required onclick="return addECValidate()" class="form-select">
+                          <select name="rationcardtype" id="rationcardtype" onclick="return addECValidate()" class="form-select">
                           <option value="">Choose...</option>
                            
                            <?php   

@@ -935,9 +935,9 @@ if (! empty($_POST["update"])) {
                       </div>  
 
                       <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">RATION CARD TYPE <span class="mand">* </span><span id="errRtype"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">RATION CARD TYPE <span id="errRtype"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="rationcardtype" id="rationcardtype" class="form-select" onchange="fnCalMotAge()" required id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
+                          <select name="rationcardtype" id="rationcardtype" class="form-select" onchange="fnCalMotAge()" id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
                             
                                 <?php
 
