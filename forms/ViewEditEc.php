@@ -1,4 +1,4 @@
-<?php include ('require/topHeader.php'); ?> 
+<?php include ('require/topHeader.php'); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
