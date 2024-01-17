@@ -10,15 +10,15 @@ $phoneNumber = $_POST['phoneno'];
 // route4 sender id should be 6 characters long.
 $senderId = "SAVMOM";
 
-// Patient name to send
-$patient = $_POST['patient'];
+// Your message to send
+$message = urlencode($_POST['smstext']);
 
 // POST parameters
 $fields = array(
     "sender_id" => $senderId,
+    "message" => $message,
     "language" => "english",
     "route" => "dlt",
-	"variables_values" => $patient,
     "numbers" => $phoneNumber,
 );
 

@@ -33,19 +33,21 @@ $senderId = "SAVMOM";
 
 // Patient name to send
 $patient = "";
-if ($message == '163449')
+if ($message == '163570') /* if ($message == '163570') Dhule */
 {
 $record_sms = mysqli_query($conn, "SELECT * FROM sms sm WHERE sm.picmeNo=$picmeNo");
 $his_sms = mysqli_fetch_array($record_sms);
 $his_sms_mot_name = $his_sms['motheraadhaarmarathiname'];
 $patient = $his_sms_mot_name;
+//$patient = $his_sms_mot_name."(".$his_sms['picmeNo'].")";
 }
 else
 {
-$patient = $his_mot_name;	
+	$patient = $his_mot_name;	
+//$patient = $his_mot_name."(".$his['picmeNo'].")";	
 }
 
-//print_r("mother no".$phoneNumber); exit;
+//print_r("mother name".$patient); exit;
 
 // POST parameters
 $fields = array(

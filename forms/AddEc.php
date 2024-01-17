@@ -236,7 +236,7 @@ if($mvid > 0) {
                             </div>
                           </div>
                           <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">MOTHER'S AGE AT EC REGISTRATION <span id="errMageecreg"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">MOTHER'S AGE AT EC REGISTRATION <span class="mand">* </span><span id="errMageecreg"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user-minus"></i
@@ -251,6 +251,7 @@ if($mvid > 0) {
                               aria-label="MOTHER'S AGE AT EC REGISTRATION"
                               aria-describedby="basic-icon-default-mobile"
 							  onclick="return addECValidate()"
+							  required
                              />
                           </div>
                         </div>
@@ -336,7 +337,7 @@ if($mvid > 0) {
 					<div id="Hus-Sug-box"></div>
 						<div class="row">
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-password">HUSBAND'S AADHAAR ID <span style="color:red" class= "husmessage" id="husmessage"></span><span id="errHaadhaarid"></span></label>
+                          <label class="form-label" for="basic-icon-default-password">HUSBAND'S AADHAAR ID <span class="mand">* </span>  <span style="color:red" class= "husmessage" id="husmessage"></span><span id="errHaadhaarid"></span></label>
                           <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-id-card"></i></span>
                             <input
@@ -351,12 +352,13 @@ if($mvid > 0) {
                               aria-describedby="basic-icon-default-password2"
 							  maxlength='12'
 							  onclick="return addECValidate()"
+                              required
                             />
                           </div>
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S NAME AS PER AADHAAR <span id="errhaadhaarname"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S NAME AS PER AADHAAR <span class="mand">* </span><span id="errhaadhaarname"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user"></i></span>
@@ -369,6 +371,7 @@ if($mvid > 0) {
                               aria-label="HUSBAND'S NAME AS PER AADHAAR"
                               aria-describedby="basic-icon-default-mobile"
 							  onclick="return addECValidate()"
+                              required
                             />
                           </div>
                         </div>
@@ -394,7 +397,7 @@ if($mvid > 0) {
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">HUSBAND'S DATE OF BIRTH <span id="errhdob"></span></label>
+                          <label class="form-label" for="basic-icon-default-email">HUSBAND'S DATE OF BIRTH <span class="mand">* </span><span id="errhdob"></span></label>
                           <div class="input-group input-group-merge">
                             <input
                               type="date"
@@ -405,12 +408,13 @@ if($mvid > 0) {
                               class="form-control" onchange="fnCalHusAge();"
                               aria-describedby="basic-icon-default-email2"
 							  onclick="return addECValidate()"
+                               required
                             />
                           </div>
                         </div>
                         <div id="Hus-mar-Sug-box"></div>
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S AGE AT MARRIAGE <span id="errhagemarriage"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S AGE AT MARRIAGE <span class="mand">* </span><span id="errhagemarriage"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user-pin"></i
@@ -426,12 +430,13 @@ if($mvid > 0) {
                               aria-describedby="basic-icon-default-mobile"
 							  min="11" max="99"
 							  onclick="return addECValidate()"
+                              required
                             />
                           </div>
                         </div>
 
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S AGE AT EC Registration <span id="errhageecreg"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S AGE AT EC Registration <span class="mand">* </span><span id="errhageecreg"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user-minus"></i
@@ -445,12 +450,13 @@ if($mvid > 0) {
                               aria-label="HUSBAND'S AGE AT EC REGISTRATION"
                               aria-describedby="basic-icon-default-mobile"
 							  onclick="return addECValidate()"
+                              required
                             />
                           </div>
                         </div>
                         
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S MOBILE NUMBER <span id="errhmob"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S MOBILE NUMBER <span class="mand">* </span><span id="errhmob"></span></label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-mobile"></i
@@ -466,15 +472,16 @@ if($mvid > 0) {
                               aria-describedby="basic-icon-default-mobile"
 							  pattern="[0-9]{3}[0-9]{3}[0-9]{4}" maxlength="10"
 							  onclick="return addECValidate()"
+                              required
                             />
                           </div>
                         </div>
   
                         <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S EDUCATIONAL STATUS <span id="errhedustatus"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">HUSBAND'S EDUCATIONAL STATUS <span class="mand">* </span><span id="errhedustatus"></span></label>
                           <div class="input-group input-group-merge">
                             
-                          <select name="husedustatus" id="husedustatus" class="form-select" onclick="return addECValidate()" >
+                          <select name="husedustatus" id="husedustatus" class="form-select" onclick="return addECValidate()" required>
                           <option value="">Choose...</option>
                            
                            <?php   
@@ -696,9 +703,9 @@ if($mvid > 0) {
                       </div>  
 
                       <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">RATION CARD TYPE <span id="errRtype"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">RATION CARD TYPE <span class="mand">* </span><span id="errRtype"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="rationcardtype" id="rationcardtype" onclick="return addECValidate()" class="form-select">
+                          <select name="rationcardtype" id="rationcardtype" required onclick="return addECValidate()" class="form-select">
                           <option value="">Choose...</option>
                            
                            <?php   
