@@ -1,4 +1,5 @@
 <?php
+ini_isset('display_errors',1);
 use Phppot\Member;
 if (! empty($_POST["login-btn"])) {
     require_once __DIR__ . '/Model/Member.php';
