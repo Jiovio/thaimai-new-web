@@ -12,7 +12,7 @@ include "../config/db_connect.php";
 	{
 	  $hscName = $_POST['HscId'];
 	}
-	if(isset($_POST['BlockId']))
+	if(isset($_POST['BlockId'])) 
 	{
 	  $bloName = $_POST['BlockId'];
 	} 
