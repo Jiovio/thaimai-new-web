@@ -188,7 +188,7 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	
 	/* ------------------------------------------------------- antenatalvisit -----------------------------------------------------------*/
 
-/*/	$listQry_AV_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) SELECT picmeno,status from antenatalvisit av 
+	$listQry_AV_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) SELECT picmeno,status from antenatalvisit av 
 	WHERE 
 	(av.HighRisk = 1 OR 
 	(av.Hb > 0  AND av.Hb < 10) OR 
