@@ -207,8 +207,12 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	av.usgFetalHeartRate1 > 170 
 	OR (av.usgFetalHeartRate2 > 0 AND av.usgFetalHeartRate2 < 100) OR 
 	av.usgFetalHeartRate2 > 170 OR 
-	av.fetalPosition = 1 OR 
-	av.fetalMovement = 4) 
+	av.usgfetalPosition = 1 OR 
+	av.usgfetalPosition1 = 1 OR
+	av.usgfetalPosition2 = 1 OR
+	av.usgfetalMovement1 = 4 OR
+	av.usgfetalMovement2 = 4 OR
+	av.usgfetalMovement = 4) 
 	AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno) AND
 NOT EXISTS (SELECT highriskmothers.picmeNo FROM highriskmothers WHERE highriskmothers.picmeNo = av.picmeno)
 AND EXISTS (SELECT medicalhistory.picmeno FROM medicalhistory WHERE medicalhistory.picmeno = av.picmeno)
@@ -268,10 +272,10 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 
 	 
 	 
-	 $listQry_AV_upd_15 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN antenatalvisit av ON highriskmothers.picmeNo = av.picmeno SET highriskmothers.highRiskFactor = 'Abnormal Fetal Position' WHERE (av.fetalPosition = 1)
+	 $listQry_AV_upd_15 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN antenatalvisit av ON highriskmothers.picmeNo = av.picmeno SET highriskmothers.highRiskFactor = 'Abnormal Fetal Position' WHERE (av.usgfetalPosition = 1 OR av.usgfetalPosition1 = 1 OR av.usgfetalPosition2 = 1)
 	 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)");
 
-     $listQry_AV_upd_16 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN antenatalvisit av ON highriskmothers.picmeNo = av.picmeno SET highriskmothers.highRiskFactor = 'Absent Fetal Movement' WHERE (av.fetalMovement = 4)
+     $listQry_AV_upd_16 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN antenatalvisit av ON highriskmothers.picmeNo = av.picmeno SET highriskmothers.highRiskFactor = 'Absent Fetal Movement' WHERE (av.usgfetalMovement = 4 OR av.usgfetalMovement1 = 4 OR av.usgfetalMovement2 = 4)
 	 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)");
 
 //	$listQry_AV_upd_9 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN antenatalvisit av ON highriskmothers.picmeNo = av.picmeno SET highriskmothers.highRiskFactor = av.symptomsHighRisk WHERE (av.HighRisk = 1) AND
@@ -282,11 +286,11 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
                 . "JOIN enumdata ON enumdata.enumid = av.symptomsHighRisk SET highriskmothers.highRiskFactor = enumdata.enumvalue WHERE (enumdata.type = 51)");
 
 	
-	 $listQry_AV_upd_10 = mysqli_query($conn, "UPDATE `ecregister` JOIN antenatalvisit av ON ecregister.picmeNo = av.picmeno SET ecregister.status = '6' WHERE (av.HighRisk = 1 OR av.Hb < 10 OR av.urineSugarPresent = 1 
+	 $listQry_AV_upd_10 = mysqli_query($conn, "UPDATE `ecregister` JOIN antenatalvisit av ON ecregister.picmeNo = av.picmeno SET ecregister.status = '6' WHERE (av.HighRisk = 1 OR (av.Hb > 0 AND av.Hb < 10) OR av.urineSugarPresent = 1 
 	 OR av.fastingSugar > 110 OR av.postPrandial > 140
 	 OR (av.usgFetalHeartRate > 0 AND av.usgFetalHeartRate < 100) OR av.usgFetalHeartRate > 170 
 	 OR (av.usgFetalHeartRate1 > 0 AND av.usgFetalHeartRate1 < 100) OR av.usgFetalHeartRate1 > 170
-	 OR (av.usgFetalHeartRate2 > 0 AND av.usgFetalHeartRate2 < 100) OR av.usgFetalHeartRate2 > 170 OR av.fetalPosition = 1 OR av.fetalMovement = 4
+	 OR (av.usgFetalHeartRate2 > 0 AND av.usgFetalHeartRate2 < 100) OR av.usgFetalHeartRate2 > 170 OR av.usgfetalPosition = 1 OR av.usgfetalPosition1 = 1 OR av.usgfetalPosition2 = 1 OR av.usgfetalMovement = 4 OR av.usgfetalMovement1 =  OR av.usgfetalMovement2 = 4
 	 OR av.urineAlbuminPresent = 1 OR av.gctValue > 140 OR av.Tsh > 'yes' OR av.bpSys > 130 OR av.bpDia > 90 OR (av.motherWeight > 0 AND av.motherWeight < 40)
 	 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno))");
 	
