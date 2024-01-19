@@ -188,7 +188,7 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	
 	/* ------------------------------------------------------- antenatalvisit -----------------------------------------------------------*/
 
-	$listQry_AV_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) SELECT picmeno,status from antenatalvisit av 
+/*/	$listQry_AV_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) SELECT picmeno,status from antenatalvisit av 
 	WHERE 
 	(av.HighRisk = 1 OR 
 	(av.Hb > 0  AND av.Hb < 10) OR 
@@ -218,7 +218,27 @@ NOT EXISTS (SELECT highriskmothers.picmeNo FROM highriskmothers WHERE highriskmo
 AND EXISTS (SELECT medicalhistory.picmeno FROM medicalhistory WHERE medicalhistory.picmeno = av.picmeno)
 AND EXISTS (SELECT anregistration.picmeno FROM anregistration WHERE anregistration.picmeno = av.picmeno)
 	 AND EXISTS (SELECT ecregister.picmeNo FROM ecregister WHERE ecregister.picmeNo = av.picmeno)
-AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = av.picmeno)");  
+AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = av.picmeno)");  /*/
+
+$listQry_AV_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,status) SELECT picmeno,status from antenatalvisit av 
+	WHERE 
+	(av.HighRisk = 1 OR 
+	(av.Hb > 0  AND av.Hb < 10) OR 
+	av.urineSugarPresent = 1 OR 
+	av.urineAlbuminPresent = 1 OR 
+	av.gctValue > 140 
+	OR av.Tsh = 'yes' OR 
+	av.bpSys > 130 OR 
+	av.bpDia > 90 OR 
+	(av.motherWeight > 0 AND av.motherWeight < 40)
+	OR av.fastingSugar > 110 OR 
+	av.postPrandial > 140) 
+	AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno) AND
+NOT EXISTS (SELECT highriskmothers.picmeNo FROM highriskmothers WHERE highriskmothers.picmeNo = av.picmeno)
+AND EXISTS (SELECT medicalhistory.picmeno FROM medicalhistory WHERE medicalhistory.picmeno = av.picmeno)
+AND EXISTS (SELECT anregistration.picmeno FROM anregistration WHERE anregistration.picmeno = av.picmeno)
+	 AND EXISTS (SELECT ecregister.picmeNo FROM ecregister WHERE ecregister.picmeNo = av.picmeno)
+AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = av.picmeno)");
 	
 /*/	$listQry_AV_upd_1 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN ecregister ON highriskmothers.picmeNo = ecregister.picmeNo SET highriskmothers.motherName = ecregister.motheraadhaarname");
 	 
