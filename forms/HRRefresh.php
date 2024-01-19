@@ -126,7 +126,7 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 			medicalhistory.momBGtype = 10) 
      AND EXISTS (SELECT anregistration.picmeno FROM anregistration WHERE anregistration.picmeno = medicalhistory.picmeno)
 	 AND EXISTS (SELECT ecregister.picmeNo FROM ecregister WHERE ecregister.picmeNo = medicalhistory.picmeno)
-	 NOT EXISTS (SELECT highriskmothers.picmeNo FROM highriskmothers WHERE highriskmothers.picmeNo = medicalhistory.picmeno)
+	 AND NOT EXISTS (SELECT highriskmothers.picmeNo FROM highriskmothers WHERE highriskmothers.picmeNo = medicalhistory.picmeno)
 	 AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = medicalhistory.picmeno)");
      
 	 $listQry_MH_upd_1 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN ecregister ON highriskmothers.picmeNo = ecregister.picmeNo SET highriskmothers.motherName = ecregister.motheraadhaarname");
