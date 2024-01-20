@@ -302,10 +302,10 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
      $listQry_AV_upd_24 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN antenatalvisit av ON highriskmothers.picmeNo = av.picmeno SET highriskmothers.highRiskFactor = 'Fetal Distress' WHERE (av.usgFetalHeartRate2 > 170)
 	 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)");
 	 
-//	 $listQry_AV_upd_15 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN antenatalvisit av ON highriskmothers.picmeNo = av.picmeno SET highriskmothers.highRiskFactor = 'Abnormal Fetal Position' WHERE (av.usgFetalPosition = 1 OR av.usgFetalPosition1 = 1 OR av.usgFetalPosition2 = 1)
-//	 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)");
+	 $listQry_AV_upd_15 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN antenatalvisit av ON highriskmothers.picmeNo = av.picmeno SET highriskmothers.highRiskFactor = 'Abnormal Fetal Position' WHERE (av.usgFetalPosition = 1 OR av.usgFetalPosition1 = 1 OR av.usgFetalPosition2 = 1)
+	 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)");
 
-     $listQry_AV_upd_16 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN antenatalvisit av ON highriskmothers.picmeNo = av.picmeno SET highriskmothers.highRiskFactor = 'Absent Fetal Movement' WHERE (av.usgFetalMovement = 4 OR av.usgFetalMovement1 = 4 OR av.usgFetalMovement2 = 4)
+ /*    $listQry_AV_upd_16 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN antenatalvisit av ON highriskmothers.picmeNo = av.picmeno SET highriskmothers.highRiskFactor = 'Absent Fetal Movement' WHERE (av.usgFetalMovement = 4 OR av.usgFetalMovement1 = 4 OR av.usgFetalMovement2 = 4)
 	 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)");
 
 //	$listQry_AV_upd_9 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN antenatalvisit av ON highriskmothers.picmeNo = av.picmeno SET highriskmothers.highRiskFactor = av.symptomsHighRisk WHERE (av.HighRisk = 1) AND
