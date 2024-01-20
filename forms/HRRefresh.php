@@ -232,8 +232,8 @@ $listQry_AV_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,stat
 	av.bpDia > 90 OR 
 	(av.usgFetalHeartRate1 > 0 AND av.usgFetalHeartRate1 < 100) OR 
 	av.usgFetalHeartRate1 > 170 OR 
-	av.usgFetalPosition1 = 1 OR
-	av.usgFetalMovement1 = 4 OR
+	av.usgFetalPosition1 = "1" OR
+	av.usgFetalMovement1 = "4" OR
 	(av.motherWeight > 0 AND av.motherWeight < 40)
 	OR av.fastingSugar > 110 OR 
 	av.postPrandial > 140 
