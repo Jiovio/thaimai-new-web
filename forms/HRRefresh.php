@@ -238,9 +238,7 @@ $listQry_AV_ins = mysqli_query($conn, "INSERT INTO highriskmothers (picmeNo,stat
 	av.usgFetalPosition = 1 OR
 	av.usgFetalMovement = 4 
 	OR (av.usgFetalHeartRate1 > 0 AND av.usgFetalHeartRate1 < 100) OR 
-	av.usgFetalHeartRate1 > 170 OR 
-	av.usgFetalPosition1 = '1' OR
-	av.usgFetalMovement1 = '4' ) 
+	av.usgFetalHeartRate1 > 170 ) 
 	AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno) AND
 NOT EXISTS (SELECT highriskmothers.picmeNo FROM highriskmothers WHERE highriskmothers.picmeNo = av.picmeno)
 AND EXISTS (SELECT medicalhistory.picmeno FROM medicalhistory WHERE medicalhistory.picmeno = av.picmeno)
