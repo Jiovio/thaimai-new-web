@@ -181,12 +181,12 @@
 									
 									$row['symptomsHighRisk'] = "Mothers age > 30";
 							} 
-							else
+						/*	else
 							if($row['hrPregnancy'] == '1')
 								{
 									
-									$row['symptomsHighRisk'] = "High Risk PRegnancy";
-							} 
+									$row['symptomsHighRisk'] = "High Risk Pregnancy";
+							} */
 								
 						/*	if($row['picmeno'] == "127023976932")
 					{
@@ -755,15 +755,7 @@ else
 										   }
 							 }
 							
-						/*	if($row['picmeno'] == "127028829268")
-					{
-						print_r("top".$row['symptomsHighRisk']); 
-					}*/
 						
-						if($row['picmeno'] == "127023976932")
-					{
-						print_r($row_av['symptomsHighRisk']); 
-					}
 								  $AR_High_Risk_Ind = "N";
 					if($row_av['HighRisk'] == "1"  OR 
 					     ($row_av['Hb'] > '0' AND $row_av['Hb'] < '10') OR 
