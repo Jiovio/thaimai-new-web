@@ -77,11 +77,6 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	
 	$listQry_anreg_upd_11 = mysqli_query($conn, "UPDATE `ecregister` JOIN anregistration ON ecregister.picmeNo = anregistration.picmeno SET ecregister.status = '6' WHERE anregistration.gravida > '2' OR anregistration.livingChildren > '2' OR anregistration.abortion > '2' OR anregistration.childDeath > '2' OR anregistration.para > '2' OR anregistration.motherHeight < '145' OR (anregistration.motherWeight > '0' AND anregistration.motherWeight < '40') OR anregistration.bpSys > '130' OR anregistration.bpDia > '90'");
 	
-	if($listQry_anreg_ins['picmeno'] == "127023976932")
-				                        	{
-					                    		print_r("hI"); exit;
-		                             		}
-	
 	
 	/*	if($listQry_anreg_ins['gravida'] > 2 OR 
 		   $listQry_anreg_ins['livingChildren'] > 2 OR 
