@@ -49,17 +49,15 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 
     $listQry_anreg_upd_1 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN ecregister ON highriskmothers.picmeNo = ecregister.picmeNo SET highriskmothers.motherName = ecregister.motheraadhaarname");
 
-    $listQry_anreg_upd_2 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno 
+	$listQry_anreg_upd_19 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno SET highriskmothers.highRiskFactor = 'High Risk Pregnancy' WHERE (anregistration.hrPregnancy = '1' )");
+	
+	$listQry_anreg_upd_2 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno 
 	SET highriskmothers.highRiskFactor = 'Multi Para' 
 	WHERE (anregistration.gravida > '2' OR 
 	anregistration.livingChildren > '2' OR 
 	anregistration.abortion > '2' OR
-    anregistration.childDeath > '2')");
+    anregistration.childDeath > '2')");	
 	
-	
-	
-	$listQry_anreg_upd_19 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno SET highriskmothers.highRiskFactor = 'High Risk Pregnancy' WHERE (anregistration.hrPregnancy = 1 )");
-
     $listQry_anreg_upd_4 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno SET highriskmothers.highRiskFactor = 'Weight below 40 kg' WHERE (anregistration.motherWeight > '0' AND anregistration.motherWeight < '40')");
 
     $listQry_anreg_upd_5 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno SET highriskmothers.highRiskFactor = 'Height below 145 cm' WHERE (anregistration.motherHeight < '145')");
