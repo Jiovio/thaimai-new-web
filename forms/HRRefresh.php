@@ -73,12 +73,12 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
     $listQry_anreg_upd_3 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno SET highriskmothers.highRiskFactor = 'Multi Para' WHERE (anregistration.para > '2')");
  		
 	$listQry_anreg_upd_10 = mysqli_query($conn, "UPDATE `anregistration` SET `hrPregnancy`=1,`highRisk`=1 WHERE gravida > 2 OR livingChildren > 2 OR abortion > 2 OR childDeath > 2 OR para > 2
-	OR motherHeight < 145 OR (anregistration.motherWeight > 0 AND motherWeight < 40) OR bpSys > 130 OR bpDia > 90 OR MotherAge < 18 OR MotherAge > 30");
+	OR motherHeight < 145 OR (motherWeight > 0 AND motherWeight < 40) OR bpSys > 130 OR bpDia > 90 OR MotherAge < 18 OR MotherAge > 30");
 	
 	$listQry_anreg_upd_11 = mysqli_query($conn, "UPDATE `ecregister` JOIN anregistration ON ecregister.picmeNo = anregistration.picmeno SET ecregister.status = 6 WHERE anregistration.gravida > 2 OR anregistration.livingChildren > 2 OR anregistration.abortion > 2 OR anregistration.childDeath > 2 OR anregistration.para > 2 OR anregistration.motherHeight < 145 OR (anregistration.motherWeight > 0 AND anregistration.motherWeight < 40) OR anregistration.bpSys > 130 OR anregistration.bpDia > 90");
 	
 	
-	/*	if($listQry_anreg_ins['gravida'] > 2 OR 
+		if($listQry_anreg_ins['gravida'] > 2 OR 
 		   $listQry_anreg_ins['livingChildren'] > 2 OR 
 		   $listQry_anreg_ins['abortion'] > 2 OR 
 		   $listQry_anreg_ins['childDeath'] > 2 OR 
@@ -92,7 +92,7 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 		   $listQry_anreg_ins['MotherAge'] > 30)
 	{
      print_r($listQry_anreg_ins['picmeno']); 
-	}	 */
+	}	 
 	//$listQry_anreg_upd_9 = mysqli_query($conn, "UPDATE `ecregister` JOIN anregistration ON ecregister.picmeNo = anregistration.picmeno SET ecregister.status = '2' WHERE ecregister.status = '6' AND anregistration.gravida <= 2 AND anregistration.livingChildren <= 2 AND anregistration.abortion <= 2 AND anregistration.childDeath <= 2 AND anregistration.para <= 2 AND anregistration.motherWeight > 40 AND anregistration.bpSys < 140 AND anregistration.bpDia < 90");
 	
 	
