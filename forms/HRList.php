@@ -162,7 +162,7 @@
 							$row['symptomsHighRisk'] = "Weight below 40 kg";
 							}
 							else
-								if($row['bpSys'] > "130" OR $row['bpDia'] > "90") 
+								if($row['bpSys'] > '130' OR $row['bpDia'] > '90') 
 							{
 								
 							$row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia";	
