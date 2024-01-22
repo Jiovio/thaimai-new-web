@@ -100,12 +100,12 @@ include "../config/db_connect.php";
 									$row['symptomsHighRisk'] = "Mothers age > 30";	
 							} 
 							else
-						/*	if($row['hrPregnancy'] == '1')
+							if($row['hrPregnancy'] == '1')
 								{
 									
 									$row['symptomsHighRisk'] = "High Risk Pregnancy";
 							} 
-							else */
+							else 
 							if($row['motherWeight'] > 0 AND $row['motherWeight'] < 40) 
 							{
 							$row['symptomsHighRisk'] = "Weight below 40 kg";	
