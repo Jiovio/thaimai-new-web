@@ -548,10 +548,10 @@ else
 										   {
 											   	 
                                            $row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia"; 	
-if($row['picmeno'] == "127028747283")
-					{
-							print_r($row['symptomsHighRisk']."inside.aass"); 
-				}											   
+                                           if($row['picmeno'] == "127028747283")
+				                        	{
+					                    		print_r($row['symptomsHighRisk']."inside.aass"); 
+		                             		}											   
 						                   }	
 										   else
 										   if($row['symptomsHighRisk'] == "7")	
