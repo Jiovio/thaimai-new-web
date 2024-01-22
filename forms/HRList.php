@@ -142,7 +142,7 @@
 							}	
 							
 							 
-							 if($row['gravida'] > "2") 
+							 if($row['gravida'] > "2" OR $row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2") 
 							{
 							$row['symptomsHighRisk'] = "Multiple Pregnancy";	
 							}
