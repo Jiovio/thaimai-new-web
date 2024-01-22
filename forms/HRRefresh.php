@@ -316,7 +316,7 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	 	
 
 	$listQry_AV_upd_13 = mysqli_query($conn, "UPDATE `highriskmothers` "
-                . "JOIN antenatalvisit av ON highriskmothers.picmeNo=av.picmeno AND int(av.symptomsHighRisk) > 0 "
+                . "JOIN antenatalvisit av ON highriskmothers.picmeNo=av.picmeno AND av.symptomsHighRisk!='' "
                 . "JOIN enumdata ON enumdata.enumid = av.symptomsHighRisk SET highriskmothers.highRiskFactor = enumdata.enumvalue WHERE (enumdata.type = 51)");
 	
 	 $listQry_AV_upd_10 = mysqli_query($conn, "UPDATE `ecregister` JOIN antenatalvisit av ON ecregister.picmeNo = av.picmeno SET ecregister.status = '6' WHERE (av.HighRisk = 1 OR (av.Hb > 0 AND av.Hb < 10) OR av.urineSugarPresent = 1 
