@@ -164,8 +164,12 @@
 							else
 								if($row['bpSys'] > "130" OR $row['bpDia'] > "90") 
 							{
-							$row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia";	
 								
+							$row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia";	
+							if($row['picmeno'] == "127028747283")
+					{
+							print_r($row['symptomsHighRisk']."inside.aass"); 
+				}		
 							} 
 							else
 								if($row['MotherAge'] > 0 AND $row['MotherAge'] < "18") 
@@ -542,7 +546,12 @@ else
                                           else
 											if($row['symptomsHighRisk'] == "6")	
 										   {
-                                           $row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia"; 											   
+											   	 
+                                           $row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia"; 	
+if($row['picmeno'] == "127028747283")
+					{
+							print_r($row['symptomsHighRisk']."inside.aass"); 
+				}											   
 						                   }	
 										   else
 										   if($row['symptomsHighRisk'] == "7")	
