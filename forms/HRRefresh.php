@@ -56,8 +56,6 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	anregistration.abortion > '2' OR
     anregistration.childDeath > '2')");
 
-    $listQry_anreg_upd_3 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno SET highriskmothers.highRiskFactor = 'Multi Para' WHERE (anregistration.para > '2')");
- 
     $listQry_anreg_upd_4 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno SET highriskmothers.highRiskFactor = 'Weight below 40 kg' WHERE (anregistration.motherWeight > '0' AND anregistration.motherWeight < '40')");
 
     $listQry_anreg_upd_5 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno SET highriskmothers.highRiskFactor = 'Height below 145 cm' WHERE (anregistration.motherHeight < '145')");
@@ -71,7 +69,9 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	//$listQry_anreg_upd_9 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno SET highriskmothers.highRiskFactor = 'High Risk Pregnancy' WHERE (anregistration.hrPregnancy = 1 )");
 		
 	$listQry_anreg_upd_9 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno SET highriskmothers.highRiskFactor = 'Multiple Pregnancy' WHERE (anregistration.gravida > 2 OR anregistration.livingChildren > 2 OR anregistration.abortion > 2 OR anregistration.childDeath > 2 )");
-			
+		
+    $listQry_anreg_upd_3 = mysqli_query($conn, "UPDATE `highriskmothers` JOIN anregistration ON highriskmothers.picmeNo = anregistration.picmeno SET highriskmothers.highRiskFactor = 'Multi Para' WHERE (anregistration.para > '2')");
+ 		
 	$listQry_anreg_upd_10 = mysqli_query($conn, "UPDATE `anregistration` SET `hrPregnancy`='1',`highRisk`='1' WHERE gravida > '2' OR livingChildren > '2' OR abortion > '2' OR childDeath > '2' OR para > '2'
 	OR motherHeight < '145' OR anregistration.hrPregnancy = '1' OR (anregistration.motherWeight > '0' AND motherWeight < '40') OR bpSys > '130' OR bpDia > '90' OR MotherAge < '18' OR MotherAge > '30'");
 	
