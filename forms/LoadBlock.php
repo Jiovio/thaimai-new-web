@@ -28,7 +28,7 @@ $UsCntmq = mysqli_query($conn,"SELECT COUNT(id) AS UsCnt FROM users WHERE BlockI
 $UsCnt = mysqli_fetch_array($UsCntmq);
     
 $LmCntmq = mysqli_query($conn,"SELECT COUNT(id) AS LmCnt FROM ecregister WHERE status NOT IN(0,1)  
-AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = ecregister.picmeNo) WHERE BlockId='".$bloName."'");
+AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = ecregister.picmeNo) WHERE ec.BlockId='".$bloName."'");
 $LmCnt = mysqli_fetch_array($LmCntmq);
     
 $HsCntmq = mysqli_query($conn,"SELECT COUNT(id) AS HsCnt FROM hscmaster WHERE BlockId='".$bloName."'");
