@@ -12,7 +12,7 @@ $AvCnt = mysqli_fetch_array($AvCntmq);
 $MhCntmq = mysqli_query($conn,"SELECT COUNT(mh.picmeno) AS MhCnt FROM medicalhistory mh JOIN ecregister ec ON mh.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND mh.status=1");
 $MhCnt = mysqli_fetch_array($MhCntmq);
 
-$HrCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(hr.picmeNo)) highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeNo WHERE ec.BlockId='".$bloName."' AND hr.status=1");
+$HrCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(hr.picmeNo)) as HrCnt from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeNo WHERE WHERE ec.BlockId='".$bloName."' AND hr.status=1");
 $HrCnt = mysqli_fetch_array($HrCntmq);
 
 $DdCntmq = mysqli_query($conn,"SELECT COUNT(dd.picmeNo) AS DdCnt FROM deliverydetails dd JOIN ecregister ec ON dd.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND dd.status=1");
