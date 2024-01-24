@@ -26,9 +26,13 @@ $PvCnt = mysqli_fetch_array($PvCntmq);
     
 $UsCntmq = mysqli_query($conn,"SELECT COUNT(id) AS UsCnt FROM users WHERE BlockId='".$bloName."' AND status=1");
 $UsCnt = mysqli_fetch_array($UsCntmq);
+
+SELECT COUNT(id) AS LmCnt FROM ecregister WHERE status NOT IN(0,1)  
+AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = ecregister.picmeNo)
     
-$LmCntmq = mysqli_query($conn,"SELECT COUNT(id) AS LmCnt FROM ecregister ec WHERE ec.status NOT IN(0,1)  
-AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = ec.picmeNo) WHERE ec.BlockId='".$bloName."'");
+$LmCntmq = mysqli_query($conn,"SELECT COUNT(id) AS LmCnt FROM ecregister WHERE status NOT IN(0,1)
+AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = ecregister.picmeNo)
+AND BlockId='".$bloName."'");
 $LmCnt = mysqli_fetch_array($LmCntmq);
     
 $HsCntmq = mysqli_query($conn,"SELECT COUNT(id) AS HsCnt FROM hscmaster WHERE BlockId='".$bloName."'");
