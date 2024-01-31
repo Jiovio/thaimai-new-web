@@ -13,7 +13,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card">
-                <h5 class="card-header"><span class="text-muted fw-light">Notified List /</span> AN Visit Due Expired</h5>
+                <h5 class="card-header"><span class="text-muted fw-light">Notified List /</span> AN Visit Due </h5>
 				<div class="table-responsive text-nowrap">
 				<div class="container">
 				<table id="users-detail" class="display nowrap" cellspacing="0" width="100%">
@@ -28,12 +28,16 @@
 					</tr>
                     </thead>
 <?php 
+/*
 $listQry = "SELECT av.picmeno,ec.motheraadhaarname,av.anvisitDate,av.avdueDate, ec.mothermobno,ec.BlockId,ec.PhcId,av.createdBy,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec ON av.picmeno=ec.picmeNo WHERE 
 str_to_date(av.anvisitDate, '%Y-%m-%d') >
          str_to_date(av.avdueDate, '%Y-%m-%d')
  AND av.status=1";
-
 $private = " AND av.createdBy='".$userid."'";
+*/
+$listQry = "SELECT av.picmeno,ec.motheraadhaarname,av.anvisitDate,av.avdueDate, ec.mothermobno,ec.BlockId,ec.PhcId,av.createdBy,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec ON av.picmeno=ec.picmeNo WHERE 
+str_to_date(av.avdueDate, '%Y-%m-%d') = CURRENT_DATE() AND av.status=1";
+$private = "";
 $orderQry = " ORDER BY ec.motheraadhaarname ASC";
 if(($usertype == 0) || ($usertype == 1)) {
   if(isset($_POST['filter'])) {

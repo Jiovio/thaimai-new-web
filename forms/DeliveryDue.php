@@ -35,12 +35,22 @@
 //$private = " AND mh.createdBy='".$userid."'";
 //$orderQry = " ORDER BY ec.motheraadhaarname ASC";
 
+/*
  $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy, u.name, ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh.createdBy WHERE 
  NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = mh.picmeno) AND 
  str_to_date(mh.edddate, '%Y-%m-%d') > CURRENT_DATE() AND mh.status=1";
  //date_format(str_to_date(mh.edddate, '%m/%d/%Y'), '%Y-%m-%d') > CURRENT_DATE() AND mh.status=1";
 $private = " AND mh.createdBy='".$userid."'";
 $orderQry = " ORDER BY mh.edddate DESC"; 
+*/
+
+
+ $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy, ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE 
+ NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = mh.picmeno) AND 
+ str_to_date(mh.edddate, '%Y-%m-%d') > CURRENT_DATE() AND mh.status=1";
+$private = "";
+$orderQry = " ORDER BY mh.edddate ASC"; 
+
 
 if(($usertype == 0) || ($usertype == 1)) {
   if(isset($_POST['filter'])) {
@@ -77,7 +87,7 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                     <td><?php  $dd = date('Y-m-d',strtotime($row['edddate'])); echo $dd; ?>
                                     <td><?php echo $row['mothermobno']; ?></td>
 									<td><?php echo $row['PhcId']; ?></td>
-                                    <td><?php echo $row['name']; ?></td>
+                                    <td><?php echo $row['createdBy']; ?></td>
 								    </tr>
                     <?php 
                         $cnt++;

@@ -31,11 +31,19 @@
                     </thead>
 <?php  
 
-$listQry = "SELECT DISTINCT(av.picmeno),ec.motheraadhaarname,av.avdueDate,ec.mothermobno, av.anvisitDate, ec.picmeNo, ec.PhcId,u.name,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno 
+$listQry = "SELECT DISTINCT(av.picmeno),ec.motheraadhaarname,av.avdueDate,ec.mothermobno, av.anvisitDate, av.createdBy, ec.picmeNo, ec.PhcId,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno 
+WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND Month(av.avdueDate) = Month(CURRENT_DATE()) AND av.status!=0";
+$private = "";
+$orderQry = " ORDER BY ec.motheraadhaarname ASC";
+
+/*
+$listQry = "SELECT DISTINCT(av.picmeno),ec.motheraadhaarname,av.avdueDate,ec.mothermobno, av.anvisitDate, ec.picmeNo, ec.PhcId,ec.BlockId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno 
 LEFT JOIN users u on av.createdBy=u.id 
 WHERE YEAR(av.avdueDate) = YEAR(CURRENT_DATE()) AND Month(av.avdueDate) = Month(CURRENT_DATE()) AND av.status!=0";
 $private = " AND av.createdBy='".$userid."'";
 $orderQry = " ORDER BY ec.motheraadhaarname ASC";
+*/
+
 if(($usertype == 0) || ($usertype == 1)) {
   if(isset($_POST['filter'])) {
     $bloName = $_POST['BlockId']; 
@@ -71,8 +79,9 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                     <td><?php  $dd = date('m-d-Y',strtotime($row['avdueDate'])); echo $dd; ?></td>
                                     <td><?php echo $row['mothermobno']; ?></td>
 									<td><?php echo $row['PhcId']; ?></td>
-                                    <td><?php echo $row['name']; ?></td>
-									<!--<td><a href="../forms/ViewEditMedical.php?view=<?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>-->
+									<td><?php echo $row['createdBy']; ?></td>
+                                 <!----   <td><//?php echo $row['name']; ?></td> --->
+									<!--<td><a href="../forms/ViewEditMedical.php?view=<//?php echo $row['id']; ?>"><i class="bx bx-show me-1"></i>View</a></td>-->
                                 </tr>
                     <?php 
                         $cnt++; 

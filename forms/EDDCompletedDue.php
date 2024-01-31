@@ -37,12 +37,21 @@
                       </tr>
                     </thead>
 <?php 
-  $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy,ec.BlockId,u.name, ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh.createdBy WHERE 
+ /* $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy,ec.BlockId,u.name, ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno JOIN users u on u.id=mh.createdBy WHERE 
+NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = mh.picmeno) AND
+str_to_date(mh.edddate, '%Y-%m-%d') < CURRENT_DATE() AND mh.status!=0";*/
+
+//$private = " AND mh.createdBy='".$userid."'";
+
+//date_format(str_to_date(mh.edddate, '%Y/%m/%d'), '%Y-%m-%d') < CURRENT_DATE() AND mh.status!=0";
+ $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarname,mh.id,mh.edddate,ec.mothermobno,mh.createdBy,ec.BlockId, ec.PhcId,ec.HscId,mh.createdBy FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE 
 NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = mh.picmeno) AND
 str_to_date(mh.edddate, '%Y-%m-%d') < CURRENT_DATE() AND mh.status!=0";
-//date_format(str_to_date(mh.edddate, '%Y/%m/%d'), '%Y-%m-%d') < CURRENT_DATE() AND mh.status!=0";
-$private = " AND mh.createdBy='".$userid."'";
+$private = "";
 $orderQry = " ORDER BY mh.edddate DESC";
+
+
+
 if(($usertype == 0) || ($usertype == 1)) {
   if(isset($_POST['filter'])) {
     $bloName = $_POST['BlockId']; 
@@ -70,6 +79,12 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                    if($ExeQuery) {
                       $cnt=1;
                       while($row = mysqli_fetch_array($ExeQuery)) {
+					/*	  if($row['picmeno'] == "127028826190")
+						  {
+							print_r(str_to_date(mh.edddate, '%Y-%m-%d');
+							print_r(CURRENT_DATE()); exit;
+						  }*/
+
                     ?>
                                 <tr>
                                     <td><?php echo $cnt; ?></td>
@@ -79,7 +94,7 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
 									
                                     <td><?php echo $row['mothermobno']; ?></td>
 									<td><?php echo $row['PhcId']; ?></td>
-                                    <td><?php echo $row['name']; ?></td>
+                                    <td><?php echo $row['createdBy']; ?></td>
                                 </tr>
                     <?php 
                         $cnt++;
