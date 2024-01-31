@@ -76,7 +76,7 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                                     <td><?php echo $cnt; ?></td>
                                     <td><?php echo $row['picmeNo']; ?></td>
 									<td><?php echo $row['motheraadhaarname']; ?></td>
-                                    <td><?php  $dd = date('m-d-Y',strtotime($row['avdueDate'])); echo $dd; ?></td>
+                                    <td><?php echo $row['avdueDate']; ?></td>
                                     <td><?php echo $row['mothermobno']; ?></td>
 									<td><?php echo $row['PhcId']; ?></td>
 									<td><?php echo $row['createdBy']; ?></td>
