@@ -181,7 +181,7 @@
 				}	*/	
 				if($row['picmeno'] == "127028844234")
 					{
-							print_r("MA".$row['bpSys'].$row['bpDia']); exit;
+							print_r("MA".$row['bpSys'].$row['bpDia'].$row['symptomsHighRisk']); exit;
 				}		
 							} 
 							else
