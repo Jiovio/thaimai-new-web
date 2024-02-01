@@ -538,7 +538,7 @@ else
 							 if(isset($row['symptomsHighRisk']))
 							 {
 							  $AV_sym_HR = "";
-										   $AV_sym_HR = $row['symptomsHighRisk'];
+										   $AV_sym_HR = $row_av['symptomsHighRisk'];
 										/*   if($row['picmeno'] == "127028844234")
 											{
 											print_r($AV_sym_HR."B"); exit;
