@@ -179,6 +179,10 @@
 					{
 							print_r($row['symptomsHighRisk']."inside.aass"); 
 				}	*/	
+				if($row['picmeno'] == "127028844234")
+					{
+							print_r("MA".$row['bpSys'].$row['bpDia']); exit;
+				}		
 							} 
 							else
 								if($row['MotherAge'] > 0 AND $row['MotherAge'] < "18") 
