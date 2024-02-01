@@ -289,7 +289,7 @@ usgFetalHeartRate2='$usgFetalHeartRate3',usgFetalPosition2='$usgFetalPosition3',
           $highrisk = mysqli_query($conn, "UPDATE ecregister ec INNER JOIN antenatalvisit av ON ec.picmeNo=av.picmeno SET ec.status=6 WHERE av.symptomsHighRisk NOT IN('1','48') AND av.picmeNo=".$picmeno);
          
 }
-if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
+/*if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
       
   $getMname = mysqli_query($conn,"SELECT motheraadhaarname FROM ecregister WHERE picmeNo='$picmeno'");
   while($value = mysqli_fetch_array($getMname)) {
@@ -300,7 +300,7 @@ if(($symptomsHighRisk !=47) && ($symptomsHighRisk !=48)) {
   $uqry= mysqli_query($conn,"UPDATE antenatalvisit SET highRiskStatus=1 WHERE picmeno='$picmeno'");
 } else {
   $uqry= mysqli_query($conn,"UPDATE highriskmothers SET status=0 WHERE picmeno='$picmeno'");
-}
+}*/
 if (isset($_GET['del'])) 
 {
   $id = $_GET['del'];

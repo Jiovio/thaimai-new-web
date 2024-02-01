@@ -70,7 +70,7 @@
 				// (mh.edddate = DATE_ADD(CURRENT_DATE(), INTERVAL 3 MONTH))";  
 				     		
 	  $private = " AND av.createdBy='".$userid."'";
-      $orderQry = " ORDER BY ar.anRegDate DESC";
+      $orderQry = " ORDER BY mh.edddate ASC";
 	  
       if(($usertype == 0) || ($usertype == 1)) {
          if(isset($_POST['filter'])) {

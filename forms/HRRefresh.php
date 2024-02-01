@@ -333,7 +333,7 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
                  AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 
                  where av1.picmeno = av.picmeno)"); 
 				 
-			/*	 $ecQry = "SELECT * From ecregister ec JOIN hscmaster hs on ec.BlockId = hs.BlockId, ec.PhcId = hs.PhcId,ec.HscId =hs.HscId,ec.PanchayatId =hs.PanchayatId,ec.VillageId = " ";				 
+			/*	 $ecQry = "SELECT * From ecregister ec JOIN hscmaster hs on ec.BlockId = hs.BlockId, ec.PhcId = hs.PhcId,ec.HscId =hs.HscId,ec.PanchayatId =hs.PanchayatId,ec.VillageId = hs.VillageId;				 
                  $ecRes =  mysqli_query($conn,$ecQry);
                  if($ecRes) { 
 				  while($row_ec = mysqli_fetch_array($ecRes)) {
