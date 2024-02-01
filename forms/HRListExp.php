@@ -99,17 +99,23 @@ include "../config/db_connect.php";
 								{
 									$row['symptomsHighRisk'] = "Mothers age > 30";	
 							} 
+							
+							else 
+							if($row['motherWeight'] > 0 AND $row['motherWeight'] < 40) 
+							{
+							$row['symptomsHighRisk'] = "Weight below 40 kg";	
+							}
+							else
+							if($row['motherHeight'] < '145') 
+							{
+							$row['symptomsHighRisk'] = "Height below 145 cm";
+							}
 							else
 							if($row['hrPregnancy'] == '1')
 								{
 									
 									$row['symptomsHighRisk'] = "High Risk Pregnancy";
 							} 
-							else 
-							if($row['motherWeight'] > 0 AND $row['motherWeight'] < 40) 
-							{
-							$row['symptomsHighRisk'] = "Weight below 40 kg";	
-							}
 							
 							$lmp_fmt = "";
 							$edd_fmt = "";

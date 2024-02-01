@@ -144,14 +144,14 @@
 							 
 							 if($row['gravida'] > "2" OR $row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2") 
 							{
-							$row['symptomsHighRisk'] = "Multiple Pregnancy";	
+							$row['symptomsHighRisk'] = "Multi Para";	
 							}
 							 else
-							if($row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2") 
+						/*	if($row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2") 
 							{
 							$row['symptomsHighRisk'] = "Previous bad obstetric history";	
 							}
-							else
+							else */
 								if($row['para'] > "2") 
 							{
 							$row['symptomsHighRisk'] = "Multi Para";	
@@ -160,6 +160,11 @@
 							if($row['motherWeight'] > "0" AND $row['motherWeight'] < '40') 
 							{
 							$row['symptomsHighRisk'] = "Weight below 40 kg";
+							}
+							else
+							if($row['motherHeight'] < '145') 
+							{
+							$row['symptomsHighRisk'] = "Height below 145 cm";
 							}
 							else
 								if($row['bpSys'] > '130' OR $row['bpDia'] > '90') 
