@@ -70,7 +70,7 @@ include "../config/db_connect.php";
 							 $row['residentType'] = "VISITOR";
 							}	
 							
-							 if($row['gravida'] > "2") 
+							if($row['gravida'] > "2" OR $row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2") 
 							{
 							$row['symptomsHighRisk'] = "Multiple Pregnancy";	
 							}
@@ -103,9 +103,9 @@ include "../config/db_connect.php";
 							if($row['hrPregnancy'] == '1')
 								{
 									
-									$row['symptomsHighRisk'] = "High Risk PRegnancy";
+									$row['symptomsHighRisk'] = "High Risk Pregnancy";
 							} 
-							else
+							else 
 							if($row['motherWeight'] > 0 AND $row['motherWeight'] < 40) 
 							{
 							$row['symptomsHighRisk'] = "Weight below 40 kg";	

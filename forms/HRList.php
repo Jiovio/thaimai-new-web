@@ -1,4 +1,4 @@
-<?php include ('require/topHeader.php'); ?>
+<?php include ('require/topHeader.php'); ?> 
 <body>
   <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -142,7 +142,7 @@
 							}	
 							
 							 
-							 if($row['gravida'] > "2") 
+							 if($row['gravida'] > "2" OR $row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2") 
 							{
 							$row['symptomsHighRisk'] = "Multiple Pregnancy";	
 							}
@@ -162,13 +162,14 @@
 							$row['symptomsHighRisk'] = "Weight below 40 kg";
 							}
 							else
-								if($row['bpSys'] > "130" OR $row['bpDia'] > "90") 
+								if($row['bpSys'] > '130' OR $row['bpDia'] > '90') 
 							{
+								
 							$row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia";	
-								if($row['picmeno'] == "127023976932")
+						/*	if($row['picmeno'] == "127028747283")
 					{
 							print_r($row['symptomsHighRisk']."inside.aass"); 
-				}
+				}	*/	
 							} 
 							else
 								if($row['MotherAge'] > 0 AND $row['MotherAge'] < "18") 
@@ -185,7 +186,7 @@
 							if($row['hrPregnancy'] == '1')
 								{
 									
-									$row['symptomsHighRisk'] = "High Risk PRegnancy";
+									$row['symptomsHighRisk'] = "High Risk Pregnancy";
 							} 
 								
 						/*	if($row['picmeno'] == "127023976932")
@@ -545,7 +546,12 @@ else
                                           else
 											if($row['symptomsHighRisk'] == "6")	
 										   {
-                                           $row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia"; 											   
+											   	 
+                                           $row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia"; 	
+                                        /*   if($row['picmeno'] == "127028747283")
+				                        	{
+					                    		print_r($row['symptomsHighRisk']."1 inside.aass"); 
+		                             		}	*/										   
 						                   }	
 										   else
 										   if($row['symptomsHighRisk'] == "7")	
@@ -755,15 +761,7 @@ else
 										   }
 							 }
 							
-						/*	if($row['picmeno'] == "127028829268")
-					{
-						print_r("top".$row['symptomsHighRisk']); 
-					}*/
 						
-						if($row['picmeno'] == "127023976932")
-					{
-						print_r($row_av['symptomsHighRisk']); 
-					}
 								  $AR_High_Risk_Ind = "N";
 					if($row_av['HighRisk'] == "1"  OR 
 					     ($row_av['Hb'] > '0' AND $row_av['Hb'] < '10') OR 
