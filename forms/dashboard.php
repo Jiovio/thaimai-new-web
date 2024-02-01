@@ -38,7 +38,7 @@ if(isset($_POST['filter'])) {
     } else if($bloName != "" && $phcName != "" && $hscName == ""){
       include 'LoadPhc.php';
 	  } else if($bloName != "" && $phcName != "" && $hscName != ""){
-      include 'LoadHsc.php';
+      include 'LoadHsc.php';  
 	  }
   } else if(isset($_POST['reset'])) {
 	  include 'LoadAll.php';

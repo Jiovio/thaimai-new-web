@@ -6,13 +6,13 @@ $ErCnt = mysqli_fetch_array($ErCntmq);
 $ArCntmq = mysqli_query($conn,"SELECT COUNT(ar.motheraadhaarid) AS ArCnt FROM anregistration ar JOIN ecregister ec ON ar.motheraadhaarid=ec.motheraadhaarid WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."' AND ar.status=1");
 $ArCnt = mysqli_fetch_array($ArCntmq);
 
-$AvCntmq = mysqli_query($conn,"SELECT COUNT(av.picmeno) AS AvCnt FROM antenatalvisit av JOIN ecregister ec ON av.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."' AND av.status=1");
+$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."' AND av.status=1");
 $AvCnt = mysqli_fetch_array($AvCntmq);
 
 $MhCntmq = mysqli_query($conn,"SELECT COUNT(mh.picmeno) AS MhCnt FROM medicalhistory mh JOIN ecregister ec ON mh.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."' AND mh.status=1");
 $MhCnt = mysqli_fetch_array($MhCntmq);
 
-$HrCntmq = mysqli_query($conn,"SELECT COUNT(av.symptomsHighRisk) AS HrCnt FROM antenatalvisit av JOIN ecregister ec on av.picmeNo=ec.picmeno WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."' AND av.symptomsHighRisk!=48 AND av.status=1");
+$HrCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(hr.picmeNo)) AS HrCnt FROM highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."' AND hr.status=1");
 $HrCnt = mysqli_fetch_array($HrCntmq);
 
 $DdCntmq = mysqli_query($conn,"SELECT COUNT(dd.picmeNo) AS DdCnt FROM deliverydetails dd JOIN ecregister ec ON dd.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."' AND dd.status=1");
@@ -27,7 +27,8 @@ $PvCnt = mysqli_fetch_array($PvCntmq);
 $UsCntmq = mysqli_query($conn,"SELECT COUNT(id) AS UsCnt FROM users WHERE BlockId='".$bloName."' AND PhcId='".$phcName."' AND HscId='".$hscName."' AND status=1");
 $UsCnt = mysqli_fetch_array($UsCntmq);
     
-$LmCntmq = mysqli_query($conn,"SELECT COUNT(id) AS LmCnt FROM hscmaster WHERE BlockId='".$bloName."' AND PhcId='".$phcName."' AND HscId='".$hscName."'");
+$LmCntmq = mysqli_query($conn,"SELECT COUNT(id) AS LmCnt FROM ecregister WHERE status NOT IN(0,1)  
+AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = ecregister.picmeNo) AND BlockId='".$bloName."' AND PhcId='".$phcName."' AND HscId='".$hscName."'");
 $LmCnt = mysqli_fetch_array($LmCntmq);
     
 $HsCntmq = mysqli_query($conn,"SELECT COUNT(id) AS HsCnt FROM hscmaster WHERE BlockId='".$bloName."' AND PhcId='".$phcName."' AND HscId='".$hscName."'");
