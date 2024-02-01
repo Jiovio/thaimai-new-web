@@ -537,7 +537,21 @@ else
 						                   }		
 							 if(isset($row['symptomsHighRisk']))
 							 {
-							 
+							  $AV_sym_HR = "";
+										   $AV_sym_HR = $row['symptomsHighRisk'];
+										   if($row['picmeno'] == "127028844234")
+											{
+											print_r($AV_sym_HR."B"); exit;
+			                                          }
+										   $HRreasonQry = "SELECT * From enumdata WHERE enumid = '$AV_sym_HR'";				 
+			                               $HRrec =  mysqli_query($conn,$HRreasonQry);
+               
+			                               if($HRrec) {
+						             		$row['symptomsHighRisk'] =  $HRrec['enumvalue'];
+											if($row['picmeno'] == "127028844234")
+											{
+											print_r($row['symptomsHighRisk']."B"); exit;
+			                                          }
 							 if($row['symptomsHighRisk'] == "1")	
 							{
 							$row['symptomsHighRisk'] = "Teenage Pregnancy";}
@@ -776,21 +790,7 @@ else
                                            $row['symptomsHighRisk'] = "None"; 	
 										   }
 										   
-										   $AV_sym_HR = "";
-										   $AV_sym_HR = $row['symptomsHighRisk'];
-										   if($row['picmeno'] == "127028844234")
-											{
-											print_r($AV_sym_HR."B"); exit;
-			                                          }
-										   $HRreasonQry = "SELECT * From enumdata WHERE enumid = '$AV_sym_HR'";				 
-			                               $HRrec =  mysqli_query($conn,$HRreasonQry);
-               
-			                               if($HRrec) {
-						             		$row['symptomsHighRisk'] =  $HRrec['enumvalue'];
-											if($row['picmeno'] == "127028844234")
-											{
-											print_r($row['symptomsHighRisk']."B"); exit;
-			                                          }
+										  
 													  }
 							 }
 							 
