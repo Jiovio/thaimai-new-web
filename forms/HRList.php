@@ -535,9 +535,9 @@ else
 										   {
                                            $row['hospitalType'] = "Home"; 											   
 						                   }		
-							 if(isset($row['symptomsHighRisk']) AND !empty($row['symptomsHighRisk']) )
+							 if(isset($row['symptomsHighRisk']))
 							 {
-								 $HRreasonQry = "SELECT * From enumdata WHERE enumdata.enumid = $row['symptomsHighRisk']";				 
+								 $HRreasonQry = "SELECT * From enumdata WHERE enumid = $row['symptomsHighRisk']";				 
 			                     $HRrec =  mysqli_query($conn,$HRreasonQry);
                
 			   if($HRrec) {
