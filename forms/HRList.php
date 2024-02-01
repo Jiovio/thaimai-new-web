@@ -772,6 +772,11 @@ else
                                            $row['symptomsHighRisk'] = "None"; 	
 										   }
 							 }
+							 
+							 if($row['picmeno'] == "127028844234")
+					{
+							print_r("MA".$row['bpSys'].$row['bpDia'].$row['symptomsHighRisk']."B"); exit;
+				}	
 							
 						
 								  $AR_High_Risk_Ind = "N";
@@ -843,7 +848,7 @@ else
 					
 					if($row['picmeno'] == "127028844234")
 					{
-							print_r("MA".$row['bpSys'].$row['bpDia'].$row['symptomsHighRisk']); exit;
+							print_r("MA".$row['bpSys'].$row['bpDia'].$row['symptomsHighRisk']."C"); exit;
 				}	
 						
 				$HscQry = "SELECT * From hscmaster";				 
