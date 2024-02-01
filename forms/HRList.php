@@ -164,6 +164,10 @@
 							else
 							if($row['motherHeight'] < '145') 
 							{
+									if($row['picmeno'] == "127028399905")
+					{
+							print_r($row['symptomsHighRisk']."inside.aass"); 
+				}		
 							$row['symptomsHighRisk'] = "Height below 145 cm";
 							}
 							else
