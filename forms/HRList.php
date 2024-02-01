@@ -433,7 +433,10 @@ else
 							
 				  }}
 				  
-				  
+				  if($row['picmeno'] == "127028844234")
+					{
+							print_r("MA".$row['bpSys'].$row['bpDia'].$row['symptomsHighRisk']."A"); exit;
+				}	
 
 				$row['pregnancyWeek'] = "";
 				//$row_av = "";
