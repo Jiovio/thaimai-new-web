@@ -537,13 +537,7 @@ else
 						                   }		
 							 if(isset($row['symptomsHighRisk']))
 							 {
-								 $HRreasonQry = "SELECT * From enumdata WHERE enumid = $row['symptomsHighRisk']";				 
-			                     $HRrec =  mysqli_query($conn,$HRreasonQry);
-               
-			   if($HRrec) {
-								$row['symptomsHighRisk'] =  $HRrec['enumvalue'];
-			   }
-							 /*
+							 
 							 if($row['symptomsHighRisk'] == "1")	
 							{
 							$row['symptomsHighRisk'] = "Teenage Pregnancy";}
@@ -575,7 +569,7 @@ else
 					                    		print_r($row['symptomsHighRisk']."1 inside.aass"); 
 		                             		}	*/										   
 						                   }	
-										/*   else
+										   else
 										   if($row['symptomsHighRisk'] == "7")	
 										   {
                                            $row['symptomsHighRisk'] = "Hydraminios"; 	
@@ -674,7 +668,7 @@ else
 										   else
 										   if($row['symptomsHighRisk'] == "27")	/**/
 										   {
-                                       /*    $row['symptomsHighRisk'] = "Differently abled mother"; 	
+                                           $row['symptomsHighRisk'] = "Differently abled mother"; 	
 										   }
 										   else
 										   if($row['symptomsHighRisk'] == "28")	
@@ -771,18 +765,16 @@ else
 										   {
                                            $row['symptomsHighRisk'] = "VDRL Positive"; 	
 										   }
-										   else 
-											   
-										   if($row['symptomsHighRisk'] == "47")	
+										   else
+										/*   if($row['symptomsHighRisk'] == "47")	
 										   {
                                            $row['symptomsHighRisk'] = "COthers"; 	
 										   }
-										   else 
+										   else */
 										   if($row['symptomsHighRisk'] == "48")	
 										   {
                                            $row['symptomsHighRisk'] = "None"; 	
-										   } */
-										   
+										   }
 							 }
 							 
 							 if($row['picmeno'] == "127028844234")
