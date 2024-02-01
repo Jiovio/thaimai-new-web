@@ -198,10 +198,12 @@
 									$row['symptomsHighRisk'] = "High Risk Pregnancy";
 							} 
 								
-						/*	if($row['picmeno'] == "127023976932")
+							
+							
+							if($row['picmeno'] == "127028844234")
 					{
-							print_r("MA".$row['MotherAge']); 
-				}	*/	
+							print_r("MA".$row['bpSys'].$row['bpDia']); exit;
+				}		
 							
 							
 							$lmp_fmt = "";
