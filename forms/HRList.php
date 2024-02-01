@@ -535,7 +535,7 @@ else
 										   {
                                            $row['hospitalType'] = "Home"; 											   
 						                   }		
-							 if(isset($row['symptomsHighRisk']))
+							 if(isset($row_av['symptomsHighRisk']))
 							 {
 							  $AV_sym_HR = "";
 										   $AV_sym_HR = $row_av['symptomsHighRisk'];
