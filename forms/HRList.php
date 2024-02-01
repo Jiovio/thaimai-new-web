@@ -164,10 +164,10 @@
 							else
 							if($row['motherHeight'] < '145') 
 							{
-									if($row['picmeno'] == "127028844234")
+								/*	if($row['picmeno'] == "127028844234")
 					{
 							print_r($row['symptomsHighRisk']."inside.aass"); 
-				}		
+				}		*/
 							$row['symptomsHighRisk'] = "Height below 145 cm";
 							}
 							else
@@ -433,10 +433,10 @@ else
 							
 				  }}
 				  
-				  if($row['picmeno'] == "127028844234")
+				/*  if($row['picmeno'] == "127028844234")
 					{
 							print_r("MA".$row['bpSys'].$row['bpDia'].$row['symptomsHighRisk']."A"); exit;
-				}	
+				}	*/
 
 				$row['pregnancyWeek'] = "";
 				//$row_av = "";
@@ -777,10 +777,10 @@ else
 										   }
 							 }
 							 
-							 if($row['picmeno'] == "127028844234")
+						/*	 if($row['picmeno'] == "127028844234")
 					{
 							print_r("MA".$row['bpSys'].$row['bpDia'].$row['symptomsHighRisk']."B"); exit;
-				}	
+				}	*/
 							
 						
 								  $AR_High_Risk_Ind = "N";
@@ -850,10 +850,10 @@ else
 						print_r("ANV".$row['symptomsHighRisk']); 
 					}*/
 					
-					if($row['picmeno'] == "127028844234")
+				/*	if($row['picmeno'] == "127028844234")
 					{
 							print_r("MA".$row['bpSys'].$row['bpDia'].$row['symptomsHighRisk']."C"); exit;
-				}	
+				}	*/
 						
 				$HscQry = "SELECT * From hscmaster";				 
 				$HscRes =  mysqli_query($conn,$HscQry);
@@ -906,10 +906,10 @@ else
 						print_r("11"."hrPregnancy".$row['gravida']."\n");
 						exit;
 				}*/
-				if($row['picmeno'] == "127028844234")
+			/*	if($row['picmeno'] == "127028844234")
 					{
 							print_r("MA".$row['bpSys'].$row['bpDia'].$row['symptomsHighRisk']); exit;
-				}		
+				}	*/	
 												 
 											   }
 										   }
