@@ -162,7 +162,12 @@
 							$row['symptomsHighRisk'] = "Weight below 40 kg";
 							}
 							else
-							
+							if($row['motherHeight'] < '145') 
+							{
+									if($row['picmeno'] == "127028844234")
+					{
+							print_r($row['symptomsHighRisk']."inside.aass"); 
+				}		
 							$row['symptomsHighRisk'] = "Height below 145 cm";
 							}
 							else
@@ -196,12 +201,6 @@
 						/*	if($row['picmeno'] == "127023976932")
 					{
 							print_r("MA".$row['MotherAge']); 
-				}	*/	
-			/*	if($row['motherHeight'] < '145') 
-							{
-									if($row['picmeno'] == "127028844234")
-					{
-							print_r($row['symptomsHighRisk']."inside.aass"); 
 				}	*/	
 							
 							
@@ -870,7 +869,7 @@ else
         		
 											   {
 												$High_Risk_Ind = "Y"; 
-if($row['picmeno'] == "127028844234")
+/*if($row['picmeno'] == "127023976932")
 					{
 						print_r("ANr".$row['symptomsHighRisk']); 
 					}												
@@ -889,7 +888,7 @@ if($row['picmeno'] == "127028844234")
 						print_r("10"."MotherAge".$row['MotherAge']."\n");
 						print_r("11"."hrPregnancy".$row['gravida']."\n");
 						exit;
-				}
+				}*/
 												 
 											   }
 										   }
