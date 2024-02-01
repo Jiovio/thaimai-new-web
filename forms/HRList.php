@@ -840,6 +840,11 @@ else
 					{
 						print_r("ANV".$row['symptomsHighRisk']); 
 					}*/
+					
+					if($row['picmeno'] == "127028844234")
+					{
+							print_r("MA".$row['bpSys'].$row['bpDia'].$row['symptomsHighRisk']); exit;
+				}	
 						
 				$HscQry = "SELECT * From hscmaster";				 
 				$HscRes =  mysqli_query($conn,$HscQry);
