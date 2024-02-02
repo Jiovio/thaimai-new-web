@@ -24,7 +24,6 @@
                 <!-- Hoverable Table rows -->
                  <div class="card">
                    <h5 class="card-header">High Risk Mothers List
-				   <?php $listQry_trunc = mysqli_query($conn,"TRUNCATE highriskmothers"); ?>
 				   
                    <a onclick="alert('Start to refresh. Please wait...');" href="<?php echo $siteurl; ?>/forms/HRRefresh.php" type="button" class="btn btn-primary" style="float:right;">
             
@@ -368,5 +367,7 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                      </table></div>
                    </div>
                  </div>
+				 
+				   <?php $listQry_trunc = mysqli_query($conn,"TRUNCATE highriskmothers"); ?>
       <!--/ Hoverable Table rows -->
 <?php include ('require/dtFooter.php'); ?>
