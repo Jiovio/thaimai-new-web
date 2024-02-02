@@ -833,22 +833,48 @@ else
                                            $row['symptomsHighRisk'] = "VDRL Positive"; 	
 										   }
 										   else
-										/*   if($row['symptomsHighRisk'] == "47")	
+										   if($row['symptomsHighRisk'] == "47")	
 										   {
-                                           $row['symptomsHighRisk'] = "COthers"; 	
+                                           $row['symptomsHighRisk'] = "hyperthyroidism"; 	
 										   }
-										   else */
+										   else 
 										   if($row['symptomsHighRisk'] == "48")	
 										   {
-                                           $row['symptomsHighRisk'] = "None"; 	
+                                           $row['symptomsHighRisk'] = "Kidney Disease"; 	
+										   }
+										   else 
+										   if($row['symptomsHighRisk'] == "49")	
+										   {
+                                           $row['symptomsHighRisk'] = "High Blood Pressure"; 	
+										   }
+										   else 
+										   if($row['symptomsHighRisk'] == "50")	
+										   {
+                                           $row['symptomsHighRisk'] = "Bradyhardic"; 	
+										   }
+										   else 
+										   if($row['symptomsHighRisk'] == "51")	
+										   {
+                                           $row['symptomsHighRisk'] = "Fetal Distress"; 	
+										   }
+										   else 
+										   if($row['symptomsHighRisk'] == "52")	
+										   {
+                                           $row['symptomsHighRisk'] = "Breech"; 	
+										   }
+										   else 
+										   if($row['symptomsHighRisk'] == "53")	
+										   {
+                                           $row['symptomsHighRisk'] = "Absent Fetal Movement"; 	
+										   }
+										   else 
+										   if($row['symptomsHighRisk'] == "54")	
+										   {
+                                           $row['symptomsHighRisk'] = "Chance to Miscarriage"; 	
 										   }
 							 }
 							 
-						/*	 if($row['picmeno'] == "127028844234")
-					{
-							print_r("MA".$row['bpSys'].$row['bpDia'].$row['symptomsHighRisk']."B"); exit;
-				}	*/
-							
+						
 						
 								  $AR_High_Risk_Ind = "N";
 					if($row_av['HighRisk'] == "1"  OR 

@@ -716,19 +716,45 @@ else
                                            $row['symptomsHighRisk'] = "Bronchial Asthma"; 	
 										   }
 										   else
-										   if($row['symptomsHighRisk'] == "46")	
-										   {
-                                           $row['symptomsHighRisk'] = "VDRL Positive"; 	
-										   }
-										/*   else
+										   else
 										   if($row['symptomsHighRisk'] == "47")	
 										   {
-                                           $row['symptomsHighRisk'] = "COthers"; 	
-										   } */
-										   else
+                                           $row['symptomsHighRisk'] = "hyperthyroidism"; 	
+										   }
+										   else 
 										   if($row['symptomsHighRisk'] == "48")	
 										   {
-                                           $row['symptomsHighRisk'] = "None"; 	
+                                           $row['symptomsHighRisk'] = "Kidney Disease"; 	
+										   }
+										   else 
+										   if($row['symptomsHighRisk'] == "49")	
+										   {
+                                           $row['symptomsHighRisk'] = "High Blood Pressure"; 	
+										   }
+										   else 
+										   if($row['symptomsHighRisk'] == "50")	
+										   {
+                                           $row['symptomsHighRisk'] = "Bradyhardic"; 	
+										   }
+										   else 
+										   if($row['symptomsHighRisk'] == "51")	
+										   {
+                                           $row['symptomsHighRisk'] = "Fetal Distress"; 	
+										   }
+										   else 
+										   if($row['symptomsHighRisk'] == "52")	
+										   {
+                                           $row['symptomsHighRisk'] = "Breech"; 	
+										   }
+										   else 
+										   if($row['symptomsHighRisk'] == "53")	
+										   {
+                                           $row['symptomsHighRisk'] = "Absent Fetal Movement"; 	
+										   }
+										   else 
+										   if($row['symptomsHighRisk'] == "54")	
+										   {
+                                           $row['symptomsHighRisk'] = "Chance to Miscarriage"; 	
 										   }
 							 }
 					  
