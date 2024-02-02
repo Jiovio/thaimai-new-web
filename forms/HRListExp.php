@@ -300,6 +300,16 @@ else
                             if($row_mh['pastillness'] == "112")
                             {
                              $row['symptomsHighRisk'] = "Hypothyroidism";
+                            }	
+                            else
+							if($row_mh['momBGtype'] == "5" OR
+						       $row_mh['momBGtype'] == "6" OR
+							   $row_mh['momBGtype'] == "7" OR
+							   $row_mh['momBGtype'] == "8" OR
+							   $row_mh['momBGtype'] == "10"
+						      )
+                            {
+                             $row['symptomsHighRisk'] = "Negative Blood Group";
                             }								
 											  										  
 					  
