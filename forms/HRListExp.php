@@ -716,6 +716,10 @@ else
                                            $row['symptomsHighRisk'] = "Bronchial Asthma"; 	
 										   }
 										   else
+										   if($row['symptomsHighRisk'] == "46")	
+										   {
+                                           $row['symptomsHighRisk'] = "VDRL Positive"; 	
+										   }
 										   else
 										   if($row['symptomsHighRisk'] == "47")	
 										   {
