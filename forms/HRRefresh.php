@@ -77,7 +77,23 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	
 	$listQry_anreg_upd_11 = mysqli_query($conn, "UPDATE `ecregister` JOIN anregistration ON ecregister.picmeNo = anregistration.picmeno SET ecregister.status = 6 WHERE anregistration.gravida > 2 OR anregistration.livingChildren > 2 OR anregistration.abortion > 2 OR anregistration.childDeath > 2 OR anregistration.para > 2 OR anregistration.motherHeight < 145 OR (anregistration.motherWeight > 0 AND anregistration.motherWeight < 40) OR anregistration.bpSys > 130 OR anregistration.bpDia > 90");
 	
-	$listQry_anreg_upd_100 = mysqli_query($conn, "UPDATE `ecregister` JOIN anregistration ON ecregister.picmeNo = anregistration.picmeno SET ecregister.status = '2' WHERE ecregister.status = '6' AND anregistration.gravida <= 2 AND anregistration.livingChildren <= 2 AND anregistration.abortion <= 2 AND anregistration.childDeath <= 2 AND anregistration.motherHeight >= 145 AND anregistration.para <= 2 AND anregistration.motherWeight > 40 AND anregistration.bpSys < 140 AND anregistration.bpDia < 90");
+	
+		if($listQry_anreg_ins['gravida'] > 2 OR 
+		   $listQry_anreg_ins['livingChildren'] > 2 OR 
+		   $listQry_anreg_ins['abortion'] > 2 OR 
+		   $listQry_anreg_ins['childDeath'] > 2 OR 
+		   $listQry_anreg_ins['para'] > 2 OR 
+		   $listQry_anreg_ins['motherHeight'] < 145 OR 
+		   ($listQry_anreg_ins['motherWeight'] > 0 AND $listQry_anreg_ins['motherWeight'] < 40) OR 
+		   $listQry_anreg_ins['bpSys'] > 130 OR 
+		   $listQry_anreg_ins['bpDia'] > 90 OR 
+		   $listQry_anreg_ins['MotherAge'] < 18 
+		   OR 
+		   $listQry_anreg_ins['MotherAge'] > 30)
+	{
+     print_r($listQry_anreg_ins['picmeno']); 
+	}	 
+	//$listQry_anreg_upd_9 = mysqli_query($conn, "UPDATE `ecregister` JOIN anregistration ON ecregister.picmeNo = anregistration.picmeno SET ecregister.status = '2' WHERE ecregister.status = '6' AND anregistration.gravida <= 2 AND anregistration.livingChildren <= 2 AND anregistration.abortion <= 2 AND anregistration.childDeath <= 2 AND anregistration.para <= 2 AND anregistration.motherWeight > 40 AND anregistration.bpSys < 140 AND anregistration.bpDia < 90");
 	
 	
 	/* ------------------------------------------------------- Medical History -----------------------------------------------------------*/
@@ -171,7 +187,7 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	
 	 $listQry_MH_upd_26 = mysqli_query($conn, "UPDATE `ecregister` JOIN medicalhistory ON ecregister.picmeNo = medicalhistory.picmeno SET ecregister.status = 6 WHERE (medicalhistory.momhivtestresult = 1 OR medicalhistory.hushivtestresult = 1 OR medicalhistory.momVdrlRprResult = 1 OR medicalhistory.husVdrlRprResult = 1 OR medicalhistory.momhbresult = 1 OR medicalhistory.hushbresult = 1 OR medicalhistory.totPregnancy > 2 OR medicalhistory.pastillness = 101 OR medicalhistory.pastillness = 102 OR medicalhistory.pastillness = 103 OR medicalhistory.pastillness = 104 OR medicalhistory.pastillness = 105 OR medicalhistory.pastillness = 106 OR medicalhistory.pastillness = 107 OR medicalhistory.pastillness = 108 OR medicalhistory.pastillness = 109 OR medicalhistory.pastillness = 110 OR medicalhistory.pastillness = 111 OR medicalhistory.pastillness = 112 OR medicalhistory.momBGtype = 5 OR medicalhistory.momBGtype = 6 OR medicalhistory.momBGtype = 7 OR medicalhistory.momBGtype = 8 OR medicalhistory.momBGtype = 10)");
 	
-	 $listQry_MH_upd_100 = mysqli_query($conn, "UPDATE `ecregister` JOIN medicalhistory ON ecregister.picmeNo = medicalhistory.picmeno SET ecregister.status = '2' WHERE (ecregister.status = '6' AND medicalhistory.momhivtestresult = 0 AND medicalhistory.hushivtestresult = 0 AND medicalhistory.momVdrlRprResult = 0 AND medicalhistory.husVdrlRprResult = 0 AND medicalhistory.momhbresult = 0 AND medicalhistory.hushbresult = 0 AND medicalhistory.totPregnancy <= 2 AND medicalhistory.pastillness != 101 AND medicalhistory.pastillness != 102 AND medicalhistory.pastillness != 103 AND medicalhistory.pastillness != 104 AND medicalhistory.pastillness != 105 AND medicalhistory.pastillness != 106 AND medicalhistory.pastillness != 107 AND medicalhistory.pastillness != 108 AND medicalhistory.pastillness != 109 AND medicalhistory.pastillness != 110 AND medicalhistory.pastillness != 111 AND medicalhistory.pastillness != 112 AND medicalhistory.momBGtype != 5 AND medicalhistory.momBGtype != 6 AND medicalhistory.momBGtype != 7 AND medicalhistory.momBGtype != 8 AND medicalhistory.momBGtype != 10)");
+//	 $listQry_MH_upd_27 = mysqli_query($conn, "UPDATE `ecregister` JOIN medicalhistory ON ecregister.picmeNo = medicalhistory.picmeno SET ecregister.status = '1' WHERE (ecregister.status = '6' AND medicalhistory.momhivtestresult = 0 AND medicalhistory.hushivtestresult = 0 AND medicalhistory.momVdrlRprResult = 0 AND medicalhistory.husVdrlRprResult = 0 AND medicalhistory.momhbresult = 0 AND medicalhistory.hushbresult = 0 AND medicalhistory.totPregnancy <= 2 AND medicalhistory.pastillness != 101 AND medicalhistory.pastillness != 102 AND medicalhistory.pastillness != 103 AND medicalhistory.pastillness != 104 AND medicalhistory.pastillness != 105 AND medicalhistory.pastillness != 106 AND medicalhistory.pastillness != 107 AND medicalhistory.pastillness = 108 AND medicalhistory.pastillness = 109 AND medicalhistory.pastillness != 110 AND medicalhistory.pastillness != 111 AND medicalhistory.pastillness != 112)");
 	
 	/* ------------------------------------------------------- antenatalvisit -----------------------------------------------------------*/
 
@@ -311,31 +327,16 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	 OR (av.usgFetalHeartRate2 > 0 AND av.usgFetalHeartRate2 < 100) OR av.usgFetalHeartRate2 > 170 OR 
 	 av.usgFetalPosition = 1 OR av.usgFetalPosition1 = 1 OR av.usgFetalPosition2 = 1 OR 
 	 av.usgFetalMovement = 4 OR av.usgFetalMovement1 = 4 OR av.usgFetalMovement2 = 4
-	 OR av.urineAlbuminPresent = 1 OR av.gctValue > 140 OR av.Tsh = 'yes' OR av.bpSys > 130 OR av.bpDia > 90 OR (av.motherWeight > 0 AND av.motherWeight < 40)
+	 OR av.urineAlbuminPresent = 1 OR av.gctValue > 140 OR av.Tsh > 'yes' OR av.bpSys > 130 OR av.bpDia > 90 OR (av.motherWeight > 0 AND av.motherWeight < 40)
 	 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno))");
 	
     /* ------------------------------------------------------- HR to Low Risk -----------------------------------------------------------*/	
-/*	 $listQry_upd_ec_11 = mysqli_query($conn, "UPDATE `ecregister` JOIN 
+	 $listQry_upd_ec_11 = mysqli_query($conn, "UPDATE `ecregister` JOIN 
                  antenatalvisit av ON ecregister.picmeNo = av.picmeno SET ecregister.status = 2
                  WHERE ecregister.status = 6 AND NOT EXISTS (SELECT highriskmothers.picmeNo 
                  FROM highriskmothers WHERE highriskmothers.picmeNo = ecregister.picmeNo) 
                  AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 
-                 where av1.picmeno = av.picmeno)"); */
-				 
-				 $listQry_upd_ec_11 = mysqli_query($conn, "UPDATE `ecregister` JOIN 
-                 antenatalvisit av ON ecregister.picmeNo = av.picmeno SET ecregister.status = 2
-                 WHERE ecregister.status = 6 AND
-				 (av.HighRisk = 0  AND av.Hb > 10 AND av.urineSugarPresent = 0 AND
-	          AND av.fastingSugar < 110 AND av.postPrandial < 140
-	 AND (av.usgFetalHeartRate >= 100 AND av.usgFetalHeartRate < 170)
-	 AND (av.usgFetalHeartRate1 >= 100 AND av.usgFetalHeartRate1 < 170)
-	 AND (av.usgFetalHeartRate2 >= 100 AND av.usgFetalHeartRate2 < 170)
-	 AND av.usgFetalPosition != 1 AND av.usgFetalPosition1 != 1 AND av.usgFetalPosition2 != 1 AND
-	 AND av.usgFetalMovement != 4 AND av.usgFetalMovement1 != 4 AND av.usgFetalMovement2 != 4 AND
-	 av.urineAlbuminPresent != 1 AND av.gctValue < 140 AND av.Tsh != 'yes' AND av.bpSys < 130 AND av.bpDia < 90 AND (av.motherWeight > 40)
-	 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 
-                 where av1.picmeno = av.picmeno)");
-	
+                 where av1.picmeno = av.picmeno)"); 
 				 
 			/*	 $ecQry = "SELECT * From ecregister ec JOIN hscmaster hs on ec.BlockId = hs.BlockId, ec.PhcId = hs.PhcId,ec.HscId =hs.HscId,ec.PanchayatId =hs.PanchayatId,ec.VillageId = hs.VillageId;				 
                  $ecRes =  mysqli_query($conn,$ecQry);
