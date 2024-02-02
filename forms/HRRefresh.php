@@ -77,22 +77,6 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 	
 	$listQry_anreg_upd_11 = mysqli_query($conn, "UPDATE `ecregister` JOIN anregistration ON ecregister.picmeNo = anregistration.picmeno SET ecregister.status = 6 WHERE anregistration.gravida > 2 OR anregistration.livingChildren > 2 OR anregistration.abortion > 2 OR anregistration.childDeath > 2 OR anregistration.para > 2 OR anregistration.motherHeight < 145 OR (anregistration.motherWeight > 0 AND anregistration.motherWeight < 40) OR anregistration.bpSys > 130 OR anregistration.bpDia > 90");
 	
-	
-		if($listQry_anreg_ins['gravida'] > 2 OR 
-		   $listQry_anreg_ins['livingChildren'] > 2 OR 
-		   $listQry_anreg_ins['abortion'] > 2 OR 
-		   $listQry_anreg_ins['childDeath'] > 2 OR 
-		   $listQry_anreg_ins['para'] > 2 OR 
-		   $listQry_anreg_ins['motherHeight'] < 145 OR 
-		   ($listQry_anreg_ins['motherWeight'] > 0 AND $listQry_anreg_ins['motherWeight'] < 40) OR 
-		   $listQry_anreg_ins['bpSys'] > 130 OR 
-		   $listQry_anreg_ins['bpDia'] > 90 OR 
-		   $listQry_anreg_ins['MotherAge'] < 18 
-		   OR 
-		   $listQry_anreg_ins['MotherAge'] > 30)
-	{
-     print_r($listQry_anreg_ins['picmeno']); 
-	}	 
 	//$listQry_anreg_upd_9 = mysqli_query($conn, "UPDATE `ecregister` JOIN anregistration ON ecregister.picmeNo = anregistration.picmeno SET ecregister.status = '2' WHERE ecregister.status = '6' AND anregistration.gravida <= 2 AND anregistration.livingChildren <= 2 AND anregistration.abortion <= 2 AND anregistration.childDeath <= 2 AND anregistration.para <= 2 AND anregistration.motherWeight > 40 AND anregistration.bpSys < 140 AND anregistration.bpDia < 90");
 	
 	

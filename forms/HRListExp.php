@@ -70,40 +70,9 @@ include "../config/db_connect.php";
 							 $row['residentType'] = "VISITOR";
 							}	
 							
-							if($row['gravida'] > "2" OR $row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2") 
+							if($row['motherWeight'] > "0" AND $row['motherWeight'] < '40') 
 							{
-							$row['symptomsHighRisk'] = "Multiple Pregnancy";	
-							}
-							 else
-							if($row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2") 
-							{
-							$row['symptomsHighRisk'] = "Previous bad obstetric history";	
-							}
-							else
-								if($row['para'] > "2") 
-							{
-							$row['symptomsHighRisk'] = "Multi Para";	
-							}
-							else
-								if($row['bpSys'] > "130" OR $row['bpDia'] > "90") 
-							{
-							$row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia";	
-							} 
-							else
-								if($row['MotherAge'] > 0 AND $row['MotherAge'] < 18) 
-							{
-							$row['symptomsHighRisk'] = "Teenage Pregnancy";	
-							} 
-							else
-								if($row['MotherAge'] > "30")
-								{
-									$row['symptomsHighRisk'] = "Mothers age > 30";	
-							} 
-							
-							else 
-							if($row['motherWeight'] > 0 AND $row['motherWeight'] < 40) 
-							{
-							$row['symptomsHighRisk'] = "Weight below 40 kg";	
+							$row['symptomsHighRisk'] = "Weight below 40 kg";
 							}
 							else
 							if($row['motherHeight'] < '145') 
@@ -111,10 +80,35 @@ include "../config/db_connect.php";
 							$row['symptomsHighRisk'] = "Height below 145 cm";
 							}
 							else
-							if($row['hrPregnancy'] == '1')
+								if($row['bpSys'] > '130' OR $row['bpDia'] > '90') 
+							{
+							$row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia";
+							} 
+							else
+								if($row['MotherAge'] > 0 AND $row['MotherAge'] < "18") 
+							{
+							$row['symptomsHighRisk'] = "Teenage Pregnancy";	
+							} 
+							else
+							if($row['MotherAge'] > '0' AND $row['MotherAge'] > '30')
 								{
 									
-									$row['symptomsHighRisk'] = "High Risk Pregnancy";
+									$row['symptomsHighRisk'] = "Mothers age > 30";
+							} 
+							else
+							if($row['gravida'] > "2" OR $row['livingChildren'] > "2" OR $row['abortion'] > "2" OR $row['childDeath'] > "2") 
+							{
+							$row['symptomsHighRisk'] = "Multiple Pregnancy";	
+							}
+							else
+							if($row['para'] > "2") 
+							{
+							$row['symptomsHighRisk'] = "Multi Para";	
+							}
+							else
+							if($row['hrPregnancy'] == '1')
+							{
+							$row['symptomsHighRisk'] = "High Risk Pregnancy";
 							} 
 							
 							$lmp_fmt = "";
@@ -357,25 +351,10 @@ else
 							{
 							$row['symptomsHighRisk'] = "Others";
 							}	*/
-							 if($row_av['motherWeight'] > "0" AND $row_av['motherWeight'] < '40') 
-							{
-							$row['symptomsHighRisk'] = "Weight below 40 kg";
-							}
-							else
-							if($row_av['motherWeight'] > 0 AND $row_av['motherWeight'] < 40) 
-							{
-							$row['symptomsHighRisk'] = "Weight below 40 kg";	
-							}
-							else
-							if($row_av['Hb'] > '0' AND $row_av['Hb'] < '10') 
-							{
-							$row['symptomsHighRisk'] = "Severe Anaemia";
-							}
 							
 							if(isset($row_av['referralDate']) > 0)
 							 {
 							 $row['refdat'] = $row_av['referralDate'];
-							 
 							 }
 							 
 							if(isset($row_av['referralPlace']) > 0)
@@ -432,7 +411,91 @@ else
 										   {
                                            $row['hospitalType'] = "Home"; 											   
 						                   }		
-							 
+							 if($row_av['Hb'] > "0" AND $row_av['Hb'] < '10') 
+							{
+							$row['symptomsHighRisk'] = "Severe Anaemia";
+							}	
+							else
+							if($row_av['urineSugarPresent'] == "1") 
+							{
+							$row['symptomsHighRisk'] = "Gestational Diabetes";
+							}
+							else	
+							if($row_av['urineAlbuminPresent'] == "1") 
+							{
+							$row['symptomsHighRisk'] = "Kidney Disease";
+							}
+							else
+                            if($row_av['gctValue'] > "140" AND $row_av['gctStatus'] != '4') 
+							{
+							$row['symptomsHighRisk'] = "GDM";
+							}
+							else
+                            if($row_av['Tsh'] == 'yes') 
+							{
+							$row['symptomsHighRisk'] = "hyperthyroidism";
+							}
+							else
+                             if($row_av['bpSys'] > '130' OR $row_av['bpDia'] > '90') 
+							{
+							$row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia";
+							}
+							else								
+							if($row_av['motherWeight'] > "0" AND $row_av['motherWeight'] < '40') 
+							{
+							$row['symptomsHighRisk'] = "Weight below 40 kg";
+							}
+							else
+							if($row_av['fastingSugar'] > '110') 
+							{
+							$row['symptomsHighRisk'] = "High Blood Pressure";
+							}
+							else
+							if($row_av['postPrandial'] > '140') 
+							{
+							$row['symptomsHighRisk'] = "Gestational Diabetes";
+							}
+							else
+							if($row_av['usgFetalHeartRate'] > '0' AND $row_av['usgFetalHeartRate'] < '100') 
+							{
+							$row['symptomsHighRisk'] = "Bradyhardic";
+							}
+							else
+							if($row_av['usgFetalHeartRate'] > '170') 
+							{
+							$row['symptomsHighRisk'] = "Fetal Distress";
+							}
+							else
+							if($row_av['usgFetalHeartRate1'] > '0' AND $row_av['usgFetalHeartRate1'] < '100') 
+							{
+							$row['symptomsHighRisk'] = "Bradyhardic";
+							}
+							else
+							if($row_av['usgFetalHeartRate1'] > '170') 
+							{
+							$row['symptomsHighRisk'] = "Fetal Distress";
+							}
+							else
+							if($row_av['usgFetalHeartRate2'] > '0' AND $row_av['usgFetalHeartRate2'] < '100') 
+							{
+							$row['symptomsHighRisk'] = "Bradyhardic";
+							}
+							else
+							if($row_av['usgFetalHeartRate2'] > '170') 
+							{
+							$row['symptomsHighRisk'] = "Fetal Distress";
+							}
+							else
+							if($row_av['usgFetalPosition'] == '1' OR $row_av['usgFetalPosition1'] == '1' OR $row_av['usgFetalPosition2'] == '1') 
+							{
+							$row['symptomsHighRisk'] = "Abnormal Fetal Position";
+							}
+							else
+							if($row_av['usgFetalMovement'] == '4' OR $row_av['usgFetalMovement1'] == '4' OR $row_av['usgFetalMovement2'] == '4') 
+							{
+							$row['symptomsHighRisk'] = "Absent Fetal Movement";
+							}
+							else									   
 							 if(isset($row['symptomsHighRisk']))
 							 {
 							 if($row['symptomsHighRisk'] == "1")	
