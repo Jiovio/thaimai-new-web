@@ -185,10 +185,10 @@
 							$row['symptomsHighRisk'] = "Multi Para";	
 							}
 							
-							if($row['hrPregnancy'] == '1')
+						/*	if($row['hrPregnancy'] == '1')
 							{
 							$row['symptomsHighRisk'] = "High Risk Pregnancy";
-							} 
+							} */
 							
 							$lmp_fmt = "";
 							$edd_fmt = "";
