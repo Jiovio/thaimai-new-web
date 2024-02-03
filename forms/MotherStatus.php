@@ -40,10 +40,12 @@
   //  $listQry = "SELECT * FROM `ecregister` WHERE status NOT IN(0,1) AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ec.picmeNo)";
     $listQry = "SELECT * FROM `ecregister` ec 
 	JOIN hscmaster hs on ec.BlockId = hs.BlockId AND ec.PhcId = hs.PhcId AND ec.HscId =hs.HscId AND 
-			ec.PanchayatId =hs.PanchayatId AND ec.VillageId = hs.VillageId WHERE status NOT IN(0,1) 
+			ec.PanchayatId =hs.PanchayatId AND ec.VillageId = hs.VillageId WHERE ec.status NOT IN(0,1) 
 	AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ec.picmeNo)";
-	$private = " AND createdBy='".$userid."'";
+	$private = "";
     $orderQry = " ORDER BY motheraadhaarname ASC";
+	
+	/*$private = " AND createdBy='".$userid."'";*/
     
     if(($usertype == 0) || ($usertype == 1)) {
   if(isset($_POST['filter'])) {
