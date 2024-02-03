@@ -49,11 +49,27 @@ $periodAr= array();
 while ($listvalue = mysqli_fetch_assoc($exequery)) {
     $periodAr[$listvalue['enumid']] = $listvalue['enumvalue'];
 }
-//$listQry = "SELECT DISTINCT(hr.picmeNo),ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
-//$listQry = "SELECT hr.picmeNo,hr.highRiskFactor from highriskmothers hr WHERE hr.status!=0";
- //$listQry = "SELECT DISTINCT(hr.picmeNo), hr.highRiskFactor, hr.status, hr.motherName  from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeNo WHERE hr.status!=0";
 
-$listQry = "SELECT DISTINCT(hr.picmeNo), hr.highRiskFactor, hr.status, hr.motherName From highriskmothers hr JOIN ecregister ec on hr.picmeNo = ec.picmeNo 
+/* ------------------------------------------------------ Virtual table updation starts ---------------------------------------------------- */
+	 
+	 $listQry_hr_upd_100 = mysqli_query($conn, "UPDATE `hr_virtual` 
+ JOIN highriskmothers hr ON hr_virtual.picmeNo = hr.picmeNo 
+ SET 
+ hr_virtual.id = hr.id,
+ hr_virtual.picmeNo = hr.picmeNo,
+ hr_virtual.motherName = hr.motherName,
+ hr_virtual.highRiskFactor = hr.highRiskFactor,
+ hr_virtual.status = hr.status
+ ");
+	 
+	 /* ------------------------------------------------------ Virtual table updation ends ------------------------------------------------------ */
+	 
+
+//$listQry = "SELECT DISTINCT(hr.picmeNo),ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from hr_virtual hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
+//$listQry = "SELECT hr.picmeNo,hr.highRiskFactor from hr_virtual hr WHERE hr.status!=0";
+ //$listQry = "SELECT DISTINCT(hr.picmeNo), hr.highRiskFactor, hr.status, hr.motherName  from hr_virtual hr JOIN ecregister ec on hr.picmeNo=ec.picmeNo WHERE hr.status!=0";
+
+$listQry = "SELECT DISTINCT(hr.picmeNo), hr.highRiskFactor, hr.status, hr.motherName From hr_virtual hr JOIN ecregister ec on hr.picmeNo = ec.picmeNo 
 			JOIN hscmaster hs on ec.BlockId = hs.BlockId AND ec.PhcId = hs.PhcId AND ec.HscId =hs.HscId AND 
 			ec.PanchayatId =hs.PanchayatId AND ec.VillageId = hs.VillageId WHERE hr.status!=0";
 
@@ -368,6 +384,6 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                    </div>
                  </div>
 				 
-				   <?php $listQry_trunc = mysqli_query($conn,"TRUNCATE highriskmothers"); ?>
+				   <?php $listQry_trunc = mysqli_query($conn,"TRUNCATE hr_virtual"); ?>
       <!--/ Hoverable Table rows -->
 <?php include ('require/dtFooter.php'); ?>
