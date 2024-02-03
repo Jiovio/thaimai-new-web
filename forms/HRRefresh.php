@@ -12,6 +12,7 @@ include ('require/Refheader.php');
   
   
   $listQry_trunc = mysqli_query($conn,"TRUNCATE highriskmothers");
+  $listQry_trunc = mysqli_query($conn,"TRUNCATE hr_virtual");
   
   /* ------------------------------------------------------- EC Register --------------------------------------------------------------------*/
 
@@ -377,7 +378,7 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 				 
 				  $listQry_upd_ec_11 = mysqli_query($conn, "UPDATE `ecregister` JOIN 
                  anregistration ar ON ecregister.picmeNo = ar.picmeno SET ecregister.status = 2
-                 WHERE ecregister.status = 6 AND NOT EXISTS (SELECT highriskmothers.picmeNo 
+                 WHERE ecregister.status != 0 AND NOT EXISTS (SELECT highriskmothers.picmeNo 
                  FROM highriskmothers WHERE highriskmothers.picmeNo = ecregister.picmeNo) 
                  "); 
 				 
