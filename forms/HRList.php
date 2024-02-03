@@ -667,7 +667,7 @@
 	                                    	 }		
                                            if($row['symptomsHighRisk'] == "18")	
 										   {
-                                           $row['symptomsHighRisk'] = "Long period infertility"; 	
+                                           $row['symptomsHighRisk'] = "Gestational Diabetes"; 	
                                            								   
 		                                     }			
 
@@ -847,6 +847,12 @@
 										   {
                                            $row['symptomsHighRisk'] = "Chance to Miscarriage"; 	
 										   }
+										   
+										   if($row['symptomsHighRisk'] == "55")	
+										   {
+                                           $row['symptomsHighRisk'] = "Long period infertility"; 	
+                                           								   
+		                                     }	
 							 }				
 							 
 						

@@ -562,7 +562,7 @@ include "../config/db_connect.php";
 	                                    	 }		
                                            if($row['symptomsHighRisk'] == "18")	
 										   {
-                                           $row['symptomsHighRisk'] = "Long period infertility"; 	
+                                           $row['symptomsHighRisk'] = "Gestational Diabetes"; 	
                                            								   
 		                                     }			
 
@@ -742,6 +742,12 @@ include "../config/db_connect.php";
 										   {
                                            $row['symptomsHighRisk'] = "Chance to Miscarriage"; 	
 										   }
+										   
+										   if($row['symptomsHighRisk'] == "55")	
+										   {
+                                           $row['symptomsHighRisk'] = "Long period infertility"; 	
+                                           								   
+		                                     }	
 							 }	
 					  
 					  $AR_High_Risk_Ind = "N";
