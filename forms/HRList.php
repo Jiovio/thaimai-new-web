@@ -342,14 +342,14 @@
                              $row['symptomsHighRisk'] = "Hep B";
                             }	
 								
-                            if($row_mh['pastillness'] == "110")
+                         /*   if($row_mh['pastillness'] == "110")
                             {
                              $row['symptomsHighRisk'] = "Any Other Specify";
-                            }
+                            } */
                             	
                             if($row_mh['pastillness'] == "111")
                             {
-                             $row['symptomsHighRisk'] = "Gestational Diabete";
+                             $row['symptomsHighRisk'] = "Gestational Diabetes";
                             }	
                             	
                             if($row_mh['pastillness'] == "112")
@@ -580,7 +580,7 @@
 							$row['symptomsHighRisk'] = "Absent Fetal Movement";
 							}
 																   
-							 if(isset($row['symptomsHighRisk']))
+							 if(isset($row_av['symptomsHighRisk']))
 							 {
 							 
 							 if($row['symptomsHighRisk'] == "1")	
