@@ -397,16 +397,8 @@ antenatalvisit.anvisitDate = (SELECT max(av1.anvisitDate) From antenatalvisit av
 	 
      $listQry_AV_del_12 = mysqli_query($conn, "TRUNCATE `highriskmothers` WHERE highriskmothers.status = 'D'"); */
 	 /* ------------------------------------------------------ Virtual table updation starts ---------------------------------------------------- */
-	 
-	 $listQry_hr_upd_100 = mysqli_query($conn, "UPDATE `hr_virtual` 
- JOIN highriskmothers hr ON hr_virtual.picmeNo = hr.picmeNo 
- SET 
- hr_virtual.id = hr.id,
- hr_virtual.picmeNo = hr.picmeNo,
- hr_virtual.motherName = hr.motherName,
- hr_virtual.highRiskFactor = hr.highRiskFactor,
- hr_virtual.status = hr.status
- ");
+	  
+ $listQry_hr_upd_100 = mysqli_query($conn, "INSERT INTO `hr_virtual` SELECT * FROM `highriskmothers`");
 	 
 	 /* ------------------------------------------------------ Virtual table updation ends ------------------------------------------------------ */
 	 
