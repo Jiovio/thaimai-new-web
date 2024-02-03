@@ -374,4 +374,4 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
 				  
       <!--/ Hoverable Table rows -->
 <?php include ('require/dtFooter.php'); ?>
-<?php $listQry_trunc = mysqli_query($conn,"TRUNCATE hr_virtual"); ?>
+<?php //$listQry_trunc = mysqli_query($conn,"TRUNCATE hr_virtual"); ?>
