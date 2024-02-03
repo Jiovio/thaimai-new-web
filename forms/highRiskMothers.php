@@ -32,22 +32,6 @@
 				   
                    <div class="table-responsive text-nowrap">
 				   
-	<?php			   
-/* ------------------------------------------------------ Virtual table updation starts ---------------------------------------------------- */
-	 
-	 $listQry_hr_upd_100 = mysqli_query($conn, "UPDATE `hr_virtual` hr 
- JOIN highriskmothers hr_mot ON hr_mot.picmeNo = hr.picmeNo 
- SET 
- hr.id = hr_mot.id,
- hr.picmeNo = hr_mot.picmeNo,
- hr.motherName = hr_mot.motherName,
- hr.highRiskFactor = hr_mot.highRiskFactor,
- hr.status = hr_mot.status
- ");
-	 
-	 /* ------------------------------------------------------ Virtual table updation ends ------------------------------------------------------ */
-	 ?>
-
            <div class="container">
            <table id="highRisk-mother-detail" class="display nowrap" cellspacing="0" width="100%">
                        <thead>
