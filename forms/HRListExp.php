@@ -478,7 +478,7 @@ include "../config/db_connect.php";
 							 if(isset($row_av['symptomsHighRisk']))
 							 {
 							 
-							 if($row['symptomsHighRisk'] == "1")	
+							 if($row['HighRisk'] == "1")	
 							{
 							$row['symptomsHighRisk'] = "Teenage Pregnancy";}
 															
