@@ -31,6 +31,23 @@
 				   </h5>
 				   
                    <div class="table-responsive text-nowrap">
+				   
+	<?php			   
+/* ------------------------------------------------------ Virtual table updation starts ---------------------------------------------------- */
+	 
+	 $listQry_hr_upd_100 = mysqli_query($conn, "UPDATE `hr_virtual` 
+ JOIN highriskmothers hr ON hr_virtual.picmeNo = hr.picmeNo 
+ SET 
+ hr_virtual.id = hr.id,
+ hr_virtual.picmeNo = hr.picmeNo,
+ hr_virtual.motherName = hr.motherName,
+ hr_virtual.highRiskFactor = hr.highRiskFactor,
+ hr_virtual.status = hr.status
+ ");
+	 
+	 /* ------------------------------------------------------ Virtual table updation ends ------------------------------------------------------ */
+	 ?>
+
            <div class="container">
            <table id="highRisk-mother-detail" class="display nowrap" cellspacing="0" width="100%">
                        <thead>
@@ -49,21 +66,6 @@ $periodAr= array();
 while ($listvalue = mysqli_fetch_assoc($exequery)) {
     $periodAr[$listvalue['enumid']] = $listvalue['enumvalue'];
 }
-
-/* ------------------------------------------------------ Virtual table updation starts ---------------------------------------------------- */
-	 
-	 $listQry_hr_upd_100 = mysqli_query($conn, "UPDATE `hr_virtual` 
- JOIN highriskmothers hr ON hr_virtual.picmeNo = hr.picmeNo 
- SET 
- hr_virtual.id = hr.id,
- hr_virtual.picmeNo = hr.picmeNo,
- hr_virtual.motherName = hr.motherName,
- hr_virtual.highRiskFactor = hr.highRiskFactor,
- hr_virtual.status = hr.status
- ");
-	 
-	 /* ------------------------------------------------------ Virtual table updation ends ------------------------------------------------------ */
-	 
 
 //$listQry = "SELECT DISTINCT(hr.picmeNo),ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from hr_virtual hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
 //$listQry = "SELECT hr.picmeNo,hr.highRiskFactor from hr_virtual hr WHERE hr.status!=0";
