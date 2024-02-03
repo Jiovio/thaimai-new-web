@@ -33,7 +33,13 @@ $UsCnt = mysqli_fetch_array($UsCntmq);
 
 /* Restricted Delivery Detials Record in pregnancy status count - by Nithya*/     
 //$LmCntmq = mysqli_query($conn,"SELECT COUNT(id) AS LmCnt FROM ecregister WHERE status NOT IN(0,1) ");
-$LmCntmq = mysqli_query($conn,"SELECT COUNT(id) AS LmCnt FROM ecregister WHERE status NOT IN(0,1)  
+$LmCntmq = mysqli_query($conn,"SELECT COUNT(id) AS LmCnt FROM ecregister
+JOIN hscmaster hs on ecregister.BlockId = hs.BlockId AND
+                     ecregister.PhcId = hs.PhcId     AND 
+					ecregister.HscId =hs.HscId      AND 
+			        ecregister.PanchayatId =hs.PanchayatId AND 
+					ecregister.VillageId = hs.VillageId 
+WHERE status NOT IN(0,1)  
 AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = ecregister.picmeNo)");
 $LmCnt = mysqli_fetch_array($LmCntmq);
     
