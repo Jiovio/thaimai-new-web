@@ -4,6 +4,7 @@
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
+	   <?php $listQry_trunc = mysqli_query($conn,"TRUNCATE hr_virtual"); ?>
         <!-- Menu -->
 <?php include ('require/header.php'); // Menu
 	  if(($usertype == 0) || ($usertype == 1)) {
@@ -370,6 +371,6 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                    </div>
                  </div>
 				 
-				   <?php $listQry_trunc = mysqli_query($conn,"TRUNCATE hr_virtual"); ?>
+				  
       <!--/ Hoverable Table rows -->
 <?php include ('require/dtFooter.php'); ?>
