@@ -1,5 +1,4 @@
 
-	   <?php $listQry_trunc = mysqli_query($conn,"TRUNCATE hr_virtual"); ?>
 <?php include ('require/topHeader.php'); ?>
 <?php session_start(); ?>
 <body>
@@ -375,3 +374,4 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
 				  
       <!--/ Hoverable Table rows -->
 <?php include ('require/dtFooter.php'); ?>
+<?php $listQry_trunc = mysqli_query($conn,"TRUNCATE hr_virtual"); ?>
