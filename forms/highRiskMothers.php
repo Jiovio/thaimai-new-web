@@ -1,10 +1,11 @@
+
+	   <?php $listQry_trunc = mysqli_query($conn,"TRUNCATE hr_virtual"); ?>
 <?php include ('require/topHeader.php'); ?>
 <?php session_start(); ?>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
-	   <?php $listQry_trunc = mysqli_query($conn,"TRUNCATE hr_virtual"); ?>
         <!-- Menu -->
 <?php include ('require/header.php'); // Menu
 	  if(($usertype == 0) || ($usertype == 1)) {
