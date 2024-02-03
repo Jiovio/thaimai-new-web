@@ -385,7 +385,7 @@ AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE delive
 				 highriskmothers ON highriskmothers.picmeNo = ecregister.picmeNo JOIN 
                  anregistration ON highriskmothers.picmeNo = anregistration.picmeno
                  SET ecregister.status = 5
-                 WHERE ecregister.status != 0 AND MotherAge < 18 
+                 WHERE ecregister.status != 0 AND anregistration.MotherAge < 18 
                  ");
 				 
 				  $listQry_upd_ec_200 = mysqli_query($conn, "UPDATE `ecregister` JOIN 
