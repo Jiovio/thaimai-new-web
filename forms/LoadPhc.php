@@ -1,15 +1,43 @@
 <?php include ('require/topHeader.php'); ?>
 <?php 
-$ErCntmq = mysqli_query($conn,"SELECT COUNT(id) AS ErCnt FROM ecregister WHERE BlockId='".$bloName."' AND PhcId='".$phcName."' AND status!=0");
+$ErCntmq = mysqli_query($conn,"SELECT COUNT(ec.id) AS ErCnt FROM ecregister ec 
+JOIN hscmaster hs on
+ec.BlockId = hs.BlockId AND 
+ec.PhcId = hs.PhcId AND 
+ec.HscId =hs.HscId AND 
+ec.PanchayatId =hs.PanchayatId AND 
+ec.VillageId = hs.VillageId
+WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.status!=0");
 $ErCnt = mysqli_fetch_array($ErCntmq);
 
-$ArCntmq = mysqli_query($conn,"SELECT COUNT(ar.motheraadhaarid) AS ArCnt FROM anregistration ar JOIN ecregister ec ON ar.motheraadhaarid=ec.motheraadhaarid WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ar.status=1");
+$ArCntmq = mysqli_query($conn,"SELECT COUNT(ar.motheraadhaarid) AS ArCnt FROM anregistration ar JOIN ecregister ec ON ar.motheraadhaarid=ec.motheraadhaarid 
+JOIN hscmaster hs on
+ec.BlockId = hs.BlockId AND 
+ec.PhcId = hs.PhcId AND 
+ec.HscId =hs.HscId AND 
+ec.PanchayatId =hs.PanchayatId AND 
+ec.VillageId = hs.VillageId
+WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ar.status=1");
 $ArCnt = mysqli_fetch_array($ArCntmq);
 
-$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND av.status=1");
+$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno 
+JOIN hscmaster hs on
+ec.BlockId = hs.BlockId AND 
+ec.PhcId = hs.PhcId AND 
+ec.HscId =hs.HscId AND 
+ec.PanchayatId =hs.PanchayatId AND 
+ec.VillageId = hs.VillageId
+WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND av.status=1");
 $AvCnt = mysqli_fetch_array($AvCntmq);
 
-$MhCntmq = mysqli_query($conn,"SELECT COUNT(mh.picmeno) AS MhCnt FROM medicalhistory mh JOIN ecregister ec ON mh.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND mh.status=1");
+$MhCntmq = mysqli_query($conn,"SELECT COUNT(mh.picmeno) AS MhCnt FROM medicalhistory mh JOIN ecregister ec ON mh.picmeno=ec.picmeno 
+JOIN hscmaster hs on
+ec.BlockId = hs.BlockId AND 
+ec.PhcId = hs.PhcId AND 
+ec.HscId =hs.HscId AND 
+ec.PanchayatId =hs.PanchayatId AND 
+ec.VillageId = hs.VillageId
+WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND mh.status=1");
 $MhCnt = mysqli_fetch_array($MhCntmq);
 
 $HrCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(hr.picmeNo)) AS HrCnt FROM highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno 
@@ -18,21 +46,49 @@ JOIN hscmaster hs on ec.BlockId = hs.BlockId AND ec.PhcId = hs.PhcId AND ec.HscI
 WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND hr.status=1");
 $HrCnt = mysqli_fetch_array($HrCntmq);
 
-$DdCntmq = mysqli_query($conn,"SELECT COUNT(dd.picmeNo) AS DdCnt FROM deliverydetails dd JOIN ecregister ec ON dd.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND dd.status=1");
+$DdCntmq = mysqli_query($conn,"SELECT COUNT(dd.picmeNo) AS DdCnt FROM deliverydetails dd JOIN ecregister ec ON dd.picmeno=ec.picmeno 
+JOIN hscmaster hs on
+ec.BlockId = hs.BlockId AND 
+ec.PhcId = hs.PhcId AND 
+ec.HscId =hs.HscId AND 
+ec.PanchayatId =hs.PanchayatId AND 
+ec.VillageId = hs.VillageId
+WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND dd.status=1");
 $DdCnt = mysqli_fetch_array($DdCntmq);
 
-$ImCntmq = mysqli_query($conn,"SELECT COUNT(im.picmeNo) AS ImCnt FROM immunization im JOIN ecregister ec ON im.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND im.status=1");
+$ImCntmq = mysqli_query($conn,"SELECT COUNT(im.picmeNo) AS ImCnt FROM immunization im JOIN ecregister ec ON im.picmeno=ec.picmeno 
+JOIN hscmaster hs on
+ec.BlockId = hs.BlockId AND 
+ec.PhcId = hs.PhcId AND 
+ec.HscId =hs.HscId AND 
+ec.PanchayatId =hs.PanchayatId AND 
+ec.VillageId = hs.VillageId
+WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND im.status=1");
 $ImCnt = mysqli_fetch_array($ImCntmq);
 									
-$PvCntmq = mysqli_query($conn,"SELECT count(pv.picmeNo) AS PvCnt FROM postnatalvisit pv JOIN ecregister ec ON pv.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND pv.status=1");
+$PvCntmq = mysqli_query($conn,"SELECT count(pv.picmeNo) AS PvCnt FROM postnatalvisit pv JOIN ecregister ec ON pv.picmeno=ec.picmeno 
+JOIN hscmaster hs on
+ec.BlockId = hs.BlockId AND 
+ec.PhcId = hs.PhcId AND 
+ec.HscId =hs.HscId AND 
+ec.PanchayatId =hs.PanchayatId AND 
+ec.VillageId = hs.VillageId
+WHERE ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND pv.status=1");
 $PvCnt = mysqli_fetch_array($PvCntmq);
     
 $UsCntmq = mysqli_query($conn,"SELECT COUNT(id) AS UsCnt FROM users WHERE BlockId='".$bloName."' AND PhcId='".$phcName."' AND status=1");
 $UsCnt = mysqli_fetch_array($UsCntmq);
     
-$LmCntmq = mysqli_query($conn,"SELECT COUNT(id) AS LmCnt FROM ecregister WHERE status NOT IN(0,1)  
-AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = ecregister.picmeNo) 
-AND BlockId='".$bloName."' AND PhcId='".$phcName."'");
+$LmCntmq = mysqli_query($conn,"SELECT COUNT(ec.id) AS LmCnt FROM ecregister ec 
+JOIN hscmaster hs on
+ec.BlockId = hs.BlockId AND 
+ec.PhcId = hs.PhcId AND 
+ec.HscId =hs.HscId AND 
+ec.PanchayatId =hs.PanchayatId AND 
+ec.VillageId = hs.VillageId
+WHERE ec.status NOT IN(0,1)  
+AND NOT EXISTS (SELECT deliverydetails.picmeno FROM deliverydetails WHERE deliverydetails.picmeno = ec.picmeNo) 
+AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'");
 $LmCnt = mysqli_fetch_array($LmCntmq);
     
 $HsCntmq = mysqli_query($conn,"SELECT COUNT(id) AS HsCnt FROM hscmaster WHERE BlockId='".$bloName."' AND PhcId='".$phcName."'");
