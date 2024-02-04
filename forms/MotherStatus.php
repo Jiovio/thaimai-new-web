@@ -39,7 +39,8 @@
     <?php 
   //  $listQry = "SELECT * FROM `ecregister` WHERE status NOT IN(0,1) AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ec.picmeNo)";
     $listQry = "SELECT * FROM `ecregister` ec 
-	WHERE ec.status NOT IN(0,1) 
+	JOIN hscmaster hs on ec.BlockId = hs.BlockId AND ec.PhcId = hs.PhcId AND ec.HscId =hs.HscId AND  
+			ec.PanchayatId =hs.PanchayatId AND ec.VillageId = hs.VillageId WHERE ec.status NOT IN(0,1) 
 	AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ec.picmeNo)";
 	$private = " AND createdBy='".$userid."'";
     $orderQry = " ORDER BY motheraadhaarname ASC";
