@@ -79,7 +79,7 @@ $PvCnt = mysqli_fetch_array($PvCntmq);
 $UsCntmq = mysqli_query($conn,"SELECT COUNT(id) AS UsCnt FROM users WHERE BlockId='".$bloName."' AND PhcId='".$phcName."' AND HscId='".$hscName."' AND status=1");
 $UsCnt = mysqli_fetch_array($UsCntmq);
     
-$LmCntmq = mysqli_query($conn,"SELECT COUNT(id) AS LmCnt FROM ecregister ec 
+$LmCntmq = mysqli_query($conn,"SELECT COUNT(ec.id) AS LmCnt FROM ecregister ec 
 JOIN hscmaster hs on
 ec.BlockId = hs.BlockId AND 
 ec.PhcId = hs.PhcId AND 
