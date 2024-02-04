@@ -1,9 +1,12 @@
 <?php include ('require/topHeader.php'); ?>
 <?php 
-$ErCntmq = mysqli_query($conn,"SELECT COUNT(ec.id) AS ErCnt FROM ecregister 
-ec JOIN hscmaster hs on ec.BlockId = hs.BlockId AND ec.PhcId = hs.PhcId AND ec.HscId =hs.HscId AND 
-			ec.PanchayatId =hs.PanchayatId
-WHERE status!=0");
+$ErCntmq = mysqli_query($conn,"SELECT COUNT(ec.id) AS ErCnt FROM ecregister ec JOIN hscmaster hs on 
+ec.BlockId = hs.BlockId AND 
+ec.PhcId = hs.PhcId AND 
+ec.HscId =hs.HscId AND 
+ec.PanchayatId =hs.PanchayatId AND 
+ec.VillageId = hs.VillageId WHERE 
+ec.status!=0");
 $ErCnt = mysqli_fetch_array($ErCntmq);
 
 $ArCntmq = mysqli_query($conn,"SELECT COUNT(an.id) AS ArCnt FROM anregistration an JOIN ecregister ec on ec.motheraadhaarid=an.motheraadhaarid WHERE an.status=1");
