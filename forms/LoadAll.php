@@ -1,6 +1,6 @@
 <?php include ('require/topHeader.php'); ?>
 <?php 
-$ErCntmq = mysqli_query($conn,"SELECT COUNT(id) AS ErCnt FROM ecregister 
+$ErCntmq = mysqli_query($conn,"SELECT COUNT(ec.id) AS ErCnt FROM ecregister 
 ec JOIN hscmaster hs on ec.BlockId = hs.BlockId AND ec.PhcId = hs.PhcId AND ec.HscId =hs.HscId AND 
 			ec.PanchayatId =hs.PanchayatId
 WHERE status!=0");
