@@ -38,11 +38,9 @@
    
     <?php 
   //  $listQry = "SELECT * FROM `ecregister` WHERE status NOT IN(0,1) AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ec.picmeNo)";
-    $listQry = "SELECT * FROM `ecregister` ec
-    JOIN anregistration an ON an.picmeno = ec.picmeNo 	
-	JOIN hscmaster hs on hs.BlockId = ec.BlockId WHERE ec.status NOT IN(0,1) AND
-	hs.PhcId = ec.PhcId AND hs.HscId = ec.HscId AND 
-			hs.PanchayatId = ec.PanchayatId AND hs.VillageId = ec.VillageId
+    $listQry = "SELECT * FROM `ecregister` ec 
+	JOIN hscmaster hs on ec.BlockId = hs.BlockId AND ec.PhcId = hs.PhcId AND ec.HscId =hs.HscId AND 
+			ec.PanchayatId =hs.PanchayatId AND ec.VillageId = hs.VillageId WHERE ec.status NOT IN(0,1) 
 	AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = ec.picmeNo)";
 	$private = " AND createdBy='".$userid."'";
     $orderQry = " ORDER BY motheraadhaarname ASC";
