@@ -167,7 +167,7 @@ include ('preloader.php');
                     <!--- <a href="javascript:void(0);" class="menu-link menu-toggle"> -->
 				<!---	 <a href="javascript:void(0);" class="menu-link menu-toggle"> --->
 					 <a class="menu-link menu-toggle">
-					    <div data-i18n=">Eligible Couples List">Eligible Couples</div> 
+					    <div data-i18n=">Eligible Couples List">Eligible Couples (Non Pregnant Couples) </div> 
 					 </a>	
 					
 				
@@ -175,7 +175,7 @@ include ('preloader.php');
 				<ul class="menu-sub"> 
 			        <li class="menu-item; style=menu-list-type:None" > 
                         <a href="ECTage.php" class="menu-link">
-                           <div data-i18n="Basic"><i>Teenage List</i></div>
+                           <div data-i18n="Basic"><i>Teenage List (Non Pregnant Couples)</i></div>
                         </a>
                     </li>
 					
@@ -183,7 +183,7 @@ include ('preloader.php');
                 
 			        <li class="menu-item; style=menu-list-type:None" > 
                         <a href="ECAbvTage.php" class="menu-link">
-                           <div data-i18n="Basic"><i>Above Teenage List</i></div>
+                           <div data-i18n="Basic"><i>Above Teenage List (Non Pregnant Couples)</i></div>
                         </a>
                     </li>
                  </ul>
@@ -195,7 +195,7 @@ include ('preloader.php');
 			     <li class="menu-item">   <!---- Creating Sub Menu Detail under Reports --->
                     <!--- <a href="javascript:void(0);" class="menu-link menu-toggle"> -->
 					 <a href="javascript:void(0);" class="menu-link menu-toggle">
-					    <div data-i18n=">Eligible Couples List">AN Registration</div> 
+					    <div data-i18n=">Eligible Couples List">AN Registration (Pregnant Couples)</div> 
 					 </a>	
 					
 					<ul class="menu-sub"> <!---- Creating Sub Sub Menu Header ---->
