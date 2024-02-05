@@ -26,7 +26,7 @@
                  <div class="card">
                    <h5 class="card-header">High Risk Mothers List
 				   
-				   <span style="color:red">Note: Please use the refresh button before checking the list. </span>
+				   <span style="color:red">( Note: Please use the refresh button before checking the list ) </span>
 				   
                    <a onclick="alert('Start to refresh. Please wait...');" href="<?php echo $siteurl; ?>/forms/HRRefresh.php" type="button" class="btn btn-primary" style="float:right;">
             
