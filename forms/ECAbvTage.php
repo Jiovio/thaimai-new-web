@@ -21,7 +21,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card"><h5 class="card-header">
-                  <span class="text-muted fw-light">Reports / Eligible Couples / </span> Above Teenage List
+                  <span class="text-muted fw-light">Reports / Eligible Couples / </span> Above Teenage List (Non Pregnant Couples)
                </h5>  
 			   
 <!------------------------------------------------------------------------------------- Page Details + search button + Table -------------------------------------------------------->		   

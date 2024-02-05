@@ -81,7 +81,7 @@ include "../config/db_connect.php";
 	{
 	  $developer_records[] = $rows;
 }}	
-	$filename = "EC_Above_Teenage_List_".date('d-m-Y') . ".xls";			
+	$filename = "EC_Above_Teenage_List_For_Non_Pregnant_Couples".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");
 	  $file = fopen('php://output','w');
