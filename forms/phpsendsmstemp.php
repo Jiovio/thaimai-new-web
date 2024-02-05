@@ -47,7 +47,7 @@ else
 //$patient = $his_mot_name."(".$his['picmeNo'].")";	
 }
 
-print_r("mother name".$patient); exit;
+//print_r("mother name".$patient); exit;
 
 // POST parameters
 $fields = array(
