@@ -404,10 +404,6 @@
 							print_r("MA".$row['bpSys'].$row['bpDia'].$row['symptomsHighRisk']."A"); exit;
 				}	*/
 				
-				if($row['picmeno'] == "127028829268")
-					{
-							print_r("127028829268"."AN"."MH".$row['symptomsHighRisk']); 
-				}	
 
 				$row['pregnancyWeek'] = "";
 				//$row_av = "";
@@ -859,11 +855,7 @@
                                            								   
 		                                     }
 							 }				
-							 if($row['picmeno'] == "127028829268")
-					{
-							print_r("127028829268"."AV".$row_av['symptomsHighRisk']); 
-				}	
-						
+							 
 						
 								  $AR_High_Risk_Ind = "N";
 					if($row_av['HighRisk'] == "1"  OR 
