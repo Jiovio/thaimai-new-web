@@ -80,7 +80,7 @@ include "../config/db_connect.php";
 						 $sym_hr_id = "";
                          $sym_hr_id = $rows['symptomsHighRisk'];						 
 						 
-                         if (isset($row['symptomsHighRisk'])) {		 
+                         if (isset($rows['symptomsHighRisk'])) {		 
 						 $enumQry = "SELECT * From enumdata where enumdata.enumid = '$sym_hr_id' and enumdata.type = '51'";				 
 			             $enumRes =  mysqli_query($conn,$enumQry);
 						 $row_enum = mysqli_fetch_array($enumRes);
