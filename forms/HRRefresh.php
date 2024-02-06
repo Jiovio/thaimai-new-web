@@ -12,7 +12,7 @@ include ('require/Refheader.php');
   
   
   $listQry_trunc = mysqli_query($conn,"TRUNCATE highriskmothers");
-  $listQry_trunc = mysqli_query($conn,"TRUNCATE hr_virtual");
+ // $listQry_trunc = mysqli_query($conn,"TRUNCATE hr_virtual");
   
   /* ------------------------------------------------------- EC Register --------------------------------------------------------------------*/
 
@@ -401,7 +401,7 @@ antenatalvisit.anvisitDate = (SELECT max(av1.anvisitDate) From antenatalvisit av
      $listQry_AV_del_12 = mysqli_query($conn, "TRUNCATE `highriskmothers` WHERE highriskmothers.status = 'D'"); */
 	 /* ------------------------------------------------------ Virtual table updation starts ---------------------------------------------------- */
 	  
- $listQry_hr_upd_100 = mysqli_query($conn, "INSERT INTO `hr_virtual` SELECT * FROM `highriskmothers`");
+ //$listQry_hr_upd_100 = mysqli_query($conn, "INSERT INTO `hr_virtual` SELECT * FROM `highriskmothers`");
 	 
 	 /* ------------------------------------------------------ Virtual table updation ends ------------------------------------------------------ */
 	 
