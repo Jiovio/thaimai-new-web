@@ -133,7 +133,7 @@
 						 $row_enum = mysqli_fetch_array($enumRes);
 						 
 						 $av_hr_fac = $row_enum['enumvalue'];
-						 print_r("picme".$row['picmeno'].$sym_hr_id);	
+						 print_r("picme".$row['picmeno'].$sym_hr_id."ENUM".$row_enum['enumvalue']);	
 						 }
 						 
 						 	
