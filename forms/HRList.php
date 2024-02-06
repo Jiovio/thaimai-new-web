@@ -403,6 +403,11 @@
 					{
 							print_r("MA".$row['bpSys'].$row['bpDia'].$row['symptomsHighRisk']."A"); exit;
 				}	*/
+				
+				if($row['picmeno'] == "127028829268")
+					{
+							print_r("127028829268".$row_av['symptomsHighRisk']); exit;
+				}	*/
 
 				$row['pregnancyWeek'] = "";
 				//$row_av = "";
