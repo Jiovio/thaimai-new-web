@@ -126,7 +126,8 @@
                          $sym_hr_id = $row['symptomsHighRisk'];						 
 						 $enumQry = "SELECT * From enumdata where enumdata.id = '$sym_hr_id' and enumdata.type = '51'";				 
 			             $enumRes =  mysqli_query($conn,$enumQry);
-							
+						 $av_hr_fac = "";
+						 $av_hr_fac = $enumRes['enumvalue'];	
 							
 							
                        ?>
@@ -148,7 +149,7 @@
 					       <td><?php echo date('d-m-Y', strtotime($row['lmpdate'])); ?></td>
                            <td><?php echo date('d-m-Y', strtotime($row['edddate'])); ?></td> 
 					       <td><?php echo $row['pregnancyWeek']; ?></td>
-					       <td><?php echo $enumRes['enumvalue']; ?></td>
+					       <td><?php echo $av_hr_fac; ?></td>
 					     </tr>
                          <?php 
                            $cnt++;
