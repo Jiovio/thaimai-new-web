@@ -124,13 +124,15 @@
 						{
 						 $av_hr_fac = "";
 						 $sym_hr_id = "";
-                         $sym_hr_id = $row['symptomsHighRisk'];	
-                         if (isset($row['symptomsHighRisk']) AND $row['symptomsHighRisk'] != '0') {	
+                         $sym_hr_id = $row['symptomsHighRisk'];
+						 
+                         if (isset($row['symptomsHighRisk']) AND $row['symptomsHighRisk'] != 0) {	
 print_r("picme".$row['picmeno'].$sym_hr_id);						 
 						 $enumQry = "SELECT * From enumdata where enumdata.id = '$sym_hr_id' and enumdata.type = '51'";				 
 			             $enumRes =  mysqli_query($conn,$enumQry);
+						 $row_enum = mysqli_fetch_array($enumRes);
 						 
-						 $av_hr_fac = $enumRes['enumvalue'];
+						 $av_hr_fac = $row_enum['enumvalue'];
 						 }
 						 
 						 	
