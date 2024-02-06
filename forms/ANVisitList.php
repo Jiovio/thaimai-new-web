@@ -126,13 +126,19 @@
 						 $sym_hr_id = "";
                          $sym_hr_id = $row['symptomsHighRisk'];
 						 
-                         if (isset($row['symptomsHighRisk'])) {	
-print_r("picme".$row['picmeno'].$sym_hr_id);						 
+						 if($row['picmeno'] = '127019494684')
+						 {
+							 print_r("Hi".$row['symptomsHighRisk']);
+						 }
+
+						 
+                         if (isset($row['symptomsHighRisk'])) {		 
 						 $enumQry = "SELECT * From enumdata where enumdata.id = '$sym_hr_id' and enumdata.type = '51'";				 
 			             $enumRes =  mysqli_query($conn,$enumQry);
 						 $row_enum = mysqli_fetch_array($enumRes);
 						 
 						 $av_hr_fac = $row_enum['enumvalue'];
+						 print_r("picme".$row['picmeno'].$sym_hr_id);	
 						 }
 						 
 						 	
