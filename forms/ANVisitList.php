@@ -122,123 +122,10 @@
 						$row['VillageId']==$rowh['VillageId'] AND
 						$row['PanchayatId']==$rowh['PanchayatId'])
 						{
-						 if($row['symptomsHighRisk'] == "1")	
-							{
-							$row['symptomsHighRisk'] = "Teenage Pregnancy";}
-							else								
-							    if($row['symptomsHighRisk'] == "2")	
-							    {
-								$row['symptomsHighRisk'] = "Elderly Primi"; }
-								 else
-							    	 if($row['symptomsHighRisk'] == "3")	
-							         {
-									 $row['symptomsHighRisk'] = "Elderly Multi "; }
-									   else 
-										   if($row['symptomsHighRisk'] == "4")	
-										   {
-                                           $row['symptomsHighRisk'] = "Short Primi"; 											   
-						                   }
-                                           else
-	                                       if($row['symptomsHighRisk'] == "5")	
-										   {
-                                           $row['symptomsHighRisk'] = "Severe Anaemia"; 											   
-						                   }	
-                                          else
-											if($row['symptomsHighRisk'] == "6")	
-										   {
-                                           $row['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia"; 											   
-						                   }	
-										   else
-										   if($row['symptomsHighRisk'] == "7")	
-										   {
-                                           $row['symptomsHighRisk'] = "Hydraminios"; 	
-                                           								   
-	                                    	 }		
-		                                   if($row['symptomsHighRisk'] == "8")	
-										   {
-                                           $row['symptomsHighRisk'] = "APH"; 	
-                                           								   
-	                                    	 }		
-                                           if($row['symptomsHighRisk'] == "9")	
-										   {
-                                           $row['symptomsHighRisk'] = "Multi Para"; 	
-                                           								   
-		                                     }				 
-											 
-											 if($row['symptomsHighRisk'] == "10")	
-							{
-							$row['symptomsHighRisk'] = "Multiple Pregnancy";}
-							else								
-							    if($row['symptomsHighRisk'] == "11")	
-							    {
-								$row['symptomsHighRisk'] = "Vesicular Mole"; }
-								 else
-							    	 if($row['symptomsHighRisk'] == "12")	
-							         {
-									 $row['symptomsHighRisk'] = "Rh incompatibility"; }
-									   else 
-										   if($row['symptomsHighRisk'] == "13")	
-										   {
-                                           $row['symptomsHighRisk'] = "Previous LSCS"; 											   
-						                   }
-                                           else
-	                                       if($row['symptomsHighRisk'] == "14")	
-										   {
-                                           $row['symptomsHighRisk'] = "Instrumental V.D"; 											   
-						                   }	
-                                          else
-											if($row['symptomsHighRisk'] == "15")	
-										   {
-                                           $row['symptomsHighRisk'] = "Weight below 40 kg"; 											   
-						                   }	
-										   else
-										   if($row['symptomsHighRisk'] == "16")	
-										   {
-                                           $row['symptomsHighRisk'] = "Heart Disease complicating pregnancy"; 	
-                                           								   
-	                                    	 }		
-		                                   if($row['symptomsHighRisk'] == "17")	
-										   {
-                                           $row['symptomsHighRisk'] = "Malaria"; 	
-                                           								   
-	                                    	 }		
-                                           if($row['symptomsHighRisk'] == "18")	
-										   {
-                                           $row['symptomsHighRisk'] = "Long period infertility"; 	
-                                           								   
-		                                     }			
-
-											if($row['symptomsHighRisk'] == "19")	
-							{
-							$row['symptomsHighRisk'] = "GDM";}
-							else								
-							    if($row['symptomsHighRisk'] == "20")	
-							    {
-								$row['symptomsHighRisk'] = "Previous bad obstetric history"; }
-								 else
-							    	 if($row['symptomsHighRisk'] == "21")	
-							         {
-									 $row['symptomsHighRisk'] = "Cancer"; }
-									   else 
-										   if($row['symptomsHighRisk'] == "22")	
-										   {
-                                           $row['symptomsHighRisk'] = "Intracranial Space occupying lesion"; 											   
-						                   }
-                                           else
-	                                       if($row['symptomsHighRisk'] == "23")	
-										   {
-                                           $row['symptomsHighRisk'] = "Pregnant due to contraceptive Failure"; 											   
-						                   }	
-                                          else
-											if($row['symptomsHighRisk'] == "24")	
-										   {
-                                           $row['symptomsHighRisk'] = "Ectopic Pregnancy"; 											   
-						                   }	
-										   else
-										   if($row['symptomsHighRisk'] == "25")	
-										   {
-                                           $row['symptomsHighRisk'] = "Malpresentation"; 	
-										   }	
+						 $sym_hr_id = "";
+                         $sym_hr_id = $row['symptomsHighRisk'];						 
+						 $enumQry = "SELECT * From enumdata where enumdata.id = '$sym_hr_id' and enumdata.type = '51'";				 
+			             $enumRes =  mysqli_query($conn,$enumQry);
 							
 							
 							
@@ -261,7 +148,7 @@
 					       <td><?php echo date('d-m-Y', strtotime($row['lmpdate'])); ?></td>
                            <td><?php echo date('d-m-Y', strtotime($row['edddate'])); ?></td> 
 					       <td><?php echo $row['pregnancyWeek']; ?></td>
-					       <td><?php echo $row['symptomsHighRisk']; ?></td>
+					       <td><?php echo $enumRes['enumvalue']; ?></td>
 					     </tr>
                          <?php 
                            $cnt++;
