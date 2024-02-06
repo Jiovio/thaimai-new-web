@@ -126,7 +126,7 @@
 						 $sym_hr_id = "";
                          $sym_hr_id = $row['symptomsHighRisk'];
 						 
-                         if (isset($row['symptomsHighRisk']) AND $row['symptomsHighRisk'] != 0) {	
+                         if (isset($row['symptomsHighRisk'])) {	
 print_r("picme".$row['picmeno'].$sym_hr_id);						 
 						 $enumQry = "SELECT * From enumdata where enumdata.id = '$sym_hr_id' and enumdata.type = '51'";				 
 			             $enumRes =  mysqli_query($conn,$enumQry);
