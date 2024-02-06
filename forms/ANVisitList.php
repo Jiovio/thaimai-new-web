@@ -122,13 +122,13 @@
 						$row['VillageId']==$rowh['VillageId'] AND
 						$row['PanchayatId']==$rowh['PanchayatId'])
 						{
-						 $av_hr_fac = "";
+						 $av_hr_fac = "No";
 						 $sym_hr_id = "";
                          $sym_hr_id = $row['symptomsHighRisk'];
 						 
 						 
                          if (isset($row['symptomsHighRisk'])) {		 
-						 $enumQry = "SELECT * From enumdata where enumdata.id = '$sym_hr_id' and enumdata.type = '51'";				 
+						 $enumQry = "SELECT * From enumdata where enumdata.enumid = '$sym_hr_id' and enumdata.type = '51'";				 
 			             $enumRes =  mysqli_query($conn,$enumQry);
 						 $row_enum = mysqli_fetch_array($enumRes);
 						 
