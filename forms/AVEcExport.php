@@ -95,6 +95,7 @@ include "../config/db_connect.php";
 	 {	 
        $wild_srch =  $wild_cnt++."||".  
 	   $rows['picmeno'].
+	   $rows['ancPeriod'].
 	   date('d-m-Y', strtotime($rows['anRegDate']))."||". 
 	   $rows['BlockName']."||".  
        $rows['PhcName']."||". 
@@ -140,7 +141,8 @@ include "../config/db_connect.php";
 		}
 		$lineData = array(
 		$sno++, 
-		$record['picmeno'], 
+		$record['picmeno'],
+        $record['ancPeriod'],		
 		date('d-m-Y', strtotime($record['anRegDate'])), 
 		$record['BlockName'], 
 		$record['PhcName'], 
