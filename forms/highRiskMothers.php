@@ -1,3 +1,4 @@
+
 <?php include ('require/topHeader.php'); ?>
 <?php session_start(); ?>
 <body>
@@ -25,12 +26,15 @@
                  <div class="card">
                    <h5 class="card-header">High Risk Mothers List
 				   
+				   <span style="color:red">( Note: Please use the refresh button before checking the list ) </span>
+				   
                    <a onclick="alert('Start to refresh. Please wait...');" href="<?php echo $siteurl; ?>/forms/HRRefresh.php" type="button" class="btn btn-primary" style="float:right;">
             
 				  <span class="bx bx-refresh"></span> Refresh </a>				   			   
 				   </h5>
 				   
                    <div class="table-responsive text-nowrap">
+				   
            <div class="container">
            <table id="highRisk-mother-detail" class="display nowrap" cellspacing="0" width="100%">
                        <thead>
@@ -49,6 +53,7 @@ $periodAr= array();
 while ($listvalue = mysqli_fetch_assoc($exequery)) {
     $periodAr[$listvalue['enumid']] = $listvalue['enumvalue'];
 }
+
 //$listQry = "SELECT DISTINCT(hr.picmeNo),ec.motheraadhaarname,hr.highRiskFactor,ec.BlockId,ec.PhcId,ec.HscId from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeno WHERE hr.status=1";
 //$listQry = "SELECT hr.picmeNo,hr.highRiskFactor from highriskmothers hr WHERE hr.status!=0";
  //$listQry = "SELECT DISTINCT(hr.picmeNo), hr.highRiskFactor, hr.status, hr.motherName  from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeNo WHERE hr.status!=0";
@@ -367,5 +372,8 @@ $orderQry = " ORDER BY hr.picmeNo ASC";
                      </table></div>
                    </div>
                  </div>
+				 
+				  
       <!--/ Hoverable Table rows -->
 <?php include ('require/dtFooter.php'); ?>
+<?php //$listQry_trunc = mysqli_query($conn,"TRUNCATE highriskmothers"); ?>
