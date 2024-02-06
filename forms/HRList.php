@@ -406,7 +406,7 @@
 				
 				if($row['picmeno'] == "127028829268")
 					{
-							print_r("127028829268".$row_av['symptomsHighRisk']); exit;
+							print_r("127028829268".$row['symptomsHighRisk']); exit;
 				}	
 
 				$row['pregnancyWeek'] = "";
