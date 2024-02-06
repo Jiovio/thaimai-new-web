@@ -406,7 +406,7 @@
 				
 				if($row['picmeno'] == "127028829268")
 					{
-							print_r("127028829268".$row['symptomsHighRisk']); exit;
+							print_r("127028829268"."AN"."MH".$row['symptomsHighRisk']); 
 				}	
 
 				$row['pregnancyWeek'] = "";
@@ -859,7 +859,10 @@
                                            								   
 		                                     }
 							 }				
-							 
+							 if($row['picmeno'] == "127028829268")
+					{
+							print_r("127028829268"."AV".$row_av['symptomsHighRisk']); 
+				}	
 						
 						
 								  $AR_High_Risk_Ind = "N";
