@@ -28,8 +28,10 @@ include "../config/db_connect.php";
 
 //if(strlen($search_text_input) > 0 )
 
-    $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
-                  WHERE av.status=1 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno)";   		
+    $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, av.ancPeriod, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
+                  WHERE av.status=1 
+				  AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)
+				  AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno)";   		
 				   
     $orderQry = " ORDER BY av.picmeno ASC";  	
 		
@@ -74,124 +76,20 @@ include "../config/db_connect.php";
 			    $rows['PanchayatName'] = $rowh['PanchayatName']; 
                 $rows['VillageName'] = $rowh['VillageName']; 
 
- if($rows['symptomsHighRisk'] == "1")	
-							{
-							$rows['symptomsHighRisk'] = "Teenage Pregnancy";}
-							else								
-							    if($rows['symptomsHighRisk'] == "2")	
-							    {
-								$rows['symptomsHighRisk'] = "Elderly Primi"; }
-								 else
-							    	 if($rows['symptomsHighRisk'] == "3")	
-							         {
-									 $rows['symptomsHighRisk'] = "Elderly Multi "; }
-									   else 
-										   if($rows['symptomsHighRisk'] == "4")	
-										   {
-                                           $rows['symptomsHighRisk'] = "Short Primi"; 											   
-						                   }
-                                           else
-	                                       if($rows['symptomsHighRisk'] == "5")	
-										   {
-                                           $rows['symptomsHighRisk'] = "Severe Anaemia"; 											   
-						                   }	
-                                          else
-											if($rows['symptomsHighRisk'] == "6")	
-										   {
-                                           $rows['symptomsHighRisk'] = "PIH/Pre Eclampsia/Eclampsia"; 											   
-						                   }	
-										   else
-										   if($rows['symptomsHighRisk'] == "7")	
-										   {
-                                           $rows['symptomsHighRisk'] = "Hydraminios"; 	
-                                           								   
-	                                    	 }		
-		                                   if($rows['symptomsHighRisk'] == "8")	
-										   {
-                                           $rows['symptomsHighRisk'] = "APH"; 	
-                                           								   
-	                                    	 }		
-                                           if($rows['symptomsHighRisk'] == "9")	
-										   {
-                                           $rows['symptomsHighRisk'] = "Multi Para"; 	
-                                           								   
-		                                     }				 
-											 
-											 if($rows['symptomsHighRisk'] == "10")	
-							{
-							$rows['symptomsHighRisk'] = "Multiple Pregnancy";}
-							else								
-							    if($rows['symptomsHighRisk'] == "11")	
-							    {
-								$rows['symptomsHighRisk'] = "Vesicular Mole"; }
-								 else
-							    	 if($rows['symptomsHighRisk'] == "12")	
-							         {
-									 $rows['symptomsHighRisk'] = "Rh incompatibility"; }
-									   else 
-										   if($rows['symptomsHighRisk'] == "13")	
-										   {
-                                           $rows['symptomsHighRisk'] = "Previous LSCS"; 											   
-						                   }
-                                           else
-	                                       if($rows['symptomsHighRisk'] == "14")	
-										   {
-                                           $rows['symptomsHighRisk'] = "Instrumental V.D"; 											   
-						                   }	
-                                          else
-											if($rows['symptomsHighRisk'] == "15")	
-										   {
-                                           $rows['symptomsHighRisk'] = "Weight below 40 kg"; 											   
-						                   }	
-										   else
-										   if($rows['symptomsHighRisk'] == "16")	
-										   {
-                                           $rows['symptomsHighRisk'] = "Heart Disease complicating pregnancy"; 	
-                                           								   
-	                                    	 }		
-		                                   if($rows['symptomsHighRisk'] == "17")	
-										   {
-                                           $rows['symptomsHighRisk'] = "Malaria"; 	
-                                           								   
-	                                    	 }		
-                                           if($rows['symptomsHighRisk'] == "18")	
-										   {
-                                           $rows['symptomsHighRisk'] = "Long period infertility"; 	
-                                           								   
-		                                     }			
-
-											if($rows['symptomsHighRisk'] == "19")	
-							{
-							$rows['symptomsHighRisk'] = "GDM";}
-							else								
-							    if($rows['symptomsHighRisk'] == "20")	
-							    {
-								$rows['symptomsHighRisk'] = "Previous bad obstetric history"; }
-								 else
-							    	 if($rows['symptomsHighRisk'] == "21")	
-							         {
-									 $rows['symptomsHighRisk'] = "Cancer"; }
-									   else 
-										   if($rows['symptomsHighRisk'] == "22")	
-										   {
-                                           $rows['symptomsHighRisk'] = "Intracranial Space occupying lesion"; 											   
-						                   }
-                                           else
-	                                       if($rows['symptomsHighRisk'] == "23")	
-										   {
-                                           $rows['symptomsHighRisk'] = "Pregnant due to contraceptive Failure"; 											   
-						                   }	
-                                          else
-											if($rows['symptomsHighRisk'] == "24")	
-										   {
-                                           $rows['symptomsHighRisk'] = "Ectopic Pregnancy"; 											   
-						                   }	
-										   else
-										   if($rows['symptomsHighRisk'] == "25")	
-										   {
-                                           $rows['symptomsHighRisk'] = "Malpresentation"; 	
-										   }				
-
+                         $av_hr_fac = "No";
+						 $sym_hr_id = "";
+                         $sym_hr_id = $rows['symptomsHighRisk'];						 
+						 
+                         if (isset($row['symptomsHighRisk'])) {		 
+						 $enumQry = "SELECT * From enumdata where enumdata.enumid = '$sym_hr_id' and enumdata.type = '51'";				 
+			             $enumRes =  mysqli_query($conn,$enumQry);
+						 $row_enum = mysqli_fetch_array($enumRes);
+						 
+						 $av_hr_fac = $row_enum['enumvalue'];
+						// print_r("picme".$row['picmeno'].$sym_hr_id."ENUM".$row_enum['enumvalue']);	
+						 }
+						 $rows['symptomsHighRisk'] = $av_hr_fac;
+						 
 		  $wild_srch = "";   
 	 if(strlen($search_text_input) > 0 )
 	 {	 
