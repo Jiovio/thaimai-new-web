@@ -126,11 +126,6 @@
 						 $sym_hr_id = "";
                          $sym_hr_id = $row['symptomsHighRisk'];
 						 
-						 if($row['picmeno'] = '127019494684')
-						 {
-							 print_r("Hi".$row['symptomsHighRisk']);
-						 }
-
 						 
                          if (isset($row['symptomsHighRisk'])) {		 
 						 $enumQry = "SELECT * From enumdata where enumdata.id = '$sym_hr_id' and enumdata.type = '51'";				 
