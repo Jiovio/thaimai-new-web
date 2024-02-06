@@ -36,6 +36,7 @@
                          <tr>
                <th>S.No</th>     
                <th>RCHID (PICME) No.</th>
+			   <th>Antenatal Visit Count</th>
                <th>AN Registered Date</th>
                <th>Block</th>
                <th>PHC</th>
@@ -59,8 +60,10 @@
 
       //  $listQry = "SELECT hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName hscmaster hs on (hs.BlockId = ec.BlockId AND hs.PhcId = ec.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId)";         
 		
-      $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
-                  WHERE av.status=1 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno)";    		
+      $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, ar.ancPeriod, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
+                  WHERE av.status=1 
+				  AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)
+				  AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno)";    		
 				     		
 	  $private = " AND av.createdBy='".$userid."'";
       $orderQry = " ORDER BY ar.anRegDate DESC";
@@ -243,6 +246,7 @@
                         <tr>
                            <td><?php echo $cnt; ?></td>
 						   <td><?php echo $row['picmeno']; ?></td>
+						   <td><?php echo $row['ancPeriod']; ?></td>
 					       <td><?php echo date('d-m-Y', strtotime($row['anRegDate'])); ?></td>
 				           <td><?php echo $rowh['BlockName']; ?></td>
                            <td><?php echo $rowh['PhcName']; ?></td>
