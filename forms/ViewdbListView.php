@@ -174,7 +174,7 @@
                         </div>
 
                         <div class="col-4 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">MOTHER AGE AT Conception</label>
+                          <label class="form-label" for="basic-icon-default-phone">MOTHER'S AGE AT MARRIAGE</label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-mobile" class="input-group-text"
                               ><i class="bx bx-user-plus"></i
@@ -184,8 +184,8 @@
                               name="motheragemarriage"
                               id="motheragemarriage"
                               class="form-control phone-mask"
-                              placeholder="MOTHER AGE AT CONCEPTION"
-                              aria-label="MOTHER AGE AT CONCEPTION"
+                              placeholder="MOTHER'S AGE AT MARRIAGE"
+                              aria-label="MOTHER'S AGE AT MARRIAGE"
                               aria-describedby="basic-icon-default-mobile"
                               disabled value="<?php echo $magemarriage; ?>"
                             />
