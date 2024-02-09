@@ -30,7 +30,8 @@
             <div class="col-md-2">
                 <label>Block Name</label>
                 <div class="input-group input-group-merge">
-                <select name="BlockId" id="BlockId" onchange="BlockOn()" class='form-control'>
+                <!--- select name="BlockId" id="BlockId" onchange="BlockOn()" class='form-control'> --->
+				<select name="BlockId" id="BlockId" onchange="BlockOn()" class='form-control'>
                 <option value="">All Blocks</option>
 				<?php
 				$result = mysqli_query($conn,"SELECT DISTINCT BlockId, BlockName FROM hscmaster ORDER BY BlockName;");

@@ -2136,6 +2136,8 @@ BlockId: BlockId
 },
 cache: false,
 success: function(result){
+	
+$("#BlockId").prop('disabled', true);	/* Controlling the result */
 document.getElementById("HscId").value="";
 $("#PhcId").html(result);
 $("#PhcId").prop('disabled', false);
@@ -2154,6 +2156,7 @@ PhcId: PhcId
 },
 cache: false,
 success: function(result){
+$("#PhcId").prop('disabled', true);	/* Controlling the result */
 $("#HscId").html(result);
 $("#HscId").prop('disabled', false);
 $("#HscId").focus();
