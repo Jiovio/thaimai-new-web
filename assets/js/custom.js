@@ -498,6 +498,8 @@ $('#picmenoNew').on('keydown keyup change', function(){
 });
 
 function addECValidate(){
+//	$("#BlockId").prop('disabled', false);	/* Controlling the result */
+//	$("#PhcId").prop('disabled', false); /* Controlling the result */
      var ecfrno = $('#ecfrno').val(); /*$('#ecfr').val + $('#ecfrno').val();*/
     var ecfr   = $('#ecfr').val();
     var motheraadhaarid = $('#motheraadhaaridec').val();
@@ -1595,11 +1597,13 @@ $('.highPregnancyCls').on('blur change', function (){
 
 $('#HscId').on('change', function(){
     hscId = $(this).val();
+	var BlockId = document.getElementById("BlockId").value;	
+    var PhcId = document.getElementById("PhcId").value;
     $.ajax({
         url: "ajax/getPanchayat.php",
         type: "POST",
         data: {
-            hscId: hscId,
+            hscId: hscId, PhcId: PhcId, BlockId: BlockId,
             type:'hsc'
         },
         cache: false,
@@ -1647,11 +1651,14 @@ $('.anregisterPicmenoCls').on('blur change', function(){
 
 $('#PanchayatId').on('change', function(){
     panchayatId = $(this).val();
+	var BlockId = document.getElementById("BlockId").value;	
+    var PhcId = document.getElementById("PhcId").value;
+	var HscId = document.getElementById("HscId").value;	
     $.ajax({
         url: "ajax/getPanchayat.php",
         type: "POST",
         data: {
-            panchayatId: panchayatId,
+            panchayatId: panchayatId, PhcId: PhcId, BlockId: BlockId, HscId: HscId,
             type : 'panchayat'
         },
         cache: false,
@@ -2136,6 +2143,8 @@ BlockId: BlockId
 },
 cache: false,
 success: function(result){
+	
+//$("#BlockId").prop('disabled', true);	/* Controlling the result */
 document.getElementById("HscId").value="";
 $("#PhcId").html(result);
 $("#PhcId").prop('disabled', false);
@@ -2145,15 +2154,17 @@ $("#PhcId").focus();
 }
 
 function PhcOn() {
+var BlockId = document.getElementById("BlockId").value;	
 var PhcId = document.getElementById("PhcId").value;
 $.ajax({
 url: "getHsc.php",
 type: "POST",
 data: {
-PhcId: PhcId
+PhcId: PhcId, BlockId: BlockId
 },
 cache: false,
 success: function(result){
+//$("#PhcId").prop('disabled', true);	/* Controlling the result */
 $("#HscId").html(result);
 $("#HscId").prop('disabled', false);
 $("#HscId").focus();
