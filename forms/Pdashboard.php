@@ -6,7 +6,7 @@
       <!-- Menu -->
 <?php include ('require/header.php'); // Menu
 	    include ('require/Bfilter.php'); // Top Filter
-      if(isset($_POST['filter'])) {
+      if(isset($_POST['Bfilter'])) {
         $bloName = $_POST['BlockId'];
         $phcName = $_POST['PhcId'];
         $hscName = $_POST['HscId'];
