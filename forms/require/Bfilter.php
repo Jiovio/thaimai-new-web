@@ -36,17 +36,12 @@
                 <select name="BlockId" id="BlockId" class='form-control' disabled>
 				<?php
 				$result = mysqli_query($conn,"SELECT DISTINCT lm.BlockId, lm.BlockName FROM users u JOIN hscmaster lm on lm.BlockId=u.BlockId WHERE u.BlockId='".$BlockId."' ORDER BY BlockId;");
-				while($row = mysqli_fetch_array($result)) {
-				  if(isset($_POST['BlockId'])) {
-					  echo "<option value=\"".$row["BlockId"]."\"";
-					  if($_POST['BlockId'] == $row['BlockId'])
-					  echo 'selected';
-					  echo ">".$row["BlockName"]."</option>"; 
-				  } else {
-            echo "<option value=\"".$row["BlockId"]."\"";
-            echo ">".$row["BlockName"]."</option>"; 
-          }
-				}
+				while($row = mysqli_fetch_array($result)) { ?>
+				   
+					   <option value="<?php echo $row["BlockName"]; ?>"><?php echo $row["BlockName"]; ?></option>
+            
+          
+			<?php	}
                 ?>
                 </select>
                 </div>
@@ -57,7 +52,7 @@
                   <select name="PhcId" id="PhcId" onchange="PhcOn()" class='form-control'>
 						<option value="">All PHCs</option>
               <?php
-				$result = mysqli_query($conn,"SELECT DISTINCT BlockId,PhcId, PhcName FROM hscmaster WHERE BlockId='".$BlockId."'  ORDER BY PhcId;");
+				$result = mysqli_query($conn,"SELECT DISTINCT PhcId, PhcName FROM hscmaster WHERE BlockId='".$BlockId."'  ORDER BY PhcName;");
         while($row = mysqli_fetch_array($result)) {
 					if(isset($_POST['PhcId'])) {
 						echo "<option value=\"".$row["PhcId"]."\"";
@@ -79,6 +74,7 @@
                   <select name="HscId" id="HscId" class='form-control' disabled>
 						<option value="">All HSCs</option>
               <?php
+			  $result = "";
 				$result = mysqli_query($conn,"SELECT DISTINCT HscId, HscName FROM hscmaster ORDER BY HscName;");
         while($row = mysqli_fetch_array($result)) {
 					if(isset($_POST['HscId'])) {

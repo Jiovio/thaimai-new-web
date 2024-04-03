@@ -3,7 +3,7 @@
 include "../config/db_connect.php";
 $PhcId = $_POST["PhcId"];
 $BlockId = $_POST["BlockId"];
-$result = mysqli_query($conn,"SELECT DISTINCT HscId, HscName, PhcId FROM hscmaster WHERE BlockId = '$BlockId' AND PhcId = '$PhcId' ORDER BY PhcId;");
+$result = mysqli_query($conn,"SELECT DISTINCT HscId, HscName, PhcId FROM hscmaster WHERE PhcId = '$PhcId' ORDER BY PhcId;");
 ?>
 <option value="">All HSCs</option>
 <?php
