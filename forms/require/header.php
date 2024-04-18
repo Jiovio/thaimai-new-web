@@ -434,7 +434,7 @@ include ('preloader.php');
 			
 			<li class="menu-item">
               <a href="PrgncyHis.php" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-data"></i>
+                <i class="menu-icon bx bx-history"></i>
                 <div data-i18n="Pregnancy History">Pregnancy History</div>
               </a>
             </li>
@@ -455,7 +455,7 @@ include ('preloader.php');
             <li class="menu-item">
              
 				<a href="smstemp.php" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-buildings"></i>
+				<i class='menu-icon bx bx-message-rounded-dots'></i>
                 <div data-i18n="SMS">SMS</div> 
 				</a>
 			 
