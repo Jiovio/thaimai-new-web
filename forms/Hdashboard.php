@@ -38,7 +38,7 @@
                 <div class="col-12 col-md-12 col-lg-12 order-3 order-md-2">
                   <div class="row">
                     <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/AntenatalVisit.php">
+                     <!---a href="<?php echo $siteurl; ?>/forms/AntenatalVisit.php"--->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -50,10 +50,10 @@
                           <h3 class="card-title mb-2"><?php if($AvTot) { echo $AvTot; } else { echo "0"; } ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!--/a-->
                     </div>
 				  <div class="col-3 mb-4">
-				     <a href="<?php echo $siteurl; ?>/forms/highRiskMothers.php">
+				     <!---a href="<?php echo $siteurl; ?>/forms/highRiskMothers.php"--->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -69,10 +69,10 @@
                           <h3 class="card-title mb-2"><?php if($HrTot) { echo $HrTot; } else { echo "0"; }  ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
                     </div>
                     <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/DeliveryDetails.php">
+                     <!---a href="<?php echo $siteurl; ?>/forms/DeliveryDetails.php"--->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -84,11 +84,11 @@
                          <h3 class="card-title mb-2"><?php  if($DdTot) { echo $DdTot; } else { echo "0"; } ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
                     </div>
 
 					<div class="col-3 mb-4">
-					 <a href="<?php echo $siteurl; ?>/forms/Immunization.php">
+					 <!---a href="<?php echo $siteurl; ?>/forms/Immunization.php"--->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -100,10 +100,10 @@
                          <h3 class="card-title mb-2"><?php if($ImTot) { echo $ImTot; } else { echo "0"; } ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
                     </div>
 					<div class="col-3 mb-4">
-					 <a href="<?php echo $siteurl; ?>/forms/PostnatalVisit.php">
+					 <!-----a href="<?php echo $siteurl; ?>/forms/PostnatalVisit.php"---->
               <div class="card">
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
@@ -115,10 +115,10 @@
                     <h3 class="card-title mb-2"><?php if($PvTot) { echo $PvTot; } else { echo "0"; } ?></h3>
                 </div>
               </div>
-           </a>
+           <!---/a--->
           </div>
           <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/MedicalHistory.php">
+                     <!---a href="<?php echo $siteurl; ?>/forms/MedicalHistory.php"--->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -130,7 +130,7 @@
                           <h3 class="card-title mb-2"><?php if($PsTot) { echo $PsTot; } else { echo "0"; } ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
             </div>
         </div>
       </div>
