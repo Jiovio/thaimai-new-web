@@ -431,13 +431,14 @@ include ('preloader.php');
                 <div data-i18n="Postnatal Visit">Pregnancy Status</div>
               </a>
             </li>
-			
+			 <?php if(($usertype == 0) || ($usertype == 1) || ($usertype == 2) || ($usertype == 3) || ($usertype == 4) || ($usertype == 6)){ ?>
 			<li class="menu-item">
               <a href="PrgncyHis.php" class="menu-link">
                 <i class="menu-icon bx bx-history"></i>
                 <div data-i18n="Pregnancy History">Pregnancy History</div>
               </a>
             </li>
+			 <?php } ?>
 			
 			    <?php if(($usertype == 0) || ($usertype == 1) || ($usertype == 2)) { ?>
             <li class="menu-item">
