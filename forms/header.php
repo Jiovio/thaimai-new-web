@@ -102,7 +102,8 @@ include ('preloader.php');
            <?php
            } else if(($usertype == 3) || ($usertype == 4)) { ?>
            <li class="menu-item">
-              <a href="Pdashboard.php" class="menu-link">
+              <!----a href="Pdashboard.php" class="menu-link"-->
+			  <a href="Mdashboard.php" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
