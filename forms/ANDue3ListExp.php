@@ -31,8 +31,12 @@ include "../config/db_connect.php";
     $listQry = "SELECT av.picmeno,av.id, av.symptomsHighRisk, av.residenttype, av.motherWeight, av.Hb, av.bpSys, av.bpDia, av.HighRisk, ec.address, ec.HscId, ec.VillageId, ec.PanchayatId, ar.anRegDate, ar.obstetricCode, ar.MotherAge, av.residenttype,av.placeofvisit,av.anvisitDate, av.pregnancyWeek,ec.motheraadhaarname,av.createdBy, ec.BlockId,ec.PhcId, ec.husbandaadhaarname, ec.mothermobno, mh.picmeno,mh.lmpdate, mh.edddate FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno JOIN anregistration ar on ar.picmeno=av.picmeno JOIN medicalhistory mh on mh.picmeno = av.picmeno
                   WHERE av.status!=0 AND NOT EXISTS (SELECT dd.picmeno FROM deliverydetails dd WHERE dd.picmeno = av.picmeno) AND (TIMESTAMPDIFF(MONTH, CURRENT_DATE(), mh.edddate) <= 3)";   		
 				   
-    $orderQry = " ORDER BY ar.anRegDate DESC";  	
-		
+    $orderQry = " ORDER BY ar.anRegDate DESC";  
+
+	
+// $ExeQuery = "";
+
+ //if($ExeQuery) {			
     if($bloName == "" && $phcName == "" && $hscName == ""){
        $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
        } else if($bloName != "" && $phcName == "" && $hscName == ""){
@@ -123,6 +127,7 @@ include "../config/db_connect.php";
 	  $developer_records[] = $rows;
 }}	
 	}}}
+	//} /*Added newly */
 	$filename = "AN_Delivery_Due_List_(3 Months EDD)".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");

@@ -108,14 +108,16 @@ include ('preloader.php');
               </a>
             </li>
            <?php 
-          } else if($usertype == 5) { ?>
+          } else
+		  if(($usertype == 5) || ($usertype == 6)) { ?>
            <li class="menu-item">
               <a href="Hdashboard.php" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
-            </li>
-          <?php } if($usertype != 5) { ?> <!-- Starts with IF Condition because of New Statement -->
+            </li> 
+		 <?php
+			} if($usertype != 5) { ?> <!-- Starts with IF Condition because of New Statement -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-calendar"></i>
@@ -431,13 +433,14 @@ include ('preloader.php');
                 <div data-i18n="Postnatal Visit">Pregnancy Status</div>
               </a>
             </li>
-			
+			 <?php if(($usertype == 0) || ($usertype == 1) || ($usertype == 2) || ($usertype == 3) || ($usertype == 4) || ($usertype == 6)){ ?>
 			<li class="menu-item">
               <a href="PrgncyHis.php" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-data"></i>
+                <i class="menu-icon bx bx-history"></i>
                 <div data-i18n="Pregnancy History">Pregnancy History</div>
               </a>
             </li>
+			 <?php } ?>
 			
 			    <?php if(($usertype == 0) || ($usertype == 1) || ($usertype == 2)) { ?>
             <li class="menu-item">
@@ -455,7 +458,7 @@ include ('preloader.php');
             <li class="menu-item">
              
 				<a href="smstemp.php" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-buildings"></i>
+				<i class='menu-icon bx bx-message-rounded-dots'></i>
                 <div data-i18n="SMS">SMS</div> 
 				</a>
 			 
@@ -472,3 +475,4 @@ include ('preloader.php');
    
         <!-- Layout container -->
         <div class="layout-page">
+		

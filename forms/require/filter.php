@@ -8,6 +8,18 @@
                 <i class="bx bx-menu bx-sm"></i>
               </a>
             </div>
+			
+			
+				<?php //if(isset($_POST['Reset'])) { print_r("Hello"); } ?>
+				
+				<?php 
+			     if(isset($_POST['BlockId']))
+					{$BlockId = $_POST['BlockId'];}
+				if(isset($_POST['PhcId']))
+					{$PhcId = $_POST['PhcId'];}
+				if(isset($_POST['HscId'])) 
+				{$HscId = $_POST['HscId'];}
+				?>
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
   <!-- Search -->
@@ -27,21 +39,29 @@
                 </select>
             </div>
             </div>
-            <div class="col-md-2">
+			
+			
+            
+			<div class="col-md-2">
                 <label>Block Name</label>
                 <div class="input-group input-group-merge">
-                <!--- select name="BlockId" id="BlockId" onchange="BlockOn()" class='form-control'> --->
-				<select name="BlockId" id="BlockId" onchange="BlockOn()" class='form-control'>
+				<?php //print_r(isset($_POST['BlockId']). " ".isset($_POST['reset'])."Heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"); ?> 
+                <select name="BlockId" id="BlockId" onchange="BlockOn()" class='form-control' <?php if(isset($_POST['BlockId']) AND empty($_POST['reset']) AND !empty($_POST['filter'])) { ?> disabled <?php } ?> >
                 <option value="">All Blocks</option>
 				<?php
 				$result = mysqli_query($conn,"SELECT DISTINCT BlockId, BlockName FROM hscmaster ORDER BY BlockName;");
+			//$result = mysqli_query($conn,"SELECT DISTINCT lm.BlockId, lm.BlockName FROM users u JOIN hscmaster lm on lm.BlockId=u.BlockId WHERE u.BlockId='".$BlockId."' ORDER BY BlockId;");
+				
 				while($row = mysqli_fetch_array($result)) {
-				  if(isset($_POST['BlockId'])) {
+				  			  
+				// if(isset($_POST['BlockId'])) {
+					if((isset($_POST['BlockId'])) && (isset($_POST['PhcId']))) { 
 					  echo "<option value=\"".$row["BlockId"]."\"";
 					  if($_POST['BlockId'] == $row['BlockId'])
 					  echo 'selected';
 					  echo ">".$row["BlockName"]."</option>"; 
-				  } else {
+					//  echo ">"."checking"."</option>"; 
+				  } else { 
             echo "<option value=\"".$row["BlockId"]."\"";
             echo ">".$row["BlockName"]."</option>"; 
           }
@@ -53,10 +73,12 @@
       <div class="col-md-2">
                   <label>PHC Name</label>
                   <div class="input-group input-group-merge">
-                  <select name="PhcId" id="PhcId" onchange="PhcOn()" class='form-control' disabled>
+                  <select name="PhcId" id="PhcId" onchange="PhcOn()" class='form-control' <?php if(isset($_POST['PhcId']) AND empty($_POST['reset']) AND !empty($_POST['filter'])) { ?> disabled <?php } ?> >
 						<option value="">All PHCs</option>
               <?php
-				$result = mysqli_query($conn,"SELECT DISTINCT PhcId, PhcName FROM hscmaster ORDER BY PhcName;");
+			//	$result = mysqli_query($conn,"SELECT DISTINCT PhcId, PhcName FROM hscmaster ORDER BY PhcName;");
+			$result = mysqli_query($conn,"SELECT DISTINCT BlockId, PhcId, PhcName FROM hscmaster WHERE BlockId='".$BlockId."' ORDER BY PhcName;");
+       
         while($row = mysqli_fetch_array($result)) {
 					if(isset($_POST['PhcId'])) {
 						echo "<option value=\"".$row["PhcId"]."\"";
@@ -75,10 +97,12 @@
       <div class="col-md-2">
                   <label>HSC Name</label>
                   <div class="input-group input-group-merge">
-                  <select name="HscId" id="HscId" class='form-control' disabled>
+                  <select name="HscId" id="HscId" class='form-control' <?php if(isset($_POST['HscId']) AND empty($_POST['reset']) AND !empty($_POST['filter'])) { ?> disabled <?php } ?> >
 						<option value="">All HSCs</option>
               <?php
-				$result = mysqli_query($conn,"SELECT DISTINCT HscId, HscName FROM hscmaster ORDER BY HscName;");
+			//	$result = mysqli_query($conn,"SELECT DISTINCT HscId, HscName FROM hscmaster ORDER BY HscName;");
+			$result = mysqli_query($conn,"SELECT DISTINCT HscId, HscName FROM hscmaster WHERE BlockId='".$BlockId."' AND PhcId='".$PhcId."' ORDER BY HscName;");
+      
         while($row = mysqli_fetch_array($result)) {
 					if(isset($_POST['HscId'])) {
 						echo "<option value=\"".$row["HscId"]."\"";

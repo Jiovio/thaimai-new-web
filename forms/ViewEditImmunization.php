@@ -142,7 +142,8 @@ if (!empty($query)) {
               <button type="button" class="btn btn-primary" id="btnBack" onclick="history.go(-1)">
 				<span class="bx bx-arrow-back"></span>&nbsp; Back
               </button>
-			  <?php $Edit_ind = "N"; ?>
+			  <?php $Edit_ind = "N"; 
+			   if($_SESSION["usertype"] != '6'){ ?>
 			  <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; $Edit_ind = "Y"; ?>" onclick="fnImEnable()">
                     <span class="bx bx-edit"></span>&nbsp; Edit
               </button>

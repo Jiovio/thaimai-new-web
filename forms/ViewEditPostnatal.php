@@ -106,14 +106,13 @@ if (isset($_GET['del'])) {
 				<span class="bx bx-arrow-back"></span>&nbsp; Back
               </button>
             
+			   <?php if($_SESSION["usertype"] != '6'){ ?>
               <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; ?>" onclick="fnPostEnable()">
                     <span class="bx bx-edit"></span>&nbsp; Edit
               </button>
-			  			  
-			  <?php if($_SESSION["usertype"] == '0' || $_SESSION["usertype"] == '1' || $_SESSION["usertype"] == '2') { ?>
-              <?php
-			 // PRINT_R($id); EXIT;
-			 
+			  <?php  if($_SESSION["usertype"] == '0' || $_SESSION["usertype"] == '1' || $_SESSION["usertype"] == '2') { 
+              
+			 // PRINT_R($id); EXIT;			 
 			 
 			  $rec_del_pic = mysqli_query($conn, "SELECT * FROM postnatalvisit p WHERE $picmeNo = p.picmeNo AND
 		                       p.pncPeriod = (SELECT max(CAST(p1.pncPeriod AS SIGNED)) From postnatalvisit p1 where p1.picmeNo = p.picmeNo)");

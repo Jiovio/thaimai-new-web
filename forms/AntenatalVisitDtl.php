@@ -5,6 +5,17 @@
       <div class="layout-container">
         <!-- Menu -->
 <?php include ('require/header.php'); // Menu & Top Search
+
+/*if(($usertype == 0) || ($usertype == 1)) {
+	  include ('require/filter.php'); // Top Filter 
+}else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
+    include ('require/Bfilter.php');
+}else if(($usertype == 5)) {
+    include ('require/Hfilter.php');   
+}else if(($usertype == 6)) {
+    include ('require/Cfilter.php');   
+}*/
+
 if (isset($_GET['History'])) {
   $AV_picmeno = $_GET['History'];
   $record = mysqli_query($conn, "SELECT * FROM ecregister ec WHERE ec.picmeNo=$AV_picmeno");
@@ -27,9 +38,11 @@ $History = true;}
               </button></a>
 		           <h5 class="card-header"><span class="text-muted fw-light"> PICME : </span> <?php echo $_GET['History']; ?> 
 				  <h5 class="card-header"> <span class="text-muted fw-light"> Mother Name : </span> <?php echo $his_mot_name; ?>
+				  <?php if($usertype != 5 AND $usertype != 6) { ?>
 				  <a href="AnVisitDtlAddBtn.php?picmeno=<?php echo $_GET['History']; ?>" id="add" type="button" class="btn btn-primary" style="float:right;">
                        <span class="bx bx-plus"></span>&nbsp; Add Details
                    </a>
+				   <?php } ?> 
 				  </h5>
                    <div class="table-responsive text-nowrap">
            <div class="container">
@@ -47,10 +60,12 @@ $History = true;}
                        </thead>                        
 <?php
 
-  $listQry = "SELECT DISTINCT(av.picmeno),av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,av.ancPeriod,av.avdueDate, ec.motheraadhaarname,av.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno 
+  $listQry = "SELECT av.picmeno,av.id, av.residenttype,av.placeofvisit,av.anvisitDate,av.pregnancyWeek,av.ancPeriod,av.avdueDate, ec.motheraadhaarname, ec.mothermobno, av.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno 
               WHERE av.status=1 AND av.picmeno = $AV_picmeno";
 			  
-  $private = " AND av.createdBy='".$userid."'";
+ // $private = " AND av.createdBy='".$userid."'";
+  
+  $private = "";
   
   $orderQry = " ORDER BY av.picmeno + av.ancPeriod ASC";
   
@@ -84,6 +99,7 @@ $History = true;}
               if($ExeQuery) {
                          $cnt=1;
                          while($row = mysqli_fetch_array($ExeQuery)) {
+							 
                        ?>
                                    <tr>
 									   <td><?php echo $row['ancPeriod']; ?></td>

@@ -7,10 +7,12 @@
 <?php include ('require/header.php'); // Menu
 	  if(($usertype == 0) || ($usertype == 1)) {
 	  include ('require/filter.php'); // Top Filter 
-}else if(($usertype == 2)) {
+}else if(($usertype == 2)|| ($usertype == 4) || ($usertype == 5)) {
+    include ('require/Mfilter.php');
+}else if(($usertype == 3) ) {
     include ('require/Bfilter.php');
-}else if(($usertype == 3) || ($usertype == 4)) {
-    include ('require/Pfilter.php');   
+} else if(($usertype == 6)) {
+    include ('require/Cfilter.php');   
 }
 ?>
 <!-- Content wrapper -->
@@ -41,7 +43,8 @@
                     </thead>
 <?php  
   $listQry = "SELECT * FROM ecregister ec WHERE status NOT IN(0,1)";
-  $private = " AND ec.createdBy='".$userid."'";
+//  $private = " AND ec.createdBy='".$userid."'";
+  $private = "";
   $orderQry = " ORDER BY picmeNo ASC";
 
   if(isset($_GET['b']) && !empty($_GET['b'])){
@@ -59,11 +62,76 @@
       $_POST['filter'] =1;
   }
 
-  if(($usertype == 0) || ($usertype == 1)) {
+ // if(($usertype == 0) || ($usertype == 1)) {
+	 
+	 $bloName = "";
+				 $phcName = "";
+				 $hscName = "";
+				 
+				 if(($usertype == 0) || ($usertype == 1)) {
+		               if(isset($_POST['BlockId']))
+	                 	{
+                          $bloName = $_POST['BlockId']; 
+	                 	} 
+						if(isset($_POST['PhcId']))
+	                	{
+                         $phcName = $_POST['PhcId']; 
+		                } 
+						if(isset($_POST['HscId']))
+	                  	{
+                         $hscName = $_POST['HscId']; 
+	                   	}	
+						
+				  }	
+				 
+				  if(($usertype == 5) || ($usertype == 2) || ($usertype == 4)) {
+		               if(isset($_SESSION['BlockId']))
+	                 	{
+                          $bloName = $_SESSION['BlockId']; 
+	                 	} 
+						if(isset($_POST['PhcId']))
+	                	{
+                         $phcName = $_POST['PhcId']; 
+		                } 
+						if(isset($_POST['HscId']))
+	                  	{
+                         $hscName = $_POST['HscId']; 
+	                   	}	
+						
+				  }	
+                  if($usertype == 3)	{
+					  if(isset($_SESSION['BlockId']))
+	                 	{
+                          $bloName = $_SESSION['BlockId']; 
+	                 	} 
+						if(isset($_SESSION['PhcId']))
+	                	{
+                         $phcName = $_SESSION['PhcId']; 
+		                } 
+						if(isset($_POST['HscId']))
+	                  	{
+                         $hscName = $_POST['HscId']; 
+	                   	}	
+				  }
+				  if($usertype == 6)	{
+					  if(isset($_SESSION['BlockId']))
+	                 	{
+                          $bloName = $_SESSION['BlockId']; 
+	                 	} 
+						if(isset($_SESSION['PhcId']))
+	                	{
+                         $phcName = $_SESSION['PhcId']; 
+		                }
+						if(isset($_SESSION['HscId']))
+	                 	{
+                         $hscName = $_SESSION['HscId']; 
+	                 	}
+				  } 
+	 
     if(isset($_POST['filter'])) {
-      $bloName = $_POST['BlockId']; 
-      $phcName = $_POST['PhcId'];
-      $hscName = $_POST['HscId'];        
+   //   $bloName = $_POST['BlockId']; 
+   //   $phcName = $_POST['PhcId'];
+   //   $hscName = $_POST['HscId'];        
                 if($bloName == "" && $phcName == "" && $hscName == ""){
                   $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
                 } else if($bloName != "" && $phcName == "" && $hscName == ""){
@@ -74,18 +142,101 @@
                   $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."' AND PhcId='".$phcName."' AND HscId='".$hscName."'".$orderQry);
                 }
               } else if(isset($_POST['reset'])) {
-                $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+              //  $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+			  if(($usertype == 0) || ($usertype == 1)) {
+		               $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+				  }	
+				 
+				  if(($usertype == 5) || ($usertype == 2) || ($usertype == 4)) {
+		               $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."'".$orderQry);
+				  }	
+                  if($usertype == 3)	{
+					  $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."' AND PhcId='".$phcName."'".$orderQry);
+				  }
+				  if($usertype == 6)	{
+					  $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."' AND PhcId='".$phcName."' AND HscId='".$hscName."'".$orderQry);
+				  }
               } else {
-                $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+              //  $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+			   if($bloName == "" && $phcName == "" && $hscName == ""){
+                  $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+                } else if($bloName != "" && $phcName == "" && $hscName == ""){
+                  $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."'".$orderQry);
+                } else if($bloName != "" && $phcName != "" && $hscName == ""){
+                  $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."' AND PhcId='".$phcName."'".$orderQry);
+                } else if($bloName != "" && $phcName != "" && $hscName != ""){
+                  $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."' AND PhcId='".$phcName."' AND HscId='".$hscName."'".$orderQry);
+                } 
               }
-} else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
+			  
+/*} else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
 $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$BlockId."'".$orderQry);
     }  else {
         $ExeQuery = mysqli_query($conn,$listQry.$private.$orderQry);
-    }
+    }*/
                     if($ExeQuery) {
                       $cnt=1;
                       while($row = mysqli_fetch_array($ExeQuery)) {
+						   //Need to modify the code here for user types
+	  $match_fnd = "N";  	
+	  
+       $HscQry = "SELECT * From users";				 
+	   $HscRes =  mysqli_query($conn,$HscQry);
+       if($HscRes) {
+         while($rowh = mysqli_fetch_array($HscRes)) 
+		 {
+		
+	/*	 if((($usertype == 0) || ($usertype == 1)))
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+		 if((($usertype == 5) || ($usertype == 2)) AND
+			 $row['BlockId']==$rowh['BlockId'] )
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+	   if(($usertype == 3) AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+		  if(($usertype == 6) AND
+			 $row['HscId']==$rowh['HscId'] AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'] AND
+			 $row['mothermobno'] == $rowh['mobile'] AND
+			 $_SESSION['username'] == $rowh['username'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+		  if(($usertype == 4) AND
+			 $row['HscId']==$rowh['HscId'] AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+	  }
+	  if($match_fnd == "Y")
+	  {*/
+   if(($usertype == 6) AND
+			 $row['HscId']==$rowh['HscId'] AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'] AND
+			 $row['mothermobno'] == $rowh['mobile'] AND
+			 $_SESSION['username'] == $rowh['username'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+	   }}
+		  if((($usertype == 6) AND $match_fnd == "Y") || ($usertype < 6))
+		  {
+		  // Code modify middle
                     ?>
                                 <tr>
                                     <td><?php echo $cnt; ?></td>
@@ -107,6 +258,8 @@ $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$BlockId."'".$orderQry)
                     <?php 
                         $cnt++;
                       } 
+					  }
+					//  }} //code modifying ends
                     } ?>
                     </table></div>
                 </div>

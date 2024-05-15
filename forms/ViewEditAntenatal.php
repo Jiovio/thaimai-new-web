@@ -123,10 +123,12 @@ if (isset($_GET['del'])) {
               <a href="../forms/ViewEditAntenatal.php?del=<?php echo $id; ?>" onclick="return confirm('Are you sure to delete?')"><button type="submit" class="btn btn-danger btnSpace">
                     <span class="bx bx-minus"></span>&nbsp; Delete
               </button></a>
-            <?php } ?>
+            <?php } 
+			 if($_SESSION["usertype"] != '6'){ ?>
               <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; ?>" onclick="fnAnEnable()">
                     <span class="bx bx-edit"></span>&nbsp; Edit
               </button>
+			  <?php } ?>
             </h4>
             <div class="row">
                     <div class="col-md-12">
@@ -234,9 +236,9 @@ if (isset($_GET['del'])) {
                           </div>
                         
                           <div class="mb-3 col-md-6">
-                            <label class="form-label">PREGNANCY TEST RESULT <span class="mand">* </span></label>
+                            <label class="form-label">PREGNANCY TEST RESULT </label>
                             <?php if($update == true || $view == true) { ?>
-                          <select required name="pregnancyTestResult" id="pregnancyTestResult" class="form-select" value="<?php echo $ptest; ?>" disabled>
+                          <select name="pregnancyTestResult" id="pregnancyTestResult" class="form-select" value="<?php echo $ptest; ?>" disabled>
                           <?php $list=mysqli_query($conn, "SELECT an.pregnancyTestResult,e.enumid,e.enumvalue from anregistration an join enumdata e ON e.enumid=an.pregnancyTestResult WHERE type=11 AND an.id=".$id);
                                 while($row_list=mysqli_fetch_assoc($list)){ ?>
                                   <option value="<?php echo $row_list['enumid']; ?>">
@@ -381,11 +383,11 @@ if (isset($_GET['del'])) {
                     <div class="row"> 
                           <div class="mb-3 col-md-6">
 						  
-                            <label class="form-label">OBSTETRIC CODE<span class="mand"> * </span></label>
+                            <label class="form-label">OBSTETRIC CODE</label>
                             <input type="text" class="form-control" id="obstetricCode" value="<?php echo $obcode; ?>" name="obstetricCode" placeholder="Code" readonly />
                           </div>
                          
-                          
+                       </div>   
                         <div class="row">
                           <div class="mb-3 col-md-6">
                             <label class="form-label">MOTHER'S HEIGHT <span class="mand">* </span></label>
@@ -468,9 +470,9 @@ if (isset($_GET['del'])) {
                             />
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label class="form-label" for="country">MRMBS ELIGIBLE <span class="mand">* </span></label>
+                            <label class="form-label" for="country">MRMBS ELIGIBLE </label>
                             <?php if($update == true || $view == true) { ?>
-                            <select required name="mrmbsEligible" id="mrmbsEligible" class="form-select" value="<?php echo $mrmbs; ?>" disabled>                           
+                            <select name="mrmbsEligible" id="mrmbsEligible" class="form-select" value="<?php echo $mrmbs; ?>" disabled>                           
                                 <?php
                                 $list=mysqli_query($conn, "SELECT an.mrmbsEligible,e.enumid,e.enumvalue from anregistration an join enumdata e ON e.enumid=an.mrmbsEligible WHERE type=13 AND an.id=".$id);
                                 while($row_list=mysqli_fetch_assoc($list)){
@@ -498,7 +500,7 @@ if (isset($_GET['del'])) {
 						?>
                         <div class="row">
                         <div class="mb-3 col-md-6">
-                            <label class="form-label">Mother's Age at Conception <span class="mand">* </span></label>
+                            <label class="form-label">Mother's Age at Conception </label>
                             <div class="input-group input-group-merge">
                             <input
                               type="number"
@@ -509,7 +511,6 @@ if (isset($_GET['del'])) {
                               placeholder="Mother's Age"
                               value="<?php echo $MotherAge; ?>"
                               disabled
-                              required
                             />
                           </div>
                           </div>
@@ -520,7 +521,7 @@ if (isset($_GET['del'])) {
 	                    $rec_Hage = $n_rec['husagemarriage'];
 						?>
                           <div class="mb-3 col-md-6">
-                            <label class="form-label">Husband's Age at Conception <span class="mand">* </span></label>
+                            <label class="form-label">Husband's Age at Conception </label>
                             <div class="input-group input-group-merge">
                             <input
                               type="number"
@@ -531,7 +532,6 @@ if (isset($_GET['del'])) {
                               placeholder="Husband's Age"
                               value="<?php echo $HusbandAge; ?>"
                               disabled
-                              required
                             />
                           </div>
                           </div>
@@ -541,7 +541,7 @@ if (isset($_GET['del'])) {
                         </div>
 						  
 						  <div class="mb-3 col-md-6">
-                          <label class="form-label">HR Pregnancy<span class="mand"> * </span></label>
+                          <label class="form-label">HR Pregnancy</label>
 						  <?php 
                            $hrPregind = 0;
                            $hrPregind = $hrPreg;

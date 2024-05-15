@@ -44,7 +44,8 @@ include "../config/db_connect.php";
        } else if($bloName != "" && $phcName != "" && $hscName != ""){
        $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
        } 
-	          		                  		  
+	     
+//if($ExeQuery) {				 
 	$developer_records = array();
 	$sno=1;
 	while( $rows = mysqli_fetch_assoc($ExeQuery) ) {
@@ -123,6 +124,7 @@ include "../config/db_connect.php";
 	  $developer_records[] = $rows;
 }}	
 	}}}
+	//} /*Added newly */
 	$filename = "AV_Report_".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");

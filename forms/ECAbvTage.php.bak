@@ -1,17 +1,30 @@
+<?php include ('require/topHeader.php'); ?>
    <body>
   <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
 		
-<?php include ('require/header.php'); // Menu
-	  if(($usertype == 0) || ($usertype == 1)) {
+<?php 
+include ('require/header.php'); // Menu
+	 /* if(($usertype == 0) || ($usertype == 1)) {
 	  include ('require/filter.php'); // Top Filter 
 }else if(($usertype == 2)) {
     include ('require/Bfilter.php');
-}else if(($usertype == 3) || ($usertype == 4)) {
+}else if(($usertype == 3) ) {
     include ('require/Pfilter.php');   
-}
+}*/
+
+if(($usertype == 0) || ($usertype == 1)) {
+	  include ('require/filter.php'); // Top Filter 
+} 
+/*else if(($usertype == 2) || ($usertype == 4) || ($usertype == 5)) {
+    include ('require/Mfilter.php');
+}else if(($usertype == 3) ) {
+    include ('require/Bfilter.php');   
+}else if(($usertype == 6) ) {
+    include ('require/Cfilter.php');   
+}*/
 ?>
           <!-- Content wrapper -->
           <div class="content-wrapper">
@@ -20,7 +33,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
 			<!-- Hoverable Table rows -->
               <div class="card"><h5 class="card-header">
-                  <span class="text-muted fw-light">Reports / Eligible Couples / </span> Above Teenage List
+                  <span class="text-muted fw-light">Reports / Eligible Couples / </span> Above Teenage List (Non Pregnant Couples)
                </h5>  
 			   
 <!------------------------------------------------------------------------------------- Page Details + search button + Table -------------------------------------------------------->		   
@@ -35,7 +48,7 @@
                          <tr>
                <th>S.No</th> 
 			   <th>ECFR No</th>
-               <th>RCH ID</th>
+               <th>RCHID (PICME) No.</th>
 			   <th>EC Registered Date</th>
 			   <th>Mother's Aadhar No</th>
 			   <th>Mother's Aadhar Name</th>
@@ -51,9 +64,14 @@
                        </thead>  
 					   
     <?php
-      $listQry = "SELECT ec.picmeno, ec.id, hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName,ec.ecfrno, ec.HscId, ec.VillageId, ec.PanchayatId, ec.dateecreg, ec.motherageecreg, ec.motheraadhaarname, ec.BlockId,ec.PhcId, ec.mothermobno,ec.motheraadhaarid FROM ecregister ec INNER JOIN hscmaster hs on (ec.BlockId = hs.BlockId AND ec.PhcId = hs.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId) WHERE ec.status!= 0 
-                  AND ec.motherageecreg > 19 AND NOT EXISTS (SELECT ar.picmeno FROM anregistration ar WHERE ar.picmeno = ec.picmeno)";   
-	        
+      $listQry = "SELECT ec.picmeNo, ec.id, hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName,ec.ecfrno, ec.HscId, ec.VillageId, ec.PanchayatId, ec.dateecreg, ec.motherageecreg, ec.motheraadhaarname, ec.BlockId,ec.PhcId, ec.mothermobno,ec.motheraadhaarid FROM ecregister ec INNER JOIN hscmaster hs on (ec.BlockId = hs.BlockId AND ec.PhcId = hs.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId) WHERE ec.status!= 0 
+                  AND ec.motherageecreg >= 18 AND NOT EXISTS (SELECT ar.picmeno FROM anregistration ar WHERE ar.picmeno = ec.picmeNo)";   
+	 
+	  //$listQry = "SELECT DISTINCT(ec.motheraadhaarid),id,picmeno, ecfrno, HscId, VillageId, PanchayatId, dateecreg, motherageecreg, motheraadhaarname, BlockId, PhcId, mothermobno FROM ecregister WHERE status!=0 AND 
+        //          ec.motherageecreg >= 18";  
+	
+	 
+       
 	  $private = " AND ec.createdBy='".$userid."'";
       $orderQry = " ORDER BY ec.dateecreg DESC";
 	  
@@ -102,7 +120,7 @@
                         <tr>
                            <td><?php echo $cnt; ?></td>
 						   <td><?php echo $row['ecfrno']; ?></td>
-						   <td><?php echo $row['picmeno']; ?></td>
+						   <td><?php echo $row['picmeNo']; ?></td>
 						   <td><?php echo date('d-m-Y', strtotime($row['dateecreg'])); ?></td>
 						   <td><?php echo $row['motheraadhaarid']; ?></td>
 						   <td><?php echo $row['motheraadhaarname']; ?></td>
@@ -146,7 +164,7 @@
 	?>	
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------------------- Download button + Submitting values to next page ------------------------------------------------------------------>
-    <form action="EcAbvTageExp.php" method="post" id="filterform" style="width:100%";>	
+    <form action="ECAbvTageExp.php" method="post" id="filterform" style="width:100%";>	
 		  <div class="col-md-8" style="margin-top: 10px;">
    		
           <button type="submit" id="AVReport" name='AVReport' style = "margin-left : 450px; margin-bottom: 10px" class="btn lt btn-primary"><span class="bx bx-download"></span>&nbsp; Download</button>

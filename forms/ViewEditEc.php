@@ -103,11 +103,12 @@ if (! empty($_POST["update"])) {
               <a href="../forms/ViewEditEc.php?del=<?php echo $id; ?>" onclick="return confirm('Are you sure to delete?')"><button type="submit" class="btn btn-danger btnSpace">
                     <span class="bx bx-minus"></span>&nbsp; Delete
               </button></a>
-              <?php } ?>
+              <?php } 
+			   if($_SESSION["usertype"] != '6'){ ?>
               <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; ?>" onclick="fnEnable()">
                     <span class="bx bx-edit"></span>&nbsp; Edit
               </button>
-              
+              <?php } ?>
 			</h4>
 
         <form action="" method="post" onSubmit="return EcFormValid(this);">
@@ -935,9 +936,9 @@ if (! empty($_POST["update"])) {
                       </div>  
 
                       <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">RATION CARD TYPE <span class="mand">* </span><span id="errRtype"></span></label>
+                          <label class="form-label" for="basic-icon-default-phone">RATION CARD TYPE <span id="errRtype"></span></label>
                           <div class="input-group input-group-merge">
-                          <select name="rationcardtype" id="rationcardtype" class="form-select" onchange="fnCalMotAge()" required id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
+                          <select name="rationcardtype" id="rationcardtype" class="form-select" onchange="fnCalMotAge()" id="inputGroupSelect04" aria-label="Example select with button addon" disabled >
                             
                                 <?php
 
@@ -965,7 +966,7 @@ if (! empty($_POST["update"])) {
                       </div>
 					  
                       <div class="col-6 mb-3">
-                          <label class="form-label" for="basic-icon-default-email">RATION CARD NUMBER <span class="mand">* </span><span id="errRcardnum"></span></label>
+                          <label class="form-label" for="basic-icon-default-email">RATION CARD NUMBER <span id="errRcardnum"></span></label>
                           <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-id-card"></i></span>
                             <input
@@ -980,8 +981,6 @@ if (! empty($_POST["update"])) {
 							  pattern="[0-9]{12}"
 							  onchange="fnCalMotAge()"
                               disabled value="<?php echo $rcnum; ?>"
-                              required
-                            />
                           </div>
                         </div>
                         
