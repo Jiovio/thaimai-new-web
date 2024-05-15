@@ -34,7 +34,7 @@
 	        <div class="md-2 col-1" style="margin-top: 11px;">
                 <button type="submit" name="go" class="btn btn-primary">Filter</button>
           </div>
-          <?php if($usertype == 5) { ?>
+          <?php if($usertype > 6) { ?>
             <div class="col-md-3">
               <ul class="navbar-nav flex-row align-items-center ms-auto" style="float:right; margin-right:1em;">
                 <!-- User -->

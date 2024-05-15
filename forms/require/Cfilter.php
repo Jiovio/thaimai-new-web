@@ -1,0 +1,67 @@
+<!-- Category Filter - Starts--> 
+<div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse" style="margin: 10px 0px;">
+	<form action="" method="post" id="searchform" style="width:98%; margin-block-end:0em;">	
+            <div class="searchBox">
+            <div class="row" style="padding: 0em 1em;">
+       
+            <div class="col-md-13">
+              <ul class="navbar-nav flex-row align-items-center ms-auto" style="float:right; margin-right:1em;">
+                <!-- User -->
+                <li class="nav-item navbar-dropdown dropdown-user dropdown" id="profile">
+                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <div class="avatar avatar-online">
+                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                    </div>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        <div class="d-flex">
+                          <div class="flex-shrink-0 me-3">
+                            <div class="avatar avatar-online">
+                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                            </div>
+                          </div>
+                          <div class="flex-grow-1">
+                            <span class="fw-semibold d-Block"><?php echo $username;?></span>
+                            <small class="text-muted">
+							        <?php
+                            $query = mysqli_query($conn,"SELECT * FROM users WHERE id='$userid'");
+			                      $utype = mysqli_fetch_array($query);
+                            $ut = $utype['usertype'];
+                                if($ut==0){ echo "Super Admin"; } elseif($ut==1){ echo "Admin"; } elseif($ut==2){ echo "Block Officer"; }
+                                elseif($ut==3){ echo "Medical Officer"; } elseif($ut==4){ echo "VHN"; }
+                                elseif($ut==5){ echo "Private Hospital"; } elseif($ut==6){ echo "Customer"; } ?></small>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="account.php">
+                        <i class="bx bx-user me-2"></i>
+                        <span class="align-middle">My Profile</span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="<?php echo $siteurl; ?>/logout.php">
+                        <i class="bx bx-power-off me-2"></i>
+                        <span class="align-middle">Log Out</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <!--/ User -->
+              </ul>
+            </div>
+		  </div>
+      
+		</div>
+		</form>
+    </div>
+        <!-- Category Filter - Ends -->

@@ -5,25 +5,115 @@
     <div class="layout-container">
       <!-- Menu -->
 <?php include ('require/header.php'); // Menu
-	    include ('require/Bfilter.php'); // Top Filter
-      if(isset($_POST['Bfilter'])) {
-        $bloName = $_POST['BlockId'];
-        $phcName = $_POST['PhcId'];
-        $hscName = $_POST['HscId'];
+
+    if($_SESSION['usertype'] == 3)
+	 {
+		include ('require/Bfilter.php'); // Top Filter
+		 
+	 }
+    
+	if($_SESSION['usertype'] == 2 || $_SESSION['usertype'] == 4)
+	 {
+		include ('require/Mfilter.php'); // Top Filter
+		 
+	 }
+
+      include ('require/Hfilter.php'); // Top Filter
+   
+		//print_r("$bloName".$_POST['BlockId']."$phcName".$_POST['PhcId']."$hscName".$_POST['HscId']);
+		
+		//print_r("Hi I am here"); //exit;
+		
+		if($_SESSION['usertype'] == 3) {
+		
+      if(isset($_POST['filter'])) {
+		
+	//	print_r("Pdashboard");
+        
+		$bloName = $_SESSION['BlockId'];
+		
+		$result = mysqli_query($conn,"SELECT lm.BlockId, lm.PhcId FROM users u JOIN hscmaster lm on lm.BlockId=u.BlockId AND lm.PhcId=u.PhcId WHERE u.BlockId='".$BlockId."'");
+		$row = mysqli_fetch_array($result);
+		
+		$bloName = $_SESSION['BlockId'];
+		$BlockId = $row['BlockId'];
+		$phcName = $_SESSION['PhcId'];
+		$PhcId = $row['PhcId'];
+		
+		$hscName = "";
+		if(isset($_POST['HscId']))
+		{	
+         $hscName = $_POST['HscId'];	
+		// print_r("bloName". $bloName." "."phcName".$phcName." "."hscName".$hscName."**************************");
+		}
       
-        if($bloName != "" && $phcName != "" && $hscName == ""){
+        if($phcName != "" && $hscName == "")		
+		{
+          include 'LoadPhc.php';
+        } 
+		
+		if($phcName != "" && $hscName != "")
+		{
+          include 'LoadHsc.php';
+		//  print_r("I am here");
+	  } 
+        
+			
+		if(isset($_POST['reset'])) 
+		{
+          include 'DefaultPhc.php';
+	  } }
+		else
+	    if(empty($_POST['reset']))
+		{
+          include 'DefaultPhc.php';
+        } 
+		else
+		{ 
+	include 'DefaultPhc.php';
+		}
+		}
+		
+		if($_SESSION['usertype'] == 4)
+		{
+		
+		if(isset($_POST['filter'])) {
+		  
+		 // print_r("I am here 1");
+		$phcName = "";
+        $hscName = "";
+		if(isset($_SESSION['BlockId']))
+		{
+        $bloName = $_SESSION['BlockId'];
+		}
+		if(isset($_POST['PhcId']))
+		{
+        $phcName = $_POST['PhcId'];
+		}
+		if(isset($_POST['HscId']))
+		{
+        $hscName = $_POST['HscId'];
+        }
+		
+        if($bloName != "" && $phcName == "" && $hscName == ""){
+          include 'LoadBlock.php';
+        } else if($bloName != "" && $phcName != "" && $hscName == ""){
           include 'LoadPhc.php';
         } else if($bloName != "" && $phcName != "" && $hscName != ""){
-          include 'LoadHsc.php';
-          } 
+            include 'LoadHsc.php';
+          }
         } else if(isset($_POST['reset'])) {
-          include 'DefaultPhc.php';
+          include 'DefaultBlock.php';
         } else {
-          include 'DefaultPhc.php';
+          include 'DefaultBlock.php';
         }
-      $EcTot = $ErCnt['ErCnt']; $ArTot = $ArCnt['ArCnt']; $AvTot = $AvCnt['AvCnt']; $MhTot = $MhCnt['MhCnt'];
-      $HrTot = $HrCnt['HrCnt']; $DdTot = $DdCnt['DdCnt']; $ImTot = $ImCnt['ImCnt']; $PvTot = $PvCnt['PvCnt'];
-      $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $PhTot = $PhCnt['PhCnt'];
+		}
+		
+			
+        $EcTot = $ErCnt['ErCnt']; $ArTot = $ArCnt['ArCnt']; $AvTot = $AvCnt['AvCnt']; $MhTot = $MhCnt['MhCnt'];
+	    $HrTot = $HrCnt['HrCnt']; $DdTot = $DdCnt['DdCnt']; $ImTot = $ImCnt['ImCnt']; $PvTot = $PvCnt['PvCnt'];
+     // $HrTot = $HrCnt['HrCnt']; $DdTot = $DdCnt['DdCnt']; $ImTot = $ImCnt['ImCnt']; $PvTot = $PvCnt['PvCnt'];
+        $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $PhTot = $PhCnt['PhCnt'];
 ?>
 		<!-- Content wrapper -->
           <div class="content-wrapper">
@@ -34,22 +124,19 @@
                 <div class="col-12 col-md-12 col-lg-12 order-3 order-md-2">
                   <div class="row">
                   <div class="col-3 mb-4">
-                    <a href="<?php echo $siteurl; ?>/forms/EligibleCouple.php">
-                      <div class="card">
+                    <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/wallet-info.png" alt="Credit Card" class="rounded" />
+                              <img src="../assets/img/icons/unicons/wallet-info.png" style="cursor:default" style="cursor:default" alt="Credit Card" class="rounded" />
                             </div>
                           </div>
-                          <span class="fw-semibold d-Block mb-1">Eligible Couples</span>
-                          <h3 class="card-title mb-2"><?php echo $EcTot; ?></h3>
+                          <span class="fw-semibold d-Block mb-1" style="cursor:default">Eligible Couples</span>
+                          <h3 class="card-title mb-2" style="cursor:default"><?php echo $EcTot; ?></h3>
                         </div>
                       </div>
-                     </a>
                     </div>
                     <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/AnRegisterlist.php">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -61,25 +148,8 @@
                           <h3 class="card-title mb-2"><?php echo $ArTot; ?></h3>
                         </div>
                       </div>
-                     </a>
-                    </div>
+                    </div>                    
                     <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/AntenatalVisit.php">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
-                            </div>
-                          </div>
-                          <span class="fw-semibold d-Block mb-1">Antenatal Visit</span>
-                          <h3 class="card-title mb-2"><?php echo $AvTot; ?></h3>
-                        </div>
-                      </div>
-                     </a>
-                    </div>
-                    <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/MedicalHistory.php">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -91,10 +161,21 @@
                           <h3 class="card-title mb-2"><?php echo $MhTot; ?></h3>
                         </div>
                       </div>
-                     </a>
+                    </div>
+					<div class="col-3 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
+                            </div>
+                          </div>
+                          <span class="fw-semibold d-Block mb-1">Antenatal Visit</span>
+                          <h3 class="card-title mb-2"><?php echo $AvTot; ?></h3>
+                        </div>
+                      </div>
                     </div>
 				  <div class="col-3 mb-4">
-				     <a href="<?php echo $siteurl; ?>/forms/highRiskMothers.php">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -110,10 +191,8 @@
                           <h3 class="card-title mb-2"><?php echo $HrTot; ?></h3>
                         </div>
                       </div>
-                     </a>
                     </div>
                     <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/DeliveryDetails.php">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -125,11 +204,9 @@
                          <h3 class="card-title mb-2"><?php echo $DdTot; ?></h3>
                         </div>
                       </div>
-                     </a>
                     </div>
 
 					<div class="col-3 mb-4">
-					 <a href="<?php echo $siteurl; ?>/forms/Immunization.php">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -141,10 +218,8 @@
                          <h3 class="card-title mb-2"><?php echo $ImTot; ?></h3>
                         </div>
                       </div>
-                     </a>
                     </div>
 					<div class="col-3 mb-4">
-					 <a href="<?php echo $siteurl; ?>/forms/PostnatalVisit.php">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -156,10 +231,9 @@
                           <h3 class="card-title mb-2"><?php echo $PvTot; ?></h3>
                         </div>
                       </div>
-                     </a>
                     </div>
                 </div>
-                </div>
+                </div>				
               </div>
             </div>
  <?php include ('require/footer.php'); ?>

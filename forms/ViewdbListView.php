@@ -291,15 +291,18 @@
 					<button type="button" class="btn btn-primary btnForm">
                     <span class="bx bx-female"></span>&nbsp; Delivery</button>
 				</a>
-				<?php } if($mh == !''){ ?>
-				<a href="../forms/ViewEditMedical.php?view=<?php echo $mhid; ?>">
-					<button type="button" class="btn btn-primary btnForm">
-                    <span class="bx bx-user-plus"></span>&nbsp; Med History</button>
-				</a>
 				<?php } if($av == !''){ ?>
 				<a href="../forms/ViewEditAnVisit.php?view=<?php echo $avid; ?>">
 					<button type="button" class="btn btn-primary btnForm">
                     <span class="bx bx-user-check"></span>&nbsp; An Visit</button>
+				</a>
+				<?php } 
+				
+				 if($usertype != 5) { 
+				if($mh == !''){ ?>
+				<a href="../forms/ViewEditMedical.php?view=<?php echo $mhid; ?>">
+					<button type="button" class="btn btn-primary btnForm">
+                    <span class="bx bx-user-plus"></span>&nbsp; Med History</button>
 				</a>
 				<?php } if($ar == !''){ ?>
 				<a href="../forms/ViewEditAntenatal.php?view=<?php echo $arid; ?>">
@@ -311,6 +314,7 @@
 					<button type="button" class="btn btn-primary btnForm">
                     <span class="bx bx-group"></span>&nbsp; Eligible Couple</button>
 				</a>
+				<?php } ?>
 			  </div>
 			</div>
 		  </div>

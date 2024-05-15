@@ -1,5 +1,6 @@
 <?php include ('require/topHeader.php'); ?>
 <?php 
+//print_r("Starting");
 $ErCntmq = mysqli_query($conn,"SELECT COUNT(id) AS ErCnt FROM ecregister WHERE status!=0");
 $ErCnt = mysqli_fetch_array($ErCntmq);
 

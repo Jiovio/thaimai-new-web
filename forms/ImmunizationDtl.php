@@ -28,10 +28,12 @@ $History = true;}
 				<span class="bx bx-arrow-back"></span>&nbsp; Back
               </button>
 				   <h5 class="card-header"><span class="text-muted fw-light"> PICME : </span> <?php echo $_GET['History']; ?> 
+				   <?php if($usertype != 5 AND $usertype != 6) { ?>
 				   <h5 class="card-header"><span class="text-muted fw-light"> Mother Name : </span> <?php echo $his_mot_name; ?>
                    <a href="AddImmunizationDtl.php?picmeNo=<?php echo $_GET['History']; ?>" id="add" type="button" class="btn btn-primary" style="float:right;">
                        <span class="bx bx-plus"></span>&nbsp; Add Details
                    </a>
+				   <?php } ?> 
 				   </h5>
                    <div class="table-responsive text-nowrap">
            <div class="container">
@@ -47,9 +49,10 @@ $History = true;}
                          </tr>
                        </thead>
 <?php 
-  $listQry = "SELECT DISTINCT(im.picmeNo),im.id,im.doseNo,im.doseDueDate,im.doseName, im.FutureDoseDate, im.doseProvidedDate,im.breastFeeding,ec.motheraadhaarname,im.createdUserId,ec.BlockId,ec.PhcId,ec.HscId FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeNo 
+  $listQry = "SELECT DISTINCT(im.picmeNo),im.id,im.doseNo,im.doseDueDate,im.doseName, ec.mothermobno, im.FutureDoseDate, im.doseProvidedDate,im.breastFeeding,ec.motheraadhaarname,im.createdUserId,ec.BlockId,ec.PhcId,ec.HscId FROM immunization im JOIN ecregister ec on ec.picmeNo=im.picmeNo 
               WHERE im.status=1 AND im.picmeNo = $IM_picmeno";
-  $private = " AND im.createdUserId='".$userid."'";
+ // $private = " AND im.createdUserId='".$userid."'";
+  $private = "";
   $orderQry = " ORDER BY im.picmeNo + im.doseNo ASC";
 
     if(($usertype == 0) || ($usertype == 1)) {
@@ -79,6 +82,54 @@ $History = true;}
               if($ExeQuery) {
                          $cnt=1;
                          while($row = mysqli_fetch_array($ExeQuery)) {
+							 //Need to modify the code here for user types
+	  $match_fnd = "N";  	
+	  
+       $HscQry = "SELECT * From users";				 
+	   $HscRes =  mysqli_query($conn,$HscQry);
+       if($HscRes) {
+         while($rowh = mysqli_fetch_array($HscRes)) 
+		 {
+		
+		 if((($usertype == 0) || ($usertype == 1)))
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+		 if((($usertype == 5) || ($usertype == 2)) AND
+			 $row['BlockId']==$rowh['BlockId'] )
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+	   if(($usertype == 3) AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+		  if(($usertype == 6) AND
+			 $row['HscId']==$rowh['HscId'] AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'] AND
+			 $row['mothermobno'] == $rowh['mobile'] AND
+			 $_SESSION['username'] == $rowh['username'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+		  if(($usertype == 4) AND
+			 $row['HscId']==$rowh['HscId'] AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+	  }
+	  if($match_fnd == "Y")
+	  {
+		  // Code modify middle
                        ?>
                                    <tr>
 									   <td><?php $dn = $row['doseNo'];
@@ -149,6 +200,7 @@ $History = true;}
                        <?php 
                            $cnt++;
                          } 
+						  }} //code modifying ends
                        } ?>
                      </table></div>
                    </div>

@@ -108,14 +108,16 @@ include ('preloader.php');
               </a>
             </li>
            <?php 
-          } else if($usertype == 5) { ?>
+          } else
+		  if(($usertype == 5) || ($usertype == 6)) { ?>
            <li class="menu-item">
               <a href="Hdashboard.php" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
-            </li>
-          <?php } if($usertype != 5) { ?> <!-- Starts with IF Condition because of New Statement -->
+            </li> 
+		 <?php
+			} if($usertype != 5) { ?> <!-- Starts with IF Condition because of New Statement -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-calendar"></i>
@@ -473,3 +475,4 @@ include ('preloader.php');
    
         <!-- Layout container -->
         <div class="layout-page">
+		

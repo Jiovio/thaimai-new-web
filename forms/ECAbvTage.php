@@ -8,10 +8,12 @@
 <?php include ('require/header.php'); // Menu
 	  if(($usertype == 0) || ($usertype == 1)) {
 	  include ('require/filter.php'); // Top Filter 
-}else if(($usertype == 2)) {
+}else if(($usertype == 2)|| ($usertype == 4) || ($usertype == 5)) {
+    include ('require/Mfilter.php');
+}else if(($usertype == 3) ) {
     include ('require/Bfilter.php');
-}else if(($usertype == 3) || ($usertype == 4)) {
-    include ('require/Pfilter.php');   
+} else if(($usertype == 6)) {
+    include ('require/Cfilter.php');   
 }
 ?>
           <!-- Content wrapper -->
@@ -52,20 +54,83 @@
                        </thead>  
 					   
     <?php
+
       $listQry = "SELECT ec.picmeNo, ec.id, hs.BlockName,hs.PhcName,hs.HscName, hs.PanchayatName, hs.VillageName,ec.ecfrno, ec.HscId, ec.VillageId, ec.PanchayatId, ec.dateecreg, ec.motherageecreg, ec.motheraadhaarname, ec.BlockId,ec.PhcId, ec.mothermobno,ec.motheraadhaarid FROM ecregister ec INNER JOIN hscmaster hs on (ec.BlockId = hs.BlockId AND ec.PhcId = hs.PhcId AND ec.HscId = hs.HscId AND ec.VillageId = hs.VillageId AND ec.PanchayatId = hs.PanchayatId) WHERE ec.status!= 0 
                   AND ec.motherageecreg >= 18 AND NOT EXISTS (SELECT ar.picmeno FROM anregistration ar WHERE ar.picmeno = ec.picmeNo)";   
 	 
 	  //$listQry = "SELECT DISTINCT(ec.motheraadhaarid),id,picmeno, ecfrno, HscId, VillageId, PanchayatId, dateecreg, motherageecreg, motheraadhaarname, BlockId, PhcId, mothermobno FROM ecregister WHERE status!=0 AND 
-        //          ec.motherageecreg >= 18";  
-	
-	 
-       
+        //          ec.motherageecreg >= 18"; 
+		
 	  $private = " AND ec.createdBy='".$userid."'";
       $orderQry = " ORDER BY ec.dateecreg DESC";
 	  
-      if(($usertype == 0) || ($usertype == 1)) {
+  //    if(($usertype == 0) || ($usertype == 1)) {
+	  
+	  $bloName = "";
+				 $phcName = "";
+				 $hscName = "";
+				 
+				 if(($usertype == 0) || ($usertype == 1)) {
+		               if(isset($_POST['BlockId']))
+	                 	{
+                          $bloName = $_POST['BlockId']; 
+	                 	} 
+						if(isset($_POST['PhcId']))
+	                	{
+                         $phcName = $_POST['PhcId']; 
+		                } 
+						if(isset($_POST['HscId']))
+	                  	{
+                         $hscName = $_POST['HscId']; 
+	                   	}	
+						
+				  }	
+				 
+				  if(($usertype == 5) || ($usertype == 2) || ($usertype == 4)) {
+		               if(isset($_SESSION['BlockId']))
+	                 	{
+                          $bloName = $_SESSION['BlockId']; 
+	                 	} 
+						if(isset($_POST['PhcId']))
+	                	{
+                         $phcName = $_POST['PhcId']; 
+		                } 
+						if(isset($_POST['HscId']))
+	                  	{
+                         $hscName = $_POST['HscId']; 
+	                   	}	
+						
+				  }	
+                  if($usertype == 3)	{
+					  if(isset($_SESSION['BlockId']))
+	                 	{
+                          $bloName = $_SESSION['BlockId']; 
+	                 	} 
+						if(isset($_SESSION['PhcId']))
+	                	{
+                         $phcName = $_SESSION['PhcId']; 
+		                } 
+						if(isset($_POST['HscId']))
+	                  	{
+                         $hscName = $_POST['HscId']; 
+	                   	}	
+				  }
+				  if($usertype == 6)	{
+					  if(isset($_SESSION['BlockId']))
+	                 	{
+                          $bloName = $_SESSION['BlockId']; 
+	                 	} 
+						if(isset($_SESSION['PhcId']))
+	                	{
+                         $phcName = $_SESSION['PhcId']; 
+		                }
+						if(isset($_SESSION['HscId']))
+	                 	{
+                         $hscName = $_SESSION['HscId']; 
+	                 	}
+				  } 
          if(isset($_POST['filter'])) {
-	        $hscName = "";
+/*	        $hscName = "";
 	$bloName = "";
 	$phcName = "";
    if(isset($_POST['HscId']))
@@ -79,36 +144,76 @@
 	if(isset($_POST['PhcId']))
 	{
 	  $phcName = $_POST['PhcId'];
-	} 
+	} */
 		 
               if($bloName == "" && $phcName == "" && $hscName == ""){
-                $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+                $ExeQuery = mysqli_query($conn,$listQry.$orderQry);			
               } else if($bloName != "" && $phcName == "" && $hscName == ""){
-                $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."'".$orderQry);
+                $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."'".$orderQry);		
               } else if($bloName != "" && $phcName != "" && $hscName == ""){
                 $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'".$orderQry);
               } else if($bloName != "" && $phcName != "" && $hscName != ""){
                 $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
-              }
+		              }
             } else if(isset($_POST['reset'])) {
-                      $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+                  //    $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+				  if(($usertype == 0) || ($usertype == 1)) {
+		               $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+				  }	
+				 
+				  if(($usertype == 5) || ($usertype == 2) || ($usertype == 4)) {
+		               $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."'".$orderQry);
+				  }	
+                  if($usertype == 3)	{
+					  $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'".$orderQry);
+				  }
+				  if($usertype == 6)	{
+					  $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
+				  }
                    } else {
-                      $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+                   //   $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+				   if($bloName == "" && $phcName == "" && $hscName == ""){
+                  $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+                } else if($bloName != "" && $phcName == "" && $hscName == ""){
+                  $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."'".$orderQry);
+                } else if($bloName != "" && $phcName != "" && $hscName == ""){
+                 $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."'".$orderQry);
+                } else if($bloName != "" && $phcName != "" && $hscName != ""){
+                  $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
+			    } 
                           }
-            } else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
+     /*       } else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
                        $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$BlockId."'".$orderQry);
                        }  else {
                        $ExeQuery = mysqli_query($conn,$listQry.$private.$orderQry);
-                        } 
-						
+                        } */
               if($ExeQuery) {
                 $cnt=1;
                 while($row = mysqli_fetch_array($ExeQuery)) {
+					$match_fnd = "N";  	/* Starts */
+	  
+       $HscQry = "SELECT * From users";				 
+	   $HscRes =  mysqli_query($conn,$HscQry);
+       if($HscRes) {
+         while($rowh = mysqli_fetch_array($HscRes)) 
+		 {
+			 if(($usertype == 6) AND
+			 $row['HscId']==$rowh['HscId'] AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'] AND
+			 $row['mothermobno'] == $rowh['mobile'] AND
+			 $_SESSION['username'] == $rowh['username'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+	   }}
+		  if((($usertype == 6) AND $match_fnd == "Y") || ($usertype < 6))
+		  {                             /* ends */
 						  ?>
                         <tr>
                            <td><?php echo $cnt; ?></td>
 						   <td><?php echo $row['ecfrno']; ?></td>
-						   <td><?php echo $row['picmeno']; ?></td>
+						   <td><?php echo $row['picmeNo']; ?></td>
 						   <td><?php echo date('d-m-Y', strtotime($row['dateecreg'])); ?></td>
 						   <td><?php echo $row['motheraadhaarid']; ?></td>
 						   <td><?php echo $row['motheraadhaarname']; ?></td>
@@ -123,7 +228,7 @@
                          <?php 
                            $cnt++;
 						}
-						
+				}
                        } ?>
 	   
 					</table>   <!-------------------- Insert Code Here -------------->

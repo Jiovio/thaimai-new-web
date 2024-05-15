@@ -145,11 +145,12 @@ if (isset($_GET['del'])) {
               <a href="../forms/ViewEditMedical.php?del=<?php echo $id; ?>" onclick="return confirm('Are you sure to delete?')"><button type="submit" class="btn btn-danger btnSpace">
                     <span class="bx bx-minus"></span>&nbsp; Delete
               </button></a>
-            <?php } ?>
+            <?php } 
+			if($_SESSION["usertype"] != '6'){ ?>
               <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; ?>" onclick="fnMedEnable()">
                     <span class="bx bx-edit"></span>&nbsp; Edit
               </button>
-
+            <?php } ?>
             </h4>
             <form action="" method="post">
               <!-- Basic Layout -->

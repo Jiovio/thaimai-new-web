@@ -5,12 +5,26 @@
     <div class="layout-container">
       <!-- Menu -->
 <?php include ('require/header.php'); // Menu
-	    include ('require/Bfilter.php'); // Top Filter
+	    include ('require/Mfilter.php'); // Top Filter
+		include ('require/Hfilter.php'); // Category Filter
       if(isset($_POST['filter'])) {
-        $bloName = $_POST['BlockId'];
+		  
+		 // print_r("I am here 1");
+		$phcName = "";
+        $hscName = "";
+		if(isset($_SESSION['BlockId']))
+		{
+        $bloName = $_SESSION['BlockId'];
+		}
+		if(isset($_POST['PhcId']))
+		{
         $phcName = $_POST['PhcId'];
+		}
+		if(isset($_POST['HscId']))
+		{
         $hscName = $_POST['HscId'];
-      
+        }
+		
         if($bloName != "" && $phcName == "" && $hscName == ""){
           include 'LoadBlock.php';
         } else if($bloName != "" && $phcName != "" && $hscName == ""){
@@ -36,7 +50,7 @@
                 <div class="col-12 col-md-12 col-lg-12 order-3 order-md-2">
                   <div class="row">
                   <div class="col-3 mb-4">
-                    <a href="<?php echo $siteurl; ?>/forms/EligibleCouple.php">
+                    <!---a href="<?php //echo $siteurl; ?>/forms/EligibleCouple.php"-->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -48,10 +62,10 @@
                           <h3 class="card-title mb-2"><?php echo $EcTot; ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
                     </div>
                     <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/AnRegisterlist.php">
+                     <!--- a href="<?php //echo $siteurl; ?>/forms/AnRegisterlist.php"-->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -63,10 +77,10 @@
                           <h3 class="card-title mb-2"><?php echo $ArTot; ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
                     </div>
                     <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/AntenatalVisit.php">
+                     <!---a href="<?php //echo $siteurl; ?>/forms/AntenatalVisit.php"--->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -78,10 +92,10 @@
                           <h3 class="card-title mb-2"><?php echo $AvTot; ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
                     </div>
                     <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/MedicalHistory.php">
+                     <!---a href="<?php //echo $siteurl; ?>/forms/MedicalHistory.php"--->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -93,10 +107,10 @@
                           <h3 class="card-title mb-2"><?php echo $MhTot; ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
                     </div>
 				  <div class="col-3 mb-4">
-				     <a href="<?php echo $siteurl; ?>/forms/highRiskMothers.php">
+				     <!---a href="<?php echo $siteurl; ?>/forms/highRiskMothers.php"--->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -112,10 +126,10 @@
                           <h3 class="card-title mb-2"><?php echo $HrTot; ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a-->
                     </div>
                     <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/DeliveryDetails.php">
+                     <!---a href="<?php echo $siteurl; ?>/forms/DeliveryDetails.php"--->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -127,11 +141,11 @@
                          <h3 class="card-title mb-2"><?php echo $DdTot; ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
                     </div>
 
 					<div class="col-3 mb-4">
-					 <a href="<?php echo $siteurl; ?>/forms/Immunization.php">
+					 <!---a href="<?php //echo $siteurl; ?>/forms/Immunization.php"--->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -143,10 +157,10 @@
                          <h3 class="card-title mb-2"><?php echo $ImTot; ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
                     </div>
 					<div class="col-3 mb-4">
-					 <a href="<?php echo $siteurl; ?>/forms/PostnatalVisit.php">
+					 <!---a href="<?php echo $siteurl; ?>/forms/PostnatalVisit.php"--->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -158,10 +172,10 @@
                           <h3 class="card-title mb-2"><?php echo $PvTot; ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
                     </div>
                     <div class="col-3 mb-4">
-					 <a href="<?php echo $siteurl; ?>/forms/MotherStatus.php">
+					 <!---a href="<?php echo $siteurl; ?>/forms/MotherStatus.php"---->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -173,10 +187,10 @@
                           <h3 class="card-title mb-2"><?php echo $LmTot; ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
                     </div>
                     <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/UserManagement.php">
+                     <!---a href="<?php echo $siteurl; ?>/forms/UserManagement.php"--->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -192,10 +206,10 @@
                           <h3 class="card-title mb-2"><?php echo $UsTot; ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
                     </div>
                     <div class="col-3 mb-4">
-					 <a href="<?php echo $siteurl; ?>/forms/Hscmaster.php">
+					 <!---a href="<?php //echo $siteurl; ?>/forms/Hscmaster.php"--->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -207,11 +221,11 @@
                           <h3 class="card-title mb-2"><?php echo $HsTot; ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
                     </div>
                     
                     <div class="col-3 mb-4">
-                     <a href="<?php echo $siteurl; ?>/forms/Hospitalmaster.php">
+                     <!----a href="<?php echo $siteurl; ?>/forms/Hospitalmaster.php"--->
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -223,7 +237,7 @@
                           <h3 class="card-title mb-2"><?php echo $PhTot; ?></h3>
                         </div>
                       </div>
-                     </a>
+                     <!---/a--->
                     </div>
                 </div>
                 </div>

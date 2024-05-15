@@ -41,6 +41,7 @@ if(isset($_POST['filter'])) {
       include 'LoadHsc.php';  
 	  }
   } else if(isset($_POST['reset'])) {
+	 // print_r("Hi");
 	  include 'LoadAll.php';
   } else {
      

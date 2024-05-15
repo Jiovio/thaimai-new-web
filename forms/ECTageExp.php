@@ -34,6 +34,8 @@ include "../config/db_connect.php";
                   AND ec.motherageecreg < 18 AND NOT EXISTS (SELECT ar.picmeno FROM anregistration ar WHERE ar.picmeno = ec.picmeno)";				  
 				   
     $orderQry = " ORDER BY ec.dateecreg DESC";	
+	
+	$ExeQuery = "";
 		
     if($bloName == "" && $phcName == "" && $hscName == ""){
        $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
@@ -44,7 +46,7 @@ include "../config/db_connect.php";
        } else if($bloName != "" && $phcName != "" && $hscName != ""){
        $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
        } 
-	          		                  		  
+	 if($ExeQuery) {	         		                  		  
 	$developer_records = array();
 	$sno=1;
 	while( $rows = mysqli_fetch_assoc($ExeQuery) ) {
@@ -81,7 +83,7 @@ include "../config/db_connect.php";
 	if($search_flag || strlen($search_text_input) == 0 )
 	{
 	  $developer_records[] = $rows;
-}}	
+	 }}	}
 	$filename = "EC_Teenage_List_For_Non_Pregnant_Couples".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");

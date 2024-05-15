@@ -48,7 +48,10 @@ include "../config/db_connect.php";
 			 $rows['PhcName'] = "";
 			 $rows['HscName'] = "";
 			 $rows['PanchayatName'] = "";
-			 $rows['VillageName'] = "";	 	
+			 $rows['VillageName'] = "";
+	//		 $ExeQuery = "";
+
+ if($ExeQuery) {				 
 	$developer_records = array();
 	$sno=1;
 
@@ -130,6 +133,7 @@ include "../config/db_connect.php";
 	  $developer_records[] = $rows;
 }}	
 }}}
+} /*Added newly */
 	$filename = "Teenage_Pregnancy_List_".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");
