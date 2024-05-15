@@ -33,6 +33,10 @@ include "../config/db_connect.php";
                   WHERE ar.status!=0 AND CAST(ar.MotherAge AS SIGNED) < 18 AND CAST(ar.motherWeight AS SIGNED) < 40 AND NOT EXISTS (SELECT av.picmeno FROM antenatalvisit av WHERE av.picmeno = ar.picmeno)";  		
 	
     $orderQry = " ORDER BY ar.picmeRegDate DESC";	
+	
+	$ExeQuery = "";
+
+ if($ExeQuery) {	
 		
     if($bloName == "" && $phcName == "" && $hscName == ""){
        $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
@@ -130,6 +134,7 @@ include "../config/db_connect.php";
 	  $developer_records[] = $rows;
 }}	
 }}}
+} /* Added newly */
 	$filename = "Potential_Teenage_Pregnancy_List_".date('d-m-Y') . ".xls";			
 	  header("Content-Type: application/vnd.ms-excel");
 	  header("Content-Disposition: attachment; filename=\"$filename\"");

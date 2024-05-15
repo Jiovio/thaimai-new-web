@@ -111,10 +111,12 @@ mysqli_query($conn, "DELETE FROM postnatalvisit WHERE picmeNo = $Del_picmeNo");
               <a href="../forms/ViewEditDelivery.php?del=<?php echo $id; ?>" onclick="return confirm('Are you sure to delete?')"><button type="submit" class="btn btn-danger btnSpace">
                     <span class="bx bx-minus"></span>&nbsp; Delete
               </button></a>
-            <?php } ?>
+            <?php } 
+			if($_SESSION["usertype"] != '6'){ ?>
               <button type="submit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; ?>" onclick="fnDEnable()">
                     <span class="bx bx-edit"></span>&nbsp; Edit
               </button>
+			  <?php } ?>
 
 			</h4>
             <form action="" method="post">

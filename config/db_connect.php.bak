@@ -1,0 +1,13 @@
+<?php
+$host = "localhost";
+$dbuser = "root";
+$dbpwd = "";
+$dbname = "demo_upload";
+
+$conn = mysqli_connect($host, $dbuser, $dbpwd, $dbname) or die("Savemom Connection failed: " . mysqli_connect_error());
+if ($conn->connect_error) { 
+    echo "Savemom Connection failed"; 
+}
+$siteurl = "http://Thaimai_Latest/thaimai-new-web";
+
+?>

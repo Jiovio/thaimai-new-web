@@ -5,7 +5,17 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-<?php include ('require/header.php'); // Menu & Top Search
+<?php include ('require/header.php'); // Menu
+	  if(($usertype == 0) || ($usertype == 1)) {
+	  include ('require/filter.php'); // Top Filter 
+}else if(($usertype == 2)|| ($usertype == 4) || ($usertype == 5)) {
+    include ('require/Mfilter.php');
+}else if(($usertype == 3) ) {
+    include ('require/Bfilter.php');
+} else if(($usertype == 6)) {
+    include ('require/Cfilter.php');   
+}
+
 if (isset($_GET['History'])) {
   $pv_picmeno = $_GET['History'];
   $record = mysqli_query($conn, "SELECT * FROM ecregister ec WHERE ec.picmeNo=$pv_picmeno");
@@ -23,9 +33,11 @@ $History = true;}
                 <!-- Hoverable Table rows -->
                  <div class="card">
                    <h5 class="card-header"><span class="text-muted fw-light">Postnatal Visit /</span> Postnatal Visit Header List /</span> Postnatal Visit Detail List
-                   <a href="AddPostnatalvisit.php" id="add" type="button" class="btn btn-primary" style="float:right;">
+                   <?php if($usertype != 5 AND $usertype != 6) { ?>
+				   <a href="AddPostnatalvisit.php" id="add" type="button" class="btn btn-primary" style="float:right;">
                        <span class="bx bx-plus"></span>&nbsp; Add Postnatal Visit
                    </a>
+				    <?php } ?> 
                    </h5>
                    <div class="table-responsive text-nowrap">
            <div class="container">
@@ -47,9 +59,74 @@ $History = true;}
     <?php 
     $listQry = "SELECT DISTINCT(p.picmeNo),p.id,p.ifaTabletStatus,p.motherDangerSign,p.bloodSugar,p.pncPeriod,p.motherPnc, ec.motheraadhaarname,ec.BlockId,ec.PhcId,ec.HscId FROM postnatalvisit p JOIN ecregister ec on ec.picmeNo=p.picmeno 
 	            WHERE p.status=1 AND p.pncPeriod = (SELECT max(CAST(p1.pncPeriod AS SIGNED)) From postnatalvisit p1 where p1.picmeNo = p.picmeNo)";
-    $private = " AND p.createdBy='".$userid."'";
+   // $private = " AND p.createdBy='".$userid."'";
+    $private = "";
     $orderQry = " ORDER BY p.picmeNo + p.pncPeriod ASC";
-    if(($usertype == 0) || ($usertype == 1)) {
+  //  if(($usertype == 0) || ($usertype == 1)) {
+	   $bloName = "";
+				 $phcName = "";
+				 $hscName = "";
+				 
+				 if(($usertype == 0) || ($usertype == 1)) {
+		               if(isset($_POST['BlockId']))
+	                 	{
+                          $bloName = $_POST['BlockId']; 
+	                 	} 
+						if(isset($_POST['PhcId']))
+	                	{
+                         $phcName = $_POST['PhcId']; 
+		                } 
+						if(isset($_POST['HscId']))
+	                  	{
+                         $hscName = $_POST['HscId']; 
+	                   	}	
+						
+				  }	
+				 
+				  if(($usertype == 5) || ($usertype == 2) || ($usertype == 4)) {
+		               if(isset($_SESSION['BlockId']))
+	                 	{
+                          $bloName = $_SESSION['BlockId']; 
+	                 	} 
+						if(isset($_POST['PhcId']))
+	                	{
+                         $phcName = $_POST['PhcId']; 
+		                } 
+						if(isset($_POST['HscId']))
+	                  	{
+                         $hscName = $_POST['HscId']; 
+	                   	}	
+						
+				  }	
+                  if($usertype == 3)	{
+					  if(isset($_SESSION['BlockId']))
+	                 	{
+                          $bloName = $_SESSION['BlockId']; 
+	                 	} 
+						if(isset($_SESSION['PhcId']))
+	                	{
+                         $phcName = $_SESSION['PhcId']; 
+		                } 
+						if(isset($_POST['HscId']))
+	                  	{
+                         $hscName = $_POST['HscId']; 
+	                   	}	
+				  }
+				  if($usertype == 6)	{
+					  if(isset($_SESSION['BlockId']))
+	                 	{
+                          $bloName = $_SESSION['BlockId']; 
+	                 	} 
+						if(isset($_SESSION['PhcId']))
+	                	{
+                         $phcName = $_SESSION['PhcId']; 
+		                }
+						if(isset($_SESSION['HscId']))
+	                 	{
+                         $hscName = $_SESSION['HscId']; 
+	                 	}
+				  } 
+	 
       if(isset($_POST['filter'])) {
         $bloName = $_POST['BlockId']; 
         $phcName = $_POST['PhcId'];
@@ -64,18 +141,101 @@ $History = true;}
                     $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$bloName."' AND ec.PhcId='".$phcName."' AND ec.HscId='".$hscName."'".$orderQry);
                   }
                 } else if(isset($_POST['reset'])) {
-                  $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+                //  $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+				if(($usertype == 0) || ($usertype == 1)) {
+		               $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+				  }	
+				 
+				  if(($usertype == 5) || ($usertype == 2) || ($usertype == 4)) {
+		               $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."'".$orderQry);
+				  }	
+                  if($usertype == 3)	{
+					  $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."' AND PhcId='".$phcName."'".$orderQry);
+				  }
+				  if($usertype == 6)	{
+					  $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."' AND PhcId='".$phcName."' AND HscId='".$hscName."'".$orderQry);
+				  }
                 } else {
+                //  $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+				if($bloName == "" && $phcName == "" && $hscName == ""){
                   $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
+                } else if($bloName != "" && $phcName == "" && $hscName == ""){
+                  $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."'".$orderQry);
+                } else if($bloName != "" && $phcName != "" && $hscName == ""){
+                  $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."' AND PhcId='".$phcName."'".$orderQry);
+                } else if($bloName != "" && $phcName != "" && $hscName != ""){
+                  $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."' AND PhcId='".$phcName."' AND HscId='".$hscName."'".$orderQry);
+                } 
                 }
-} else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
+/*} else if(($usertype == 2) || ($usertype == 3) || ($usertype == 4)) {
 $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQry);
       }  else {
           $ExeQuery = mysqli_query($conn,$listQry.$private.$orderQry);
-      } 
+      } */
                   if($ExeQuery) {
                          $cnt=1;
                          while($row = mysqli_fetch_array($ExeQuery)) {
+							 //Need to modify the code here for user types
+	  $match_fnd = "N";  	
+	  
+       $HscQry = "SELECT * From users";				 
+	   $HscRes =  mysqli_query($conn,$HscQry);
+       if($HscRes) {
+         while($rowh = mysqli_fetch_array($HscRes)) 
+		 {
+		
+		/* if((($usertype == 0) || ($usertype == 1)))
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+		 if((($usertype == 5) || ($usertype == 2)) AND
+			 $row['BlockId']==$rowh['BlockId'] )
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+	   if(($usertype == 3) AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+		  if(($usertype == 6) AND
+			 $row['HscId']==$rowh['HscId'] AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'] AND
+			 $row['mothermobno'] == $rowh['mobile'] AND
+			 $_SESSION['username'] == $rowh['username'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+		  if(($usertype == 4) AND
+			 $row['HscId']==$rowh['HscId'] AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+	  }
+	  if($match_fnd == "Y")
+	  { */
+		  // Code modify middle
+		  
+		  if(($usertype == 6) AND
+			 $row['HscId']==$rowh['HscId'] AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'] AND
+			 $row['mothermobno'] == $rowh['mobile'] AND
+			 $_SESSION['username'] == $rowh['username'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+	   }}
+		  if((($usertype == 6) AND $match_fnd == "Y") || ($usertype < 6))
+		  {
                     ?>
                                    <tr>
                                        <td><?php echo $cnt; ?></td>
@@ -100,6 +260,8 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                        <?php 
                            $cnt++;
                          } 
+						// }} //code modifying ends
+						}
                        } ?>
                      </table></div>
                    </div>

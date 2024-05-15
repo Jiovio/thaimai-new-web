@@ -332,11 +332,12 @@ if (isset($_GET['del']))
 				<span class="bx bx-arrow-back"></span>&nbsp; Back
               </button></a>			  
 			 
-			  <?php $Edit_ind = "N";?>
+			  <?php $Edit_ind = "N";
+			  if($_SESSION["usertype"] != '6'){ ?>
 			  <a href="EditAnVisit.php?view=<?php echo $id; ?>" ><button type="submit" name="edit" id="edit" class="btn btn-success btnSpace edit" value="<?php echo $id; ?>" onclick="fnAnVisitEnable()">
               <span class="bx bx-edit"></span>&nbsp; Edit
               </button>
-			  
+			   <?php } ?>
 			  	  
               <?php if($_SESSION["usertype"] == '0' || $_SESSION["usertype"] == '1' || $_SESSION["usertype"] == '2') { ?>
 			  <?php

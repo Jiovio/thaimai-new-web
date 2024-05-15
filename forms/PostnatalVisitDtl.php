@@ -27,9 +27,11 @@ $History = true;}
               </button>
 				  <h5 class="card-header"><span class="text-muted fw-light"> PICME : </span> <?php echo $_GET['History']; ?> 
 				   <h5 class="card-header"><span class="text-muted fw-light"> Mother Name : </span> <?php echo $his_mot_name; ?>
-                   <a href="AddPostnatalvisitDtl.php?picmeNo=<?php echo $_GET['History']; ?>" id="add" type="button" class="btn btn-primary" style="float:right;">
+                  <?php if($usertype != 5 AND $usertype != 6) { ?>                     
+				  <a href="AddPostnatalvisitDtl.php?picmeNo=<?php echo $_GET['History']; ?>" id="add" type="button" class="btn btn-primary" style="float:right;">
                        <span class="bx bx-plus"></span>&nbsp; Add Details
                    </a>
+				   <?php } ?> 
                    </a>
                    </h5>
                    <div class="table-responsive text-nowrap">
@@ -47,9 +49,10 @@ $History = true;}
                        </thead>
    
     <?php 
-    $listQry = "SELECT DISTINCT(p.picmeNo),p.id,p.ifaTabletStatus,p.motherDangerSign,p.bloodSugar,p.pncPeriod,p.motherPnc, ec.motheraadhaarname,ec.BlockId,ec.PhcId,ec.HscId FROM postnatalvisit p JOIN ecregister ec on ec.picmeNo=p.picmeno 
+    $listQry = "SELECT DISTINCT(p.picmeNo),p.id,p.ifaTabletStatus,p.motherDangerSign,p.bloodSugar,ec.mothermobno, p.pncPeriod,p.motherPnc, ec.motheraadhaarname,ec.BlockId,ec.PhcId,ec.HscId FROM postnatalvisit p JOIN ecregister ec on ec.picmeNo=p.picmeno 
 	            WHERE p.status=1 AND p.picmeNo = $pv_picmeno";
-    $private = " AND p.createdBy='".$userid."'";
+   // $private = " AND p.createdBy='".$userid."'";
+    $private = "";
     $orderQry = " ORDER BY p.picmeNo + p.pncPeriod ASC";
     if(($usertype == 0) || ($usertype == 1)) {
       if(isset($_POST['filter'])) {
@@ -78,6 +81,54 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                   if($ExeQuery) {
                          $cnt=1;
                          while($row = mysqli_fetch_array($ExeQuery)) {
+							 //Need to modify the code here for user types
+	  $match_fnd = "N";  	
+	  
+       $HscQry = "SELECT * From users";				 
+	   $HscRes =  mysqli_query($conn,$HscQry);
+       if($HscRes) {
+         while($rowh = mysqli_fetch_array($HscRes)) 
+		 {
+		
+		 if((($usertype == 0) || ($usertype == 1)))
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+		 if((($usertype == 5) || ($usertype == 2)) AND
+			 $row['BlockId']==$rowh['BlockId'] )
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+	   if(($usertype == 3) AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+		  if(($usertype == 6) AND
+			 $row['HscId']==$rowh['HscId'] AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'] AND
+			 $row['mothermobno'] == $rowh['mobile'] AND
+			 $_SESSION['username'] == $rowh['username'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+		 
+		  if(($usertype == 4) AND
+			 $row['HscId']==$rowh['HscId'] AND
+			 $row['BlockId']==$rowh['BlockId'] AND
+			 $row['PhcId']==$rowh['PhcId'])
+		 {
+          $match_fnd = "Y"; 
+		 } 
+	  }
+	  if($match_fnd == "Y")
+	  {
+		  // Code modify middle
                     ?>
                                    <tr>
                                        <td><?php echo $row['pncPeriod']; ?></td>
@@ -98,6 +149,7 @@ $ExeQuery = mysqli_query($conn,$listQry." AND ec.BlockId='".$BlockId."'".$orderQ
                        <?php 
                            $cnt++;
                          } 
+						  }} //code modifying ends
                        } ?>
                      </table></div>
                    </div>
