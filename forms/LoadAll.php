@@ -1,18 +1,25 @@
 <?php include ('require/topHeader.php'); ?>
 <?php 
+//print_r("Starting");
 $ErCntmq = mysqli_query($conn,"SELECT COUNT(id) AS ErCnt FROM ecregister WHERE status!=0");
 $ErCnt = mysqli_fetch_array($ErCntmq);
 
 $ArCntmq = mysqli_query($conn,"SELECT COUNT(an.id) AS ArCnt FROM anregistration an JOIN ecregister ec on ec.motheraadhaarid=an.motheraadhaarid WHERE an.status=1");
 $ArCnt = mysqli_fetch_array($ArCntmq);
 
-$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1");
+$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM
+antenatalvisit av WHERE av.status=1");
+//antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status//=1");
+
 $AvCnt = mysqli_fetch_array($AvCntmq);
 
 $MhCntmq = mysqli_query($conn,"SELECT count(mh.id) AS MhCnt FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE mh.status=1");
 $MhCnt = mysqli_fetch_array($MhCntmq);
 
-$HrCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(hr.picmeNo)) as HrCnt from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeNo WHERE hr.status!=0");
+$HrCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(hr.picmeNo)) as HrCnt from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeNo 
+JOIN hscmaster hs on ec.BlockId = hs.BlockId AND ec.PhcId = hs.PhcId AND ec.HscId =hs.HscId AND 
+			ec.PanchayatId =hs.PanchayatId AND ec.VillageId = hs.VillageId
+WHERE hr.status!=0");
 $HrCnt = mysqli_fetch_array($HrCntmq);
 
 $DdCntmq = mysqli_query($conn,"SELECT COUNT(dd.id) AS DdCnt FROM deliverydetails dd JOIN ecregister ec on ec.picmeNo=dd.picmeno WHERE dd.status=1");

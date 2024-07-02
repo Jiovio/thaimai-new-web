@@ -38,15 +38,18 @@ if(isset($_POST['filter'])) {
     } else if($bloName != "" && $phcName != "" && $hscName == ""){
       include 'LoadPhc.php';
 	  } else if($bloName != "" && $phcName != "" && $hscName != ""){
-      include 'LoadHsc.php';
+      include 'LoadHsc.php';  
 	  }
   } else if(isset($_POST['reset'])) {
+	 // print_r("Hi");
 	  include 'LoadAll.php';
   } else {
      
 	  include 'LoadAll.php';
   }
-$EcTot = $ErCnt['ErCnt']; $ArTot = $ArCnt['ArCnt']; $AvTot = $AvCnt['AvCnt']; $MhTot = $MhCnt['MhCnt'];
+$EcTot = $ErCnt['ErCnt']; $ArTot = $ArCnt['ArCnt'];
+$AvTot = $AvCnt['AvCnt'];
+$MhTot = $MhCnt['MhCnt'];
 $HrTot = $HrCnt['HrCnt']; $DdTot = $DdCnt['DdCnt']; $ImTot = $ImCnt['ImCnt']; $PvTot = $PvCnt['PvCnt'];
 $UsTot = $UsCnt['UsCnt']; $LmTot = $LmCnt['LmCnt']; $HsTot = $HsCnt['HsCnt']; $PhTot = $PhCnt['PhCnt'];
 ?>

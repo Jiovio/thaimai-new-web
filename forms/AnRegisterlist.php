@@ -42,7 +42,8 @@
 <?php
   $listQry = "SELECT an.motheraadhaarid,an.id,an.picmeno,ec.motheraadhaarname,an.residentType,an.pregnancyTestResult,an.gravida,an.para,an.hrPregnancy,an.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM anregistration an JOIN ecregister ec on ec.motheraadhaarid=an.motheraadhaarid WHERE an.status=1"; 
   $private = " AND an.createdBy='".$userid."'";
-  $orderQry = " ORDER BY ec.motheraadhaarname ASC";
+  $orderQry = "";
+ // $orderQry = " ORDER BY ec.motheraadhaarname ASC";
     
   if(($usertype == 0) || ($usertype == 1)) {
     if(isset($_POST['filter'])) {
