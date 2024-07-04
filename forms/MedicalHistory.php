@@ -150,6 +150,7 @@
             } else {
            //   $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
 		   if($bloName == "" && $phcName == "" && $hscName == ""){
+			   print_r("testing"); exit;
                   $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
                 } else if($bloName != "" && $phcName == "" && $hscName == ""){
                   $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."'".$orderQry);
