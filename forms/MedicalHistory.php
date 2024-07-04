@@ -42,8 +42,9 @@
                        </thead>
 <?php
   $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarid,mh.id,mh.lmpdate,mh.edddate,mh.reg12weeks,ec.motheraadhaarname,mh.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE mh.status=1";
-  $private = " AND mh.createdBy='".$userid;
+  $private = "";
   $orderQry = "";
+ //$private = " AND mh.createdBy='".$userid;
  // $orderQry = " ORDER BY ec.motheraadhaarname ASC";
   
   if(($usertype == 0) || ($usertype == 1)) {
