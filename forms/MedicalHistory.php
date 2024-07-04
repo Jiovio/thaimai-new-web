@@ -44,7 +44,7 @@
   $listQry = "SELECT mh.picmeno,ec.motheraadhaarid,mh.id,mh.lmpdate,mh.edddate,mh.reg12weeks,ec.motheraadhaarname,mh.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE mh.status=1";
   $private = "";
   $orderQry = "";
-   $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarid,mh.id,mh.lmpdate,mh.edddate,mh.reg12weeks,ec.motheraadhaarname,mh.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE mh.status=1";
+ //  $listQry = "SELECT DISTINCT(mh.picmeno),ec.motheraadhaarid,mh.id,mh.lmpdate,mh.edddate,mh.reg12weeks,ec.motheraadhaarname,mh.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE mh.status=1";
    //$private = " AND mh.createdBy='".$userid;
  // $orderQry = " ORDER BY ec.motheraadhaarname ASC";
   
