@@ -14,7 +14,7 @@ $MhCnt = mysqli_fetch_array($MhCntmq);
 //antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1");
 
 $AvCntmq = mysqli_query($conn,"SELECT COUNT(av.picmeno) AS AvCnt FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE 
-av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1) JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1");
+av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1) AND av.status=1");
 
 $AvCnt = mysqli_fetch_array($AvCntmq);
 
