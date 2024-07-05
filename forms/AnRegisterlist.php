@@ -47,8 +47,7 @@
   $listQry = "SELECT an.motheraadhaarid,an.id,an.picmeno,ec.motheraadhaarname, ec.mothermobno, an.residentType,an.pregnancyTestResult,an.gravida,an.para,an.hrPregnancy,an.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM anregistration an JOIN ecregister ec on ec.motheraadhaarid=an.motheraadhaarid WHERE an.status=1"; 
  // $private = " AND an.createdBy='".$userid."'"; 
   $private = ""; 
- // $orderQry = " ORDER BY ec.motheraadhaarname ASC";
-  $orderQry = "";
+  $orderQry = " ORDER BY ec.motheraadhaarname ASC";
     
  // if(($usertype == 0) || ($usertype == 1)) {
 	 

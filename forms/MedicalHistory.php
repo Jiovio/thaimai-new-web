@@ -46,11 +46,10 @@
                          </tr>
                        </thead>
 <?php
-  $listQry = "SELECT mh.picmeno,ec.motheraadhaarid,mh.lmpdate,mh.edddate,mh.reg12weeks,ec.motheraadhaarname,ec.mothermobno, mh.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE mh.status=1";
+  $listQry = "SELECT mh.picmeno,ec.motheraadhaarid,mh.id,mh.lmpdate,mh.edddate,mh.reg12weeks,ec.motheraadhaarname,ec.mothermobno, mh.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE mh.status=1";
   //$private = " AND mh.createdBy='".$userid."'";
   $private = "";
-  $orderQry = "";
- // $orderQry = " ORDER BY ec.motheraadhaarname ASC";
+  $orderQry = " ORDER BY ec.motheraadhaarname ASC";
   
  // if(($usertype == 0) || ($usertype == 1)) {
 	 
@@ -150,9 +149,7 @@
             } else {
            //   $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
 		   if($bloName == "" && $phcName == "" && $hscName == ""){
-			//   print_r($listQry.$orderQry);
                   $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
-			//	  print_r("testing"); exit;
                 } else if($bloName != "" && $phcName == "" && $hscName == ""){
                   $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."'".$orderQry);
                 } else if($bloName != "" && $phcName != "" && $hscName == ""){
