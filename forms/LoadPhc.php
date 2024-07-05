@@ -38,7 +38,7 @@ $HrCnt = mysqli_fetch_array($HrCntmq);
 print_r("Testhr");
 
 //$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND av.status=1");
-$AvCntmq = mysqli_query($conn,"SELECT SELECT COUNT(av.picmeno) AS AvCnt FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE 
+$AvCntmq = mysqli_query($conn,"SELECT COUNT(av.picmeno) AS AvCnt FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE 
 av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1) AND ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND av.status=1");
 $AvCnt = mysqli_fetch_array($AvCntmq);
 print_r("Testav");
