@@ -8,8 +8,7 @@ $ArCntmq = mysqli_query($conn,"SELECT COUNT(an.id) AS ArCnt FROM anregistration 
 $ArCnt = mysqli_fetch_array($ArCntmq);
 
 $AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM
-antenatalvisit av WHERE av.status=1");
-//antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status//=1");
+antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1");
 
 $AvCnt = mysqli_fetch_array($AvCntmq);
 
