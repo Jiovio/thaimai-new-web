@@ -150,9 +150,9 @@
             } else {
            //   $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
 		   if($bloName == "" && $phcName == "" && $hscName == ""){
-			   print_r($listQry.$orderQry);
+			//   print_r($listQry.$orderQry);
                   $ExeQuery = mysqli_query($conn,$listQry.$orderQry);
-				  print_r("testing"); exit;
+			//	  print_r("testing"); exit;
                 } else if($bloName != "" && $phcName == "" && $hscName == ""){
                   $ExeQuery = mysqli_query($conn,$listQry." AND BlockId='".$bloName."'".$orderQry);
                 } else if($bloName != "" && $phcName != "" && $hscName == ""){
