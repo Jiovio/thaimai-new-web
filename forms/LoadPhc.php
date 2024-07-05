@@ -16,7 +16,7 @@
 	// $HscId = $_POST['HscId'];
 	 $username = $_SESSION['username'];
 	 
-	// print_r($_SESSION['usertype']);
+	print_r($PhcId);
 
 $ErCntmq = mysqli_query($conn,"SELECT COUNT(id) AS ErCnt FROM ecregister WHERE BlockId='".$BlockId."' AND PhcId='".$PhcId."' AND status!=0");
 $ErCnt = mysqli_fetch_array($ErCntmq);
