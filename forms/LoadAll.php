@@ -13,8 +13,12 @@ $MhCnt = mysqli_fetch_array($MhCntmq);
 //$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM
 //antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1");
 
-$AvCntmq = mysqli_query($conn,"SELECT COUNT(av.picmeno) AS AvCnt FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE 
-av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1) AND av.status=1");
+$AvCntmq = mysqli_query($conn,"SELECT COUNT(av.picmeno) AS AvCnt
+FROM antenatalvisit av
+WHERE av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno) AND
+EXISTS (SELECT ecregister.picmeNo FROM ecregister WHERE ecregister.picmeNo = av.picmeno) AND av.status=1
+ORDER BY av.picmeno DESC, av.ancPeriod DESC 
+;");
 
 $AvCnt = mysqli_fetch_array($AvCntmq);
 
