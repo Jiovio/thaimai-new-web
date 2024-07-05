@@ -16,10 +16,11 @@
 	// $HscId = $_POST['HscId'];
 	 $username = $_SESSION['username'];
 	 
-	print_r($PhcId);
+	//print_r($PhcId);
 
 $ErCntmq = mysqli_query($conn,"SELECT COUNT(id) AS ErCnt FROM ecregister WHERE BlockId='".$BlockId."' AND PhcId='".$PhcId."' AND status!=0");
 $ErCnt = mysqli_fetch_array($ErCntmq);
+print_r("Test");
 
 $ArCntmq = mysqli_query($conn,"SELECT COUNT(ar.motheraadhaarid) AS ArCnt FROM anregistration ar JOIN ecregister ec ON ar.motheraadhaarid=ec.motheraadhaarid WHERE ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND ar.status=1");
 $ArCnt = mysqli_fetch_array($ArCntmq);
