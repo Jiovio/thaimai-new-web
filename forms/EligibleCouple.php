@@ -46,8 +46,9 @@
                       </tr>
                     </thead>
 <?php  
-  $listQry = "SELECT DISTINCT(motheraadhaarid),id,ecfrno,dateecreg,motheraadhaarname,husbandaadhaarid,mothermobno, BlockId,PhcId,HscId,status FROM ecregister WHERE status!=0";
+ // $listQry = "SELECT DISTINCT(motheraadhaarid),id,ecfrno,dateecreg,motheraadhaarname,husbandaadhaarid,mothermobno, BlockId,PhcId,HscId,status FROM ecregister WHERE status!=0";
 //  $private = " AND ec.createdBy='".$userid."'";
+  $listQry = "SELECT motheraadhaarid,ecfrno,dateecreg,motheraadhaarname,husbandaadhaarid,mothermobno, BlockId,PhcId,HscId,status FROM ecregister WHERE status!=0";
   $private = "";
   $orderQry = " ORDER BY motheraadhaarname ASC";
 
