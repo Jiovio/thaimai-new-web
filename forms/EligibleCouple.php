@@ -50,7 +50,9 @@
 //  $private = " AND ec.createdBy='".$userid."'";
   $listQry = "SELECT motheraadhaarid,ecfrno,dateecreg,motheraadhaarname,husbandaadhaarid,mothermobno, BlockId,PhcId,HscId,status FROM ecregister WHERE status!=0";
   $private = "";
-  $orderQry = " ORDER BY motheraadhaarname ASC";
+  // $orderQry = " ORDER BY motheraadhaarname ASC";
+  $orderQry = "";
+
 
   if(isset($_GET['b']) && !empty($_GET['b'])){
       $_POST['BlockId'] = $_GET['b'];
