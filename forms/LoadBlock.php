@@ -8,7 +8,8 @@ $ArCnt = mysqli_fetch_array($ArCntmq);
 
 //print_r("Testing".$bloName);
 
-$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av JOIN ecregister ec ON av.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND av.status=1");
+//$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av JOIN ecregister ec ON av.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND av.status=1");
+$AvCntmq = mysqli_query($conn,"SELECT SUM(1) AS AvCnt FROM antenatalvisit where ec.BlockId='".$bloName."' AND av.status=1 AND ancPeriod = 1 GROUP BY status=1");
 $AvCnt = mysqli_fetch_array($AvCntmq);
 //$AvCnt = 0;
 
