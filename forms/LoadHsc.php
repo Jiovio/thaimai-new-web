@@ -19,7 +19,7 @@
 	 
 $ErCntmq = mysqli_query($conn,"SELECT COUNT(id) AS ErCnt FROM ecregister WHERE BlockId='".$BlockId."' AND PhcId='".$PhcId."' AND HscId='".$HscId."' AND status!=0");
 $ErCnt = mysqli_fetch_array($ErCntmq);
-//print_r($ErCnt);
+print_r($ErCnt);
 
 $ArCntmq = mysqli_query($conn,"SELECT COUNT(ar.motheraadhaarid) AS ArCnt FROM anregistration ar JOIN ecregister ec ON ar.motheraadhaarid=ec.motheraadhaarid WHERE ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND ec.HscId='".$HscId."' AND ar.status=1");
 $ArCnt = mysqli_fetch_array($ArCntmq);
@@ -27,7 +27,9 @@ $ArCnt = mysqli_fetch_array($ArCntmq);
 //$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND ec.HscId='".$HscId."' AND av.status=1");
 //$AvCntmq = mysqli_query($conn,"SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno) AND
 //EXISTS (SELECT ecregister.picmeNo FROM ecregister WHERE ecregister.picmeNo = av.picmeno) AND ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND ec.HscId='".$HscId."' AND av.status=1 ORDER BY av.picmeno DESC, av.ancPeriod DESC");
-$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av WHERE ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND ec.HscId='".$HscId."' AND av.status=1");
+//$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av WHERE ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND ec.HscId='".$HscId."' AND av.status=1");
+$AvCntmq = mysqli_query($conn,"SELECT av.picmeno AS AvCnt From antenatalvisit where
+AND ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND ec.HscId='".$HscId."' AND av.status=1 AND ancperiod = 1");
 $AvCnt = mysqli_fetch_array($AvCntmq);
 
 $MhCntmq = mysqli_query($conn,"SELECT COUNT(mh.picmeno) AS MhCnt FROM medicalhistory mh JOIN ecregister ec ON mh.picmeno=ec.picmeno WHERE ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND ec.HscId='".$HscId."' AND mh.status=1");
