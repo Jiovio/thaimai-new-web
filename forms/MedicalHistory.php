@@ -46,10 +46,13 @@
                          </tr>
                        </thead>
 <?php
-  $listQry = "SELECT mh.picmeno,ec.motheraadhaarid,mh.id,mh.lmpdate,mh.edddate,mh.reg12weeks,ec.motheraadhaarname,ec.mothermobno, mh.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE mh.status=1";
+  //$listQry = "SELECT mh.picmeno,ec.motheraadhaarid,mh.id,mh.lmpdate,mh.edddate,mh.reg12weeks,ec.motheraadhaarname,ec.mothermobno, mh.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE mh.status=1";
   //$private = " AND mh.createdBy='".$userid."'";
+  $listQry = "SELECT mh.picmeno,ec.motheraadhaarid,mh.lmpdate,mh.edddate,mh.reg12weeks,ec.motheraadhaarname,ec.mothermobno, mh.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM medicalhistory mh JOIN ecregister ec on ec.picmeNo=mh.picmeno WHERE mh.status=1";
+  
   $private = "";
-  $orderQry = " ORDER BY ec.motheraadhaarname ASC";
+ // $orderQry = " ORDER BY ec.motheraadhaarname ASC";
+ $orderQry = "";
   
  // if(($usertype == 0) || ($usertype == 1)) {
 	 
