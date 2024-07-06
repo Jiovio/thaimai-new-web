@@ -25,8 +25,9 @@ $ArCntmq = mysqli_query($conn,"SELECT COUNT(ar.motheraadhaarid) AS ArCnt FROM an
 $ArCnt = mysqli_fetch_array($ArCntmq);
 
 //$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND ec.HscId='".$HscId."' AND av.status=1");
-$AvCntmq = mysqli_query($conn,"SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno) AND
-EXISTS (SELECT ecregister.picmeNo FROM ecregister WHERE ecregister.picmeNo = av.picmeno) AND ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND ec.HscId='".$HscId."' AND av.status=1 ORDER BY av.picmeno DESC, av.ancPeriod DESC");
+//$AvCntmq = mysqli_query($conn,"SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno) AND
+//EXISTS (SELECT ecregister.picmeNo FROM ecregister WHERE ecregister.picmeNo = av.picmeno) AND ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND ec.HscId='".$HscId."' AND av.status=1 ORDER BY av.picmeno DESC, av.ancPeriod DESC");
+$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av WHERE ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND ec.HscId='".$HscId."' AND av.status=1");
 $AvCnt = mysqli_fetch_array($AvCntmq);
 
 $MhCntmq = mysqli_query($conn,"SELECT COUNT(mh.picmeno) AS MhCnt FROM medicalhistory mh JOIN ecregister ec ON mh.picmeno=ec.picmeno WHERE ec.BlockId='".$BlockId."' AND ec.PhcId='".$PhcId."' AND ec.HscId='".$HscId."' AND mh.status=1");
