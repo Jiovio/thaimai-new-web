@@ -8,7 +8,7 @@ $ArCnt = mysqli_fetch_array($ArCntmq);
 
 //print_r("Testing".$bloName);
 
-$AvCntmq = mysqli_query($conn,"SELECT COUNT((av.picmeno)) AS AvCnt FROM antenatalvisit av JOIN ecregister ec ON av.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND av.status=1");
+$AvCntmq = mysqli_query($conn,"SELECT COUNT((av.picmeno)) AS AvCnt FROM antenatalvisit av");
 $AvCnt = mysqli_fetch_array($AvCntmq);
 //$AvCnt = 0;
 
