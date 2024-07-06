@@ -16,8 +16,9 @@ $ArCnt = mysqli_fetch_array($ArCntmq);
 
 //print_r("Testing query");
 
-$AvCntmq = mysqli_query($conn,"SELECT COUNT(av.picmeno) AS AvCnt FROM antenatalvisit av WHERE ec.BlockId='".$bloName."' AND av.status=1 GROUP BY picmeno");
-
+$AvCntmq = mysqli_query($conn,"SELECT COUNT(av.picmeno) AS AvCnt FROM antenatalvisit av WHERE 
+av.status=1
+AND EXISTS (SELECT ecregister.picmeNo FROM ecregister WHERE ecregister.picmeNo = av.picmeno AND ec.BlockId='".$bloName."') AND av.ancperiod = 1");
 $AvCnt = mysqli_fetch_array($AvCntmq);
 //$AvCnt = 0;
 
