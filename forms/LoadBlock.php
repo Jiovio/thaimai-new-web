@@ -11,7 +11,8 @@ $ArCnt = mysqli_fetch_array($ArCntmq);
 //$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av JOIN ecregister ec ON av.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND av.status=1");
 //$AvCntmq = mysqli_query($conn,"SELECT COUNT(av.picmeno) AS AvCnt FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE 
 //av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1) AND ec.BlockId='".$bloName."' AND av.status=1");
-$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av WHERE ec.BlockId='".$bloName."' AND av.status=1");
+
+$AvCntmq = mysqli_query($conn,"select sum(av.ancperiod) from antenatalvisit av where ec.BlockId='".$bloName."' AND av.status=1 AND av.ancperiod = 1 group by status");
 $AvCnt = mysqli_fetch_array($AvCntmq);
 
 $MhCntmq = mysqli_query($conn,"SELECT COUNT(mh.picmeno) AS MhCnt FROM medicalhistory mh JOIN ecregister ec ON mh.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND mh.status=1");

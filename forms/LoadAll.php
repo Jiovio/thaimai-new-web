@@ -20,7 +20,6 @@ EXISTS (SELECT ecregister.picmeNo FROM ecregister WHERE ecregister.picmeNo = av.
 ORDER BY av.picmeno DESC, av.ancPeriod DESC 
 ;");*/
 
-
 //$AvCntmq = mysqli_query($conn,"SELECT COUNT(UNIQUE(av.picmeno)) AS AvCnt FROM
 //antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1");
 
