@@ -24,7 +24,7 @@ ORDER BY av.picmeno DESC, av.ancPeriod DESC
 //$AvCntmq = mysqli_query($conn,"SELECT COUNT(UNIQUE(av.picmeno)) AS AvCnt FROM
 //antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE av.status=1");
 
-$AvCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(av.picmeno)) AS AvCnt FROM antenatalvisit av WHERE av.status=1");
+$AvCntmq = mysqli_query($conn,"select sum(av.ancperiod) from antenatalvisit av where av.status=1 AND av.ancperiod = 1 group by status;");
 $AvCnt = mysqli_fetch_array($AvCntmq);
 
 $HrCntmq = mysqli_query($conn,"SELECT COUNT(DISTINCT(hr.picmeNo)) as HrCnt from highriskmothers hr JOIN ecregister ec on hr.picmeNo=ec.picmeNo 
