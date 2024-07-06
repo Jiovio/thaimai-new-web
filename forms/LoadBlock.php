@@ -16,10 +16,10 @@ $ArCnt = mysqli_fetch_array($ArCntmq);
 
 //print_r("Testing query");
 
-//$AvCntmq = mysqli_query($conn,"SELECT COUNT(av.picmeno) AS AvCnt FROM antenatalvisit av WHERE ec.BlockId='".$bloName."' AND av.status=1 AND av.ancperiod = 1");
+$AvCntmq = mysqli_query($conn,"SELECT COUNT(av.picmeno) AS AvCnt FROM antenatalvisit av WHERE ec.BlockId='".$bloName."' AND av.status=1 AND av.ancperiod = 1");
 
-//$AvCnt = mysqli_fetch_array($AvCntmq);
-$AvCnt = 0;
+$AvCnt = mysqli_fetch_array($AvCntmq);
+//$AvCnt = 0;
 
 
 $MhCntmq = mysqli_query($conn,"SELECT COUNT(mh.picmeno) AS MhCnt FROM medicalhistory mh JOIN ecregister ec ON mh.picmeno=ec.picmeno WHERE ec.BlockId='".$bloName."' AND mh.status=1");
