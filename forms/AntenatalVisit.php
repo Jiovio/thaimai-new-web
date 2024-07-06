@@ -51,7 +51,7 @@
   //            av.status=1 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)";
  // $private = " AND av.createdBy='".$userid."'";
  $listQry = "SELECT av.picmeno,av.id, av.residenttype,av.placeofvisit,av.anvisitDate, ec.mothermobno, av.avdueDate, av.pregnancyWeek,av.ancPeriod,ec.motheraadhaarname,av.createdBy,ec.BlockId,ec.PhcId,ec.HscId FROM antenatalvisit av JOIN ecregister ec on ec.picmeNo=av.picmeno WHERE 
-             av.status=1 AND av.ancPeriod = (SELECT max(CAST(av1.ancPeriod AS SIGNED)) From antenatalvisit av1 where av1.picmeno = av.picmeno)";
+             av.status=1";
 
   $private = "";
  // $orderQry = " ORDER BY av.picmeno + av.ancPeriod ASC";
