@@ -1,13 +1,13 @@
 <?php
 $host = "localhost";
-$dbuser = "adminthaimai_user";
-$dbpwd = "ELxKb+Tp2GHn";
-$dbname = "adminthaimai_admin";
+$dbuser = "savemom_dhule";
+$dbpwd = "RB9YRPb.]3iS";
+$dbname = "savemom_dhule";
 
-$conn = mysqli_connect($host, $dbuser, $dbpwd, $dbname) or die("Thaimayudan Connection failed: " . mysqli_connect_error());
+$conn = mysqli_connect($host, $dbuser, $dbpwd, $dbname) or die("Savemom Connection failed: " . mysqli_connect_error());
 if ($conn->connect_error) { 
-    echo "Thaimayudan Connection failed"; 
+    echo "Savemom Connection failed"; 
 }
-$siteurl = "http://admin.thaimaiyudan.org";
+$siteurl = "http://dhule.savemom.in";
 
 ?>

@@ -17,9 +17,9 @@ class Database{
     // specify your own database credentials
     
     private $host = "localhost";
-    private $db_name = "adminthaimai_admin";
-    private $username = "adminthaimai_user";
-    private $password = "ELxKb+Tp2GHn";
+    private $db_name = "savemom_dhule";
+    private $username = "savemom_dhule";
+    private $password = "RB9YRPb.]3iS";
     
     public $conn;
  
