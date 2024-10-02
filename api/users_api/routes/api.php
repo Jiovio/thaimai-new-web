@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\UserController;
 
 //Route::put('/users/{userId}/otp', [UserController::class, 'updateOtp']);
+Route::get('test', [UserController::class, 'loginOrRegister']);
 Route::post('login-or-register', [UserController::class, 'loginOrRegister']);
 Route::post('verify-otp', [UserController::class, 'verifyOtp']);
 //Route::put('/users/{userId}/token', [AuthController::class, 'updateToken'])->middleware('auth:api');
